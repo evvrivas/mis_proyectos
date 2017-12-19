@@ -14,18 +14,14 @@ urlpatterns = [
     url(r'^$', index),
     url(r'^health$', health),
     url(r'^admin/', include(admin.site.urls)),
+    static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
+    url(r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':  settings.MEDIA_ROOT}),
+    static(settings.MEDIA_ROOT, document_root=settings.MEDIA_URL),
+    url(r'^principal/$', pagina_principal), staticfiles_urlpatterns(),
+
+
 ]
-
-urlpatterns +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += patterns('', (r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STATIC_ROOT}))
-urlpatterns += patterns('',(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':  settings.MEDIA_ROOT}))
-
-urlpatterns += static(settings.MEDIA_ROOT, document_root=settings.MEDIA_URL)
-
-
-urlpatterns += patterns('',(r'^principal/$', pagina_principal),) + staticfiles_urlpatterns()
-
 
 
 
