@@ -126,11 +126,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 MEDIA_URL = '/static/media/'
 
-if ON_PAAS:
-    MEDIA_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR'), 'media')
-else: 
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
