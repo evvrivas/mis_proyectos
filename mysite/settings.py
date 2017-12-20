@@ -61,7 +61,7 @@ ROOT_URLCONF = 'mysite.urls'
 
 ######################################################################
 #import os
-import urlparse
+#import urlparse
 
 DATABASES = {}
 if 'OPENSHIFT_MYSQL_DB_URL' in os.environ:
