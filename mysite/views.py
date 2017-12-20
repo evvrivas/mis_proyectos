@@ -233,7 +233,7 @@ def informacion(request):
 
 
 
-from datos_artetronica.cart import Cart
+from mysite.datos_artetronica.cart import Cart
 @login_required
 def add_to_cart_PCB(request,product_id, quantity,precio):
     #print request  
