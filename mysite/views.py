@@ -24,7 +24,7 @@ import datetime
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 #from miPagina.books.models import Book
-from settings import MEDIA_URL
+from mysite.settings import MEDIA_URL
 
 
 from django.contrib import auth
