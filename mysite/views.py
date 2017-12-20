@@ -266,8 +266,8 @@ def add_to_cart(request, product_id):
     else :
         precio=product.precio_A
 
-    print  "########"
-    print  quantity, product, precio 
+    
+    #print  quantity, product, precio 
     cart = Cart(request)
     cart.add(product, precio, quantity)
     total=cart.summary()
@@ -283,7 +283,7 @@ def remove_from_cart(request, product_id):
 
 @login_required
 def get_cart(request):
-    print "getcqr" 
+    #print "getcqr" 
     cart = Cart(request)
     cart.view()
     return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
@@ -356,7 +356,7 @@ def calcByte( ch, crc):
 
 def calcular(id_maquina):
 
-                print "cjcjcjcjcjc"
+                #print "cjcjcjcjcjc"
                 dato=id_maquina
                 letras=""
                 crc=0xffff
@@ -417,7 +417,7 @@ def descargar_serial_key(request):
         
         
         contrasenas=[] 
-        print "ULO"      
+        #print "ULO"      
             
         
         seriales_keys_anteriores=Seriales_pymblock.objects.filter(id_usuario=ide_de_usuario).order_by("-id") 
