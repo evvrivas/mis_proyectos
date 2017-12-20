@@ -65,7 +65,7 @@ class Producto(models.Model):
 	            image.save(output, format='JPEG', quality=75)
 	            output.seek(0)
 	            self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
-	        super(Producto, self).save(*args, **kwargs)
+	            super(Producto, self).save(*args, **kwargs)
 
 	     def __str__(self):
 		    		return  self.nombre
