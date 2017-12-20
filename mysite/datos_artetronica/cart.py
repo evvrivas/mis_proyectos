@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import datetime
-import models
+import datos_artetronica.models
 
 CART_ID = 'CART-ID'
 
