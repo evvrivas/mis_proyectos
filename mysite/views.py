@@ -720,7 +720,7 @@ def hacer_un_curso(request):
                                      if form_seccion.is_valid():
                                          
                                          form_seccion.save
-                                         print "hou"
+                                         
 
                                          return render_to_response('principal.html', locals() ,context_instance=RequestContext(request))
                                        
