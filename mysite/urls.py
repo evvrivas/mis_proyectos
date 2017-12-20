@@ -37,15 +37,14 @@ urlpatterns = ['',
      url(r'^$', Index.as_view(), name='index'),
     (r'^accounts/login/$', login,{'template_name': 'login.html'}),
     (r'^accounts/logout/$', logout),
+    (r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':  settings.MEDIA_ROOT}),
 ]
 
 #r'^admin/', include(admin.site.urls)
 
 
 urlpatterns +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += url('',	(r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STATIC_ROOT}))
-urlpatterns += url('',(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':  settings.MEDIA_ROOT}))
 
 urlpatterns += static(settings.MEDIA_ROOT, document_root=settings.MEDIA_URL)
 
