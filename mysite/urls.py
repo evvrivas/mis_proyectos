@@ -13,7 +13,7 @@ from django.contrib import admin
 
 
 from django.conf import settings
-import settings
+import mysite.settings
 
 from django.contrib.auth.views import login, logout
 
