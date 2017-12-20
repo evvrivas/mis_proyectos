@@ -33,7 +33,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
-from forms import *
+from mysite.forms import *
 from datos_artetronica.models import *
 
 from django.contrib.auth.models import User  
