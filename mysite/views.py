@@ -39,7 +39,7 @@ from mysite.datos_artetronica.models import *
 
 from django.contrib.auth.models import User  
 from django.core.mail import send_mail
-
+from mysite.templates import *
 
 def logout(request):
     auth.logout(request)
@@ -219,7 +219,7 @@ def pagina_principal(request):
 
                          form=BuscarForm()
                
-                         return render(request,'templates/principal.html',locals())
+                         return render(request,'principal.html',locals())
 
 
 
