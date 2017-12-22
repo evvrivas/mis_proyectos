@@ -49,7 +49,7 @@ urlpatterns +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_ROOT, document_root=settings.MEDIA_URL)
 
 
-urlpatterns += url('',(r'^principal/$', pagina_principal),(r'^catalogo/(\d+)$', catalogo),(r'^informacion/$', informacion)) + staticfiles_urlpatterns()
+urlpatterns += url('',(r'^principal/$', pagina_principal),(r'^catalogo/(\d+)$', catalogo),(r'^informacion/$', informacion)) 
 urlpatterns += url('',(r'^listado/([a-z]+)$', listado),(r'^editar/(\d+)/$', editar),)
 urlpatterns += url('',(r'^entrada_usuario/$', entrada_usuario),(r'^entrada_mensaje/(\d+)$', entrada_mensaje),(r'^descargar_material/$', descargar_material),)
 urlpatterns += url('',(r'^add_to_cart_PCB/(\d+)/([^/]+)/$', add_to_cart_PCB),(r'^get_cart/$', get_cart),)
