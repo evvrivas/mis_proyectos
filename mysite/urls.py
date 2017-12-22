@@ -39,16 +39,16 @@ urlpatterns = ['',
     url(r'^accounts/logout/$', logout),
     #url(r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
     #url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':  settings.MEDIA_ROOT}),
-    url(r'^principal/$', pagina_principal),
-    url(r'^catalogo/(\d+)$', catalogo),
-    url(r'^informacion/$', informacion),
-    url(r'^listado/([a-z]+)$', listado),
-    url(r'^editar/(\d+)/$', editar),
-    url(r'^entrada_usuario/$', entrada_usuario),
-    url(r'^entrada_mensaje/(\d+)$', entrada_mensaje),
-    url(r'^descargar_material/$', descargar_material),
-    url(r'^add_to_cart_PCB/(\d+)/([^/]+)/$', add_to_cart_PCB),
-    url(r'^get_cart/$', get_cart),
+    #url(r'^principal/$', pagina_principal),
+    #url(r'^catalogo/(\d+)$', catalogo),
+    #url(r'^informacion/$', informacion),
+    #url(r'^listado/([a-z]+)$', listado),
+    #url(r'^editar/(\d+)/$', editar),
+    #url(r'^entrada_usuario/$', entrada_usuario),
+    #url(r'^entrada_mensaje/(\d+)$', entrada_mensaje),
+    ##url(r'^descargar_material/$', descargar_material),
+    #url(r'^add_to_cart_PCB/(\d+)/([^/]+)/$', add_to_cart_PCB),
+    #url(r'^get_cart/$', get_cart),
 
 ]
 
@@ -58,7 +58,6 @@ urlpatterns = ['',
 urlpatterns +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_ROOT, document_root=settings.MEDIA_URL)
-
 
 
 
