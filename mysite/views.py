@@ -22,6 +22,7 @@ import datetime
 
 #from books.models import Publisher
 from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 #from miPagina.books.models import Book
 from mysite.settings import MEDIA_URL
@@ -218,7 +219,9 @@ def pagina_principal(request):
 
                          form=BuscarForm()
                
-                         return render_to_response('principal.html', locals(),context_instance=RequestContext(request))
+                         return render(request,'principal.html', locals(),context_instance=RequestContext(request))
+
+
 
 def catalogo(request, var):
 	current_date = datetime.datetime.now()	
