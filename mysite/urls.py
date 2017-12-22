@@ -39,6 +39,17 @@ urlpatterns = ['',
     (r'^accounts/logout/$', logout),
     (r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':  settings.MEDIA_ROOT}),
+    url(r'^principal/$', pagina_principal),
+    url(r'^catalogo/(\d+)$', catalogo),
+    url(r'^informacion/$', informacion),
+    url(r'^listado/([a-z]+)$', listado),
+    url(r'^editar/(\d+)/$', editar),
+    url(r'^entrada_usuario/$', entrada_usuario),
+    url(r'^entrada_mensaje/(\d+)$', entrada_mensaje),
+    url(r'^descargar_material/$', descargar_material),
+    url(r'^add_to_cart_PCB/(\d+)/([^/]+)/$', add_to_cart_PCB),
+    url(r'^get_cart/$', get_cart),
+
 ]
 
 #r'^admin/', include(admin.site.urls)
@@ -48,11 +59,6 @@ urlpatterns +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_ROOT, document_root=settings.MEDIA_URL)
 
-
-urlpatterns += url('',(r'^principal/$', pagina_principal),(r'^catalogo/(\d+)$', catalogo),(r'^informacion/$', informacion)) 
-urlpatterns += url('',(r'^listado/([a-z]+)$', listado),(r'^editar/(\d+)/$', editar),)
-urlpatterns += url('',(r'^entrada_usuario/$', entrada_usuario),(r'^entrada_mensaje/(\d+)$', entrada_mensaje),(r'^descargar_material/$', descargar_material),)
-urlpatterns += url('',(r'^add_to_cart_PCB/(\d+)/([^/]+)/$', add_to_cart_PCB),(r'^get_cart/$', get_cart),)
 
 
 
