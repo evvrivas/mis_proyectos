@@ -219,10 +219,11 @@ def pagina_principal(request):
 
                          form=BuscarForm()
                
-                         return render(request,'principal.html', locals(),context_instance=RequestContext(request))
+                         return render(request,'principal.html', context)
 
 
 
+   
 def catalogo(request, var):
 	current_date = datetime.datetime.now()	
 	
