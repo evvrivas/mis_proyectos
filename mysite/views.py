@@ -219,7 +219,7 @@ def pagina_principal(request):
 
                          form=BuscarForm()
                
-                         return render(request,'templates/principal.html',locals())
+                         return render(request,'principal.html',locals())
 
 
 
