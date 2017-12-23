@@ -64,8 +64,8 @@ def entrada_producto(request):
         #                username2 = request.user.id
         #                form = ProductoForm(initial={'id_usuario': username2})
 
-        
-        return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
+        return render(request,'formulario.html',locals())
+        #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
 
 
 @login_required
@@ -83,8 +83,9 @@ def entrada_mensaje(request,bandera):
                         mensajero.save() # Now you can send it to DB
                      
 
-                        return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-       
+                        return render(request,'confirmar.html',locals())
+                        #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                        
         else:            
                         form = MensajeForm()
 
@@ -100,8 +101,8 @@ def entrada_mensaje(request,bandera):
                   mensajes_anteriores=Mensaje.objects.all().order_by("-id") 
     
         
-
-        return render_to_response('mensajes.html', locals() ,context_instance=RequestContext(request))
+        return render(request,'mensajes.html',locals()) 
+        #return render_to_response('mensajes.html', locals() ,context_instance=RequestContext(request))
 
 
 
@@ -134,15 +135,16 @@ def entrada_usuario(request):
                             usuario.save() # Now you can send it to DB
                             form.save() # Guardar los datos en la base de datos  print 
                                                       
-                            return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                            return render(request,'confirmar.html',locals()) 
+                            #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
        
         else:            
                         
 
                          form=UserProfile1Form()
 
-       
-        return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
+        return render(request,'formulario.html',locals()) 
+        #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
     
 
 
@@ -151,8 +153,8 @@ def listado_producto(request,bandera):
     productos=Producto.objects.filter(categoria=bandera)
      
     
-
-    return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
+    return render(request,'catalogo.html',locals()) 
+    #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
 
    
 def listado(request,bandera):
@@ -160,19 +162,24 @@ def listado(request,bandera):
     if bandera=="usuario":     
         #usuarios=User.objects.all() 
         productos= UserProfile1.objects.all() 
-        return render_to_response('usuarios.html', locals(),context_instance=RequestContext(request))
+
+        return render(request,'usuarios.html',locals()) 
+        #return render_to_response('usuarios.html', locals(),context_instance=RequestContext(request))
     
     elif bandera=="staff":     
         productos= Staff.objects.all() 
-        return render_to_response('staff.html', locals(),context_instance=RequestContext(request))
+        return render(request,'staff.html',locals()) 
+        #return render_to_response('staff.html', locals(),context_instance=RequestContext(request))
     
     elif bandera=="producto":     
         productos= Producto.objects.all() 
-        return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
+        return render(request,'catalogo.html',locals()) 
+        #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
     
     else:     
         productos= Producto.objects.all() 
-        return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
+        return render(request,'catalogo.html',locals()) 
+        #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
     
    
 
@@ -189,7 +196,8 @@ def editar(request, acid):
     #else:
     #    form = ProductoForm(instance=f)    
     #    
-    return render_to_response('formulario.html',locals(),context_instance=RequestContext(request))
+    return render(request,'formulario.html',locals()) 
+    #return render_to_response('formulario.html',locals(),context_instance=RequestContext(request))
 
 
 
@@ -211,8 +219,9 @@ def pagina_principal(request):
                     if form.is_valid() :                      
                             
                             form.save() # Guardar los datos en la base de datos  print 
-                                                      
-                            return render_to_response('catalogo.html', locals() ,context_instance=RequestContext(request))
+                            
+                            return render(request,'catalogo.html',locals())                           
+                            #return render_to_response('catalogo.html', locals() ,context_instance=RequestContext(request))
        
     else:            
                         
@@ -226,13 +235,13 @@ def pagina_principal(request):
    
 def catalogo(request, var):
 	current_date = datetime.datetime.now()	
-	
-	return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
+	return render(request,'catalogo.html',locals()) 
+	#return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
 
 def informacion(request):
 	current_date = datetime.datetime.now()
-	
-	return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
+	return render(request,'informacion.html',locals()) 
+	#return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
 
 
 
@@ -249,8 +258,8 @@ def add_to_cart_PCB(request,product_id, quantity,precio):
     cart.add(product, precio, quantity)
     total=cart.summary()    
     
-
-    return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
+    return render(request,'carrito.html',locals()) 
+    #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
 
 
 @login_required
@@ -276,8 +285,8 @@ def add_to_cart(request, product_id):
     cart.add(product, precio, quantity)
     total=cart.summary()
     
-
-    return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
+    return render(request,'carrito.html',locals()) 
+    #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
 
 @login_required
 def remove_from_cart(request, product_id):
@@ -290,7 +299,8 @@ def get_cart(request):
     #print "getcqr" 
     cart = Cart(request)
     cart.view()
-    return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
+    return render(request,'carrito.html',locals()) 
+    #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
 
 @login_required
 def pedido(request):    
@@ -310,8 +320,8 @@ def pedido(request):
 
     send_mail('Pedido ', mensaje,"artetronica@gmail.com",(sender,), fail_silently=False)
    
-    
-    return render_to_response('cotizacion.html', locals(),context_instance=RequestContext(request))
+    return render(request,'cootizacion.html',locals()) 
+    #return render_to_response('cotizacion.html', locals(),context_instance=RequestContext(request))
  
 
 ####libreria de algun fulano que se utiliza para calcular el CRC de on byte
@@ -412,8 +422,8 @@ def descargar_serial_key(request):
                                                                         
                     else:
                             mensaje= "usted no tiene bonos"  
- 
-                    return render_to_response('principal.html', locals() ,context_instance=RequestContext(request))
+                    return render(request,'principal.html',locals()) 
+                    #return render_to_response('principal.html', locals() ,context_instance=RequestContext(request))
         else:            
                         
                         form = Seriales_pymblockForm()
@@ -433,12 +443,13 @@ def descargar_serial_key(request):
                 a = i.id_usuario_pymblock
                 contrasenas.append( (a,b) )
                                      
-        return render_to_response('descargas.html', locals() ,context_instance=RequestContext(request))
+        return render(request,'descargas.html',locals()) 
+        #return render_to_response('descargas.html', locals() ,context_instance=RequestContext(request))
 
 def descargar_material(request):
        
-                                           
-        return render_to_response('descargar_material.html', locals() ,context_instance=RequestContext(request))
+        return render(request,'descargar_material.html',locals())                                    
+        #return render_to_response('descargar_material.html', locals() ,context_instance=RequestContext(request))
 
 
 def calcular_precio(cantidad,ancho,largo,n_caras):
@@ -507,15 +518,15 @@ def pcb(request):
                                precio,total=calcular_precio(cant,ancho,largo,n_c)
                                #x=add_to_cart_PCB(request,id_producto,precio)
                                
-
-                               return render_to_response('pcb_pedido.html', locals() ,context_instance=RequestContext(request))
+                               return render(request,'pcb_pedido.html',locals())
+                               #return render_to_response('pcb_pedido.html', locals() ,context_instance=RequestContext(request))
         else:            
                         
                         form = PcbForm()   
                             
 
-                                                
-        return render_to_response('pcb.html', locals() ,context_instance=RequestContext(request))
+        return render(request,'pcb.html',locals())                                         
+        #return render_to_response('pcb.html', locals() ,context_instance=RequestContext(request))
 
 
 @login_required
@@ -550,15 +561,15 @@ def pcb_pedido(request):
                                precio,total=calcular_precio(cant,ancho,largo,n_c)
                                x=add_to_cart_PCB(request,tarjeta.id,cant,precio)
                                
-
-                               return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                               return render(request,'confirmar.html',locals())
+                               #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
         else:            
                         
                         form = PcbForm()   
                             
 
-                                                
-        return render_to_response('pcb_pedido.html', locals() ,context_instance=RequestContext(request))
+        return render(request,'pcb_pedido.html',locals())                                        
+        #return render_to_response('pcb_pedido.html', locals() ,context_instance=RequestContext(request))
 
 
 
@@ -566,12 +577,14 @@ def pcb_pedido(request):
 
 
 def catalogos(request):
-   productos= Producto.objects.all()       
-   return render_to_response('catalogo2.html', locals() ,context_instance=RequestContext(request))
-
+   productos= Producto.objects.all() 
+   return render(request,'catalogo2.html',locals())      
+   #return render_to_response('catalogo2.html', locals() ,context_instance=RequestContext(request))
+   
 def catalogos2(request):
-   productos= Producto.objects.all()        
-   return render_to_response('catalogo.html', locals() ,context_instance=RequestContext(request))
+   productos= Producto.objects.all() 
+   return render(request,'catalogo.html',locals())       
+   #return render_to_response('catalogo.html', locals() ,context_instance=RequestContext(request))
 
 
 
@@ -586,14 +599,15 @@ def listado_cursos(request,bandera):
 
             for i in inscritos:
                     cursos.append(i.nombre_curso)
-                       
-            return render_to_response('mostrar_cursos.html', locals() ,context_instance=RequestContext(request))
+            return render(request,'mostrar_cursos.html',locals())           
+            #return render_to_response('mostrar_cursos.html', locals() ,context_instance=RequestContext(request))
   
 
       else:
             form = Alumno4Form() 
-            cursos=Curso.objects.all()         
-            return render_to_response('mostrar_cursos.html', locals() ,context_instance=RequestContext(request))
+            cursos=Curso.objects.all()  
+            return render(request,'mostrar_cursos.html',locals())       
+            #return render_to_response('mostrar_cursos.html', locals() ,context_instance=RequestContext(request))
   
       
         
@@ -631,8 +645,9 @@ def inscribirme_en_el_curso(request,cursoid):
 
                     inscripcion.save() # Now you can send it to DB
                     form.save()
-                  
-      return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+
+      return render(request,'confirmar.html',locals())            
+      #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                
  
 
@@ -652,8 +667,9 @@ def ir_al_curso(request,id_del_curso):
     alumno=Alumno4.objects.get(nombre_curso=curso, id_usuario=request.user.id)
     
     if  alumno.capitulo_actual=="FINALIZADO":
-        return render_to_response('diploma.html', locals() ,context_instance=RequestContext(request))
-   
+        return render(request,'diploma.html',locals()) 
+        #return render_to_response('diploma.html', locals() ,context_instance=RequestContext(request))
+        
 
     nombre_capitulo_actual=alumno.capitulo_actual
     nombre_seccion_actual=alumno.seccion_actual
@@ -677,8 +693,8 @@ def ir_al_curso(request,id_del_curso):
     secciones_cap=Seccion3.objects.filter(nombre_capitulo= capitulo,parte=nombre_seccion_actual)
 
 
-     
-    return render_to_response('curso.html', locals() ,context_instance=RequestContext(request))
+    return render(request,'curso.html',locals()) 
+    #return render_to_response('curso.html', locals() ,context_instance=RequestContext(request))
     
 
 
@@ -726,12 +742,14 @@ def hacer_un_curso(request):
                                          form_seccion.save
                                          
 
-                                         return render_to_response('principal.html', locals() ,context_instance=RequestContext(request))
+                                         return render(request,'principal.html',locals())
+                                         #return render_to_response('principal.html', locals() ,context_instance=RequestContext(request))
                                        
                                 
                                 
 
-            return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+            return render(request,'confirmar.html',locals())
+            #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
        
      else:            
                         
@@ -741,7 +759,8 @@ def hacer_un_curso(request):
                           form_seccion=Seccion3Form()   
                                              
 
-     return render_to_response('hacer_un_curso.html', locals() ,context_instance=RequestContext(request))
+     return render(request,'hacer_un_curso.html',locals())
+     #return render_to_response('hacer_un_curso.html', locals() ,context_instance=RequestContext(request))
 
 
 
@@ -905,11 +924,13 @@ def calificar_curso(request,id_del_curso,id_seccion):
                                   alumno.save()                
                  
 
-
-    return render_to_response('calificar_curso.html', locals() ,context_instance=RequestContext(request))
+    return render(request,'calificar_curso.html',locals())
+    #return render_to_response('calificar_curso.html', locals() ,context_instance=RequestContext(request))
     
 
 
 def pymblock(request):
-   productos= Producto.objects.all()       
-   return render_to_response('pymblock.html', locals() ,context_instance=RequestContext(request))
+   productos= Producto.objects.all()  
+   return render(request,'pymblock.html',locals())    
+   #return render_to_response('pymblock.html', locals() ,context_instance=RequestContext(request))
+   
