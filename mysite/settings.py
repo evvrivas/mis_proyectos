@@ -4,6 +4,12 @@
 import os
 import socket
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+def root(folder):
+    return os.path.join(os.path.abspath(os.path.dirname(__file__)), '..',folder)
+
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # openshift is our PAAS for now.
@@ -170,18 +176,28 @@ else:
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_URL = '/static/'
 #MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi','static')
+
+#####STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi','static')
+STATIC_ROOT = root('staticstorage')# probando
+
+
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+
+
 STATICFILES_DIRS = (
+    root('static'),
+)
+##STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR,"static"),
-)
+##    os.path.join(BASE_DIR,"static"),
+##)
 
 
 TEMPLATES = [
@@ -219,4 +235,5 @@ EMAIL_HOST_USER = 'artetronica@gmail.com'
 EMAIL_HOST_PASSWORD = 'rootroot'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
 
