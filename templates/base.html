@@ -7,11 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
     <meta name="viewport" content="width=device-width, initial-scale=1">    
          
-    <link href={{STATIC_URL}}bootstrap/css/bootstrap.min.css rel="stylesheet" media="screen">
+    <!--<link href={{STATIC_URL}}bootstrap/css/bootstrap.min.css rel="stylesheet" media="screen">
     <link href={{STATIC_URL}}bootstrap/css/jquery.dataTables.css rel="stylesheet">
-    <link href={{STATIC_URL}}css/style.css rel="stylesheet">
+    <link href={{STATIC_URL}}css/style.css rel="stylesheet">  -->
   
-  
+  <link src='{% static  "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet" media="screen"'></script>
+  <link src='{% static  "bootstrap/css/jquery.dataTables.css" %}' rel="stylesheet"></script>
+  <link src='{% static  "css/style.css" %}' rel="stylesheet"></script>
 
   </head>
 
@@ -23,7 +25,7 @@
 
              <div class="col-md-3">
                  
-                 <center><img src= {{STATIC_URL}}logo.gif /><img src='{% static "logo.gif" %}' alt='img' />
+                 <center><img src='{% static "logo.gif" %}' alt='img' />
                  <li>Comprar y vender rapido</li>           
                 
                       
@@ -143,7 +145,7 @@
 
             <div class="col-md-2">          
 
-                     <center> <a href=""><img src={{STATIC_URL}}tronico.jpg></a></center> 
+                     <center> <a href=""><img src='{% static "tronico.jpg" %}' alt='img' /></a></center> 
                        
             </div>
 
@@ -152,8 +154,8 @@
         </div>
   </div>
 
-    <script src={{STATIC_URL}}bootstrap/js/jquery.min.js></script>
-    <script src={{STATIC_URL}}bootstrap/js/bootstrap.min.js></script>
+    <script src='{% static "bootstrap/js/jquery.min.js" %}' ></script>
+    <script src='{% static  "bootstrap/js/bootstrap.min.js" %}'></script>
 
     
 
