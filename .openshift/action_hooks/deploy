@@ -19,14 +19,14 @@ echo -e '\033[0;32mactivating virtual environment . . . \033[0m'
 source $OPENSHIFT_HOMEDIR/python/virtenv/bin/activate
 
 echo -e '\033[0;32mapplying migrations \033[0m'
+python "$OPENSHIFT_REPO_DIR"/manage.py check --noinput
+
+
+echo -e '\033[0;32mapplying migrations \033[0m'
 python "$OPENSHIFT_REPO_DIR"/manage.py migrate --noinput
 
 echo -e '\033[0;32mcollecting static files \033[0m'
 python "$OPENSHIFT_REPO_DIR"/manage.py collectstatic --noinput
-
-
-echo "Executing 'python $OPENSHIFT_REPO_DIR/manage.py --noinput'"
-python "$OPENSHIFT_REPO_DIR"/manage.py syncdb --noinput
 
 
 echo -e "\033[0;31mstatus\033[0m: \033[42m\033[1;37m success \033[0m"
