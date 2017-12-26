@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_mysql',
+    #'django_mysql',
     'mysite',
     'mysite.datos_artetronica',
 
