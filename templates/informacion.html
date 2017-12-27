@@ -2,7 +2,7 @@
 
 
 {% block content %}
-  
+
 
 
     
@@ -17,11 +17,13 @@
 
              <div class="col-md-4">
                 <div class="thumbnail"> 
-                  <center> <a href=""><img src={{STATIC_URL}}logo.gif></a> </center>                                   
+                  <center> <a href="">   <img src ='{% static "logo.gif" %}' alt='img' > </a> </center>    
+                                           
                   <div class="caption">
 
 
-                    <h4><center>Sobre STOREMAN</center></h4>     
+                    <h4><center>Sobre STOREMAN</center></h4>   
+                    <h4><center>Sobre STOREMAN</center></h4>   
                   </div>                     
                   <p>StoreMan es una plataforma desarrollada para que vendedores y compradores puedan realizar transacciones comerciales, proporcionandole al vendedor un espacio virtual para que pueda mostrar sus productos de manera ordenada y al comprador una herramienta para realizar la mejor compra. </p>
                   <br>
@@ -47,14 +49,16 @@
                    <br>               
                  <p>StoreMan ademas de proporcionar gratuitamente el servicio de alojamiento de productos tambien ofrece el servicio pagado de creacion de tienda online con carrito de compras incluido donde puedes organizar tus productos por categorias, ofertas y liquidaciones entre otras opciones.</p>
                    <br>
-                  <center><a href=""><img src={{STATIC_URL}}planes.gif></a>    </center>  
+                  <center><a href=""><img src='{% static "planes.gif" %}' alt='img' ></a>    </center>  
+                  
                   <br>  
                   <p><a href="/contratar">CONTRATAR TIENDA ONLINE</a></p>                             
 
                   <br>
                  <p>Ademas puedes contratar un plan de publicidad con el cual puedes poner tu tienda o producto en los ojos de potenciales clientes interesados</p>
                   <br>
-                  <center> <a href=""><img src={{STATIC_URL}}publicidad.gif></a> </center>
+                  <center> <a href=""><img src='{% static "publicidad.gif" %}' alt='img'></a> </center>
+                       
                   <br>
                   <p><a href="/contratar">CONTRATAR TIENDA ONLINE</a></p> 
                                                                       
@@ -64,7 +68,8 @@
 
 <div class="col-md-4">
                 <div class="thumbnail"> 
-                <a href=""><img src={{STATIC_URL}}garantia.jpg></a>                                   
+                <a href=""><img src='{% static "garantia.gif" %}' alt='img'></a>   
+                                             
                   <div class="caption">
                     <h4><center>Responsabilidad y garantía</center></h4>     
                   </div>     

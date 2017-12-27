@@ -2,7 +2,13 @@
 
 
 {% block content %}
+  
 
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>INFORMACION DE INTERES </center></h2>
+
+             
       </div>
 
 
@@ -24,18 +30,11 @@
                                        <table>   
 
 
-                                          <p>No de WhatsApp {{ form.id_usuario }} </p> 
-                                          <p>Contraseña(4 caracteres) {{ form.clave }}  </p>
-                                          <p>Nombre de la tienda {{ form.nombre_tienda }} </p> 
-                                          <p>Plan de tienda a contratar {{ form.plan_tienda }} </p> 
-                                          <p>correo electronico) {{ form.email }}  </p>
-                                          <p>ubicacion de su negocio {{ form.ubicacion }}  </p>
-                                          <p>Logo de su negocio {{ form.imagen1 }}  </p>
-                                          <p>Categoria de su negocio {{ form.slogan }}  </p>                                      
-                                          <p>Plan de publicidada  contratar {{ form.plan_publicidad }} </p>         
+                                          <p>Categoria nueva {{ form.categoria }} </p> 
+                                                 
                                       
                                        </table>
-                                      <p><input type="submit" value="Contratar plan tienda"></p>
+                                      <p><input type="submit" value="Crear categoria"></p>
                                       
                                       </form> 
                               

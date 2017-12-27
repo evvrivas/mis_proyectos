@@ -10,23 +10,14 @@ from mysite.datos_artetronica.models import *
 #admin.site.unregister(User)
 from mysite.forms import *
 
-
-admin.site.register(Producto)
+admin.site.register(Usuarios)
 class RulesAdmin(admin.ModelAdmin):
-    form = ProductoForm
+    form = UsuariosForm
+
+admin.site.register(Productos)
+class RulesAdmin(admin.ModelAdmin):
+    form = ProductosForm
 
 admin.site.register(Buscar)
 class RulesAdmin(admin.ModelAdmin):
     form = BuscarForm
-
-admin.site.register(Empresa)
-class RulesAdmin(admin.ModelAdmin):
-    form = EmpresaForm
-
-admin.site.register(Categoria)
-class RulesAdmin(admin.ModelAdmin):
-    form = CategoriaForm
-		
-
-  
-    

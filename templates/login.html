@@ -2,7 +2,7 @@
 
 
 {% block content %}
-      
+{% load url from future %}       
 
 <div class="panel panel-info">
       <div class="panel-heading">
@@ -30,15 +30,16 @@
                        <center>
                        <form action='.' method='post'>
                               {% csrf_token %}
-                           <label for="username">Email-->:</label>
+                           <label for="username"># WhatsApp:</label>
                             <input type="text" name="username" value="" id="username">
                             <br>
                             <label for="password">Password:</label>
                             <input type="password" name="password" value="" id="password">
                            
-                            <input type="submit" value="Entrar" />
-                            <input type="hidden" name="next" value="/principal/" />
-                            <form action='.' method='post'>  
+                            
+                             <button type="submit">Entrar</button>
+                            
+
                             <br>
                             <li><a href="/entrada_usuario">Registrarme como usuario</a></li>                  
                        </form >  

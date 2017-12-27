@@ -8,18 +8,17 @@ from datetime import datetime
 from django.contrib.auth.models import User
 #import Image
 
+from PIL import Image as Img
+import StringIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
 
 CATEGORIA = (
-			('tarjeta', 'tarjeta'),
-			('kits', 'kits'),
-			('Software', 'Software'),
-			('shields', 'shields'),
-			('elementos', 'elementos'),
-			('proyecto', 'proyecto'),
-			('sensores', 'sensores'),
-			('impreso', 'impreso'),
-
+			('ver todos', 'ver todos'),
+              
 			)
+
+
 
 PUNTUACION = (
 			('1 de 10', '1 de 10'),
@@ -40,17 +39,23 @@ ESTADO= (
 			('Ya lo vendi', 'Ya lo vendi'),
 			('Disponible', 'Disponible'),		
 
-			)		
-	
+			)	
 
+class Categoria(models.Model):
+		 id_usuario=models.CharField(max_length=30,blank=True)
+		 categoria=models.CharField(max_length=30)
+		 def __str__(self):
+		 	return  self.categoria
+		 class Admin:
+		 	list_display = ('categoria')
 
-class Producto(models.Model):
+class Productos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
-	     categoria=models.CharField(max_length=30,choices=CATEGORIA)
+	     categoria=models.ForeignKey('Categoria')
 	     cantidad         =  models.DecimalField(max_digits=15,decimal_places=0,default=0)
 	     nombre           =  models.CharField(max_length=30)
 	     
-	     #imagen1      = models.ImageField(upload_to='tmp')	     
+	     imagen1      = models.ImageField(upload_to='tmp')	     
 	    
 	     descripcion = models.TextField(max_length=100)
 	     puntuacion	 = models.CharField(max_length=30,choices=PUNTUACION) 
@@ -60,12 +65,12 @@ class Producto(models.Model):
 	     def save(self, *args, **kwargs):
          	if self.imagen1:
 	            image = Img.open(StringIO.StringIO(self.imagen1.read()))
-	            image.thumbnail((600,600), Img.ANTIALIAS)
+	            image.thumbnail((400,400), Img.ANTIALIAS)
 	            output = StringIO.StringIO()
 	            image.save(output, format='JPEG', quality=75)
 	            output.seek(0)
 	            self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
-	        #super(Producto, self).save(*args, **kwargs)
+	        super(Productos, self).save(*args, **kwargs)
 
 	     def __str__(self):
 		    		return  self.nombre
@@ -83,43 +88,39 @@ class Buscar(models.Model):
 	     class Admin:
 		    		list_display = ('item_de_busqueda')
 
-class Empresa(models.Model):
-	     id_usuario=models.CharField(max_length=30,blank=True)
-	     empresa=models.CharField(max_length=30)
 
-	     def __str__(self):
-		    		return  self.empresa
-	     class Admin:
-		    		list_display = ('empresa')
 
-class Categoria(models.Model):
-		 id_usuario=models.CharField(max_length=30,blank=True)
-		 categoria=models.CharField(max_length=30)
-		 def __str__(self):
-		 	return  self.categoria
-		 class Admin:
-		 	list_display = ('categoria')
 
-class UsuarioW(models.Model):
+PLAN_TIENDA= (
+			('BASICO', 'BASICO'),
+			('BASICO_CON_PUBLICIDAD', 'BASICO_CON_PUBLICIDAD'),
+			('PREMIUN', 'PREMIUN'),	
+			('PREMIUN_CON_PUBLICIDAD', 'PREMIUN_CON_PUBLICIDAD'),		
+
+			)	
+
+class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
 	     clave=models.CharField(max_length=4)
-	     email = models.EmailField()
+	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)
+	     email = models.EmailField(blank=True)
 	     ubicacion=models.CharField(max_length=30,blank=True)
-	     plan=models.CharField(max_length=30,blank=True)
-	     publicidad=models.CharField(max_length=30,blank=True)
-	     #imagen1      = models.ImageField(upload_to='tmp')	
-	     plan_tienda=models.CharField(max_length=30)
-	     plan_publicidad=models.CharField(max_length=30) 
+	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
+	     imagen1      = models.ImageField(upload_to='tmp',blank=True)
+	     slogan=models.CharField(max_length=30,blank=True)
+	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
+
+
 
 	     def save(self, *args, **kwargs):
          	if self.imagen1:
 	            image = Img.open(StringIO.StringIO(self.imagen1.read()))
-	            image.thumbnail((600,600), Img.ANTIALIAS)
+	            image.thumbnail((250,200), Img.ANTIALIAS)
 	            output = StringIO.StringIO()
 	            image.save(output, format='JPEG', quality=75)
 	            output.seek(0)
 	            self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
-	            #super(Usuariow, self).save(*args, **kwargs)
+	        super(Usuarios, self).save(*args, **kwargs)
 	     
 	     def __str__(self):
 		    		return  self.id_usuario

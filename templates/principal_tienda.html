@@ -1,0 +1,64 @@
+
+{% extends "base_tienda.html" %}
+
+
+{% block content %}
+{% load url from future %}      
+ 
+
+  <div class="panel panel-danger">
+      <div class="panel-heading">               
+                  
+
+      </div>
+
+    <div class="panel-body">   
+                                          
+        
+ 
+          <div class="row">
+
+                      {% for j in productos %}                 
+
+                             <div class="col-md-3">   
+                                  <div class="thumbnail">
+                                    
+                                         <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
+                                         <img src={{MEDIA_URL}}{{j.imagen1}} />             
+                                         <p>{{j.descripcion}}</p>            
+                                                                         
+                                      <br>
+
+                                       <p>Mensaje: 
+                     
+                              
+                          <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>   </p>
+                            
+                        
+                     
+                                                    
+                                   </div>
+                                  </div>           
+                                  
+                                  
+                             {% endfor %} 
+            
+
+        
+          </div>
+
+
+          
+
+
+
+
+        </div>
+</div>
+ 
+
+
+{% endblock %}
+
+
+

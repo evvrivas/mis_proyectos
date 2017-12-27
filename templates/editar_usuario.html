@@ -1,0 +1,89 @@
+ {% extends "base.html" %}
+
+
+{% block content %}
+
+
+            
+       
+
+<form action='' method='post' enctype="multipart/form-data" > 
+{% csrf_token%}
+
+  {% extends "base.html" %}
+
+
+{% block content %}
+       
+
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>INFORMACION DE INTERES </center></h2>
+
+             
+      </div>
+
+
+    <div class="panel-body">
+
+            <div class="row">
+
+               <div class="col-md-2">
+               </div> 
+
+             <div class="col-md-8">
+                <div class="thumbnail">                                    
+                  <div class="caption">
+                    <h4><center>Entrada de datos importantes</center></h4>     
+                  </div>                  
+                   
+                   <form action="" method="post" enctype="multipart/form-data"> 
+                    {% csrf_token%}
+                     <table> 
+                       
+
+                             {%  if   form.id_usuario == None %} 
+
+                                    <p>No de WhatsApp {{ form.id_usuario }} </p> 
+                                    <p>Contraseña(4 caracteres) {{ form.clave }}  </p>  
+
+                              {%else %}
+
+                                   {%  if    form.plan_tienda==None  %} 
+
+                                          <p>Nombre de la tienda {{ form.nombre_tienda }} </p> 
+                                          <p>Plan de tienda a contratar {{ form.plan_tienda }} </p> 
+                                          <p>correo electronico) {{ form.email }}  </p>
+                                          <p>ubicacion de su negocio {{ form.ubicacion }}  </p>
+                                          <p>Logo de su negocio {{ form.imagen1 }}  </p>
+                                          <p>Categoria de su negocio {{ form.slogan }}  </p>
+                                    
+                                    {%else %}    
+
+                                          <p>Plan de publicidada  contratar {{ form.plan_publicidad }} </p> 
+                                                                          
+                                    {%endif %}
+                               {%endif %}
+                   
+                    </table>
+
+                    <p><input type="submit" value="Registrarme"></p>
+                    
+                    </form>                 
+                  
+                </div>
+            </div>
+
+            <div class="col-md-2">
+            </div>  
+
+
+          </div>
+
+        </div>
+  </div>
+           
+
+        
+
+{% endblock %}

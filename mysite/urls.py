@@ -51,9 +51,13 @@ urlpatterns = [
     url(r'^editar/(\d+)/$', editar),
     url(r'^entrada_usuario/$', entrada_usuario),
     url(r'^entrada_mensaje/(\d+)$', entrada_mensaje),
-    url(r'^descargar_material/$', descargar_material),
-    url(r'^add_to_cart_PCB/(\d+)/([^/]+)/$', add_to_cart_PCB),
+   
+   
     url(r'^get_cart/$', get_cart),
+    url(r'^ver_categorias/([^/]+)$', ver_categorias),
+    url(r'^busqueda/$', busqueda),
+    url(r'^([^/]+)/$', mi_tienda),
+    url(r'^editar_usuario/(\d+)/$',editar_usuario)
 
 ]
 

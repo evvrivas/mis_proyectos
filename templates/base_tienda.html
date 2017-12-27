@@ -1,0 +1,210 @@
+{% load staticfiles %}    
+
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+         
+    <link href='{% static  "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet" media="screen"'></script>
+    <link href='{% static  "bootstrap/css/jquery.dataTables.css" %}' rel="stylesheet"></script>
+    <link href='{% static  "css/style.css" %}' rel="stylesheet"></script>
+
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  
+  
+  </head>
+
+
+
+  <body> 
+
+<div class="panel panel-warning">     
+
+     <div class="panel-heading">
+
+            <div class="col-md-6">     
+
+                 
+                    
+                 <center><img src='{% static {{vendedor.imagen1}} %}' alt='img' />   
+                          
+                 
+                 <li>{{vendedor.nombre_tienda}}</li> </center>    
+
+                 
+
+
+
+                 
+                
+                 
+              </center>
+
+             </div>
+                
+              
+             <div class="col-md-6">  
+
+                     <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle"
+                                        data-toggle="dropdown">
+                                  Inicio <span class="caret"></span>
+                                </button>
+                               
+                                <ul class="dropdown-menu" role="menu">
+                                         <li><a href="/{{user.username}}">Mi tienda </a></li>
+                                         <li><a href="/principal">Ir a Storeman </a></li>
+
+                                         {%  if user.is_authenticated %}          
+                                               <li><a href="/accounts/logout/">Salir</a></li>
+                                         {%  else  %}                                 
+                                           <li><a href="/accounts/login">Entrar </a></li>
+                                           <li><a href="/entrada_usuario">Registrarme</a></li>
+                                           
+                                         {% endif %}  
+                                                                            
+                                  
+                                </ul>
+                       </div>
+
+                        <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle"
+                                        data-toggle="dropdown">
+                                  Categoria <span class="caret"></span>
+                                </button>
+                               
+                                <ul class="dropdown-menu" role="menu">
+
+                                    {%  for i in categorias %}
+                                      <li><a href="/ver_categorias/{{i.categoria}}">{{i.categoria}}</a></li>
+                                   {%  endfor %} 
+
+
+                                </ul>
+                       </div>
+
+             
+                         <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle"
+                                        data-toggle="dropdown">
+                                  Mi tienda <span class="caret"></span>
+                                </button>
+
+                                     <ul class="dropdown-menu" role="menu">
+
+                                       <li><a href="/entrada_producto">Nuevo producto </a></li>
+                                      
+                                       <li><a href="/editar_usuario/{{user.username}}">Cambiar plan </a></li>
+                                       
+
+
+                                </ul>
+                               
+                                      
+                                
+                       </div>
+
+
+
+
+
+
+
+
+                
+               </div> 
+
+              
+                              
+               
+      
+
+      </div>
+
+
+
+
+
+
+
+    <div class="panel-body">  
+
+            <div class="col-md-6"> 
+
+                          <form action="/busqueda/" method="post">
+                                             {% csrf_token %}
+                                                      <div>
+                                                          
+                                                      <input type="text" id="name" name="nombre" size="15"/>
+                                                      <input type="submit" value="Buscar">
+                                                      
+                                                      </div>                               
+                                                      
+                                                      
+                                            </form>
+               </div> 
+
+                 
+           
+            <div class="col-md-6"> 
+
+              <form method="post" action=".">
+                 <input type="radio" name="selec1" value="1" id="r11"  checked/>
+                 <label for="r11">$↓ </label>                   
+                 <input type="radio" name="selec1" value="2" id="r12" /> 
+                 <label for="r12">$↑  </label>                  
+                 <input type="radio" name="selec1" value="3" id="r13" />
+                 <label for="r13">↑fecha</label>
+                 <input type="radio" name="selec1" value="4" id="r14" />
+                 <label for="r14">↓fecha</label>
+
+              </form>
+
+             </div> 
+
+
+    </div>
+
+</div>
+
+
+ 
+    {% block content %}
+    {% endblock %}
+
+
+
+
+        
+  <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>{{vendedor.deireccion}}{{vendedor.id_usuario}}</center></h2>    
+                
+      </div>
+
+    <div class="panel-body">    
+                                      
+
+    </div>
+
+  </div>
+  
+
+    <script src='{% static "bootstrap/js/jquery.min.js" %}' ></script>
+    <script src='{% static  "bootstrap/js/bootstrap.min.js" %}'></script>
+
+  </body>
+</html>
+
+
+
+
