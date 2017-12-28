@@ -70,7 +70,7 @@ class Productos(models.Model):
 	            image.save(output, format='JPEG', quality=75)
 	            output.seek(0)
 	            self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
-	        super(Productos, self).save(*args, **kwargs)
+	        #super(Productos, self).save(*args, **kwargs)
 
 	     def __str__(self):
 		    		return  self.nombre
@@ -120,7 +120,7 @@ class Usuarios(models.Model):
 	            image.save(output, format='JPEG', quality=75)
 	            output.seek(0)
 	            self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
-	        super(Usuarios, self).save(*args, **kwargs)
+	        #super(Usuarios, self).save(*args, **kwargs)
 	     
 	     def __str__(self):
 		    		return  self.id_usuario
