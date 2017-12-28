@@ -9,7 +9,8 @@ from django.contrib.auth.models import User
 #import Image
 
 from PIL import Image as Img
-import StringIO
+
+from io import StringIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
