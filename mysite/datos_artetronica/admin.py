@@ -21,3 +21,7 @@ class RulesAdmin(admin.ModelAdmin):
 admin.site.register(Buscar)
 class RulesAdmin(admin.ModelAdmin):
     form = BuscarForm
+
+admin.site.register(Categooria)
+class RulesAdmin(admin.ModelAdmin):
+    form = CategoriaForm
