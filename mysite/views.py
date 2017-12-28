@@ -349,8 +349,8 @@ def add_to_cart(request, product_id):
     else :
         precio=productos.precio_A
 
-    print  "########"
-    print  quantity, productos, precio 
+   
+    
     cart = Cart(request)
     cart.add(productos, precio, quantity)
     total=cart.summary()
@@ -368,7 +368,7 @@ def remove_from_cart(request, product_id):
 @login_required
 def get_cart(request):
     categoria=Categoria.objects.all().order_by("categoria")
-    print "getcqr" 
+    
     cart = Cart(request)
     cart.view()
     return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
