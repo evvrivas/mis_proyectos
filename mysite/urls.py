@@ -47,7 +47,7 @@ urlpatterns = [
     url(r'^principal/$', pagina_principal),
     url(r'^catalogo/(\d+)$', catalogo),
     url(r'^informacion/$', informacion),
-    url(r'^listado/([a-z]+)$', listado),
+
     url(r'^editar/(\d+)/$', editar),
     url(r'^entrada_usuario/$', entrada_usuario),
     url(r'^entrada_mensaje/(\d+)$', entrada_mensaje),
