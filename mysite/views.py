@@ -87,10 +87,9 @@ def entrada_producto(request):
                                   return render(request,'entrada_producto.html',locals())                           
                                  
                                           
-     else:                    
-                        
-                          formProd=ProductosForm()
-                          formCateg=CategoriaForm()
+     else:
+        formProd=ProductosForm()
+        formCateg=CategoriaForm()
                          
 
      
