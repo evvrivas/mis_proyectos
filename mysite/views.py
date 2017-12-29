@@ -69,8 +69,8 @@ def entrada_producto(request):
                           productillo.save() # Now you can send it to DB
                           formProd.save()  
                           
-                          return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-                  
+                          #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                          return render(request,'confirmar.html',locals())     
                   else:
 
 
@@ -113,8 +113,8 @@ def entrada_mensaje(request,bandera):
                         mensajero.save() # Now you can send it to DB
                      
 
-                        return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-       
+                        #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                        return render(request,'confirmar.html',locals())   
         else:            
                         form = MensajeForm()
 
@@ -130,8 +130,8 @@ def entrada_mensaje(request,bandera):
                   mensajes_anteriores=Mensaje.objects.all().order_by("-id") 
     
         
-
-        return render_to_response('mensajes.html', locals() ,context_instance=RequestContext(request))
+        return render(request,'mensajes.html',locals())   
+        #return render_to_response('mensajes.html', locals() ,context_instance=RequestContext(request))
 
 
 
@@ -162,15 +162,15 @@ def entrada_usuario(request):
                             usuario.save() # Now you can send it to DB
                             form.save() # Guardar los datos en la base de datos  print 
                             user.save()                          
-                            return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-       
+                            #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                            return render(request,'confirmar.html',locals())   
         else:            
                         
 
                          form=UsuariosForm()
 
-       
-        return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
+        return render(request,'formulario.html',locals())   
+        #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
     
 def editar_usuario(request,acid):    
         categoria=Categoria.objects.all().order_by("categoria")
@@ -184,14 +184,16 @@ def editar_usuario(request,acid):
                     usu.id_usuario = request.user.username
                     usu.clave = request.user.password
                     usu.save() # Guardar los datos en la base de datos 
-                    return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))          
+                    #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
+                    return render(request,'confirmar.html',locals())             
         
         else:
             
             form = UsuariosForm(instance=f)   
         
 
-        return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+        return render(request,'formulario.html',locals())   
 
 
 
@@ -212,7 +214,8 @@ def listado_productos(request,ordenados):
         productos=Productos.objects.filter(id_usuario=request.user.username)    
     
 
-    return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
+    #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
+    return render(request,'catalogo.html',locals())   
 
    
    
@@ -231,7 +234,8 @@ def editar(request, acid):
     #else:
     #    form = ProductoForm(instance=f)    
     #    
-    return render_to_response('formulario.html',locals(),context_instance=RequestContext(request))
+    #return render_to_response('formulario.html',locals(),context_instance=RequestContext(request))
+    return render(request,'formulario.html',locals())   
 
 
 def mi_tienda(request,nombre):
@@ -243,7 +247,8 @@ def mi_tienda(request,nombre):
 
   
   #if vendedor.plan_tienda!="":
-  return render_to_response('principal_tienda.html',locals(),context_instance=RequestContext(request))
+  #return render_to_response('principal_tienda.html',locals(),context_instance=RequestContext(request))
+  return render(request,'principal.html',locals())   
   #else:
   #      return render_to_response('no_tienes_tienda.html',locals(),context_instance=RequestContext(request))
 
@@ -262,8 +267,9 @@ def ver_categorias(request,item):
     productos=Productos.objects.filter(categoria__categoria__contains=item)
     
    
-
-  return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
+  
+  #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
+  return render(request,'catalogo.html',locals())   
 
     
 
@@ -285,7 +291,8 @@ def busqueda(request):
 
 
          
-        return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
+        #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
+        return render(request,'catalogo.html',locals())   
 
 
     
@@ -317,17 +324,20 @@ def pagina_principal(request):
 
                          usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
 
-                         return render_to_response('principal.html', locals(),context_instance=RequestContext(request))
+                         #return render_to_response('principal.html', locals(),context_instance=RequestContext(request))
+                         return render(request,'principal.html',locals())   
 
 
 
 def catalogo(request, var):
   categoria=Categoria.objects.all().order_by("categoria")
-  return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
+  #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
+  return render(request,'catalogo.html',locals())   
 
 def informacion(request):
   categoria=Categoria.objects.all().order_by("categoria")
-  return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
+  #return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
+  return render(request,'informacion.html',locals())   
 
 
 from mysite.datos_artetronica.cart import Cart
@@ -355,7 +365,8 @@ def add_to_cart(request, product_id):
     total=cart.summary()
     
 
-    return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
+    #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
+    return render(request,'carrito.html',locals())   
 
 @login_required
 def remove_from_cart(request, product_id):
@@ -370,7 +381,8 @@ def get_cart(request):
     
     cart = Cart(request)
     cart.view()
-    return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
+    #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
+    return render(request,'carrito.html',locals())   
 
 @login_required
 def pedido(request):   
@@ -392,5 +404,6 @@ def pedido(request):
     send_mail('Pedido ', mensaje,"artetronica@gmail.com",(sender,), fail_silently=False)
    
     
-    return render_to_response('cotizacion.html', locals(),context_instance=RequestContext(request))
+    #return render_to_response('cotizacion.html', locals(),context_instance=RequestContext(request))
+    return render(request,'cotizacion.html',locals())   
  
