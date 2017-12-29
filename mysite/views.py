@@ -330,7 +330,7 @@ def informacion(request):
   return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
 
 
-from datos_artetronica.cart import Cart
+from mysite.datos_artetronica.cart import Cart
 
 @login_required
 def add_to_cart(request, product_id): 
