@@ -65,9 +65,9 @@ class Productos(models.Model):
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     def save(self, *args, **kwargs):
          	if self.imagen1:
-	            image = Img.open(StringIO.StringIO(self.imagen1.read()))
+	            image = Img.open(StringIO(self.imagen1.read()))
 	            image.thumbnail((400,400), Img.ANTIALIAS)
-	            output = StringIO.StringIO()
+	            output = StringIO()
 	            image.save(output, format='JPEG', quality=75)
 	            output.seek(0)
 	            self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
@@ -115,9 +115,9 @@ class Usuarios(models.Model):
 
 	     def save(self, *args, **kwargs):
          	if self.imagen1:
-	            image = Img.open(StringIO.StringIO(self.imagen1.read()))
+	            image = Img.open(StringIO(self.imagen1.read()))
 	            image.thumbnail((250,200), Img.ANTIALIAS)
-	            output = StringIO.StringIO()
+	            output = StringIO()
 	            image.save(output, format='JPEG', quality=75)
 	            output.seek(0)
 	            self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
