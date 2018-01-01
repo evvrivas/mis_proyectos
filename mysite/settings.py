@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     #'django_mysql',
     'mysite',
     'mysite.datos_artetronica',
+    'sorl.thumbnail',
 
 )
 

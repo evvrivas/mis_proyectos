@@ -14,6 +14,14 @@ from io import StringIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
+
+
+
+
+from sorl.thumbnail import ImageField
+
+    image = ImageField(upload_to='whatever')
+
 CATEGORIA = (
 			('ver todos', 'ver todos'),
               
@@ -56,21 +64,23 @@ class Productos(models.Model):
 	     cantidad         =  models.DecimalField(max_digits=15,decimal_places=0,default=0)
 	     nombre           =  models.CharField(max_length=30)
 	     
-	     imagen1      = models.ImageField(upload_to='tmp')	     
+	     #imagen1      = models.ImageField(upload_to='tmp')	  
+	     imagen1 = ImageField(upload_to='tmp')
+   
 	    
 	     descripcion = models.TextField(max_length=100)
 	     puntuacion	 = models.CharField(max_length=30,choices=PUNTUACION) 
 	     estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_A  = models.FloatField(blank=True,null= True	)	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
-	     def save(self, *args, **kwargs):
-         	if self.imagen1:
-	            image = Img.open(StringIO(self.imagen1.read()))
-	            image.thumbnail((400,400), Img.ANTIALIAS)
-	            output = StringIO()
-	            image.save(output, format='JPEG', quality=75)
-	            output.seek(0)
-	            self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
+	     #def save(self, *args, **kwargs):
+         #	if self.imagen1:
+	      #      image = Img.open(StringIO(self.imagen1.read()))
+	       #     image.thumbnail((400,400), Img.ANTIALIAS)
+	        #    output = StringIO()
+	         #   image.save(output, format='JPEG', quality=75)
+	          #  output.seek(0)
+	           # self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
 	        #super(Productos, self).save(*args, **kwargs)
 
 	     def __str__(self):
@@ -107,20 +117,21 @@ class Usuarios(models.Model):
 	     email = models.EmailField(blank=True)
 	     ubicacion=models.CharField(max_length=30,blank=True)
 	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
-	     imagen1      = models.ImageField(upload_to='tmp',blank=True)
+	     #imagen1      = models.ImageField(upload_to='tmp',blank=True)
+	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     slogan=models.CharField(max_length=30,blank=True)
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 
 
 
-	     def save(self, *args, **kwargs):
-         	if self.imagen1:
-	            image = Img.open(StringIO(self.imagen1.read()))
-	            image.thumbnail((250,200), Img.ANTIALIAS)
-	            output = StringIO()
-	            image.save(output, format='JPEG', quality=75)
-	            output.seek(0)
-	            self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
+	     #def save(self, *args, **kwargs):
+         #	if self.imagen1:
+	      #      image = Img.open(StringIO(self.imagen1.read()))
+	       #     image.thumbnail((250,200), Img.ANTIALIAS)
+	        #    output = StringIO()
+	         #   image.save(output, format='JPEG', quality=75)
+	          #  output.seek(0)
+	           # self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
 	        #super(Usuarios, self).save(*args, **kwargs)
 	     
 	     def __str__(self):
