@@ -20,7 +20,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from sorl.thumbnail import ImageField
 
-    image = ImageField(upload_to='whatever')
+ 
 
 CATEGORIA = (
 			('ver todos', 'ver todos'),
