@@ -24,7 +24,8 @@
                                   <div class="thumbnail">
                                     
                                          <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
-                                         <img src={{j.imagen1.url}} />             
+                                         <img src="{% get_media_prefix %}{{j.imagen1}}" />     
+                                            
                                          <p>{{j.descripcion}}</p>            
                                                                          
                                       <br>
