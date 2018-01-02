@@ -166,7 +166,7 @@ USE_TZ = True
 
 
 
-MEDIA_URL = '/static/media/'
+MEDIA_URL = '/media/'
 
 if ON_PAAS:
     MEDIA_ROOT = os.path.join(os.environ.get('OPENSHIFT_DATA_DIR'), 'media/')
