@@ -288,10 +288,8 @@ def busqueda(request):
             
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
                    
-
-
          
-        #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
+        
         return render(request,'catalogo.html',locals())   
 
 
@@ -304,27 +302,15 @@ import datetime
 def pagina_principal(request):
                         
 
-                         categoria=Categoria.objects.all().order_by("categoria")
-
+                         categoria=Categoria.objects.all().order_by("categoria")                         
                          
-                         #publicidad=Buscar.objects.filter(id_usuario=request.user.username)
-
-                         #user=Usuarios.objects.filter(plan_publicidad="PRODUCTO")
-
-                         #p=[]
-                         #for i in user:                            
-                         #   productos=Product.objects.filter(id_usuario=i.username)[0:4]
-                         #   p.append(productos)
-
-                         #nuevas_tiendas=Usuarios.objects.filter(plan_publicidad="TIENDA")[0:4] 
-                         nuevas_tiendas=Usuarios.objects.exclude(plan_tienda__isnull=True).exclude(plan_tienda="").order_by("-fecha_ingreso")[0:4] 
-                        
- 
-                         nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:4]
+                         nuevas_tiendas=Usuarios.objects.exclude(plan_tienda__isnull=True).exclude(plan_tienda="").order_by("-fecha_ingreso")[0:2] 
+                         
+                         nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:2]
 
                          usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
 
-                         #return render_to_response('principal.html', locals(),context_instance=RequestContext(request))
+                        
                          return render(request,'principal.html',locals())   
 
 
