@@ -32,8 +32,11 @@
      <div class="panel-heading">
 
             <div class="col-md-6">                     
-                    
-                 <center><img src={{vendedor.imagen1.ulr}} alt='img' />   
+                     {%  for i in vendedor %}
+                                     <center><img src={{i.imagen1.ulr}} alt='img' />  
+                      {%  endfor %} 
+                 
+
                           
                                 
                  
