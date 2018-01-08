@@ -93,7 +93,7 @@ def entrada_producto(request):
                          
 
      
-        return render(request,'entrada_producto.html',locals())
+     return render(request,'entrada_producto.html',locals())
         #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
 
 
@@ -240,7 +240,6 @@ def editar(request, acid):
 
 def mi_tienda(request,nombre):
   vendedor=Usuarios.objects.filter(id_usuario=nombre).first()
-
   productos=Productos.objects.filter(id_usuario=nombre)
   categorias=Categoria.objects.filter(id_usuario=nombre)
 
@@ -248,7 +247,7 @@ def mi_tienda(request,nombre):
   
   #if vendedor.plan_tienda!="":
   #return render_to_response('principal_tienda.html',locals(),context_instance=RequestContext(request))
-  return render(request,'principal.html',locals())   
+  return render(request,'principal_tienda.html',locals())   
   #else:
   #      return render_to_response('no_tienes_tienda.html',locals(),context_instance=RequestContext(request))
 
@@ -264,15 +263,28 @@ def ver_categorias(request,item):
     productos=Productos.objects.all()
   else:
     #productos=Productos.objects.all()
-    productos=Productos.objects.filter(categoria__categoria__contains=item)
-    
+    productos=Productos.objects.filter(categoria__categoria__contains=item)    
    
   
   #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
   return render(request,'catalogo.html',locals())   
 
     
+def ver_mis_categorias(request,item):
+  
+  categoria=Categoria.objects.all().order_by("categoria")
+  respuesta=request.POST.getlist('selec1')
+  
 
+  if item=="todas las categorias":
+    productos=Productos.objects.all()
+  else:
+    #productos=Productos.objects.all()
+    productos=Productos.objects.filter(categoria__categoria__contains=item)    
+   
+  
+  #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
+  return render(request,'catalogo_tienda.html',locals())   
  
 
 
