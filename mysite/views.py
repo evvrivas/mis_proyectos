@@ -239,17 +239,13 @@ def editar(request, acid):
 
 
 def mi_tienda(request,nombre):
-  vendedor=Usuarios.objects.filter(id_usuario=nombre).first()
-  productos=Productos.objects.filter(id_usuario=nombre)
-  categorias=Categoria.objects.filter(id_usuario=nombre)
-
-
+  vendedor=Usuarios.objects.filter(id_usuario=request.user.username).first()
+  productos=Productos.objects.filter(id_usuario=request.user.username)
+  categorias=Categoria.objects.filter(id_usuario=request.user.username) 
   
-  #if vendedor.plan_tienda!="":
-  #return render_to_response('principal_tienda.html',locals(),context_instance=RequestContext(request))
+  
   return render(request,'principal_tienda.html',locals())   
-  #else:
-  #      return render_to_response('no_tienes_tienda.html',locals(),context_instance=RequestContext(request))
+ 
 
 
 
