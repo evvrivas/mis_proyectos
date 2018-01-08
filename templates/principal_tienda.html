@@ -8,7 +8,10 @@
 
   <div class="panel panel-danger">
       <div class="panel-heading">               
-                  
+            
+            {%  for i in vendedor %}
+                <center><img src={{i.imagen1.ulr}} alt='img' />  
+            {%  endfor %}         
 
       </div>
 
