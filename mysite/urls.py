@@ -52,7 +52,7 @@ urlpatterns = [
     url(r'^editar/(\d+)/$', editar),
     url(r'^entrada_usuario/$', entrada_usuario),
     url(r'^entrada_mensaje/(\d+)$', entrada_mensaje),
-    url(r'^entrada_producto/(\d+)$', entrada_producto),
+    url(r'^entrada_producto/$', entrada_producto),
    
    
     url(r'^get_cart/$', get_cart),

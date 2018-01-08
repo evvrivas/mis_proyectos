@@ -93,7 +93,7 @@ def entrada_producto(request):
                          
 
      
-     return render(request,'entrada_producto.html',locals())
+        return render(request,'entrada_producto.html',locals())
         #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
 
 
