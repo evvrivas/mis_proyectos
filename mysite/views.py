@@ -239,9 +239,10 @@ def editar(request, acid):
 
 
 def mi_tienda(request,nombre):
-  vendedor=Usuarios.objects.filter(id_usuario=request.user.username).first()
-  productos=Productos.objects.filter(id_usuario=request.user.username)
-  categorias=Categoria.objects.filter(id_usuario=request.user.username) 
+  
+  vendedor=Usuarios.objects.filter(id_usuario=nombre)
+  productos=Productos.objects.filter(id_usuario=nombre)
+  categorias=Categoria.objects.filter(id_usuario=nombre) 
   
   
   return render(request,'principal_tienda.html',locals())   
