@@ -24,4 +24,4 @@ class BuscarForm(ModelForm):
 class CategoriaForm(ModelForm):
 	class Meta:
 		model= Categoria		
-		exclude=["id_usuario"]
+		exclude=[]

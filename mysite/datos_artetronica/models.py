@@ -51,7 +51,6 @@ ESTADO= (
 			)	
 
 class Categoria(models.Model):
-		 id_usuario=models.CharField(max_length=30,blank=True)
 		 categoria=models.CharField(max_length=30)
 		 def __str__(self):
 		 	return  self.categoria
