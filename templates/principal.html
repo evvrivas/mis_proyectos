@@ -1,6 +1,6 @@
 
 {% extends "base.html" %}
-
+{% load thumbnail %}
 
 {% block content %}
 
@@ -20,10 +20,13 @@
 
                  {% for j in nuevas_tiendas %}                 
 
-                             <div class="col-md-3">   
-                                  <div class="thumbnail">
+                     <div class="col-md-3">   
+                     <div class="thumbnail">
                                           
-                                          <a href="/{{j.id_usuario}}"><img src={{j.imagen1.url}} > </a>  
+                          {% thumbnail item.image "100x" crop="center" as im %}
+                          <a href="/{{j.id_usuario}}"><img src="{{ j.imagen1.url }}" width="{{ j.imagen1.width }}" height="{{ j.imagen1.height }}">
+                          {% endthumbnail %}
+                                         
                                                                                 
                                                                                          
                                    </div>

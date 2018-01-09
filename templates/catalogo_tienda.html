@@ -1,5 +1,5 @@
 {% extends "base_tienda.html" %}
-
+{% load thumbnail %}
 
 {% block content %}
           
@@ -36,7 +36,10 @@
                 <div class="thumbnail">
                        
                        <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
-                       <img src={{j.imagen1.url}} />             
+                       {% thumbnail item.image "100x" crop="center" as im %}
+                          <a href="/{{j.id_usuario}}"><img src="{{ j.imagen1.url }}" width="{{ j.imagen1.width }}" height="{{ j.imagen1.height }}">
+                          {% endthumbnail %}
+                          
                        <p>{{j.descripcion}}</p>              
 
                       <p>Le enviare un mensaje                     
