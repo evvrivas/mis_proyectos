@@ -36,8 +36,8 @@
                 <div class="thumbnail">
                        
                        <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
-                       {% thumbnail item.image "100" crop="center" as im %}
-                          <a href="/{{j.id_usuario}}"><img src="{{ j.imagen1.url }}" width="{{ j.imagen1.width }}" height="{{ j.imagen1.height }}">
+                        {% thumbnail j.imagen1 "100" crop="center" as im %}
+                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                           {% endthumbnail %}
                           
                        <p>{{j.descripcion}}</p>              

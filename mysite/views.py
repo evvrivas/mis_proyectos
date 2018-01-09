@@ -242,7 +242,7 @@ def mi_tienda(request,nombre):
   
   vendedor=Usuarios.objects.filter(id_usuario=nombre)
   productos=Productos.objects.filter(id_usuario=nombre)
-  categorias=Categoria.objects.filter(id_usuario=nombre) 
+  
   
   
   return render(request,'principal_tienda.html',locals())   
