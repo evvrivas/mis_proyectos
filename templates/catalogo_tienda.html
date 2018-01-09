@@ -36,7 +36,7 @@
                 <div class="thumbnail">
                        
                        <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
-                       {% thumbnail item.image "100x" crop="center" as im %}
+                       {% thumbnail item.image "100" crop="center" as im %}
                           <a href="/{{j.id_usuario}}"><img src="{{ j.imagen1.url }}" width="{{ j.imagen1.width }}" height="{{ j.imagen1.height }}">
                           {% endthumbnail %}
                           
