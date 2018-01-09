@@ -40,7 +40,10 @@
                              <div class="col-md-3">   
                                   <div class="thumbnail">
                                     
-                                         <a href="."><img src={{j.imagen1.url}} > </a>
+                                        
+                                         {% thumbnail j.imagen1 "100" crop="center" as im %}
+                                          <a href="."><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                         {% endthumbnail %}
                                                     
                                    </div>
                                   </div>           
@@ -60,7 +63,10 @@
                                   <div class="thumbnail">
                                     
                                          <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
-                                         <img src={{j.imagen1.url}} />             
+                                         {% thumbnail j.imagen1 "100" crop="center" as im %}
+                                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                         {% endthumbnail %}
+                                                  
                                          <p>{{j.descripcion}}</p>            
                                                                          
                                       <br>
@@ -97,7 +103,10 @@
                                   <div class="thumbnail">
                                     
                                          <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
-                                         <img src={{j.imagen1.url}} />             
+                                         {% thumbnail j.imagen1 "100" crop="center" as im %}
+                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                         {% endthumbnail %}
+                                               
                                          <p>{{j.descripcion}}</p>            
                                                                          
                                       <br>
