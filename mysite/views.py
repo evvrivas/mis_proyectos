@@ -279,7 +279,7 @@ def ver_categorias(request,item):
 
   if item=="xproductox":
     productos=Productos.objects.all()
-  elif item=="xtiendax": :
+  elif item=="xtiendax": 
     tiendas=Usuarios.objects.all()
    
   else:  
