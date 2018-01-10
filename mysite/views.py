@@ -274,9 +274,7 @@ def ver_categorias(request,item):
   categoria=Categoria.objects.all().order_by("categoria")
   respuesta=request.POST.getlist('selec1')
   
-  xproductox
-  xtiendax
-
+  
   if item=="xproductox":
     productos=Productos.objects.all()
   elif item=="xtiendax": 
