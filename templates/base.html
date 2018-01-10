@@ -24,8 +24,6 @@
   
   </head>
 
-
-
   <body> 
 
 <div class="panel panel-info">
@@ -51,6 +49,7 @@
                            
                  {% endif %}  
               </center>
+
 
              </div>
                 
@@ -80,10 +79,13 @@
                         <div class="btn-group">
                                 <button type="button" class="btn btn-info dropdown-toggle"
                                         data-toggle="dropdown">
-                                  Categoria <span class="caret"></span>
+                                  Ver  <span class="caret"></span>
                                 </button>
                                
                                 <ul class="dropdown-menu" role="menu">
+
+                                    <li><a href="/ver_categorias/xtiendax">Todas las tiendas </a></li>
+                                    <li><a href="/ver_categorias/xproductox">Todos los productos</a></li>
 
                                     {%  for i in categoria %}
                                       <li><a href="/ver_categorias/{{i}}">{{i}}</a></li>
@@ -129,39 +131,6 @@
 
       </div>
 
-
-
-
-
-
-
-    <div class="panel-body">  
-
-            <div class="col-md-6"> 
-
-                          
-               </div> 
-
-                 
-           
-            <div class="col-md-6"> 
-
-              <form method="post" action=".">
-                 <input type="radio" name="selec1" value="1" id="r11"  checked/>
-                 <label for="r11">$↓ </label>                   
-                 <input type="radio" name="selec1" value="2" id="r12" /> 
-                 <label for="r12">$↑  </label>                  
-                 <input type="radio" name="selec1" value="3" id="r13" />
-                 <label for="r13">↑fecha</label>
-                 <input type="radio" name="selec1" value="4" id="r14" />
-                 <label for="r14">↓fecha</label>
-
-              </form>
-
-             </div> 
-
-
-    </div>
 
 </div>
 

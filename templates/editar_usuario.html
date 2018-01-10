@@ -37,6 +37,12 @@
                     <h4><center>Entrada de datos importantes</center></h4>     
                   </div>                  
                    
+                        <form action="." method="post" enctype="multipart/form-data" > 
+                           {% csrf_token%}
+                           <p>Categoria {{ formCateg }} </p> 
+                           <input type="submit" value="crear categoria"  />                       
+                                                   </form>
+
                    <form action="" method="post" enctype="multipart/form-data"> 
                     {% csrf_token%}
                      <table> 

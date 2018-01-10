@@ -18,38 +18,39 @@
 
          
 
-                 {% for j in nuevas_tiendas %}                 
+                                
 
                      <div class="col-md-3">   
                      <div class="thumbnail">
-                                          
-                         {% thumbnail j.imagen1 "100" crop="center" as im %}
-                          <a href="/{{j.id_usuario}}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                         {% endthumbnail %}
-                                         
+
+                       {% for j in nuevas_tiendas %}                     
+                             {% thumbnail j.imagen1 "100" crop="center" as im %}
+                              <a href="/{{j.id_usuario}}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>
+                             {% endthumbnail %}
+                       {% endfor %}                   
                                                                                 
                                                                                          
                                    </div>
                                   </div>           
                                   
                                   
-                {% endfor %} 
+                
 
-                      {% for j in tiendas %}                 
+                                      
 
                              <div class="col-md-3">   
                                   <div class="thumbnail">
                                     
-                                        
+                                    {% for j in tiendas %}     
                                          {% thumbnail j.imagen1 "100" crop="center" as im %}
-                                          <a href="."><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                          <a href="."><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>
                                          {% endthumbnail %}
-                                                    
+                                    {% endfor %}                 
                                    </div>
                                   </div>           
                                   
                                   
-                             {% endfor %} 
+                            
             
 
         
@@ -63,7 +64,7 @@
                                   <div class="thumbnail">
                                     
                                          <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
-                                         {% thumbnail j.imagen1 "100" crop="center" as im %}
+                                         {% thumbnail j.imagen1 "200" crop="center" as im %}
                                           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                                          {% endthumbnail %}
                                                   
@@ -103,7 +104,7 @@
                                   <div class="thumbnail">
                                     
                                          <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
-                                         {% thumbnail j.imagen1 "100" crop="center" as im %}
+                                         {% thumbnail j.imagen1 "200" crop="center" as im %}
                           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                          {% endthumbnail %}
                                                

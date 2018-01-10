@@ -136,25 +136,25 @@ def entrada_mensaje(request,bandera):
 
 
 def entrada_usuario(request): 
+        #!/usr/bin/python
+        # -*- coding: latin-1 -*-
         categoria=Categoria.objects.all().order_by("categoria")
-       
+        import os, sys
+        categoria=Categoria.objects.all().order_by("categoria") 
+        
         if request.method == 'POST': # si el usuario est enviando el formulario con datos
-            
-                    
+               
+
+               if request.POST:                
                     form = UsuariosForm(request.POST,request.FILES)                      
                     
-                    if form.is_valid() :                  
-
-                            
+                    if form.is_valid() :                        
                             
                             whatsapp = form.cleaned_data['id_usuario']
                             contra = form.cleaned_data['clave'] 
-                                                                                                                                   
-                            
+                                            
                             user = User.objects.create_user(username=whatsapp, password=contra)
-                            
-
-                            
+                                                       
                             usuario = form.save(commit=False)
                             # commit=False tells Django that "Don't send this to database yet.
                             # I have more things I want to do with it."
@@ -164,14 +164,33 @@ def entrada_usuario(request):
                             user.save()                          
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             return render(request,'confirmar.html',locals())   
+                    
+                   
+                    else:
+                          formCateg=CategoriaForm(request.POST,request.FILES) 
+                          if formCateg.is_valid() :                           
+
+                                  categor = formCateg.save(commit=False)
+                                  # commit=False tells Django that "Don't send this to database yet.
+                                  # I have more things I want to do with it."
+                                  categor.id_usuario = request.user.username # Set the user object here
+                                  categor.save() # Now you can send it to DB
+                                  formCateg.save() # Guardar los datos en la base de datos  print  
+
+                                  return render(request,'formulario.html',locals())  
+
+
+
+
+
         else:            
                         
-
                          form=UsuariosForm()
-
+                         formCateg=CategoriaForm() 
+                         
         return render(request,'formulario.html',locals())   
-        #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
-    
+        
+
 def editar_usuario(request,acid):    
         categoria=Categoria.objects.all().order_by("categoria")
         f = Usuarios.objects.get(id_usuario=acid)           
@@ -255,14 +274,22 @@ def ver_categorias(request,item):
   categoria=Categoria.objects.all().order_by("categoria")
   respuesta=request.POST.getlist('selec1')
   
+  xproductox
+  xtiendax
 
-  if item=="todas las categorias":
+  if item=="xproductox":
     productos=Productos.objects.all()
-  else:
-    #productos=Productos.objects.all()
-    productos=Productos.objects.filter(categoria__categoria__contains=item)    
+  elif item=="xtiendax": :
+    tiendas=Usuarios.objects.all()
    
+  else:  
+    tiendas=Usuarios.objects.filter(categoria__categoria__contains=item)  
+    productos=Productos.objects.filter(categoria__categoria__contains=item)    
+    
   
+
+
+
   #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
   return render(request,'catalogo.html',locals())   
 

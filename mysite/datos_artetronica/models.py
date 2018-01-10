@@ -20,33 +20,9 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from sorl.thumbnail import ImageField
 
- 
-
-CATEGORIA = (
-			('ver todos', 'ver todos'),
-              
-			)
-
-
-
-PUNTUACION = (
-			('1 de 10', '1 de 10'),
-			('2 de 10', '2 de 10'),
-			('3 de 10', '3 de 10'),
-			('4 de 10', '4 de 10'),
-			('5 de 10', '5 de 10'),
-			('6 de 10', '6 de 10'),
-			('7 de 10', '7 de 10'),
-			('8 de 10', '8 de 10'),
-			('9 de 10', '9 de 10'),
-			('10 de 10', '10 de 10'),
-
-			)
-
-	
 ESTADO= (
-			('Ya lo vendi', 'Ya lo vendi'),
-			('Disponible', 'Disponible'),		
+			('Nuevo', 'Nuevo'),
+			('Usado', 'Usado'),		
 
 			)	
 
@@ -68,7 +44,7 @@ class Productos(models.Model):
    
 	    
 	     descripcion = models.TextField(max_length=100)
-	     puntuacion	 = models.CharField(max_length=30,choices=PUNTUACION) 
+	     puntuacion	 = models.CharField(max_length=30,default=0) 
 	     estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_A  = models.FloatField(blank=True,null= True	)	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
@@ -102,11 +78,18 @@ class Buscar(models.Model):
 
 
 PLAN_TIENDA= (
-			('BASICO', 'BASICO'),
-			('BASICO_CON_PUBLICIDAD', 'BASICO_CON_PUBLICIDAD'),
-			('PREMIUN', 'PREMIUN'),	
-			('PREMIUN_CON_PUBLICIDAD', 'PREMIUN_CON_PUBLICIDAD'),		
+			('BASICO', 'BASICO S30 ANUALES'),
+			('STANDARD', 'STANDARD $50 ANUALES'),
+			('PREMIUM', 'PREMIUN $90 ANUALES '),	
+			('ILIMITADO', 'ILIMITADO $160 ANUALES'),		
 
+			)	
+
+INFORMA= (
+			('informacion1', 'Acepto pagos contra entrega'),
+			('informacion2', 'Acepto solamente pago anticipado'),
+			('informacion3', 'Definamos el pago y la entrega'),	
+			
 			)	
 
 class Usuarios(models.Model):
@@ -116,12 +99,12 @@ class Usuarios(models.Model):
 	     email = models.EmailField(blank=True)
 	     ubicacion=models.CharField(max_length=30,blank=True)
 	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
-	     #imagen1      = models.ImageField(upload_to='tmp',blank=True)
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
-	     slogan=models.CharField(max_length=30,blank=True)
+	     descripcion=models.CharField(max_length=30,blank=True)
+	     categoria=models.ForeignKey('Categoria')
+	     info=models.CharField(max_length=30,choices=INFORMA,blank=True)
+
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
-
-
 
 	     #def save(self, *args, **kwargs):
          #	if self.imagen1:

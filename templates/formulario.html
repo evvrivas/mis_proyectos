@@ -31,14 +31,23 @@
                                           <p>correo electronico) {{ form.email }}  </p>
                                           <p>ubicacion de su negocio {{ form.ubicacion }}  </p>
                                           <p>Logo de su negocio {{ form.imagen1 }}  </p>
-                                          <p>Categoria de su negocio {{ form.slogan }}  </p>                                      
-                                          <p>Plan de publicidada  contratar {{ form.plan_publicidad }} </p>         
-                                      
+                                          <p>Categoria de su negocio {{ form.descripcion }}  </p>             
+                                          <p>Informacion  {{ form.info }} </p>         
+                                      <br>
                                        </table>
-                                      <p><input type="submit" value="Contratar plan tienda"></p>
+                                      <p><input type="submit" value="Contratar"></p>
                                       
                                       </form> 
                               
+ 
+       
+      
+       
+            
+       
+       
+     
+       info=models.CharField(max_length=30,choices=INFORMA,blank=True)
 
        
 
