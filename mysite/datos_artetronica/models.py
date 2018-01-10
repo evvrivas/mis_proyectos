@@ -27,7 +27,7 @@ ESTADO= (
 			)	
 
 class Categoria(models.Model):
-		 categoria=models.CharField(max_length=30)
+		 categoria=models.CharField(max_length=30,blank=True)
 		 def __str__(self):
 		 	return  self.categoria
 		 class Admin:
