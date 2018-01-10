@@ -143,7 +143,9 @@ def entrada_usuario(request):
        
         
         if request.method == 'POST': # si el usuario est enviando el formulario con datos
-                                      
+               
+
+                             
                     form = UsuariosForm(request.POST,request.FILES)                      
                     
                     if form.is_valid() :                        
@@ -163,16 +165,13 @@ def entrada_usuario(request):
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             return render(request,'confirmar.html',locals())   
                     
-                   
-                    
-
-
-
+                  
+                
 
         else:            
                         
                          form=UsuariosForm()
-                        
+                         
                          
         return render(request,'formulario.html',locals())   
         
@@ -260,10 +259,10 @@ def ver_categorias(request,item):
   categoria=Categoria.objects.all().order_by("categoria")
   respuesta=request.POST.getlist('selec1')
   
-  
+
   if item=="xproductox":
     productos=Productos.objects.all()
-  elif item=="xtiendax": 
+  elif item=="xtiendax":
     tiendas=Usuarios.objects.all()
    
   else:  

@@ -40,18 +40,7 @@
                                       </form> 
                               
  
-       
-      
-       
-            
-       
-       
-     
-       info=models.CharField(max_length=30,choices=INFORMA,blank=True)
-
-       
-
-                              {%  else  %} 
+                             {%  else  %} 
 
                                      <form action="" method="post" enctype="multipart/form-data"> 
                                       {% csrf_token%}
