@@ -18,34 +18,32 @@
  
           <div class="row">
 
-                      {% for j in productos %}                 
+                {% for j in productos %}                 
 
-                             <div class="col-md-3">   
+                             <div class="col-md-2">   
                                   <div class="thumbnail">
                                     
-                                     <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
-                                     
-                                     {% thumbnail j.imagen1 "200" crop="center" as im %}
-                                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                                     {% endthumbnail %}
-                                  
-
-                                     <p>{{j.descripcion}}</p>            
+                                         <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
+                                         {% thumbnail j.imagen1 "200" crop="center" as im %}
+                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                         {% endthumbnail %}
+                                               
+                                         <p>{{j.descripcion}}</p>            
                                                                          
                                       <br>
 
-                                                        
+                                       <p>Mensaje por: 
+                     
                               
                           <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>   </p>
                             
                         
-                     
-                                                    
-                                   </div>
-                                  </div>           
+                                                     
+
+                                    </div>
+                                  </div>  
                                   
-                                  
-                             {% endfor %} 
+                             {% endfor %}      
             
 
         
