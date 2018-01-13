@@ -20,8 +20,8 @@
       {% for j in nuevas_tiendas %} 
                <div class="col-md-2">   
                      <div class="thumbnail">                      
-                      
-                       <p><a href="/{{j.id_usuario}}">{{j.nombre}}</a>  </p>                  
+                      <li><a href="/{j.id_usuario}}">{{j.nombre_tienda}}</a></li>
+                                 
                              {% thumbnail j.imagen1 "200" crop="center" as im %}
                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                         <p>{{j.categoria}}</p>  
