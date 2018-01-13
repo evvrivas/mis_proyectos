@@ -17,24 +17,23 @@
         <div class="row">
 
                                  
-
+      {% for j in nuevas_tiendas %} 
                <div class="col-md-2">   
-                     <div class="thumbnail">
-
-                       {% for j in nuevas_tiendas %} 
-                       <p><a href="/{{j.id_usuario}}">{{j.nombre}}</p></a>                     
+                     <div class="thumbnail">                      
+                      
+                       <p><a href="/{{j.id_usuario}}">{{j.nombre}}</a>  </p>                  
                              {% thumbnail j.imagen1 "200" crop="center" as im %}
                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                         <p>{{j.categoria}}</p>  
-                        <p>{{j.descripcion}}                                   
+                        <p>{{j.descripcion}}</p>                                    
 
                              {% endthumbnail %}
-                       {% endfor %}                   
+                                        
                                                                                 
                                                                                          
                     </div>
                </div>           
-                                  
+            {% endfor %}                        
                           
           </div>
 
