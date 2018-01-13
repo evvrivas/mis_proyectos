@@ -323,13 +323,12 @@ def pagina_principal(request):
 
                          categoria=Categoria.objects.all().order_by("categoria")                         
                          
-                         nuevas_tiendas=Usuarios.objects.exclude(plan_tienda__isnull=True).exclude(plan_tienda="").order_by("-fecha_ingreso")[0:2] 
+                         nuevas_tiendas=Usuarios.objects.exclude(plan_tienda__isnull=True).exclude(plan_tienda="").order_by("-fecha_ingreso")[0:6] 
                          
-                         nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:2]
+                         nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:6]
 
-                         usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
-
-                        
+                         misprod=Productos.objects.filter(id_usuario=request.user.username)
+                     
                          return render(request,'principal.html',locals())   
 
 
