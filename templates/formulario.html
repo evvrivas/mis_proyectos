@@ -1,10 +1,5 @@
 {% extends "base.html" %}
-
-
 {% block content %}
-
-      </div>
-
 
     <div class="panel-body">
 
@@ -16,13 +11,12 @@
              <div class="col-md-8">
                 <div class="thumbnail">                                    
                                   
-                       
-
+                      
                               {%  if user.is_authenticated %}  
 
                                        <form action="." method="post" enctype="multipart/form-data" > 
                                         {% csrf_token%}
-                                        <p>Categoria: {{ formCateg.categoria }} </p> 
+                                        <p>Categoria: {{ formCateg}} </p> 
                                        <input type="submit" value="crear categoria"  />                       
                                        </form>
                                        
@@ -38,8 +32,7 @@
                                           <p>ubicacion de su negocio {{ form.ubicacion }}  </p>
                                           <p>Nombre de la tienda {{ form.nombre_tienda }} </p> 
                                           <p>Plan de tienda a contratar {{ form.plan_tienda }} </p> 
-                                          <p>correo electronico) {{ form.email }}  </p>
-                                                            
+                                          <p>correo electronico) {{ form.email }}  </p>                           
                                           <p>Informacion  {{ form.info }} </p>         
                                       <br>
                                        </table>
@@ -83,7 +76,7 @@
           </div>
 
         </div>
-  </div>
+  
            
 
         

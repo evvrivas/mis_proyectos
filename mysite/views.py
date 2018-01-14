@@ -179,10 +179,10 @@ def entrada_usuario(request):
                 
 
         else:            
-                        
+                         formCateg=CategoriaForm() 
                          form=UsuariosForm()
-                         formCateg=CategoriaForm()
                          
+                      
         return render(request,'formulario.html',locals())   
         
 
