@@ -145,7 +145,7 @@ def entrada_usuario(request):
         if request.method == 'POST': # si el usuario est enviando el formulario con datos
                
 
-                             
+              if request.POST:               
                     form = UsuariosForm(request.POST,request.FILES)                      
                     
                     if form.is_valid() :                        
@@ -164,14 +164,24 @@ def entrada_usuario(request):
                             user.save()                          
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             return render(request,'confirmar.html',locals())   
-                    
-                  
+                    else:
+                            formCateg=CategoriaForm(request.POST,request.FILES) 
+                            if formCateg.is_valid() :                           
+
+                                  categor = formCateg.save(commit=False)
+                                  # commit=False tells Django that "Don't send this to database yet.
+                                  # I have more things I want to do with it."
+                                  categor.id_usuario = request.user.username # Set the user object here
+                                  categor.save() # Now you can send it to DB
+                                  formCateg.save() # Guardar los datos en la base de datos  print  
+
+                                  return render(request,'formulario.html',locals())
                 
 
         else:            
                         
                          form=UsuariosForm()
-                         
+                         formCateg=CategoriaForm()
                          
         return render(request,'formulario.html',locals())   
         
@@ -243,10 +253,10 @@ def editar(request, acid):
 
 
 def mi_tienda(request,nombre):
-  categoria=Categoria.objects.filter(id_usuario=str(nombre))
+
 
   productos=Productos.objects.filter(id_usuario=str(nombre))
-   
+  
   
   return render(request,'principal_tienda.html',locals())   
  
