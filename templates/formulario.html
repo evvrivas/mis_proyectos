@@ -22,20 +22,24 @@
 
                                        <form action="." method="post" enctype="multipart/form-data" > 
                                         {% csrf_token%}
-                                        <p>Categoria {{ formCateg }} </p> 
-                                        <input type="submit" value="crear categoria"  />                       
-                                                                 </form>
+                                        <p>Categoria: {{ formCateg.categoria }} </p> 
+                                       <input type="submit" value="crear categoria"  />                       
+                                       </form>
+                                       
+
                                        <form action="" method="post" enctype="multipart/form-data"> 
                                       {% csrf_token%}
                                        <table>  
-                                          <p>Categoria de su negocio {{ form.descripcion }}  </p>  
+                                          <p>No de WhatsApp {{ form.id_usuario }} </p> 
+                                          <p>Contraseña(4 caracteres) {{ form.clave }}  </p>  
+                                          <p>Categoria de su negocio {{ form.categoria }}  </p>  
+                                          <p>Descripcion slogan {{ form.descripcion }}  </p>  
                                           <p>Logo de su negocio {{ form.imagen1 }}  </p>
                                           <p>ubicacion de su negocio {{ form.ubicacion }}  </p>
-                                           <p>Nombre de la tienda {{ form.nombre_tienda }} </p> 
-                                           <p>Plan de tienda a contratar {{ form.plan_tienda }} </p> 
+                                          <p>Nombre de la tienda {{ form.nombre_tienda }} </p> 
+                                          <p>Plan de tienda a contratar {{ form.plan_tienda }} </p> 
                                           <p>correo electronico) {{ form.email }}  </p>
-                                          <p>No de WhatsApp {{ form.id_usuario }} </p> 
-                                          <p>Contraseña(4 caracteres) {{ form.clave }}  </p>                     
+                                                            
                                           <p>Informacion  {{ form.info }} </p>         
                                       <br>
                                        </table>
