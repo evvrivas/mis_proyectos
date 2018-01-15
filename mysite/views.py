@@ -141,10 +141,8 @@ def entrada_usuario(request):
         categoria=Categoria.objects.all().order_by("categoria")
         import os, sys
        
-        
         if request.method == 'POST': # si el usuario est enviando el formulario con datos
                
-
               if request.POST:               
                     form = UsuariosForm(request.POST,request.FILES)                      
                     
