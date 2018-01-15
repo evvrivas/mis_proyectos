@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form action="." method="post" enctype="multipart/form-data" > 
-{% csrf_token%}
- <p>Categoria {{ formCateg }} </p> 
- <input type="submit" value="crear categoria"  />                       
- </form>
-    <div class="panel-body">
+                             
+  
 
-            <div class="row">
-
-               <div class="col-md-2">
-               </div> 
-
-             <div class="col-md-8">
-                <div class="thumbnail">                                    
-                                  
                       
                               {%  if user.is_authenticated %}  
+
+                                      <form action="" method="post" enctype="multipart/form-data"> 
+                                      {% csrf_token%}
+                                       <table>   
+                
+                                    <p>categooria {{ formCateg.categoria }} </p>                                     
+
+                                     </table>
+
+                                      <p><input type="submit" value="Crear categoria"></p>
+                                      
+                                      </form> 
 
                                       <form action="" method="post" enctype="multipart/form-data"> 
                                       {% csrf_token%}
@@ -64,17 +64,7 @@
                    
                                    
                   
-                </div>
-            </div>
-
-            <div class="col-md-2">
-            </div>  
-
-
-          </div>
-
-        </div>
-  
+                
            
 
         
