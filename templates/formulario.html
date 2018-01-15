@@ -1,25 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
+         
+       
+   
+<div class="panel panel-danger">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>ENTRADA PRODUCTO </center></h2>
 
-                             
-  
+             
+      </div>
 
-                      
-                              {%  if user.is_authenticated %}  
+    <div class="panel-body">
 
-                                      <form action="" method="post" enctype="multipart/form-data"> 
-                                      {% csrf_token%}
-                                       <table>   
-                
-                                    <p>categooria {{ formCateg.categoria }} </p>                                     
+            <div class="row">
+          
 
-                                     </table>
+ <div class="col-md-12">
+                <div class="thumbnail"> 
+                                                  
+                      <div class="caption">
+                               <h4><center>PRODUCTO NUEVO</center></h4>     
+                      </div>                         
 
-                                      <p><input type="submit" value="Crear categoria"></p>
-                                      
-                                      </form> 
+                     {%  if user.is_authenticated %}  
 
-                                      <form action="" method="post" enctype="multipart/form-data"> 
+                                       <form action="." method="post" enctype="multipart/form-data" > 
+                                        {% csrf_token%}
+                                        <p>Categoria: {{formCateg}} </p> 
+                                       <input type="submit" value="crear categoria"  />                       
+                                       </form>
+                                       
+
+                                       <form action="" method="post" enctype="multipart/form-data"> 
                                       {% csrf_token%}
                                        <table>  
                                           <p>No de WhatsApp {{ form.id_usuario }} </p> 
@@ -54,32 +66,27 @@
                                       
                                       </form> 
 
-                             {% endif %} 
-  
+                             {% endif %}              
+                                                             
+                     <br>               
 
-                                  
-                                         
-                                                                          
-                                   
-                   
-                                   
-                  
-                
-           
+                     <input type="submit" value="GUARDAR"  />                       
+                        
+                </div> 
 
-        
+
+   </div>
+
+            </div>
+
+       </div>
+  </div>
+
+ 
+</form>
+       
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
 
 
 
