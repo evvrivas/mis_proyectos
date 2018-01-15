@@ -138,7 +138,7 @@ def entrada_mensaje(request,bandera):
 def entrada_usuario(request): 
         #!/usr/bin/python
         # -*- coding: latin-1 -*-
-        #categoria=Categoria.objects.all().order_by("categoria")
+        categoria=Categoria.objects.all().order_by("categoria")
         import os, sys
        
         if request.method == 'POST': # si el usuario est enviando el formulario con datos
