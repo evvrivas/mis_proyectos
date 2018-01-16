@@ -50,7 +50,9 @@ urlpatterns = [
     url(r'^informacion/$', informacion),
 
     url(r'^editar/(\d+)/$', editar),
-    url(r'^entrada_usuario/$', entrada_usuario),
+    url(r'^registro_usuario/$',registro_usuario),
+    url(r'^registro_compelto_usuario/$',registro_completo_usuario),
+
     url(r'^entrada_mensaje/(\d+)$', entrada_mensaje),
     url(r'^entrada_producto/$', entrada_producto),
    

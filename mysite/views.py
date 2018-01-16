@@ -135,7 +135,44 @@ def entrada_mensaje(request,bandera):
 
 
 
-def entrada_usuario(request): 
+def registro_usuario(request): 
+        #!/usr/bin/python
+        # -*- coding: latin-1 -*-
+        categoria=Categoria.objects.all().order_by("categoria")
+        import os, sys
+       
+        if request.method == 'POST': # si el usuario est enviando el formulario con datos
+               
+              
+                    form = UsuariosForm(request.POST,request.FILES)                      
+                    
+                    if form.is_valid() :                        
+                            
+                            whatsapp = form.cleaned_data['id_usuario']
+                            contra = form.cleaned_data['clave'] 
+                                            
+                            user = User.objects.create_user(username=whatsapp, password=contra)
+                                                       
+                            usuario = form.save(commit=False)
+                            # commit=False tells Django that "Don't send this to database yet.
+                            # I have more things I want to do with it."
+                            usuario.id_usuario = user.username # Set the user object here
+                            usuario.save() # Now you can send it to DB
+                            form.save() # Guardar los datos en la base de datos  print 
+                            user.save()                          
+                            #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                            return render(request,'confirmar.html',locals())   
+                   
+                
+
+        else:            
+                         
+                         form=UsuariosForm()
+                         
+        return render(request,'formulario.html',locals()) 
+
+
+def registro_completo_usuario(request): 
         #!/usr/bin/python
         # -*- coding: latin-1 -*-
         categoria=Categoria.objects.all().order_by("categoria")
@@ -174,15 +211,14 @@ def entrada_usuario(request):
                                   categor.save() # Now you can send it to DB
                                   formCateg.save() # Guardar los datos en la base de datos  print  
 
-                                  return render(request,'formulario.html',locals())
+                                  return render(request,'formulario_completo.html',locals())
                 
 
         else:            
                          formCateg=CategoriaForm() 
                          form=UsuariosForm()
                          
-                      
-        return render(request,'formulario.html',locals())   
+        return render(request,'formulario_completo.html',locals())   
         
 
 def editar_usuario(request,acid):    
