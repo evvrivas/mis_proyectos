@@ -312,8 +312,8 @@ def editar(request, acid):
 
 def mi_tienda(request,nombre):
 
-
-  productos=Productos.objects.filter(id_usuario=str(nombre))
+  tienda=Usuario.objects.filter(id_usuario=nombre).first()
+  productos=Productos.objects.filter(id_usuario=nombre)
   
   
   return render(request,'principal_tienda.html',locals())   
@@ -324,7 +324,7 @@ def mi_tienda(request,nombre):
 def ver_categorias(request,item):
   
   categoria=Categoria.objects.all().order_by("categoria")
-  respuesta=request.POST.getlist('selec1')
+  
   
 
   if item=="xproductox":
@@ -361,7 +361,6 @@ def ver_mis_categorias(request,item):
   return render(request,'catalogo_tienda.html',locals())   
  
 
-
 def busqueda(request):
      categoria=Categoria.objects.all().order_by("categoria")
      
@@ -371,12 +370,16 @@ def busqueda(request):
         if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
             busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra)
             busqueda.save()
-            
-        productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-                   
+
+
+
+     productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+     tiendas= Usuario.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+     return render(request,'catalogo.html',locals())   
+                  
          
         
-        return render(request,'catalogo.html',locals())   
+     
 
 
     
