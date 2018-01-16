@@ -222,10 +222,13 @@ def registro_completo_usuario(request):
         
 
 def editar_usuario(request,acid):    
+        
+
         categoria=Categoria.objects.all().order_by("categoria")
         f = Usuarios.objects.get(id_usuario=acid)           
        
         if request.method == 'POST':
+            
             form = UsuariosForm(request.POST,request.FILES,instance=f)
        
             if form.is_valid():
@@ -235,14 +238,34 @@ def editar_usuario(request,acid):
                     usu.save() # Guardar los datos en la base de datos 
                     #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
                     return render(request,'confirmar.html',locals())             
+            
+
+            else:
+                    formCateg=CategoriaForm(request.POST,request.FILES) 
+                    if formCateg.is_valid() :                           
+
+                                  categor = formCateg.save(commit=False)
+                                  # commit=False tells Django that "Don't send this to database yet.
+                                  # I have more things I want to do with it."
+                                  categor.id_usuario = request.user.username # Set the user object here
+                                  categor.save() # Now you can send it to DB
+                                  formCateg.save() # Guardar los datos en la base de datos  print  
+
+                                  return render(request,'formulario_completo.html',locals())
         
+
+
+
+
         else:
             
-            form = UsuariosForm(instance=f)   
+            form = UsuariosForm(instance=f)
+            formCateg=CategoriaForm() 
+
         
 
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-        return render(request,'formulario.html',locals())   
+        return render(request,'formulario_completo.html',locals())   
 
 
 
