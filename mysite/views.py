@@ -250,7 +250,7 @@ def editar_usuario(request,acid):
                                   categor.id_usuario = request.user.username # Set the user object here
                                   categor.save() # Now you can send it to DB
                                   formCateg.save() # Guardar los datos en la base de datos  print  
-
+                                  form = UsuariosForm(instance=f) 
                                   return render(request,'formulario_completo.html',locals())
         
 
