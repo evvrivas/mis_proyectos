@@ -24,6 +24,7 @@
                                   <div class="thumbnail">
                                     
                                          <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
+                                         <br>
                                          {% thumbnail j.imagen1 "200" crop="center" as im %}
                           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                          {% endthumbnail %}

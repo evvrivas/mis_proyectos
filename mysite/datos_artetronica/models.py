@@ -75,10 +75,10 @@ class Buscar(models.Model):
 
 
 PLAN_TIENDA= (
-			('BASICO', 'BASICO S30 ANUALES'),
-			('STANDARD', 'STANDARD $50 ANUALES'),
-			('PREMIUM', 'PREMIUN $90 ANUALES '),	
-			('ILIMITADO', 'ILIMITADO $160 ANUALES'),		
+			('BASICO', 'BASICO 30 productos S30 ANUALES'),
+			('STANDARD', 'STANDARD 60 productos$50 ANUALES'),
+			('PREMIUM', 'PREMIUN 120 productos $90 ANUALES '),	
+			('ILIMITADO', 'ILIMITADO $300 ANUALES'),		
 
 			)	
 
