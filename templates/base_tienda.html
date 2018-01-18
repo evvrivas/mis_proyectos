@@ -136,7 +136,7 @@
 
 
 
-                        %  for j in tienda %}
+                        {%  for j in tienda %}
                             {% thumbnail j.imagen1 "200" crop="center" as im %}
                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                                                   
@@ -191,7 +191,7 @@
         
   <div class="panel panel-danger">
       <div class="panel-heading">
-        <h2 class="panel-title"><center>{{vendedor.deireccion}}{{vendedor.id_usuario}}</center></h2>    
+        <h2 class="panel-title"><center>Direccion {{tienda.ubicacion}}: WhatsApp: {{tienda.id_usuario}}</center></h2>    
                 
       </div>
 
