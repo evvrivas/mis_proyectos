@@ -1,4 +1,5 @@
-{% load staticfiles %}    
+{% load staticfiles %}   
+{% load thumbnail %} 
 
 <html>
   <head>
@@ -109,12 +110,20 @@
                                                    <li><a href="/editar_usuario/{{user.username}}">Contratar Plan</a></li> 
                                                    <li><br></li> 
                                                    
+
                                                    {% if usuario.plan_tienda %}
-                                                        <li><a href="/{{user.username}}">Ir a mi tienda "</a></li>
+                                                        <li><a href="/{{user.username}}">Ir a mis tiendas "</a></li>
+
+                                                        <li><a href="/editar_usuario/{{user.username}}">Crear una tienda</a></li> 
+                                                        <li><br></li> 
+
+
                                                    {% else %}  
                                                        
                                                         
                                                         <li><a href="/entrada_producto">Subir un Producto"</a></li>
+
+
                                                    {% endif %} 
 
                                             </ul>

@@ -97,6 +97,8 @@ class Usuarios(models.Model):
 	     ubicacion=models.CharField(max_length=30,blank=True)
 	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
+	    
+
 	     descripcion=models.CharField(max_length=30,blank=True)
 	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
 	     info=models.CharField(max_length=30,choices=INFORMA,blank=True)
@@ -118,4 +120,29 @@ class Usuarios(models.Model):
 	     class Admin:
 		    		list_display = ('id_usuario')
 
+class Tiendas(models.Model):	     
+	     id_usuario=models.CharField(max_length=30)     
+	     ubicacion=models.CharField(max_length=30,blank=True)
+	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
+	     imagen1 = ImageField(upload_to='tmp',blank=True)  
 
+	     descripcion=models.CharField(max_length=30,blank=True)
+	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
+	     info=models.CharField(max_length=30,choices=INFORMA,blank=True)
+
+	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
+
+	     #def save(self, *args, **kwargs):
+         #	if self.imagen1:
+	      #      image = Img.open(StringIO(self.imagen1.read()))
+	       #     image.thumbnail((250,200), Img.ANTIALIAS)
+	        #    output = StringIO()
+	         #   image.save(output, format='JPEG', quality=75)
+	          #  output.seek(0)
+	           # self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
+	        #super(Usuarios, self).save(*args, **kwargs)
+	     
+	     def __str__(self):
+		    		return  self.id_usuario
+	     class Admin:
+		    		list_display = ('id_usuario')

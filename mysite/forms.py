@@ -25,3 +25,8 @@ class CategoriaForm(ModelForm):
 	class Meta:
 		model= Categoria		
 		exclude=[]
+
+class TiendasForm(ModelForm):
+	class Meta:
+		model= Tiendas		
+		exclude=[]
