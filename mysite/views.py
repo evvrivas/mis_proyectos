@@ -366,7 +366,7 @@ def crear_tienda(request):
                                  
                                           
      else:
-        form=Form()
+        form=TiendasForm()
         formCateg=CategoriaForm()
                          
 
@@ -402,7 +402,7 @@ def editar_tienda(request,acid):
                                   return render(request,'formulario_ingreso.html',locals())  
         else:
             
-            form = UsuariosForm(instance=f)
+            form = TiendasForm(instance=f)
             formCateg=CategoriaForm()
 
         
