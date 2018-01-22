@@ -452,14 +452,18 @@ def editar(request, acid):
 
 
 def mi_tienda(request,nombre):
-
-  tienda=Usuarios.objects.filter(id_usuario=nombre)
-  productos=Productos.objects.filter(id_usuario=nombre)
-  
-  
-  return render(request,'principal_tienda.html',locals())   
+    productos=Productos.objects.filter(id_usuario=nombre,)
+    return render(request,'principal_tienda.html',locals())   
  
+def mis_tiendas(request,nombre):
+  tiendas=Tiendas.objects.filter(id_usuario=nombre)
+  return render(request,'catalogo.html',locals())   
 
+#def mis_productos(request,nombre): 
+   # productos=Productos.objects.filter(id_usuario=nombre) 
+  
+  
+ # return render(request,'principal_tienda.html',locals())   
 
 
 def ver_categorias(request,item):

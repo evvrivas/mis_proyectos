@@ -72,7 +72,7 @@ urlpatterns = [
     url(r'^get_cart/$', get_cart),
     url(r'^ver_categorias/([^/]+)$', ver_categorias),
     url(r'^busqueda/$', busqueda),
-    url(r'^([^/]+)/$', mi_tienda),
+    url(r'^([^/]+)/$', mis_tiendas),
    
 
 ]
