@@ -30,3 +30,16 @@ class TiendasForm(ModelForm):
 	class Meta:
 		model= Tiendas		
 		exclude=[]
+
+
+class PedidosForm(ModelForm):
+	class Meta:
+		model= Pedidos	
+		widgets = {'descripcion': Textarea(attrs={'cols': 40, 'rows': 6}),}
+		exclude=["id_usuario","fecha_ingreso"]
+
+class MensajesForm(ModelForm):
+	class Meta:
+		exclude = ('id_usuario',)		
+		model=Mensaje
+		widgets = {'mensaje': Textarea(attrs={'cols': 30, 'rows': 3}),'respuesta': Textarea(attrs={'cols': 30, 'rows': 3}),}

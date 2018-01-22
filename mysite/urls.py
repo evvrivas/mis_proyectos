@@ -45,23 +45,35 @@ urlpatterns = [
     url(r'^accounts/logout/$', logout),
     #url(r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
     #url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':  settings.MEDIA_ROOT}),
+    
     url(r'^principal/$', pagina_principal),
     url(r'^catalogo/(\d+)$', catalogo),
     url(r'^informacion/$', informacion),
 
     url(r'^editar/(\d+)/$', editar),
-    url(r'^registro_usuario/$',registro_usuario),
-    url(r'^registro_compelto_usuario/$',registro_completo_usuario),
+    
+    url(r'^crear_usuario/$',crear_usuario),
+    url(r'^editar_usuario/(\d+)/$',editar_usuario)
 
-    url(r'^entrada_mensaje/(\d+)$', entrada_mensaje),
-    url(r'^entrada_producto/$', entrada_producto),
+    url(r'^crear_tienda/$',crear_tienda),
+    url(r'^editar_tienda/(\d+)/$',editar_tienda),
+    
+    url(r'^crear_producto/$',crear_producto),
+    url(r'^editar_producto/(\d+)/$',editar_producto),
+
+    url(r'^crear_pedido/$',crear_pedido),
+    url(r'^editar_pedido/(\d+)/$',editar_pedido),
+
+    url(r'^crear_mensaje/$',crear_mensaje),
+    #url(r'^editar_mensaje/(\d+)/$',editar_mensaje),
+  
    
    
     url(r'^get_cart/$', get_cart),
     url(r'^ver_categorias/([^/]+)$', ver_categorias),
     url(r'^busqueda/$', busqueda),
     url(r'^([^/]+)/$', mi_tienda),
-    url(r'^editar_usuario/(\d+)/$',editar_usuario)
+   
 
 ]
 

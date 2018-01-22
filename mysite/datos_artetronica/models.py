@@ -32,12 +32,15 @@ class Categoria(models.Model):
 
 class Productos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
+	     tienda=models.ForeignKey('Tiendas',blank=True,null=True)
 	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
 	     cantidad         =  models.DecimalField(max_digits=15,decimal_places=0,default=0)
 	     nombre           =  models.CharField(max_length=30)
 	     
 	     #imagen1      = models.ImageField(upload_to='tmp')	  
 	     imagen1 = ImageField(upload_to='tmp')
+	     imagen2 = ImageField(upload_to='tmp')
+	     imagen3 = ImageField(upload_to='tmp')
    
 	    
 	     descripcion = models.TextField(max_length=100)
@@ -45,22 +48,12 @@ class Productos(models.Model):
 	     estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_A  = models.FloatField(blank=True,null= True	)	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
-	     #def save(self, *args, **kwargs):
-         #	if self.imagen1:
-	      #      image = Img.open(StringIO(self.imagen1.read()))
-	       #     image.thumbnail((400,400), Img.ANTIALIAS)
-	        #    output = StringIO()
-	         #   image.save(output, format='JPEG', quality=75)
-	          #  output.seek(0)
-	           # self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
-	        #super(Productos, self).save(*args, **kwargs)
-
+	    
 	     def __str__(self):
 		    		return  self.nombre
 	     class Admin:
 		    		list_display = ('categoria', 'cantidad', 'nombre','precio_A')
-		    		#ordering = ('fecha_ingreso')
-		    		#search_fields = ('nombre')#
+		    		
 
 class Buscar(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
@@ -75,10 +68,11 @@ class Buscar(models.Model):
 
 
 PLAN_TIENDA= (
-			('BASICO', 'BASICO 30 productos S30 ANUALES'),
-			('STANDARD', 'STANDARD 60 productos$50 ANUALES'),
-			('PREMIUM', 'PREMIUN 120 productos $90 ANUALES '),	
-			('ILIMITADO', 'ILIMITADO $300 ANUALES'),		
+	        ('GRATIS', 'GRATIS (5 PRODUCTOS MAXIMO, NO PUBLICIDAD)'), 
+			('BASICO', 'BASICO (20 productos S30 ANUALES)'),
+			('STANDARD', 'STANDARD (45 productos $50 ANUALES)'),
+			('PREMIUM', 'PREMIUN (100 productos $90 ANUALES)'),	
+			
 
 			)	
 
@@ -88,32 +82,37 @@ INFORMA= (
 			('informacion3', 'Definamos el pago y la entrega'),	
 			
 			)	
+TIPOTELA = (
+			('Q1', 'Q1'),
+			('Q2', 'Q2'),
+			('KIANITA', 'KIANITA'),
+			('SUPER_KIANA', 'SUPER_KIANA'),
+			('ALGODON_SENCILLO', 'ALGODON_SENCILLO'),
+			('ALGODON_DOBLE', 'ALGODON_DOBLE'),
+			('ADIDAS', 'ADIDAS'),
+			('PIQUE_POLO', 'PIQUE_POLO'),
+			('SIMPLE_PIQUE', 'SIMPLE_PIQUE'),
+            ('POLIESTER', 'POLIESTER'), 
+			('EYELET', 'EYELET'),
+			('SINCATEX', 'SINCATEX'),
+			('LINO_STRECH', 'LINO_STRECH'),
+			('IMPREMEABLE', 'IMPREMEABLE'),
+			('SATIN', 'SATIN'),
+			('LINO_OXFORD', 'LINO_OXFORD'),
+			('TAFETA', 'TAFETA'),
+			('MANTA', 'MANTA'),
+			('OTRA_TELA', 'OTRA_TELA'),
+			)
 
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
 	     clave=models.CharField(max_length=4)
-	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)
+	     nombre=models.CharField(max_length=30,blank=True)
 	     email = models.EmailField(blank=True)
-	     ubicacion=models.CharField(max_length=30,blank=True)
-	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
-	     imagen1 = ImageField(upload_to='tmp',blank=True)
-	    
-
-	     descripcion=models.CharField(max_length=30,blank=True)
-	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
-	     info=models.CharField(max_length=30,choices=INFORMA,blank=True)
-
-	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
-
-	     #def save(self, *args, **kwargs):
-         #	if self.imagen1:
-	      #      image = Img.open(StringIO(self.imagen1.read()))
-	       #     image.thumbnail((250,200), Img.ANTIALIAS)
-	        #    output = StringIO()
-	         #   image.save(output, format='JPEG', quality=75)
-	          #  output.seek(0)
-	           # self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
-	        #super(Usuarios, self).save(*args, **kwargs)
+	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)	     
+	     Pais=models.CharField(max_length=30,blank=True)
+	     Direccion=models.CharField(max_length=30,blank=True)	     	     
+	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
 	     
 	     def __str__(self):
 		    		return  self.id_usuario
@@ -124,25 +123,58 @@ class Tiendas(models.Model):
 	     id_usuario=models.CharField(max_length=30)     
 	     ubicacion=models.CharField(max_length=30,blank=True)
 	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
-	     imagen1 = ImageField(upload_to='tmp',blank=True)  
+	     imagen1 = ImageField(upload_to='tmp',blank=True)
 
 	     descripcion=models.CharField(max_length=30,blank=True)
 	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
 	     info=models.CharField(max_length=30,choices=INFORMA,blank=True)
 
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
+	     	     
+	     def __str__(self):
+		    		return  self.id_usuario
+	     class Admin:
+		    		list_display = ('id_usuario')
 
-	     #def save(self, *args, **kwargs):
-         #	if self.imagen1:
-	      #      image = Img.open(StringIO(self.imagen1.read()))
-	       #     image.thumbnail((250,200), Img.ANTIALIAS)
-	        #    output = StringIO()
-	         #   image.save(output, format='JPEG', quality=75)
-	          #  output.seek(0)
-	           # self.imagen1= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'image/jpeg', output.len, None)
-	        #super(Usuarios, self).save(*args, **kwargs)
+
+class Pedidos(models.Model):	     
+	     id_usuario=models.CharField(max_length=30)     
+	     nombre=models.CharField(max_length=30)
+	     contacto=models.CharField(max_length=30)	     
+	     imagen1 = ImageField(upload_to='tmp',blank=True)  
+	     imagen2 = ImageField(upload_to='tmp',blank=True) 
+	     imagen3 = ImageField(upload_to='tmp',blank=True)
+	     descripcion=models.CharField(max_length=30,blank=True)
+	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
+	     total  = models.FloatField()
+	     anticipo  = models.FloatField()	     
+         fecha_de_entrega = models.DateField(default=datetime.now)
+	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
+
+         cant_tela_1=models.FloatField(blank=True,null= True)
+	     tipo_tela_1=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
+	     color_tela_1=models.CharField(blank=True,max_length=30)
+
+	     cant_tela_2=models.FloatField(blank=True,null= True)
+	     tipo_tela_2=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
+	     color_tela_2=models.CharField(blank=True,max_length=30)
+
+	     cant_tela_3=models.FloatField(blank=True,null= True)
+	     tipo_tela_3=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
+	     color_tela_3=models.CharField(blank=True,max_length=30)
+	    
 	     
 	     def __str__(self):
 		    		return  self.id_usuario
 	     class Admin:
 		    		list_display = ('id_usuario')
+
+class Mensajes(models.Model):
+		id_usuario=models.IntegerField(blank=True,default=0)
+		mensaje = models.TextField() 
+		respuesta = models.TextField(blank=True)
+		fecha= models.DateField(default=datetime.now,blank=True,editable = False)
+		def __str__(self):
+				return  self.mensaje
+		class Admin:
+				pass

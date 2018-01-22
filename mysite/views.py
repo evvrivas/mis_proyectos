@@ -46,7 +46,7 @@ def logout(request):
 
 
 @login_required
-def entrada_producto(request):                
+def crear_producto(request):                
 
      #!/usr/bin/python
      # -*- coding: latin-1 -*-
@@ -84,7 +84,7 @@ def entrada_producto(request):
                                   categor.save() # Now you can send it to DB
                                   formCateg.save() # Guardar los datos en la base de datos  print  
 
-                                  return render(request,'entrada_producto.html',locals())                           
+                                  return render(request,'formulario_ingreso.html',locals())                           
                                  
                                           
      else:
@@ -96,14 +96,50 @@ def entrada_producto(request):
      return render(request,'entrada_producto.html',locals())
         #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
 
+def editar_producto(request,acid):   
+        categoria=Categoria.objects.all().order_by("categoria")
+        
+        f = Productos.objects.get(id_usuario=acid)           
+       
+        if request.method == 'POST':
+            
+            form = ProductosForm(request.POST,request.FILES,instance=f)
+       
+            if form.is_valid():
+                    form.save() 
+                    return render(request,'confirmar.html',locals())             
+            
+            else:
+
+                          formCateg=CategoriaForm(request.POST,request.FILES) 
+                          if formCateg.is_valid() :                           
+
+                                  categor = formCateg.save(commit=False)
+                                  # commit=False tells Django that "Don't send this to database yet.
+                                  # I have more things I want to do with it."
+                                  categor.id_usuario = request.user.username # Set the user object here
+                                  categor.save() # Now you can send it to DB
+                                  formCateg.save() # Guardar los datos en la base de datos  print  
+
+                                  return render(request,'formulario_ingreso.html',locals())  
+        else:
+            
+            form = UsuariosForm(instance=f)
+            formCateg=CategoriaForm()
+
+        
+
+        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+        return render(request,'formulario_editar_usuario.html',locals())   
+
 
 @login_required
-def entrada_mensaje(request,bandera): 
+def crear_mensaje(request,bandera): 
         categoria=Categoria.objects.all().order_by("categoria")           
 
         if request.method == 'POST': # si el usuario est enviando el formulario con datos
             
-                    form = MensajeForm(request.POST)  
+                    form = MensajesForm(request.POST)  
 
                     if form.is_valid():
                         mensajero = form.save(commit=False)
@@ -116,18 +152,18 @@ def entrada_mensaje(request,bandera):
                         #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                         return render(request,'confirmar.html',locals())   
         else:            
-                        form = MensajeForm()
+                        form = MensajesForm()
 
 
                         
         if bandera=="0": 
                   
 
-                  mensajes_anteriores=Mensaje.objects.filter(id_usuario=request.user.id).order_by("-id")    
+                  mensajes_anteriores=Mensajes.objects.filter(id_usuario=request.user.id).order_by("-id")    
                   
         else:
                   
-                  mensajes_anteriores=Mensaje.objects.all().order_by("-id") 
+                  mensajes_anteriores=Mensajes.objects.all().order_by("-id") 
     
         
         return render(request,'mensajes.html',locals())   
@@ -135,7 +171,7 @@ def entrada_mensaje(request,bandera):
 
 
 
-def registro_usuario(request): 
+def crear_usuario(request): 
         #!/usr/bin/python
         # -*- coding: latin-1 -*-
         categoria=Categoria.objects.all().order_by("categoria")
@@ -161,7 +197,7 @@ def registro_usuario(request):
                             form.save() # Guardar los datos en la base de datos  print 
                             user.save()                          
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-                            return render(request,'confirmar.html',locals())   
+                            return render(request,'confirmar_usuario.html',locals())   
                    
                 
 
@@ -169,61 +205,13 @@ def registro_usuario(request):
                          
                          form=UsuariosForm()
                          
-        return render(request,'formulario.html',locals()) 
+        return render(request,'formulario_crear_usuario.html',locals()) 
 
 
-def registro_completo_usuario(request): 
-        #!/usr/bin/python
-        # -*- coding: latin-1 -*-
-        categoria=Categoria.objects.all().order_by("categoria")
-        import os, sys
-       
-        if request.method == 'POST': # si el usuario est enviando el formulario con datos
-               
 
-              if request.POST:               
-                    form = UsuariosForm(request.POST,request.FILES)                      
-                    
-                    if form.is_valid() :                        
-                            
-                            whatsapp = form.cleaned_data['id_usuario']
-                            contra = form.cleaned_data['clave'] 
-                                            
-                            user = User.objects.create_user(username=whatsapp, password=contra)
-                                                       
-                            usuario = form.save(commit=False)
-                            # commit=False tells Django that "Don't send this to database yet.
-                            # I have more things I want to do with it."
-                            usuario.id_usuario = user.username # Set the user object here
-                            usuario.save() # Now you can send it to DB
-                            form.save() # Guardar los datos en la base de datos  print 
-                            user.save()                          
-                            #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-                            return render(request,'confirmar.html',locals())   
-                    else:
-                            formCateg=CategoriaForm(request.POST,request.FILES) 
-                            if formCateg.is_valid() :                           
-
-                                  categor = formCateg.save(commit=False)
-                                  # commit=False tells Django that "Don't send this to database yet.
-                                  # I have more things I want to do with it."
-                                  categor.id_usuario = request.user.username # Set the user object here
-                                  categor.save() # Now you can send it to DB
-                                  formCateg.save() # Guardar los datos en la base de datos  print  
-
-                                  return render(request,'formulario_completo.html',locals())
-                
-
-        else:            
-                         formCateg=CategoriaForm() 
-                         form=UsuariosForm()
-                         
-        return render(request,'formulario_completo.html',locals())   
         
 
-def editar_usuario(request,acid):    
-        
-
+def editar_usuario(request,acid):   
         categoria=Categoria.objects.all().order_by("categoria")
         f = Usuarios.objects.get(id_usuario=acid)           
        
@@ -239,10 +227,47 @@ def editar_usuario(request,acid):
                     #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
                     return render(request,'confirmar.html',locals())             
             
+       else:
+            
+            form = UsuariosForm(instance=f)
+            
 
-            else:
-                    formCateg=CategoriaForm(request.POST,request.FILES) 
-                    if formCateg.is_valid() :                           
+        
+
+        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+        return render(request,'formulario_editar_usuario.html',locals())   
+
+@login_required
+def crear_tienda(request):                
+
+     #!/usr/bin/python
+     # -*- coding: latin-1 -*-
+     import os, sys
+     categoria=Categoria.objects.all().order_by("categoria") 
+    
+     if request.method == 'POST': # si el usuario est enviando el formulario con datos
+            
+                         
+            if request.POST:
+
+                  formProd=TiendasForm(request.POST,request.FILES)                   
+                  
+                  if formProd.is_valid():
+                          tiendecilla = formProd.save(commit=False)
+                          # commit=False tells Django that "Don't send this to database yet.
+                          # I have more things I want to do with it."
+                          tiendecilla.id_usuario = request.user.username # Set the user object here             
+                                           
+                          tiendecilla.save() # Now you can send it to DB
+                          formProd.save()  
+                          
+                          #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                          return render(request,'confirmar.html',locals())     
+                  else:
+
+
+                          formCateg=CategoriaForm(request.POST,request.FILES) 
+                          if formCateg.is_valid() :                           
 
                                   categor = formCateg.save(commit=False)
                                   # commit=False tells Django that "Don't send this to database yet.
@@ -250,24 +275,54 @@ def editar_usuario(request,acid):
                                   categor.id_usuario = request.user.username # Set the user object here
                                   categor.save() # Now you can send it to DB
                                   formCateg.save() # Guardar los datos en la base de datos  print  
-                                  form = UsuariosForm(instance=f) 
-                                  return render(request,'formulario_completo.html',locals())
+
+                                  return render(request,'formulario_ingreso.html',locals())                           
+                                 
+                                          
+     else:
+        formProd=ProductosForm()
+        formCateg=CategoriaForm()
+                         
+
+     
+     return render(request,'formulario_ingreso.html',locals())
+        #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
+
+def editar_tienda(request,acid):   
+        categoria=Categoria.objects.all().order_by("categoria")
         
+        f = Tiendas.objects.get(id_usuario=acid)           
+       
+        if request.method == 'POST':
+            
+            form = TiendasForm(request.POST,request.FILES,instance=f)
+       
+            if form.is_valid():
+                    form.save() 
+                    return render(request,'confirmar.html',locals())             
+            
+            else:
 
+                          formCateg=CategoriaForm(request.POST,request.FILES) 
+                          if formCateg.is_valid() :                           
 
+                                  categor = formCateg.save(commit=False)
+                                  # commit=False tells Django that "Don't send this to database yet.
+                                  # I have more things I want to do with it."
+                                  categor.id_usuario = request.user.username # Set the user object here
+                                  categor.save() # Now you can send it to DB
+                                  formCateg.save() # Guardar los datos en la base de datos  print  
 
-
+                                  return render(request,'formulario_ingreso.html',locals())  
         else:
             
             form = UsuariosForm(instance=f)
-            formCateg=CategoriaForm() 
+            formCateg=CategoriaForm()
 
         
 
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-        return render(request,'formulario_completo.html',locals())   
-
-
+        return render(request,'formulario_ingreso.html',locals())   
 
 def listado_productos(request,ordenados): 
 
@@ -312,7 +367,7 @@ def editar(request, acid):
 
 def mi_tienda(request,nombre):
 
-  tienda=Usuarios.objects.filter(id_usuario=nombre).first()
+  tienda=Usuarios.objects.filter(id_usuario=nombre)
   productos=Productos.objects.filter(id_usuario=nombre)
   
   
