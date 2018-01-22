@@ -234,8 +234,8 @@ def editar_usuario(request,acid):
 
         
 
-        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-        return render(request,'formulario_editar_usuario.html',locals())   
+       #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+       return render(request,'formulario_editar_usuario.html',locals())   
 
 @login_required
 def crear_tienda(request):                
