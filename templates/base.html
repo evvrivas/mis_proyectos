@@ -45,7 +45,7 @@
                  
                 
                  {%  if user.is_authenticated %}          
-                              <li> Hola.!.{{ user.username }}  
+                              <li> Hola.!.{{ user.username }}  </li>
                            
                  {% endif %}  
               </center>
@@ -104,15 +104,12 @@
                                               Tienda <span class="caret"></span>
                                             </button>
                                            
-                                            <ul class="dropdown-menu" role="menu">
-
-                                                   
-                                                   <li><br></li>                                             
+                                            <ul class="dropdown-menu" role="menu">                                                                                   
                                                    <li><a href="/editar_usuario/{{user.username}}">Completar el Registro</a></li> 
-                                                   <li><br></li> 
+                                                   
 
                                                    <li><a href="/crear_tienda/">Crear una tienda</a></li> 
-                                                   <li><br></li>                                        
+                                                                                      
 
                                                    
                                                    <li><a href="/{{user.username}}">Ver mis tiendas"</a></li>
