@@ -366,7 +366,7 @@ def crear_tienda(request):
                                  
                                           
      else:
-        form=ProductosForm()
+        form=Form()
         formCateg=CategoriaForm()
                          
 
