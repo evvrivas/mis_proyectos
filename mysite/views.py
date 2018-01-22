@@ -58,16 +58,16 @@ def crear_producto(request):
                          
             if request.POST:
 
-                  formProd=ProductosForm(request.POST,request.FILES)                   
+                  form=ProductosForm(request.POST,request.FILES)                   
                   
-                  if formProd.is_valid():
-                          productillo = formProd.save(commit=False)
+                  if form.is_valid():
+                          productillo = form.save(commit=False)
                           # commit=False tells Django that "Don't send this to database yet.
                           # I have more things I want to do with it."
                           productillo.id_usuario = request.user.username # Set the user object here             
                                            
                           productillo.save() # Now you can send it to DB
-                          formProd.save()  
+                          form.save()  
                           
                           #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                           return render(request,'confirmar.html',locals())     
@@ -88,7 +88,7 @@ def crear_producto(request):
                                  
                                           
      else:
-        formProd=ProductosForm()
+        form=ProductosForm()
         formCateg=CategoriaForm()
                          
 
@@ -132,6 +132,92 @@ def editar_producto(request,acid):
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
         return render(request,'formulario_editar_usuario.html',locals())   
 
+@login_required
+def crear_pedido(request):                
+
+     #!/usr/bin/python
+     # -*- coding: latin-1 -*-
+     import os, sys
+     categoria=Categoria.objects.all().order_by("categoria") 
+    
+     if request.method == 'POST': # si el usuario est enviando el formulario con datos
+            
+                         
+            if request.POST:
+
+                  form=ProductosForm(request.POST,request.FILES)                   
+                  
+                  if form.is_valid():
+                          productillo = form.save(commit=False)
+                          # commit=False tells Django that "Don't send this to database yet.
+                          # I have more things I want to do with it."
+                          productillo.id_usuario = request.user.username # Set the user object here             
+                                           
+                          productillo.save() # Now you can send it to DB
+                          form.save()  
+                          
+                          #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                          return render(request,'confirmar.html',locals())     
+                  else:
+
+
+                          formCateg=CategoriaForm(request.POST,request.FILES) 
+                          if formCateg.is_valid() :                           
+
+                                  categor = formCateg.save(commit=False)
+                                  # commit=False tells Django that "Don't send this to database yet.
+                                  # I have more things I want to do with it."
+                                  categor.id_usuario = request.user.username # Set the user object here
+                                  categor.save() # Now you can send it to DB
+                                  formCateg.save() # Guardar los datos en la base de datos  print  
+
+                                  return render(request,'formulario_ingreso.html',locals())                           
+                                 
+                                          
+     else:
+        form=ProductosForm()
+        formCateg=CategoriaForm()
+                         
+
+     
+     return render(request,'entrada_producto.html',locals())
+        #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
+
+def editar_pedido(request,acid):   
+        categoria=Categoria.objects.all().order_by("categoria")
+        
+        f = Pedidos.objects.get(id_usuario=acid)           
+       
+        if request.method == 'POST':
+            
+            form = PedidosForm(request.POST,request.FILES,instance=f)
+       
+            if form.is_valid():
+                    form.save() 
+                    return render(request,'confirmar.html',locals())             
+            
+            else:
+
+                          formCateg=CategoriaForm(request.POST,request.FILES) 
+                          if formCateg.is_valid() :                           
+
+                                  categor = formCateg.save(commit=False)
+                                  # commit=False tells Django that "Don't send this to database yet.
+                                  # I have more things I want to do with it."
+                                  categor.id_usuario = request.user.username # Set the user object here
+                                  categor.save() # Now you can send it to DB
+                                  formCateg.save() # Guardar los datos en la base de datos  print  
+
+                                  return render(request,'formulario_ingreso.html',locals())  
+        else:
+            
+            form = PedidosForm(instance=f)
+            formCateg=CategoriaForm()
+
+        
+
+        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+        return render(request,'formulario_editar_usuario.html',locals())   
 
 @login_required
 def crear_mensaje(request,bandera): 
@@ -250,16 +336,16 @@ def crear_tienda(request):
                          
             if request.POST:
 
-                  formProd=TiendasForm(request.POST,request.FILES)                   
+                  form=TiendasForm(request.POST,request.FILES)                   
                   
-                  if formProd.is_valid():
-                          tiendecilla = formProd.save(commit=False)
+                  if form.is_valid():
+                          tiendecilla = form.save(commit=False)
                           # commit=False tells Django that "Don't send this to database yet.
                           # I have more things I want to do with it."
                           tiendecilla.id_usuario = request.user.username # Set the user object here             
                                            
                           tiendecilla.save() # Now you can send it to DB
-                          formProd.save()  
+                          form.save()  
                           
                           #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                           return render(request,'confirmar.html',locals())     
@@ -280,7 +366,7 @@ def crear_tienda(request):
                                  
                                           
      else:
-        formProd=ProductosForm()
+        form=ProductosForm()
         formCateg=CategoriaForm()
                          
 
