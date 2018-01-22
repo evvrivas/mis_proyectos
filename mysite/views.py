@@ -212,10 +212,10 @@ def crear_usuario(request):
         
 
 def editar_usuario(request,acid):   
-        categoria=Categoria.objects.all().order_by("categoria")
-        f = Usuarios.objects.get(id_usuario=acid)           
+       categoria=Categoria.objects.all().order_by("categoria")
+       f = Usuarios.objects.get(id_usuario=acid)           
        
-        if request.method == 'POST':
+       if request.method == 'POST':
             
             form = UsuariosForm(request.POST,request.FILES,instance=f)
        
