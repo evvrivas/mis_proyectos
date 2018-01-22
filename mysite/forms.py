@@ -41,5 +41,5 @@ class PedidosForm(ModelForm):
 class MensajesForm(ModelForm):
 	class Meta:
 		exclude = ('id_usuario',)		
-		model=Mensaje
+		model=Mensajes
 		widgets = {'mensaje': Textarea(attrs={'cols': 30, 'rows': 3}),'respuesta': Textarea(attrs={'cols': 30, 'rows': 3}),}
