@@ -37,7 +37,7 @@ from mysite.datos_artetronica.models import *
 
 from django.contrib.auth.models import User  
 from django.core.mail import send_mail
-from templates import *
+#from templates import *
 from django.db.models import Q
 def logout(request):
     auth.logout(request)
