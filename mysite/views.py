@@ -538,7 +538,7 @@ def pagina_principal(request):
 
                          categoria=Categoria.objects.all().order_by("categoria")                         
                          
-                         nuevas_tiendas=Usuarios.objects.all().order_by("-fecha_ingreso")[0:6]
+                         nuevas_tiendas=Tiendas.objects.all().order_by("-fecha_ingreso")[0:6]
                          
                          nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:6]
                                             
