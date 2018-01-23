@@ -451,8 +451,10 @@ def editar(request, acid):
     return render(request,'formulario.html',locals())   
 
 
-def mi_tienda(request,nombre):
-    productos=Productos.objects.filter(id_usuario=nombre,)
+def mi_tienda(request,usuario,nombretienda):
+    tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
+    productos=Productos.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda)
+
     return render(request,'principal_tienda.html',locals())   
  
 def mis_tiendas(request,nombre):
