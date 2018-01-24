@@ -480,10 +480,10 @@ def ver_categorias(request,item):
   if item=="xproductox":
     productos=Productos.objects.all()
   elif item=="xtiendax":
-    tiendas=Usuarios.objects.all()
+    tiendas=Tiendas.objects.all()
    
   else:  
-    tiendas=Usuarios.objects.filter(categoria__categoria__contains=item)  
+    tiendas=Tiendas.objects.filter(categoria__categoria__contains=item)  
     productos=Productos.objects.filter(categoria__categoria__contains=item)    
     
   

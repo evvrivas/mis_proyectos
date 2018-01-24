@@ -34,7 +34,22 @@
 
             <div class="col-md-6">                     
                       
-                 
+                  {% thumbnail tiendas.imagen1 "50x50" crop="center" as im %}
+                              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                            {% endthumbnail %}
+                        
+
+                          <form action="/busqueda/" method="post">
+                                             {% csrf_token %}
+                                                      <div>
+                                                          
+                                                      <input type="text" id="name" name="nombre" size="15"/>
+                                                      <input type="submit" value="Buscar">
+                                                      
+                                                      </div>                               
+                                                      
+                                                      
+                                            </form>
 
                                                          
                  
@@ -95,95 +110,22 @@
                                        <li><a href="/crear_producto/">Subir un producto </a></li>      
                                        <li><a href="/editar_usuario/{{user.username}}">Editar mi tienda </a></li>
                                        
-
-
                                 </ul>
-                               
-                                      
-                                
+                          
                        </div>
-
-
-
-
-
-
-
-
-                
+            
                </div> 
-
-              
-                              
-               
-      
 
       </div>
 
-
-
-
-
-
-
     <div class="panel-body">  
-
-            <div class="col-md-6"> 
-
-
-
-
-
-
-                       
-                            {% thumbnail tiendas.imagen1 "200" crop="center" as im %}
-                              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                                                  
-
-                             {% endthumbnail %}
-                        
-
-                          <form action="/busqueda/" method="post">
-                                             {% csrf_token %}
-                                                      <div>
-                                                          
-                                                      <input type="text" id="name" name="nombre" size="15"/>
-                                                      <input type="submit" value="Buscar">
-                                                      
-                                                      </div>                               
-                                                      
-                                                      
-                                            </form>
-               </div> 
-
-                 
-           
-            <div class="col-md-6"> 
-
-              <form method="post" action=".">
-                 <input type="radio" name="selec1" value="1" id="r11"  checked/>
-                 <label for="r11">$↓ </label>                   
-                 <input type="radio" name="selec1" value="2" id="r12" /> 
-                 <label for="r12">$↑  </label>                  
-                 <input type="radio" name="selec1" value="3" id="r13" />
-                 <label for="r13">↑fecha</label>
-                 <input type="radio" name="selec1" value="4" id="r14" />
-                 <label for="r14">↓fecha</label>
-
-              </form>
-
-             </div> 
-
-
-    </div>
-
-</div>
-
-
- 
+      
     {% block content %}
     {% endblock %}
 
+ </div>
+
+</div>
 
 
 
