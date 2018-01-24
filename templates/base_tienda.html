@@ -135,13 +135,13 @@
 
 
 
-                        {%  for j in tienda %}
-                            {% thumbnail j.imagen1 "200" crop="center" as im %}
+                       
+                            {% thumbnail tiendas.imagen1 "200" crop="center" as im %}
                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                                                   
 
                              {% endthumbnail %}
-                        {%  endfor %} 
+                        
 
                           <form action="/busqueda/" method="post">
                                              {% csrf_token %}
