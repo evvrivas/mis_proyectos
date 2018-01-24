@@ -132,9 +132,9 @@ class Tiendas(models.Model):
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     	     
 	     def __str__(self):
-		    		return  self.id_usuario
+		    		return  self.nombre_tienda
 	     class Admin:
-		    		list_display = ('id_usuario')
+		    		list_display = ('nombre_tienda')
 
 
 class Pedidos(models.Model):	     
