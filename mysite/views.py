@@ -456,7 +456,7 @@ def mi_tienda(request,usuario,nombretienda):
     
     try:
       productos=Productos.objects.filter(id_usuario=usuario,tienda=nombretienda)
-    excep:
+    except:
       pass
     return render(request,'principal_tienda.html',locals())   
  
