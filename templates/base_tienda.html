@@ -38,18 +38,14 @@
                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                             {% endthumbnail %}
                         
-
                           <form action="/busqueda/" method="post">
                                              {% csrf_token %}
-                                                      <div>
-                                                          
+                                                                                                               
                                                       <input type="text" id="name" name="nombre" size="15"/>
                                                       <input type="submit" value="Buscar">
+                                             
                                                       
-                                                      </div>                               
-                                                      
-                                                      
-                                            </form>
+                           </form>
 
                                                          
                  

@@ -39,7 +39,7 @@
                           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                          {% endthumbnail %}
                  <form action="/busqueda/" method="post">
-                                             {% csrf_token  %}                                                  
+                                       {% csrf_token %}                                                  
                                                     
                                                     <center><img src='{% static "logo.gif" %}' alt='img' />   
                                                     <input type="text" id="name" name="nombre" size="10"/>
@@ -124,25 +124,15 @@
                                    </div>
                  {% endif %}  
 
-             
-
-              
-      
-
       </div>
       </div>
-
-
-
-
-
 
      <div class="panel-body">    
                                   
          {% block content %}
          {% endblock %}
         
-    </div>
+   
 
 </div>
 
