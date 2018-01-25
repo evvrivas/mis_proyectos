@@ -111,7 +111,8 @@ class Usuarios(models.Model):
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)	     
 	     pais=models.CharField(max_length=30,blank=True)
-	     direccion=models.CharField(max_length=30,blank=True)	     	     
+	     direccion=models.CharField(max_length=30,blank=True)
+	     codigoapk=models.CharField(max_length=30,blank=True)	     	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
 	     
 	     def __str__(self):

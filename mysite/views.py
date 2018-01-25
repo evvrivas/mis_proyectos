@@ -524,17 +524,11 @@ def busqueda(request):
 
 
      productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-     tiendas= Usuario.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-     return render(request,'catalogo.html',locals())   
-                  
+     tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+     return render(request,'catalogo.html',locals())                   
          
-        
-     
-
-
+       
     
-  
-   
 
 import datetime
 #@login_required
