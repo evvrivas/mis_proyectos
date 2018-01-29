@@ -5,10 +5,11 @@
 {% block content %}
 
 
- <div class="row">                                 
-     
+ <div class="row">   
+
+  <div class="col-md-12">     
       {% for j in nuevas_tiendas %} 
-               <div class="col-md-2">   
+                
                      <div class="thumbnail">                      
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
@@ -17,17 +18,20 @@
                         <p>{{j.descripcion}}</p>                                    
                         {% endthumbnail %}
                      </div>
-               </div>           
-       {% endfor %}                        
+                        
+       {% endfor %} 
+
+    </div> 
+
                           
  </div>         
 
 
  <div class="row">
-
+     <div class="col-md-2">  
        {% for j in nuevos_productos %} 
 
-           <div class="col-md-2">   
+            
                  <div class="thumbnail">
                         <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
@@ -48,9 +52,10 @@
 
                         <li><a href="/get_cart/">Ver mi pedido</a></li>                      
                   </div>
-            </div>  
+           
                                   
          {% endfor %} 
+     </div>  
 </div>
  
  {% endblock %}

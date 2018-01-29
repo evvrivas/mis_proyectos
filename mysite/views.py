@@ -452,15 +452,22 @@ def editar(request, acid):
 
 
 def mi_tienda(request,usuario,nombretienda):
+    vector=Productos.objects.filter(id_usuario=usuario,tienda=nombre_tienda)
+    cat=[]
+    for i in vector:
+        cat.append(i)
+    categoria= sorted(set(cat))
+
+
     tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
+      
+    productos=Productos.objects.filter(id_usuario=usuario,tienda=nombretienda)
     
-    try:
-      productos=Productos.objects.filter(id_usuario=usuario,tienda=nombretienda)
-    except:
-      pass
     return render(request,'principal_tienda.html',locals())   
  
 def mis_tiendas(request,nombre):
+  categoria=Categoria.objects.all().order_by("categoria")
+  
   tiendas=Tiendas.objects.filter(id_usuario=nombre)
   return render(request,'catalogo.html',locals())   
 
@@ -494,17 +501,20 @@ def ver_categorias(request,item):
   return render(request,'catalogo.html',locals())   
 
     
-def ver_mis_categorias(request,item):
+def ver_mis_categorias(request,idusuario,nombretienda,item):
   
-  categoria=Categoria.objects.all().order_by("categoria")
-  respuesta=request.POST.getlist('selec1')
+  vector=Productos.objects.filter(id_usuario=idusuario,tienda=nombre_tienda)
+  cat=[]
+  for i in vector:
+      cat.append(i)
+  categoria= sorted(set(cat))
   
 
-  if item=="todas las categorias":
-    productos=Productos.objects.all()
-  else:
-    #productos=Productos.objects.all()
-    productos=Productos.objects.filter(categoria__categoria__contains=item)    
+  if item=="todas las categorias":    
+    productos=Productos.objects.filter(id_usuario=idusuario,tienda=nombretienda) 
+  else:      
+    productos=Productos.objects.filter(Q(categoria__categoria__contains=item) & Q(tienda=nombretienda),Q(categoria=item)) 
+   
    
   
   #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
@@ -525,10 +535,16 @@ def busqueda(request):
 
      productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
      tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-     return render(request,'catalogo.html',locals())                   
+     return render(request,'catalogo.html',locals())   
+                  
          
-       
+        
+     
+
+
     
+  
+   
 
 import datetime
 #@login_required

@@ -68,12 +68,13 @@ urlpatterns = [
     #url(r'^editar_mensaje/(\d+)/$',editar_mensaje),
   
    
-   
+  
     url(r'^get_cart/$', get_cart),
     url(r'^ver_categorias/([^/]+)$', ver_categorias),
     url(r'^busqueda/$', busqueda),
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
+    url(r'^([^/]+)/([^/]+)/([^/]+)/$', ver_mis_categorias),
    
 
 ]
