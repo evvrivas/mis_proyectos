@@ -461,8 +461,9 @@ def mi_tienda(request,usuario,nombretienda):
     categoria= sorted(set(cat))
 
     tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
-      
-    productos=Productos.objects.filter(id_usuario=usuario,tienda=nombretienda)
+     
+    productos=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+
     
     return render(request,'principal_tienda.html',locals())   
  
@@ -514,7 +515,9 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
   
   if item=="todas las categorias":    
-    productos=Productos.objects.filter(id_usuario=idusuario,tienda=nombretienda) 
+    productos=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda)) 
+
+    
   else:      
     productos=Productos.objects.filter(Q(categoria__categoria__contains=item) & Q(tienda=nombretienda),Q(categoria=item)) 
    
