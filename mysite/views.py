@@ -291,7 +291,7 @@ def crear_usuario(request):
                          
                          form=UsuariosForm()
                          
-        return render(request,'formulario_crear_usuario.html',locals()) 
+        return render(request,'formulario_editar_usuario.html',locals()) 
 
 
 
@@ -552,7 +552,7 @@ def busqueda(request):
 
 
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-        tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+        tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda_icontains=palabra) | Q(descripcion__icontains=palabra))
      return render(request,'catalogo.html',locals())   
                   
          
