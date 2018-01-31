@@ -452,7 +452,7 @@ def editar(request, acid):
 
 
 def mi_tienda(request,usuario,nombretienda):
-    vector=Productos.objects.filter(id_usuario=usuario,tienda=nombre_tienda)
+    vector=Productos.objects.filter(id_usuario=usuario,tienda=nombretienda)
     cat=[]
     for i in vector:
         cat.append(i)
@@ -503,7 +503,7 @@ def ver_categorias(request,item):
     
 def ver_mis_categorias(request,idusuario,nombretienda,item):
   
-  vector=Productos.objects.filter(id_usuario=idusuario,tienda=nombre_tienda)
+  vector=Productos.objects.filter(id_usuario=idusuario,tienda=nombretienda)
   cat=[]
   for i in vector:
       cat.append(i)
@@ -522,7 +522,7 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   return render(request,'catalogo_tienda.html',locals())   
  
 def busqueda_tienda(request,nombretienda):
-     vector=Productos.objects.filter(id_usuario=idusuario,tienda=nombre_tienda)
+     vector=Productos.objects.filter(id_usuario=idusuario,tienda=nombretienda)
      cat=[]
      for i in vector:
           cat.append(i)
