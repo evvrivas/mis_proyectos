@@ -46,7 +46,7 @@ def logout(request):
 
 
 @login_required
-def crear_producto(request):                
+def crear_producto(request):               
 
      #!/usr/bin/python
      # -*- coding: latin-1 -*-
@@ -84,7 +84,7 @@ def crear_producto(request):
                                   categor.save() # Now you can send it to DB
                                   formCateg.save() # Guardar los datos en la base de datos  print  
 
-                                  return render(request,'formulario_ingreso.html',locals())                           
+                                  return render(request,'entrada_producto.html',locals())                           
                                  
                                           
      else:
@@ -121,7 +121,7 @@ def editar_producto(request,acid):
                                   categor.save() # Now you can send it to DB
                                   formCateg.save() # Guardar los datos en la base de datos  print  
 
-                                  return render(request,'formulario_ingreso.html',locals())  
+                                  return render(request,'entrada_producto.html',locals())  
         else:
             
             form = UsuariosForm(instance=f)
@@ -130,7 +130,7 @@ def editar_producto(request,acid):
         
 
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-        return render(request,'formulario_editar_usuario.html',locals())   
+        return render(request,'entrada_producto.html',locals())   
 
 @login_required
 def crear_pedido(request):                
@@ -180,7 +180,7 @@ def crear_pedido(request):
                          
 
      
-     return render(request,'entrada_producto.html',locals())
+     return render(request,'formulario_ingreso.html',locals())
         #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
 
 def editar_pedido(request,acid):   
@@ -217,7 +217,7 @@ def editar_pedido(request,acid):
         
 
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-        return render(request,'formulario_editar_usuario.html',locals())   
+        return render(request,'formulario_ingreso.html',locals())   
 
 @login_required
 def crear_mensaje(request,bandera): 
@@ -509,7 +509,8 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
       cat.append(i)
   categoria= sorted(set(cat))
   
-
+  tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+  
   if item=="todas las categorias":    
     productos=Productos.objects.filter(id_usuario=idusuario,tienda=nombretienda) 
   else:      
@@ -520,6 +521,23 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
   return render(request,'catalogo_tienda.html',locals())   
  
+def busqueda_tienda(request,nombretienda):
+     vector=Productos.objects.filter(id_usuario=idusuario,tienda=nombre_tienda)
+     cat=[]
+     for i in vector:
+          cat.append(i)
+     categoria= sorted(set(cat))
+     
+     if request.POST:
+        palabra = request.POST.get('nombre')
+        #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+        if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
+            busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra)
+            busqueda.save()
+        
+        tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first()
+        productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra),Q(tienda=nombretienda))
+        return render(request,'catalogo_tienda.html',locals()) 
 
 def busqueda(request):
      categoria=Categoria.objects.all().order_by("categoria")
@@ -533,8 +551,8 @@ def busqueda(request):
 
 
 
-     productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-     tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+        productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+        tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
      return render(request,'catalogo.html',locals())   
                   
          
@@ -563,6 +581,7 @@ def pagina_principal(request):
 
 def catalogo(request, var):
   categoria=Categoria.objects.all().order_by("categoria")
+
   #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
   return render(request,'catalogo.html',locals())   
 
