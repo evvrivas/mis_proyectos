@@ -76,7 +76,7 @@ urlpatterns = [
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
     url(r'^([^/]+)/([^/]+)/([^/]+)/$', ver_mis_categorias),
-   busqueda_tienda
+   
 
 ]
 
