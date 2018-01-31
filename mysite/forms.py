@@ -7,7 +7,7 @@ from django.forms import ModelForm, Textarea
 class UsuariosForm(ModelForm):
 	class Meta:
 		model= Usuarios		
-		exclude=["id_usuario","codigoapk","fecha_ingreso"]
+		exclude=["codigoapk","fecha_ingreso"]
 
 class ProductosForm(ModelForm):
 	class Meta:
