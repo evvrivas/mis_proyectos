@@ -126,7 +126,7 @@ class Tiendas(models.Model):
 	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 
-	     descripcion=models.CharField(max_length=30,blank=True)
+	     descripcion=models.CharField(max_length=60,blank=True)
 	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
 	     info=models.CharField(max_length=30,choices=INFORMA,blank=True)
 

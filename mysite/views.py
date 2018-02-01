@@ -510,13 +510,13 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   categoria= sorted(set(cat))
   
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-  
+
   if item=="todas las categorias":    
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)) 
 
     
   else:      
-    productos=Productos.objects.filter(Q(categoria__categoria__contains=item) & Q(tienda=nombretienda),Q(categoria=item)) 
+    productos=Productos.objects.filter(Q(categoria__categoria__contains=item) & Q(tienda__nombre_tienda__contains=nombretienda),Q(categoria=item)) 
    
    
   

@@ -19,7 +19,7 @@
                       <form action="." method="post" enctype="multipart/form-data" > 
                             {% csrf_token%}                              
 
-                            <p> {{ form }} </p>                                                              
+                            <p> {{ form.as_p }} </p>                                                              
                            <br>             
                            <input type="submit" value="GUARDAR"  />                       
                       </form>
