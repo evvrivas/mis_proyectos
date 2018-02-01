@@ -4,9 +4,9 @@
 {% block content %}
 
 
- <div class="row">       
- <div class="col-md-2">  
-    {% for j in productos %}                
+ <div class="row">    
+ {% for j in productos %}   
+ <div class="col-md-2">                    
 
             
                 <div class="thumbnail">
@@ -20,9 +20,9 @@
                      <br>
                       <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>   
                 </div>
-                                 
+       </div>                           
     {% endfor %} 
- </div>     
+     
  </div>             
 {% endblock %}
 

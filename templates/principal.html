@@ -4,11 +4,10 @@
 
 {% block content %}
 
-
  <div class="row">   
-
-  <div class="col-md-12">     
-      {% for j in nuevas_tiendas %} 
+{% for j in nuevas_tiendas %} 
+  <div class="col-md-2">     
+      
                 
                      <div class="thumbnail">                      
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
@@ -18,19 +17,19 @@
                         <p>{{j.descripcion}}</p>                                    
                         {% endthumbnail %}
                      </div>
-                        
+                   </div>      
        {% endfor %} 
 
-    </div> 
+    
 
                           
  </div>         
 
 
  <div class="row">
-     <div class="col-md-12">  
-       {% for j in nuevos_productos %} 
-
+ {% for j in nuevos_productos %} 
+     <div class="col-md-2">  
+       
             
                  <div class="thumbnail">
                         <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
@@ -41,21 +40,15 @@
                         <p>{{j.descripcion}}</p>                    
                               
                         <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>   
+                        <li><a href="/{{j.id_usuario}}/{{j.tienda}}/">{{j.tienda}}</a></li>
                         <br>
 
-                        <form action='/add_to_cart/{{j.id}}/' method='post'>
-                        {% csrf_token %}
-                            <label for="username">cantidad</label>
-                            <input type="text" name="cant" value="1" id="cant" size="10">
-                            <input type="submit" value="comprar" >                               
-                        </form>
-
-                        <li><a href="/get_cart/">Ver mi pedido</a></li>                      
+                                          
                   </div>
            
-                                  
+          </div>                        
          {% endfor %} 
-     </div>  
+       
 </div>
  
  {% endblock %}
