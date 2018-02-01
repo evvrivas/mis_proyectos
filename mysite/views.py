@@ -55,9 +55,6 @@ def crear_producto(request):
     
      if request.method == 'POST': # si el usuario est enviando el formulario con datos
             
-                         
-            if request.POST:
-
                   form=ProductosForm(request.POST,request.FILES)                   
                   
                   if form.is_valid():
@@ -505,7 +502,7 @@ def ver_categorias(request,item):
     
 def ver_mis_categorias(request,idusuario,nombretienda,item):
   
-  vector=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+  vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
 
   cat=[]
   for i in vector:
@@ -515,7 +512,7 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
   
   if item=="todas las categorias":    
-    productos=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda)) 
+    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)) 
 
     
   else:      
@@ -526,9 +523,9 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
   return render(request,'catalogo_tienda.html',locals())   
  
-def busqueda_tienda(request,nombretienda):
+def busqueda_tienda(request,idusuario,nombretienda):
      
-     vector=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+     vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
 
      cat=[]
      for i in vector:
@@ -542,7 +539,7 @@ def busqueda_tienda(request,nombretienda):
             busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra)
             busqueda.save()
         
-        tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first()
+        tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra),Q(tienda=nombretienda))
         return render(request,'catalogo_tienda.html',locals()) 
 

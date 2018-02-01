@@ -63,7 +63,7 @@
                                 </button>
                                
                                 <ul class="dropdown-menu" role="menu">
-                                         <li><a href="/{{user.username}}">Mi tienda </a></li>
+                                         <li><a href="/{{user.username}}">{{user.username}} </a></li>
                                          <li><a href="/principal">Ir a Xgangas </a></li>
 
                                          {%  if user.is_authenticated %}          
@@ -94,6 +94,7 @@
                                 </ul>
                        </div>
 
+          {%  if user.is_authenticated %}          
              
                          <div class="btn-group">
                                 <button type="button" class="btn btn-info dropdown-toggle"
@@ -102,14 +103,19 @@
                                 </button>
 
                                      <ul class="dropdown-menu" role="menu">
-                                     
+                              
+                           
+                   
                                        <li><a href="/crear_producto/">Subir un producto </a></li>      
                                        <li><a href="/editar_usuario/{{user.username}}">Editar mi tienda </a></li>
+                                     
                                        
                                 </ul>
                           
                        </div>
-            
+            {% endif %}
+               
+
                </div> 
 
       </div>
