@@ -85,9 +85,9 @@
                                 </button>
                                
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/ver_mis_categorias/xproductox">Todos los productos</a></li> 
+                                    <li><a href="/ver_categoria_tienda/tiendas.id_usuario/tiendas.nombre/xproductox">Todos los productos</a></li> 
                                     {%  for i in productos %}
-                                      <li><a href="/ver_mis_categorias/{{i.categoria}}">{{i.categoria}}</a></li>
+                                      <li><a href="/ver_categoria_tienda/tiendas.id_usuario/tiendas.nombre//{{i.categoria}}">{{i.categoria}}</a></li>
                                    {%  endfor %} 
 
 
@@ -123,7 +123,7 @@
     <div class="panel-body">  
     <br>
 
-    <div class="col-md-6">  
+    <div class="col-md-12">  
     {% block content %}
     {% endblock %}
     </div>

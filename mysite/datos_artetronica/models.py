@@ -36,14 +36,14 @@ class Productos(models.Model):
 	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
 	     cantidad         =  models.DecimalField(max_digits=15,decimal_places=0,default=0)
 	     nombre           =  models.CharField(max_length=30)
-	     
+	     codigo=models.CharField(max_length=30,blank=True)
 	     #imagen1      = models.ImageField(upload_to='tmp')	  
-	     imagen1 = ImageField(upload_to='tmp')
-	     imagen2 = ImageField(upload_to='tmp')
-	     imagen3 = ImageField(upload_to='tmp')
+	     imagen1 = ImageField(upload_to='tmp',blank=True)
+	     imagen2 = ImageField(upload_to='tmp',blank=True)
+	     imagen3 = ImageField(upload_to='tmp',blank=True)
    
 	    
-	     descripcion = models.TextField(max_length=100)
+	     descripcion = models.TextField(max_length=100,blank=True)
 	     puntuacion	 = models.CharField(max_length=30,default=0) 
 	     estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_A  = models.FloatField(blank=True,null= True	)	     
@@ -109,7 +109,8 @@ class Usuarios(models.Model):
 	     clave=models.CharField(max_length=4)
 	     nombre=models.CharField(max_length=30,blank=True)
 	     email = models.EmailField(blank=True)
-	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)	     
+	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)	 
+	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)	     
 	     pais=models.CharField(max_length=30,blank=True)
 	     direccion=models.CharField(max_length=30,blank=True)
 	     codigoapk=models.CharField(max_length=30,blank=True)	     	     
@@ -124,7 +125,7 @@ class Tiendas(models.Model):
 	     id_usuario=models.CharField(max_length=30)     
 	     ubicacion=models.CharField(max_length=30,blank=True)
 	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
-	     imagen1 = ImageField(upload_to='tmp',blank=True)
+	     imagen1 = ImageField(upload_to='tmp')
 
 	     descripcion=models.CharField(max_length=60,blank=True)
 	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
