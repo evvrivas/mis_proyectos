@@ -38,7 +38,7 @@
                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                             {% endthumbnail %}
                         
-                          <form action="/busqueda_tienda/tiendas.nombre" method="post">
+                          <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" method="post">
                                              {% csrf_token %}
                                                                                                                
                                                       <input type="text" id="name" name="nombre" size="15"/>
@@ -81,7 +81,7 @@
                         <div class="btn-group">
                                 <button type="button" class="btn btn-info dropdown-toggle"
                                         data-toggle="dropdown">
-                                  Categoria <span class="caret"></span>
+                                  Ver <span class="caret"></span>
                                 </button>
                                
                                 <ul class="dropdown-menu" role="menu">
@@ -99,7 +99,7 @@
                          <div class="btn-group">
                                 <button type="button" class="btn btn-info dropdown-toggle"
                                         data-toggle="dropdown">
-                                  Mi tienda <span class="caret"></span>
+                                  Tienda <span class="caret"></span>
                                 </button>
 
                                      <ul class="dropdown-menu" role="menu">
