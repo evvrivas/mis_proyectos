@@ -278,7 +278,8 @@ def crear_usuario(request):
                             usuario.id_usuario = user.username # Set the user object here
                             usuario.save() # Now you can send it to DB
                             form.save() # Guardar los datos en la base de datos  print 
-                            user.save()                          
+                            user.save()   
+                            auth.logout(request)                       
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             return render(request,'confirmar_usuario.html',locals())   
                    
