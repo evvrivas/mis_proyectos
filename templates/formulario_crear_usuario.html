@@ -3,12 +3,10 @@
          
  <div class="row">
  <div class="col-md-12">
-                <div class="thumbnail"> 
-                                                  
+                <div class="thumbnail">                                                   
                       <div class="caption">
                                <h4><center>DATOS DE USUARIO</center></h4>    
                       </div> 
-
                             <form action="" method="post" enctype="multipart/form-data"> 
                             {% csrf_token%}
                              <table>   
@@ -16,7 +14,7 @@
                                  <p>Contraseña(4 caracteres) {{ form.clave }}  </p>  
                              </table>
                              <p><input type="submit" value="Registrarme"></p>
-                                      
+                                    
                              </form>                                
                              <br>               
                 </div> 

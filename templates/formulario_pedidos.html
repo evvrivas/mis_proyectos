@@ -1,42 +1,17 @@
-{% load staticfiles %}
-{% load thumbnail %}    
+{% extends "base_tienda.html" %}
+{% load thumbnail %}
 
-<html>
-  <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-         
-    <link href='{% static  "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet" media="screen"'></script>
-    <link href='{% static  "bootstrap/css/jquery.dataTables.css" %}' rel="stylesheet"></script>
-    <link href='{% static  "css/style.css" %}' rel="stylesheet"></script>
-
-    <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-  
-  
-  </head>
-
-
-
-  <body> 
-
-<div class="panel panel-warning">     
+{% block content %}
+          
+        <div class="panel panel-warning">     
 
      <div class="panel-heading">
 
-            <div class="col-md-6">                     
+            <div class="col-md-6">                    
                       
                   {% thumbnail tiendas.imagen1 "50x50" crop="center" as im %}
                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                            {% endthumbnail %}
+                  {% endthumbnail %}
                         
                           <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" method="post">
                                              {% csrf_token %}
@@ -139,27 +114,87 @@
 
 
 
-        
-  <div class="panel panel-danger">
-      <div class="panel-heading">
-        <h2 class="panel-title"><center>Direccion {{tienda.ubicacion}}: WhatsApp: {{tienda.id_usuario}}</center></h2>    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <div class="row">   
+          {% for j in productos %}                 
+
+           <div class="col-md-2">   
+                <div class="thumbnail">
+                       
+                       <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
+                        {% thumbnail j.imagen1 "200" crop="center" as im %}
+                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                        {% endthumbnail %}
+                          
+                       <p>{{j.descripcion}}</p>              
+
+                      <p>                    
+                              
+                          <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>    </p>
+                            
+                                                                                        
+                 </div>
+            </div>            
                 
-      </div>
+                
+           {% endfor %}  
+        
+       </div>
+                
 
-    <div class="panel-body">    
-                                      
-
-    </div>
-
-  </div>
-  
-
-    <script src='{% static "bootstrap/js/jquery.min.js" %}' ></script>
-    <script src='{% static  "bootstrap/js/bootstrap.min.js" %}'></script>
-
-  </body>
-</html>
+{% endblock %}
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+
+         
+          
+
+
+
+
+
+
+
+ 

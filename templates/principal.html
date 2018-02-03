@@ -6,9 +6,8 @@
 
  <div class="row">   
 {% for j in nuevas_tiendas %} 
-  <div class="col-md-2">     
-      
-                
+  <div class="col-md-2">   
+                      
                      <div class="thumbnail">                      
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
@@ -19,17 +18,12 @@
                      </div>
                    </div>      
        {% endfor %} 
-
-    
-
-                          
+         
  </div>         
-
 
  <div class="row">
  {% for j in nuevos_productos %} 
      <div class="col-md-2">  
-       
             
                  <div class="thumbnail">
                         <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
@@ -42,7 +36,6 @@
                         <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>   
                         <li><a href="/{{j.id_usuario}}/{{j.tienda}}/">{{j.tienda}}</a></li>
                         <br>
-
                                           
                   </div>
            
@@ -52,6 +45,3 @@
 </div>
  
  {% endblock %}
-
-
-

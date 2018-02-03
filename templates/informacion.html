@@ -31,11 +31,15 @@
                   <p>COMO FUNCIONA</p>
                   <br>
                   
-                  <p>Hay que registrarse utilizando datos personales reales y tu numero de Whatsapp ademas de una contrasena de 4 digitos, con esto ya puedes crear tiendas y subir tus productos y/o servicios (Plan Gratuito 5 productos maximo), Si solo realizaras compras no es nesesario registrarse. Si el plan gratuito (5 productos maximo) no es suficiente para ti, puedes adquirir el plan que mas se adecue a tus nesecidades.</p>
-
-                  <p>Publicidad inteligente en todos los planes.</p>
+                  <p>Hay que registrarse utilizando datos personales reales y tu numero de Whatsapp ademas de una contrasena de 4 digitos, con esto ya puedes crear tiendas y subir productos y/o servicios (Plan Gratuito 5 productos maximo).<p>
                   <br>
-                  <p>Hacemos uso de inteligencia artificial para promocionar tu tienda y tus productos, Tu tienda y tus productos son vistos por personas que realmente estan interesados en ellos. esto aumenta las posibilidades de tu tienda.</p>
+
+                   <p>Si el plan gratuito (5 productos maximo) no es suficiente para ti, puedes adquirir el plan que mas se adecue a tus nesecidades.</p>
+
+                  <br>
+                  <p>PUBLICIDAD INTELIGENTE EN TODOS LOS PLANES</p>
+                  <br>
+                  <p>Hacemos uso de inteligencia artificial para que  tu tienda y tus productos sean vistos por personas que realmente estan interesados en ellos.</p>                  
 
                   <br>
                 </div>
@@ -50,11 +54,34 @@
                    <br>
                   
                   <center><a href=""><img src='{% static "planes.gif" %}' alt='img' ></a>    </center>  
-                  
+
+                  <p>BENEFICIOS DE CONTRATAR UN PLAN</p>
+                  <br>
+                  <ol>
+                  <li>Tienda/Catalogo online de tus productos/servicios</li>
+                  <li>compartir por medio de redes sociales</li>
+                  <li>Carrito de compras</li>
+                  <li>Publicidad con inteligencia</li>
+                  <li>Publicidad Permanente en medios tradicionales</li>
+                  <li>Adecuar el sistema u tus necesidades</li>
+                  <li>Informate sobre mas posibilidades para tu negocio</li>
+
+                  </ol> 
+
                   <br>  
-                  <p><a href="/contratar">CONTRATAR TIENDA ONLINE</a></p>                             
-                
-                  <li><a href="/editar_usuario/{{user.username}}">Seleccionar el plan</a></li>                                                                      
+                   {%  if user.is_authenticated %}              
+                  
+                       <li><a href="/editar_usuario/{{user.username}}">Actualizar/cambiar Plan </a></li> 
+                         <br>
+                   {%  else  %}  
+
+                       <li><a href="/accounts/login">Entrar </a></li>
+                        <br>
+                       <li><a href="/crear_usuario">Crear una cuenta</a></li>  
+                        <br>  
+                   {% endif %}                                                             
+                       
+
                 </div>
             </div>
 </div>

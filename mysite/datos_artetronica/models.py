@@ -48,7 +48,31 @@ class Productos(models.Model):
 	     estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_A  = models.FloatField(blank=True,null= True	)	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
+
+	     
+	     contacto=models.CharField(max_length=30,blank=True)
+	     descripcion2 = models.TextField(max_length=100,blank=True)
+	     total  = models.FloatField(blank=True)
+	     anticipo  = models.FloatField(blank=True)
+	     fecha_de_entrega = models.DateField(default=datetime.now,blank=True)	
+	     estado2=  models.CharField(max_length=30,choices=ESTADO,blank=True)
+
+	     cant_tela_1=models.FloatField(blank=True,null= True)
+	     tipo_tela_1=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
+	     color_tela_1=models.CharField(blank=True,max_length=30)
+	     
+	     cant_tela_2=models.FloatField(blank=True,null= True)
+	     tipo_tela_2=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
+	     color_tela_2=models.CharField(blank=True,max_length=30)
+	     
+	     cant_tela_3=models.FloatField(blank=True,null= True)
+	     tipo_tela_3=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
+	     color_tela_3=models.CharField(blank=True,max_length=30)
 	    
+
+
+
+
 	     def __str__(self):
 		    		return  self.nombre
 	     class Admin:

@@ -70,10 +70,10 @@
                                          <li><a href="/principal">Inicio </a></li>
                                          <li><a href="/informacion">Informacion</a></li>
                                          {%  if user.is_authenticated %}          
-                                               <li><a href="/accounts/logout/">Salir</a></li>
+                                               <li><a href="/accounts/logout/">Cerrar sesión </a></li>
                                          {%  else  %}                                 
                                            <li><a href="/accounts/login">Entrar </a></li>
-                                           <li><a href="/crear_usuario">Registrarme</a></li>
+                                           <li><a href="/crear_usuario">Crear cuenta</a></li>
                                            
                                          {% endif %}  
                                   
