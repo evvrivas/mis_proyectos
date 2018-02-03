@@ -163,9 +163,10 @@ class Usuarios(models.Model):
 	     nombre=models.CharField(max_length=30,blank=True)
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)	 
-	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)	     
+	     plan_tienda_activo=mod els.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)
+
 	     pais=models.CharField(max_length=30,blank=True)
-	     direccion=models.CharField(max_length=30,blank=True)
+	     direccion=models.URLField(blank=True)	         
 	     codigoapk=models.CharField(max_length=30,blank=True)	     	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
 	     
