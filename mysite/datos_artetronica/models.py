@@ -23,6 +23,35 @@ ESTADO= (
 
 			)	
 
+TIPOTELA = (
+			('Q1', 'Q1'),
+			('Q2', 'Q2'),
+			('KIANITA', 'KIANITA'),
+			('SUPER_KIANA', 'SUPER_KIANA'),
+			('ALGODON_SENCILLO', 'ALGODON_SENCILLO'),
+			('ALGODON_DOBLE', 'ALGODON_DOBLE'),
+			('ADIDAS', 'ADIDAS'),
+			('PIQUE_POLO', 'PIQUE_POLO'),
+			('SIMPLE_PIQUE', 'SIMPLE_PIQUE'),
+
+			('EYELET', 'EYELET'),
+			('SINCATEX', 'SINCATEX'),
+			('LINO STRECH', 'LINO STRECH'),
+			('IMPREMEABLE', 'IMPREMEABLE'),
+			('SATIN', 'SATIN'),
+			('LINO_OXFORD', 'LINO_OXFORD'),
+			('OTRA_TELA', 'OTRA_TELA'),
+
+			)
+ESTADO2 = (
+			('ENCARGADO', 'ENCARGADO'),
+			('PRODUCCION', 'PRODUCCION'),
+			('EMPACADO', 'EMPACADO'),
+			('ENTREGADO', 'ENTREGADO'),	
+			)
+
+
+
 class Categoria(models.Model):
 		 categoria=models.CharField(max_length=30,blank=True,null=True)
 		 def __str__(self):
@@ -55,7 +84,7 @@ class Productos(models.Model):
 	     total  = models.FloatField(blank=True)
 	     anticipo  = models.FloatField(blank=True)
 	     fecha_de_entrega = models.DateField(default=datetime.now,blank=True)	
-	     estado2=  models.CharField(max_length=30,choices=ESTADO,blank=True)
+	     estado2=  models.CharField(max_length=30,choices=ESTADO2,blank=True)
 
 	     cant_tela_1=models.FloatField(blank=True,null= True)
 	     tipo_tela_1=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
