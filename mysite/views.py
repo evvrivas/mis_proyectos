@@ -39,6 +39,8 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 #from templates import *
 from django.db.models import Q
+
+
 def logout(request):
     auth.logout(request)
     # Redirect to a success page.
@@ -279,7 +281,7 @@ def crear_usuario(request):
                             usuario.save() # Now you can send it to DB
                             form.save() # Guardar los datos en la base de datos  print 
                             user.save()   
-                            auth.logout(request)                       
+                                                  
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             return render(request,'confirmar_usuario.html',locals())   
                    

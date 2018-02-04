@@ -41,7 +41,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #url(r'^admin/',include(admin.site.urls)),
     url(r'^$', Index.as_view(), name='index'),
-    url(r'^accounts/login/ $', login,{'template_name': 'login.html'}),
+    url(r'^accounts/login/$', login,{'template_name': 'login.html'}),
     url(r'^accounts/logout/$', logout),
     #url(r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
     #url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':  settings.MEDIA_ROOT}),
