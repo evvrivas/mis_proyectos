@@ -239,4 +239,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-#LOGIN_REDIRECT_URL = '/principal' #Or whatever you wish
+LOGIN_REDIRECT_URL = '/principal/' #Or whatever you wish
