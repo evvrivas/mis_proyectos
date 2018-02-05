@@ -81,8 +81,8 @@ class Productos(models.Model):
 	     
 	     contacto=models.CharField(max_length=30,blank=True)
 	     descripcion2 = models.TextField(max_length=100,blank=True)
-	     total  = models.FloatField(blank=True)
-	     anticipo  = models.FloatField(blank=True)
+	     total  = models.FloatField(blank=True,null=True)
+	     anticipo  = models.FloatField(blank=True,null=True)
 	     fecha_de_entrega = models.DateField(default=datetime.now,blank=True)	
 	     estado2=  models.CharField(max_length=30,choices=ESTADO2,blank=True)
 

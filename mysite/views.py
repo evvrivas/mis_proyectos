@@ -88,8 +88,7 @@ def crear_producto(request):
                                           
      else:
         form=ProductosForm()
-        formCateg=CategoriaForm()
-                         
+        formCateg=CategoriaForm()                         
 
      
      return render(request,'entrada_producto.html',locals())
@@ -543,7 +542,7 @@ def busqueda_tienda(request,idusuario,nombretienda):
             busqueda.save()
         
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-        productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra),Q(tienda=nombretienda))
+        productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) & Q(tienda__nombre_tienda__contains=nombretienda))
         return render(request,'catalogo_tienda.html',locals()) 
 
 def busqueda(request):
@@ -559,7 +558,7 @@ def busqueda(request):
 
 
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-        tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda_icontains=palabra) | Q(descripcion__icontains=palabra))
+        tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra))
      return render(request,'catalogo.html',locals())   
                   
          
@@ -642,26 +641,124 @@ def get_cart(request):
     #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
     return render(request,'carrito.html',locals())   
 
+
+
 @login_required
-def pedido(request):   
-    categoria=Categoria.objects.all().order_by("categoria") 
-    cart = Cart(request)
-    cart.view()    
-    fecha= datetime.datetime.now()
-    
-    mensaje= str(fecha)+"  "+str(request.user.first_name) + "  "+str(request.user.last_name) +"  "+ str(request.user.id)+"  "+"\n"
+def cambiar_estado_pedido(request,id_del_pedido):  
+                                           
+                        ped = Productos.objects.get(pk=id_del_pedido)
+                                                                       
+                        if ped.estado2=="ENCARGADO":
+                             ped.estado2="PRODUCCION"
+                        
+                        elif ped.estado2=="PRODUCCION":
+                              ped.estado2="EMPACADO"
+                        
+                        elif ped.estado2=="EMPACADO":
+                              ped.estado2="ENTREGADO"
 
-    for item in cart:
-        mensaje=mensaje+"  "+ str(item.productos)+ "  "+ str(item.unit_price)+ "  "+str(item.quantity)+"  "+ str(item.total_price)+"  "+"\n"
-
-                                
-    mensaje=mensaje+"\n" 
-     
-    sender =str(request.user.email)
-
-    send_mail('Pedido ', mensaje,"artetronica@gmail.com",(sender,), fail_silently=False)
-   
-    
-    #return render_to_response('cotizacion.html', locals(),context_instance=RequestContext(request))
-    return render(request,'cotizacion.html',locals())   
+                        elif ped.estado2=="ENTREGADO":
+                              ped.estado2="ENCARGADO"
  
+                        else:
+                          pass 
+                       
+                        ped.save() # Guardar los datos en la base de datos 
+                        #bandera=ped.estado_del_pedido 
+                        #pedidos=Pedido.objects.filter(estado_del_pedido=bandera) 
+                        i=ped
+                        return render(request,'catalogo_pedidos.html',locals())
+
+@login_required
+def editar_pedido(request,acid):    
+        
+        f = Productos.objects.get(pk=acid)           
+       
+        if request.method == 'POST':
+            form = ProductosForm(request.POST,request.FILES,instance=f)
+       
+            if form.is_valid():
+                    ped=form.save(commit=False)
+                    ped.id_usuario =  request.user.username
+                    ped.save() # Guardar los datos en la base de datos 
+                    return render(request,'confirmar.html',locals())
+
+        else:
+            
+            form = PedidoForm(instance=f)   
+        
+
+        return render(request,'pedido.html',locals())
+
+
+@login_required
+def hacer_pedido(request):              
+
+     #!/usr/bin/python
+     # -*- coding: latin-1 -*-
+     import os, sys
+     categoria=Categoria.objects.all().order_by("categoria") 
+    
+     if request.method == 'POST': # si el usuario est enviando el formulario con datos
+            
+                  form=ProductosForm(request.POST,request.FILES)                   
+                  
+                  if form.is_valid():
+                          productillo = form.save(commit=False)
+                          # commit=False tells Django that "Don't send this to database yet.
+                          # I have more things I want to do with it."
+                          productillo.id_usuario = request.user.username # Set the user object here             
+                                           
+                          productillo.save() # Now you can send it to DB
+                          form.save()  
+                          
+                          #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                          return render(request,'confirmar.html',locals())     
+                  else:
+
+
+                          formCateg=CategoriaForm(request.POST,request.FILES) 
+                          if formCateg.is_valid() :                           
+
+                                  categor = formCateg.save(commit=False)
+                                  # commit=False tells Django that "Don't send this to database yet.
+                                  # I have more things I want to do with it."
+                                  categor.id_usuario = request.user.username # Set the user object here
+                                  categor.save() # Now you can send it to DB
+                                  formCateg.save() # Guardar los datos en la base de datos  print  
+
+                                  return render(request,'pedido.html',locals())                           
+                                 
+                                          
+     else:
+        form=ProductosForm()
+        formCateg=CategoriaForm()                         
+
+     
+     return render(request,'pedido.html',locals())
+        #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
+
+def listado_pedido(request,idusuario,nombretienda,bandera): 
+    palabra="PEDIDOS"  
+    tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+       
+   
+    if bandera=="TODOS":
+        pedidos= Productos.objects.filter(Q(categoria__categoria=palabra) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("fecha_de_entrega")
+     
+       
+
+    else:
+        if bandera=="PARAHOY":
+              
+             parahoy = datetime.datetime.now()
+             pedidos= Productos.objects.filter(Q(categoria__categoria=palabra) & Q(tienda__nombre_tienda__contains=nombretienda) & Q(fecha_de_entrega=palabra)).order_by("fecha_de_entrega")
+     
+        else:
+             
+            pedidos= Productos.objects.filter(Q(categoria__categoria=palabra) & Q(tienda__nombre_tienda__contains=nombretienda) & Q(estado_del_pedido=bandera)).order_by( "fecha_de_entrega")
+     
+    return render(request,'catalogo_pedido.html',locals())
+        
+
+

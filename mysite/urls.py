@@ -76,10 +76,17 @@ urlpatterns = [
     url(r'^busqueda_tienda/([^/]+)/([^/]+)/$', busqueda_tienda),
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
+
+    url(r'^editar_pedido/(\d+)/$',editar_pedido),
+    url(r'^hacer_pedido/$',hacer_pedido),
+    url(r'^cambiar_estado_pedido/(\d+)$',cambiar_estado_pedido),
+    url(r'^ver_este_pedido/(\d+)/$',ver_este_pedido),
+    url(r'^listado_pedido/([A-Z]+)$', listado_pedido)
    
 ]
 
     
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 

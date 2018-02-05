@@ -15,6 +15,8 @@ class ProductosForm(ModelForm):
 		widgets = {'descripcion': Textarea(attrs={'cols': 40, 'rows': 3}),}
 		exclude=["id_usuario","puntuacion","fecha_ingreso"]
 
+
+
 class BuscarForm(ModelForm):
 	class Meta:
 		model= Buscar		
