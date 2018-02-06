@@ -646,11 +646,11 @@ def get_cart(request):
 @login_required
 def cambiar_estado_pedido(request,idusuario,nombretienda,id_del_pedido):  
 
-                       vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-                       cat=[]
-                       for i in vector:
+                        vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+                        cat=[]
+                        for i in vector:
                            cat.append(i)
-                       categoria= sorted(set(cat))
+                        categoria= sorted(set(cat))
                                            
                         ped = Pedidos.objects.get(pk=id_del_pedido)
                                                                        
