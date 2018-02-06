@@ -11,7 +11,7 @@
                        
                        <h4><center> {{j.nombre}} {{j.estado}}
 
-                       <form action='/cambiar_estado_pedido/{{j.id}}' method='post'>
+                       <form action='/cambiar_estado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}' method='post'>
                         {% csrf_token %}                                             
                         <input type="submit" value="editar estado"  />                       
                        </form>
@@ -32,12 +32,28 @@
                           
                        <p>Descripcion {{j.descripcion}}</p> 
                        <br>
-                       <p>P/Unitarios {{j.precios_unitarios}}</p>                       
-                            
+                       <p>P/Unitarios {{j.precios_unitarios}}</p> 
+
+                       <p>P/Total {{j.total}} Anticipo {{j.anticipo}}</p>                       
+                        <br>
+
+                        <p>FECHA DE ENTREGA {{j.fecha_de_entrega}}</p> 
+                        <br>
+                        <p>Tela1 {{j.tipo_tela_1}} color {{j.color_tela_1}} cantidad {{cant_tela_1}}</p>
+                        <p>Tela2 {{j.tipo_tela_2}} color {{j.color_tela_2}} cantidad {{cant_tela_2}}</p>
+                        <p>Tela3 {{j.tipo_tela_3}} color {{j.color_tela_3}} cantidad {{cant_tela_3}}</p> 
+ 
+
+ 
+
+                       
+
+
+
                                                                                         
                  </div>
                                                                   
-                             <li><a href="/editar_pedido/{{j.id}}">editar</a></li>  
+                             <li><a href="/editar_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li>  
                         
             </div>            
                 
