@@ -691,7 +691,6 @@ def editar_pedido(request,acid):
         return render(request,'pedido.html',locals())
 
 
-
 @login_required
 def hacer_pedido(request):                
 
