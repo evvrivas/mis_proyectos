@@ -39,3 +39,7 @@ class RulesAdmin(admin.ModelAdmin):
 admin.site.register(Mensajes)
 class RulesAdmin(admin.ModelAdmin):
     form = MensajesForm
+
+admin.site.register(Pedidos)
+class RulesAdmin(admin.ModelAdmin):
+    form = PedidosForm

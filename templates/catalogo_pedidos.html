@@ -4,12 +4,12 @@
 {% block content %}
           
      <div class="row">   
-          {% for j in productos %}                 
+          {% for j in pedidos %}                 
 
            <div class="col-md-2">   
                 <div class="thumbnail">
                        
-                       <h4><center> {{j.nombre}} {{j.estado2}}
+                       <h4><center> {{j.nombre}} {{j.estado}}
 
                        <form action='/cambiar_estado_pedido/{{j.id}}' method='post'>
                         {% csrf_token %}                                             
@@ -30,15 +30,15 @@
                           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                         {% endthumbnail %}
                           
-                       <p>{{j.descripcion}}</p> 
+                       <p>Descripcion {{j.descripcion}}</p> 
                        <br>
-                       <p>{{j.descripcion2}}</p>                       
+                       <p>P/Unitarios {{j.precios_unitarios}}</p>                       
                             
                                                                                         
                  </div>
-                      {%  if user.is_authenticated %}                                              
+                                                                  
                              <li><a href="/editar_pedido/{{j.id}}">editar</a></li>  
-                      {% endif %}     
+                        
             </div>            
                 
                 

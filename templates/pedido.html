@@ -17,24 +17,27 @@
                       </form>
 
                       <form action="." method="post" enctype="multipart/form-data" > 
-                       {% csrf_token%}
-
+                     {% csrf_token%}
+                     <p>Codigo {{ form.codigo }} </p> 
                      <p>Tienda {{ form.tienda }} </p>   
-                     <p>categoria {{ form.categoria }}  </p>       
-                                         
-                     
-                     <p>nombre {{ form.nombre }}  </p>   
+                     <p>categoria {{ form.tipo_prenda }}  </p>                      
+                     <p>nombre {{ form.nombre }}  </p> 
+                     <p>contacto {{ form.contacto }}  </p>
+                     <p>descripcion {{ form.descripcion }} </p>     
 
                      <p>imagen1 {{ form.imagen1 }} </p> 
                      <p>imagen2 {{ form.imagen2 }} </p> 
                      <p>imagen3 {{ form.imagen3 }} </p>                
-                     
-                     <p>descripcion {{ form.descripcion }} </p> 
+                                          
                      <p>precios unitarios {{ form.descripcion2 }} </p> 
 
                      <p>Total {{ form.total }} </p>
                      <p>Anticipo {{ form.anticipo }} </p>
-                     <p>Estado {{ form.estado2 }} </p>                    
+                     <p>Estado {{ form.estado }} </p>  
+
+                     <p>Fecha de entrega {{ form.fecha_de_entrega }} </p>  
+
+                                      
                      
                      <p> cantidad de tela {{  form.cant_tela_1 }} </p>
                   <p> tipo de tela{{  form.tipo_tela_1 }} </p>
