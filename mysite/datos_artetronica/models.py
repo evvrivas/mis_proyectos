@@ -134,7 +134,7 @@ class Usuarios(models.Model):
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)
 
 	     pais=models.CharField(max_length=30,blank=True)
-	     direccion=models.URLField(blank=True)	         
+	     facedireccion=models.URLField(blank=True)	         
 	     codigoapk=models.CharField(max_length=30,blank=True)	     	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
 	     
