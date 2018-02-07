@@ -23,24 +23,19 @@ ESTADO= (
 
 			)	
 TIPO_PRENDA = (
-			('camisa', 'camisa'),
-			('short', 'short'),
-			('licra', 'licra'),
-			('sueter', 'sueter'),
-			('chumpa', 'chumpa'),
-			('pans', 'pans'), 
+	        ('confeccion ', 'confeccion'),	        
+	        ('serigrafia', 'serigrafia'),
+			('Sublimacion', 'Sublimacion'),
 			('uniforme escolar', 'uniforme escolar'),
 			('uniforme deportivo', 'uniforme deportivo'),
 			('uniforme de trabajo', 'uniforme de trabajo'),
-			('bolso', 'bolso'),
-			('cojin', 'cogin'),
-			('gafete', 'gafete'),
-			('gorra', 'gorra'),
-			('superheroe', 'superheroe'),
-			('casual', 'casual'),
-			('paile', 'baile'),			
+			('sueter', 'sueter'),
+			('chumpa', 'chumpa'),
+			('camisa', 'camisa'), 
+			('pans', 'pans'), 
+			('otros', 'otros'),
+			)
 
-			 )
 TIPOTELA = (
 			('Q1', 'Q1'),
 			('Q2', 'Q2'),
