@@ -651,7 +651,9 @@ def cambiar_estado_pedido(request,idusuario,nombretienda,id_del_pedido):
                         for i in vector:
                            cat.append(i)
                         categoria= sorted(set(cat))
-                                           
+                        
+                        tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()                  
+
                         ped = Pedidos.objects.get(pk=id_del_pedido)
                                                                        
                         if ped.estado2=="ENCARGADO":
@@ -681,7 +683,9 @@ def editar_pedido(request,idusuario,nombretienda,acid):
         cat=[]
         for i in vector:
             cat.append(i)
-        categoria= sorted(set(cat))   
+        categoria= sorted(set(cat))
+
+        tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()   
         
         f = Pedidos.objects.get(pk=acid)           
        
@@ -708,7 +712,10 @@ def hacer_pedido(request,idusuario,nombretienda):
         cat=[]
         for i in vector:
             cat.append(i)
-        categoria= sorted(set(cat))                
+        categoria= sorted(set(cat)) 
+        
+        tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+
 
         if request.method == 'POST': # si el usuario est enviando el formulario con datos
             
@@ -741,7 +748,7 @@ def listado_pedido(request,idusuario,nombretienda,bandera):
     categoria= sorted(set(cat))
      
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-       
+
    
     if bandera=="TODOS":
         pedidos= Pedidos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda=nombretienda)).order_by("fecha_de_entrega")

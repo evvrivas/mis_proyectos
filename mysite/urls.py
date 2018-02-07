@@ -70,7 +70,7 @@ urlpatterns = [
    
   
     url(r'^get_cart/$', get_cart),
-    url(r'^ver_categorias/([^/]+)$', ver_categorias),
+    url(r'^ver_categorias/([^/]+)/$', ver_categorias),
     url(r'^ver_categorias_tienda/([^/]+)/([^/]+)/([^/]+)/$', ver_mis_categorias),
     url(r'^busqueda/$', busqueda),
     url(r'^busqueda_tienda/([^/]+)/([^/]+)/$', busqueda_tienda),
@@ -78,9 +78,9 @@ urlpatterns = [
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
 
     url(r'^editar_pedido/([^/]+)/([^/]+)/(\d+)/$',editar_pedido),
-    url(r'^hacer_pedido/([^/]+)/([^/]+)$',hacer_pedido),
-    url(r'^cambiar_estado_pedido/([^/]+)/([^/]+)(\d+)$',cambiar_estado_pedido),
-    url(r'^listado_pedido/([^/]+)/([^/]+)/([A-Z]+)$', listado_pedido)
+    url(r'^hacer_pedido/([^/]+)/([^/]+)/$',hacer_pedido),
+    url(r'^cambiar_estado_pedido/([^/]+)/([^/]+)(\d+)/$',cambiar_estado_pedido),
+    url(r'^listado_pedido/([^/]+)/([^/]+)/([A-Z]+)/$', listado_pedido)
    
 ]
 
