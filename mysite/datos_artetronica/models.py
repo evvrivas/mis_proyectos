@@ -144,13 +144,13 @@ class Usuarios(models.Model):
 		    		list_display = ('id_usuario')
 
 class Tiendas(models.Model):	     
-	     id_usuario=models.CharField(max_length=30)     
+	     id_usuario=models.CharField(max_length=30)	     
+	     nombre_tienda=models.CharField(max_length=30,blank=True)
 	     ubicacion=models.CharField(max_length=30,blank=True)
-	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
+	     categoria=models.ForeignKey('Categoria',blank=True,null=True)	     
 	     imagen1 = ImageField(upload_to='tmp')
-
 	     descripcion=models.CharField(max_length=60,blank=True)
-	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
+	     
 	     info=models.CharField(max_length=30,choices=INFORMA,blank=True)
 
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)

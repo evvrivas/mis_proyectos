@@ -6,16 +6,20 @@
      <div class="row">   
           {% for j in pedidos %}                 
 
-           <div class="col-md-2">   
+           <div class="col-md-12">   
                 <div class="thumbnail">
                        
-                       <h4><center> {{j.nombre}} {{j.estado}}
+                  <div class="col-md-6"> 
+                       <p>Categoria:{{}j.tipo_prenda}</p>
+                       <br>
+                       <h4><center> cliente: {{j.nombre}} ESTADO: {{j.estado}}
 
                        <form action='/cambiar_estado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}' method='post'>
                         {% csrf_token %}                                             
                         <input type="submit" value="editar estado"  />                       
                        </form>
                        </center></h4> 
+                       <br>
 
 
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
@@ -29,20 +33,25 @@
                         {% thumbnail j.imagen3 "200" crop="center" as im %}
                           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                         {% endthumbnail %}
-                          
+                  </div>
+                  <div class="col-md-6"> 
+
                        <p>Descripcion {{j.descripcion}}</p> 
                        <br>
                        <p>P/Unitarios {{j.precios_unitarios}}</p> 
 
                        <p>P/Total {{j.total}} Anticipo {{j.anticipo}}</p>                       
                         <br>
+                        <p>FECHA DE ENCARGO {{j.fecha_ingreso}}</p>
 
                         <p>FECHA DE ENTREGA {{j.fecha_de_entrega}}</p> 
                         <br>
+                        
                         <p>Tela1 {{j.tipo_tela_1}} color {{j.color_tela_1}} cantidad {{cant_tela_1}}</p>
                         <p>Tela2 {{j.tipo_tela_2}} color {{j.color_tela_2}} cantidad {{cant_tela_2}}</p>
                         <p>Tela3 {{j.tipo_tela_3}} color {{j.color_tela_3}} cantidad {{cant_tela_3}}</p> 
- 
+                   
+                   </div>
 
  
 

@@ -55,15 +55,13 @@ urlpatterns = [
     url(r'^crear_usuario/$',crear_usuario),
     url(r'^editar_usuario/(\d+)/$',editar_usuario),
 
-    url(r'^crear_tienda/$',crear_tienda),
-    url(r'^editar_tienda/(\d+)/$',editar_tienda),
+    url(r'^crear_tienda/([^/]+)/$',crear_tienda),
+    url(r'^editar_tienda/([^/]+)/(\d+)/$',editar_tienda),
     
-    url(r'^crear_producto/$',crear_producto),
-    url(r'^editar_producto/(\d+)/$',editar_producto),
+    url(r'^crear_producto/([^/]+)/([^/]+)/$',crear_producto),
+    url(r'^editar_producto/([^/]+)/([^/]+)/(\d+)/$',editar_producto),
 
-    url(r'^crear_pedido/$',crear_pedido),
-    url(r'^editar_pedido/(\d+)/$',editar_pedido),
-
+    
     url(r'^crear_mensaje/$',crear_mensaje),
     #url(r'^editar_mensaje/(\d+)/$',editar_mensaje),
   
@@ -79,7 +77,7 @@ urlpatterns = [
 
     url(r'^editar_pedido/([^/]+)/([^/]+)/(\d+)/$',editar_pedido),
     url(r'^hacer_pedido/([^/]+)/([^/]+)/$',hacer_pedido),
-    url(r'^cambiar_estado_pedido/([^/]+)/([^/]+)(\d+)/$',cambiar_estado_pedido),
+    url(r'^cambiar_estado_pedido/([^/]+)/([^/]+)/(\d+)/$',cambiar_estado_pedido),
     url(r'^listado_pedido/([^/]+)/([^/]+)/([A-Z]+)/$', listado_pedido)
    
 ]

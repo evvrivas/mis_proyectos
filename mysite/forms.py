@@ -38,7 +38,7 @@ class PedidosForm(ModelForm):
 	class Meta:
 		model= Pedidos	
 		widgets = {'descripcion': Textarea(attrs={'cols': 40, 'rows': 6}),}
-		exclude=["id_usuario","fecha_ingreso"]
+		exclude=["id_usuario"]
 
 class MensajesForm(ModelForm):
 	class Meta:

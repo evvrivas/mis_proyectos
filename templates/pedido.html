@@ -12,18 +12,26 @@
                       
                       <form action="." method="post" enctype="multipart/form-data" > 
                      {% csrf_token%}
+
+
+                     <div class="caption">
+                               <h4><center>DATOS DE CLIENTE</center></h4>     
+                     </div>                    
+                                      
                      
-                     <p>Tienda {{ form.tienda }} </p>   
-                     <p>Tipo de prenda {{ form.tipo_prenda }}  </p>                      
                      <p>Nombre cliente {{ form.nombre }}  </p> 
                      <p>Contacto {{ form.contacto }}  </p>
+                     <br>
+
+                     <p>Tienda {{ form.tienda }} </p>   
+                     <p>Tipo de prenda {{ form.tipo_prenda }}  </p> 
                      <br>
                      <p>descripcion {{ form.descripcion }} </p>  
                      <br>
                      <p>imagen1 {{ form.imagen1 }} </p> 
                      <p>imagen2 {{ form.imagen2 }} </p> 
                      <p>imagen3 {{ form.imagen3 }} </p> 
-                     <br>               
+                     <br>  
                      <p>precios unitarios {{ form.descripcion2 }} </p> 
                      <p>Total {{ form.total }} </p>
                      <p>Anticipo {{ form.anticipo }} </p>
@@ -34,8 +42,13 @@
                      <br>
                      <p>Fecha de entrega {{ form.fecha_de_entrega }} </p>
                      <br>                     
-                     <p> cantidad de tela {{  form.cant_tela_1 }} </p>
-                  
+                    
+
+                    
+                  <div class="caption">
+                               <h4><center>DATOS DE TELAS</center></h4>     
+                  </div>  
+                  <p> cantidad de tela {{  form.cant_tela_1 }} </p>
                   <p> tipo de tela{{  form.tipo_tela_1 }} </p>
                   <p> color de tela  {{  form.color_tela_1 }} </p>
                   <br>

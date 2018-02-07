@@ -97,7 +97,7 @@ def crear_producto(request):
 def editar_producto(request,acid):   
         categoria=Categoria.objects.all().order_by("categoria")
         
-        f = Productos.objects.get(id_usuario=acid)           
+        f = Productos.objects.get(pk=acid)           
        
         if request.method == 'POST':
             
@@ -184,7 +184,7 @@ def crear_pedido(request):
 def editar_pedido(request,acid):   
         categoria=Categoria.objects.all().order_by("categoria")
         
-        f = Pedidos.objects.get(id_usuario=acid)           
+        f = Pedidos.objects.get(pk=acid)           
        
         if request.method == 'POST':
             
@@ -298,7 +298,7 @@ def crear_usuario(request):
 
 def editar_usuario(request,acid):   
        categoria=Categoria.objects.all().order_by("categoria")
-       f = Usuarios.objects.get(id_usuario=acid)           
+       f = Usuarios.objects.get(pk=acid)           
        
        if request.method == 'POST':
             
@@ -376,7 +376,7 @@ def crear_tienda(request):
 def editar_tienda(request,acid):   
         categoria=Categoria.objects.all().order_by("categoria")
         
-        f = Tiendas.objects.get(id_usuario=acid)           
+        f = Tiendas.objects.get(pk=acid)           
        
         if request.method == 'POST':
             
@@ -651,7 +651,7 @@ def cambiar_estado_pedido(request,idusuario,nombretienda,id_del_pedido):
                         for i in vector:
                            cat.append(i)
                         categoria= sorted(set(cat))
-                        
+
                         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()                  
 
                         ped = Pedidos.objects.get(pk=id_del_pedido)
@@ -726,8 +726,7 @@ def hacer_pedido(request,idusuario,nombretienda):
                         ped.id_usuario = request.user.username
                         ped.save() # Guardar los datos en la base de datos 
                         
-                        return render_to_response('confirmar_tienda.html', locals() ,context_instance=RequestContext(request))
-              
+                        return render(request,'confirmar_tienda.html',locals())
         else:            
                        
                         form = PedidosForm()                

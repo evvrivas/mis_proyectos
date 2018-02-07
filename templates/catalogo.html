@@ -13,10 +13,7 @@
                              {% thumbnail j.imagen1 "200" crop="center" as im %}
                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                         <p>{{j.categoria}}</p>  
-                        <p>{{j.descripcion}}</p> 
-
-                        <br>
-                       <li><a href="/editar_tienda/{{j.id}}">Editar</a></li>                                    
+                        <p>{{j.descripcion}}</p>                                                                       
 
                              {% endthumbnail %}                                                                                      
                     </div>
@@ -31,56 +28,32 @@
                 
            <div class="col-md-2">   
                 <div class="thumbnail">
+                      
+                        <h2><center> # WhatsApp {{j.id_usuario}}</center></h2> 
+                        <h4><center> {{j.cantidad}} > {{j.nombre}} $ {{j.precio_A }}</center></h4> 
                        
-                       <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
-                       
-                         {% thumbnail j.imagen1 "200" crop="center" as im %}
+                          {% thumbnail j.imagen1 "200" crop="center" as im %}
                           <a href="/{{j.id_usuario}}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                           {% endthumbnail %}
 
-
                        <p>{{j.descripcion}}</p>  
-                        <p>categoria {{j.categoria}}</p>             
-                  
-                              
+                                                                    
                           <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>    </p>
-                          
-                          <br>
-                          <form action='/add_to_cart/{{j.id}}/' method='post'>
-                                  {% csrf_token %}
-                                <label for="username">cantidad</label>
-                                <input type="text" name="cant" value="1" id="cant" size="10">
-                                <input type="submit" value="comprar"  />                               
-                                        </form>
 
-                      <li><a href="/get_cart/">Ver mi pedido</a></li>
-                      <br>
-                       <li><a href="/editar_producto/{{i.id}}">Editar</a></li> 
+                          <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{j.nombre}}">Mensaje al vendedor</a>
+
+                          <a href=”tel://{{id_usuario}}”>LLamar al vendedor</a>
+
+                          <a href="https://m.me/XYZ">enviar mensaje por Facebook</a>
 
 
-                            
-                                                                                        
+         
+                                                                                                     
                  </div>
-                </div>            
-                
-                
+                </div>             
            {% endfor %}  
-        
-       
-                
+               
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}
 
