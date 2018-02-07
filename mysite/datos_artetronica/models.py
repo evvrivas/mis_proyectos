@@ -166,33 +166,6 @@ class Tiendas(models.Model):
 		    		list_display = ('nombre_tienda')
 
 
-class Pedidos(models.Model):	     
-	     id_usuario=models.CharField(max_length=30)     
-	     nombre=models.CharField(max_length=30)
-	     contacto=models.CharField(max_length=30)	     
-	     imagen1 = ImageField(upload_to='tmp',blank=True)  
-	     imagen2 = ImageField(upload_to='tmp',blank=True) 
-	     imagen3 = ImageField(upload_to='tmp',blank=True)
-	     descripcion=models.CharField(max_length=30,blank=True)
-	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
-	     total  = models.FloatField()
-	     anticipo  = models.FloatField()
-	     fecha_de_entrega = models.DateField(default=datetime.now)
-	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
-	     cant_tela_1=models.FloatField(blank=True,null= True)
-	     tipo_tela_1=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
-	     color_tela_1=models.CharField(blank=True,max_length=30)
-	     cant_tela_2=models.FloatField(blank=True,null= True)
-	     tipo_tela_2=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
-	     color_tela_2=models.CharField(blank=True,max_length=30)
-	     cant_tela_3=models.FloatField(blank=True,null= True)
-	     tipo_tela_3=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
-	     color_tela_3=models.CharField(blank=True,max_length=30)
-	     def __str__(self):
-		    		return  self.id_usuario
-	     class Admin:
-		    		list_display = ('id_usuario')
-
 class Mensajes(models.Model):
 		id_usuario=models.IntegerField(blank=True,default=0)
 		mensaje = models.TextField() 
