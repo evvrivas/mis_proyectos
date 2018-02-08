@@ -50,8 +50,7 @@ urlpatterns = [
     url(r'^catalogo/(\d+)$', catalogo),
     url(r'^informacion/$', informacion),
 
-    url(r'^editar/(\d+)/$', editar),
-    
+       
     url(r'^crear_usuario/$',crear_usuario),
     url(r'^editar_usuario/(\d+)/$',editar_usuario),
 
