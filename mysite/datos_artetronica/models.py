@@ -124,10 +124,14 @@ INFORMA= (
 			
 			)	
 
-
+CLAVES=(
+			('NORMAL', 'NORMAL'),
+			('PEDIDOS', 'PEDIDOS'),
+						
+			)
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
-	     clave=models.CharField(max_length=4)
+	     clave=models.CharField(max_length=30,choices=INFORMA)
 	     nombre=models.CharField(max_length=30,blank=True)
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)	 

@@ -347,7 +347,7 @@ def mi_tienda(request,usuario,nombretienda):
     for i in vector:
         cat.append(i)
     categoria= sorted(set(cat))
-
+    usuario=Usuarios.object.get(id_usuario=request.user.username) 
     tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
      
     productos=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda))
@@ -642,7 +642,7 @@ def listado_pedido(request,idusuario,nombretienda,bandera):
     
     else:
                    
-        pedidos= Pedidos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda=nombretienda) & Q(estado_del_pedido=bandera)).order_by( "fecha_de_entrega")
+        pedidos= Pedidos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda=nombretienda) & Q(estado=bandera)).order_by( "fecha_de_entrega")
      
     return render(request,'catalogo_pedidos.html',locals())
         

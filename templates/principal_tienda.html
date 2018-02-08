@@ -16,9 +16,15 @@
                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                      {% endthumbnail %}
                                                
-                     <p>{{j.descripcion}}</p>            
+                     <p>{{j.descripcion | linebreaks}}</p>            
                      <br>
-                      <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>   
+                       <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>    
+
+                          <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{j.nombre}}"><img src='{% static "logo.gif" %}' alt='img'/></a>
+
+                          <a href=”tel://{{j.id_usuario}}”><img src='{% static "logo.gif" %}' alt='img'/></a>
+
+                          <a href="https://m.me/j.facedireccion"><img src='{% static "logo.gif" %}' alt='img'/></a>   
                 </div>
        </div>                           
     {% endfor %} 

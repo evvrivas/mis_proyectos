@@ -12,13 +12,7 @@
                       
                       <form action="." method="post" enctype="multipart/form-data" > 
                      {% csrf_token%}
-
-
-                     <div class="caption">
-                               <h4><center>DATOS DE CLIENTE</center></h4>     
-                     </div>                    
-                                      
-                     
+                
                      <p>Nombre cliente {{ form.nombre }}  </p> 
                      <p>Contacto {{ form.contacto }}  </p>
                      <br>
@@ -32,7 +26,7 @@
                      <p>imagen2 {{ form.imagen2 }} </p> 
                      <p>imagen3 {{ form.imagen3 }} </p> 
                      <br>  
-                     <p>precios unitarios {{ form.descripcion2 }} </p> 
+                     <p>precios unitarios {{ form.precios_unitarios }} </p> 
                      <p>Total {{ form.total }} </p>
                      <p>Anticipo {{ form.anticipo }} </p>
                      <br>
@@ -42,7 +36,7 @@
                      <br>
                      <p>Fecha de entrega {{ form.fecha_de_entrega }} </p>
                      <br>                     
-                    
+         
 
                     
                   <div class="caption">
