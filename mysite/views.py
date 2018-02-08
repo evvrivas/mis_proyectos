@@ -60,46 +60,72 @@ def crear_producto(request,idusuario,nombretienda):
         cat.append(i)
      categoria= sorted(set(cat))
   
-     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-    
-     if request.method == 'POST': # si el usuario est enviando el formulario con datos
-            
-                  form=ProductosForm(request.POST,request.FILES)                   
-                  
-                  if form.is_valid():
-                          productillo = form.save(commit=False)
-                          # commit=False tells Django that "Don't send this to database yet.
-                          # I have more things I want to do with it."
-                          productillo.id_usuario = request.user.username # Set the user object here             
-                                           
-                          productillo.save() # Now you can send it to DB
-                          form.save()  
-                          
-                          #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-                          return render(request,'confirmar.html',locals())     
-                  else:
-
-
-                          formCateg=CategoriaForm(request.POST,request.FILES) 
-                          if formCateg.is_valid() :                           
-
-                                  categor = formCateg.save(commit=False)
-                                  # commit=False tells Django that "Don't send this to database yet.
-                                  # I have more things I want to do with it."
-                                  categor.id_usuario = request.user.username # Set the user object here
-                                  categor.save() # Now you can send it to DB
-                                  formCateg.save() # Guardar los datos en la base de datos  print  
-
-                                  return render(request,'entrada_producto.html',locals())                           
-                                 
-                                          
-     else:
-        form=ProductosForm()
-        formCateg=CategoriaForm()                         
-
+     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first
+     cantidad_productos=Productos.objects.filter(id_usuario=request.user.username).count()
      
-     return render(request,'entrada_producto.html',locals())
-        #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
+     usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
+     
+     bandera=0
+     if  usuario.plan_tienda_activo=="GRATIS" and cantidad_productos<5:
+            bandera=1
+     elif  usuario.plan_tienda_activo=="BASICO" and cantidad_productos<20:
+            bandera=1
+     elif  usuario.plan_tienda_activo=="STANDARD" and cantidad_productos<50:
+            bandera=1
+     elif  usuario.plan_tienda_activo=="PREMIUM" and cantidad_productos<100:
+            bandera=1 
+     else:
+           bandera=0
+
+                 
+    if bandera==1:
+    
+
+                 if request.method == 'POST': # si el usuario est enviando el formulario con datos
+                        
+                              form=ProductosForm(request.POST,request.FILES)                   
+                              
+                              if form.is_valid():
+                                      productillo = form.save(commit=False)
+                                      # commit=False tells Django that "Don't send this to database yet.
+                                      # I have more things I want to do with it."
+                                      productillo.id_usuario = request.user.username # Set the user object here             
+                                                       
+                                      productillo.save() # Now you can send it to DB
+                                      form.save()  
+                                      
+                                      #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                                      return render(request,'confirmar.html',locals())     
+                              else:
+
+
+                                      formCateg=CategoriaForm(request.POST,request.FILES) 
+                                      if formCateg.is_valid() :                           
+
+                                              categor = formCateg.save(commit=False)
+                                              # commit=False tells Django that "Don't send this to database yet.
+                                              # I have more things I want to do with it."
+                                              categor.id_usuario = request.user.username # Set the user object here
+                                              categor.save() # Now you can send it to DB
+                                              formCateg.save() # Guardar los datos en la base de datos  print  
+
+                                              return render(request,'entrada_producto.html',locals())                           
+                                             
+                                                      
+                 else:
+                    form=ProductosForm()
+                    formCateg=CategoriaForm()                         
+
+                 
+                 return render(request,'entrada_producto.html',locals())
+    else:
+
+
+          return render(request,'formulario_cambio_plan.html',locals())
+
+
+
+
 
 def editar_producto(request,idusuario,nombretienda,acid):   
         vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
@@ -207,7 +233,12 @@ def crear_usuario(request):
                             usuario.id_usuario = user.username # Set the user object here
                             usuario.save() # Now you can send it to DB
                             form.save() # Guardar los datos en la base de datos  print 
-                            user.save()   
+                            user.save()  
+                            
+                            fecha= datetime.datetime.now()
+                            mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
+                            sender =str("artetronica@gmail.com")
+                            send_mail('Nuevo usuario ', mensaje,"evvrivas@gmail.com",(sender,), fail_silently=False) 
                                                   
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             return render(request,'confirmar_usuario.html',locals())   
@@ -238,6 +269,12 @@ def editar_usuario(request,idusuario,nombretienda,acid):
                     usu.clave = request.user.password
                     usu.save() # Guardar los datos en la base de datos 
                     #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
+                    fecha= datetime.datetime.now()
+                    mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
+                    sender =str("artetronica@gmail.com")
+                    send_mail('Editaron datos ', mensaje,"evvrivas@gmail.com",(sender,), fail_silently=False) 
+                           
+
                     return render(request,'confirmar.html',locals())             
             
        else:
@@ -348,6 +385,7 @@ def mi_tienda(request,usuario,nombretienda):
         cat.append(i)
     categoria= sorted(set(cat))
     usuario=Usuarios.objects.filter(id_usuario=request.user.username).first() 
+
     var=usuario.codigoapk
     tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
      

@@ -1,0 +1,18 @@
+{% extends "base_tienda.html" %}
+{% load staticfiles %} 
+{% block content %}
+      
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center> CAMBIO DE PLAN</center></h2>
+        
+        <p>Tu plan de tienda no permite el ingreso de mas productos, te sugerimos cambiar de plan</p>
+            <br>
+                  <ol>Plan Gratuito 5 productos por $0 Anuales </ol>
+                  <ol>Plan Básico 20 productos por $30 Anuales </ol>
+                  <ol>Plan Profesional 50 productos por $60 Anuales </ol>
+                  <ol>Plan Premium 100 productos por $100 Anuales </ol>  
+                  <br>   
+                 <li><a href="/editar_usuario/{{user.id}}">Actualizar/cambiar Plan </a></li>
+      </div>
+</div>
