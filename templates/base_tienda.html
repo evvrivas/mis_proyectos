@@ -107,7 +107,7 @@
                                        <li><a href="/crear_producto/{{user.username}}/{{tiendas.nombre_tienda}}">Subir un producto </a></li>      
                                        <li><a href="/editar_tienda/{{tiendas.id}}">Editar mi tienda </a></li>
                                        <br>
-                                    {% ifequal var 'PEDIDO' %}
+                                    {% ifequal var 'PEDIDOS' %}
                                     
                                        <li><a href="/hacer_pedido/{{user.username}}/{{tiendas.nombre_tienda}}">Ingresar pedido</a></li>
                                         <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/ENCARGADO">Ver pedidos encargados </a></li>
