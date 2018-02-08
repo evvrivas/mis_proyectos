@@ -48,12 +48,19 @@ def logout(request):
 
 
 @login_required
-def crear_producto(request):               
+def crear_producto(request,idusuario,nombretienda):               
 
      #!/usr/bin/python
      # -*- coding: latin-1 -*-
      import os, sys
-     categoria=Categoria.objects.all().order_by("categoria") 
+     vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+
+     cat=[]
+     for i in vector:
+        cat.append(i)
+     categoria= sorted(set(cat))
+  
+     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
     
      if request.method == 'POST': # si el usuario est enviando el formulario con datos
             
@@ -94,8 +101,15 @@ def crear_producto(request):
      return render(request,'entrada_producto.html',locals())
         #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
 
-def editar_producto(request,acid):   
-        categoria=Categoria.objects.all().order_by("categoria")
+def editar_producto(request,idusuario,nombretienda,acid):   
+        vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+
+        cat=[]
+        for i in vector:
+            cat.append(i)
+        categoria= sorted(set(cat))
+  
+        tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
         
         f = Productos.objects.get(pk=acid)           
        
@@ -129,93 +143,7 @@ def editar_producto(request,acid):
 
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
         return render(request,'entrada_producto.html',locals())   
-
-@login_required
-def crear_pedido(request):                
-
-     #!/usr/bin/python
-     # -*- coding: latin-1 -*-
-     import os, sys
-     categoria=Categoria.objects.all().order_by("categoria") 
-    
-     if request.method == 'POST': # si el usuario est enviando el formulario con datos
-            
-                         
-            if request.POST:
-
-                  form=ProductosForm(request.POST,request.FILES)                   
-                  
-                  if form.is_valid():
-                          productillo = form.save(commit=False)
-                          # commit=False tells Django that "Don't send this to database yet.
-                          # I have more things I want to do with it."
-                          productillo.id_usuario = request.user.username # Set the user object here             
-                                           
-                          productillo.save() # Now you can send it to DB
-                          form.save()  
-                          
-                          #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-                          return render(request,'confirmar.html',locals())     
-                  else:
-
-
-                          formCateg=CategoriaForm(request.POST,request.FILES) 
-                          if formCateg.is_valid() :                           
-
-                                  categor = formCateg.save(commit=False)
-                                  # commit=False tells Django that "Don't send this to database yet.
-                                  # I have more things I want to do with it."
-                                  categor.id_usuario = request.user.username # Set the user object here
-                                  categor.save() # Now you can send it to DB
-                                  formCateg.save() # Guardar los datos en la base de datos  print  
-
-                                  return render(request,'formulario_ingreso.html',locals())                           
-                                 
-                                          
-     else:
-        form=ProductosForm()
-        formCateg=CategoriaForm()
-                         
-
-     
-     return render(request,'formulario_ingreso.html',locals())
-        #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
-
-def editar_pedido(request,acid):   
-        categoria=Categoria.objects.all().order_by("categoria")
         
-        f = Pedidos.objects.get(pk=acid)           
-       
-        if request.method == 'POST':
-            
-            form = PedidosForm(request.POST,request.FILES,instance=f)
-       
-            if form.is_valid():
-                    form.save() 
-                    return render(request,'confirmar.html',locals())             
-            
-            else:
-
-                          formCateg=CategoriaForm(request.POST,request.FILES) 
-                          if formCateg.is_valid() :                           
-
-                                  categor = formCateg.save(commit=False)
-                                  # commit=False tells Django that "Don't send this to database yet.
-                                  # I have more things I want to do with it."
-                                  categor.id_usuario = request.user.username # Set the user object here
-                                  categor.save() # Now you can send it to DB
-                                  formCateg.save() # Guardar los datos en la base de datos  print  
-
-                                  return render(request,'formulario_ingreso.html',locals())  
-        else:
-            
-            form = PedidosForm(instance=f)
-            formCateg=CategoriaForm()
-
-        
-
-        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-        return render(request,'formulario_ingreso.html',locals())   
 
 @login_required
 def crear_mensaje(request,bandera): 
@@ -296,7 +224,7 @@ def crear_usuario(request):
 
         
 
-def editar_usuario(request,acid):   
+def editar_usuario(request,idusuario,nombretienda,acid):   
        categoria=Categoria.objects.all().order_by("categoria")
        f = Usuarios.objects.get(pk=acid)           
        
@@ -409,45 +337,6 @@ def editar_tienda(request,acid):
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
         return render(request,'formulario_ingreso.html',locals())   
 
-def listado_productos(request,ordenados): 
-
-    categoria=Categoria.objects.all().order_by("categoria")        
-    if ordenados=="recientes":
-        productos=Productos.objects.filter(id_usuario=request.user.username).order_by("fecha_ingreso")
-    elif ordenados=="antiguos": 
-        productos=Productos.objects.filter(id_usuario=request.user.username).order_by("-fecha_ingreso") 
-    elif ordenados=="menorp":
-        productos=Productos.objects.filter(id_usuario=request.user.username).order_by("precio_A")
-    
-    elif ordenados=="mayorp":
-        productos=Productos.objects.filter(id_usuario=request.user.username).order_by("-precio_A")     
-    
-    else:
-        productos=Productos.objects.filter(id_usuario=request.user.username)    
-    
-
-    #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
-    return render(request,'catalogo.html',locals())   
-
-   
-   
-
-    
-@login_required
-def editar(request, acid):
-    categoria=Categoria.objects.all().order_by("categoria")
-    #if = Producto.objects.get(pk=acid)    
-    ##message = Pedido.objects.get(pk=id)
-    #if request.method == 'POST':
-    #    form = ProductoForm(request.POST,instance=f)
-    #    if form.is_valid():
-    #        form.save() 
-    #        return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))          
-    #else:
-    #    form = ProductoForm(instance=f)    
-    #    
-    #return render_to_response('formulario.html',locals(),context_instance=RequestContext(request))
-    return render(request,'formulario.html',locals())   
 
 
 def mi_tienda(request,usuario,nombretienda):
@@ -466,10 +355,10 @@ def mi_tienda(request,usuario,nombretienda):
     
     return render(request,'principal_tienda.html',locals())   
  
-def mis_tiendas(request,nombre):
+def mis_tiendas(request,idusuario):
   categoria=Categoria.objects.all().order_by("categoria")
   
-  tiendas=Tiendas.objects.filter(id_usuario=nombre)
+  tiendas=Tiendas.objects.filter(id_usuario=idusuario)
   return render(request,'catalogo.html',locals())   
 
 #def mis_productos(request,nombre): 
@@ -640,7 +529,6 @@ def get_cart(request):
     cart.view()
     #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
     return render(request,'carrito.html',locals())   
-
 
 
 @login_required
