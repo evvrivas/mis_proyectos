@@ -131,7 +131,7 @@ CLAVES=(
 			)
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
-	     clave=models.CharField(max_length=30,choices=INFORMA)
+	     clave=models.CharField(max_length=30)
 	     nombre=models.CharField(max_length=30,blank=True)
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True)	 
@@ -139,7 +139,7 @@ class Usuarios(models.Model):
 
 	     pais=models.CharField(max_length=30,blank=True)
 	     facedireccion=models.URLField(blank=True)	         
-	     codigoapk=models.CharField(max_length=30,blank=True)	     	     
+	     codigoapk=models.CharField(max_length=30,blank=True,choices=INFORMA)	     	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
 	     
 	     def __str__(self):

@@ -108,7 +108,7 @@
                                        <li><a href="/editar_tienda/{{tiendas.id}}">Editar mi tienda </a></li>
                                        <br>
 
-                                    {% if usuario.clave=="PEDIDO" %}
+                                    {% if usuario.codigoapk=="PEDIDO" %}
                                        <li><a href="/hacer_pedido/{{user.username}}/{{tiendas.nombre_tienda}}">Ingresar pedido</a></li>
                                         <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/ENCARGADO">Ver pedidos encargados </a></li>
                                         <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/PRODUCCION">ver pedidos en produccion </a></li>
