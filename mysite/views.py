@@ -347,7 +347,7 @@ def mi_tienda(request,usuario,nombretienda):
     for i in vector:
         cat.append(i)
     categoria= sorted(set(cat))
-    usuario=Usuarios.objects.get(id_usuario=request.user.username) 
+    usuario=Usuarios.objects.filter(id_usuario=request.user.username).first() 
     var=usuario.codigoapk
     tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
      
