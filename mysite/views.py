@@ -78,7 +78,7 @@ def crear_producto(request,idusuario,nombretienda):
            bandera=0
 
                  
-    if bandera==1:
+     if bandera==1:
     
 
                  if request.method == 'POST': # si el usuario est enviando el formulario con datos
@@ -118,7 +118,7 @@ def crear_producto(request,idusuario,nombretienda):
 
                  
                  return render(request,'entrada_producto.html',locals())
-    else:
+     else:
 
 
           return render(request,'formulario_cambio_plan.html',locals())
