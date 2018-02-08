@@ -348,6 +348,7 @@ def mi_tienda(request,usuario,nombretienda):
         cat.append(i)
     categoria= sorted(set(cat))
     usuario=Usuarios.objects.get(id_usuario=request.user.username) 
+    var=usuario.codigoapk
     tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
      
     productos=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda))
