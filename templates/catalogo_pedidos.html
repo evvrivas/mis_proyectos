@@ -1,6 +1,6 @@
 {% extends "base_tienda.html" %}
 {% load thumbnail %}
-
+{% load staticfiles %} 
 {% block content %}
           
      <div class="row">   
@@ -56,7 +56,11 @@
                                                                   
                              <li><a href="/editar_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li>  
 
-                             <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>    
+                             <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>  
+
+
+
+                               
 
                           <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{j.nombre}}"><img src='{% static "logo.gif" %}' alt='img'/></a>
 
