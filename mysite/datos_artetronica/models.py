@@ -139,7 +139,7 @@ class Usuarios(models.Model):
 
 	     pais=models.CharField(max_length=30,blank=True)
 	     facedireccion=models.URLField(blank=True)	         
-	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES)	     	     
+	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")	     	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
 	     
 	     def __str__(self):

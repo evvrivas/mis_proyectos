@@ -29,7 +29,7 @@
            <div class="col-md-2">   
                 <div class="thumbnail">
                       
-                        <h2><center> # WhatsApp {{j.id_usuario}}</center></h2> 
+                        <h4><center> {{j.id_usuario}}</center></h4> 
                         <h4><center> {{j.cantidad}} > {{j.nombre}} $ {{j.precio_A }}</center></h4> 
                        
                           {% thumbnail j.imagen1 "200" crop="center" as im %}
@@ -38,9 +38,7 @@
 
                        <p>{{j.descripcion}}</p>  
                                                                     
-                           <a href="intent://send/+{{j.id_usuario}}#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" style="font-size:14px;padding:5px 12px;border-radius:5px;background-color:#189D0E;color:white;text-shadow:none;"> WhatsApp </a>    
-
-                          <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{j.nombre}}"><img src='{% static "whatsapp.gif" %}' alt='img'/></a>
+                           <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{j.nombre}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
 
                           <a href=”tel://{{j.id_usuario}}”><img src='{% static "llamar.png" %}' alt='img'/></a>
 

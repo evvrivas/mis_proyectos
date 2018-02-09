@@ -33,18 +33,19 @@
      <div class="panel-heading">
 
             <div class="col-md-6">                     
-                      <center>
+                      
+                      
                             {% thumbnail tiendas.imagen1 "x50" crop="center" as im %}
                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                             {% endthumbnail %}
                         
                           <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" method="post">
-                                             {% csrf_token %}
+                              {% csrf_token %}
                                                                                                                
-                                                      <input type="text" id="name" name="nombre" size="15"/>
-                                                      <input type="submit" value="Buscar">
+                              <input type="text" id="name" name="nombre" size="10"/>
+                              <input type="submit" value="Buscar">
                            </form>
-                      </center>
+                      
                                                         
                  
 
@@ -88,7 +89,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
                                     {%  for i in productos %}
-                                      <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}//{{i.categoria}}">{{i.categoria}}</a></li>
+                                      <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i.categoria}}">{{i.categoria}}</a></li>
                                    {%  endfor %} 
 
 

@@ -448,7 +448,7 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
 
     
   else:      
-    productos=Productos.objects.filter(Q(categoria__categoria__contains=item) & Q(tienda__nombre_tienda__contains=nombretienda),Q(categoria=item)) 
+    productos=Productos.objects.filter(Q(categoria__categoria__contains=item) & Q(tienda__nombre_tienda__contains=nombretienda)) 
    
    
   
