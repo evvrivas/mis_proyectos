@@ -238,8 +238,9 @@ def crear_usuario(request):
                             fecha= datetime.datetime.now()
                             mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
                             sender =str("artetronica@gmail.com")
-                            send_mail('Nuevo usuario ', mensaje,"evvrivas@gmail.com",(sender,), fail_silently=False) 
-                                                  
+                            asunto="nuevo usuario"+" "+ str(whatsapp)
+                            send_mail(asunto, mensaje,"artetronica@gmail.com",(sender,), fail_silently=False)            
+                            
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             return render(request,'confirmar_usuario.html',locals())   
                    
@@ -249,13 +250,13 @@ def crear_usuario(request):
                          
                          form=UsuariosForm()
                          
-        return render(request,'formulario_editar_usuario.html',locals()) 
+        return render(request,'formulario_crear_usuario.html',locals()) 
 
 
 
         
 
-def editar_usuario(request,idusuario,nombretienda,acid):   
+def editar_usuario(request,acid):   
        categoria=Categoria.objects.all().order_by("categoria")
        f = Usuarios.objects.get(pk=acid)           
        
@@ -272,7 +273,8 @@ def editar_usuario(request,idusuario,nombretienda,acid):
                     fecha= datetime.datetime.now()
                     mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
                     sender =str("artetronica@gmail.com")
-                    send_mail('Editaron datos ', mensaje,"evvrivas@gmail.com",(sender,), fail_silently=False) 
+                    asunto="edita"+" "+ str(whatsapp)
+                    send_mail(asunto, mensaje,"artetronica@gmail.com",(sender,), fail_silently=False) 
                            
 
                     return render(request,'confirmar.html',locals())             
