@@ -19,7 +19,20 @@
                                                
                      <p>{{j.descripcion | linebreaks}}</p>            
                      <br>
-                         
+                          
+                          <form action='/add_to_cart/{{j.id}}/' method='post'>
+                                  {% csrf_token %}
+                                
+                                <label for="username">cantidad</label>
+                                <input type="text" name="cant" value="1" id="cant">                    
+                                <input type="submit" value="ok"  />                               
+                               
+                                </form>  
+                              <br>            
+                             <li><a href="/get_cart/0/{{correotienda}}">Ver mi pedido</a></li>
+                             <li><a href="/get_cart/1/{{correotienda}}">Enviar un correo al vendedor</a></li>
+
+
 
                           <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{j.nombre}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
 

@@ -233,7 +233,7 @@ TEMPLATES = [
 
 #para utilizar y poder enviar por correo de gmail
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'artetronica@gmail.com'
+EMAIL_HOST_USER = 'xgangasx@gmail.com'
 EMAIL_HOST_PASSWORD = 'rootroot'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

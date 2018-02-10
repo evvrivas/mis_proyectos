@@ -237,9 +237,9 @@ def crear_usuario(request):
                             
                             fecha= datetime.datetime.now()
                             mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
-                            sender =str("artetronica@gmail.com")
+                            sender =str("xgangasx@gmail.com")
                             asunto="nuevo usuario"+" "+ str(whatsapp)
-                            send_mail(asunto, mensaje,"artetronica@gmail.com",(sender,), fail_silently=False)            
+                            send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False)            
                             
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             return render(request,'confirmar_usuario.html',locals())   
@@ -258,6 +258,7 @@ def crear_usuario(request):
 
 def editar_usuario(request,acid):   
        categoria=Categoria.objects.all().order_by("categoria")
+
        f = Usuarios.objects.get(pk=acid)           
        
        if request.method == 'POST':
@@ -270,11 +271,12 @@ def editar_usuario(request,acid):
                     usu.clave = request.user.password
                     usu.save() # Guardar los datos en la base de datos 
                     #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
+                    whatsapp=request.user.username
                     fecha= datetime.datetime.now()
                     mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
-                    sender =str("artetronica@gmail.com")
+                    sender =str("xgangasx@gmail.com")
                     asunto="edita"+" "+ str(whatsapp)
-                    send_mail(asunto, mensaje,"artetronica@gmail.com",(sender,), fail_silently=False) 
+                    send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
                            
 
                     return render(request,'confirmar.html',locals())             
@@ -386,9 +388,15 @@ def mi_tienda(request,usuario,nombretienda):
     for i in vector:
         cat.append(i)
     categoria= sorted(set(cat))
-    usuario=Usuarios.objects.filter(id_usuario=request.user.username).first() 
-
-    var=usuario.codigoapk
+    
+    usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
+    var=usuario.codigoapk 
+   
+    duenotienda=Usuarios.objects.filter(id_usuario=idusuario).first() 
+    correotienda=duenotienda.email
+    
+    
+    
     tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
      
     productos=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda))
@@ -440,6 +448,9 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   for i in vector:
       cat.append(i)
   categoria= sorted(set(cat))
+  
+  duenotienda=Usuarios.objects.filter(id_usuario=idusuario).first() 
+  correotienda=duenotienda.email
   
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
@@ -534,22 +545,18 @@ def add_to_cart(request, product_id):
 
     categoria=Categoria.objects.all().order_by("categoria")
     quantity= request.POST["cant"]
-    product = Productos.objects.get(id=product_id)   
+    productos = Productos.objects.get(id=product_id)   
 
-    if quantity==1:
-        precio=productos.precio_A
-    elif quantity>=2 and quantity <=5:
-        precio=productos.precio_B
-    elif quantity>=6:
-        precio=productos.precio_C
-    else :
-        precio=productos.precio_A
-
-   
+    precio=productos.precio_A   
     
     cart = Cart(request)
     cart.add(productos, precio, quantity)
     total=cart.summary()
+
+    mensaje="Hola, Estoy interesado en esto:\n"
+    for item in cart:     
+         mensaje+= "["+str(item.quantity)+str(item.product )+str(item.total_price)+"]\n"
+    mensaje+="\nEl total es:"+str(total)
     
 
     #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
@@ -563,13 +570,33 @@ def remove_from_cart(request, product_id):
     cart.remove(product)
 
 @login_required
-def get_cart(request):
+def get_cart(request,bandera,correotienda):
     categoria=Categoria.objects.all().order_by("categoria")
+    
+    usuario=Usuarios.objects.filter()
     
     cart = Cart(request)
     cart.view()
-    #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
-    return render(request,'carrito.html',locals())   
+    
+    if bandera==1:
+            mensaje="Hola, Estoy interesado en esto:\n"
+            for item in cart:     
+                 mensaje+= "["+str(item.quantity)+str(item.product )+str(item.total_price)+"]\n"
+            
+            mensaje+="\nEl total es:"+str(total)+"\n"
+            whatsapp=request.user.username
+            fecha= datetime.datetime.now()
+            mensaje+= str(fecha)
+            sender =correotienda
+            asunto="Xgangas: Etoy interesado"
+            send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
+                        
+            return render(request,'confirmar_tienda.html',locals())               
+    else:
+
+            #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
+            
+          return render(request,'carrito.html',locals())   
 
 
 @login_required
