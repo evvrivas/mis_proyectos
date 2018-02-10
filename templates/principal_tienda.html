@@ -13,10 +13,32 @@
                 <div class="thumbnail">
                     <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
                     <br>
+
+              <div class="col-md-12">
+                     
                      {% thumbnail j.imagen1 "200" crop="center" as im %}
                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                      {% endthumbnail %}
-                                               
+              </div>
+
+              <div class="row"> 
+                  <div class="col-md-6">   
+                     {% thumbnail j.imagen2 "100" crop="center" as im %}
+                         <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                     {% endthumbnail %}
+                  </div>
+
+                  <div class="col-md-6">
+                     {% thumbnail j.imagen3 "100" crop="center" as im %}
+                         <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                     {% endthumbnail %}
+                  </div>
+
+              </div>
+
+      
+
+
                      <p>{{j.descripcion | linebreaks}}</p>            
                      <br>
                           
@@ -36,7 +58,7 @@
 
                           <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{j.nombre}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
 
-                          <a href=”tel://{{j.id_usuario}}”><img src='{% static "llamar.png" %}' alt='img'/></a>
+                          <a href="tel://{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a>
 
                           <a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a>   
                 </div>
