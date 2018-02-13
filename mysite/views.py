@@ -392,7 +392,7 @@ def mi_tienda(request,usuario,nombretienda):
     usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
     var=usuario.codigoapk 
    
-    duenotienda=Usuarios.objects.filter(id_usuario=idusuario).first() 
+    duenotienda=Usuarios.objects.filter(id_usuario=usuario).first() 
     correotienda=duenotienda.email
     
     
