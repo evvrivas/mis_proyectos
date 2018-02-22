@@ -390,12 +390,7 @@ def mi_tienda(request,usuario,nombretienda):
     categoria= sorted(set(cat))
     
     usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
-    var=usuario.codigoapk 
-   
-    duenotienda=Usuarios.objects.filter(id_usuario=usuario).first() 
-    correotienda=duenotienda.email
-    
-    
+    var=usuario.codigoapk     
     
     tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
      
@@ -448,9 +443,6 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   for i in vector:
       cat.append(i)
   categoria= sorted(set(cat))
-  
-  duenotienda=Usuarios.objects.filter(id_usuario=idusuario).first() 
-  correotienda=duenotienda.email
   
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
@@ -541,9 +533,18 @@ def informacion(request):
 from mysite.datos_artetronica.cart import Cart
 
 @login_required
-def add_to_cart(request, product_id): 
+def add_to_cart(request, product_id,idusuario,nombretienda): 
 
-    categoria=Categoria.objects.all().order_by("categoria")
+    vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+
+    cat=[]
+    for i in vector:
+        cat.append(i)
+    categoria= sorted(set(cat))
+           
+    tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+
+    
     quantity= request.POST["cant"]
     productos = Productos.objects.get(id=product_id)   
 
@@ -551,13 +552,7 @@ def add_to_cart(request, product_id):
     
     cart = Cart(request)
     cart.add(productos, precio, quantity)
-    total=cart.summary()
-
-    mensaje="Hola, Estoy interesado en esto:\n"
-    for item in cart:     
-         mensaje+= "["+str(item.quantity)+str(item.product )+str(item.total_price)+"]\n"
-    mensaje+="\nEl total es:"+str(total)
-    
+    total=cart.summary()     
 
     #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
     return render(request,'carrito.html',locals())   
@@ -570,10 +565,17 @@ def remove_from_cart(request, product_id):
     cart.remove(product)
 
 @login_required
-def get_cart(request,bandera,correotienda):
-    categoria=Categoria.objects.all().order_by("categoria")
+def get_cart(request,bandera,idusuario,nombretienda):
+   
+    vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+    cat=[]
+    for i in vector:
+        cat.append(i)
+    categoria= sorted(set(cat))
     
-    usuario=Usuarios.objects.filter()
+    tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+      
+    duenotienda=Usuarios.objects.filter(id_usuario=idusuario).first()
     
     cart = Cart(request)
     cart.view()
@@ -587,7 +589,7 @@ def get_cart(request,bandera,correotienda):
             whatsapp=request.user.username
             fecha= datetime.datetime.now()
             mensaje+= str(fecha)
-            sender =correotienda
+            sender =duenotienda.email
             asunto="Xgangas: Etoy interesado"
             send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
                         

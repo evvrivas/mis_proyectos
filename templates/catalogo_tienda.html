@@ -16,27 +16,38 @@
                           
                        <p>{{j.descripcion | linebreaks}}</p>  
 
-                       <form action='/add_to_cart/{{j.id}}/' method='post'>
-                                  {% csrf_token %}
-                                
-                                <label for="username">cantidad</label>
-                                <input type="text" name="cant" value="1" id="cant">                    
-                                <input type="submit" value="ok"  />                               
+                       
+                       <form action='/add_to_cart/{{j.id}}/{{j.id_usuario}}/{{j.tienda}}' method='post'>
+                              {% csrf_token %}                                
+                              <label for="username">cantidad</label>
+                              <input type="text" name="cant" value="1" id="cant">                    
+                              <input type="submit" value="comprar"  />                               
                                
-                                </form>  
-                              <br>            
+                       </form>  
+
+                       <br>            
                              
-                             <li><a href="/get_cart/0/{{correotienda}}">Ver mi pedido</a></li>
-                             <li><a href="/get_cart/1/{{correotienda}}">Enviar un correo al vendedor</a></li>
+                             <li><a href="/get_cart/0/{{j.id_usuario}}/{{j.tienda}}">Ver mi pedido</a></li>
+                             <li><a href="/get_cart/1/{{j.id_usuario}}/{{j.tienda}}">Enviar un correo al vendedor</a></li>
 
 
                       <p>                    
                               
-                           <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{j.nombre}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+                           <div class="row"> 
 
+                    <div class="col-md-4">  
+                         <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{j.nombre}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+                     </div> 
+
+                     <div class="col-md-4"> 
                           <a href="tel://{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a>
-
+                      </div>
+                     
+                      <div class="col-md-4">  
                           <a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a>
+                      </div>    
+
+                 </div>
                       
                       {%  if user.is_authenticated %}                                              
                              <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li>  

@@ -79,8 +79,8 @@ urlpatterns = [
     url(r'^cambiar_estado_pedido/([^/]+)/([^/]+)/(\d+)/$',cambiar_estado_pedido),
     url(r'^listado_pedido/([^/]+)/([^/]+)/([A-Z]+)/$', listado_pedido),
 
-    url(r'^add_to_cart/(\d+)/$', add_to_cart),
-    url(r'^get_cart/$', get_cart)
+    url(r'^add_to_cart/(\d+)/([^/]+)/([^/]+)/$', add_to_cart),
+    url(r'^get_cart/(\d+)/([^/]+)/([^/]+)/$', get_cart)
 
    
 ]
