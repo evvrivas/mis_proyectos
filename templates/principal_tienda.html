@@ -42,7 +42,7 @@
                      <p>{{j.descripcion | linebreaks}}</p>            
                      <br>
                           
-                          <form action='/add_to_cart/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}' method='post'>
+                          <form action='/add_to_cart/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/' method='post'>
                               {% csrf_token %}                                
                               <label for="username">cantidad</label>
                               <input type="text" name="cant" value="1" id="cant">                    

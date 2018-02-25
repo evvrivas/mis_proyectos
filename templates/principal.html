@@ -12,7 +12,7 @@
                      <div class="thumbnail">                      
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
-                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}">
                         <p>{{j.categoria}}</p>  
                         <p>{{j.descripcion}}</p>                                    
                         {% endthumbnail %}
@@ -48,9 +48,35 @@
             
                  <div class="thumbnail">
                         <h4><center> {{j.nombre}} $ {{j.precio_A }}</center></h4> 
-                        {% thumbnail j.imagen1 "200" crop="center" as im %}
-                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                        {% endthumbnail %}
+                         
+                          <div class="row"> 
+
+                         <div class="col-md-12">   
+                             <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
+                              {% thumbnail j.imagen1 "200" crop="center" as im %}
+                                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                              {% endthumbnail %}
+                         </div>
+
+                     
+                     <div class="row">                        
+                             
+                        <div class="col-md-6">   
+                           {% thumbnail j.imagen2 "100" crop="center" as im %}
+                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                           {% endthumbnail %}
+                        </div>
+
+                        <div class="col-md-6">
+                           {% thumbnail j.imagen3 "100" crop="center" as im %}
+                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                           {% endthumbnail %}
+                        </div>
+                     </div>
+
+
+
+                  </div>
                                                
                         <p>{{j.descripcion | linebreaks}}</p>                    
                                            

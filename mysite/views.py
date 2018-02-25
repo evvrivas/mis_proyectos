@@ -398,7 +398,7 @@ def mi_tienda(request,usuario,nombretienda):
     productos=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda))
 
     
-    return render(request,'principal_tienda.html',locals())   
+    return render(request,'catalogo_tienda.html',locals())   
  
 def mis_tiendas(request,idusuario):
   categoria=Categoria.objects.all().order_by("categoria")
