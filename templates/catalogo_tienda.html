@@ -16,19 +16,19 @@
                           
                        <p>{{j.descripcion | linebreaks}}</p>  
 
-                       
-                       <form action='/add_to_cart/{{j.id}}/{{j.id_usuario}}/{{j.tienda}}' method='post'>
+                        
+                       <form action='/add_to_cart/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}' method='post'>
                               {% csrf_token %}                                
                               <label for="username">cantidad</label>
                               <input type="text" name="cant" value="1" id="cant">                    
-                              <input type="submit" value="comprar"  />                               
+                              <input type="submit" value="agregar al pedido "  />                               
                                
                        </form>  
 
                        <br>            
                              
-                             <li><a href="/get_cart/0/{{j.id_usuario}}/{{j.tienda}}">Ver mi pedido</a></li>
-                             <li><a href="/get_cart/1/{{j.id_usuario}}/{{j.tienda}}">Enviar un correo al vendedor</a></li>
+                             <li><a href="/get_cart/0/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}">Ver mi pedido</a></li>
+                             <li><a href="/get_cart/1/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}">Enviar un correo al vendedor</a></li>
 
 
                       <p>                    

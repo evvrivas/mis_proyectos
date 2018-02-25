@@ -545,7 +545,7 @@ def add_to_cart(request, product_id,idusuario,nombretienda):
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
     
-    quantity= request.POST["cant"]
+    quantity= request.POST.get("cant")
     productos = Productos.objects.get(id=product_id)   
 
     precio=productos.precio_A   
