@@ -34,6 +34,7 @@ from django.contrib.auth.decorators import login_required
 
 from mysite.forms import *
 from mysite.datos_artetronica.models import *
+from mysite.datos_artetronica.cart import *
 
 from django.contrib.auth.models import User  
 from django.core.mail import send_mail
