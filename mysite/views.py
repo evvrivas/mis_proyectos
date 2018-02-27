@@ -86,7 +86,7 @@ def crear_producto(request,idusuario,nombretienda):
                                       # commit=False tells Django that "Don't send this to database yet.
                                       # I have more things I want to do with it."
                                       productillo.id_usuario = request.user.username # Set the user object here             
-                                      productillo.tienda=tiendas.nombre_tienda                  
+                                      productillo.tienda=tiendas             
                                       productillo.save() # Now you can send it to DB
                                       form.save()  
                                       
