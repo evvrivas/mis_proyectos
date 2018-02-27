@@ -30,10 +30,10 @@
 
                                 <tr  align="center">                                  
                               
-                                    <td WIDTH="100">{{ item.quantity }}</td> <td></td>  
-                                    <td WIDTH="600">{{ item.product }}</td>  <td></td> 
-                                    <td WIDTH="300">{{ item.unit_price }}</td> <td></td>  
-                                    <td WIDTH="400">{{ item.total_price }}</td>
+                                    <td WIDTH="75">{{ item.quantity }}</td> <td></td>  
+                                    <td WIDTH="400">{{ item.product }}</td>  <td></td> 
+                                    <td WIDTH="75">{{ item.unit_price }}</td> <td></td>  
+                                    <td WIDTH="100">{{ item.total_price }}</td>
                                 </tr>                                  
                                 {% endfor %}
                                  <br>
@@ -43,7 +43,21 @@
                               
                              <br>
 
-                              <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text={{mensaje}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+                               <div class="row"> 
+
+                    <div class="col-md-4">  
+                         <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{mensaje}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+                     </div> 
+
+                     <div class="col-md-4"> 
+                          <a href="tel://{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a>
+                      </div>
+                     
+                      <div class="col-md-4">  
+                          <a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a>
+                      </div>    
+
+                 </div>
                               
                               
                                                                  

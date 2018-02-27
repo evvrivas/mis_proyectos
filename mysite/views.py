@@ -495,13 +495,6 @@ def busqueda(request):
         tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra))
      return render(request,'catalogo.html',locals())   
                   
-         
-        
-     
-
-
-    
-  
    
 
 import datetime
@@ -547,7 +540,7 @@ def add_to_cart(request, product_id,idusuario,nombretienda):
 
     
     quantity= request.POST.get("cant")
-    productos = Productos.objects.get(id=product_id)   
+    productos = Productos.objects.get(id=product_id).values()   
 
     precio=productos.precio_A   
     
