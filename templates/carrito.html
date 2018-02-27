@@ -5,7 +5,7 @@
      
 <div class="panel panel-info">
       <div class="panel-heading">
-        <h2 class="panel-title"><center>Pedido del productos </center></h2>                
+        <h2 class="panel-title"><center>Detalle del Pedido </center></h2>                
       </div>
 
 
@@ -15,24 +15,22 @@
 
              <div class="col-md-8">
                 <div class="thumbnail">                                    
-                  <div class="caption">
-                    <h4><center>Detalle del pedido</center></h4>     
-                  </div>                     
+                                  
                             <table BORDER="3" CELLSPACING="5">
                                 <tr  align="center">
-                                    <td WIDTH="100">Cantidad</td><td></td>
-                                    <td WIDTH="600">Producto</td><td> </td>
-                                    <td WIDTH="300">Precio_Unitario</td><td> </td>
-                                    <td WIDTH="400">precio total</td>
+                                    <td WIDTH="75">Cantidad</td>
+                                    <td WIDTH="400">Producto</td>
+                                    <td WIDTH="75">Precio_Unitario</td>
+                                    <td WIDTH="100">Total</td>
                                 </tr >
 
                                 {% for item in cart %}  
 
                                 <tr  align="center">                                  
                               
-                                    <td WIDTH="75">{{ item.quantity }}</td> <td></td>  
-                                    <td WIDTH="400">{{ item.product }}</td>  <td></td> 
-                                    <td WIDTH="75">{{ item.unit_price }}</td> <td></td>  
+                                    <td WIDTH="75">{{ item.quantity }}</td> 
+                                    <td WIDTH="400">{{ item.product }}</td>  
+                                    <td WIDTH="75">{{ item.unit_price }}</td> 
                                     <td WIDTH="100">{{ item.total_price }}</td>
                                 </tr>                                  
                                 {% endfor %}
@@ -43,12 +41,11 @@
                               
                              <br>
 
-                              <li><a href="/get_cart/1/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}">Enviar un correo al vendedor</a></li>
-
+                              <li><a href="/get_cart/1/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}">Enviar este pedido al vendedor</a></li>
                               <div class="row"> 
 
                     <div class="col-md-4">  
-                         <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{mensaje}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+                         <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20adquirir%20{{mensaje_pedido}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
                      </div> 
 
                      <div class="col-md-4"> 

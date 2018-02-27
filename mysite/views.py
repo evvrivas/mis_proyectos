@@ -545,8 +545,16 @@ def get_cart(request,bandera,idusuario,nombretienda):
     
     cart = Cart(request)
     cart.view()
+    total=cart.summary()   
+  
+    mensaje_pedido=""
+    for item in cart  
+            mensaje_pedido+=str(item.quantity)+"---" + str(item.product)+"---"+str(item.unit_price)+"---"+ str(item.total_price)+ "\n"
     
-    if bandera==1:
+    mensaje_pedido+= "\n$ "+str(total) 
+
+    
+    if bandera=="1":
             mensaje="Hola, Estoy interesado en esto:\n"
             for item in cart:     
                  mensaje+= "["+str(item.quantity)+str(item.product )+str(item.total_price)+"]\n"
