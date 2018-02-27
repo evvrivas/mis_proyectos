@@ -447,7 +447,7 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
-  if item=="todas las categorias":    
+  if item=="xproductox":    
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)) 
 
     

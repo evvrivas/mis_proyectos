@@ -32,13 +32,14 @@
 
      <div class="panel-heading">
 
-            <div class="col-md-6">                     
+            <div class="col-md-4">                     
                       
                       
-                            {% thumbnail tiendas.imagen1 "x50" crop="center" as im %}
+                            {% thumbnail tiendas.imagen1 "x40" crop="center" as im %}
                               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                             {% endthumbnail %}
-                        
+             </div>
+             <div class="col-md-4">            
                           <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" method="post">
                               {% csrf_token %}
                                                                                                                
@@ -49,14 +50,14 @@
                               <li> Hola.!.{{ user.username }}  </li>
                            
                             {% endif %}  
-                      
+                   
                                                         
                  
 
              </div>
                 
               
-             <div class="col-md-6">  
+             <div class="col-md-4">  
 
                      <div class="btn-group">
                                 <button type="button" class="btn btn-info dropdown-toggle"

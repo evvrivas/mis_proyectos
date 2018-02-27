@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import datetime
-import mysite.datos_artetronica.models 
-from django.db import models
+import mysite.datos_artetronica.models as models
+#from django.db import models
 
 CART_ID = 'CART-ID'
 
