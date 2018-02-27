@@ -548,7 +548,7 @@ def get_cart(request,bandera,idusuario,nombretienda):
     total=cart.summary()   
   
     mensaje_pedido=""
-    for item in cart  
+    for item in cart:  
             mensaje_pedido+=str(item.quantity)+"---" + str(item.product)+"---"+str(item.unit_price)+"---"+ str(item.total_price)+ "\n"
     
     mensaje_pedido+= "\n$ "+str(total) 
