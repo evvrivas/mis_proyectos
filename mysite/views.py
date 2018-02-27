@@ -54,14 +54,9 @@ def crear_producto(request,idusuario,nombretienda):
      #!/usr/bin/python
      # -*- coding: latin-1 -*-
      import os, sys
-     vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-
-     cat=[]
-     for i in vector:
-        cat.append(i)
-     categoria= sorted(set(cat))
+     categoria=categorizar(idusuario,nombretienda)
   
-     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first
+     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
      cantidad_productos=Productos.objects.filter(id_usuario=request.user.username).count()
      
      usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
@@ -91,7 +86,7 @@ def crear_producto(request,idusuario,nombretienda):
                                       # commit=False tells Django that "Don't send this to database yet.
                                       # I have more things I want to do with it."
                                       productillo.id_usuario = request.user.username # Set the user object here             
-                                                       
+                                      productillo.tienda=tiendas.nombre_tienda                  
                                       productillo.save() # Now you can send it to DB
                                       form.save()  
                                       
@@ -124,17 +119,18 @@ def crear_producto(request,idusuario,nombretienda):
 
           return render(request,'formulario_cambio_plan.html',locals())
 
-
+def categorizar(idusuario,nombretienda):
+        vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+        cat=[]
+        for i in vector:
+              cat.append(i.categoria)
+        categoria= sorted(set(cat))
+        return categoria
 
 
 
 def editar_producto(request,idusuario,nombretienda,acid):   
-        vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-
-        cat=[]
-        for i in vector:
-            cat.append(i)
-        categoria= sorted(set(cat))
+        categoria=categorizar(idusuario,nombretienda)
   
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
         
@@ -383,12 +379,7 @@ def editar_tienda(request,acid):
 
 def mi_tienda(request,usuario,nombretienda):
     
-    vector=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-
-    cat=[]
-    for i in vector:
-        cat.append(i)
-    categoria= sorted(set(cat))
+    categoria=categorizar(usuario,nombretienda)
     
     usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
     var=usuario.codigoapk     
@@ -438,12 +429,7 @@ def ver_categorias(request,item):
     
 def ver_mis_categorias(request,idusuario,nombretienda,item):
   
-  vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-
-  cat=[]
-  for i in vector:
-      cat.append(i)
-  categoria= sorted(set(cat))
+  categoria=categorizar(idusuario,nombretienda)
   
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
@@ -461,12 +447,7 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
  
 def busqueda_tienda(request,idusuario,nombretienda):
      
-     vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-
-     cat=[]
-     for i in vector:
-          cat.append(i)
-     categoria= sorted(set(cat))
+     categoria=categorizar(idusuario,nombretienda)
      
      if request.POST:
         palabra = request.POST.get('nombre')
@@ -529,18 +510,13 @@ from mysite.datos_artetronica.cart import Cart
 @login_required
 def add_to_cart(request, product_id,idusuario,nombretienda): 
 
-    vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-
-    cat=[]
-    for i in vector:
-        cat.append(i)
-    categoria= sorted(set(cat))
+    categoria=categorizar(idusuario,nombretienda)
            
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
     
     quantity= request.POST.get("cant")
-    productos = Productos.objects.get(id=product_id).values()   
+    productos = Productos.objects.get(id=product_id)
 
     precio=productos.precio_A   
     
@@ -550,7 +526,7 @@ def add_to_cart(request, product_id,idusuario,nombretienda):
 
     #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
     return render(request,'carrito.html',locals())   
-
+    
 @login_required
 def remove_from_cart(request, product_id):
     categoria=Categoria.objects.all().order_by("categoria")
@@ -561,11 +537,7 @@ def remove_from_cart(request, product_id):
 @login_required
 def get_cart(request,bandera,idusuario,nombretienda):
    
-    vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-    cat=[]
-    for i in vector:
-        cat.append(i)
-    categoria= sorted(set(cat))
+    categoria=categorizar(idusuario,nombretienda)
     
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
       
@@ -598,11 +570,7 @@ def get_cart(request,bandera,idusuario,nombretienda):
 @login_required
 def cambiar_estado_pedido(request,idusuario,nombretienda,id_del_pedido):  
 
-                        vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-                        cat=[]
-                        for i in vector:
-                           cat.append(i)
-                        categoria= sorted(set(cat))
+                        categoria=categorizar(idusuario,nombretienda)
 
                         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()                  
 
@@ -631,11 +599,7 @@ def cambiar_estado_pedido(request,idusuario,nombretienda,id_del_pedido):
 
 @login_required
 def editar_pedido(request,idusuario,nombretienda,acid): 
-        vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-        cat=[]
-        for i in vector:
-            cat.append(i)
-        categoria= sorted(set(cat))
+        categoria=categorizar(idusuario,nombretienda)
 
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()   
         
@@ -660,11 +624,7 @@ def editar_pedido(request,idusuario,nombretienda,acid):
 
 @login_required
 def hacer_pedido(request,idusuario,nombretienda): 
-        vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-        cat=[]
-        for i in vector:
-            cat.append(i)
-        categoria= sorted(set(cat)) 
+        categoria=categorizar(idusuario,nombretienda)
         
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
@@ -692,11 +652,7 @@ def hacer_pedido(request,idusuario,nombretienda):
 @login_required
 def listado_pedido(request,idusuario,nombretienda,bandera): 
 
-    vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-    cat=[]
-    for i in vector:
-            cat.append(i)
-    categoria= sorted(set(cat))
+    categoria=categorizar(idusuario,nombretienda)
      
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 

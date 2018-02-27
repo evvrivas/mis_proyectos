@@ -93,8 +93,8 @@
                                
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
-                                    {%  for i in productos %}
-                                      <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i.categoria}}">{{i.categoria}}</a></li>
+                                    {%  for i in categoria %}
+                                      <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i}}">{{i.categoria}}</a></li>
                                    {%  endfor %} 
 
 
