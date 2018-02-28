@@ -54,7 +54,7 @@
                          <div class="col-md-12">   
                              <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
                               {% thumbnail j.imagen1 "200" crop="center" as im %}
-                                <a href="" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                                <a href="/carrusel/{{j.id}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                               {% endthumbnail %}
 
                           </div>
@@ -64,13 +64,13 @@
                              
                         <div class="col-md-6">   
                            {% thumbnail j.imagen2 "100" crop="center" as im %}
-                                <a href="" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                                <a href="/carrusel/{{j.id}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                            {% endthumbnail %}
                         </div>
 
                         <div class="col-md-6">
                            {% thumbnail j.imagen3 "100" crop="center" as im %}
-                                <a href="" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                               <a href="/carrusel/{{j.id}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                            {% endthumbnail %}
                         </div>
                      </div>
