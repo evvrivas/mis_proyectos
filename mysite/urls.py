@@ -81,7 +81,7 @@ urlpatterns = [
 
     url(r'^add_to_cart/(\d+)/([^/]+)/([^/]+)/$', add_to_cart),
     url(r'^get_cart/(\d+)/([^/]+)/([^/]+)/$', get_cart),
-    url(r'^carrusel/(\d+)/$', carrusel)
+    url(r'^carrusel/(\d+)/([^/]+)/([^/]+)/$', carrusel)
 
    
 ]
