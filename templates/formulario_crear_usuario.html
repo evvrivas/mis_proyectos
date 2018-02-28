@@ -28,15 +28,18 @@
                                        <form action="." method="post" enctype="multipart/form-data"> 
                                       {% csrf_token%}
                                        <table>  
-
+                                          <p>Codigo de pais mas numero de telefono </p> 
                                           <p>No de WhatsApp {{ form.id_usuario }} </p> 
                                           <p>Contraseña(4 caracteres) {{ form.clave }}  </p> 
 
-                                          <p>Nombre  {{ form.nombre }} </p>                               
+                                          <p>Nombres y apellidos personal  {{ form.nombre }} </p>                               
                                           
-                                          <p>correo electronico) {{ form.email }}  </p>
+                                          <p>correo electronico {{ form.email }}  </p>
                                           <p>cuenta de Facebook {{ form.facedireccion }}  </p>
-                                          <p>Pais y ciudad  {{ form.pais }}  </p>                                      
+                                          <p>Pais y ciudad  {{ form.pais }}  </p>
+                                          <br>
+                                          <p>Todos los datos deben de ser reales, recuerda que de ello depende el exito en los negocios.</p>
+
                                                                                                            
                                       <br>
                                        </table>
