@@ -11,9 +11,44 @@
                       <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}">{{j.nombre_tienda}}</a></li>
                                  
                              {% thumbnail j.imagen1 "200" crop="center" as im %}
-                              <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                              <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}" target="_blank"><img class="img-rounded" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                         <p>{{j.categoria}}</p>  
-                        <p>{{j.descripcion}}</p>                                                                       
+                        <p>{{j.descripcion}}</p>
+
+                        <div class="row"> 
+
+                    <div class="col-md-4">  
+                         <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20informacion"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+                     </div> 
+
+                     <div class="col-md-4"> 
+                          <a href="tel://{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a>
+                      </div>
+                     
+                      <div class="col-md-4">  
+                          <a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a>
+                      </div>    
+
+                 </div>     
+
+                  <div class="row">  
+                              
+                            <div class="col-md-6">    
+                                
+                                    <a href='whatsapp://send?text= http://xgangas.com/{{j.idusuario}}/{{j.nombre_tienda}}' data-action='share/whatsapp/share' ><img src='{% static "whatssapp-sharing.png" %}' style='height:30px !important;' title='Compartir por whatsapp' /></a>
+                             
+                            </div> 
+ 
+                            <div class="col-md-6">  
+                                
+                                   <div class="fb-share-button" data-href="http://xgangas.com/{{j.idusuario}}/{{j.nombre_tienda}}" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdjango-cvaldez.rhcloud.com%2Flistado%2Fropa&amp;src=sdkpreparse">Compartir</a></div>
+                                
+                             </div> 
+
+
+
+
+                            </div>                                                                  
 
                              {% endthumbnail %}                                                                                      
                     </div>

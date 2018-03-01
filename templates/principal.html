@@ -12,21 +12,30 @@
                      <div class="thumbnail">                      
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
-                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}">
+                        <img class="img-rounded" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}">
+
+                        
                         <p>{{j.categoria}}</p>  
                         <p>{{j.descripcion}}</p>                                    
                         {% endthumbnail %}
 
-                            <div class="row">  
+                          <div class="row">  
+                              
+                            <div class="col-md-6">    
                                 
-                                <div class="col-md-2"> 
-                                    <a href='whatsapp://send?text= http://xgangas.com/{{j.idusuario}}/{{j.nombre_tienda}}' data-action='share/whatsapp/share' ><<img src='{% static "whatssapp-sharing.png" %}' style='height:20px !important;' title='Compartir por whatsapp' /></a>
-                                </div> 
-
-                                <div class="col-md-2"> 
+                                    <a href='whatsapp://send?text= http://xgangas.com/{{j.idusuario}}/{{j.nombre_tienda}}' data-action='share/whatsapp/share' ><img src='{% static "whatssapp-sharing.png" %}' style='height:30px !important;' title='Compartir por whatsapp' /></a>
+                             
+                            </div> 
+ 
+                            <div class="col-md-6">  
+                                
                                    <div class="fb-share-button" data-href="http://xgangas.com/{{j.idusuario}}/{{j.nombre_tienda}}" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdjango-cvaldez.rhcloud.com%2Flistado%2Fropa&amp;src=sdkpreparse">Compartir</a></div>
-                                </div>
-                            
+                                
+                             </div> 
+
+
+
+
                             </div>
 
 
@@ -54,7 +63,12 @@
                          <div class="col-md-12">   
                              <h4><center> {{j.nombre}}-->$ {{j.precio_A }}</center></h4> 
                               {% thumbnail j.imagen1 "200" crop="center" as im %}
-                                <a href="/carrusel/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
+                                <a href="/carrusel/{{j.id}}/{{J.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
+
+                              
+
+
+
                               {% endthumbnail %}
 
                           </div>
@@ -64,13 +78,13 @@
                              
                         <div class="col-md-6">   
                            {% thumbnail j.imagen2 "100" crop="center" as im %}
-                               <a href="/carrusel/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                                <a href="/carrusel/{{j.id}}/{{J.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
                            {% endthumbnail %}
                         </div>
 
                         <div class="col-md-6">
                            {% thumbnail j.imagen3 "100" crop="center" as im %}
-                               <a href="/carrusel/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
+                               <a href="/carrusel/{{j.id}}/{{J.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
                            {% endthumbnail %}
                         </div>
                      </div>

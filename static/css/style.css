@@ -79,6 +79,10 @@ background:url(../images/fondo-menu.jpg)no-repeat left top;
    position: absolute;
 }
 
-
+.img-rounded {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
 
 

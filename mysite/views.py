@@ -381,8 +381,11 @@ def mi_tienda(request,usuario,nombretienda):
     
     categoria=categorizar(usuario,nombretienda)
     
-    usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
-    var=usuario.codigoapk     
+    try:
+        usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
+        var=usuario.codigoapk     
+    except:
+        pass
     
     tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
      
@@ -486,7 +489,6 @@ def pagina_principal(request):
                          categoria=Categoria.objects.all().order_by("categoria")                         
                          
                          nuevas_tiendas=Tiendas.objects.all().order_by("-fecha_ingreso")[0:6]
-                         
                          nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:6]
                                             
                          return render(request,'principal.html',locals())   
