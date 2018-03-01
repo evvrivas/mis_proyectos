@@ -110,10 +110,10 @@ def crear_producto(request,idusuario,nombretienda):
                                                       
                  else:
                     form=ProductosForm()
-                    formCateg=CategoriaForm()                         
+                    formCateg=CategoriaForm()                       
+                    return render(request,'entrada_producto.html',locals())
 
-                 
-                 return render(request,'entrada_producto.html',locals())
+
      else:
 
 
@@ -377,21 +377,22 @@ def editar_tienda(request,acid):
 
 
 
-def mi_tienda(request,usuario,nombretienda):
+def mi_tienda(request,idusuario,nombretienda):
     
-    categoria=categorizar(usuario,nombretienda)
+    categoria=categorizar(idusuario,nombretienda)
     
-    usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
-    
+
+       
     try:
-        
+        usuario=Usuarios.objects.filter(id_usuario=request.user.username).first() 
         var=usuario.codigoapk     
     except:
         pass
     
-    tiendas=Tiendas.objects.filter(id_usuario=usuario,nombre_tienda=nombretienda).first() 
+
+    tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first() 
      
-    productos=Productos.objects.filter(Q(id_usuario=usuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
 
     
     return render(request,'catalogo_tienda.html',locals())   
