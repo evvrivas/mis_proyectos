@@ -381,8 +381,10 @@ def mi_tienda(request,usuario,nombretienda):
     
     categoria=categorizar(usuario,nombretienda)
     
+    usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
+    
     try:
-        usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
+        
         var=usuario.codigoapk     
     except:
         pass
