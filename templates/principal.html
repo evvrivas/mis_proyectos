@@ -19,8 +19,8 @@
                         <p>{{j.descripcion}}</p>                                    
                         {% endthumbnail %}
 
-              <div class="row"> 
-
+                 <div class="row"> 
+                  <div class="col-md-12">   
                     <div class="col-md-4">  
                          <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20informacion"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
                      </div> 
@@ -32,24 +32,29 @@
                       <div class="col-md-4">  
                           <a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a>
                       </div>    
-
+                    </div> 
                  </div> 
 
            <br>
 
 
                           <div class="row">  
-                              
-                            <div class="col-md-6">    
+                         <div class="col-md-12">         
+                            <div class="col-md-4">    
                                 
-                                    <a href='whatsapp://send?text= http://xgangas.com/{{j.id_usuario}}/{{j.nombre_tienda}}' data-action='share/whatsapp/share' ><img src='{% static "whatssapp-sharing.png" %}' style='height:30px !important;' title='Compartir por whatsapp' /></a>
+                                    <a href='whatsapp://send?text= http://xgangas.com/{{j.id_usuario}}/{{j.nombre_tienda}}' data-action='share/whatsapp/share' ><img src='{% static "whatssapp-sharing.png" %}' style='height:15px !important;' title='Compartir por whatsapp' /></a>
                              
-                            </div> 
+                            </div>
+
+                            <div class="col-md-4">
+                            </div>  
+
  
-                            <div class="col-md-6">  
+                            <div class="col-md-4">  
                                 
                                    <div class="fb-share-button" data-href="http://xgangas.com/{{j.id_usuario}}/{{j.nombre_tienda}}" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdjango-cvaldez.rhcloud.com%2Flistado%2Fropa&amp;src=sdkpreparse">Compartir</a></div>
                                 
+                             </div> 
                              </div> 
 
 
