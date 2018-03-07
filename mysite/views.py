@@ -141,8 +141,16 @@ def editar_producto(request,idusuario,nombretienda,acid):
             form = ProductosForm(request.POST,request.FILES,instance=f)
        
             if form.is_valid():
+                    productillo = form.save(commit=False)
+                    # commit=False tells Django that "Don't send this to database yet.
+                    # I have more things I want to do with it."
+                    productillo.id_usuario = request.user.username # Set the user object here             
+                    productillo.tienda=tiendas             
+                    productillo.save() # Now you can send it to DB
                     form.save() 
-                    return render(request,'confirmar.html',locals())             
+                    return render(request,'confirmar.html',locals())      
+
+                                          
             
             else:
 
@@ -560,7 +568,9 @@ def get_cart(request,bandera,idusuario,nombretienda):
 
     
     if bandera=="1":
-            mensaje="Hola, Estoy interesado en esto:\n"
+            mensaje="Hola, contactate con mi persona al WhatsApp No:\n"
+            mensaje+= str(duenotienda.id_usuario)  +"\n"
+            mensaje="Estoy muy interesado en esto:\n"
             for item in cart:     
                  mensaje+= "["+str(item.quantity)+str(item.product )+str(item.total_price)+"]\n"
             

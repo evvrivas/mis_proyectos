@@ -18,20 +18,20 @@
                                   
                             <table BORDER="3" CELLSPACING="5">
                                 <tr  align="center">
-                                    <td WIDTH="75">Cantidad</td>
-                                    <td WIDTH="400">Producto</td>
-                                    <td WIDTH="75">Precio_Unitario</td>
-                                    <td WIDTH="100">Total</td>
+                                    <td WIDTH="50">Cant</td>
+                                    <td WIDTH="200">Descrip</td>
+                                    <td WIDTH="50">P/U</td>
+                                    <td WIDTH="50">Total</td>
                                 </tr >
 
                                 {% for item in cart %}  
 
                                 <tr  align="center">                                  
                               
-                                    <td WIDTH="75">{{ item.quantity }}</td> 
-                                    <td WIDTH="400">{{ item.product }}</td>  
-                                    <td WIDTH="75">{{ item.unit_price }}</td> 
-                                    <td WIDTH="100">{{ item.total_price }}</td>
+                                    <td WIDTH="50">{{ item.quantity }}</td> 
+                                    <td WIDTH="200">{{ item.product }}</td>  
+                                    <td WIDTH="50">{{ item.unit_price }}</td> 
+                                    <td WIDTH="50">{{ item.total_price }}</td>
                                 </tr>                                  
                                 {% endfor %}
                                  <br>

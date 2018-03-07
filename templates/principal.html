@@ -19,23 +19,19 @@
                         <p>{{j.descripcion}}</p>                                    
                         {% endthumbnail %}
 
-                 <div class="row"> 
-                  <div class="col-md-12">   
-                    <div class="col-md-4">  
-                         <a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20informacion"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
-                     </div> 
 
-                     <div class="col-md-4"> 
-                          <a href="tel://{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a>
-                      </div>
-                     
-                      <div class="col-md-4">  
-                          <a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a>
-                      </div>    
-                    </div> 
-                 </div> 
 
-           <br>
+                        <table BORDER="1" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="50"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20informacion"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="50"><a href="tel://{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    
+                                    <td WIDTH="50"><a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a></td>
+                                </tr >
+                        </table>
+
+                
 
 
                           <div class="row">  
