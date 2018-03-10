@@ -510,8 +510,11 @@ def pagina_principal(request):
 
                          categoria=Categoria.objects.all().order_by("categoria")                         
                          
-                         tiendas,productos=publicida_inteligencia(request)
-
+                         try:
+                             tiendas,productos=publicida_inteligencia(request)
+                         except:
+                             pass
+                         
                          nuevas_tiendas=Tiendas.objects.all().order_by("-fecha_ingreso")[0:6]
                          nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:6]
                                             
