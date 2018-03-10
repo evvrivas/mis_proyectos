@@ -128,8 +128,8 @@ def categorizar(idusuario,nombretienda):
         return categoria
 
 
-def publicida_inteligencia():
-
+def publicida_inteligencia(request):
+    
     items=Buscar.objects.filter(id_usuario=request.user.username).first()
     palabra=items.item_de_busqueda
             
