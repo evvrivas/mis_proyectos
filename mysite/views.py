@@ -128,6 +128,17 @@ def categorizar(idusuario,nombretienda):
         return categoria
 
 
+def publicida_inteligencia():
+
+    items=Buscar.objects.filter(id_usuario=request.user.username).first()
+    palabra=items.item_de_busqueda
+            
+    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+    tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra))
+            
+           
+    return  tiendas,productos
+
 
 def editar_producto(request,idusuario,nombretienda,acid):   
         categoria=categorizar(idusuario,nombretienda)
@@ -499,6 +510,8 @@ def pagina_principal(request):
 
                          categoria=Categoria.objects.all().order_by("categoria")                         
                          
+                         tiendas,productos=publicida_inteligencia()
+
                          nuevas_tiendas=Tiendas.objects.all().order_by("-fecha_ingreso")[0:6]
                          nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:6]
                                             
