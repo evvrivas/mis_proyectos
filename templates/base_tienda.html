@@ -40,7 +40,7 @@
                             {% endthumbnail %}
              </div>
              <div class="col-md-4">            
-                          <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" method="post">
+                          <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
                               {% csrf_token %}
                                                                                                                
                               <input type="text" id="name" name="nombre" size="10"/>
