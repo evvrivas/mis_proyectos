@@ -61,44 +61,32 @@
      <div class="col-md-2">  
             
                  <div class="thumbnail">
-                        <h4><center> {{j.nombre}} $ {{j.precio_A }}</center></h4> 
+                        <h4><center> {%  if j.cantidad %} {{j.cantidad}} {% endif %} > {{j.nombre}} $ {{j.precio_A }}</center></h4> 
+                        <br>
+                         <p>{{j.descripcion}}</p>  
                          
-                          <div class="row"> 
+                           <div class="row"> 
+                           
+                            <center><table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+                                    {% thumbnail j.imagen1 "200" crop="center" as im %}
+                                    <td WIDTH="210"><a href="/carrusel/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
+                                    {% endthumbnail %}
+                                </tr >
 
-                         <div class="col-md-12">   
-                            
-                              {% thumbnail j.imagen1 "200" crop="center" as im %}
-                                <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
+                                <tr  align="center">
+                                    {% thumbnail j.imagen2 "100" crop="center" as im %}
+                                    <td WIDTH="105"><a href="/carrusel/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
+                                     {% endthumbnail %}
 
-                              
-
-
-
-                              {% endthumbnail %}
-
-                          </div>
-
-                     
-                     <div class="row">                        
-                             
-                        <div class="col-md-6">   
-                           {% thumbnail j.imagen2 "100" crop="center" as im %}
-                                <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
-                           {% endthumbnail %}
-                        </div>
-
-                        <div class="col-md-6">
-                           {% thumbnail j.imagen3 "100" crop="center" as im %}
-                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
-                           {% endthumbnail %}
-                        </div>
-                     </div>
-
-
-
-                  </div>
-                                               
-                        <p>{{j.descripcion | linebreaks}}</p>                    
+                                     {% thumbnail j.imagen3 "100" crop="center" as im %}
+                                    <td WIDTH="105"><a href="/carrusel/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>
+                                    {% endthumbnail %}                                       
+                               
+                                </tr >
+                          </table></center>                    
+                  
+                  </div>              
                                            
                         <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">{{j.tienda}}</a></li>
                         <br>
@@ -187,44 +175,32 @@
      <div class="col-md-2">  
             
                  <div class="thumbnail">
-                        <h4><center> {{j.nombre}} $ {{j.precio_A }}</center></h4> 
+                        <h4><center> {%  if j.cantidad %} {{j.cantidad}} {% endif %} > {{j.nombre}} $ {{j.precio_A }}</center></h4> 
+                        <br>
+                         <p>{{j.descripcion}}</p>  
                          
-                          <div class="row"> 
+                           <div class="row"> 
+                           
+                            <center><table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+                                    {% thumbnail j.imagen1 "200" crop="center" as im %}
+                                    <td WIDTH="210"><a href="/carrusel/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
+                                    {% endthumbnail %}
+                                </tr >
 
-                         <div class="col-md-12">   
-                            
-                              {% thumbnail j.imagen1 "200" crop="center" as im %}
-                                <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
+                                <tr  align="center">
+                                    {% thumbnail j.imagen2 "100" crop="center" as im %}
+                                    <td WIDTH="105"><a href="/carrusel/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
+                                     {% endthumbnail %}
 
-                              
-
-
-
-                              {% endthumbnail %}
-
-                          </div>
-
-                     
-                     <div class="row">                        
-                             
-                        <div class="col-md-6">   
-                           {% thumbnail j.imagen2 "100" crop="center" as im %}
-                                <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
-                           {% endthumbnail %}
-                        </div>
-
-                        <div class="col-md-6">
-                           {% thumbnail j.imagen3 "100" crop="center" as im %}
-                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
-                           {% endthumbnail %}
-                        </div>
-                     </div>
-
-
-
-                  </div>
-                                               
-                        <p>{{j.descripcion | linebreaks}}</p>                    
+                                     {% thumbnail j.imagen3 "100" crop="center" as im %}
+                                    <td WIDTH="105"><a href="/carrusel/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>
+                                    {% endthumbnail %}                                       
+                               
+                                </tr >
+                          </table></center>                    
+                  
+                  </div>                  
                                            
                         <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">{{j.tienda}}</a></li>
                         <br>
