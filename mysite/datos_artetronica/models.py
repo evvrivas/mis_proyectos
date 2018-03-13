@@ -76,7 +76,7 @@ class Productos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
 	     tienda=models.ForeignKey('Tiendas',blank=True,null=True)
 	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
-	     cantidad         =  models.DecimalField(max_digits=15,decimal_places=0,default=0)
+	     cantidad         =  models.DecimalField(max_digits=15,decimal_places=0,default=0,blank=True,null= True)
 	     nombre           =  models.CharField(max_length=30)
 	     codigo=models.CharField(max_length=30,blank=True)
 	     #imagen1      = models.ImageField(upload_to='tmp')	  
@@ -89,7 +89,7 @@ class Productos(models.Model):
 	     descripcion = models.TextField(max_length=100,blank=True)
 	     puntuacion	 = models.CharField(max_length=30,default=0) 
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
-	     precio_A  = models.FloatField(blank=True,null= True	)	     
+	     precio_A  = models.FloatField(blank=True,null= True,default=0.0)	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 
 	      	    
