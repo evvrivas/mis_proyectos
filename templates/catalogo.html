@@ -59,29 +59,30 @@
                 <div class="thumbnail">
                       
                                             
-                        <h4><center> {%  if j.cantidad %} {{j.cantidad}} {% endif %} > {{j.nombre}} $ {{j.precio_A }}</center></h4> 
+                       <h4><center> {%  if j.cantidad %} {{j.cantidad}} {% endif %}  {{j.nombre}} 
+                        {%  if j.precio_A %} $ {{j.precio_A }} {% endif %}</center></h4> 
                        
                          <p>{{j.descripcion}}</p>  
                          
                            <div class="row"> 
                            
-                            <center><table BORDER="0" CELLSPACING="0">
-                                <tr  align="center">
+                            <center><table>
+                                <tr>
                                     {% thumbnail j.imagen1 "200" crop="center" as im %}
-                                    <td WIDTH="100"><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
+                                    <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
                                     {% endthumbnail %}
                                 </tr >
 
-                                <tr  align="center">
+                                <tr>
                                     {% thumbnail j.imagen2 "100" crop="center" as im %}
-                                    <td WIDTH="50"><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
+                                    <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
                                      {% endthumbnail %}
 
                                      {% thumbnail j.imagen3 "100" crop="center" as im %}
-                                    <td WIDTH="50"><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>
+                                    <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>
                                     {% endthumbnail %}                                       
                                
-                                </tr >
+                                </tr>
                           </table></center>                    
                   
                   </div>
