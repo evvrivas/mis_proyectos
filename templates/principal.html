@@ -67,12 +67,13 @@
                          
                            <div class="row"> 
                            
-                            <center><table>
-                                <tr>
+                           
+                               
                                     {% thumbnail j.imagen1 "200" crop="center" as im %}
                                     <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
                                     {% endthumbnail %}
-                                </tr >
+                                
+                                 <center><table>
 
                                 <tr>
                                     {% thumbnail j.imagen2 "100" crop="center" as im %}
@@ -182,13 +183,13 @@
                          
                            <div class="row"> 
                            
-                            <center><table >
-                                <tr>
+                            
+                               
                                     {% thumbnail j.imagen1 "200" crop="center" as im %}
                                     <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
                                     {% endthumbnail %}
-                                </tr>
-
+                             
+                                <center><table >
                                 <tr>
                                     {% thumbnail j.imagen2 "100" crop="center" as im %}
                                     <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
