@@ -18,17 +18,17 @@
                             <center><table BORDER="0" CELLSPACING="0">
                                 <tr  align="center">
                                     {% thumbnail j.imagen1 "200" crop="center" as im %}
-                                    <td WIDTH="200"><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
+                                    <td WIDTH="100"><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
                                     {% endthumbnail %}
                                 </tr >
 
                                 <tr  align="center">
                                     {% thumbnail j.imagen2 "100" crop="center" as im %}
-                                    <td WIDTH="100"><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
+                                    <td WIDTH="50"><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
                                      {% endthumbnail %}
 
                                      {% thumbnail j.imagen3 "100" crop="center" as im %}
-                                    <td WIDTH="100"><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>
+                                    <td WIDTH="50"><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>
                                     {% endthumbnail %}                                       
                                
                                 </tr >
@@ -37,7 +37,7 @@
                   </div>
 
 
-                          
+                          <br>
                        
 
                         
