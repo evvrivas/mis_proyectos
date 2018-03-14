@@ -545,7 +545,7 @@ def add_to_cart(request, product_id,idusuario,nombretienda):
     
     quantity= request.POST.get("cant")
     productos = Productos.objects.get(id=product_id)
-    if 
+    
     precio=productos.precio_A   
     if precio==None:
       precio=0
