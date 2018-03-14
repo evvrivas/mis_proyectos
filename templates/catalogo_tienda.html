@@ -12,7 +12,7 @@
                  <h4><center> {%  if j.cantidad %} {{j.cantidad}} {% endif %}  {{j.nombre}} 
                         {%  if j.precio_A %} $ {{j.precio_A }} {% endif %}</center></h4> 
                         
-                         <p>{{j.descripcion}}</p>  
+                         <p>{{j.descripcion | linebreaks}}</p>  
                          
                            <div class="row">                         
                            

@@ -542,12 +542,14 @@ def add_to_cart(request, product_id,idusuario,nombretienda):
     categoria=categorizar(idusuario,nombretienda)
            
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-
     
     quantity= request.POST.get("cant")
     productos = Productos.objects.get(id=product_id)
-
+    if 
     precio=productos.precio_A   
+    if precio==None:
+      precio=0
+
     
     cart = Cart(request)
     cart.add(productos, precio, quantity)

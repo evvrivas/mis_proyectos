@@ -15,8 +15,8 @@
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
 
                         
-                        <p>{{j.categoria}}</p>  
-                        <p>{{j.descripcion}}</p>                                    
+                        <p>{{j.categoria }}</p>  
+                        <p>{{j.descripcion | linebreaks}}</p>                                    
                         {% endthumbnail %}
 
 
@@ -63,7 +63,7 @@
                  <div class="thumbnail">
                         <h4><center> {%  if j.cantidad %} {{j.cantidad}} {% endif %}  {{j.nombre}} 
                         {%  if j.precio_A %} $ {{j.precio_A }} {% endif %}</center></h4> 
-                        <p>{{j.descripcion}}</p>  
+                        <p>{{j.descripcion | linebreaks}}</p>  
                          
                            <div class="row"> 
                            
