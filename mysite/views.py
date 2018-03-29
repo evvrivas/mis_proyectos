@@ -617,17 +617,17 @@ def cambiar_estado_pedido(request,idusuario,nombretienda,id_del_pedido):
 
                         ped = Pedidos.objects.get(pk=id_del_pedido)
                                                                        
-                        if ped.estado2=="ENCARGADO":
-                             ped.estado2="PRODUCCION"
+                        if ped.estado=="ENCARGADO":
+                             ped.estado="PRODUCCION"
                         
-                        elif ped.estado2=="PRODUCCION":
-                              ped.estado2="EMPACADO"
+                        elif ped.estado=="PRODUCCION":
+                              ped.estado="EMPACADO"
                         
-                        elif ped.estado2=="EMPACADO":
-                              ped.estado2="ENTREGADO"
+                        elif ped.estado=="EMPACADO":
+                              ped.estado="ENTREGADO"
 
-                        elif ped.estado2=="ENTREGADO":
-                              ped.estado2="ENCARGADO"
+                        elif ped.estado=="ENTREGADO":
+                              ped.estado="ENCARGADO"
  
                         else:
                           pass 

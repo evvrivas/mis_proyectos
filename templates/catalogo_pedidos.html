@@ -22,17 +22,19 @@
                        </center></h4> 
                        <br>
 
+                      <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>     
+
 
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
-                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                          <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                         {% endthumbnail %}
 
                         {% thumbnail j.imagen2 "200" crop="center" as im %}
-                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                          <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>
                         {% endthumbnail %}
 
                         {% thumbnail j.imagen3 "200" crop="center" as im %}
-                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                          <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>
                         {% endthumbnail %}
                   </div>
                   <div class="col-md-6"> 
