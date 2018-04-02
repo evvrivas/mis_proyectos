@@ -715,3 +715,10 @@ def carrusel(request,id_prod,idusuario,nombretienda):
 
      productos=Productos.objects.get(id=id_prod)
      return render(request,'carrusel.html',locals())
+
+def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
+     categoria=categorizar(idusuario,nombretienda)     
+     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+
+     productos=Pedidos.objects.get(id=id_prod)
+     return render(request,'carrusel.html',locals())

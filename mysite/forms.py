@@ -46,3 +46,5 @@ class MensajesForm(ModelForm):
 		model=Mensajes
 		widgets = {'mensaje': Textarea(attrs={'cols': 30, 'rows': 3}),'respuesta': Textarea(attrs={'cols': 30, 'rows': 3}),}
 
+
+		
