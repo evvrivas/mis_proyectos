@@ -45,7 +45,7 @@ from django.db.models import Q
 def logout(request):
     auth.logout(request)
     # Redirect to a success page.
-    return HttpResponseRedirect("/principal")
+    return HttpResponseRedirect("")
 
 
 @login_required
@@ -697,12 +697,13 @@ def listado_pedido(request,idusuario,nombretienda,bandera):
      
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
-   
+    usuario=Usuarios.objects.filter(id_usuario=request.user.username).first() 
+        var=usuario.codigoapk 
+
     if bandera=="TODOS":
         pedidos= Pedidos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda=nombretienda)).order_by("fecha_de_entrega")
     
-    else:
-                   
+    else:                   
         pedidos= Pedidos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda=nombretienda) & Q(estado=bandera)).order_by( "fecha_de_entrega")
      
     return render(request,'catalogo_pedidos.html',locals())
