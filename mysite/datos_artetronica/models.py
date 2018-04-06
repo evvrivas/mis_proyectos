@@ -148,6 +148,19 @@ class Usuarios(models.Model):
 	     class Admin:
 		    		list_display = ('id_usuario')
 
+CATEGORIA_TIENDA= (
+	        ('GRATIS', 'GRATIS (5 PRODUCTOS MAXIMO, NO PUBLICIDAD)'), 
+			('BASICO', 'BASICO (20 productos S30 ANUALES)'),
+			('STANDARD', 'STANDARD (45 productos $50 ANUALES)'),
+			('PREMIUM', 'PREMIUN (100 productos $90 ANUALES)'),	
+			
+
+			)
+
+
+
+
+
 class Tiendas(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	     
 	     nombre_tienda=models.CharField(max_length=30,blank=True)
@@ -185,13 +198,13 @@ class Pedidos(models.Model):
 	     nombre           =  models.CharField(max_length=30)
 	     contacto=  models.CharField(max_length=30)
 
-	     descripcion = models.TextField(max_length=100,blank=True)
+	     descripcion = models.TextField(blank=True)
 	     #imagen1      = models.ImageField(upload_to='tmp')	  
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     imagen2 = ImageField(upload_to='tmp',blank=True)
 	     imagen3 = ImageField(upload_to='tmp',blank=True)
 
-	     precios_unitarios = models.TextField(max_length=100,blank=True)
+	     precios_unitarios = models.TextField(max_length=300,blank=True)
 	     total  = models.FloatField(blank=True,null=True)
 	     anticipo  = models.FloatField(blank=True,null=True)
             
