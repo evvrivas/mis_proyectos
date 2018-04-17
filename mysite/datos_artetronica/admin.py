@@ -26,6 +26,9 @@ admin.site.register(Categoria)
 class RulesAdmin(admin.ModelAdmin):
     form = CategoriaForm
 
+admin.site.register(Categoria_global)
+class RulesAdmin(admin.ModelAdmin):
+    form = Categoria_globalForm
     
 admin.site.register(Tiendas)
 class RulesAdmin(admin.ModelAdmin):

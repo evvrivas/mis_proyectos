@@ -28,6 +28,11 @@ class CategoriaForm(ModelForm):
 		model= Categoria		
 		exclude=[]
 
+class Categoria_globalForm(ModelForm):
+	class Meta:
+		model= Categoria_global		
+		exclude=[]
+
 class TiendasForm(ModelForm):
 	class Meta:
 		model= Tiendas		

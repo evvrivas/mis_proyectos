@@ -44,8 +44,8 @@ from django.db.models import Q
 
 def logout(request):
     auth.logout(request)
-    # Redirect to a success page.
-    return HttpResponseRedirect("")
+    pagina_principal(request)
+    #return HttpResponseRedirect("")
 
 
 @login_required
@@ -228,7 +228,9 @@ def crear_mensaje(request,bandera):
 def crear_usuario(request): 
         #!/usr/bin/python
         # -*- coding: latin-1 -*-
-        categoria=Categoria.objects.all().order_by("categoria")
+        categoria=Categoria_global.objects.all().order_by("categoria")
+        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+
         import os, sys
        
         if request.method == 'POST': # si el usuario est enviando el formulario con datos
@@ -273,7 +275,8 @@ def crear_usuario(request):
         
 
 def editar_usuario(request,acid):   
-       categoria=Categoria.objects.all().order_by("categoria")
+       categoria=Categoria_global.objects.all().order_by("categoria")
+       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
        f = Usuarios.objects.get(pk=acid)           
        
@@ -313,16 +316,13 @@ def crear_tienda(request):
      #!/usr/bin/python
      # -*- coding: latin-1 -*-
      import os, sys
-     categoria=Categoria.objects.all().order_by("categoria") 
+     categoria=Categoria_global.objects.all().order_by("categoria")
+     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username) 
     
      if request.method == 'POST': # si el usuario est enviando el formulario con datos
-            
-                         
-            if request.POST:
-
-                  form=TiendasForm(request.POST,request.FILES)                   
+            form=TiendasForm(request.POST,request.FILES)                   
                   
-                  if form.is_valid():
+            if form.is_valid():
                           tiendecilla = form.save(commit=False)
                           # commit=False tells Django that "Don't send this to database yet.
                           # I have more things I want to do with it."
@@ -333,33 +333,20 @@ def crear_tienda(request):
                           
                           #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                           return render(request,'confirmar.html',locals())     
-                  else:
-
-
-                          formCateg=CategoriaForm(request.POST,request.FILES) 
-                          if formCateg.is_valid() :                           
-
-                                  categor = formCateg.save(commit=False)
-                                  # commit=False tells Django that "Don't send this to database yet.
-                                  # I have more things I want to do with it."
-                                  categor.id_usuario = request.user.username # Set the user object here
-                                  categor.save() # Now you can send it to DB
-                                  formCateg.save() # Guardar los datos en la base de datos  print  
-
-                                  return render(request,'formulario_ingreso.html',locals())                           
+                                          
                                  
                                           
      else:
         form=TiendasForm()
-        formCateg=CategoriaForm()
-                         
+                                
 
      
      return render(request,'formulario_ingreso.html',locals())
         #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
 
 def editar_tienda(request,acid):   
-        categoria=Categoria.objects.all().order_by("categoria")
+        categoria=Categoria_global.objects.all().order_by("categoria")
+        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
         
         f = Tiendas.objects.get(pk=acid)           
        
@@ -369,25 +356,12 @@ def editar_tienda(request,acid):
        
             if form.is_valid():
                     form.save() 
-                    return render(request,'confirmar.html',locals())             
-            
-            else:
-
-                          formCateg=CategoriaForm(request.POST,request.FILES) 
-                          if formCateg.is_valid() :                           
-
-                                  categor = formCateg.save(commit=False)
-                                  # commit=False tells Django that "Don't send this to database yet.
-                                  # I have more things I want to do with it."
-                                  categor.id_usuario = request.user.username # Set the user object here
-                                  categor.save() # Now you can send it to DB
-                                  formCateg.save() # Guardar los datos en la base de datos  print  
-
-                                  return render(request,'formulario_ingreso.html',locals())  
+                   return render(request,'confirmar.html',locals())             
+                    
         else:
             
             form = TiendasForm(instance=f)
-            formCateg=CategoriaForm()
+            
 
         
 
@@ -417,7 +391,8 @@ def mi_tienda(request,idusuario,nombretienda):
     return render(request,'catalogo_tienda.html',locals())   
  
 def mis_tiendas(request,idusuario):
-  categoria=Categoria.objects.all().order_by("categoria")
+  categoria=Categoria_global.objects.all().order_by("categoria")
+  mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   
   tiendas=Tiendas.objects.filter(id_usuario=idusuario)
   return render(request,'catalogo.html',locals())   
@@ -431,7 +406,8 @@ def mis_tiendas(request,idusuario):
 
 def ver_categorias(request,item):
   
-  categoria=Categoria.objects.all().order_by("categoria")
+  categoria=Categoria_global.objects.all().order_by("categoria")
+  mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   
   
 
@@ -486,7 +462,8 @@ def busqueda_tienda(request,idusuario,nombretienda):
         return render(request,'catalogo_tienda.html',locals()) 
 
 def busqueda(request):
-     categoria=Categoria.objects.all().order_by("categoria")
+     categoria=Categoria_global.objects.all().order_by("categoria")
+     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
      
      if request.POST:
         palabra = request.POST.get('nombre')
@@ -508,7 +485,8 @@ import datetime
 def pagina_principal(request):
                         
 
-                         categoria=Categoria.objects.all().order_by("categoria")                         
+                         categoria=Categoria_global.objects.all().order_by("categoria")
+                         mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)                         
                          
                          try:
                              tiendas,productos=publicida_inteligencia(request)
@@ -523,13 +501,15 @@ def pagina_principal(request):
 
 
 def catalogo(request, var):
-  categoria=Categoria.objects.all().order_by("categoria")
+  categoria=Categoria_global.objects.all().order_by("categoria")
+  mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
   #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
   return render(request,'catalogo.html',locals())   
 
 def informacion(request):
-  categoria=Categoria.objects.all().order_by("categoria")
+  categoria=Categoria_global.objects.all().order_by("categoria")
+  mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   #return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
   return render(request,'informacion.html',locals())   
 
@@ -560,7 +540,9 @@ def add_to_cart(request, product_id,idusuario,nombretienda):
     
 @login_required
 def remove_from_cart(request, product_id):
-    categoria=Categoria.objects.all().order_by("categoria")
+    categoria=Categoria_global.objects.all().order_by("categoria")
+    mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+    
     product = Productos.objects.get(id=product_id)
     cart = Cart(request)
     cart.remove(product)
@@ -597,7 +579,7 @@ def get_cart(request,bandera,idusuario,nombretienda):
             fecha= datetime.datetime.now()
             mensaje+= str(fecha)
             sender =duenotienda.email
-            asunto="Xgangas: Etoy interesado"
+            asunto="Xgangas: Estoy interesado"
             send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
                         
             return render(request,'confirmar_tienda.html',locals())               

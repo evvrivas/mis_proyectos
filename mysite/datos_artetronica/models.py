@@ -64,6 +64,12 @@ ESTADO2 = (
 			)
 
 
+class Categoria_global(models.Model):
+		 categoria=models.CharField(max_length=60,blank=True,null=True)
+		 def __str__(self):
+		 	return  self.categoria
+		 class Admin:
+		 	list_display = ('categoria')
 
 class Categoria(models.Model):
 		 categoria=models.CharField(max_length=30,blank=True,null=True)
@@ -86,7 +92,7 @@ class Productos(models.Model):
 
 	      
 	     
-	     descripcion = models.TextField(max_length=200,blank=True)
+	     descripcion = models.TextField(blank=True)
 	     puntuacion	 = models.CharField(max_length=30,default=0) 
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_A  = models.FloatField(default=0,blank=True,null=True)	     
@@ -132,8 +138,8 @@ CLAVES=(
 			)
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
-	     clave=models.CharField(max_length=30)
-	     nombre=models.CharField(max_length=30,blank=True)
+	     clave=models.CharField(max_length=4)
+	     nombre=models.CharField(max_length=40,blank=True)
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")	 
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")
@@ -165,7 +171,7 @@ class Tiendas(models.Model):
 	     id_usuario=models.CharField(max_length=30)	     
 	     nombre_tienda=models.CharField(max_length=30,blank=True)
 	     ubicacion=models.CharField(max_length=30,blank=True)
-	     categoria=models.ForeignKey('Categoria',blank=True,null=True)	     
+	     categoria=models.ForeignKey('Categoria_global',blank=True,null=True)	     
 	     imagen1 = ImageField(upload_to='tmp')
 	     descripcion=models.CharField(max_length=90,blank=True)
 	     
