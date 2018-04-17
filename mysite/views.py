@@ -355,7 +355,7 @@ def editar_tienda(request,acid):
             form = TiendasForm(request.POST,request.FILES,instance=f)
        
             if form.is_valid():
-                    form.save() 
+                   form.save() 
                    return render(request,'confirmar.html',locals())             
                     
         else:
@@ -542,7 +542,7 @@ def add_to_cart(request, product_id,idusuario,nombretienda):
 def remove_from_cart(request, product_id):
     categoria=Categoria_global.objects.all().order_by("categoria")
     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-    
+
     product = Productos.objects.get(id=product_id)
     cart = Cart(request)
     cart.remove(product)
