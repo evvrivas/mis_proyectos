@@ -3,7 +3,7 @@
 
 #from mysite.views import Index
 
-############################################
+##########################
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
