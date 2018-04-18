@@ -38,7 +38,7 @@
 
                                     <td WIDTH="90"><a href='whatsapp://send?text= http://xgangas.com/{{j.id_usuario}}/{{j.nombre_tienda}}' data-action='share/whatsapp/share' ><img src='{% static "whatssapp-sharing.png" %}' style='height:15px !important;' title='Compartir por whatsapp' /></a></td>                                    
                                        
-                                    <td WIDTH="90"><div class="fb-share-button" data-href="https://xgangas.com/&#123;&#123;j.id_usuario&#125;&#125;/&#123;&#123;j.nombre_tienda&#125;&#125;" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://xgangas.com/{{j.id_usuario}}/{{j.nombre_tienda}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div></td>
+                                    <td WIDTH="90"><div class="fb-share-button" data-href="https://xgangas.com/&#123;&#123;j.id_usuario&#125;&#125;/&#123;&#123;j.nombre_tienda&#125;&#125;" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u= ' +https://xgangas.com/{{j.id_usuario}}/{{j.nombre_tienda}} + ' &amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div></td>
 
                                      <a href="https://www.facebook.com/sharer/sharer.php?u=https://xgangas.com/{{j.id_usuario}}/{{j.nombre_tienda}}">Share on Facebook</a> 
                                 </tr >
