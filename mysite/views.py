@@ -44,8 +44,8 @@ from django.db.models import Q
 
 def logout(request):
     auth.logout(request)
-    pagina_principal(request)
-    #return HttpResponseRedirect("")
+    
+    return HttpResponseRedirect("/")
 
 
 @login_required
@@ -124,7 +124,9 @@ def categorizar(idusuario,nombretienda):
         cat=[]
         for i in vector:
               cat.append(i.categoria)
-        categoria= sorted(set(cat))
+        cat2=set(cat)      
+        categoria= sorted(cat2, key=lambda x: x.lower())
+
         return categoria
 
 
