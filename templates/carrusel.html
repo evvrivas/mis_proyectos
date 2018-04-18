@@ -21,15 +21,15 @@
           </ol>
           <div class="carousel-inner">
 
-     {% thumbnail productos.imagen1 "300" crop="center" as im %}                              
+     {% thumbnail productos.imagen1 "400" crop="center" as im %}                              
  <div class="active item"> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" /></div>
     {% endthumbnail %}
 
- {% thumbnail productos.imagen2 "300" crop="center" as im %}                              
+ {% thumbnail productos.imagen2 "400" crop="center" as im %}                              
  <div class="item"> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" /></div>
     {% endthumbnail %}
             
-   {% thumbnail productos.imagen3 "300" crop="center" as im %}                              
+   {% thumbnail productos.imagen3 "400" crop="center" as im %}                              
  <div class="item"> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" /></div>
     {% endthumbnail %}          
     
