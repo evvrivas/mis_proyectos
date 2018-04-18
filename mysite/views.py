@@ -125,7 +125,7 @@ def categorizar(idusuario,nombretienda):
         for i in vector:
               cat.append(i.categoria)
         cat2=set(cat)      
-        categoria= sorted(cat2, key=lambda x: x.lower())
+        #categoria= sorted(cat2, key=lambda x: x.lower())
 
         return categoria
 
