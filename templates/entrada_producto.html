@@ -31,7 +31,16 @@
                      <p>imagen2 {{ form.imagen2 }} </p> 
                      <p>imagen3 {{ form.imagen3 }} </p>                
                      
-                     <p>descripcion {{ form.descripcion }} </p>                            
+                     <p>descripcion {{ form.descripcion }} </p> 
+
+                     {% ifequal var 'ENLACES' %}
+                             
+                               <p>Enlace al video {{ form.video_insercion }} </p>      
+                               <p>Nombre del enlace {{ form.nombre_recurso }} </p>
+                               <p>Enlace {{ form.recurso }} </p>  
+                    
+                     {% endifequal %}
+
                      <p>precio_A {{ form.precio_A }} </p>
                                   
                                                              

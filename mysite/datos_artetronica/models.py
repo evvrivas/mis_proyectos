@@ -89,10 +89,13 @@ class Productos(models.Model):
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     imagen2 = ImageField(upload_to='tmp',blank=True)
 	     imagen3 = ImageField(upload_to='tmp',blank=True)
-
-	      
-	     
+ 
 	     descripcion = models.TextField(blank=True)
+	     
+	     video_insercion=models.CharField(blank=True)
+	     nombre_recurso=models.CharField(max_length=40,blank=True)
+         recurso=models.URLField(blank=True)
+	         
 	     puntuacion	 = models.CharField(max_length=30,default=0) 
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_A  = models.FloatField(default=0,blank=True,null=True)	     
@@ -134,6 +137,8 @@ INFORMA= (
 CLAVES=(
 			('NORMAL', 'NORMAL'),
 			('PEDIDOS', 'PEDIDOS'),
+			('ENLACES', 'ENLACES'),
+
 						
 			)
 class Usuarios(models.Model):
