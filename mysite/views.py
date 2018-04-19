@@ -57,6 +57,7 @@ def crear_producto(request,idusuario,nombretienda):
      categoria=categorizar(idusuario,nombretienda)
   
      tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+     var=tiendas.codigoapk 
      cantidad_productos=Productos.objects.filter(id_usuario=request.user.username).count()
      
      usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
@@ -146,6 +147,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
         categoria=categorizar(idusuario,nombretienda)
   
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+        var=tiendas.codigoapk 
         
         f = Productos.objects.get(pk=acid)           
        
