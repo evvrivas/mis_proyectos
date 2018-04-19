@@ -36,7 +36,7 @@ class Categoria_globalForm(ModelForm):
 class TiendasForm(ModelForm):
 	class Meta:
 		model= Tiendas		
-		exclude=["id_usuario","fecha_ingreso"]
+		exclude=["codigoapk","id_usuario","fecha_ingreso"]
 
 
 class PedidosForm(ModelForm):

@@ -177,7 +177,7 @@ class Tiendas(models.Model):
 	     categoria=models.ForeignKey('Categoria_global',blank=True,null=True)	     
 	     imagen1 = ImageField(upload_to='tmp')
 	     descripcion=models.CharField(max_length=90,blank=True)
-	     
+	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
 	     #info=models.CharField(max_length=30,choices=INFORMA,blank=True)
 
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)

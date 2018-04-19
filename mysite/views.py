@@ -378,15 +378,16 @@ def mi_tienda(request,idusuario,nombretienda):
     
 
        
-    try:
-        usuario=Usuarios.objects.filter(id_usuario=request.user.username).first() 
-        var=usuario.codigoapk     
-    except:
-        pass
+    #try:
+    #    usuario=Usuarios.objects.filter(id_usuario=request.user.username).first() 
+    #    var=usuario.codigoapk     
+    #except:
+    #    pass
     
-
+    
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first() 
-     
+    var=tiendas.codigoapk    
+    
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
 
     
@@ -680,12 +681,12 @@ def listado_pedido(request,idusuario,nombretienda,bandera):
     categoria=categorizar(idusuario,nombretienda)
      
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-
-    try:
-        usuario=Usuarios.objects.filter(id_usuario=request.user.username).first() 
-        var=usuario.codigoapk     
-    except:
-        pass
+    var=tiendas.codigoapk
+    #try:
+    #    usuario=Usuarios.objects.filter(id_usuario=request.user.username).first() 
+    #    var=usuario.codigoapk     
+    #except:
+    #    pass
 
     if bandera=="TODOS":
         pedidos= Pedidos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda=nombretienda)).order_by("fecha_de_entrega")
