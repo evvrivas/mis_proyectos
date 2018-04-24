@@ -75,9 +75,9 @@ class Categoria(models.Model):
          id_usuario=models.CharField(max_length=30,blank=True)
          categoria=models.CharField(max_length=30,blank=True,null=True)
          def __str__(self):
-		 	return  self.categoria
-		 class Admin:
-		 	list_display = ('categoria')
+         	return  self.categoria
+         class Admin:
+         	list_display = ('categoria')
 
 class Productos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
