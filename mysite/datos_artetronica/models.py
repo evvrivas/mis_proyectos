@@ -80,8 +80,8 @@ class Categoria(models.Model):
 
 class Productos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
-	     tienda=models.ForeignKey('Tiendas.nombre_tienda',blank=True,null=True)
-	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
+	     tienda=models.ForeignKey('Tiendas',blank=True,null=True)
+	     categoria=models.ForeignKey('Categoria.id_usuario',blank=True,null=True)
 	     cantidad         =  models.DecimalField(max_digits=15,decimal_places=0,default=0,blank=True,null= True)
 	     nombre           =  models.CharField(max_length=30)
 	     codigo=models.CharField(max_length=30,blank=True)
