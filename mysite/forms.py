@@ -15,6 +15,10 @@ class ProductosForm(ModelForm):
 		widgets = {'descripcion': Textarea(attrs={'cols': 40, 'rows': 3}),}
 		exclude=["id_usuario","puntuacion","fecha_ingreso"]
 
+    def __init__(self, id_usuario, *args, **kwargs):
+        super(ProductosForm, self).__init__(*args, **kwargs)
+        self.fields['categoria'].queryset = Category.objects.filter(id_usuario=request.user.username)
+
 
 
 class BuscarForm(ModelForm):
@@ -26,7 +30,7 @@ class BuscarForm(ModelForm):
 class CategoriaForm(ModelForm):
 	class Meta:
 		model= Categoria		
-		exclude=[]
+		exclude=["id_usuario"]
 
 class Categoria_globalForm(ModelForm):
 	class Meta:
