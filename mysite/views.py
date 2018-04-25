@@ -110,6 +110,7 @@ def crear_producto(request,idusuario,nombretienda):
                                              
                                                       
                  else:
+                   
                     form=ProductosForm()
                     formCateg=CategoriaForm()                       
                     return render(request,'entrada_producto.html',locals())
