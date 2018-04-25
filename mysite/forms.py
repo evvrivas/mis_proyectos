@@ -22,7 +22,7 @@ class ProductosForm(ModelForm):
 
 class BuscarForm(ModelForm):
 	class Meta:
-		model= Buscar		f
+		model= Buscar
 		exclude=["id_usuario"]
 
 
