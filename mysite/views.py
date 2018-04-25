@@ -110,7 +110,7 @@ def crear_producto(request,idusuario,nombretienda):
                                              
                                                       
                  else:
-                    form=ProductosForm()
+                    form=ProductosForm(id_usuario=request.user.username)
                     formCateg=CategoriaForm()                       
                     return render(request,'entrada_producto.html',locals())
 
@@ -182,7 +182,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
                                   return render(request,'entrada_producto.html',locals())  
         else:
             
-            form = ProductosForm(instance=f)
+            form = ProductosForm(instance=f,id_usuario=request.user.username)
             formCateg=CategoriaForm()
 
         
