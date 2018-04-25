@@ -15,9 +15,11 @@ class ProductosForm(ModelForm):
 		widgets = {'descripcion': Textarea(attrs={'cols': 40, 'rows': 3}),}
 		exclude=["id_usuario","puntuacion","fecha_ingreso"]
 	
-	def __init__(self, *args, **kwars):
-		super().__init(*args,**kwargs)
+	def __init__(self, request,*args, **kwars):
+		
 		self.fields['categoria'].queryset=Categoria.objects.filter(id_usuario=request.user.username)
+
+
 
 
 class BuscarForm(ModelForm):
