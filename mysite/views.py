@@ -80,7 +80,7 @@ def crear_producto(request,idusuario,nombretienda):
 
                  if request.method == 'POST': # si el usuario est enviando el formulario con datos
                         
-                              form=ProductosForm(request.POST,request.FILES,request.user.username)                   
+                              form=ProductosForm(,request.user.username,request.POST,request.FILES)                   
                               
                               if form.is_valid():
                                       productillo = form.save(commit=False)
@@ -154,7 +154,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
        
         if request.method == 'POST':
             
-            form = ProductosForm(request.POST,request.FILES,instance=f)
+            form = ProductosForm(request.user.username,request.POST,request.FILES,instance=f)
        
             if form.is_valid():
                     productillo = form.save(commit=False)
@@ -183,7 +183,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
                                   return render(request,'entrada_producto.html',locals())  
         else:
             
-            form = ProductosForm(instance=f)
+            form = ProductosForm(request.user.username,instance=f)
             formCateg=CategoriaForm()
 
         
