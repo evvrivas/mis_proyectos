@@ -184,7 +184,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
         else:
             
             form = ProductosForm(request.user.username,instance=f)
-            formCateg=CategoriaForm()
+            #formCateg=CategoriaForm()
 
         
 

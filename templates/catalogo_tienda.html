@@ -92,7 +92,7 @@
                         <br>
                  </div>
                       
-                      {%  if user.is_authenticated %}                                              
+                      {%  if user.is_authenticated and user.username == tiendas.id_usuario %}                       
                              <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li>  
                       {% endif %}     
                                                                                         
