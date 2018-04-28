@@ -48,6 +48,19 @@ def logout(request):
     return HttpResponseRedirect("/")
 
 
+
+
+def info_pagina():
+
+    cantidad_usuarios=Usuarios.objects.filter(id_usuario=request.user.username).count()
+    cantidad_tiendas=Tiendas.objects.filter(id_usuario=request.user.username).count()
+    cantidad_productos=Productos.objects.filter(id_usuario=request.user.username).count()
+    return cantidad_usuarios, cantidad_tiendas, cantidad_productos
+
+
+
+
+
 @login_required
 def crear_producto(request,idusuario,nombretienda):               
 
@@ -489,10 +502,14 @@ def busqueda(request):
 import datetime
 #@login_required
 def pagina_principal(request):
-                        
+
+
+                         n_usuarios, n_tiendas, n_productos=info_pagina()
 
                          categoria=Categoria_global.objects.all().order_by("categoria")
-                         mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)                         
+                         mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)  
+
+
                          
                          try:
                              tiendas,productos=publicida_inteligencia(request)

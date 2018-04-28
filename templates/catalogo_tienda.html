@@ -9,8 +9,27 @@
            <div class="col-md-2">   
                 <div class="thumbnail">
                        
-                 <h4><center> {%  if j.cantidad %} {{j.cantidad}} {% endif %}  {{j.nombre}} 
-                        {%  if j.precio_A %} $ {{j.precio_A }} {% endif %}</center></h4> 
+                  <h4><center>  {{j.nombre}}  </center></h4> 
+
+                       <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                <td WIDTH="60">
+                                        {%  if j.precio_A %}
+                           <h3>Precio <span class="badge badge-success">${{j.precio_A }}</span></h3>
+                                         {% endif %}
+
+                                    </td> 
+                                       {%  if j.cantidad %}  
+                           <h3>Existencias<span class="badge badge-danger">{{j.cantidad}}</span></h3>
+                                       {% endif %}
+                                   
+                                    <td WIDTH="60"></td>                                    
+                                    
+                                </tr >
+                        </table>
+                        </center>  
                         
                          <p>{{j.descripcion | linebreaks}}</p>  
 
