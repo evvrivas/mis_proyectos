@@ -50,7 +50,7 @@ def logout(request):
 
 
 
-def info_pagina():
+def info_pagina(request):
 
     cantidad_usuarios=Usuarios.objects.filter(id_usuario=request.user.username).count()
     cantidad_tiendas=Tiendas.objects.filter(id_usuario=request.user.username).count()
@@ -504,7 +504,7 @@ import datetime
 def pagina_principal(request):
 
 
-                         n_usuarios, n_tiendas, n_productos=info_pagina()
+                         n_usuarios, n_tiendas, n_productos=info_pagina(request)
 
                          categoria=Categoria_global.objects.all().order_by("categoria")
                          mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)  
