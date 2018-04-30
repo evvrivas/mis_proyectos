@@ -41,7 +41,8 @@ class Categoria_globalForm(ModelForm):
 
 class TiendasForm(ModelForm):
 	class Meta:
-		model= Tiendas		
+		model= Tiendas	
+		widgets = {'descripcion': Textarea(attrs={'cols': 50, 'rows': 8}),}	
 		exclude=["codigoapk","id_usuario","fecha_ingreso"]
 
 

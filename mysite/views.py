@@ -143,7 +143,7 @@ def categorizar(idusuario,nombretienda):
         vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
         cat=[]
         for i in vector:
-              cat.append(i.categoria)
+              cat.append(i.categoria)              
         categoria=set(cat)      
         #categoria= sorted(cat2, key=lambda x: x.lower())
 
