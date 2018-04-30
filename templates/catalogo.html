@@ -70,13 +70,16 @@
 
                                 <td >
                                         {%  if j.precio_A %}
-                           <h3>Precio <span class="badge badge-success">${{j.precio_A }}</span></h3>
+                          <button type="button" class="btn btn-primary">
+    Precio <span class="badge badge-light">{{j.precio_A}}</span>
+  </button>
                                          {% endif %}
 
                                     </td> 
                                     <td >
                                        {%  if j.cantidad %}  
-                           <h3>Existencias<span class="badge badge-danger">{{j.cantidad}}</span></h3>
+                            <button type="button" class="btn btn-danger">
+    Existencias <span class="badge badge-light">{{j.cantidad}}</span>
                                        {% endif %}
                                    
                                     </td>                                    
