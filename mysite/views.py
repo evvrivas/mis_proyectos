@@ -145,8 +145,7 @@ def categorizar(idusuario,nombretienda):
         cat=[]
         for i in vector:
               cat.append(i.categoria)              
-        #categoria=set(cat)
-        categoria=Counter(cat)
+        categoria=set(cat)        
         return categoria
 
 
