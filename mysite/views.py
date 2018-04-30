@@ -560,8 +560,8 @@ def informacion(request):
 def informacion_vendedor(request,idusuario):
       categoria=Categoria_global.objects.all().order_by("categoria")
      
-            
-      usuario=Usuarios.objects.filter(id_usuario=idusuario).firrst()
+
+      usuario=Usuarios.objects.filter(id_usuario=idusuario).first()
       cantidad_tiendas=Tiendas.objects.filter(id_usuario=idusuario).count()    
       tiendas=Tiendas.objects.filter(id_usuario=idusuario)
       
