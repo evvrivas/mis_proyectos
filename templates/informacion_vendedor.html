@@ -24,7 +24,7 @@
        <br>
        <p>Tiene {{cantidad_tiendas}} tiendas</p>
 
-       {%  for i in tiendas %}
+       {%  for j in tiendas %}
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
                         {% thumbnail j.imagen1 "75" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>                        
