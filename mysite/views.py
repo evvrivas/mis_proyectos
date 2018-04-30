@@ -558,9 +558,9 @@ def informacion(request):
   return render(request,'informacion.html',locals())   
 
 def informacion_vendedor(request,idusuario):
-      categoria=categorizar(idusuario,nombretienda)
-      tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-      
+      categoria=Categoria_global.objects.all().order_by("categoria")
+     
+            
       usuario=Usuarios.objects.filter(id_usuario=idusuario).firrst()
       cantidad_tiendas=Tiendas.objects.filter(id_usuario=idusuario).count()    
       tiendas=Tiendas.objects.filter(id_usuario=idusuario)
