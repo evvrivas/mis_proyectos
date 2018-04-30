@@ -557,13 +557,13 @@ def informacion(request):
   #return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
   return render(request,'informacion.html',locals())   
 
-def informacion_vendedor(request):
+def informacion_vendedor(request,idusuario):
       categoria=categorizar(idusuario,nombretienda)
       tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
       
-      usuario=Usuarios.objects.filter(id_usuario=request.user.username).firrst()
-      cantidad_tiendas=Tiendas.objects.filter(id_usuario=request.user.username).count()    
-      tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+      usuario=Usuarios.objects.filter(id_usuario=idusuario).firrst()
+      cantidad_tiendas=Tiendas.objects.filter(id_usuario=idusuario).count()    
+      tiendas=Tiendas.objects.filter(id_usuario=idusuario)
       
       return render(request,'informacion_vendedor.html',locals())   
 
