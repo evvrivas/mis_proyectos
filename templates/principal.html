@@ -11,11 +11,13 @@
                       
                      <div class="thumbnail">                      
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
+                        
+
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
 
                         
-                        <p>{{j.categoria }}</p>{{j.slogan}}</p>   
+                        <p>{{j.categoria }} Slogan: {{j.slogan}}</p>   
                         <p>{{j.descripcion | linebreaks}}</p>  
                         <p>Miembro desde {{j.fecha_ingreso}}</p>                                    
                         {% endthumbnail %}
@@ -63,35 +65,31 @@
      <div class="col-md-2">  
             
                  <div class="thumbnail">
+
+
  <h4><center>  {{j.nombre}}  </center></h4> 
  
                      <center> 
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                <td WIDTH="60">
+                                <td >
                                         {%  if j.precio_A %}
-                           <h3>Precio <span class="badge badge-success">${{j.precio_A }}</span></h3>
+                           <h>Precio <span class="badge badge-success">${{j.precio_A }}</span></h3>
                                          {% endif %}
 
                                     </td> 
+                                    <td >
                                        {%  if j.cantidad %}  
                            <h3>Existencias<span class="badge badge-danger">{{j.cantidad}}</span></h3>
                                        {% endif %}
                                    
-                                    <td WIDTH="60"></td>                                    
+                                    </td>                                    
                                     
                                 </tr >
                         </table>
                         </center>   
-
-
-
-
-                    
-
-
-                   
+             
 
 
                       <p>{{j.descripcion | linebreaks}}</p>  
@@ -141,12 +139,12 @@
 
                  </div>
 
-
+                  <p>Ingreso el {{j.fecha_ingreso}}</p> 
                                           
                   </div>
            
           </div>   
-           <p>Ingreso el {{j.fecha_ingreso}}</p>                      
+                                
          {% endfor %} 
        
 </div>
@@ -216,17 +214,19 @@
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                <td WIDTH="60">
+                                <td >
                                         {%  if j.precio_A %}
                            <h3>Precio <span class="badge badge-success">${{j.precio_A }}</span></h3>
                                          {% endif %}
 
                                     </td> 
+
+                                    <td >
                                        {%  if j.cantidad %}  
                            <h3>Existencias<span class="badge badge-danger">{{j.cantidad}}</span></h3>
                                        {% endif %}
                                    
-                                    <td WIDTH="60"></td>                                    
+                                    </td>                                    
                                     
                                 </tr >
                         </table>
@@ -278,12 +278,12 @@
 
                  </div>
 
-
+                    <p>Ingreso el {{j.fecha_ingreso}}</p> 
                                           
                   </div>
            
           </div>   
-          <p>Ingreso el {{j.fecha_ingreso}}</p>                       
+                                
          {% endfor %} 
        
 </div>

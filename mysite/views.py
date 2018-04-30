@@ -140,13 +140,13 @@ def crear_producto(request,idusuario,nombretienda):
           return render(request,'formulario_cambio_plan.html',locals())
 
 def categorizar(idusuario,nombretienda):
+        from collections import Counter
         vector=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
         cat=[]
         for i in vector:
               cat.append(i.categoria)              
-        categoria=set(cat)      
-        #categoria= sorted(cat2, key=lambda x: x.lower())
-
+        #categoria=set(cat)
+        categoria=Counter(cat)
         return categoria
 
 
@@ -281,8 +281,10 @@ def crear_usuario(request):
                             mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
                             sender =str("xgangasx@gmail.com")
                             asunto="nuevo usuario"+" "+ str(whatsapp)
-                            send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False)            
-                            
+                            try:
+                                 send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False)            
+                            except:
+                                  pass
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             return render(request,'confirmar_usuario.html',locals())   
                    
@@ -320,8 +322,10 @@ def editar_usuario(request,acid):
                     mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
                     sender =str("xgangasx@gmail.com")
                     asunto="edita"+" "+ str(whatsapp)
-                    send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
-                           
+                    try:
+                        send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
+                    except:
+                         pass        
 
                     return render(request,'confirmar.html',locals())             
             
@@ -632,8 +636,11 @@ def get_cart(request,bandera,idusuario,nombretienda):
             mensaje+= str(fecha)
             sender =duenotienda.email
             asunto="Xgangas: Estoy interesado"
-            send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
-                        
+            try:
+               send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
+            except:
+                pass            
+            
             return render(request,'confirmar_tienda.html',locals())               
     else:
 

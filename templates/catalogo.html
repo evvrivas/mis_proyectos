@@ -12,7 +12,7 @@
                                  
                              {% thumbnail j.imagen1 "200" crop="center" as im %}
                               <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
-                        <p>{{j.categoria}} slogan {{j.slogan}}</p>  
+                        <p>{{j.categoria}} Slogan: {{j.slogan}}</p>  
                         <p>{{j.descripcion | linebreaks}}</p>
                         <p>Miembro desde {{j.fecha_ingreso}}</p> 
 
@@ -67,17 +67,18 @@
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                <td WIDTH="60">
+                                <td >
                                         {%  if j.precio_A %}
                            <h3>Precio <span class="badge badge-success">${{j.precio_A }}</span></h3>
                                          {% endif %}
 
                                     </td> 
+                                    <td >
                                        {%  if j.cantidad %}  
                            <h3>Existencias<span class="badge badge-danger">{{j.cantidad}}</span></h3>
                                        {% endif %}
                                    
-                                    <td WIDTH="60"></td>                                    
+                                    </td>                                    
                                     
                                 </tr >
                         </table>
@@ -123,11 +124,11 @@
                         </center>
                  </div>
 
-         
+                   <p>Ingreso el {{j.fecha_ingreso}}</p>
                                                                                                      
                  </div>
                 </div>   
-                <p>Ingreso el {{j.fecha_ingreso}}</p>            
+                            
            {% endfor %}  
                
 </div>

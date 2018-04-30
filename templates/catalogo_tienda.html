@@ -21,17 +21,19 @@
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                <td WIDTH="60">
+                                <td >
                                         {%  if j.precio_A %}
                            <h3>Precio <span class="badge badge-success">${{j.precio_A }}</span></h3>
                                          {% endif %}
 
                                     </td> 
+
+                                    <td>
                                        {%  if j.cantidad %}  
                            <h3>Existencias<span class="badge badge-danger">{{j.cantidad}}</span></h3>
                                        {% endif %}
                                    
-                                    <td WIDTH="60"></td>                                    
+                                    </td>                                    
                                     
                                 </tr >
                         </table>
@@ -120,11 +122,11 @@
                       {%  if user.is_authenticated and user.username == tiendas.id_usuario %}                       
                              <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li>  
                       {% endif %}     
-                                                                                        
+                      <p>Ingreso el {{j.fecha_ingreso}}</p>                                                                     
                  </div>
             </div>            
                 
-            <p>Ingreso el {{j.fecha_ingreso}}</p>      
+               
            {% endfor %}  
         
 </div>
