@@ -15,8 +15,9 @@
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
 
                         
-                        <p>{{j.categoria }}</p>  
-                        <p>{{j.descripcion | linebreaks}}</p>                                    
+                        <p>{{j.categoria }}</p>{{j.slogan}}</p>   
+                        <p>{{j.descripcion | linebreaks}}</p>  
+                        <p>Miembro desde {{j.fecha_ingreso}}</p>                                    
                         {% endthumbnail %}
 
 
@@ -144,7 +145,8 @@
                                           
                   </div>
            
-          </div>                        
+          </div>   
+           <p>Ingreso el {{j.fecha_ingreso}}</p>                      
          {% endfor %} 
        
 </div>
@@ -280,7 +282,8 @@
                                           
                   </div>
            
-          </div>                        
+          </div>   
+          <p>Ingreso el {{j.fecha_ingreso}}</p>                       
          {% endfor %} 
        
 </div>

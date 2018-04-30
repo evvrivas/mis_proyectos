@@ -12,8 +12,9 @@
                                  
                              {% thumbnail j.imagen1 "200" crop="center" as im %}
                               <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
-                        <p>{{j.categoria}}</p>  
+                        <p>{{j.categoria}} slogan {{j.slogan}}</p>  
                         <p>{{j.descripcion | linebreaks}}</p>
+                        <p>Miembro desde {{j.fecha_ingreso}}</p> 
 
                    <div class="row"> 
                    
@@ -125,7 +126,8 @@
          
                                                                                                      
                  </div>
-                </div>             
+                </div>   
+                <p>Ingreso el {{j.fecha_ingreso}}</p>            
            {% endfor %}  
                
 </div>

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+{% load staticfiles %} 
+
+    
+
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>INFORMACION DEL PROPIETARIO DE ESTA TIENDA </center></h2>             
+      </div>
+
+    <div class="panel-body">
+            
+
+                <div class="thumbnail"> 
+                                 
+       <p>Nombre del vendedor:{{usuario.nombre}}</p>
+       <p>Telefono/Whatsapp: {{usuario.id_usuario}}</p>
+       <p>email: {{usuario.email}} </p>
+       <p>Pais/ciudad: {{usuario.pais}}</p>
+       <p>Mesenger: {{usuario.facedireccion}}</p>       
+       <p>es miembro desde: {{usuario.fecha_ingreso}} </p>  
+       <br>
+       <p>Tiene {{cantidad_tiendas}} tiendas</p>
+
+       {%  for i in tiendas %}
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
+                        {% thumbnail j.imagen1 "75" crop="center" as im %}
+                        <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>                        
+                        <p>{{j.categoria }} slogan {{j.slogan}}</p>  
+                        
+                        <p>{{j.descripcion | linebreaks}}</p>   
+                        <p>{{i.ubicacion}}</p>                                 
+                        {% endthumbnail %}
+
+        {%  endfor %} 
+
+
+                </div>
+  
+  </div>
+  </div>
+        
+
+{% endblock %}

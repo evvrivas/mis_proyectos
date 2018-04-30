@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^$', pagina_principal),
     url(r'^catalogo/(\d+)$', catalogo),
     url(r'^informacion/$', informacion),
+    url(r'^informacion_vendedor/([^/]+)/$', informacion_vendedor),
 
        
     url(r'^crear_usuario/$',crear_usuario),
