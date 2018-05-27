@@ -157,7 +157,7 @@ class Usuarios(models.Model):
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")	 
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")
-         pais=models.CharField(max_length=30,blank=True)
+	     pais=models.CharField(max_length=30,blank=True)
          facedireccion=models.URLField(blank=True)
          codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
          fecha_inicio_plan = models.DateField(default=datetime.now)
@@ -172,8 +172,8 @@ class Usuarios(models.Model):
 CATEGORIA_TIENDA= (
 	        ('GRATIS', 'GRATIS (5 PRODUCTOS MAXIMO, NO PUBLICIDAD)'), 
 			('BASICO', 'BASICO (20 productos S30 ANUALES)'),
-			('STANDARD', 'STANDARD (45 productos $50 ANUALES)'),
-			('PREMIUM', 'PREMIUN (100 productos $90 ANUALES)'),	
+			('STANDARD', 'STANDARD (50 productos $75 ANUALES)'),
+			('PREMIUM', 'PREMIUN (100 productos $125 ANUALES)'),	
 			
 
 			)
