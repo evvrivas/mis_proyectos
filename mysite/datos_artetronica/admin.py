@@ -43,3 +43,6 @@ admin.site.register(Mensajes)
 class RulesAdmin(admin.ModelAdmin):
     form = MensajesForm
 
+admin.site.register(Configuracion_sistema)
+class RulesAdmin(admin.ModelAdmin):
+    form = Configuracion_sistemaForm

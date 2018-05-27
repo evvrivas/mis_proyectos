@@ -5,6 +5,26 @@
 
 {% block content %}
 
+
+<div class="row">  
+       <div class="alert alert-primary">
+         <a href="#" class="alert-link">{{mensaje_bienvenida| linebreaks}}</a>.
+       </div>
+</div>
+<br>
+<div class="row">  
+       <div class="alert alert-info">
+
+         <li><a href="/accounts/login">Entrar Aqui </a></li>
+         <br>
+         <li><a href="/crear_usuario">Quieres una tienda? Registrarte Aqui</a></li>
+         <br>                            
+
+
+       </div>
+</div>
+<br>
+
 <div class="row">   
 {% for j in tiendas %} 
   <div class="col-md-2">   
@@ -22,6 +42,9 @@
                         <p>{{j.slogan}} </p>
                         <p>Miembro desde {{j.fecha_ingreso}}</p>                                    
                         {% endthumbnail %}
+
+
+                        
 
 
                         <center> 
@@ -78,11 +101,28 @@
                                 <tr  align="center">
 
                                 <td >
-                                        {%  if j.precio_A %}
+                   
+
+
+             {%  if j.precio_B %}
+                          <button type="button" class="btn btn-success">
+                          Precio $ <span class="badge badge-light">{{j.precio_B}}</span>
+                          </button>
+             { % else %}
+                    
+                    {%  if j.precio_A %}
                           <button type="button" class="btn btn-primary">
-    Precio $ <span class="badge badge-light">{{j.precio_A}}</span>
-  </button>
-                                         {% endif %}
+                          Precio $ <span class="badge badge-light">{{j.precio_A}}</span>
+                          </button>
+                    {% endif %}
+
+
+             {% endif %}
+
+
+
+
+
 
                                     </td> 
                                     <td >
@@ -224,11 +264,20 @@
                                 <tr  align="center">
 
                                 <td >
-                                        {%  if j.precio_A %}
+                                        {%  if j.precio_B %}
+                          <button type="button" class="btn btn-success">
+                          Precio $ <span class="badge badge-light">{{j.precio_B}}</span>
+                          </button>
+             { % else %}
+                    
+                    {%  if j.precio_A %}
                           <button type="button" class="btn btn-primary">
-    Precio $<span class="badge badge-light">{{j.precio_A}}</span>
-  </button>
-                                         {% endif %}
+                          Precio $ <span class="badge badge-light">{{j.precio_A}}</span>
+                          </button>
+                    {% endif %}
+
+
+             {% endif %}
 
                                     </td> 
                                     <td >

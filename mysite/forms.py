@@ -7,14 +7,14 @@ from django.forms import ModelForm, Textarea
 class UsuariosForm(ModelForm):
 	class Meta:
 		model= Usuarios		
-		exclude=["codigoapk","plan_tienda_activo","fecha_ingreso"]
+		exclude=["codigoapk","plan_tienda_activo","fecha_inicio_plan","fecha_final_plan","fecha_ingreso"]
 
 class ProductosForm(ModelForm):
 
 	class Meta:
 		model= Productos
 		widgets = {'descripcion': Textarea(attrs={'cols': 40, 'rows': 3}),}
-		exclude=["id_usuario","puntuacion","fecha_ingreso"]
+		exclude=["id_usuario","puntuacion","precio_B","fecha_ingreso"]
 	
 	def __init__(self, user,*args, **kwargs):
 		super(ProductosForm, self).__init__(*args, **kwargs)		

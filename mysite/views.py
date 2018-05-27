@@ -415,7 +415,13 @@ def mi_tienda(request,idusuario,nombretienda):
     
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first() 
     var=tiendas.codigoapk    
-    
+
+    #if fecha_inicio_plan<=fecha_final_plan:
+    #    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+
+    #else:
+    #     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))[0:5]
+
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
 
     
@@ -519,7 +525,7 @@ def busqueda(request):
 
 import datetime
 #@login_required
-def pagina_principal(request):
+def pagina_principal(request):   
 
 
                          n_usuarios, n_tiendas, n_productos=info_pagina()
@@ -527,6 +533,7 @@ def pagina_principal(request):
                          categoria=Categoria_global.objects.all().order_by("categoria")
                          mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)  
 
+                         mensaje_bienvenida=Mensaje_bienvenida.objects.all().first()
 
                          
                          try:
@@ -534,8 +541,8 @@ def pagina_principal(request):
                          except:
                              pass
                          
-                         nuevas_tiendas=Tiendas.objects.all().order_by("-fecha_ingreso")[0:6]
-                         nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:6]
+                         #nuevas_tiendas=Tiendas.objects.all().order_by("-fecha_ingreso")[0:6]
+                         #nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:6]
                                             
                          return render(request,'principal.html',locals())   
 

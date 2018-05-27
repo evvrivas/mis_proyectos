@@ -92,12 +92,14 @@ class Productos(models.Model):
 	     imagen3 = ImageField(upload_to='tmp',blank=True)
  
 	     descripcion = models.TextField(blank=True)
-	     video_insercion=models.CharField(max_length=100,blank=True)
+	     video_insercion=models.CharField(blank=True)
 	     nombre_recurso=models.CharField(max_length=40,blank=True)
 	     recurso=models.URLField(blank=True)
 	     puntuacion	 = models.CharField(max_length=30,default=0) 
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
-	     precio_A  = models.FloatField(default=0,blank=True,null=True)	     
+	     precio_A  = models.FloatField(default=0,blank=True,null=True)
+	     precio_B=FloatField(blank=True,null=True)	   
+
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 
 	      	    
@@ -140,6 +142,14 @@ CLAVES=(
 
 						
 			)
+
+class Configuracion_sistema(models.Model):
+	     mensaje_bienvenida=models.TextField(blank=True)	            
+	     def __str__(self):
+		    		return  self.mensaje_bienvenida
+	     class Admin:
+		    		list_display = ('mensaje_bienvenida')
+
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
 	     clave=models.CharField(max_length=4)
@@ -147,10 +157,13 @@ class Usuarios(models.Model):
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")	 
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")
-
-	     pais=models.CharField(max_length=30,blank=True)
+         pais=models.CharField(max_length=30,blank=True)
 	     facedireccion=models.URLField(blank=True)	         
-	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")	     	     
+	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")	   
+
+	     fecha_inicio_plan = models.DateField(default=datetime.now) 
+	     fecha_final_plan = models.DateField(default=datetime.now) 	
+	     	          
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
 	     
 	     def __str__(self):
