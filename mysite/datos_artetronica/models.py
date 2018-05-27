@@ -92,7 +92,7 @@ class Productos(models.Model):
 	     imagen3 = ImageField(upload_to='tmp',blank=True)
  
 	     descripcion = models.TextField(blank=True)
-	     video_insercion=models.CharField(blank=True)
+	     video_insercion=models.CharField(max_length=400,blank=True)
 	     nombre_recurso=models.CharField(max_length=40,blank=True)
 	     recurso=models.URLField(blank=True)
 	     puntuacion	 = models.CharField(max_length=30,default=0) 
