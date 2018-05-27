@@ -158,11 +158,11 @@ class Usuarios(models.Model):
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")	 
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")
 	     pais=models.CharField(max_length=30,blank=True)
-         facedireccion=models.URLField(blank=True)
-         codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
-         fecha_inicio_plan = models.DateField(default=datetime.now)
-         fecha_final_plan = models.DateField(default=datetime.now)
-         fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
+	     facedireccion=models.URLField(blank=True)
+	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
+	     fecha_inicio_plan = models.DateField(default=datetime.now)
+	     fecha_final_plan = models.DateField(default=datetime.now)
+	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
 	     
 	     def __str__(self):
 		    		return  self.id_usuario
