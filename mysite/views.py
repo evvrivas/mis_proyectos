@@ -533,7 +533,7 @@ def pagina_principal(request):
                          categoria=Categoria_global.objects.all().order_by("categoria")
                          mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)  
 
-                         mensaje_bienvenida=Mensaje_bienvenida.objects.all().first()
+                         configurar=Configuracion_sistema.objects.all().first()
 
                          
                          try:
