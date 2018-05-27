@@ -98,7 +98,7 @@ class Productos(models.Model):
 	     puntuacion	 = models.CharField(max_length=30,default=0) 
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_A  = models.FloatField(default=0,blank=True,null=True)
-	     precio_B=FloatField(blank=True,null=True)	   
+	     precio_B=models.FloatField(blank=True,null=True)	   
 
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 
