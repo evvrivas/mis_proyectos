@@ -246,11 +246,26 @@ def crear_mensaje(request,bandera):
         #return render_to_response('mensajes.html', locals() ,context_instance=RequestContext(request))
 
 
+def n_categorias():
+       
+         cat=Categoria_global.objects.all().order_by("categoria")
+         cat2=set(cat)
+         categoria=[]
+         for i in cat2:
+            item=str(cat.count(i)) + " " +str(i)
+            categoria.append(item)
+            item=""
+
+         return categoria
+
+
+
 
 def crear_usuario(request): 
         #!/usr/bin/python
         # -*- coding: latin-1 -*-
-        categoria=Categoria_global.objects.all().order_by("categoria")
+        categoria=n_categorias()
+        
         n_usuarios, n_tiendas, n_productos=info_pagina()
         mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
@@ -300,7 +315,7 @@ def crear_usuario(request):
         
 
 def editar_usuario(request,acid):   
-       categoria=Categoria_global.objects.all().order_by("categoria")
+       categoria=n_categorias()
        n_usuarios, n_tiendas, n_productos=info_pagina()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
@@ -344,7 +359,7 @@ def crear_tienda(request):
      #!/usr/bin/python
      # -*- coding: latin-1 -*-
      import os, sys
-     categoria=Categoria_global.objects.all().order_by("categoria")
+     categoria=n_categorias()
      n_usuarios, n_tiendas, n_productos=info_pagina()
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username) 
     
@@ -374,7 +389,7 @@ def crear_tienda(request):
         #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
 
 def editar_tienda(request,acid):   
-        categoria=Categoria_global.objects.all().order_by("categoria")
+        categoria=n_categorias()
         n_usuarios, n_tiendas, n_productos=info_pagina()
         mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
         
@@ -428,7 +443,7 @@ def mi_tienda(request,idusuario,nombretienda):
     return render(request,'catalogo_tienda.html',locals())   
  
 def mis_tiendas(request,idusuario):
-  categoria=Categoria_global.objects.all().order_by("categoria")
+  categoria=n_categorias()
   n_usuarios, n_tiendas, n_productos=info_pagina()
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   
@@ -447,7 +462,7 @@ def mis_tiendas(request,idusuario):
 
 def ver_categorias(request,item):
   
-  categoria=Categoria_global.objects.all().order_by("categoria")
+  categoria=n_categorias()
   n_usuarios, n_tiendas, n_productos=info_pagina()
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   
@@ -504,7 +519,7 @@ def busqueda_tienda(request,idusuario,nombretienda):
         return render(request,'catalogo_tienda.html',locals()) 
 
 def busqueda(request):
-     categoria=Categoria_global.objects.all().order_by("categoria")
+     categoria=n_categorias()
      n_usuarios, n_tiendas, n_productos=info_pagina()
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
      
@@ -530,7 +545,7 @@ def pagina_principal(request):
 
                          n_usuarios, n_tiendas, n_productos=info_pagina()
 
-                         categoria=Categoria_global.objects.all().order_by("categoria")
+                         categoria=n_categorias()
                          mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)  
 
                          configurar=Configuracion_sistema.objects.all().first()
@@ -549,7 +564,7 @@ def pagina_principal(request):
 
 
 def catalogo(request, var):
-  categoria=Categoria_global.objects.all().order_by("categoria")
+  categoria=n_categorias()
   n_usuarios, n_tiendas, n_productos=info_pagina()
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
@@ -557,14 +572,15 @@ def catalogo(request, var):
   return render(request,'catalogo.html',locals())   
 
 def informacion(request):
-  categoria=Categoria_global.objects.all().order_by("categoria")
+  categoria=n_categorias()
   n_usuarios, n_tiendas, n_productos=info_pagina()
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   #return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
   return render(request,'informacion.html',locals())   
 
 def informacion_vendedor(request,idusuario):
-      categoria=Categoria_global.objects.all().order_by("categoria")
+      categoria=n_categorias()
+      n_usuarios, n_tiendas, n_productos=info_pagina()
      
 
       usuario=Usuarios.objects.filter(id_usuario=idusuario).first()
@@ -601,7 +617,7 @@ def add_to_cart(request, product_id,idusuario,nombretienda):
     
 @login_required
 def remove_from_cart(request, product_id):
-    categoria=Categoria_global.objects.all().order_by("categoria")
+    categoria=n_categorias()
     n_usuarios, n_tiendas, n_productos=info_pagina()
     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 

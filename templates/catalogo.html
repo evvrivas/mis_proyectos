@@ -13,7 +13,12 @@
                              {% thumbnail j.imagen1 "200" crop="center" as im %}
                               <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                         <p>{{j.categoria}} </p>  
-                        <p>{{j.descripcion | linebreaks}}</p>
+
+                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Informacion</button>
+                              <div id="demo" class="collapse">
+                               <p>{{j.descripcion | linebreaks}}</p>   
+                              </div>
+                        
                         <p>{{j.slogan}}</p>
                         <p>Miembro desde {{j.fecha_ingreso}}</p> 
 
