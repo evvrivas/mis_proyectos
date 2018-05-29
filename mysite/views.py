@@ -251,7 +251,7 @@ def n_categorias():
          cate=[]
          cat=Categoria_global.objects.all().order_by("categoria")
          categoria=Counter(cat)
-         for c,v in categoria.iteritems(): 
+         for c,v in categoria.items(): 
             x=str(c)+ " " +str(v)
             cate.append(x)
          return cate
