@@ -36,15 +36,23 @@
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
 
+                        <br>
+                        <p>{{j.categoria }} </p>   
+                        <br>
+
                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Informacion</button>
                               <div id="demo" class="collapse">
-                               <p>{{j.descripcion | linebreaks}}</p>   
+                               <p>{{j.descripcion | linebreaks}}</p> 
+                                                       
+                               <p>{{j.slogan}} </p>
+                               <p>Miembro desde {{j.fecha_ingreso}}</p>     
+
+
+
                               </div>
 
                         
-                        <p>{{j.categoria }} </p>                           
-                        <p>{{j.slogan}} </p>
-                        <p>Miembro desde {{j.fecha_ingreso}}</p>                                    
+                                                         
                         {% endthumbnail %}
 
 
@@ -108,14 +116,14 @@
                                 <td >
                    
 
-
+             
              {%  if j.precio_B %}
                           <button type="button" class="btn btn-success">
                           Precio $ <span class="badge badge-light">{{j.precio_B}}</span>
                           </button>
-             { % else %}
+             {% else %}
                     
-                    {%  if j.precio_A %}
+                    {% if j.precio_A %}
                           <button type="button" class="btn btn-primary">
                           Precio $ <span class="badge badge-light">{{j.precio_A}}</span>
                           </button>
@@ -210,16 +218,20 @@
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
 
-                        
+                        <br>
                         <p>{{j.categoria}} </p>  
-                       
+                       <br>
                          <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Informacion</button>
                               <div id="demo" class="collapse">
+                               
                                <p>{{j.descripcion | linebreaks}}</p>   
+                                                       
+                               <p>{{j.slogan}} </p>
+                               <p>Miembro desde {{j.fecha_ingreso}}</p>     
+
                               </div>
-                              
-                         <p>{{j.slogan}} </p>
-                        <p>Miembro desde {{j.fecha_ingreso}}</p>                                     
+
+                                                         
                         {% endthumbnail %}
 
 
@@ -278,7 +290,7 @@
                           <button type="button" class="btn btn-success">
                           Precio $ <span class="badge badge-light">{{j.precio_B}}</span>
                           </button>
-             { % else %}
+             {% else %}
                     
                     {%  if j.precio_A %}
                           <button type="button" class="btn btn-primary">

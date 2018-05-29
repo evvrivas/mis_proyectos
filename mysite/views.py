@@ -248,11 +248,13 @@ def crear_mensaje(request,bandera):
 
 def n_categorias():
          from collections import Counter
-         
+         cate=[]
          cat=Categoria_global.objects.all().order_by("categoria")
          categoria=Counter(cat)
-
-         return categoria
+         for c,v in categoria.iteritems(): 
+            x=str(c)+ " " +str(v)
+            cate.append(x)
+         return cate
 
 
 
