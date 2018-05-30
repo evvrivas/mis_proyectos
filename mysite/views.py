@@ -252,7 +252,7 @@ def n_categorias():
          cat=Tiendas.objects.all()
          v=[]
          for i in cat:
-             v.append(i.categorias)
+             v.append(i.categoria)
 
          categoria=Counter(v)
 
