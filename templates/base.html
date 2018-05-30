@@ -100,9 +100,9 @@
                                     <!--
                                     <li><a href="/ver_categorias/xproductox">Todos los productos</a></li>
                                      -->
-                                     <li>{{categoria}}</li>
-                                     {%  for key in categoria %}
-                                      <li><a href="/ver_categorias/{{key}}">{{key}} : {{key.attribute}}</a></li>
+                                     
+                                     {%  for key,val in categoria.items() %}
+                                      <li><a href="/ver_categorias/{{key}}">{{key}} : {{val}}</a></li>
                                    {%  endfor %} 
 
 
