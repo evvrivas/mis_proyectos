@@ -254,12 +254,11 @@ def n_categorias():
          for i in cat:
              v.append(i.categoria)
 
-         categoria=Counter(v)
+         categoria=dict(Counter(v))
 
          return categoria
 
-
-
+          
 
 def crear_usuario(request): 
         #!/usr/bin/python
