@@ -11,12 +11,13 @@
          
          <p>{{configurar.mensaje_bienvenida| linebreaks}}</p>
          
+      {%  if user.is_authenticated %}     
          <br> 
          <li><a href="/accounts/login">Entrar Aqui </a></li>
          <br>
          <li><a href="/crear_usuario">Quieres una tienda? Registrarte Aqui</a></li>
          <br>                            
-
+      {% endif %}  
 
        </div>
 </div>
@@ -37,8 +38,8 @@
                         <p>{{j.categoria }} </p>   
                         <br>
 
-                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Informacion</button>
-                              <div id="demo" class="collapse">
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{j.nombre_tienda}}">Informacion</button>
+                              <div id="{{j.nombre_tienda}}" class="collapse">
                                <p>{{j.descripcion | linebreaks}}</p> 
                                                        
                                <p>{{j.slogan}} </p>
@@ -218,8 +219,8 @@
                         <br>
                         <p>{{j.categoria}} </p>  
                        <br>
-                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Informacion</button>
-                              <div id="demo" class="collapse">
+                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{j.nombre_tienda}}">Informacion</button>
+                              <div id="{{j.nombre_tienda}}" class="collapse">
                                
                                <p>{{j.descripcion | linebreaks}}</p>   
                                                        
