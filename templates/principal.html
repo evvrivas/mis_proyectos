@@ -38,10 +38,10 @@
 
                         <br>
                         <p>{{j.categoria }} </p>   
-                        <br>
+                       zs
 
-                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Informacion</button>
-                              <div id="demo" class="collapse">
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{j.nombre_tienda}}">Informacion</button>
+                              <div id="{{j.nombre_tienda}}" class="collapse">
                                <p>{{j.descripcion | linebreaks}}</p> 
                                                        
                                <p>{{j.slogan}} </p>
