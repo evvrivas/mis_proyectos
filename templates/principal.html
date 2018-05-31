@@ -10,16 +10,18 @@
        <div class="alert alert-info">
          
          <p>{{configurar.mensaje_bienvenida| linebreaks}}</p>
-         
-      {%  if user.is_authenticated %}    
+        
+         {%  if user.is_authenticated %}   
+             <br>          
+             <center><p>Gracias por usar XGANGAS</p></center>>
+         {%  else  %} 
+             <br>                                
+             <li><a href="/accounts/login">Entrar </a></li>
+              <br>
+            <li><a href="/crear_usuario">Quieresuna tienda?   Registrarte Aqui</a></li>
+         {% endif %}  
 
-       
-         <br> 
-         <li><a href="/accounts/login">Entrar Aqui </a></li>
-         <br>
-         <li><a href="/crear_usuario">Quieres una tienda? Registrarte Aqui</a></li>
-         <br>                            
-      {% endif %}  
+     
 
        </div>
 </div>
