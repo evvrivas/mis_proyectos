@@ -21,6 +21,7 @@ import datetime
 #from books.models import Publisher
 from django.shortcuts import render_to_response
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 #from miPagina.books.models import Book
 from mysite.settings import MEDIA_URL
@@ -593,7 +594,7 @@ def informacion_vendedor(request,idusuario):
 from mysite.datos_artetronica.cart import Cart
 
 @login_required
-def add_to_cart(product_id,idusuario,nombretienda):    
+def add_to_cart(request,product_id,idusuario,nombretienda):    
     
     quantity= request.POST.get("cant")
     productos = Productos.objects.get(id=product_id)
@@ -607,7 +608,7 @@ def add_to_cart(product_id,idusuario,nombretienda):
     cart.add(productos, precio, quantity)
     total=cart.summary()    
     
-
+    return redirect('/')
     #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
     #return render(request,'.',locals())   
     
