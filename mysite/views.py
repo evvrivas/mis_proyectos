@@ -605,10 +605,11 @@ def add_to_cart(request,product_id,idusuario,nombretienda):
     
     cart = Cart(request)
     cart.add(productos, precio, quantity)
-    total=cart.summary()     
-    return None
+    total=cart.summary()    
+    
+
     #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
-    #return render(request,'carrito.html',locals())   
+    return render(request,'.',locals())   
     
 @login_required
 def remove_from_cart(request, product_id):
