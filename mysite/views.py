@@ -593,9 +593,7 @@ def informacion_vendedor(request,idusuario):
 from mysite.datos_artetronica.cart import Cart
 
 @login_required
-def add_to_cart(product_id,idusuario,nombretienda): 
-
-   
+def add_to_cart(request,product_id,idusuario,nombretienda):    
     
     quantity= request.POST.get("cant")
     productos = Productos.objects.get(id=product_id)

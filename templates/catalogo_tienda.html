@@ -98,15 +98,38 @@
 
                           <br>
                        
-                       get_cart(request,bandera,idusuario,nombretienda):
-                        
-                       <form action='/add_to_cart/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/' method='post'>
+                       
+ <div class="container">               
+                <form action='/add_to_cart/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/' method='post'>
                               {% csrf_token %}                                
                               <label for="username">cant</label>
                               <input type="text" name="cant" value="1" id="cant" size="2">                    
-                              <input type="submit" value="Al Pedido "  />                               
+                              <input type="submit" value="Al Pedido " class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" />                               
                               <a href="/get_cart/0/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}">Ver</a> 
+                                                  
+
                        </form>  
+
+
+                      <div class="modal fade" id="myModal" role="dialog">
+                          <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Hola</h4>
+                              </div>
+                              <div class="modal-body">
+                                <p>Producto agregado a la lista</p>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Ok.</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+</div>
+
 
                       
 
