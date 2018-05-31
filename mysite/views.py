@@ -596,6 +596,10 @@ from mysite.datos_artetronica.cart import Cart
 @login_required
 def add_to_cart(request,product_id,idusuario,nombretienda):    
     
+    categoria=n_categorias()
+    n_usuarios, n_tiendas, n_productos=info_pagina()
+    mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+
     quantity= request.POST.get("cant")
     productos = Productos.objects.get(id=product_id)
     
@@ -607,10 +611,9 @@ def add_to_cart(request,product_id,idusuario,nombretienda):
     cart = Cart(request)
     cart.add(productos, precio, quantity)
     total=cart.summary()    
-    return HttpResponseRedirect("")  
-    #return redirect('/')
-    #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
-    #return render(request,'.',locals())   
+   
+   
+    return render(request,'carrito.html',locals())   
     
 @login_required
 def remove_from_cart(request, product_id):
