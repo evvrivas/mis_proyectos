@@ -162,11 +162,11 @@ def categorizar(idusuario,nombretienda):
 
 def publicida_inteligencia(request):
     
-    items=Buscar.objects.filter(id_usuario=request.user.username).first()
+    items=Buscar.objects.filter(id_usuario=request.user.username).order_by("fecha_busqueda").first()
     palabra=items.item_de_busqueda
             
-    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-    tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra))
+    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("fecha")[:6]
+    tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("fecha")[:6]
             
            
     return  tiendas,productos
@@ -439,6 +439,10 @@ def mi_tienda(request,idusuario,nombretienda):
     
     
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first() 
+    
+    tiendas.n_visitas= tiendas.n_visitas+=1 #          
+    tiendas.save()
+    
     var=tiendas.codigoapk    
 
     #if fecha_inicio_plan<=fecha_final_plan:
@@ -559,6 +563,9 @@ def pagina_principal(request):
                          mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)  
 
                          configurar=Configuracion_sistema.objects.all().first()
+                         
+                         configurar.n_visitas= configurar.n_visitas+=1 #          
+                         configurar.save()
 
                          
                          try:
@@ -566,8 +573,8 @@ def pagina_principal(request):
                          except:
                              pass
                          
-                         #nuevas_tiendas=Tiendas.objects.all().order_by("-fecha_ingreso")[0:6]
-                         #nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[0:6]
+                         nuevas_tiendas=Tiendas.objects.all().order_by("fecha_ingreso")[0:6]
+                         nuevos_productos=Productos.objects.all().order_by("fecha_ingreso")[0:6]
                                             
                          return render(request,'principal.html',locals())   
 
@@ -604,6 +611,7 @@ def informacion_vendedor(request,idusuario):
 from mysite.datos_artetronica.cart import Cart
 
 @login_required
+
 def add_to_cart(request,product_id,idusuario,nombretienda):    
     
     categoria=n_categorias()
@@ -623,7 +631,7 @@ def add_to_cart(request,product_id,idusuario,nombretienda):
     total=cart.summary()    
    
    
-    return render(request,'carrito.html',locals())   
+    return render(request,'confirmar_tienda.html',locals())   
     
 @login_required
 def remove_from_cart(request, product_id):
@@ -799,3 +807,21 @@ def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
 
      productos=Pedidos.objects.get(id=id_prod)
      return render(request,'carrusel.html',locals())
+
+
+def comentario_tienda(request,idusuario,nombretienda):
+   
+    categoria=categorizar(idusuario,nombretienda)    
+    
+    tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first() 
+    
+    
+    if request.POST:
+        coment = request.POST.get('comentario')
+        tiendas.ultimo_comentario= coment          
+        tiendas.save()
+        #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+        
+    return render(request,'confirmar_tienda.html',locals()) 
+
+    

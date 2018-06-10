@@ -22,15 +22,20 @@
                                  <p>Miembro desde {{j.fecha_ingreso}}</p>   
                               </div>
                         
-                        
+                           <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{j.nombre_tienda}}2">Comentario</button>
+                               <div id="{{j.nombre_tienda}}2" class="collapse">
+                               <p>{{j.comentario | linebreaks}}</p> 
+                                                       
+                               
+                              </div>
 
                    <div class="row"> 
                    
                 <center><table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20informacion"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
-                                    <td WIDTH="60"><a href="tel://{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20informacion%20de%20{{j.nombre_tienda}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="tel://+{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
                                     
                                     <td WIDTH="60"><a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a></td>
                                 </tr >
@@ -135,8 +140,8 @@
                  <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Xgangas_Hola%2C%20deseo%20informacion"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
-                                    <td WIDTH="60"><a href="tel://{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Xgangas_Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="tel://+{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
                                     
                                     <td WIDTH="60"><a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a></td>
                                 </tr >

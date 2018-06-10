@@ -112,11 +112,12 @@ class Productos(models.Model):
 class Buscar(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
 	     item_de_busqueda=models.CharField(max_length=30)
+	     fecha_busqueda = models.DateField(default=datetime.now,editable = False)
 
 	     def __str__(self):
 		    		return  self.item_de_busqueda
 	     class Admin:
-		    		list_display = ('item_de_busqueda')
+		    		list_display = ('item_de_busqueda','fecha_busqueda')
 
 
 PLAN_TIENDA= (
@@ -148,7 +149,8 @@ CLAVES=(
 			)
 
 class Configuracion_sistema(models.Model):
-	     mensaje_bienvenida=models.TextField(blank=True)	            
+	     mensaje_bienvenida=models.TextField(blank=True)	
+	     n_visitas=models.IntegerField(blank=True,default=0)            
 	     def __str__(self):
 		    		return  self.mensaje_bienvenida
 	     class Admin:
@@ -192,6 +194,8 @@ class Tiendas(models.Model):
 	     descripcion=models.TextField(blank=True)
 	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
 	     slogan=models.CharField(max_length=90,blank=True)
+	     n_visitas=models.IntegerField(blank=True,default=0)
+	     ultimo_comentario=models.CharField(max_length=90,blank=True)
 
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     	     

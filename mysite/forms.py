@@ -26,7 +26,7 @@ class ProductosForm(ModelForm):
 class BuscarForm(ModelForm):
 	class Meta:
 		model= Buscar
-		exclude=["id_usuario"]
+		exclude=["id_usuario","fecha_busqueda"]
 
 
 class CategoriaForm(ModelForm):
@@ -43,7 +43,7 @@ class TiendasForm(ModelForm):
 	class Meta:
 		model= Tiendas	
 		widgets = {'descripcion': Textarea(attrs={'cols': 50, 'rows': 8}),}	
-		exclude=["codigoapk","id_usuario","fecha_ingreso"]
+		exclude=["codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario"]
 
 
 class PedidosForm(ModelForm):
