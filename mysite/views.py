@@ -90,6 +90,16 @@ def crear_producto(request,idusuario,nombretienda):
             bandera=1
      elif  usuario.plan_tienda_activo=="PREMIUM" and cantidad_productos<100:
             bandera=1 
+     elif  usuario.plan_tienda_activo=="TRECIENTOS" and cantidad_productos<300:
+            bandera=1 
+     elif  usuario.plan_tienda_activo=="QUINIENTOS" and cantidad_productos<500:
+            bandera=1 
+     elif  usuario.plan_tienda_activo=="MIL" and cantidad_productos<1000:
+            bandera=1 
+     elif  usuario.plan_tienda_activo=="DOSMIL" and cantidad_productos<2000:
+            bandera=1 
+     elif  usuario.plan_tienda_activo=="CINCOMIL" and cantidad_productos<2000:
+            bandera=1 
      else:
            bandera=0
 

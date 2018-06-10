@@ -124,8 +124,12 @@ PLAN_TIENDA= (
 			('BASICO', 'BASICO (20 productos S30 ANUALES)'),
 			('STANDARD', 'STANDARD (45 productos $50 ANUALES)'),
 			('PREMIUM', 'PREMIUN (100 productos $90 ANUALES)'),	
-			
-
+			('TRECIENTOS', 'TRECIENTOS PRODUCTOS $?'),	
+			('QUINIENTOS', 'QUINIENTOS PRODUCTOS $?'),	
+			('MIL', 'MIL PRODUCTOS $?'),
+			('DOSMIL', 'DOSMIL PRODUCTOS $?'),	
+			('CINCOMIL', 'CINCOMIL PRODUCTOS $?'),		 
+			       
 			)	
 
 INFORMA= (
@@ -177,9 +181,6 @@ CATEGORIA_TIENDA= (
 			
 
 			)
-
-
-
 
 
 class Tiendas(models.Model):	     
