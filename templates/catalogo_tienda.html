@@ -12,7 +12,7 @@
          <a href="#" class="alert-link"> {{tiendas.descripcion| linebreaks}}</a>.
          <p>de forma breve comenta que te parece esta tienda</p>
 
-        <form action="/comentar/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
+        <form action="/comentario_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
                                      {% csrf_token %}
                                <input type="text" id="name" name="comentario" size="10"/>
                                <input type="submit" value=">>">
