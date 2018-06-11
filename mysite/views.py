@@ -439,8 +439,9 @@ def mi_tienda(request,idusuario,nombretienda):
     
     
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first() 
-    
-    tiendas.n_visitas= eval(tiendas.n_visitas)+=1      
+    visitas=tiendas.n_visitas
+
+    tiendas.n_visitas+=1      
     tiendas.save()
     
     var=tiendas.codigoapk    
@@ -564,7 +565,7 @@ def pagina_principal(request):
 
                          configurar=Configuracion_sistema.objects.all().first()
                          
-                         configurar.n_visitas= eval(configurar.n_visitas)+=1 #          
+                         configurar.n_visitas+=1         
                          configurar.save()
 
                          
