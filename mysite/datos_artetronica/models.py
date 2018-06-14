@@ -183,7 +183,13 @@ CATEGORIA_TIENDA= (
 			
 
 			)
-
+ESTADO_PRODUCTO= (
+	        ('EN_EXISTENCIA', 'EN_EXISTENCIA'), 
+			('EN_PRODUCCION', 'EN_PRODUCCION'),
+			('SOLO_POR_ENCARGO', 'SOLO_POR_ENCARGO'),
+			('AGOTADO', 'AGOTADO'),	
+			
+			)
 
 class Tiendas(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	     
@@ -196,7 +202,8 @@ class Tiendas(models.Model):
 	     slogan=models.CharField(max_length=90,blank=True)
 	     n_visitas=models.IntegerField(blank=True,default=0)
 	     ultimo_comentario=models.CharField(max_length=90,blank=True)
-
+	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO_PRODUCTO,default="EN_EXISTENCIA")
+     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     	     
 	     def __str__(self):

@@ -171,7 +171,16 @@
                  </div>
                       
                       {%  if user.is_authenticated and user.username == tiendas.id_usuario %}                       
-                             <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li>  
+                             <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li> 
+
+                <form action='/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/' method='post'>
+                {% csrf_token %}  
+
+                <input type="submit" value="cambiar estado estado"  />                       
+                </form>
+                       
+
+
                       {% endif %}     
                       <p>Ingreso el {{j.fecha_ingreso}}</p>                                                                     
                  </div>

@@ -165,8 +165,8 @@ def publicida_inteligencia(request):
     items=Buscar.objects.filter(id_usuario=request.user.username).order_by("fecha_busqueda").first()
     palabra=items.item_de_busqueda
             
-    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("fecha")[:6]
-    tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("fecha")[:6]
+    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("fecha_ingreso")[:6]
+    tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("fecha_ingreso")[:6]
             
            
     return  tiendas,productos
@@ -825,4 +825,34 @@ def comentario_tienda(request,idusuario,nombretienda):
         
     return render(request,'confirmar_tienda.html',locals()) 
 
-    
+def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto):  
+
+                        categoria=categorizar(idusuario,nombretienda)
+
+                        tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()                  
+
+                        prod = Producto.objects.get(pk=id_del_producto)
+                                                                       
+                        if prod.estado=="EN_EXISTENCIA":
+                             prod.estado="AGOTADO"
+                        
+                        elif prod.estado=="AGOTADO":
+                              prod.estado="SOLO_POR_ENCARGO"
+                        
+                        elif prod.estado=="SOLO_POR_ENCARGO":
+                              prod.estado="EN_PRODUCCION"
+
+                        elif prod.estado=="EN PRODUCCION":
+                              prod.estado="EN_EXISTENCIA"
+ 
+                        else:
+                             pass 
+                       
+                        prod.save() # Guardar los datos en la base de datos 
+                        #bandera=ped.estado_del_pedido 
+                        #pedidos=Pedido.objects.filter(estado_del_pedido=bandera) 
+                        i=prod
+                        return render(request,'catalogo_tienda.html',locals())
+
+
+                      
