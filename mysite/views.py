@@ -833,17 +833,17 @@ def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto):
 
                         prod = Productos.objects.get(pk=id_del_producto)
                                                                        
-                        if prod.estado=="EN_EXISTENCIA":
-                             prod.estado="AGOTADO"
+                        if prod.estado_prod=="EN_EXISTENCIA":
+                             prod.estado_prod="AGOTADO"
                         
-                        elif prod.estado=="AGOTADO":
-                              prod.estado="SOLO_POR_ENCARGO"
+                        elif prod.estado_prod=="AGOTADO":
+                              prod.estado_prod="SOLO_POR_ENCARGO"
                         
-                        elif prod.estado=="SOLO_POR_ENCARGO":
-                              prod.estado="EN_PRODUCCION"
+                        elif prod.estado_prod=="SOLO_POR_ENCARGO":
+                              prod.estado_prod="EN_PRODUCCION"
 
-                        elif prod.estado=="EN PRODUCCION":
-                              prod.estado="EN_EXISTENCIA"
+                        elif prod.estado_prod=="EN PRODUCCION":
+                              prod.estado_prod="EN_EXISTENCIA"
  
                         else:
                              pass 
