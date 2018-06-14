@@ -831,7 +831,7 @@ def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto):
 
                         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()                  
 
-                        prod = Producto.objects.get(pk=id_del_producto)
+                        prod = Productos.objects.get(pk=id_del_producto)
                                                                        
                         if prod.estado=="EN_EXISTENCIA":
                              prod.estado="AGOTADO"

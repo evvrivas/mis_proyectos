@@ -79,6 +79,16 @@ class Categoria(models.Model):
          class Admin:
          	list_display = ('categoria')
 
+
+ESTADO_PRODUCTO= (
+	        ('EN_EXISTENCIA', 'EN_EXISTENCIA'), 
+			('EN_PRODUCCION', 'EN_PRODUCCION'),
+			('SOLO_POR_ENCARGO', 'SOLO_POR_ENCARGO'),
+			('AGOTADO', 'AGOTADO'),	
+			
+			)
+
+
 class Productos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
 	     tienda=models.ForeignKey('Tiendas',blank=True,null=True)
@@ -99,7 +109,7 @@ class Productos(models.Model):
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_A  = models.FloatField(default=0,blank=True,null=True)
 	     precio_B=models.FloatField(blank=True,null=True)	   
-
+         estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO_PRODUCTO,default="EN_EXISTENCIA")     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 
 	      	    
@@ -183,13 +193,7 @@ CATEGORIA_TIENDA= (
 			
 
 			)
-ESTADO_PRODUCTO= (
-	        ('EN_EXISTENCIA', 'EN_EXISTENCIA'), 
-			('EN_PRODUCCION', 'EN_PRODUCCION'),
-			('SOLO_POR_ENCARGO', 'SOLO_POR_ENCARGO'),
-			('AGOTADO', 'AGOTADO'),	
-			
-			)
+
 
 class Tiendas(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	     
@@ -202,8 +206,7 @@ class Tiendas(models.Model):
 	     slogan=models.CharField(max_length=90,blank=True)
 	     n_visitas=models.IntegerField(blank=True,default=0)
 	     ultimo_comentario=models.CharField(max_length=90,blank=True)
-	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO_PRODUCTO,default="EN_EXISTENCIA")
-     
+	     
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     	     
 	     def __str__(self):
