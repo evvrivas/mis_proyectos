@@ -653,6 +653,8 @@ def get_cart(request,bandera,idusuario,nombretienda):
       
     duenotienda=Usuarios.objects.filter(id_usuario=idusuario).first()
     
+    cliente=Usuarios.objects.filter(id_usuario=request.user.username).first()
+
     cart = Cart(request)
     cart.view()
     total=cart.summary()   
@@ -665,18 +667,25 @@ def get_cart(request,bandera,idusuario,nombretienda):
 
     
     if bandera=="1":
-            mensaje="Hola, contactate con mi persona al WhatsApp No:\n"
-            mensaje+= str(duenotienda.id_usuario)  +"\n"
-            mensaje="Estoy muy interesado en esto:\n"
+            mensaje="Hola, somos xgangas y registramos que su tienda :\n"
+            mensaje+= str(duenotienda.nombre_tienda)+ " y No. de contacto" +str(duenotienda.id_usuario)  +"\n"
+            mensaje+="tubo una visita y el cliente se intereso por esto::\n"
+            
             for item in cart:     
                  mensaje+= "["+str(item.quantity)+str(item.product )+str(item.total_price)+"]\n"
             
-            mensaje+="\nEl total es:"+str(total)+"\n"
-            whatsapp=request.user.username
+            mensaje+="\nEl total es:"+str(total)+"\n\n"
+            
+            whatsapp=cliente.id_usuario
             fecha= datetime.datetime.now()
+
+            mensaje+="El numero de contacto del cliente es:"+str(cliente.id_usuario)+"\n"
+            mensaje+="El Nombre del cliente es:"+str(cliente.nombre)+"\n"
+            mensaje+="El Email del cliente es:"+str(cliente.mail)+"\n"
+
             mensaje+= str(fecha)
             sender =duenotienda.email
-            asunto="Xgangas: Estoy interesado"
+            asunto="de Xgangas: negocios"
             try:
                send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
             except:
