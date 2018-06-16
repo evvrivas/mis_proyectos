@@ -328,7 +328,7 @@ def editar_usuario(request,acid):
        categoria=n_categorias()
        n_usuarios, n_tiendas, n_productos=info_pagina()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-
+       acid=acid-1
        f = Usuarios.objects.get(pk=acid)           
        
        if request.method == 'POST':
