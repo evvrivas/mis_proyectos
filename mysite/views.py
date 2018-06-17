@@ -338,11 +338,18 @@ def editar_usuario(request,acid):
             form = UsuariosForm(request.POST,request.FILES,instance=f)
        
             if form.is_valid():
+
+                    contra = form.cleaned_data['clave'] 
+
+                    user = User.objects.get(username=request.user.username)
+                    user.set_password(contra)
+                    user.save()
+
                     usu=form.save(commit=False)
-                    usu.id_usuario = request.user.username
-                    usu.clave = request.user.password
+                    usu.id_usuario = request.user.username                    
                     usu.save() # Guardar los datos en la base de datos 
                     #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
+                    
                     whatsapp=request.user.username
                     fecha= datetime.datetime.now()
                     mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
@@ -454,7 +461,7 @@ def mi_tienda(request,idusuario,nombretienda):
     #else:
     #     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))[0:5]
 
-    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
+    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("-precio_A")[0:5]
 
     
     return render(request,'catalogo_tienda.html',locals())   
