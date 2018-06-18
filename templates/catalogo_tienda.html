@@ -175,17 +175,11 @@
                            <center> 
                              <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li> 
 
-                <form action='/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/' method='post'>
-                {% csrf_token %}  
-
-                <input type="submit" value="{{j.estado_prod}}"  />                       
-                </form>
-
-
+                
                 <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle"
           data-toggle="dropdown">
-    Título del botón <span class="caret"></span>
+    Cambiar {{j.estado_prod}}  <span class="caret"></span>
   </button>
  
   <ul class="dropdown-menu" role="menu">
@@ -210,8 +204,9 @@
            {% endfor %}  
         
 <center>
-<div class="dropup">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">VER MAS PRODUCTOS
+<div class="container">                                          
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
@@ -219,9 +214,9 @@
   {%  for i in categoria %}
     <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i}}">{{i}}</a></li>
   {%  endfor %} 
-
     </ul>
   </div>
+</div>
 
 </center>
 
