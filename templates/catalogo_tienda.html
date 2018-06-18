@@ -26,7 +26,7 @@
    {% for j in productos %} 
 
 
-      {% if user.is_anonymous and j.estado_prod == 'VENDIDO' %}
+      {% if if user.usename != j.id_usuario and j.estado_prod == 'VENDIDO' %}
 
 {% else %}
 

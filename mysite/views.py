@@ -855,7 +855,7 @@ def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estad
 
                         prod = Productos.objects.get(pk=id_del_producto)
                                                                        
-                        if estado_nuevo=="EN_EXISTENCIA" or estado_nuevo=="AGOTADO" or estado_nuevo=="SOLO_POR_ENCARGO" or estado_nuevo=="EN_PRODUCCION":
+                        if estado_nuevo=="EN_EXISTENCIA" or estado_nuevo=="AGOTADO" or estado_nuevo=="SOLO_POR_ENCARGO" or estado_nuevo=="EN_PRODUCCION" or estado_nuevo=="VENDIDO":
                              prod.estado_prod=estado_nuevo
                              prod.save()
                                               

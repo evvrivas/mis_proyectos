@@ -105,7 +105,7 @@
 
  
  
- {% if user.is_anonymous and j.estado_prod == 'VENDIDO' %}
+ {% if user.usename != j.id_usuario and j.estado_prod == 'VENDIDO' %}
 
 {% else %}
 
@@ -292,7 +292,7 @@
  <div class="row">
  {% for j in nuevos_productos %} 
 
- {% if user.is_anonymous and j.estado_prod == 'VENDIDO' %}
+ {% if user.usename != j.id_usuario and j.estado_prod == 'VENDIDO' %}
 }
 
 {% else %}
