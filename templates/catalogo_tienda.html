@@ -180,7 +180,25 @@
 
                 <input type="submit" value="{{j.estado_prod}}"  />                       
                 </form>
-                     </center>  
+
+
+                <div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown">
+    Título del botón <span class="caret"></span>
+  </button>
+ 
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/EN_EXISTENCIA/">EN_EXISTENCIA</a></li>
+    <li><a href="/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/EN_PRODUCCION/">EN_PRODUCCION</a></li>
+    <li><a href="/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/SOLO_POR_ENCARGO/">SOLO_POR_ENCARGO</a></li>
+    <li><a href="/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/AGOTADO/">AGOTADO</a></li>
+    <li><a href="/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/VENDIDO/">VENDIDO</a></li>
+  </ul>
+</div>
+
+
+                  </center>  
 
 
                       {% endif %}     
@@ -191,6 +209,24 @@
                
            {% endfor %}  
         
+<center>
+<div class="dropup">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">VER MAS PRODUCTOS
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
+  
+  {%  for i in categoria %}
+    <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i}}">{{i}}</a></li>
+  {%  endfor %} 
+
+    </ul>
+  </div>
+
+</center>
+
+
+
 </div>
                 
 

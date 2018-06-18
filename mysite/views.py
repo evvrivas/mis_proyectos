@@ -843,7 +843,7 @@ def comentario_tienda(request,idusuario,nombretienda):
         
     return render(request,'confirmar_tienda.html',locals()) 
 
-def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto):  
+def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estado_nuevo):  
 
                         categoria=categorizar(idusuario,nombretienda)
 
@@ -851,24 +851,11 @@ def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto):
 
                         prod = Productos.objects.get(pk=id_del_producto)
                                                                        
-                        if prod.estado_prod=="EN_EXISTENCIA":
-                             prod.estado_prod="AGOTADO"
-                        
-                        elif prod.estado_prod=="AGOTADO":
-                              prod.estado_prod="SOLO_POR_ENCARGO"
-                        
-                        elif prod.estado_prod=="SOLO_POR_ENCARGO":
-                              prod.estado_prod="EN_PRODUCCION"
-
-                        elif prod.estado_prod=="EN PRODUCCION":
-                              prod.estado_prod="EN_EXISTENCIA"
- 
-                        else:
-                             pass 
-                       
-                        prod.save() # Guardar los datos en la base de datos 
-                        #bandera=ped.estado_del_pedido 
-                        #pedidos=Pedido.objects.filter(estado_del_pedido=bandera) 
+                        if estado_nuevo=="EN_EXISTENCIA" or estado_nuevo=="AGOTADO" or estado_nuevo=="SOLO_POR_ENCARGO" or estado_nuevo=="EN_PRODUCCION":
+                             prod.estado_prod=estado_nuevo
+                             prod.save()
+                                              
+                         # Guardar los datos en la base de datos 
                         i=prod
                         return render(request,'catalogo_tienda.html',locals())
 
