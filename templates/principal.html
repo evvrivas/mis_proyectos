@@ -30,6 +30,7 @@
 <div class="row">   
 {% for j in tiendas %} 
   <div class="col-md-2">   
+
                       
                      <div class="thumbnail">                      
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
@@ -100,6 +101,16 @@
 
  <div class="row">
  {% for j in productos %} 
+
+
+ {% if user.is_anonymous and j.estado_prod=="VENDIDO" %}
+
+{% else %}
+
+
+
+
+
      <div class="col-md-2">  
             
                  <div class="thumbnail">
@@ -205,7 +216,7 @@
                   </div>
            
           </div>   
-                                
+{% endif %}                     
          {% endfor %} 
        
 </div>
@@ -278,6 +289,10 @@
 
  <div class="row">
  {% for j in nuevos_productos %} 
+
+ {% if user.is_anonymous and j.estado_prod=="VENDIDO" %}
+
+{% else %}
      <div class="col-md-2">  
             
                  <div class="thumbnail">
@@ -368,7 +383,7 @@
                   </div>
            
           </div>   
-                                
+            {% endif %}                     
          {% endfor %} 
        
 </div>
