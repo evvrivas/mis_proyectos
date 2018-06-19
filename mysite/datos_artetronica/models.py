@@ -17,11 +17,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from sorl.thumbnail import ImageField
 
-ESTADO= (
-			('Nuevo', 'Nuevo'),
-			('Usado', 'Usado'),		
-
-			)	
+	
 TIPO_PRENDA = (
 	        ('confeccion ', 'confeccion'),	        
 	        ('serigrafia', 'serigrafia'),
@@ -70,6 +66,8 @@ class Categoria_global(models.Model):
 		 	return  self.categoria
 		 class Admin:
 		 	list_display = ('categoria')
+		 class Meta:
+              ordering = ["categoria"]
 
 class Categoria(models.Model):
          id_usuario=models.CharField(max_length=30,blank=True)
@@ -78,7 +76,9 @@ class Categoria(models.Model):
          	return  self.categoria
          class Admin:
          	list_display = ('categoria')
-
+         
+         class Meta:
+              ordering = ["categoria"]
 
 ESTADO_PRODUCTO= (
 	        ('EN_EXISTENCIA', 'EN_EXISTENCIA'), 
@@ -118,7 +118,7 @@ class Productos(models.Model):
 		    		return  self.nombre
 	     class Admin:
 		    		list_display = ('categoria', 'cantidad', 'nombre','precio_A')
-		    		
+		  		
 
 class Buscar(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
@@ -142,13 +142,6 @@ PLAN_TIENDA= (
 			('DOSMIL', 'DOSMIL PRODUCTOS $?'),	
 			('CINCOMIL', 'CINCOMIL PRODUCTOS $?'),		 
 			       
-			)	
-
-INFORMA= (
-			('informacion1', 'Acepto pagos contra entrega'),
-			('informacion2', 'Acepto solamente pago anticipado'),
-			('informacion3', 'Definamos el pago y la entrega'),	
-			
 			)	
 
 CLAVES=(
@@ -215,16 +208,6 @@ class Tiendas(models.Model):
 	     class Admin:
 		    		list_display = ('nombre_tienda')
 
-
-class Mensajes(models.Model):
-		id_usuario=models.IntegerField(blank=True,default=0)
-		mensaje = models.TextField() 
-		respuesta = models.TextField(blank=True)
-		fecha= models.DateField(default=datetime.now,blank=True,editable = False)
-		def __str__(self):
-				return  self.mensaje
-		class Admin:
-				pass
 
 class Pedidos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)

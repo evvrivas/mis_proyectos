@@ -39,9 +39,6 @@ admin.site.register(Pedidos)
 class RulesAdmin(admin.ModelAdmin):
     form = PedidosForm
 
-admin.site.register(Mensajes)
-class RulesAdmin(admin.ModelAdmin):
-    form = MensajesForm
 
 admin.site.register(Configuracion_sistema)
 class RulesAdmin(admin.ModelAdmin):

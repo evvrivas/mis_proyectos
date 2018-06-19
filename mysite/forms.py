@@ -52,12 +52,6 @@ class PedidosForm(ModelForm):
 		widgets = {'descripcion': Textarea(attrs={'cols': 40, 'rows': 6}),}
 		exclude=["id_usuario"]
 
-class MensajesForm(ModelForm):
-	class Meta:
-		exclude = ('id_usuario',)		
-		model=Mensajes
-		widgets = {'mensaje': Textarea(attrs={'cols': 30, 'rows': 3}),'respuesta': Textarea(attrs={'cols': 30, 'rows': 3}),}
-
 
 		
 class Configuracion_sistemaForm(ModelForm):

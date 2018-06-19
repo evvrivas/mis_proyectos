@@ -480,7 +480,7 @@ def mi_tienda(request,idusuario,nombretienda):
     #else:
     #     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))[0:5]
 
-    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("-precio_A")[0:5]
+    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("precio_A")[:10]
 
     connection.close() 
     return render(request,'catalogo_tienda.html',locals())   
@@ -590,10 +590,8 @@ def pagina_principal(request):
 
 
                          n_usuarios, n_tiendas, n_productos=info_pagina()
-
                          categoria=n_categorias()
-                         mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)  
-
+                         mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username) 
                          configurar=Configuracion_sistema.objects.all().first()
                          
                          configurar.n_visitas+=1         
@@ -605,8 +603,8 @@ def pagina_principal(request):
                          except:
                              pass
                          
-                         nuevas_tiendas=Tiendas.objects.all().order_by("fecha_ingreso")[0:6]
-                         nuevos_productos=Productos.objects.all().order_by("fecha_ingreso")[0:6]
+                         nuevas_tiendas=Tiendas.objects.all().order_by("fecha_ingreso")[:6]
+                         nuevos_productos=Productos.objects.all().order_by("fecha_ingreso")[:6]
                          connection.close()                    
                          return render(request,'principal.html',locals())   
 
