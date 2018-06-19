@@ -66,8 +66,6 @@ class Categoria_global(models.Model):
 		 	return  self.categoria
 		 class Admin:
 		 	list_display = ('categoria')
-		 class Meta:
-              ordering = ["categoria"]
 
 class Categoria(models.Model):
          id_usuario=models.CharField(max_length=30,blank=True)
@@ -76,9 +74,7 @@ class Categoria(models.Model):
          	return  self.categoria
          class Admin:
          	list_display = ('categoria')
-         
-         class Meta:
-              ordering = ["categoria"]
+
 
 ESTADO_PRODUCTO= (
 	        ('EN_EXISTENCIA', 'EN_EXISTENCIA'), 
@@ -118,7 +114,7 @@ class Productos(models.Model):
 		    		return  self.nombre
 	     class Admin:
 		    		list_display = ('categoria', 'cantidad', 'nombre','precio_A')
-		  		
+		    		
 
 class Buscar(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
@@ -207,6 +203,8 @@ class Tiendas(models.Model):
 		    		return  self.nombre_tienda
 	     class Admin:
 		    		list_display = ('nombre_tienda')
+
+
 
 
 class Pedidos(models.Model):
