@@ -41,7 +41,11 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 #from templates import *
 from django.db.models import Q
-from django import db
+
+
+
+from django.db import connections
+
 
 
 
@@ -58,7 +62,9 @@ def info_usuario(request):
     usuario=Usuarios.objects.filter(id_usuario=request.user.username).firrst()
     cantidad_tiendas=Tiendas.objects.filter(id_usuario=request.user.username).count()    
     tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-    db.close_connection()
+    
+    connection.close()
+
     return cantidad_usuarios, cantidad_tiendas, cantidad_productos
 
 
@@ -66,7 +72,7 @@ def info_pagina():
     cantidad_usuarios=Usuarios.objects.all().count()
     cantidad_tiendas=Tiendas.objects.all().count()
     cantidad_productos=Productos.objects.all().count()
-    db.close_connection()
+    connection.close()
     return cantidad_usuarios, cantidad_tiendas, cantidad_productos
 
 
@@ -127,7 +133,7 @@ def crear_producto(request,idusuario,nombretienda):
                                       form.save()  
                                       
                                       #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-                                      db.close_connection()
+                                      connection.close()
                                       return render(request,'confirmar.html',locals())     
                               else:
 
@@ -141,7 +147,7 @@ def crear_producto(request,idusuario,nombretienda):
                                               categor.id_usuario = request.user.username # Set the user object here
                                               categor.save() # Now you can send it to DB
                                               formCateg.save() # Guardar los datos en la base de datos  print  
-                                              db.close_connection() 
+                                              connection.close() 
                                               return render(request,'entrada_producto.html',locals())                           
                                              
                                                       
@@ -149,13 +155,13 @@ def crear_producto(request,idusuario,nombretienda):
                    
                     form=ProductosForm(request.user.username)
                     formCateg=CategoriaForm() 
-                    db.close_connection()                      
+                    connection.close()                      
                     return render(request,'entrada_producto.html',locals())
 
 
      else:
 
-          db.close_connection()
+          connection.close()
           return render(request,'formulario_cambio_plan.html',locals())
 
 def categorizar(idusuario,nombretienda):
@@ -165,7 +171,7 @@ def categorizar(idusuario,nombretienda):
         for i in vector:
               cat.append(i.categoria)              
         categoria=set(cat) 
-        db.close_connection()       
+        connection.close()       
         return categoria
 
 
@@ -177,7 +183,7 @@ def publicida_inteligencia(request):
     productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("fecha_ingreso")[:6]
     tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("fecha_ingreso")[:6]
             
-    db.close_connection()       
+    connection.close()       
     return  tiendas,productos
 
 
@@ -201,7 +207,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
                     productillo.tienda=tiendas             
                     productillo.save() # Now you can send it to DB
                     form.save()
-                    db.close_connection() 
+                    connection.close() 
                     return render(request,'confirmar.html',locals())      
 
                                           
@@ -217,7 +223,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
                                   categor.id_usuario = request.user.username # Set the user object here
                                   categor.save() # Now you can send it to DB
                                   formCateg.save() # Guardar los datos en la base de datos  print  
-                                  db.close_connection()
+                                  connection.close()
                                   return render(request,'entrada_producto.html',locals())  
         else:
             
@@ -225,7 +231,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
             #formCateg=CategoriaForm()
 
         
-        db.close_connection()
+        connection.close()
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
         return render(request,'entrada_producto.html',locals())   
         
@@ -245,7 +251,7 @@ def crear_mensaje(request,bandera):
                         mensajero.id_usuario = request.user.id # Set the user object here
                         mensajero.save() # Now you can send it to DB
                      
-                        db.close_connection()
+                        connection.close()
                         #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                         return render(request,'confirmar.html',locals())   
         else:            
@@ -262,7 +268,7 @@ def crear_mensaje(request,bandera):
                   
                   mensajes_anteriores=Mensajes.objects.all().order_by("-id") 
     
-        db.close_connection()
+        connection.close()
         return render(request,'mensajes.html',locals())   
         #return render_to_response('mensajes.html', locals() ,context_instance=RequestContext(request))
 
@@ -276,7 +282,7 @@ def n_categorias():
              v.append(i.categoria)
 
          categoria=dict(Counter(v))
-         db.close_connection()
+         connection.close()
          return categoria
 
           
@@ -320,7 +326,7 @@ def crear_usuario(request):
                             except:
                                   pass
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-                            db.close_connection()
+                            connection.close()
                             return render(request,'confirmar_usuario.html',locals())   
                    
                 
@@ -328,7 +334,7 @@ def crear_usuario(request):
         else:            
                          
                          form=UsuariosForm()
-        db.close_connection()                  
+        connection.close()                  
         return render(request,'formulario_crear_usuario.html',locals()) 
 
 
@@ -370,7 +376,7 @@ def editar_usuario(request,acid):
                         send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
                     except:
                          pass        
-                    db.close_connection()
+                    connection.close()
                     return render(request,'confirmar.html',locals())             
             
        else:
@@ -380,7 +386,7 @@ def editar_usuario(request,acid):
 
         
 
-       db.close_connection()
+       connection.close()
        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
        return render(request,'formulario_editar_usuario.html',locals())   
 
@@ -405,7 +411,7 @@ def crear_tienda(request):
                                            
                           tiendecilla.save() # Now you can send it to DB
                           form.save()  
-                          db.close_connection()
+                          connection.close()
                           #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                           return render(request,'confirmar.html',locals())     
                                           
@@ -415,7 +421,7 @@ def crear_tienda(request):
         form=TiendasForm()
                                 
 
-     db.close_connection() 
+     connection.close() 
      return render(request,'formulario_ingreso.html',locals())
         #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
 
@@ -432,7 +438,7 @@ def editar_tienda(request,acid):
        
             if form.is_valid():
                    form.save() 
-                   db.close_connection()
+                   connection.close()
                    return render(request,'confirmar.html',locals())             
                     
         else:
@@ -441,7 +447,7 @@ def editar_tienda(request,acid):
             
 
         
-        db.close_connection()
+        connection.close()
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
         return render(request,'formulario_ingreso.html',locals())   
 
@@ -476,7 +482,7 @@ def mi_tienda(request,idusuario,nombretienda):
 
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("-precio_A")[0:5]
 
-    db.close_connection() 
+    connection.close() 
     return render(request,'catalogo_tienda.html',locals())   
  
 def mis_tiendas(request,idusuario):
@@ -485,7 +491,7 @@ def mis_tiendas(request,idusuario):
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   
   tiendas=Tiendas.objects.filter(id_usuario=idusuario)
-  db.close_connection()
+  connection.close()
   return render(request,'catalogo.html',locals())   
 
 
@@ -516,7 +522,7 @@ def ver_categorias(request,item):
     productos=Productos.objects.filter(categoria__categoria__contains=item)    
     
   
-  db.close_connection()
+  connection.close()
 
 
   #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
@@ -537,7 +543,7 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
     productos=Productos.objects.filter(Q(categoria__categoria__contains=item) & Q(tienda__nombre_tienda__contains=nombretienda)) 
    
    
-  db.close_connection()
+  connection.close()
   #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
   return render(request,'catalogo_tienda.html',locals())   
  
@@ -554,7 +560,7 @@ def busqueda_tienda(request,idusuario,nombretienda):
         
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) & Q(tienda__nombre_tienda__contains=nombretienda))
-        db.close_connection()
+        connection.close()
         return render(request,'catalogo_tienda.html',locals()) 
 
 def busqueda(request):
@@ -573,7 +579,7 @@ def busqueda(request):
 
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
         tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra))
-     db.close_connection()
+     connection.close()
      return render(request,'catalogo.html',locals())   
                   
    
@@ -601,7 +607,7 @@ def pagina_principal(request):
                          
                          nuevas_tiendas=Tiendas.objects.all().order_by("fecha_ingreso")[0:6]
                          nuevos_productos=Productos.objects.all().order_by("fecha_ingreso")[0:6]
-                         db.close_connection()                    
+                         connection.close()                    
                          return render(request,'principal.html',locals())   
 
 
@@ -612,7 +618,7 @@ def catalogo(request, var):
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
   #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
-  db.close_connection()
+  connection.close()
   return render(request,'catalogo.html',locals())   
 
 def informacion(request):
@@ -620,7 +626,7 @@ def informacion(request):
   n_usuarios, n_tiendas, n_productos=info_pagina()
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   #return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
-  db.close_connection()
+  connection.close()
   return render(request,'informacion.html',locals())   
 
 def informacion_vendedor(request,idusuario):
@@ -631,7 +637,7 @@ def informacion_vendedor(request,idusuario):
       usuario=Usuarios.objects.filter(id_usuario=idusuario).first()
       cantidad_tiendas=Tiendas.objects.filter(id_usuario=idusuario).count()    
       tiendas=Tiendas.objects.filter(id_usuario=idusuario)
-      db.close_connection()
+      connection.close()
       
       return render(request,'informacion_vendedor.html',locals())   
 
@@ -659,7 +665,7 @@ def add_to_cart(request,product_id,idusuario,nombretienda):
     cart.add(productos, precio, quantity)
     total=cart.summary()    
    
-    db.close_connection()
+    connection.close()
     return render(request,'confirmar_tienda.html',locals())   
     
 @login_required
@@ -671,7 +677,7 @@ def remove_from_cart(request, product_id):
     product = Productos.objects.get(id=product_id)
     cart = Cart(request)
     cart.remove(product)
-    db.close_connection()
+    connection.close()
 
 @login_required
 def get_cart(request,bandera,idusuario,nombretienda):
@@ -719,12 +725,12 @@ def get_cart(request,bandera,idusuario,nombretienda):
                send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
             except:
                 pass            
-            db.close_connection()
+            connection.close()
             return render(request,'confirmar_tienda.html',locals())               
     else:
 
             #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
-          db.close_connection() 
+          connection.close() 
           return render(request,'carrito.html',locals())   
 
 
@@ -756,7 +762,7 @@ def cambiar_estado_pedido(request,idusuario,nombretienda,id_del_pedido):
                         #bandera=ped.estado_del_pedido 
                         #pedidos=Pedido.objects.filter(estado_del_pedido=bandera) 
                         i=ped
-                        db.close_connection()
+                        connection.close()
                         return render(request,'catalogo_pedidos.html',locals())
 
 @login_required
@@ -774,14 +780,14 @@ def editar_pedido(request,idusuario,nombretienda,acid):
                     ped=form.save(commit=False)
                     ped.id_usuario =  request.user.username
                     ped.save() # Guardar los datos en la base de datos 
-                    db.close_connection()
+                    connection.close()
                     return render(request,'confirmar_tienda.html',locals())
 
         else:
             
             form = PedidosForm(instance=f)   
         
-        db.close_connection()
+        connection.close()
         return render(request,'pedido.html',locals())
 
 
@@ -800,13 +806,13 @@ def hacer_pedido(request,idusuario,nombretienda):
                         ped=form.save(commit=False)
                         ped.id_usuario = request.user.username
                         ped.save() # Guardar los datos en la base de datos 
-                        db.close_connection()
+                        connection.close()
                         return render(request,'confirmar_tienda.html',locals())
         else:            
                        
                         form = PedidosForm()                
 
-        db.close_connection() 
+        connection.close() 
         return render(request,'pedido.html',locals())
 
      
@@ -830,7 +836,7 @@ def listado_pedido(request,idusuario,nombretienda,bandera):
     
     else:                   
         pedidos= Pedidos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda=nombretienda) & Q(estado=bandera)).order_by( "fecha_de_entrega")
-    db.close_connection() 
+    connection.close() 
     return render(request,'catalogo_pedidos.html',locals())
         
 
@@ -840,7 +846,7 @@ def carrusel(request,id_prod,idusuario,nombretienda):
      tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
      productos=Productos.objects.get(id=id_prod)
-     db.close_connection()
+     connection.close()
      return render(request,'carrusel.html',locals())
 
 def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
@@ -852,7 +858,7 @@ def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
      tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
      productos=Pedidos.objects.get(id=id_prod)
-     db.close_connection()
+     connection.close()
      return render(request,'carrusel.html',locals())
 
 
@@ -868,7 +874,7 @@ def comentario_tienda(request,idusuario,nombretienda):
         tiendas.ultimo_comentario= coment          
         tiendas.save()
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
-    db.close_connection()    
+    connection.close()    
     return render(request,'confirmar_tienda.html',locals()) 
 
 def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estado_nuevo):  
@@ -885,7 +891,7 @@ def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estad
                                               
                          # Guardar los datos en la base de datos 
                         i=prod
-                        db.close_connection()
+                        connection.close()
                         return render(request,'catalogo_tienda.html',locals())
 
 
