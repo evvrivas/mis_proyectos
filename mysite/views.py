@@ -134,7 +134,7 @@ def crear_producto(request,idusuario,nombretienda):
                                       
                                       #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                                       connection.close()
-                                      return render(request,'confirmar.html',locals())     
+                                      return render(request,'confirmar_tienda.html',locals())     
                               else:
 
 
