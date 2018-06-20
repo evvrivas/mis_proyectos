@@ -177,11 +177,11 @@ def categorizar(idusuario,nombretienda):
 
 def publicida_inteligencia(request):
     
-    items=Buscar.objects.filter(id_usuario=request.user.username).order_by("fecha_busqueda").first()
+    items=Buscar.objects.filter(id_usuario=request.user.username).order_by("-fecha_busqueda").first()
     palabra=items.item_de_busqueda
             
-    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("fecha_ingreso")[:6]
-    tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("fecha_ingreso")[:6]
+    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("-fecha_ingreso")[6]
+    tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("-fecha_ingreso")[6]
             
     connection.close()       
     return  tiendas,productos
@@ -480,7 +480,7 @@ def mi_tienda(request,idusuario,nombretienda):
     #else:
     #     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))[0:5]
 
-    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("precio_A")[:10]
+    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("precio_A")[10]
 
     connection.close() 
     return render(request,'catalogo_tienda.html',locals())   
@@ -603,8 +603,8 @@ def pagina_principal(request):
                          except:
                              pass
                          
-                         nuevas_tiendas=Tiendas.objects.all().order_by("fecha_ingreso")[:6]
-                         nuevos_productos=Productos.objects.all().order_by("fecha_ingreso")[:6]
+                         nuevas_tiendas=Tiendas.objects.all().order_by("-fecha_ingreso")[6]
+                         nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[6]
                          connection.close()                    
                          return render(request,'principal.html',locals())   
 
