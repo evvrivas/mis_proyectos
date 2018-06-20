@@ -180,8 +180,8 @@ def publicida_inteligencia(request):
     items=Buscar.objects.filter(id_usuario=request.user.username).order_by("-fecha_busqueda").first()
     palabra=items.item_de_busqueda
             
-    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("-fecha_ingreso")[-6:]
-    tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("-fecha_ingreso")[-6:]
+    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
+    tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
             
     connection.close()       
     return  tiendas,productos
@@ -603,8 +603,8 @@ def pagina_principal(request):
                          except:
                              pass
                          
-                         nuevas_tiendas=Tiendas.objects.all().order_by("-fecha_ingreso")[-6:]
-                         nuevos_productos=Productos.objects.all().order_by("-fecha_ingreso")[-6:]
+                         nuevas_tiendas=Tiendas.objects.all().order_by("-id")[:6]
+                         nuevos_productos=Productos.objects.all().order_by("-id")[:6:]
                          connection.close()                    
                          return render(request,'principal.html',locals())   
 
