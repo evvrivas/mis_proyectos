@@ -845,7 +845,7 @@ def carrusel(request,id_prod,idusuario,nombretienda):
 
      productos=Productos.objects.get(id=id_prod)
      connection.close()
-     return render(request,'carrusel.html',locals())
+     return render(request,'carrusel2.html',locals())
 
 def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
      
@@ -857,7 +857,7 @@ def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
 
      productos=Pedidos.objects.get(id=id_prod)
      connection.close()
-     return render(request,'carrusel.html',locals())
+     return render(request,'carrusel2.html',locals())
 
 
 def comentario_tienda(request,idusuario,nombretienda):

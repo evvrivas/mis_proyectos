@@ -1,0 +1,79 @@
+{% extends "base_tienda.html" %}
+{% load thumbnail %}
+{% load staticfiles %} 
+{% block content %}
+    
+
+ <div class="row">   
+ 
+
+<h4><center>  {{productos.nombre}}  </center></h4> 
+<p>{{productos.descripcion | linebreaks}}</p> 
+
+
+
+
+<div class="container">
+  
+   {% thumbnail productos.imagen1 "400" crop="center" as im %}   
+  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" style="width:100%;">
+   {% endthumbnail %}
+  <div class="content">
+    <h1>$ {{ productos.precio_A }}</h1>
+    <p></p>
+  </div>
+</div>
+
+
+
+<div class="container">
+  
+   {% thumbnail productos.imagen2 "400" crop="center" as im %}   
+  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" style="width:100%;">
+   {% endthumbnail %}
+  <div class="content">
+    <h1>productos.precio_A</h1>
+    <p></p>
+  </div>
+</div>
+
+
+
+<div class="container">  
+   {% thumbnail productos.imagen3 "400" crop="center" as im %}   
+  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" style="width:100%;">
+   {% endthumbnail %}
+  <div class="content">
+    <h1>productos.precio_A</h1>
+    <p></p>
+  </div>
+</div>
+
+
+
+     
+<center>
+              <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone={{productos.id_usuario}}&text=Xgangas_Hola%2C%20deseo%20informacion%20de%20{{productos.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="tel://+{{productos.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    
+                                    <td WIDTH="60"><a href="https://m.me/productos.facedireccion" target="_blank"><img src='{% static "mesenger.png" %}' alt='img'/></a></td>
+                                </tr >
+                        </table>
+ </center>
+
+
+
+</div>
+           
+
+
+
+
+
+{% endblock %}
+
+
+
