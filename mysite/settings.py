@@ -50,10 +50,12 @@ INSTALLED_APPS = (
     'mysite',
     'mysite.datos_artetronica',
     'sorl.thumbnail',
+    'dbbackup',  # django-dbbackup
 
 )
 
-
+DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
+DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}
 
 
 MIDDLEWARE_CLASSES = (

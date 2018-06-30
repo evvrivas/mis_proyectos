@@ -17,6 +17,7 @@ sorl-thumbnail
 #gunicorn==19.3.0
 
 Pillow==2.7.0
+django-dbbackup
 #psycopg2==2.5.4
 #pyDatalog==0.15.2
 #pyfacebook===1.0a2.1

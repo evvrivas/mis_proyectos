@@ -5,17 +5,28 @@
     
 
  <div class="row">   
- 
 
-<h4><center>  {{productos.nombre}}  </center></h4> 
-<p>{{productos.descripcion | linebreaks}}</p> 
+        <div class="col-md-4"> 
+         </div> 
+
+        <div class="col-md-4">  
+        <h4><center>  {{productos.nombre}}  </center></h4> 
+        <p>{{productos.descripcion | linebreaks}}</p> 
+        </div> 
 
 
+         <div class="col-md-4">  
+         </div> 
 
+ </div>  
 
+ <div class="row">  
+
+<div class="col-md-4">  
+
+{%  if productos.imagen1 %}
 <div class="container">
-  
-   {% thumbnail productos.imagen1 "400" crop="center" as im %}   
+    {% thumbnail productos.imagen1 "400" crop="center" as im %}   
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" style="width:100%;">
    {% endthumbnail %}
   <div class="content">
@@ -23,33 +34,44 @@
     <p></p>
   </div>
 </div>
+{% endif %}
 
+</div>
 
+<div class="col-md-4">
 
+{%  if productos.imagen2 %}
 <div class="container">
   
    {% thumbnail productos.imagen2 "400" crop="center" as im %}   
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" style="width:100%;">
    {% endthumbnail %}
   <div class="content">
-    <h1>productos.precio_A</h1>
+    <h1>{{ productos.precio_A }}</h1>
     <p></p>
   </div>
 </div>
+{% endif %}
+
+</div>
+
+<div class="col-md-4">
 
 
-
+{%  if productos.imagen3 %}
 <div class="container">  
    {% thumbnail productos.imagen3 "400" crop="center" as im %}   
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" style="width:100%;">
    {% endthumbnail %}
   <div class="content">
-    <h1>productos.precio_A</h1>
+    <h1>{{ productos.precio_A }}</h1>
     <p></p>
   </div>
 </div>
+{% endif %}
 
 
+</div>
 
      
 <center>
