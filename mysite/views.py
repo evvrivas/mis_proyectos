@@ -145,6 +145,7 @@ def crear_producto(request,idusuario,nombretienda):
                                               # commit=False tells Django that "Don't send this to database yet.
                                               # I have more things I want to do with it."
                                               categor.id_usuario = request.user.username # Set the user object here
+                                              categor.tienda = tiendas.nombre_tienda
                                               categor.save() # Now you can send it to DB
                                               formCateg.save() # Guardar los datos en la base de datos  print  
                                               connection.close() 
