@@ -32,7 +32,7 @@ class BuscarForm(ModelForm):
 class CategoriaForm(ModelForm):
 	class Meta:
 		model= Categoria		
-		exclude=["id_usuario","nombre_tienda"]
+		exclude=["id_usuario","tienda"]
 
 
 
