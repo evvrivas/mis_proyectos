@@ -154,7 +154,7 @@ def crear_producto(request,idusuario,nombretienda):
                                                       
                  else:
                    
-                    form=ProductosForm(request.user.username)
+                    form=ProductosForm(request.user.username,tiendas.nombre_tienda)
                     formCateg=CategoriaForm() 
                     connection.close()                      
                     return render(request,'entrada_producto.html',locals())
