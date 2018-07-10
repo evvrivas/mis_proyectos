@@ -121,7 +121,7 @@ def crear_producto(request,idusuario,nombretienda):
 
                  if request.method == 'POST': # si el usuario est enviando el formulario con datos
                         
-                              form=ProductosForm(request.user.username,request.POST,request.FILES)                   
+                              form=ProductosForm(request.user.username,tiendas.nombre_tienda,request.POST,request.FILES)                   
                               
                               if form.is_valid():
                                       productillo = form.save(commit=False)

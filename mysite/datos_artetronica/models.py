@@ -69,7 +69,7 @@ class Categoria_global(models.Model):
 
 class Categoria(models.Model):
          id_usuario=models.CharField(max_length=30,blank=True)
-         tienda=models.CharField(max_length=30,blank=True)
+         tienda=models.CharField(max_length=30,blank=True,null=True)
          categoria=models.CharField(max_length=30,blank=True,null=True)
          def __str__(self):
          	return  self.categoria

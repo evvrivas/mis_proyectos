@@ -25,7 +25,8 @@
 <div class="col-md-4">  
 
 {%  if productos.imagen1 %}
-<div class="container">
+
+<div class="thumbnail">
     {% thumbnail productos.imagen1 "400" crop="center" as im %}   
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
    {% endthumbnail %}
@@ -41,7 +42,7 @@
 <div class="col-md-4">
 
 {%  if productos.imagen2 %}
-<div class="container">
+<div class="thumbnail">
   
    {% thumbnail productos.imagen2 "400" crop="center" as im %}   
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
@@ -59,7 +60,7 @@
 
 
 {%  if productos.imagen3 %}
-<div class="container">  
+<div class="thumbnail">
    {% thumbnail productos.imagen3 "400" crop="center" as im %}   
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
    {% endthumbnail %}
