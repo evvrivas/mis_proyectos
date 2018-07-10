@@ -32,15 +32,16 @@
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
    {% endthumbnail %}
   <div class="content">
-    {%  if j.precio_B %}
+    {%  if productos.precio_B %}
                           <h1>$ {{ productos.precio_B }}</h1>
               {% else %}
                     
-                    {%  if j.precio_A %}
+                    {%  if productos.precio_A %}
                           <h1>$ {{ productos.precio_A }}</h1>
                     {% endif %}
 
-              {% endif %}
+    {% endif %}
+    
     <p></p>
   </div>
 </div>
@@ -59,11 +60,11 @@
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
    {% endthumbnail %}
   <div class="content">
-    {%  if j.precio_B %}
+    {%  if productos.precio_B %}
                           <h1>$ {{ productos.precio_B }}</h1>
               {% else %}
                     
-                    {%  if j.precio_A %}
+                    {%  if productos.precio_A %}
                           <h1>$ {{ productos.precio_A }}</h1>
                     {% endif %}
 
@@ -87,11 +88,11 @@
    {% endthumbnail %}
   <div class="content">
 
-              {%  if j.precio_B %}
+              {%  if productos.precio_B %}
                           <h1>$ {{ productos.precio_B }}</h1>
               {% else %}
                     
-                    {%  if j.precio_A %}
+                    {%  if productos.precio_A %}
                           <h1>$ {{ productos.precio_A }}</h1>
                     {% endif %}
 
