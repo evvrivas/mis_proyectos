@@ -37,7 +37,7 @@
                         
 
                         {% thumbnail j.imagen1 "200" crop="center" as im %}
-                        <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
+                        <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}" class="responsive"> </a>
 
                         <br>
                         <p>{{j.categoria }} </p>   
@@ -391,4 +391,177 @@
        
 </div>
  
+
+<div class="row">   
+{% for j in aleatorias_tiendas %} 
+  <div class="col-md-2">   
+                      
+                     <div class="thumbnail">                      
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
+                        {% thumbnail j.imagen1 "200" crop="center" as im %}
+                        <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
+
+                        <br>
+                        <p>{{j.categoria}} </p>  
+                       <br>
+                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{j.nombre_tienda}}">Informacion</button>
+                              <div id="{{j.nombre_tienda}}" class="collapse">
+                               
+                               <p>{{j.descripcion | linebreaks}}</p>   
+                                                       
+                               <p>{{j.slogan}} </p>
+                               <p>Miembro desde {{j.fecha_ingreso}}</p>  
+                               <br>
+                               <p>El ultimo cliente que comento Dijo: {{j.ultimo_comentario}}</p>    
+
+                              </div>
+                          
+                                            
+                        {% endthumbnail %}
+
+
+                        <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20informacion%20de%20{{j.nombre_tienda}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="tel://+{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    
+                                    <td WIDTH="60"><a href="https://m.me/j.facedireccion" target="_blank"><img src='{% static "mesenger.png" %}' alt='img'/></a></td>
+                                </tr >
+                        </table>
+                        </center> 
+
+                
+                         <br>
+                       
+                          <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="90"><a href='whatsapp://send?text= http://xgangas.com/{{j.id_usuario}}/{{j.nombre_tienda}}' data-action='share/whatsapp/share' target="_blank"><img src='{% static "whatssapp-sharing.png" %}' style='height:15px !important;' title='Compartir por whatsapp' /></a></td>                                    
+                                   
+                                    
+                                    <td WIDTH="90"><a href="https://www.facebook.com/sharer/sharer.php?u=www.xgangas.com/{{j.id_usuario}}/{{j.nombre_tienda}}" target="_blank"><img src='{% static "facebook.png" %}' alt='img' ></a></td>
+                                     
+                                </tr >
+                        </table>
+                        </center>
+
+
+                     </div>
+   </div>  
+
+
+
+       {% endfor %} 
+         
+ </div>         
+
+ <div class="row">
+ {% for j in aleatorias_productos %} 
+
+ {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' %}
+}
+
+{% else %}
+     <div class="col-md-2">  
+            
+                 <div class="thumbnail">
+                       <center>  {{j.estado_prod}}  </center>
+                       <h4><center>  {{j.nombre}}  </center></h4> 
+
+                         <center> 
+                       <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                <td >
+                                        {%  if j.precio_B %}
+                          <button type="button" class="btn btn-success">
+                          Precio $ <span class="badge badge-light">{{j.precio_B}}</span>
+                          </button>
+             {% else %}
+                    
+                    {%  if j.precio_A %}
+                          <button type="button" class="btn btn-primary">
+                          Precio $ <span class="badge badge-light">{{j.precio_A}}</span>
+                          </button>
+                    {% endif %}
+
+
+             {% endif %}
+
+                                    </td> 
+                                    <td >
+                                       {%  if j.cantidad %}  
+                            <button type="button" class="btn btn-danger">
+    Cant. <span class="badge badge-light">{{j.cantidad}}</span>
+                                       {% endif %}
+                                   
+                                    </td>                                    
+                                    
+                                </tr >
+                        </table>
+                        </center>   
+                       
+                         <p>{{j.descripcion | linebreaks}}</p>  
+                         
+                           <div class="row"> 
+                           
+                            
+                               
+                                    {% thumbnail j.imagen1 "200" crop="center" as im %}
+                                    <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
+                                    {% endthumbnail %}
+                             
+                                <center><table >
+                                <tr>
+                                    {% thumbnail j.imagen2 "100" crop="center" as im %}
+                                    <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
+                                     {% endthumbnail %}
+
+                                     {% thumbnail j.imagen3 "100" crop="center" as im %}
+                                    <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>
+                                    {% endthumbnail %}                                       
+                               
+                                </tr>
+                          </table></center>                    
+                  
+                  </div>                  
+                        <br>                   
+                        <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">Ir a la tienda {{j.tienda}}</a></li>
+                        <br>
+                         
+                         
+
+                 <div class="row"> 
+
+                    <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Xgangas_Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="tel://+{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    
+                                    <td WIDTH="60"><a href="https://m.me/j.facedireccion" target="_blank"><img src='{% static "mesenger.png" %}' alt='img'/></a></td>
+                                </tr >
+                        </table>
+                        </center>    
+
+                 </div>
+
+                    <p>Ingreso el {{j.fecha_ingreso}}</p> 
+                                          
+                  </div>
+           
+          </div>   
+            {% endif %}                     
+         {% endfor %} 
+       
+</div>
+
+
+
+
+
  {% endblock %}

@@ -46,7 +46,7 @@ from django.db.models import Q
 
 from django.db import connection
 
-
+from random import sample
 
 
    
@@ -198,7 +198,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
        
         if request.method == 'POST':
             
-            form = ProductosForm(request.user.username,request.POST,request.FILES,instance=f)
+            form = ProductosForm(request.user.username,tiendas.nombre_tienda,request.POST,request.FILES,instance=f)
        
             if form.is_valid():
                     productillo = form.save(commit=False)
@@ -228,7 +228,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
                                   return render(request,'entrada_producto.html',locals())  
         else:
             
-            form = ProductosForm(request.user.username,instance=f)
+            form = ProductosForm(request.user.username,tiendas.nombre_tienda,instance=f)
             #formCateg=CategoriaForm()
 
         
@@ -606,6 +606,24 @@ def pagina_principal(request):
                          
                          nuevas_tiendas=Tiendas.objects.all().order_by("-id")[:6]
                          nuevos_productos=Productos.objects.all().order_by("-id")[:6:]
+
+                         try:                             
+                             count = Tiendas.objecs.all().count()
+                             rand_ids = sample(xrange(1, count), 3)
+                             aleatorias_tiendas=Tiendas.objects.filter(id__in=rand_ids)
+                         except:
+                             pass
+                        
+                         try:
+                             count = Productos.objecs.all().count()
+                             rand_ids = sample(xrange(1, count), 3)
+                             aleatorias_productos=Productos.objects.filter(id__in=rand_ids)
+                         except:
+                             pass
+
+                         
+                         
+
                          connection.close()                    
                          return render(request,'principal.html',locals())   
 
