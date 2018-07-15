@@ -105,11 +105,9 @@ class Productos(models.Model):
 	     
 	     nombre_recurso=models.CharField(max_length=40,blank=True)
 	     recurso=models.URLField(blank=True)
-         
-         nombre_recurso_de_pago=CharField(max_length=400,blank=True)
+	     nombre_recurso_de_pago=CharField(max_length=400,blank=True)
 	     recurso_de_pago=CharField(max_length=400,blank=True)
-         password_de_recurso=CharField(max_length=4,blank=True)
-         
+	     password_de_recurso=CharField(max_length=4,blank=True)
 
 	     puntuacion	 = models.CharField(max_length=30,default=0) 
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
@@ -118,11 +116,8 @@ class Productos(models.Model):
 	     precio_B=models.FloatField(blank=True,null=True)
 	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO_PRODUCTO,default="EN_EXISTENCIA")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
-         ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
-        
-        
+	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
 
-	      	    
 	     def __str__(self):
 		    		return  self.nombre
 	     class Admin:
@@ -212,7 +207,7 @@ class Tiendas(models.Model):
 	     administrador_junior=models.CharField(max_length=30)
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
-	     	     
+
 	     def __str__(self):
 		    		return  self.nombre_tienda
 	     class Admin:
