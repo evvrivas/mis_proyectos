@@ -105,9 +105,9 @@ class Productos(models.Model):
 	     
 	     nombre_recurso=models.CharField(max_length=40,blank=True)
 	     recurso=models.URLField(blank=True)
-	     nombre_recurso_de_pago=CharField(max_length=400,blank=True)
-	     recurso_de_pago=CharField(max_length=400,blank=True)
-	     password_de_recurso=CharField(max_length=4,blank=True)
+	     nombre_recurso_de_pago=models.CharField(max_length=400,blank=True)
+	     recurso_de_pago=models.CharField(max_length=400,blank=True)
+	     password_de_recurso=models.CharField(max_length=4,blank=True)
 
 	     puntuacion	 = models.CharField(max_length=30,default=0) 
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
