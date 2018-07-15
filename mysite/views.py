@@ -912,7 +912,7 @@ def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estad
                         return render(request,'catalogo_tienda.html',locals())
 
 
- def descargar(request,idusuario,nombretienda,id_del_producto):  
+def descargar(request,idusuario,nombretienda,id_del_producto):  
 
                         categoria=categorizar(idusuario,nombretienda)
 
