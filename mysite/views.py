@@ -77,8 +77,6 @@ def info_pagina():
 
 
 
-
-
 @login_required
 def crear_producto(request,idusuario,nombretienda):               
 
@@ -205,7 +203,8 @@ def editar_producto(request,idusuario,nombretienda,acid):
                     # commit=False tells Django that "Don't send this to database yet.
                     # I have more things I want to do with it."
                     productillo.id_usuario = request.user.username # Set the user object here             
-                    productillo.tienda=tiendas             
+                    productillo.tienda=tiendas 
+                    productillo.ultima_fecha_edicion=datetime.datetime.now()             
                     productillo.save() # Now you can send it to DB
                     form.save()
                     connection.close() 
@@ -285,7 +284,6 @@ def n_categorias():
          categoria=dict(Counter(v))
          connection.close()
          return categoria
-
           
 
 def crear_usuario(request): 
@@ -328,8 +326,7 @@ def crear_usuario(request):
                                   pass
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             connection.close()
-                            return render(request,'confirmar_usuario.html',locals())   
-                   
+                            return render(request,'confirmar_usuario.html',locals())                  
                 
 
         else:            
@@ -337,8 +334,6 @@ def crear_usuario(request):
                          form=UsuariosForm()
         connection.close()                  
         return render(request,'formulario_crear_usuario.html',locals()) 
-
-
 
         
 
@@ -364,13 +359,13 @@ def editar_usuario(request,acid):
                     user.save()
 
                     usu=form.save(commit=False)
-                    usu.id_usuario = request.user.username                    
+                    usu.id_usuario = request.user.username
                     usu.save() # Guardar los datos en la base de datos 
                     #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
                     
                     whatsapp=request.user.username
                     fecha= datetime.datetime.now()
-                    mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
+                    mensaje= str(fecha)+"  "+str(whatsapp) + "EDITO SU ESTADO "+"\n"
                     sender =str("xgangasx@gmail.com")
                     asunto="edita"+" "+ str(whatsapp)
                     try:
@@ -438,6 +433,11 @@ def editar_tienda(request,acid):
             form = TiendasForm(request.POST,request.FILES,instance=f)
        
             if form.is_valid():
+                   tiendecilla = form.save(commit=False)
+                   # commit=False tells Django that "Don't send this to database yet.
+                   # I have more things I want to do with it."
+                   tiendecilla.ultima_fecha_edicion=datetime.datetime.now()             
+                   tiendecilla.save() # Now you can send it to DB
                    form.save() 
                    connection.close()
                    return render(request,'confirmar.html',locals())             
@@ -605,7 +605,7 @@ def pagina_principal(request):
                              pass
                          
                          nuevas_tiendas=Tiendas.objects.all().order_by("-id")[:6]
-                         nuevos_productos=Productos.objects.all().order_by("-id")[:6:]
+                         nuevos_productos=Productos.objects.all().order_by("-id")[:6]
 
                          try:                             
                              count = Tiendas.objecs.all().count()
@@ -912,4 +912,23 @@ def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estad
                         return render(request,'catalogo_tienda.html',locals())
 
 
-                      
+ def descargar(request,idusuario,nombretienda,id_del_producto):  
+
+                        categoria=categorizar(idusuario,nombretienda)
+
+                        tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()                  
+
+                        prod = Productos.objects.get(pk=id_del_producto)
+                        clave= request.POST.get("descargar")                                               
+                        
+                        if prod.password_de_recurso==clave:                            
+                             bandera="CORRECTO"
+                        else:
+                             
+                             bandera="INCORRECTO"                 
+                         # Guardar los datos en la base de datos 
+                        
+                        connection.close()
+                        return render(request,'descarga.html',locals())                     
+
+                       

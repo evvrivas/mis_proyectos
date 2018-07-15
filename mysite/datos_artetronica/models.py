@@ -100,15 +100,27 @@ class Productos(models.Model):
 	     imagen3 = ImageField(upload_to='tmp',blank=True)
  
 	     descripcion = models.TextField(blank=True)
+
 	     video_insercion=models.CharField(max_length=400,blank=True)
+	     
 	     nombre_recurso=models.CharField(max_length=40,blank=True)
 	     recurso=models.URLField(blank=True)
+         
+         nombre_recurso_de_pago=CharField(max_length=400,blank=True)
+	     recurso_de_pago=CharField(max_length=400,blank=True)
+         password_de_recurso=CharField(max_length=4,blank=True)
+         
+
 	     puntuacion	 = models.CharField(max_length=30,default=0) 
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
+	     precio_de_antes= models.FloatField(default=0,blank=True,null=True)
 	     precio_A  = models.FloatField(default=0,blank=True,null=True)
 	     precio_B=models.FloatField(blank=True,null=True)
 	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO_PRODUCTO,default="EN_EXISTENCIA")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
+         ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
+        
+        
 
 	      	    
 	     def __str__(self):
@@ -197,8 +209,9 @@ class Tiendas(models.Model):
 	     slogan=models.CharField(max_length=90,blank=True)
 	     n_visitas=models.IntegerField(blank=True,default=0)
 	     ultimo_comentario=models.CharField(max_length=90,blank=True)
-	     
+	     administrador_junior=models.CharField(max_length=30)
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
+	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
 	     	     
 	     def __str__(self):
 		    		return  self.nombre_tienda

@@ -81,7 +81,19 @@
                                {% if j.recurso %}                         
                                  <center><a href={{j.recurso}}>{{j.nombre_recurso}} </a></center>
                                {% endif  %} 
+                               
+                                {% if j.recurso_de_pago %}                         
+                                <form action='/descargar/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/' method='post'>
+                              {% csrf_token %}                                
+                              <label for="username">{{j.nombre_recurso_de_pago}}</label>
+                              <input type="text" name="descargar" value="1" id="descargar" size="2">                    
+                              <input type="submit" value="Descargar " class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" />                               
+                             
+                                                  
 
+                       </form>  
+
+                               {% endif  %} 
 
 
 
@@ -176,7 +188,7 @@
                         <br>
                  </div>
                       
-                      {%  if user.is_authenticated and user.username == tiendas.id_usuario %}                       
+ {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.username == tiendas.administador_junior%}                       
                            <center> 
                              <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li> 
 
