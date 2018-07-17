@@ -204,7 +204,7 @@ class Tiendas(models.Model):
 	     slogan=models.CharField(max_length=90,blank=True)
 	     n_visitas=models.IntegerField(blank=True,default=0)
 	     ultimo_comentario=models.CharField(max_length=90,blank=True)
-	     administrador_junior=models.CharField(max_length=30)
+	     administrador_junior=models.CharField(max_length=30,blank=True)
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
 

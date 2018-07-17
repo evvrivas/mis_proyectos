@@ -80,6 +80,10 @@
                                 <tr  align="center">
 
                                 <td >
+
+                                {%  if j.precio_de_antes %}  
+             <center><strike>Antes $ {{j.precio_de_antes}}</strike></center>
+             {% endif %}
                                         {%  if j.precio_B %}
                           <button type="button" class="btn btn-success">
                           Precio $ <span class="badge badge-light">{{j.precio_B}}</span>

@@ -458,15 +458,6 @@ def mi_tienda(request,idusuario,nombretienda):
     
     categoria=categorizar(idusuario,nombretienda)
     
-
-       
-    #try:
-    #    usuario=Usuarios.objects.filter(id_usuario=request.user.username).first() 
-    #    var=usuario.codigoapk     
-    #except:
-    #    pass
-    
-    
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first() 
     visitas=tiendas.n_visitas
 
@@ -474,12 +465,6 @@ def mi_tienda(request,idusuario,nombretienda):
     tiendas.save()
     
     var=tiendas.codigoapk    
-
-    #if fecha_inicio_plan<=fecha_final_plan:
-    #    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))
-
-    #else:
-    #     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda))[0:5]
 
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("precio_A")[:10]
 

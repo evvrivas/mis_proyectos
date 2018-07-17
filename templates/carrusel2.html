@@ -32,12 +32,18 @@
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
    {% endthumbnail %}
   <div class="content">
+
+     {%  if productos.precio_de_antes %}  
+             <center><strike><h1>Antes $ {{productos.precio_de_antes}}</h1></strike></center>
+     {% endif %}
+    
     {%  if productos.precio_B %}
-                          <h1>$ {{ productos.precio_B }}</h1>
+
+                          <h1>Hoy $ {{ productos.precio_B }}</h1>
               {% else %}
                     
                     {%  if productos.precio_A %}
-                          <h1>$ {{ productos.precio_A }}</h1>
+                          <h1>Hoy $ {{ productos.precio_A }}</h1>
                     {% endif %}
 
     {% endif %}
@@ -60,12 +66,16 @@
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
    {% endthumbnail %}
   <div class="content">
+
+     {%  if productos.precio_de_antes %}  
+             <center><strike><h1>Antes $ {{productos.precio_de_antes}}</h1></strike></center>
+     {% endif %}
     {%  if productos.precio_B %}
-                          <h1>$ {{ productos.precio_B }}</h1>
+                          <h1>Hoy $ {{ productos.precio_B }}</h1>
               {% else %}
                     
                     {%  if productos.precio_A %}
-                          <h1>$ {{ productos.precio_A }}</h1>
+                          <h1>Hoy $ {{ productos.precio_A }}</h1>
                     {% endif %}
 
               {% endif %}
@@ -87,13 +97,16 @@
   <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
    {% endthumbnail %}
   <div class="content">
+              {%  if productos.precio_de_antes %}  
+             <center><strike><h1>Antes $ {{productos.precio_de_antes}}</h1></strike></center>
+     {% endif %}
 
               {%  if productos.precio_B %}
-                          <h1>$ {{ productos.precio_B }}</h1>
+                          <h1>Hoy $ {{ productos.precio_B }}</h1>
               {% else %}
                     
                     {%  if productos.precio_A %}
-                          <h1>$ {{ productos.precio_A }}</h1>
+                          <h1>Hoy $ {{ productos.precio_A }}</h1>
                     {% endif %}
 
               {% endif %}
