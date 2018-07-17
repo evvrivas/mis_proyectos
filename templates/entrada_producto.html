@@ -36,11 +36,18 @@
                      {% ifequal var 'ENLACES' %}
                              
                                <p>Enlace al video {{ form.video_insercion }} </p>      
+                               <br> 
                                <p>Nombre del enlace {{ form.nombre_recurso }} </p>
-                               <p>Enlace {{ form.recurso }} </p>  
+                               <p>Enlace {{ form.recurso }} </p> 
+
+                                <br>    
+                               <p>Nombre del enlace de pago {{ form.nombre_recurso_de_pago }} </p>
+                               <p>Enlace de pago {{ form.recurso_de_pago }} </p> 
+                               <p>Paswor de descarga{{ form.password_de_recurso }} </p> 
+
                     
                      {% endifequal %}
-
+                      <p>precio anterior {{ form.precio_de_antes }} </p> 
                       <p>precio venta {{ form.precio_A }} </p>
                       <p>precio Reventa {{ form.precio_A }} </p>            
                       <p>Estado de producto {{ form.estado_prod }} </p>                                        

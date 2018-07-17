@@ -187,8 +187,12 @@
                         </center>
                         <br>
                  </div>
-                      
- {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.username == tiendas.administador_junior%}                       
+  {{ tiendas.id_usuario }}
+  {{ user.username }}
+  {{ tiendas.administador_junior }}
+
+
+ {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administador_junior %}                       
                            <center> 
                              <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li> 
 
