@@ -193,9 +193,13 @@
                  </div>
 
 
- {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior %}                       
+ {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior %}     
+
+
+                   {%  if user.is_authenticated and user.username == tiendas.id_usuario  %} 
                            <center> 
                              <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li> 
+                   {% endif %}  
 
                 
                 <div class="btn-group">
@@ -204,11 +208,11 @@
   </button>
  
   <ul class="dropdown-menu" role="menu">
-    <li><a href="/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/EN_EXISTENCIA/">EN_EXISTENCIA</a></li>
-    <li><a href="/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/EN_PRODUCCION/">EN_PRODUCCION</a></li>
-    <li><a href="/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/SOLO_POR_ENCARGO/">SOLO_POR_ENCARGO</a></li>
-    <li><a href="/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/AGOTADO/">AGOTADO</a></li>
-    <li><a href="/cambiar_estado_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/VENDIDO/">VENDIDO</a></li>
+    <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/EN_EXISTENCIA/">EN_EXISTENCIA</a></li>
+    <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/EN_PRODUCCION/">EN_PRODUCCION</a></li>
+    <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/SOLO_POR_ENCARGO/">SOLO_POR_ENCARGO</a></li>
+    <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/AGOTADO/">AGOTADO</a></li>
+    <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/VENDIDO/">VENDIDO</a></li>
   </ul>
 </div>
 
