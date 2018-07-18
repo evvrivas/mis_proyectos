@@ -885,14 +885,16 @@ def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estad
 
                         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()                  
 
-                        productos = Productos.objects.get(pk=id_del_producto)
+                        prod = Productos.objects.get(pk=id_del_producto)
                                                                        
                         if estado_nuevo=="EN_EXISTENCIA" or estado_nuevo=="AGOTADO" or estado_nuevo=="SOLO_POR_ENCARGO" or estado_nuevo=="EN_PRODUCCION" or estado_nuevo=="VENDIDO":
-                             productos.estado_prod=estado_nuevo
-                             productos.save()
+                             prod.estado_prod=estado_nuevo
+                             prod.save()
                                               
                          # Guardar los datos en la base de datos 
-                        i=productos
+                        i=prod
+                        productos=[]
+                        productos.append(prod)
                         connection.close()
                         return render(request,'catalogo_tienda.html',locals())
 
