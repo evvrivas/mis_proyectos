@@ -596,11 +596,11 @@ def pagina_principal(request):
                          nuevas_tiendas=Tiendas.objects.all().order_by("-id")[:6]
                          nuevos_productos=Productos.objects.all().order_by("-id")[:6]
 
-                         count = Tiendas.objecs.all().count()
+                         count = Tiendas.objects.all().count()
                          rand_ids = sample(xrange(1, count), 3)
                          aleatorias_tiendas=Tiendas.objects.filter(id__in=rand_ids)
                                                
-                         count = Productos.objecs.all().count()
+                         count = Productos.objects.all().count()
                          rand_ids = sample(xrange(1, count), 3)
                          aleatorias_productos=Productos.objects.filter(id__in=rand_ids)
                          
