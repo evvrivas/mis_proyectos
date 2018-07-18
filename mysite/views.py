@@ -412,6 +412,7 @@ def crear_tienda(request):
                           form.save()  
                           connection.close()
                           #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                          
                           return render(request,'confirmar.html',locals())     
                                           
                                  
