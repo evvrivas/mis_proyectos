@@ -208,7 +208,10 @@ def editar_producto(request,idusuario,nombretienda,acid):
                     productillo.save() # Now you can send it to DB
                     form.save()
                     connection.close() 
-                    return render(request,'confirmar.html',locals())      
+                    productos=[]
+                    productos.append(f)
+
+                    return render(request,'catalogo_tienda.html',locals())      
 
                                           
             

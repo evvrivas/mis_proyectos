@@ -122,6 +122,10 @@
  
 <center>  {{j.estado_prod}}  </center>
  <h4><center>  {{j.nombre}}  </center></h4> 
+             
+             {%  if j.precio_de_antes %}  
+                   <center><strike>Antes $ {{j.precio_de_antes}}</strike></center>
+             {% endif %}
  
                      <center> 
                         <table BORDER="0" CELLSPACING="1">
@@ -129,10 +133,6 @@
 
                                 <td >
                    
-             {%  if j.precio_de_antes %}  
-             <center><strike>Antes $ {{j.precio_de_antes}}</strike></center>
-             {% endif %}
-
              {%  if j.precio_B %}
                           <button type="button" class="btn btn-success">
                           Precio $ <span class="badge badge-light">{{j.precio_B}}</span>
@@ -303,6 +303,9 @@
                  <div class="thumbnail">
                        <center>  {{j.estado_prod}}  </center>
                        <h4><center>  {{j.nombre}}  </center></h4> 
+                       {%  if j.precio_de_antes %}  
+                            <center><strike>Antes $ {{j.precio_de_antes}}</strike></center>
+                       {% endif %}
 
                          <center> 
                        <table BORDER="0" CELLSPACING="1">
@@ -310,9 +313,7 @@
 
                                 <td >
 
-             {%  if j.precio_de_antes %}  
-             <center><strike>Antes $ {{j.precio_de_antes}}</strike></center>
-             {% endif %}
+             
               {%  if j.precio_B %}
                           <button type="button" class="btn btn-success">
                           Precio $ <span class="badge badge-light">{{j.precio_B}}</span>
