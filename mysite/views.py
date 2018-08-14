@@ -939,11 +939,3 @@ def descargar(request,idusuario,nombretienda,id_del_producto):
 
 
 
-def me_interesa(request,idusuario,nombretienda,id_del_producto):
-                    categoria=categorizar(idusuario,nombretienda)
-                    tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-
-                    if request.user.username:
-                           mensaje="Estoy interesado en:"
-
-                    else:
