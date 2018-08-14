@@ -71,6 +71,8 @@ class Categoria(models.Model):
          id_usuario=models.CharField(max_length=30,blank=True)
          tienda=models.CharField(max_length=30,blank=True,null=True)
          categoria=models.CharField(max_length=30,blank=True,null=True)
+         descripcion = models.TextField(blank=True)
+         
          def __str__(self):
          	return  self.categoria
          class Admin:
@@ -214,6 +216,22 @@ class Tiendas(models.Model):
 		    		list_display = ('nombre_tienda')
 
 
+ESTADO_MENSAJE= (
+	        ('ATENDIDO', 'ATENDIDO'), 
+			('NO_ATENDIDO', 'NO_ATENDIDO'),
+			)
+
+class Mensajes(models.Model):
+		id_usuario=models.CharField(max_length=30)
+		contacto=models.CharField(max_length=30)
+		pregunta = models.TextField(blank=True)
+		respuesta = models.TextField(blank=True)
+		estado=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NO_ATENDIDO")
+		fecha= models.DateField(default=datetime.now,blank=True,editable = False)
+		def __str__(self):
+				return  self.pregunta
+		class Admin:
+				list_display = ('contacto', 'id_usuario','pregunta')
 
 
 class Pedidos(models.Model):

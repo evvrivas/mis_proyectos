@@ -7,19 +7,38 @@
 
  <div class="row">   
         <div class="alert alert-danger">
-         <p>Esta pagina ha sido visitada {{tiendas.n_visitas}} veces por potenciales clientes.</p>
-         
+                  
          <a href="#" class="alert-link"> {{tiendas.descripcion| linebreaks}}</a>.
-         <p>de forma breve comenta que te parece esta tienda</p>
-
+         
+        
         <form action="/comentario_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
                                      {% csrf_token %}
-                               <input type="text" id="name" name="comentario" size="10"/>
-                               <input type="submit" value=">>">
-                               </form>
+
+                     {%  if user.is_authenticated %}
+                           <p>Quiero preguntar lo siguiente</p>
+                           <input type="text" id="name" name="comentario" size="10"/>
+                     {% else %}       
+                           <p>Quiero preguntar lo siguiente</p>
+                           <input type="text" id="name" name="comentario" size="40"/>
+                           <p>Mi numero de telefone es el siguiente</p>
+                           <input type="text" id="name" name="telefono" size="15"/>                        
+                      {% endif %}         
+
+                               <input type="submit" value="enviar">
+        </form>
+
+
+
+      
+
+
+
+
+
+
+
          <br>
-         <p>El ultimo cliente que comento Dijo: {{tiendas.ultimo_comentario}}</p> 
-       
+               
 
          </div>
 

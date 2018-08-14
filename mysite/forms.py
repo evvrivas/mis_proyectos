@@ -65,3 +65,8 @@ class Configuracion_sistemaForm(ModelForm):
 		widgets = {'mensaje_bienvenida': Textarea(attrs={'cols': 30, 'rows': 3}),'respuesta': Textarea(attrs={'cols': 30, 'rows': 3}),}
 		exclude=[]
 		
+class MensajesForm(ModelForm):
+	class Meta:			
+		model=Mensajes
+		widgets = {'pregunta': Textarea(attrs={'cols': 30, 'rows': 3}),'respuesta': Textarea(attrs={'cols': 30, 'rows': 3}),}
+		exclude=["id_usuario","fecha"]

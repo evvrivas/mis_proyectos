@@ -240,6 +240,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
         
 
 @login_required
+
 def crear_mensaje(request,bandera): 
         categoria=Categoria.objects.all().order_by("categoria")           
 
@@ -562,7 +563,7 @@ def busqueda(request):
         palabra = request.POST.get('nombre')
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
         if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
-            busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra)
+            busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra,fecha_busqueda=datetime.now)
             busqueda.save()
 
 
@@ -708,7 +709,7 @@ def get_cart(request,bandera,idusuario,nombretienda):
     
     if bandera=="1":
             mensaje="Hola, somos xgangas y registramos que su tienda :\n"
-            mensaje+= str(duenotienda.nombre_tienda)+ " y No. de contacto" +str(duenotienda.id_usuario)  +"\n"
+            mensaje+= str(nombretienda)+ " y No. de contacto" +str(duenotienda.id_usuario)  +"\n"
             mensaje+="tubo una visita y el cliente se intereso por esto::\n"
             
             for item in cart:     
@@ -875,12 +876,27 @@ def comentario_tienda(request,idusuario,nombretienda):
     
     
     if request.POST:
+
         coment = request.POST.get('comentario')
-        tiendas.ultimo_comentario= coment          
-        tiendas.save()
-        #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+        
+        
+        if request.user.username:
+               ncontacto=request.user.username
+               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,estad="NO_ATENDIDO",fecha=datetime.now)
+               mensajes.save()
+           
+        else: 
+            ncontacto = request.POST.get('telefono')
+            if ncontacto=="":
+              pass
+            else:               
+               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,estad="NO_ATENDIDO",fecha=datetime.now)
+               mensajes.save()
+        
     connection.close()    
     return render(request,'confirmar_tienda.html',locals()) 
+
+
 
 def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estado_nuevo):  
 
@@ -921,4 +937,13 @@ def descargar(request,idusuario,nombretienda,id_del_producto):
                         connection.close()
                         return render(request,'descarga.html',locals())                     
 
-                       
+
+
+def me_interesa(request,idusuario,nombretienda,id_del_producto):
+                    categoria=categorizar(idusuario,nombretienda)
+                    tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+
+                    if request.user.username:
+                           mensaje="Estoy interesado en:"
+
+                    else:

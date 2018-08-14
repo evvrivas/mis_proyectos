@@ -80,6 +80,7 @@ urlpatterns = [
     url(r'^cambiar_estado_producto/([^/]+)/([^/]+)/(\d+)/([^/]+)/$',cambiar_estado_producto),
     url(r'^descargar/([^/]+)/([^/]+)/(\d+)/$',descargar),
     
+    
 
    
 ]

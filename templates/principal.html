@@ -7,9 +7,14 @@
       
      
 <div class="row">  
-       <div class="alert alert-info">
-         <p>La pagina principal de xgangas a sido vista {{configurar.n_visitas}} veces </p>
+       <div class="alert alert-info">         
          <p>{{configurar.mensaje_bienvenida| linebreaks}}</p>
+         <br>
+
+         <p>Quieres consultar algo?<p>
+
+
+
         
          {%  if user.is_authenticated %}   
              <br>          
@@ -195,9 +200,14 @@
                   </div>              
                         <br>                   
                         <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">Ir a la tienda {{j.tienda}}</a></li>
+                        <br>                                                 
+ 
+
+
+ <center><a href="/me_interesa/{{j.id_usuario}}{{j.tienda.nombre_tienda}}/j.nombre" class="btn btn-success" role="button">Me interesa este producto</a></center>
+                        
                         <br>
-                         
-                         
+
 
                  <div class="row"> 
 
