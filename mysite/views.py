@@ -563,7 +563,8 @@ def busqueda(request):
         palabra = request.POST.get('nombre')
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
         if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
-            busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra,fecha_busqueda=datetime.now)
+            fecha=datetime.datetime.now()
+            busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra,fecha_busqueda=fecha)
             busqueda.save()
 
 
@@ -882,15 +883,17 @@ def comentario_tienda(request,idusuario,nombretienda):
         
         if request.user.username:
                ncontacto=request.user.username
-               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,estad="NO_ATENDIDO",fecha=datetime.now)
+               lafecha=datetime.datetime.now()
+               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,estad="NO_ATENDIDO",fecha=lafecha)
                mensajes.save()
            
         else: 
             ncontacto = request.POST.get('telefono')
             if ncontacto=="":
               pass
-            else:               
-               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,estad="NO_ATENDIDO",fecha=datetime.now)
+            else:
+               lafecha=datetime.datetime.now()               
+               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,estad="NO_ATENDIDO",fecha=lafecha)
                mensajes.save()
         
     connection.close()    
