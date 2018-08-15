@@ -11,12 +11,12 @@
          <a href="#" class="alert-link"> {{tiendas.descripcion| linebreaks}}</a>.
          
         
-        <form action="/comentario_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
+        <form action="/comentario_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{tiendas.nombre_tienda}}/" method="post">
                                      {% csrf_token %}
 
                      {%  if user.is_authenticated %}
                            <p>Quiero preguntar lo siguiente</p>
-                           <input type="text" id="name" name="comentario" size="10"/>
+                           <input type="text" id="name" name="comentario" size="15"/>
                      {% else %}       
                            <p>Quiero preguntar lo siguiente</p>
                            <input type="text" id="name" name="comentario" size="40"/>
@@ -211,6 +211,23 @@
                         </center>
                         <br>
                  </div>
+
+
+      <form action="/comentario_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.nombre}}/" method="post">
+                                     {% csrf_token %}
+
+                     {%  if user.is_authenticated %}
+                           <p>Quiero preguntar lo siguiente</p>
+                           <input type="text" id="name" name="comentario" size="15"/>
+                     {% else %}       
+                           <p>Quiero preguntar lo siguiente</p>
+                           <input type="text" id="name" name="comentario" size="40"/>
+                           <p>Mi numero de telefone es el siguiente</p>
+                           <input type="text" id="name" name="telefono" size="15"/>                        
+                      {% endif %}         
+
+                               <input type="submit" value="enviar">
+        </form>
 
 
  {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior %}     

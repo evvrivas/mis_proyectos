@@ -76,7 +76,7 @@ urlpatterns = [
     url(r'^get_cart/(\d+)/([^/]+)/([^/]+)/$', get_cart),
     url(r'^carrusel/(\d+)/([^/]+)/([^/]+)/$', carrusel),
     url(r'^carrusel_pedidos/(\d+)/([^/]+)/([^/]+)/$', carrusel_pedidos),
-    url(r'^comentario_tienda/([^/]+)/([^/]+)/$', comentario_tienda),
+    url(r'^comentario_tienda/([^/]+)/([^/]+)/([^/]+)/$', comentario_tienda),
     url(r'^cambiar_estado_producto/([^/]+)/([^/]+)/(\d+)/([^/]+)/$',cambiar_estado_producto),
     url(r'^descargar/([^/]+)/([^/]+)/(\d+)/$',descargar),
     

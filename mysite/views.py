@@ -869,7 +869,7 @@ def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
      return render(request,'carrusel2.html',locals())
 
 
-def comentario_tienda(request,idusuario,nombretienda):
+def comentario_tienda(request,idusuario,nombretienda,producto):
    
     categoria=categorizar(idusuario,nombretienda)    
     
@@ -884,7 +884,7 @@ def comentario_tienda(request,idusuario,nombretienda):
         if request.user.username:
                ncontacto=request.user.username
                lafecha=datetime.datetime.now()
-               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,estad="NO_ATENDIDO",fecha=lafecha)
+               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,nombre_producto=producto,estado="NO_ATENDIDO",fecha=lafecha)
                mensajes.save()
            
         else: 
@@ -893,7 +893,7 @@ def comentario_tienda(request,idusuario,nombretienda):
               pass
             else:
                lafecha=datetime.datetime.now()               
-               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,estad="NO_ATENDIDO",fecha=lafecha)
+               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,nombre_producto=producto,estado="NO_ATENDIDO",fecha=lafecha)
                mensajes.save()
         
     connection.close()    

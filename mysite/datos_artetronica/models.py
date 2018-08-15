@@ -225,6 +225,7 @@ class Mensajes(models.Model):
 		id_usuario=models.CharField(max_length=30)
 		contacto=models.CharField(max_length=30)
 		pregunta = models.TextField(blank=True)
+		nombre_producto=CharField(max_length=30,blank=True)
 		respuesta = models.TextField(blank=True)
 		estado=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NO_ATENDIDO")
 		fecha= models.DateField(default=datetime.now,blank=True,editable = False)
