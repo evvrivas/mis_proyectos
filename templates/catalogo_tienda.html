@@ -18,9 +18,9 @@
                            <p>Quiero preguntar lo siguiente</p>
                            <input type="text" id="name" name="comentario" size="15"/>
                      {% else %}       
-                           <p>Quiero preguntar lo siguiente</p>
-                           <input type="text" id="name" name="comentario" size="40"/>
-                           <p>Mi numero de telefone es el siguiente</p>
+                           <p>Quiero preguntar</p>
+                           <input type="text" id="name" name="comentario" size="25"/>
+                           <p>Mi numero de contacto es</p>
                            <input type="text" id="name" name="telefono" size="15"/>                        
                       {% endif %}         
 
@@ -217,12 +217,12 @@
                                      {% csrf_token %}
 
                      {%  if user.is_authenticated %}
-                           <p>Quiero preguntar lo siguiente</p>
+                           <p>Quiero preguntar</p>
                            <input type="text" id="name" name="comentario" size="15"/>
                      {% else %}       
-                           <p>Quiero preguntar lo siguiente</p>
-                           <input type="text" id="name" name="comentario" size="40"/>
-                           <p>Mi numero de telefone es el siguiente</p>
+                           <p>Quiero preguntar</p>
+                           <input type="text" id="name" name="comentario" size="25"/>
+                           <p>Mi numero de contacto es</p>
                            <input type="text" id="name" name="telefono" size="15"/>                        
                       {% endif %}         
 

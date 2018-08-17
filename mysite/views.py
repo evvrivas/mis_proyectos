@@ -885,7 +885,7 @@ def comentario_tienda(request,idusuario,nombretienda,producto):
                ncontacto=request.user.username
                lafecha=datetime.datetime.now()
                mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,nombre_producto=producto,estado="NO_ATENDIDO",fecha=lafecha)
-               mensajes.save()
+               mensaje.save()
            
         else: 
             ncontacto = request.POST.get('telefono')
@@ -894,7 +894,7 @@ def comentario_tienda(request,idusuario,nombretienda,producto):
             else:
                lafecha=datetime.datetime.now()               
                mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,nombre_producto=producto,estado="NO_ATENDIDO",fecha=lafecha)
-               mensajes.save()
+               mensaje.save()
         
     connection.close()    
     return render(request,'confirmar_tienda.html',locals()) 
