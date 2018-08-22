@@ -2,6 +2,33 @@
 {% load thumbnail %}
 {% load staticfiles %} 
 {% block content %}
+   
+       
+
+<div class="row">
+          {% for j in comercio %} 
+               <div class="col-md-2">   
+                     <div class="thumbnail">                      
+                      <li><a href="/centro_comercial/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
+                                 
+                             {% thumbnail j.imagen_ccomercial "200" crop="center" as im %}
+                              <a href="/centro_comercial/{{j.nombre_ccomercial}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                               {% endthumbnail %}   
+                        
+                        <br>
+                        <p>{{j.descripcion | linebreaks}} </p>  
+                        <br>
+                         <p>{{j.ubicacion}}</p> 
+                               
+                               
+                    </div>
+               
+                                                                                                  
+                </div>
+                     
+            {% endfor %}   
+ </div>
+
                 
           
 <div class="row">
@@ -12,6 +39,7 @@
                                  
                              {% thumbnail j.imagen1 "200" crop="center" as im %}
                               <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                              {% endthumbnail %}               
                         <br>
                         <p>{{j.categoria}} </p>  
                         <br>
@@ -56,7 +84,7 @@
                         </table>
                         </center>                                                              
 
-                             {% endthumbnail %}                                                                                      
+                                                                                                    
                     </div>
                </div>           
             {% endfor %}   

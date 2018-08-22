@@ -43,3 +43,12 @@ class RulesAdmin(admin.ModelAdmin):
 admin.site.register(Configuracion_sistema)
 class RulesAdmin(admin.ModelAdmin):
     form = Configuracion_sistemaForm
+
+admin.site.register(Mensajes)
+class RulesAdmin(admin.ModelAdmin):
+    form = MensajesForm
+
+    
+admin.site.register(Ccomercial)
+class RulesAdmin(admin.ModelAdmin):
+    form = CcomercialForm

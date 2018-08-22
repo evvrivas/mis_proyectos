@@ -194,9 +194,22 @@ CATEGORIA_TIENDA= (
 
 			)
 
+class Ccomercial(models.Model):	     
+	     id_usuario=models.CharField(max_length=30)	     
+	     nombre_ccomercial=models.CharField(max_length=30,blank=True)
+	     imagen_ccomercial = ImageField(upload_to='tmp')
+	     ubicacion=models.CharField(max_length=30,blank=True)	     
+	     descripcion=models.TextField(blank=True)	     
+	         
+
+	     def __str__(self):
+		    		return  self.nombre_ccomercial
+	     class Admin:
+		    		list_display = ('nombre_ccomercial')
 
 class Tiendas(models.Model):	     
-	     id_usuario=models.CharField(max_length=30)	     
+	     id_usuario=models.CharField(max_length=30)	  
+	     ccomercial=models.ForeignKey('Ccomercial',blank=True,null=True)   
 	     nombre_tienda=models.CharField(max_length=30,blank=True)
 	     ubicacion=models.CharField(max_length=30,blank=True)
 	     categoria=models.ForeignKey('Categoria_global',blank=True,null=True)	     

@@ -415,11 +415,29 @@ def crear_tienda(request):
                           #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                           
                           return render(request,'confirmar.html',locals())     
-                                          
+            else:
+
+
+                                      formCcomercial=CcomercialForm(request.POST,request.FILES) 
+                                      if formCcomercial.is_valid() :                           
+
+                                              Ccomer = formCcomercial.save(commit=False)
+                                              # commit=False tells Django that "Don't send this to database yet.
+                                              # I have more things I want to do with it."
+                                              Ccomer.id_usuario = request.user.username # Set the user object here
+                                              
+                                              Ccomer.save() # Now you can send it to DB
+                                              formCcomercial.save() # Guardar los datos en la base de datos  print  
+                                              connection.close() 
+                                              return render(request,'formulario_ingreso.html',locals())                           
+                                                                           
                                  
                                           
      else:
+        formCcomercial=CcomercialForm()
         form=TiendasForm()
+
+
                                 
 
      connection.close() 
@@ -571,6 +589,10 @@ def busqueda(request):
 
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
         tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra))
+        comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(ubicacion__icontains=palabra) | Q(descripcion__icontains=palabra)) 
+     
+
+       
      connection.close()
      return render(request,'catalogo.html',locals())   
                   
@@ -941,4 +963,12 @@ def descargar(request,idusuario,nombretienda,id_del_producto):
                         return render(request,'descarga.html',locals())                     
 
 
-
+def centro_comercial(request,nombre_del_centro_comercial):
+    categoria=n_categorias()
+    n_usuarios, n_tiendas, n_productos=info_pagina()    
+    
+    
+    tiendas= Tiendas.objects.filter(Q(ccomercial__nombre_ccomercial__icontains=nombre_del_centro_comercial))
+            
+    connection.close()
+    return render(request,'catalogo.html',locals())   
