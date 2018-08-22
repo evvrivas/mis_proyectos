@@ -78,7 +78,7 @@ class CcomercialForm(ModelForm):
 	class Meta:			
 		model=Ccomercial
 		widgets = {'descripcion_ccomercial': Textarea(attrs={'cols': 30, 'rows': 3})}
-		exclude=["id_usuario","fecha_creacion"]
+		exclude=["id_usuario"]
 
 		    
 	     
