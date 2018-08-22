@@ -196,8 +196,8 @@ CATEGORIA_TIENDA= (
 
 class Ccomercial(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	     
-	     nombre_ccomercial=models.CharField(max_length=30,blank=True)
-	     imagen_ccomercial = ImageField(upload_to='tmp')
+	     nombre_ccomercial=models.CharField(max_length=40,blank=True)
+	     imagen_ccomercial = ImageField(upload_to='tmp',blank=True)
 	     ubicacion=models.CharField(max_length=30,blank=True)	     
 	     descripcion=models.TextField(blank=True)	     
 	         
