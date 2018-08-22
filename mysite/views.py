@@ -435,7 +435,7 @@ def crear_tienda(request):
                                           
      else:
         formCcomercial=CcomercialForm()
-        form=TiendasForm()
+        form=TiendasForm(request.user.username)
 
 
                                 
