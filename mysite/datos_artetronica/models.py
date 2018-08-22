@@ -199,7 +199,7 @@ class Ccomercial(models.Model):
 	     nombre_ccomercial=models.CharField(max_length=40,blank=True)
 	     imagen_ccomercial = ImageField(upload_to='tmp',blank=True)
 	     ubicacion=models.CharField(max_length=30,blank=True)	     
-	     descripcion=models.TextField(blank=True)	     
+	     descripcion_ccomercial=models.TextField(blank=True)	     
 	         
 
 	     def __str__(self):

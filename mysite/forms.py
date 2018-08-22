@@ -77,7 +77,7 @@ class MensajesForm(ModelForm):
 class CcomercialForm(ModelForm):
 	class Meta:			
 		model=Ccomercial
-		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 3})}
+		widgets = {'descripcion_ccomercial': Textarea(attrs={'cols': 30, 'rows': 3})}
 		exclude=["id_usuario","fecha_creacion"]
 
 		    
