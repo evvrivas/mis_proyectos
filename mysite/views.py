@@ -402,7 +402,7 @@ def crear_tienda(request):
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username) 
     
      if request.method == 'POST': # si el usuario est enviando el formulario con datos
-            form=TiendasForm(request.POST,request.FILES)                   
+            form=TiendasForm(request.user.username,request.POST,request.FILES)                   
                   
             if form.is_valid():
                           tiendecilla = form.save(commit=False)
