@@ -210,7 +210,7 @@ class Ccomercial(models.Model):
 class Tiendas(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	  
 	     ccomercial=models.ForeignKey('Ccomercial',blank=True,null=True)   
-	     nombre_tienda=models.CharField(max_length=30,blank=True)
+	     nombre_tienda=models.CharField(max_length=30)
 	     ubicacion=models.CharField(max_length=30,blank=True)
 	     categoria=models.ForeignKey('Categoria_global',blank=True,null=True)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
