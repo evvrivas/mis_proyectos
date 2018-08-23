@@ -213,7 +213,7 @@ class Tiendas(models.Model):
 	     nombre_tienda=models.CharField(max_length=30,blank=True)
 	     ubicacion=models.CharField(max_length=30,blank=True)
 	     categoria=models.ForeignKey('Categoria_global',blank=True,null=True)	     
-	     imagen1 = ImageField(upload_to='tmp')
+	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     descripcion=models.TextField(blank=True)
 	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
 	     slogan=models.CharField(max_length=90,blank=True)
