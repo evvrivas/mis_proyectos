@@ -184,7 +184,7 @@ def publicida_inteligencia(request):
     comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(ubicacion__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).order_by("id")[:3] 
              
     connection.close()       
-    return  tiendas,productos
+    return  comercio,tiendas,productos
 
 
 def editar_producto(request,idusuario,nombretienda,acid):   
@@ -614,10 +614,10 @@ def pagina_principal(request):
 
                          
                          try:
-                             tiendas,productos=publicida_inteligencia(request)
+                             comercio,tiendas,productos=publicida_inteligencia(request)
                          except:
                              pass
-                         
+                         nuevo_comercio=Ccomercial.objects.all().order_by("-id")[:6]
                          nuevas_tiendas=Tiendas.objects.all().order_by("-id")[:6]
                          nuevos_productos=Productos.objects.all().order_by("-id")[:6]
                          
@@ -631,6 +631,13 @@ def pagina_principal(request):
                             count = Productos.objects.all().count()
                             rand_ids = sample(range(1, count), 3)
                             aleatorias_productos=Productos.objects.filter(id__in=rand_ids)
+                         except:
+                             pass
+
+                         try:                      
+                            count = Ccomercial.objects.all().count()
+                            rand_ids = sample(range(1, count), 3)
+                            aleatorias_comercio=Ccomercial.objects.filter(id__in=rand_ids)
                          except:
                              pass
 
