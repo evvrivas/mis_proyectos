@@ -60,9 +60,8 @@
                            
                           {% endif %}  
                           
-                          <a href="#">Vistas <span class="badge">{{tiendas.n_visitas}}</span></a>
-                          <a href="#">Prod <span class="badge">{{n_productos}}</span></a>
-                          <a href="#">Msg <span class="badge">{{n_mensages}}</span></a>
+                         
+                       
 
             </div>
                                                        
@@ -131,6 +130,7 @@
                                    <ul class="dropdown-menu" role="menu">
                                        <li><a href="/crear_producto/{{user.username}}/{{tiendas.nombre_tienda}}">Subir un producto </a></li>      
                                        <li><a href="/editar_tienda/{{tiendas.id}}">Editar mi tienda </a></li>
+                                       <li><a href="/ver_mis_mensajes/{{user.username}}">Ver mensajes </a>
                                        <br>
                                        
 
@@ -161,7 +161,7 @@
       </div>
 
     <div class="panel-body">  
-    <br>
+    
 
     <div class="col-md-12">  
     {% block content %}

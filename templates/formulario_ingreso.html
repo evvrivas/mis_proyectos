@@ -12,10 +12,14 @@
 
                       <form action="." method="post" enctype="multipart/form-data" > 
                             {% csrf_token%}
-                            <p> {{ formCcomercial }} </p> 
+                            <p> {{ formCcomercial.as_p }} </p> 
+                            <br>  
                             <input type="submit" value="crear centro comercial"  />                       
                       </form> 
+                      <br> 
                       <p>--------------------------------- </p> 
+                      <br> 
+
                       <form action="." method="post" enctype="multipart/form-data" > 
                             {% csrf_token %}                              
 

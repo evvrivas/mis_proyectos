@@ -207,6 +207,11 @@ class Ccomercial(models.Model):
 	     class Admin:
 		    		list_display = ('nombre_ccomercial')
 
+ESTADO_TIENDA= (
+	        ('DISPONIBLE', 'DISPONIBLE'), 
+			('NO_DISPONIBLE', 'NO_DISPONIBLE'),						
+			)
+
 class Tiendas(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	  
 	     ccomercial=models.ForeignKey('Ccomercial',blank=True,null=True)   
@@ -220,6 +225,7 @@ class Tiendas(models.Model):
 	     n_visitas=models.IntegerField(blank=True,default=0)
 	     ultimo_comentario=models.CharField(max_length=90,blank=True)
 	     administrador_junior=models.CharField(max_length=30,blank=True)
+	     estado_tienda=models.CharField(max_length=30,blank=True,choices=ESTADO_TIENDA,default="DISPONIBLE")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
 

@@ -9,7 +9,7 @@
 <div class="row">  
        <div class="alert alert-info">         
          <p>{{configurar.mensaje_bienvenida| linebreaks}}</p>
-         <br>
+        
                  
          {%  if user.is_authenticated %}   
              <br>          
@@ -81,6 +81,13 @@
 
 <div class="row">   
 {% for j in tiendas %} 
+
+{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' %}
+
+{% else %}
+
+
+
   <div class="col-md-2">   
 
                       
@@ -144,7 +151,7 @@
                   </div>
    </div>  
 
-
+{% endif %}  
 
        {% endfor %} 
          
@@ -283,6 +290,12 @@
 
  <div class="row">   
 {% for j in nuevas_tiendas %} 
+
+{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' %}
+
+{% else %}
+
+
   <div class="col-md-2">   
                       
                      <div class="thumbnail">                      
@@ -342,7 +355,7 @@
    </div>  
 
 
-
+ {% endif %}    
        {% endfor %} 
          
  </div>         
@@ -458,6 +471,10 @@
 
 <div class="row">   
 {% for j in aleatorias_tiendas %} 
+
+{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' %}
+
+{% else %}
   <div class="col-md-2">   
                       
                      <div class="thumbnail">                      
@@ -517,7 +534,7 @@
    </div>  
 
 
-
+ {% endif %}    
        {% endfor %} 
          
  </div>         

@@ -478,6 +478,11 @@ def editar_tienda(request,acid):
 
 
 
+
+def info_tienda(idusuario,nombretienda):
+
+
+
 def mi_tienda(request,idusuario,nombretienda):
     
     categoria=categorizar(idusuario,nombretienda)
@@ -487,11 +492,13 @@ def mi_tienda(request,idusuario,nombretienda):
 
     tiendas.n_visitas+=1      
     tiendas.save()
+
+
     
     var=tiendas.codigoapk    
 
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("precio_A")[:10]
-
+    
     connection.close() 
     return render(request,'catalogo_tienda.html',locals())   
  
@@ -932,6 +939,22 @@ def comentario_tienda(request,idusuario,nombretienda,producto):
     return render(request,'confirmar_tienda.html',locals()) 
 
 
+def cambiar_estado_tienda(request,idusuario,id_dela_tienda,estado):
+                        categoria=n_categorias()
+                        n_usuarios, n_tiendas, n_productos=info_pagina()                           
+                       
+                        tiend = Tiendas.objects.get(pk=id_dela_tienda)
+                                                                       
+                        if estado=="DISPONIBLE" or estado=="NO_DISPONIBLE":
+                             tiend.estado_tienda=estado
+                             tiend.save()
+                                              
+                         # Guardar los datos en la base de datos 
+                        i=prod
+                        tiendas=[]
+                        tiendas.append(tiend)
+                        connection.close()
+                        return render(request,'catalogo.html',locals())
 
 def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estado_nuevo):  
 
@@ -986,7 +1009,7 @@ def centro_comercial(request,nombre_del_centro_comercial):
 def ver_mis_mensajes(request,idusuario):                
                 categoria=n_categorias()
                 n_usuarios, n_tiendas, n_productos=info_pagina()
-                
+
                 mensajes=Mensajes.objects.filter(id_usuario=idusuario)
                 connection.close()
                 return render(request,'mensajes.html',locals())   
