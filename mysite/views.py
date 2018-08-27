@@ -479,10 +479,6 @@ def editar_tienda(request,acid):
 
 
 
-def info_tienda(idusuario,nombretienda):
-
-
-
 def mi_tienda(request,idusuario,nombretienda):
     
     categoria=categorizar(idusuario,nombretienda)
