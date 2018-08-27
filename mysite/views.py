@@ -524,6 +524,8 @@ def ver_categorias(request,item):
 
   if item=="xproductox":
     productos=Productos.objects.all()
+  elif item=="xcomerciox":
+    comercio=Ccomercio.objects.all()
   elif item=="xtiendax":
     tiendas=Tiendas.objects.all()
    
@@ -980,3 +982,14 @@ def centro_comercial(request,nombre_del_centro_comercial):
             
     connection.close()
     return render(request,'catalogo.html',locals())   
+
+def ver_mis_mensajes(request,idusuario):                
+                categoria=n_categorias()
+                n_usuarios, n_tiendas, n_productos=info_pagina()
+                
+                mensajes=Mensajes.objects.filter(id_usuario=idusuario)
+                connection.close()
+                return render(request,'mensajes.html',locals())   
+
+
+                

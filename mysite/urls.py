@@ -76,6 +76,8 @@ urlpatterns = [
     url(r'^cambiar_estado_producto/([^/]+)/([^/]+)/(\d+)/([^/]+)/$',cambiar_estado_producto),
     url(r'^descargar/([^/]+)/([^/]+)/(\d+)/$',descargar),
     url(r'^centro_comercial/([^/]+)/$',centro_comercial),
+    url(r'^ver_mis_mensajes/([^/]+)/$',ver_mis_mensajes),
+    
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
     

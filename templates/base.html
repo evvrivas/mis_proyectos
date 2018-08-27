@@ -96,6 +96,7 @@
                                     
                                    
                                     <li><a href="/ver_categorias/xtiendax">Todas las tiendas </a></li>
+                                    <li><a href="/ver_categorias/xcomerciox">Plazas y centros comerciales </a></li>
                                     
                                     <!--
                                     <li><a href="/ver_categorias/xproductox">Todos los productos</a></li>
@@ -121,11 +122,12 @@
                                                    <li><a href="/editar_usuario/{{user.id}}">Editar Usuario/cambiar Plan </a></li> 
                                                    
                                               
-                                                   <li><a href="/crear_tienda/">Crear una tienda</a></li> 
-                                                                                      
+                                                   <li><a href="/crear_tienda/">Crear una tienda</a></li>                                                                                   
 
                                                    
                                                    <li><a href="/{{user.username}}">Ver mis tiendas"</a></li>
+                                                   <li><a href="/ver_mis_mensajes/{{user.id}}">Ver mensajes </a></li>
+                                       <br>
 
                                                     {%  for i in mis_tiendas %}
                                         <li><a href="/{{user.username}}/{{i.nombre_tienda}}">{{i.nombre_tienda}}</a></li>
