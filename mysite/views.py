@@ -454,7 +454,7 @@ def editar_tienda(request,acid):
        
         if request.method == 'POST':
             
-            form = TiendasForm(request.POST,request.FILES,instance=f)
+            form = TiendasForm(request.user.username,request.POST,request.FILES,instance=f)
        
             if form.is_valid():
                    tiendecilla = form.save(commit=False)
@@ -468,7 +468,7 @@ def editar_tienda(request,acid):
                     
         else:
             
-            form = TiendasForm(instance=f)
+            form = TiendasForm(request.user.username,instance=f)
             
 
         

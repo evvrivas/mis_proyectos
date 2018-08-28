@@ -53,9 +53,7 @@
                                <p>{{j.descripcion | linebreaks}}</p> 
                                <p>{{j.slogan}}</p>
                                <p>Miembro desde {{j.fecha_ingreso}}</p>   
-                               <br>
-                               <p>El ultimo cliente que comento Dijo: {{j.ultimo_comentario}}</p> 
-                               
+                                                              
                               </div>
                         
                            
@@ -96,7 +94,7 @@
 
 
 
-{%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior %}    
+{%  if user.is_authenticated and user.username == j.id_usuario or user.is_authenticated and user.username == j.administrador_junior %}    
                                   
                 <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle"
