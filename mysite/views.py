@@ -946,7 +946,7 @@ def cambiar_estado_tienda(request,idusuario,id_dela_tienda,estado):
                              tiend.save()
                                               
                          # Guardar los datos en la base de datos 
-                        i=prod
+                        
                         tiendas=[]
                         tiendas.append(tiend)
                         connection.close()
