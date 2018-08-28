@@ -85,16 +85,9 @@
                                       
                                 </tr >
                         </table>
-                        </center>                                                              
+                        </center> 
 
-                                                                                                    
-                    </div>
-               </div>   
-
-
-
-
-{%  if user.is_authenticated and user.username == j.id_usuario or user.is_authenticated and user.username == j.administrador_junior %}    
+                        {%  if user.is_authenticated and user.username == j.id_usuario or user.is_authenticated and user.username == j.administrador_junior %}    
                                   
                 <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle"
@@ -107,7 +100,16 @@
   </ul>
 </div>
 
-{% endif %}  
+{% endif %}                                                               
+
+                                                                                                    
+                    </div>
+               </div>   
+
+
+
+
+
 
 
 

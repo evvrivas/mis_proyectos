@@ -559,6 +559,20 @@
                                 </tr >
                         </table>
                         </center>
+                        {%  if user.is_authenticated and user.username == j.id_usuario or user.is_authenticated and user.username == j.administrador_junior %}    
+                                  
+                <div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown">{{j.estado_tienda}}  <span class="caret"></span>
+  </button>
+ 
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="/cambiar_estado_tienda/{{user.username}}/{{j.id}}/DISPONIBLE/">DISPONIBLE</a></li>
+    <li><a href="/cambiar_estado_tienda/{{user.username}}/{{j.id}}/NO_DISPONIBLE/">NO_DISPONIBLE</a></li>    
+  </ul>
+</div>
+
+{% endif %}  
 
 
                      </div>
