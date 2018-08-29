@@ -31,10 +31,10 @@
           {% for j in comercio %} 
                <div class="col-md-2">   
                      <div class="thumbnail">                      
-                      <li><a href="/centro_comercial/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
+                      <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
                                  
                              {% thumbnail j.imagen_ccomercial "200" crop="center" as im %}
-                              <a href="/centro_comercial/{{j.nombre_ccomercial}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                              <a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                {% endthumbnail %}   
                         
                         <br>
@@ -50,32 +50,6 @@
                      
             {% endfor %}   
  </div>
-
-<div class="row">
-          {% for j in nuevo_comercio %} 
-               <div class="col-md-2">   
-                     <div class="thumbnail">                      
-                      <li><a href="/centro_comercial/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
-                                 
-                             {% thumbnail j.imagen_ccomercial "200" crop="center" as im %}
-                              <a href="/centro_comercial/{{j.nombre_ccomercial}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
-                               {% endthumbnail %}   
-                        
-                        <br>
-                        <p>{{j.descripcion_ccomercial | linebreaks}} </p>  
-                        <br>
-                         <p>{{j.ubicacion}}</p> 
-                            
-                               
-                    </div>
-               
-                                                                                                  
-                </div>
-                     
-            {% endfor %}   
- </div>
-
-
 
 
 
@@ -303,6 +277,38 @@
          {% endfor %} 
        
 </div>
+
+
+
+<div class="row">
+          {% for j in nuevo_comercio %} 
+               <div class="col-md-2">   
+                     <div class="thumbnail">                      
+                      <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
+                                 
+                             {% thumbnail j.imagen_ccomercial "200" crop="center" as im %}
+                              <a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                               {% endthumbnail %}   
+                        
+                        <br>
+                        <p>{{j.descripcion_ccomercial | linebreaks}} </p>  
+                        <br>
+                         <p>{{j.ubicacion}}</p> 
+                            
+                               
+                    </div>
+               
+                                                                                                  
+                </div>
+                     
+            {% endfor %}   
+ </div>
+
+
+
+
+
+
 
  <div class="row">   
 {% for j in nuevas_tiendas %} 
@@ -706,10 +712,10 @@
           {% for j in aleatorias_comercio %} 
                <div class="col-md-2">   
                      <div class="thumbnail">                      
-                      <li><a href="/centro_comercial/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
+                      <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
                                  
                              {% thumbnail j.imagen_ccomercial "200" crop="center" as im %}
-                              <a href="/centro_comercial/{{j.nombre_ccomercial}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                              <a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}" target="_blank"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                {% endthumbnail %}   
                         
                         <br>

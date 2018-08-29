@@ -523,7 +523,7 @@ def ver_categorias(request,item):
   n_usuarios, n_tiendas, n_productos=info_pagina()
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   
-  
+   
 
   if item=="xproductox":
     productos=Productos.objects.all()
@@ -931,7 +931,7 @@ def comentario_tienda(request,idusuario,nombretienda,producto):
 
                de="xgangasx@gmail.com"
                para=["evvrivas@gmail.com","xgangasx@gmail.com",tiendas.email_junior,usuarios.email]               
-               mensajemail= str(lafecha) + "\n" + str(ncontacto)+"\n"+ str(coment) 
+               mensajemail= str(lafecha) + "\n" + str(ncontacto)+"\n"+ str(coment) + str(producto)
                asunto="Xgangas de un cliente"
                try:
                      send_mail(asunto, mensajemail,de,para, fail_silently=False)            
@@ -953,7 +953,7 @@ def comentario_tienda(request,idusuario,nombretienda,producto):
 
                de="xgangasx@gmail.com"
                para=["evvrivas@gmail.com","xgangasx@gmail.com",tiendas.email_junior,usuarios.email]               
-               mensajemail= str(lafecha) + "\n" + str(ncontacto)+"\n"+ str(coment) 
+               mensajemail= str(lafecha) + "\n" + str(ncontacto)+"\n"+ str(coment) + str(producto)
                asunto="Xgangas de un cliente"
                try:
                      send_mail(asunto, mensajemail,de,para, fail_silently=False)            
@@ -1021,13 +1021,17 @@ def descargar(request,idusuario,nombretienda,id_del_producto):
                         return render(request,'descarga.html',locals())                     
 
 
-def centro_comercial(request,nombre_del_centro_comercial):
+
+
+
+def centro_comercial(request,idusuario,nombre_del_centro_comercial):
     categoria=n_categorias()
-    n_usuarios, n_tiendas, n_productos=info_pagina()    
-    
+    n_usuarios, n_tiendas, n_productos=info_pagina()        
     
     tiendas= Tiendas.objects.filter(Q(ccomercial__nombre_ccomercial__icontains=nombre_del_centro_comercial))
-            
+
+    ccomercial=Ccomercial.objects.filter(id_usuario=idusuario,nombre_ccomercial=nombre_del_centro_comercial).first()
+    
     connection.close()
     return render(request,'catalogo.html',locals())   
 
