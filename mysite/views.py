@@ -903,6 +903,11 @@ def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
      connection.close()
      return render(request,'carrusel2.html',locals())
 
+      
+            
+            
+    
+
 
 def comentario_tienda(request,idusuario,nombretienda,producto):
    
@@ -910,7 +915,9 @@ def comentario_tienda(request,idusuario,nombretienda,producto):
     
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first() 
     
+    usuarios=Usuarios.objects.filter(id_usuario=idusuario).first() 
     
+
     if request.POST:
 
         coment = request.POST.get('comentario')
@@ -921,6 +928,19 @@ def comentario_tienda(request,idusuario,nombretienda,producto):
                lafecha=datetime.datetime.now()
                mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,nombre_producto=producto,estado="NO_ATENDIDO",fecha=lafecha)
                mensaje.save()
+
+               de="xgangasx@gmail.com"
+               para=["evvrivas@gmail.com","xgangasx@gmail.com",tiendas.email_junior,usuarios.email]               
+               mensajemail= str(lafecha) + "\n" + str(ncontacto)+"\n"+ str(coment) 
+               asunto="Xgangas de un cliente"
+               try:
+                     send_mail(asunto, mensajemail,de,para, fail_silently=False)            
+               except:
+                      pass 
+
+
+
+
            
         else: 
             ncontacto = request.POST.get('telefono')
@@ -930,6 +950,15 @@ def comentario_tienda(request,idusuario,nombretienda,producto):
                lafecha=datetime.datetime.now()               
                mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,nombre_producto=producto,estado="NO_ATENDIDO",fecha=lafecha)
                mensaje.save()
+
+               de="xgangasx@gmail.com"
+               para=["evvrivas@gmail.com","xgangasx@gmail.com",tiendas.email_junior,usuarios.email]               
+               mensajemail= str(lafecha) + "\n" + str(ncontacto)+"\n"+ str(coment) 
+               asunto="Xgangas de un cliente"
+               try:
+                     send_mail(asunto, mensajemail,de,para, fail_silently=False)            
+               except:
+                      pass 
         
     connection.close()    
     return render(request,'confirmar_tienda.html',locals()) 

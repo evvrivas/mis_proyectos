@@ -15,11 +15,10 @@
                                      {% csrf_token %}
 
                      {%  if user.is_authenticated %}
-                           <p>Quiero preguntar lo siguiente</p>
-                           <input type="text" id="name" name="comentario" size="15"/>
+                           <textarea name="comentario" style="width:250px; height:100px;">Quieres preguntar o hacer un pedido?</textarea>
                      {% else %}       
                            <p>Quiero preguntar</p>
-                           <input type="text" id="name" name="comentario" size="25"/>
+                           <textarea name="comentario" style="width:250px; height:100px;">Quieres preguntar o hacer un pedido?</textarea>
                            <p>Mi numero de contacto es</p>
                            <input type="text" id="name" name="telefono" size="15"/>                        
                       {% endif %}         
@@ -205,11 +204,9 @@
                                      {% csrf_token %}
 
                      {%  if user.is_authenticated %}
-                           <p>Quiero preguntar</p>
-                           <input type="text" id="name" name="comentario" size="15"/>
+                           <textarea name="comentario" style="width:250px; height:100px;">Quieres preguntar o hacer un pedido?</textarea>
                      {% else %}       
-                           <p>Quiero preguntar</p>
-                           <input type="text" id="name" name="comentario" size="25"/>
+                           <textarea name="comentario" style="width:250px; height:100px;">Quieres preguntar o hacer un pedido?</textarea>
                            <p>Mi numero de contacto es</p>
                            <input type="text" id="name" name="telefono" size="15"/>                        
                       {% endif %}         

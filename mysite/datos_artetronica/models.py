@@ -225,6 +225,7 @@ class Tiendas(models.Model):
 	     n_visitas=models.IntegerField(blank=True,default=0)
 	     ultimo_comentario=models.CharField(max_length=90,blank=True)
 	     administrador_junior=models.CharField(max_length=30,blank=True)
+	     email_junior = models.EmailField(blank=True)
 	     estado_tienda=models.CharField(max_length=30,blank=True,choices=ESTADO_TIENDA,default="DISPONIBLE")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
