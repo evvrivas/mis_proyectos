@@ -50,7 +50,8 @@ class TiendasForm(ModelForm):
 		exclude=["codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario","ultima_fecha_edicion"]
 	def __init__(self, user,*args, **kwargs):
 		super(TiendasForm, self).__init__(*args, **kwargs)
-		self.fields['ccomercial'].queryset=Ccomercial.objects.filter(id_usuario=user)
+		self.fields['ccomercial'].queryset=Ccomercial.objects.all()
+		#self.fields['ccomercial'].queryset=Ccomercial.objects.filter(id_usuario=user)
 
 
 class PedidosForm(ModelForm):
