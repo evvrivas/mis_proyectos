@@ -43,7 +43,7 @@ from django.db import connection
 from random import sample
 
 
-def app_cel():
+def app_cel(request):
 
 
 
