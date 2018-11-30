@@ -38,7 +38,7 @@ class Central_generadora():
 
 class Transformador(models.Model):
 
-	     central=models..ForeignKey('Central_generadora')
+	     central=models.ForeignKey('Central_generadora')
 	     codigo=models.CharField(max_length=60,blank=True)
 	     marca=models.CharField(max_length=60,blank=True)
 	     modelo=models.CharField(max_length=60,blank=True)
