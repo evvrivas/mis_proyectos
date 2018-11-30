@@ -82,16 +82,20 @@ class CcomercialForm(ModelForm):
 class Central_generadoraForm(ModelForm):
 	class Meta:			
 		model=Central_generadora
+		exclude=[]
 				    
 class TransformadorForm(ModelForm):
 	class Meta:			
 		model=Transformador
+		exclude=[]
 		 
 class MedicionForm(ModelForm):
 	class Meta:			
 		model=Medicion
+		exclude=[]
 
 class Usuarios_celForm(ModelForm):
 	class Meta:			
-		model=Usuarios_cel	
+		model=Usuarios_cel
+		exclude=[]	
 #########################################################
