@@ -45,8 +45,9 @@
                           <form action="/busqueda/" method="post">
                                        {% csrf_token %}                                                  
                                        <center><img src='{% static "logo_cel.gif" %}' alt='img' />   
-                                       <input type="text" id="name" name="nombre" size="10"/>
+                                       <input type="text" id="name" name="nombre" size="30"/>
                                        <input type="submit" value="Buscar"></center>
+                                       
                           </form>
                  
                 
@@ -66,10 +67,94 @@
             
       </div>
 
+
+<div class="col-md-4"> 
+
+             <div class="btn-group">
+                                <button type="button" class="btn btn-danger dropdown-toggle"
+                                        data-toggle="dropdown">
+                                  Inicio <span class="caret"></span>
+                                </button>
+                               
+                                <ul class="dropdown-menu" role="menu">
+                                         <li><a href="">Como Funciona este soft </a></li>
+
+                                         
+                                         {%  if user.is_authenticated %}          
+                                               <li><a href="/accounts/logout/">Cerrar la sesión</a></li>
+                                               <br>
+                                         {%  else  %}                                 
+                                           <li><a href="/accounts/login">Entrar </a></li>
+                                           <br>
+                                           <li><a href="/crear_usuario_cel">Registrarme</a></li>
+                                           <br>
+                                         {% endif %}
+                                                                            
+                                  
+                                </ul>
+                       </div>
+
+                        <div class="btn-group">
+                                <button type="button" class="btn btn-danger dropdown-toggle"
+                                        data-toggle="dropdown">
+                                  Ver <span class="caret"></span>
+                                </button>
+                               
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="">Todas las centrales</a></li> 
+                                    <li><a href="">Todas los transformadores</a></li>
+
+                                </ul>
+                       </div>  
+
+                       <div class="btn-group">
+                                <button type="button" class="btn btn-danger dropdown-toggle"
+                                        data-toggle="dropdown">
+                                  Ingresar informacion <span class="caret"></span>
+                                </button>
+                               
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="">Una central</a></li> 
+                                    <li><a href="">Un transformador</a></li>
+                                    <li><a href="">Datos de laboratorio</a></li>
+                                </ul>
+                       
+                       </div>   
+
+                       <div class="btn-group">
+                                <button type="button" class="btn btn-danger dropdown-toggle"
+                                        data-toggle="dropdown">
+                                  ayuda <span class="caret"></span>
+                                </button>
+                               
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="">Manual de usuario</a></li> 
+                                    <li><a href="">Analisis de resultados</a></li>
+                                    <li><a href=""></a></li>
+                                </ul>
+                       
+                       </div>  
+
+         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
      <div class="panel-body">    
          <br> 
         <div class="col-md-12">                           
-         {% block content %}
+         {% block cel %}
+
+
          {% endblock %}
         </div>
        

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from mysite.datos_artetronica.models import *
+from mysite.datos_artetronica.models_cel import *
 
 from django.forms import ModelForm, Textarea
 

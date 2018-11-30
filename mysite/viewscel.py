@@ -36,19 +36,20 @@ from django.core.mail import send_mail
 #from templates import *
 from django.db.models import Q
 
-
-
 from django.db import connection
 
 from random import sample
 
+from mysite.datos_artetronica.models_cel import *
+
 
 def app_cel(request):
-
-
-
 	return render(request,'cel_principal.html',locals())  
 
 
-
+def busqueda_cel(request):     
+    return render(request,'cel_principal.html',locals())   
           
+
+def ver_cel(request):
+	return render(request,'cel_principal.html',locals()) 

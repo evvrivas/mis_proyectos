@@ -7,6 +7,8 @@ from django.contrib import admin
 
 
 from mysite.datos_artetronica.models import *
+from mysite.datos_artetronica.models_cel import *
+
 #admin.site.unregister(User)
 from mysite.forms import *
 
