@@ -26,7 +26,7 @@ from django.contrib.contenttypes.models import ContentType
 
 class Central_generadora():
 	     codigo=models.CharField(max_length=60,blank=True)
-	     nombre=CharField(max_length=60,blank=True)	     
+	     nombre=models.CharField(max_length=60,blank=True)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)	    
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     
