@@ -22,8 +22,6 @@ class ProductosForm(ModelForm):
 		self.fields['categoria'].queryset=Categoria.objects.filter(id_usuario=user,tienda=nombre_tienda)
 
 
-
-
 class BuscarForm(ModelForm):
 	class Meta:
 		model= Buscar
@@ -34,9 +32,6 @@ class CategoriaForm(ModelForm):
 	class Meta:
 		model= Categoria		
 		exclude=["id_usuario","tienda"]
-
-
-
 
     
 class Categoria_globalForm(ModelForm):
@@ -61,8 +56,7 @@ class PedidosForm(ModelForm):
 		widgets = {'descripcion': Textarea(attrs={'cols': 40, 'rows': 6}),}
 		exclude=["id_usuario"]
 
-
-		
+	
 class Configuracion_sistemaForm(ModelForm):
 	class Meta:
 			
@@ -82,5 +76,22 @@ class CcomercialForm(ModelForm):
 		widgets = {'descripcion_ccomercial': Textarea(attrs={'cols': 30, 'rows': 3})}
 		exclude=["id_usuario"]
 
-		    
-	     
+
+
+########################  CEL  ##########################
+class Central_generadoraForm(ModelForm):
+	class Meta:			
+		model=Central_generadora
+				    
+class TransformadorForm(ModelForm):
+	class Meta:			
+		model=Transformador
+		 
+class MedicionForm(ModelForm):
+	class Meta:			
+		model=Medicion
+
+class Usuarios_celForm(ModelForm):
+	class Meta:			
+		model=Usuarios_cel	
+#########################################################

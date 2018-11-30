@@ -24,7 +24,8 @@ from django.contrib.contenttypes.models import ContentType
 #from django.contrib.contenttypes import generic
 
 
-class Central_generadora():
+
+class Central_generadora(models.Model):
 	     codigo=models.CharField(max_length=60,blank=True)
 	     nombre=models.CharField(max_length=60,blank=True)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)	    
@@ -34,6 +35,24 @@ class Central_generadora():
 		    		return  self.codigo
 	     class Admin:
 		    		list_display = ('codigo', 'nombre')
+
+
+class Usuarios_cel(models.Model):
+	     central=models.ForeignKey('Central_generadora')
+	     codigo=models.IntegerField(max_length=7)
+	     nombre=models.CharField(max_length=30)
+	     apellidos=models.CharField(max_length=30)
+	     pasword=models.CharField(max_length=4)
+	     email = models.EmailField(blank=True)
+	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
+	     
+	     def __str__(self):
+		    		return  self.codigo
+	     class Admin:
+		    		list_display = ('id_usuario')
+
+
+
 
 
 class Transformador(models.Model):
@@ -56,7 +75,7 @@ class Transformador(models.Model):
 
 
 
-from django.contrib.postgres.fields import ArrayField
+#from django.contrib.postgres.fields import ArrayField
 
 
 class Medicion(models.Model):
