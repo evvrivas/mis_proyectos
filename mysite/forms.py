@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from mysite.datos_artetronica.models import *
-from mysite.datos_artetronica.models_cel import *
 
 from django.forms import ModelForm, Textarea
 
@@ -77,25 +76,3 @@ class CcomercialForm(ModelForm):
 		exclude=["id_usuario"]
 
 
-
-########################  CEL  ##########################
-class Central_generadoraForm(ModelForm):
-	class Meta:			
-		model=Central_generadora
-		exclude=[]
-				    
-class TransformadorForm(ModelForm):
-	class Meta:			
-		model=Transformador
-		exclude=[]
-		 
-class MedicionForm(ModelForm):
-	class Meta:			
-		model=Medicion
-		exclude=[]
-
-class Usuarios_celForm(ModelForm):
-	class Meta:			
-		model=Usuarios_cel
-		exclude=[]	
-#########################################################

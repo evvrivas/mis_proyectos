@@ -6,7 +6,7 @@ from django.contrib import admin
 # Register your models here.
 
 from mysite.datos_artetronica.models import *
-from mysite.datos_artetronica.models_cel import *
+
 
 #admin.site.unregister(User)
 from mysite.forms import *
@@ -55,25 +55,3 @@ class RulesAdmin(admin.ModelAdmin):
     form = CcomercialForm
 
 
-
-
-###################  cel #####################
-admin.site.register(Central_generadora)
-class RulesAdmin(admin.ModelAdmin):
-    form = Central_generadora
-
-admin.site.register(Transformador)
-class RulesAdmin(admin.ModelAdmin):
-    form = Transformador
-
-admin.site.register(Medicion)
-class RulesAdmin(admin.ModelAdmin):
-    form = Medicion
-
-admin.site.register(Usuarios_cel)
-class RulesAdmin(admin.ModelAdmin):
-    form = Usuarios_cel  
-  
- ########################################  
-
-   

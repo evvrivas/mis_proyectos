@@ -25,7 +25,6 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from mysite.views import *
-from mysite.viewscel import *    ##   Agregada para ver las vistas de la app cel
 
 urlpatterns = [
     # Examples:
@@ -80,7 +79,7 @@ urlpatterns = [
     url(r'^centro_comercial/([^/]+)/([^/]+)/$',centro_comercial),
     url(r'^ver_mis_mensajes/([^/]+)/$',ver_mis_mensajes),
     
-    url(r'^cel_app/', app_cel),
+   
 
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
