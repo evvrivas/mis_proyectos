@@ -48,6 +48,27 @@ from django.db import connection
 
 from random import sample
 
+def crear_categorias(request):
+  categorias=["Productos Ventas Varias","Alimentos bebidas","Antiguedades artesanias Adornos","Mascotas acsesorios veterinarios",
+                "Bienes raices alquileres ventas","Tecnologia informatica informacion","Educacion ciencia Academias",
+                "Deportes ocio acsesorios","Herramientas maquinaria equipo","Agro ferreteria maderas","Materias primas varias",
+                "Mateiales de construccion","Muebles electrodomesticos","Productos para el hogar","Productos de consumo diario",
+                "Productos para la industria","Industria acsesorios repuestos","Ropa Moda calzado","Salud belleza",
+                "Usados de todos","Vehiculos acsesorios repuestos","Productos y Sevicios varios","Servicios domesticos",
+                "Servicios personales","Servicios pofesionales","Servicios de Ensenanza","Sevicios financieros",
+                "Servicios publicitarios","Servicio de reparaiones","Servicio de hotel alojamiento","Otros Servicios"]
+  
+  for i in categorias:
+      cat=Categoria_global(categoria=i)
+      cat.save()
+
+  return render(request,'principal.html',locals())
+
+
+
+
+
+
 
    
 def logout(request):

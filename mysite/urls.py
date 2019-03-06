@@ -79,10 +79,15 @@ urlpatterns = [
     url(r'^centro_comercial/([^/]+)/([^/]+)/$',centro_comercial),
     url(r'^ver_mis_mensajes/([^/]+)/$',ver_mis_mensajes),
     
+    url(r'^crear_categorias/$',crear_categorias),
    
 
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
+
+
+
+    
       
        
 ]
