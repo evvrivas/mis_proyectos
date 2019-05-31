@@ -212,6 +212,7 @@ ESTADO_TIENDA= (
 			('NO_DISPONIBLE', 'NO_DISPONIBLE'),						
 			)
 
+
 class Tiendas(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	  
 	     ccomercial=models.ForeignKey('Ccomercial',blank=True,null=True)   
@@ -222,6 +223,7 @@ class Tiendas(models.Model):
 	     descripcion=models.TextField(blank=True)
 	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
 	     slogan=models.CharField(max_length=90,blank=True)
+	     promocion=models.CharField(max_length=90,blank=True)
 	     n_visitas=models.IntegerField(blank=True,default=0)
 	     ultimo_comentario=models.CharField(max_length=90,blank=True)
 	     administrador_junior=models.CharField(max_length=30,blank=True)
