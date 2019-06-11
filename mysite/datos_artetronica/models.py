@@ -358,3 +358,26 @@ class Item(models.Model):
 								self.object_id = product.pk
 
 				product = property(get_product, set_product)
+
+ESTADO3 = (
+			('PENDIENTE', 'PENDIENTE'),
+			('EN TRAMITE', 'EN TRAMITE'),
+			('CONFIRMADO', 'CONFIRMADO'),
+			('ENTREGADO', 'ENTREGADO'),
+			
+			)
+
+class Carro_de_compras(models.Model):	     
+	     id_usuario=models.CharField(max_length=30,blank=True)
+	     cantidad=models.FloatField(default=0,blank=True,null=True)
+	     producto=models.ForeignKey('Productos',blank=True,null=True)
+	     descripcion = models.TextField(blank=True)	     
+	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO_PRODUCTO,default="EN_EXISTENCIA")
+	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
+	    
+
+	     def __str__(self):
+		    		return  self.nombre
+	     class Admin:
+		    		list_display = ('categoria', 'cantidad', 'nombre','precio_A')
+		    		

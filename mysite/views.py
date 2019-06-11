@@ -1065,4 +1065,7 @@ def ver_mis_mensajes(request,idusuario):
                 return render(request,'mensajes.html',locals())   
 
 
-                
+
+#def agregar_producto_al _carrito():  
+#def ver_el_carrito():
+#def quitar_producto_del_carrito():

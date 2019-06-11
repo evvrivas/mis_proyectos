@@ -75,4 +75,11 @@ class CcomercialForm(ModelForm):
 		widgets = {'descripcion_ccomercial': Textarea(attrs={'cols': 30, 'rows': 3})}
 		exclude=["id_usuario"]
 
+class Carro_de_comprasForm(ModelForm):
+	class Meta:			
+		model=Carro_de_compras
+		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 1})}
+		exclude=["id_usuario","fecha_ingreso"]
+
+
 

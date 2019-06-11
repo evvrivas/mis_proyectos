@@ -48,16 +48,7 @@
                                             </form>
                  
                 
-                 {%  if user.is_authenticated %}          
-                              <li> Hola.!.{{ user.username }}  </li>
-                           
-                   <a href="#">Vistas <span class="badge">{{configurar.n_visitas}}</span></a>
-                   <a href="#">Tien <span class="badge">{{n_tiendas}}</span></a>
-                   <a href="#">Prod <span class="badge">{{n_productos}}</span></a>
-                   
-
-
-                 {% endif %}  
+                
               </center>
 
 
@@ -67,7 +58,7 @@
              <div class="col-md-6">  
 
                      <div class="btn-group">
-                                <button type="button" class="btn btn-info dropdown-toggle"
+                                <button type="button" class="btn dropdown-toggle"
                                         data-toggle="dropdown">
                                   Inicio <span class="caret"></span>
                                 </button>
@@ -87,7 +78,7 @@
                        </div>
 
                         <div class="btn-group">
-                                <button type="button" class="btn btn-info dropdown-toggle"
+                                <button type="button" class="btn btn-default dropdown-toggle"
                                         data-toggle="dropdown">
                                   Ver  <span class="caret"></span>
                                 </button>
@@ -143,7 +134,21 @@
       </div>
 
      <div class="panel-body">    
-         <br> 
+
+
+
+
+         {%  if user.is_authenticated %}          
+                              <li> Hola.!.{{ user.username }}  </li>
+                           
+                   <a href="#">Vistas <span class="badge">{{configurar.n_visitas}}</span></a>
+                   <a href="#">Tien <span class="badge">{{n_tiendas}}</span></a>
+                   <a href="#">Prod <span class="badge">{{n_productos}}</span></a>
+                   
+
+
+                 {% endif %}  
+<br>
         <div class="col-md-12">                           
          {% block content %}
          {% endblock %}

@@ -16,7 +16,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = UsuariosForm
 class UsuariosAdmin(admin.ModelAdmin):
         model = Usuarios
-        list_display = ['nombre', 'email','fecha_ingreso',]
+        list_display = ['nombre', 'plan_tienda_activo','email','fecha_ingreso',]
     
 admin.site.register(Usuarios,UsuariosAdmin)
 ####################################################
@@ -26,9 +26,9 @@ class RulesAdmin(admin.ModelAdmin):
     form = ProductosForm
 class ProductosAdmin(admin.ModelAdmin):
         model = Productos
-        list_display = ['tienda_nombre', 'nombre','precio_A','estado_prod']
+        list_display = ['tienda_nombre', 'nombre','precio_A','precio_B','estado_prod']
         def tienda_nombre(self,instance):
-                return instance.tienda.nombre
+                return instance.tienda.nombre_tienda
 admin.site.register(Productos,ProductosAdmin)
 ####################################################
          
@@ -88,7 +88,7 @@ admin.site.register(Pedidos,PedidosAdmin)
 class RulesAdmin(admin.ModelAdmin):
     form = Configuracion_sistemaForm
 class Configuracion_sistemaAdmin(admin.ModelAdmin):
-    model = Pedidos
+    model = Configuracion_sistema
     list_display = ['n_visitas','mensaje_bienvenida']   
 admin.site.register(Configuracion_sistema,Configuracion_sistemaAdmin)
 ####################################################
@@ -107,10 +107,33 @@ admin.site.register(Mensajes,MensajesAdmin)
 class RulesAdmin(admin.ModelAdmin):
     form = CcomercialForm
 class CcomercialAdmin(admin.ModelAdmin):
-    model = Mensajes
+    model = Ccomercial
     list_display = ['nombre_ccomercial','id_usuario']
 
 admin.site.register(Ccomercial,CcomercialAdmin)
 ####################################################
- 
-    
+     
+
+
+####################################################
+class RulesAdmin(admin.ModelAdmin):
+    form = Carro_de_comprasForm
+class Carro_de_comprasAdmin(admin.ModelAdmin):
+    model = Carro_de_compras
+    list_display = ['contacto_tienda','nombre_tienda','id_usuario','cantidad','nombre_producto','descripcion','precio_A','precio_B','estado_prod','fecha_ingreso']
+
+    def nombre_producto(self,instance):
+        return instance.producto.nombre
+    def precio_A(self,instance):
+        return instance.producto.precio_A 
+    def precio_B(self,instance):
+        return instance.producto.precio_B 
+    def nombre_tienda(self,instance):
+        return instance.producto.tienda.nombre_tienda 
+    def contacto_tienda(self,instance):
+        return instance.producto.tienda.id_ususario 
+
+admin.site.register(Carro_de_compras,Carro_de_comprasAdmin)
+####################################################
+
+          

@@ -10,8 +10,8 @@
                   
          <a href="#" class="alert-link"> {{tiendas.n_visitas}} visitas, {{ productos.0.categoria.descripcion | linebreaks }}</a>
          <br>
-                 <h4><center>  APROBECHA ESTO !!!  </center></h4> 
-                 <p>tiendas.promocion</p>
+                 <h4><center>  APROVECHA ESTO !!!  </center></h4> 
+                 <p>{{tiendas.promocion}}</p>
          <br>
      <!--   <form action="/comentario_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{tiendas.nombre_tienda}}/" method="post">
                      {% csrf_token %}
@@ -56,13 +56,13 @@
             
             {%  if j.precio_B %}
                           <button type="button" class="btn btn-success">
-                          Precio $ <span class="badge badge-light">{{j.precio_B}}</span>
+                           $ <span class="badge badge-light">{{j.precio_B}}</span>
                           </button>
              {% else %}
                     
                     {%  if j.precio_A %}
                           <button type="button" class="btn btn-primary">
-                          Precio $ <span class="badge badge-light">{{j.precio_A}}</span>
+                           $ <span class="badge badge-light">{{j.precio_A}}</span>
                           </button>
                     {% endif %}
 
