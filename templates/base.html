@@ -41,7 +41,7 @@
                  <form action="/busqueda/" method="post">
                                        {% csrf_token %}                                                  
                                                     
-                                                    <center><img src='{% static "logo.gif" %}' alt='img' />   
+                                                    <center><img src='{% static "logo.png" %}' alt='img' />   
                                                     <input type="text" id="name" name="nombre" size="10"/>
                                                     <input type="submit" value="Buscar">
                                                                                                         
@@ -58,7 +58,7 @@
              <div class="col-md-6">  
 
                      <div class="btn-group">
-                                <button type="button" class="btn dropdown-toggle"
+                                <button type="button" class="btn btn-default dropdown-toggle"
                                         data-toggle="dropdown">
                                   Inicio <span class="caret"></span>
                                 </button>
@@ -139,15 +139,15 @@
 
 
          {%  if user.is_authenticated %}          
-                              <li> Hola.!.{{ user.username }}  </li>
-                           
-                   <a href="#">Vistas <span class="badge">{{configurar.n_visitas}}</span></a>
-                   <a href="#">Tien <span class="badge">{{n_tiendas}}</span></a>
-                   <a href="#">Prod <span class="badge">{{n_productos}}</span></a>
+                              <li> Hola.!.{{ user.username }}  </li>              
                    
+                  
 
+        {% endif %}  
 
-                 {% endif %}  
+        <a href="#">Vistas <span class="badge">{{configurar.n_visitas}}</span></a>
+        <a href="#">Tien <span class="badge">{{n_tiendas}}</span></a>
+        <a href="#">Prod <span class="badge">{{n_productos}}</span></a>
 <br>
         <div class="col-md-12">                           
          {% block content %}
