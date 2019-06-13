@@ -27,13 +27,8 @@
 
   <body> 
 
-<div class="panel panel-primary">     
-
-     <div class="panel-heading">
-
-            <div class="col-md-6"> 
-
-                 <center>
+<div class="panel panel-primary"> 
+ <center>
 
                           {% thumbnail tiendas.imagen1 "200" crop="center" as im %}
                           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
@@ -42,14 +37,20 @@
                                        {% csrf_token %}                                                  
                                                     
                                                     <center><img src='{% static "logo.png" %}' alt='img' />   
-                                                    <input type="text" id="name" name="nombre" size="10"/>
+                                                    <input type="text" id="name" name="nombre" size="10" placeholder="Que buscas?"/>
                                                     <input type="submit" value="Buscar">
                                                                                                         
                                             </form>
                  
                 
                 
-              </center>
+              </center>    
+
+     <div class="panel-heading">
+
+            <div class="col-md-6"> 
+
+                
 
 
              </div>

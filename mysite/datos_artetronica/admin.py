@@ -48,10 +48,10 @@ class RulesAdmin(admin.ModelAdmin):
     form = CategoriaForm
 class CategoriaAdmin(admin.ModelAdmin):
     model = Categoria
-    list_display = ['id_usuario','tienda', 'categoria']   
+    list_display = ['id_usuario','tienda', 'categoria']      
 admin.site.register(Categoria,CategoriaAdmin)
 ####################################################
-
+tienda
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
     form = Categoria_globalForm
@@ -64,7 +64,7 @@ class RulesAdmin(admin.ModelAdmin):
 class TiendasAdmin(admin.ModelAdmin):
     model = Tiendas
     list_display = ['id_usuario','centro_comecial', 'nombre_tienda','codigoapk','nombre_categoria','n_visitas','administrador_junior','promocion']
-    list_filter=(('ccomercial',admin.RelatedOnlyFieldListFilter),('categoria',admin.RelatedOnlyFieldListFilter),('id_usuario',admin.RelatedOnlyFieldListFilter),)
+    list_filter=(('ccomercial',admin.RelatedOnlyFieldListFilter),('categoria',admin.RelatedOnlyFieldListFilter),)
     def centro_comecial(self,instance):
         return instance.ccomercial.nombre_ccomercial
     def nombre_categoria(self,instance):
@@ -102,8 +102,7 @@ class RulesAdmin(admin.ModelAdmin):
 class MensajesAdmin(admin.ModelAdmin):
     model = Mensajes
     list_display = ['id_usuario','nombre_producto','contacto','pregunta','respuesta','estado','fecha']
-    list_filter=(('id_usuario',admin.RelatedOnlyFieldListFilter),('contacto',admin.RelatedOnlyFieldListFilter),)
-
+ 
 admin.site.register(Mensajes,MensajesAdmin)
 ####################################################
    
@@ -125,7 +124,7 @@ class RulesAdmin(admin.ModelAdmin):
 class Carro_de_comprasAdmin(admin.ModelAdmin):
     model = Carro_de_compras
     list_display = ['contacto_tienda','nombre_tienda','id_usuario','cantidad','nombre_producto','descripcion','precio_A','precio_B','estado_prod','fecha_ingreso']
-    list_filter=(('id_usuario',admin.RelatedOnlyFieldListFilter),('estado_prod',admin.RelatedOnlyFieldListFilter),)
+    
 
     def nombre_producto(self,instance):
         return instance.producto.nombre
