@@ -51,7 +51,7 @@ class CategoriaAdmin(admin.ModelAdmin):
     list_display = ['id_usuario','tienda', 'categoria']      
 admin.site.register(Categoria,CategoriaAdmin)
 ####################################################
-tienda
+
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
     form = Categoria_globalForm
