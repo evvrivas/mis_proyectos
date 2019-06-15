@@ -1084,17 +1084,23 @@ def agregar_producto_al_carrito(request,id_producto):
     categoria=n_categorias()
     n_usuarios, n_tiendas, n_productos=info_pagina()
 
+    el_producto=Productos.objects.get(id=id_prod)
+    lafecha=datetime.datetime.now() 
+
+    tiendas=Tiendas.objects.filter(id_usuario=request.user.username,nombre_tienda=el_producto.tienda.nombre_tienda).first() 
+
 
     if request.POST:
             cant = request.POST.get('cantidad')
             #espe = request.POST.get('especificacion')
 
             #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
-            if cant>0:
-                 el_producto=Productos.objects.get(id=id_prod)
-                 lafecha=datetime.datetime.now() 
+            canti=eval(cant)
+            if canti>0:
 
-                 carrito=Carro_de_compras(id_usuario=el_producto.id_usuario,cantidad=cant,producto=el_producto,descripcion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
+                 
+
+                 carrito=Carro_de_compras(id_usuario=el_producto.id_usuario,cantidad=canti,producto=el_producto,descripcion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
