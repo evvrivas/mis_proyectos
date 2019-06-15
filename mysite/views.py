@@ -534,16 +534,15 @@ def mi_tienda(request,idusuario,nombretienda):
     return render(request,'catalogo_tienda.html',locals())   
  
 def mis_tiendas(request,idusuario):
-  try:
+  
       categoria=n_categorias()
       n_usuarios, n_tiendas, n_productos=info_pagina()
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
       
       tiendas=Tiendas.objects.filter(id_usuario=idusuario)
       connection.close()
-  except:
-    pass
-  return render(request,'catalogo.html',locals())   
+    
+      return render(request,'catalogo.html',locals())   
 
 
 
@@ -1105,7 +1104,7 @@ def agregar_producto_al_carrito(request,id_producto):
 
                  carrito=Carro_de_compras(id_usuario=el_producto.id_usuario,cantidad=canti,producto=el_producto,descripcion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
                  carrito.save()
-    #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def ver_el_carrito(request):

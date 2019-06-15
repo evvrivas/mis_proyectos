@@ -79,17 +79,19 @@ urlpatterns = [
     url(r'^centro_comercial/([^/]+)/([^/]+)/$',centro_comercial),
     url(r'^ver_mis_mensajes/([^/]+)/$',ver_mis_mensajes),
     
-    url(r'^crear_categorias/$',crear_categorias),   
+    url(r'^crear_categorias/$',crear_categorias),  
+
+    url(r'^agregar_producto_al _carrito/(\d+)/$',agregar_producto_al_carrito),  
+    url(r'^ver_el_carrito/$',ver_el_carrito),  
+    url(r'^quitar_producto_del_carrito/(\d+)/$',quitar_producto_del_carrito),  
+    url(r'^editar_producto_del_carrito/$',editar_producto_del_carrito), 
 
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
 
 
 
-    url(r'^agregar_producto_al _carrito/(\d+)/$',agregar_producto_al_carrito),  
-    url(r'^ver_el_carrito/$',ver_el_carrito),  
-    url(r'^quitar_producto_del_carrito/(\d+)/$',quitar_producto_del_carrito),  
-    url(r'^editar_producto_del_carrito/$',editar_producto_del_carrito),
+    
       
        
 ]
