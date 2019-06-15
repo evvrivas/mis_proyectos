@@ -1091,7 +1091,7 @@ def agregar_producto_al_carrito(request,id_producto):
                  el_producto=Productos.objects.get(id=id_prod)
                  lafecha=datetime.datetime.now() 
 
-                 carrito=Carro_de_compras(id_usuario=el_producto.id_usuario,cantidad=cant,producto=el_producto,descripcion=espe,estado_prod="POR ENCARGAR" fecha_ingreso=lafecha)
+                 carrito=Carro_de_compras(id_usuario=el_producto.id_usuario,cantidad=cant,producto=el_producto,descripcion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
                  carrito.save()
 
 def ver_el_carrito(request):
