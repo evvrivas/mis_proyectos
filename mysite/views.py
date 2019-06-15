@@ -534,12 +534,15 @@ def mi_tienda(request,idusuario,nombretienda):
     return render(request,'catalogo_tienda.html',locals())   
  
 def mis_tiendas(request,idusuario):
-  categoria=n_categorias()
-  n_usuarios, n_tiendas, n_productos=info_pagina()
-  mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-  
-  tiendas=Tiendas.objects.filter(id_usuario=idusuario)
-  connection.close()
+  try:
+      categoria=n_categorias()
+      n_usuarios, n_tiendas, n_productos=info_pagina()
+      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+      
+      tiendas=Tiendas.objects.filter(id_usuario=idusuario)
+      connection.close()
+  except:
+    pass
   return render(request,'catalogo.html',locals())   
 
 
