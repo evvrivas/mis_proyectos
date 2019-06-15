@@ -372,12 +372,12 @@ class Carro_de_compras(models.Model):
 	     cantidad=models.FloatField(default=0,blank=True,null=True)
 	     producto=models.ForeignKey('Productos',blank=True,null=True)
 	     descripcion = models.TextField(blank=True)	     
-	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO_PRODUCTO,default="EN_EXISTENCIA")
+	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="EN_EXISTENCIA")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	    
 
 	     def __str__(self):
-		    		return  self.nombre
+		    		return  self.producto.nombre
 	     class Admin:
 		    		list_display = ('categoria', 'cantidad', 'nombre','precio_A')
 		    		
