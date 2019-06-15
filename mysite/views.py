@@ -1097,7 +1097,7 @@ def agregar_producto_al _carrito(request,id_producto):
 
     if request.POST:
             cant = request.POST.get('cantidad')
-            espe = request.POST.get('especificacion')
+            #espe = request.POST.get('especificacion')
 
             #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
             if cant>0:
