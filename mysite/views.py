@@ -1093,11 +1093,13 @@ def agregar_producto_al_carrito(request,id_producto):
 
 
     if request.POST:
-            cant = request.POST.get('cantidad')
+            cant = request.POST.get("cantidad")
             #espe = request.POST.get('especificacion')
 
             #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
-            
+            cant=str(cant)
+            cant=eval(cant)
+
             if cant>0:
 
                  
@@ -1123,7 +1125,7 @@ def editar_producto_del_carrito(request):
         categoria=n_categorias()
         n_usuarios, n_tiendas, n_productos=info_pagina() 
    
-        carrito= Carro_de_compras(id_usuario=request.user.username)
+        carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username)
         vector_de_formularios=[]
         if request.method == 'POST':
           for i in carrito:                  
