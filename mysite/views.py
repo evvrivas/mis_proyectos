@@ -1078,8 +1078,71 @@ def ver_mis_mensajes(request,idusuario):
                 connection.close()
                 return render(request,'mensajes.html',locals())   
 
+       id_usuario=models.CharField(max_length=30,blank=True)
+       cantidad=models.FloatField(default=0,blank=True,null=True)
+       producto=models.ForeignKey('Productos',blank=True,null=True)
+       descripcion = models.TextField(blank=True)      
+       estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO_PRODUCTO,default="EN_EXISTENCIA")
+       fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 
 
-#def agregar_producto_al _carrito():  
-#def ver_el_carrito():
-#def quitar_producto_del_carrito():
+
+
+
+
+
+
+
+def agregar_producto_al _carrito(request,id_producto):   
+
+    if request.POST:
+            cant = request.POST.get('cantidad')
+            espe = request.POST.get('especificacion')
+
+            #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+            if cant>0:
+                 el_producto=Productos.objects.get(id=id_prod)
+                 lafecha=datetime.datetime.now() 
+
+                 carrito=Carro_de_compras(id_usuario=el_producto.id_usuario,cantidad=cant,producto=el_producto,descripcion=espe,estado_prod="POR ENCARGAR" fecha_ingreso=lafecha)
+                 carrito.save()
+
+def ver_el_carrito(request):
+      carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username)order_by("producto.tienda.nombre_tienda")
+      return render(request,'carrito_de_compras.html',locals())   
+
+def quitar_producto_del_carrito(request,id_producto):
+       Carro_de_compras.objects.filter(id=id_producto)
+       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def editar_producto_del_carrito(request):   
+   
+        carrito= Carro_de_compras(id_usuario=request.user.username)
+        vector_de_formularios=[]
+        if request.method == 'POST':
+          for i in carrito:                  
+                
+                      form = Carro_de_comprasForm(request.POST,request.FILES,instance=i)
+                 
+                      if form.is_valid():
+                                                           
+                              form.save()
+                              vector_de_formularios.append(form)
+                              connection.close() 
+                            
+
+                      return render(request,'catalogo_tienda.html',locals())                                                  
+                      
+                   
+        else:
+            for i in carrito:
+              
+              form = Carro_de_comprasForm(instance=i)
+              vector_de_formularios.append(form)
+              #formCateg=CategoriaForm()
+
+        
+        connection.close()
+        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+        return render(request,'edicion_carrito_de_compras.html',locals())   
+  

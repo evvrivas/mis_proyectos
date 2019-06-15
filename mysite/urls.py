@@ -86,7 +86,10 @@ urlpatterns = [
 
 
 
-    
+    rl(r'^agregar_producto_al _carrito/(\d+)/$',agregar_producto_al _carrito),  
+    rl(r'^ver_el_carrito/$',ver_el_carrito),  
+    rl(r'^quitar_producto_del_carrito/(\d+)/$',quitar_producto_del_carrito),  
+    rl(r'^editar_producto_del_carrito/$',editar_producto_del_carrito),
       
        
 ]
@@ -94,5 +97,4 @@ urlpatterns = [
     
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 

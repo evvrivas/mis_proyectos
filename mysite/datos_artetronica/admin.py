@@ -121,10 +121,12 @@ admin.site.register(Ccomercial,CcomercialAdmin)
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
     form = Carro_de_comprasForm
+
+
 class Carro_de_comprasAdmin(admin.ModelAdmin):
     model = Carro_de_compras
     list_display = ['contacto_tienda','nombre_tienda','id_usuario','cantidad','nombre_producto','descripcion','precio_A','precio_B','estado_prod','fecha_ingreso']
-    
+   
 
     def nombre_producto(self,instance):
         return instance.producto.nombre

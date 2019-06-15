@@ -1,0 +1,87 @@
+{% extends "base_tienda.html" %}
+{% load thumbnail %}
+{% load staticfiles %} 
+{% block content %}
+     
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>Detalle del Pedido </center></h2>                
+      </div>
+
+
+    <div class="panel-body">
+
+            <div class="row">
+
+             <div class="col-md-8">
+                <div class="thumbnail">                                    
+                                  
+                     
+
+                            <table BORDER="3" CELLSPACING="5">
+                                <tr  align="center">
+                                    <td WIDTH="50">Cant</td>
+                                    <td WIDTH="200">Nombre</td>
+                                    <td WIDTH="200">Descrip</td>
+                                    <td WIDTH="50">P/U</td>
+                                    <td WIDTH="50">Total</td>
+                                </tr >
+
+                                {% for i in vector_de_formulario %}  
+
+                                 <form action="." method="post" enctype="multipart/form-data"> 
+                                      {% csrf_token%}
+
+
+                                        <tr  align="center">                                  
+                                      
+                                            <td WIDTH="50">{{ i.cantidad }}</td> 
+                                            <td WIDTH="200">{{ i.producto.nombre }}</td>
+                                            <td WIDTH="200">{{ i.producto.descripcion }}</td> 
+                                            <td WIDTH="50">{{ i.estado_prod }}</td> 
+                                            <td WIDTH="50">{{ i.fecha_ingreso }}</td>
+                                         <br>
+                                      
+                                                                            
+                                  </form> 
+                                  </tr>  
+
+
+                                {% endfor %}
+                                 <br>
+                            </table>
+                             <br> 
+                             <h2><center>Total a pagar: {{ total }} </center></h2>
+                              
+                             <br>
+
+                             
+                              <br>
+                              <div class="row"> 
+
+                    <center>
+                 <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20informacion"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="tel://{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    
+                                    <td WIDTH="60"><a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a></td>
+                                </tr >
+                        </table>
+                        </center>
+
+                 </div>
+                              
+                              
+                                                                 
+                </div>
+            </div>
+            
+          </div>
+
+        </div>
+  </div>
+   
+
+{% endblock %}
