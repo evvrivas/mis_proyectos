@@ -137,7 +137,7 @@ class Carro_de_comprasAdmin(admin.ModelAdmin):
     def nombre_tienda(self,instance):
         return instance.producto.tienda.nombre_tienda 
     def contacto_tienda(self,instance):
-        return instance.producto.tienda.id_ususario 
+        return instance.producto.tienda.id_usuario 
 
 admin.site.register(Carro_de_compras,Carro_de_comprasAdmin)
 ####################################################
