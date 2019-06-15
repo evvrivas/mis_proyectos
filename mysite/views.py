@@ -1078,20 +1078,7 @@ def ver_mis_mensajes(request,idusuario):
                 connection.close()
                 return render(request,'mensajes.html',locals())   
 
-       id_usuario=models.CharField(max_length=30,blank=True)
-       cantidad=models.FloatField(default=0,blank=True,null=True)
-       producto=models.ForeignKey('Productos',blank=True,null=True)
-       descripcion = models.TextField(blank=True)      
-       estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO_PRODUCTO,default="EN_EXISTENCIA")
-       fecha_ingreso = models.DateField(default=datetime.now,editable = False)
-
-
-
-
-
-
-
-
+       
 
 def agregar_producto_al_carrito(request,id_producto):   
 
