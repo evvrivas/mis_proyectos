@@ -1081,6 +1081,9 @@ def ver_mis_mensajes(request,idusuario):
        
 
 def agregar_producto_al_carrito(request,id_producto):   
+    categoria=n_categorias()
+    n_usuarios, n_tiendas, n_productos=info_pagina()
+
 
     if request.POST:
             cant = request.POST.get('cantidad')
@@ -1093,16 +1096,24 @@ def agregar_producto_al_carrito(request,id_producto):
 
                  carrito=Carro_de_compras(id_usuario=el_producto.id_usuario,cantidad=cant,producto=el_producto,descripcion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
                  carrito.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 def ver_el_carrito(request):
+      categoria=n_categorias()
+      n_usuarios, n_tiendas, n_productos=info_pagina()
       carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username).order_by("producto.tienda.nombre_tienda")
       return render(request,'carrito_de_compras.html',locals())   
 
 def quitar_producto_del_carrito(request,id_producto):
+       categoria=n_categorias()
+       n_usuarios, n_tiendas, n_productos=info_pagina()
        Carro_de_compras.objects.filter(id=id_producto)
        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-def editar_producto_del_carrito(request):   
+def editar_producto_del_carrito(request):  
+        categoria=n_categorias()
+        n_usuarios, n_tiendas, n_productos=info_pagina() 
    
         carrito= Carro_de_compras(id_usuario=request.user.username)
         vector_de_formularios=[]
