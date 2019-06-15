@@ -1086,7 +1086,7 @@ def agregar_producto_al_carrito(request,id_producto):
     categoria=n_categorias()
     n_usuarios, n_tiendas, n_productos=info_pagina()
 
-    el_producto=Productos.objects.get(id=id_prod)
+    el_producto=Productos.objects.get(id=id_producto)
     lafecha=datetime.datetime.now() 
 
     tiendas=Tiendas.objects.filter(id_usuario=request.user.username,nombre_tienda=el_producto.tienda.nombre_tienda).first() 
