@@ -1093,7 +1093,7 @@ def ver_mis_mensajes(request,idusuario):
 
 
 
-def agregar_producto_al _carrito(request,id_producto):   
+def agregar_producto_al_carrito(request,id_producto):   
 
     if request.POST:
             cant = request.POST.get('cantidad')
