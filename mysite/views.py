@@ -82,7 +82,7 @@ def crear_categorias(request):
   
  
 
-  fechita=atetime.datetime.now()
+  fechita=datetime.datetime.now()
 
   u1=User.objects.create_user(username="50378218224", password="1111",email="evvrivas@gmail.com",first_name="Ernesto",last_name="Valdez")
   u1.save()
