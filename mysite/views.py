@@ -1082,7 +1082,7 @@ def ver_mis_mensajes(request,idusuario):
 
        
 
-def agregar_producto_al_carrito(request,id_producto,cantidad,):   
+def agregar_producto_al_carrito(request,id_producto):   
     categoria=n_categorias()
     n_usuarios, n_tiendas, n_productos=info_pagina()
 
