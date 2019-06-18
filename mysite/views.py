@@ -1082,7 +1082,7 @@ def ver_mis_mensajes(request,idusuario):
 
        
 
-def agregar_producto_al_carrito(request,id_producto):   
+def agregar_producto_al_carrito(request,id_producto,cantidad,):   
     categoria=n_categorias()
     n_usuarios, n_tiendas, n_productos=info_pagina()
 
@@ -1093,7 +1093,7 @@ def agregar_producto_al_carrito(request,id_producto):
 
 
     if request.POST:
-            cant = request.POST.get("cantidad")
+            cant = request.POST.get("cant")
             #espe = request.POST.get('especificacion')
 
             #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
@@ -1152,5 +1152,5 @@ def editar_producto_del_carrito(request):
         
         connection.close()
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-        return render(request,'edicion_carrito_de_compras.html',locals())   
+        return render(request,'editar_carrito_de_compras.html',locals())   
   

@@ -144,6 +144,21 @@
                        
                        
  <div class="container">               
+               
+               <form action='/agregar_producto_al_carrito/{{j.id}}/' method='post'>
+                              {% csrf_token %}                                
+                              <label for="username">cant</label>
+                              <input type="text" name="cant" value="1" id="cant" size="2"> 
+                              <input type="text" name="espe" value="2" id="espe" size="20">                   
+               <input type="submit" value="Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" />
+               <a href="/editar_producto_del_carrito">Ver</a> 
+                                                  
+
+                       </form>
+
+
+<!--
+
                 <form action='/add_to_cart/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/' method='post'>
                               {% csrf_token %}                                
                               <label for="username">cant</label>
@@ -154,7 +169,7 @@
 
                        </form>  
 
-
+-->
 
 
 
@@ -222,16 +237,7 @@
                                <input type="submit" value="enviar">
         </form>
 
-<form action='/agregar_producto_al_carrito/{{j.id}}/' method='post'>
-                              {% csrf_token %}                                
-                              <label for="username">cant</label>
-                              <input type="text" name="cant" value="1" id="cant" size="2"> 
-                              <input type="text" name="espe" value="2" id="espe" size="20">                   
-               <input type="submit" value="Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" />
-               <a href="/editar_producto_del_carrito">Ver</a> 
-                                                  
 
-                       </form>
 
 
  {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior %}     
