@@ -371,7 +371,7 @@ class Carro_de_compras(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
 	     cantidad=models.FloatField(default=0,blank=True,null=True)
 	     producto=models.ForeignKey('Productos',blank=True,null=True)
-	     descripcion = models.TextField(blank=True)	     
+	     descripcion = models.TextField(blank=True,null=True)	     
 	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="EN_EXISTENCIA")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	    
