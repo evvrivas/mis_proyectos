@@ -76,6 +76,25 @@ def crear_categorias(request):
       cat=Categoria_global(categoria=i)
       cat.save()
 
+
+  conf=Configuracion_sistema(mensaje_bienvenida="Bienvenido a xgangas", n_visitas=0)
+  conf.save()
+  
+ 
+
+  fechita=atetime.datetime.now()
+
+  u1=User.objects.create_user(username="50378218224", password="1111",email="evvrivas@gmail.com",first_name="Ernesto",last_name="Valdez")
+  u1.save()
+
+
+  us=Usuarios(id_usuario="50378218224", clave="1111", nombre="Ernesto", email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",pais="El Salvador",facedireccion="",codigoapk="NORMAL",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita)      
+  us.save()
+
+
+
+
+
   return render(request,'principal.html',locals())
 
 
@@ -1094,7 +1113,7 @@ def agregar_producto_al_carrito(request,id_producto):
 
     if request.POST:
             cant = request.POST.get("cant")
-            #espe = request.POST.get('especificacion')
+            espe = request.POST.get('especificacion')
 
             #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
             cant=str(cant)
