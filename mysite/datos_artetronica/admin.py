@@ -125,7 +125,7 @@ class RulesAdmin(admin.ModelAdmin):
 
 class Carro_de_comprasAdmin(admin.ModelAdmin):
     model = Carro_de_compras
-    list_display = ['contacto_tienda','nombre_tienda','id_usuario','cantidad','nombre_producto','descripcion','precio_A','precio_B','estado_prod','fecha_ingreso']
+    list_display = ['contacto_tienda','nombre_tienda','id_usuario','cantidad','nombre_producto','especificacion','precio_A','precio_B','estado_prod','fecha_ingreso']
    
 
     def nombre_producto(self,instance):
