@@ -148,11 +148,11 @@
                <form action='/agregar_producto_al_carrito/{{j.id}}/' method='post'>
                               {% csrf_token %}                                
                               <label for="username">cant</label>
-                              <input type="text" name="cant" value="1" id="cant" size="1"> 
-                              <input type="text" name="especificacion" value="2" id="especificacion" size="10">
+                              <input type="text" name="cant"  id="cant" size="1" placeholder="cant"> 
+                              <input type="text" name="especificacion"  id="especificacion" placeholder="especificar" size="10">
 
                                                  
-               <input type="submit" value="Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" />
+               <input type="submit" value="+" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" />
                <a href="/editar_producto_del_carrito">Ver</a> 
                                                   
 
@@ -232,8 +232,8 @@
           
                      {% else %}       
                            <textarea name="comentario" style="width:200px; height:50px;">Quieres preguntar o hacer un pedido?</textarea>
-                           <p>Mi numero de contacto es</p>
-                           <input type="text" id="name" name="telefono" size="15"/>                        
+                           
+                           <input type="text" id="name" name="telefono" size="15" placeholder="Mi numero de contacto es" />                        
                       {% endif %}         
 
                                <input type="submit" value="enviar">
