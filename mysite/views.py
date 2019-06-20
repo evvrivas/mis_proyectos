@@ -1106,6 +1106,8 @@ def agregar_producto_al_carrito(request,id_producto):
     n_usuarios, n_tiendas, n_productos=info_pagina()
 
     el_producto=Productos.objects.get(id=id_producto)
+
+    
     lafecha=datetime.datetime.now() 
 
     tiendas=Tiendas.objects.filter(id_usuario=request.user.username,nombre_tienda=el_producto.tienda.nombre_tienda).first() 
@@ -1123,7 +1125,7 @@ def agregar_producto_al_carrito(request,id_producto):
 
                  
 
-                 carrito=Carro_de_compras(id_usuario=el_producto.id_usuario,cantidad=cant,producto=el_producto,especificacion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
+                 carrito=Carro_de_compras(id_usuario=request.user.username,cantidad=cant,producto=el_producto,especificacion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
