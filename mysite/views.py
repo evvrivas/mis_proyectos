@@ -1145,6 +1145,7 @@ def editar_producto_del_carrito(request):
         n_usuarios, n_tiendas, n_productos=info_pagina() 
    
         carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username)
+
         vector_de_formularios=[]
         
         if request.method == 'POST':
@@ -1165,7 +1166,7 @@ def editar_producto_del_carrito(request):
         else:
             for i in carrito:
               
-              form = Carro_de_comprasForm(instance=i)
+              form = Carro_de_comprasForm(i.producto.id_usuario,i.producto.tienda.nombre_tienda,instance=i)
               vector_de_formularios.append(form)
               #formCateg=CategoriaForm()
 
@@ -1174,3 +1175,4 @@ def editar_producto_del_carrito(request):
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
         return render(request,'editar_carrito_de_compras.html',locals())   
   
+
