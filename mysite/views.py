@@ -549,7 +549,6 @@ def mi_tienda(request,idusuario,nombretienda):
 
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("precio_A")[:10]
     
-    form=Especificacion_itemForm()
     connection.close() 
     return render(request,'catalogo_tienda.html',locals())   
  
@@ -1099,8 +1098,8 @@ def ver_mis_mensajes(request,idusuario):
                 mensajes=Mensajes.objects.filter(id_usuario=idusuario)
                 connection.close()
                 return render(request,'mensajes.html',locals())   
-                        
-           
+
+       
 
 def agregar_producto_al_carrito(request,id_producto):   
     categoria=n_categorias()
@@ -1113,13 +1112,19 @@ def agregar_producto_al_carrito(request,id_producto):
 
 
     if request.POST:
-            form = Especificacion_itemForm(request.POST,request.FILES)
-            if form.is_valid() :  
-                canti = form.cleaned_data['cantidad']
-                especi = form.cleaned_data['especificacion']
-                carrito=Carro_de_compras(id_usuario=el_producto.id_usuario,cantidad=canti,producto=el_producto,descripcion=especi,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
-                carrito.save()
-    
+            cant = request.POST.get("cant")
+            espe = request.POST.get('especificacion')
+
+            #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+            cant=str(cant)
+            cant=eval(cant)
+
+            if cant>0:
+
+                 
+
+                 carrito=Carro_de_compras(id_usuario=el_producto.id_usuario,cantidad=cant,producto=el_producto,descripcion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
+                 carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 

@@ -367,17 +367,6 @@ ESTADO3 = (
 			
 			)
 
-
-
-class Especificacion_item(models.Model):
-		cantidad=models.FloatField(blank=True,null=True,default=1)
-		especificacion=models.CharField(max_length=40,blank=True,null=True)
-		def __str__(self):
-		    		return  self.cantidad
-	    class Admin:
-		    		list_display = ('cantidad', 'especificacion')
-
-
 class Carro_de_compras(models.Model):	     
 	     id_usuario=models.CharField(max_length=30,blank=True)
 	     cantidad=models.FloatField(default=0,blank=True,null=True)
