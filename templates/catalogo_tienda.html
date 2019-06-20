@@ -145,16 +145,16 @@
                        
  <div class="container">               
                
-               <form action='/agregar_producto_al_carrito/{{j.id}}/' method='post'>
+               <form action='/agregar_producto_al_carrito/{{j.id}}/' id={{j.id}} method='post' enctype="multipart/form-data">
                               {% csrf_token %}                                
-                              <label for="username">cant</label>
-                              <input type="text" name="cant" value="1" id="cant" size="2"> 
-                              <input type="text" name="espe" value="2" id="espe" size="20">                   
-               <input type="submit" value="Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" />
-               <a href="/editar_producto_del_carrito">Ver</a> 
-                                                  
+                             <p> {{form.cantidad}} {{form.especificacion}} <input type="submit" value="+">           <a href="/editar_producto_del_carrito">Ver</a> <p>
+                                               
+               </form>
 
-                       </form>
+
+
+
+
 
 
 <!--

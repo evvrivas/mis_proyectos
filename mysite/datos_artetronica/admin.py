@@ -120,8 +120,14 @@ admin.site.register(Ccomercial,CcomercialAdmin)
 
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
-    form = Carro_de_comprasForm
+    form = Especificacion_itemForm
+admin.site.register(Especificacion_item)
+####################################################
 
+
+####################################################
+class RulesAdmin(admin.ModelAdmin):
+    form = Carro_de_comprasForm
 
 class Carro_de_comprasAdmin(admin.ModelAdmin):
     model = Carro_de_compras
