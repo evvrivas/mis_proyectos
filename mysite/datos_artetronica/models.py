@@ -379,5 +379,5 @@ class Carro_de_compras(models.Model):
 	     def __str__(self):
 		    		return  self.producto.nombre
 	     class Admin:
-		    		list_display = ('cantidad')
+		    		list_display = ('categoria', 'cantidad', 'nombre','precio_A')
 		    		
