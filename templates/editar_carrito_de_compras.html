@@ -33,20 +33,14 @@
                                       {% csrf_token%}
 
 
-                                        <tr  align="center">    
-
-                                            <td WIDTH="50">{{ i }}</td>
-                                            <td WIDTH="200"> hhhhh</td>                
-                                            <td WIDTH="200">aaaaaa </td> 
-                                            <td WIDTH="50">aaaaaa</td> 
-                                            <td WIDTH="50">bbbb</td>                      
+                                        <tr  align="center">                                  
                                       
-                                  <!--          <td WIDTH="50">{{ i.cantidad }}</td> 
+                                            <td WIDTH="50">{{ i.cantidad }}</td> 
                                             <td WIDTH="200">{{ i.producto.nombre }}</td>                
                                             <td WIDTH="200">{{ i.especificacion }} </td> 
                                             <td WIDTH="50">{{ i.estado_prod }}</td> 
                                             <td WIDTH="50">{{ i.fecha_ingreso }}</td>
-                                         <br>    -->
+                                         <br>
       
                                                                             
                                   </form> 
@@ -57,7 +51,7 @@
                                  <br>
                             </table>
                              <br> 
-                             <h2><center>Total a pagar: vvvvv</center></h2>
+                             <h2><center>Total a pagar: {{ total }} </center></h2>
                               
                              <br>
 

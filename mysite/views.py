@@ -1107,7 +1107,7 @@ def agregar_producto_al_carrito(request,id_producto):
 
     el_producto=Productos.objects.get(id=id_producto)
 
-    
+
     lafecha=datetime.datetime.now() 
 
     tiendas=Tiendas.objects.filter(id_usuario=request.user.username,nombre_tienda=el_producto.tienda.nombre_tienda).first() 
@@ -1149,6 +1149,7 @@ def editar_producto_del_carrito(request):
         carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username)
 
         vector_de_formularios=[]
+
         
         if request.method == 'POST':
           for i in carrito:                  
@@ -1168,7 +1169,7 @@ def editar_producto_del_carrito(request):
         else:
             for i in carrito:
               
-              form = Carro_de_comprasForm(i.producto.id_usuario,i.producto.tienda.nombre_tienda,instance=i)
+              form = Carro_de_comprasForm(instance=i)
               vector_de_formularios.append(form)
               #formCateg=CategoriaForm()
 
