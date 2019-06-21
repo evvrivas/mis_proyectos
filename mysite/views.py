@@ -1125,9 +1125,9 @@ def agregar_producto_al_carrito(request,id_producto):
 
             if cant>0:
 
-                 
+                
 
-                 carrito=Carro_de_compras(id_usuario=request.user.username,cantidad=cant,producto=el_producto,especificacion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
+                 carrito=Carro_de_compras(nombre_tienda=el_producto.tienda.nombre_tienda,id_usuario=request.user.username,cantidad=cant,nombre=el_producto.nombre,especificacion=espe,precio=el_producto.precio_A,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

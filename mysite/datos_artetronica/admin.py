@@ -124,21 +124,10 @@ class RulesAdmin(admin.ModelAdmin):
 
 class Carro_de_comprasAdmin(admin.ModelAdmin):
     model = Carro_de_compras
-    list_display = ['contacto_tienda','nombre_tienda','id_usuario','cantidad','nombre_producto','especificacion','precio_A','precio_B','estado_prod','fecha_ingreso']
+    list_display = ['id_vendedor','nombre_tienda','id_usuario','cantidad','nombre','especificacion','precio','estado_prod','fecha_ingreso']
    
-
-    def nombre_producto(self,instance):
-        return instance.producto.nombre
-    def precio_A(self,instance):
-        return instance.producto.precio_A 
-    def precio_B(self,instance):
-        return instance.producto.precio_B 
-    def nombre_tienda(self,instance):
-        return instance.producto.tienda.nombre_tienda 
-    def contacto_tienda(self,instance):
-        return instance.producto.tienda.id_usuario 
-
+    
 admin.site.register(Carro_de_compras,Carro_de_comprasAdmin)
 ####################################################
 
-          
+   

@@ -20,6 +20,7 @@
 
                             <table BORDER="3" CELLSPACING="5">
                                 <tr  align="center">
+                                    <td WIDTH="50">nombre_tienda</td>
                                     <td WIDTH="50">Cant</td>
                                     <td WIDTH="200">Nombre</td>                                  
                                     <td WIDTH="200">Especif</td>
@@ -35,12 +36,14 @@
 
                                         <tr  align="center">                                  
                                       
+                                            <td WIDTH="50">{{ i.nombre_tienda }}</td> 
                                             <td WIDTH="50">{{ i.cantidad }}</td> 
                                             <td WIDTH="200">{{ i.producto.nombre }}</td>                
                                             <td WIDTH="200">{{ i.especificacion }} </td>
-                                            <td WIDTH="50">{{ i.producto}}</td> 
+                                            <td WIDTH="50">{{ i.precio}}</td> 
                                             <td WIDTH="50">{{ i.estado_prod }}</td> 
                                             
+       
                                          <br>
       
                                                                             
