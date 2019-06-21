@@ -45,7 +45,7 @@
                                     <td> 
                                     <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
                                      {% csrf_token %}
-                                     <input type="text" id="name" name="nombre" size="10"/>
+                                     <input type="text" id="name" name="nombre" placeholder="Que buscas?" size="10"/>
                                      <input type="submit" value="Buscar">
                                      </form>
                                      </td>                                                     

@@ -20,12 +20,12 @@
 
                             <table BORDER="3" CELLSPACING="5">
                                 <tr  align="center">
-                                    <td WIDTH="50">nombre_tienda</td>
-                                    <td WIDTH="50">Cant</td>
-                                    <td WIDTH="200">Nombre</td>                                  
-                                    <td WIDTH="200">Especif</td>
-                                    <td WIDTH="50">P/U</td>
-                                    <td WIDTH="50">Estado</td>
+                                    <td WIDTH="15">nombre_tienda</td>
+                                    <td WIDTH="5">Cant</td>
+                                    <td WIDTH="20">Nombre</td>                                  
+                                    <td WIDTH="30">Especif</td>
+                                    <td WIDTH="10">P/U</td>
+                                    <td WIDTH="20">Estado</td>
                                 </tr >
 
                                 {% for i in vector_de_formularios %}  
@@ -36,12 +36,12 @@
 
                                         <tr  align="center">                                  
                                       
-                                            <td WIDTH="50">{{ i.nombre_tienda }}</td> 
-                                            <td WIDTH="50">{{ i.cantidad }}</td> 
-                                            <td WIDTH="200">{{ i.producto.nombre }}</td>                
-                                            <td WIDTH="200">{{ i.especificacion }} </td>
-                                            <td WIDTH="50">{{ i.precio}}</td> 
-                                            <td WIDTH="50">{{ i.estado_prod }}</td> 
+                                            <td WIDTH="15">{{ i.nombre_tienda }}</td> 
+                                            <td WIDTH="5">{{ i.cantidad }}</td> 
+                                            <td WIDTH="20">{{ i.nombre }}</td>                
+                                            <td WIDTH="30">{{ i.especificacion }} </td>
+                                            <td WIDTH="10">{{ i.precio}}</td> 
+                                            <td WIDTH="20">{{ i.estado_prod }}</td> 
                                             
        
                                          <br>

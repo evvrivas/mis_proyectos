@@ -13,7 +13,7 @@ class ProductosForm(ModelForm):
 
 	class Meta:
 		model= Productos
-		widgets = {'descripcion': Textarea(attrs={'cols': 40, 'rows': 3}),}
+		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}
 		exclude=["id_usuario","puntuacion","fecha_ingreso","ultima_fecha_edicion"]
 	
 	def __init__(self, user,nombre_tienda,*args, **kwargs):
@@ -41,7 +41,7 @@ class Categoria_globalForm(ModelForm):
 class TiendasForm(ModelForm):
 	class Meta:
 		model= Tiendas	
-		widgets = {'descripcion': Textarea(attrs={'cols': 50, 'rows': 8}),}	
+		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}	
 		exclude=["codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario","ultima_fecha_edicion"]
 	def __init__(self, user,*args, **kwargs):
 		super(TiendasForm, self).__init__(*args, **kwargs)
@@ -52,7 +52,7 @@ class TiendasForm(ModelForm):
 class PedidosForm(ModelForm):
 	class Meta:
 		model= Pedidos	
-		widgets = {'descripcion': Textarea(attrs={'cols': 40, 'rows': 6}),}
+		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 3}),}
 		exclude=["id_usuario"]
 
 	
@@ -60,25 +60,25 @@ class Configuracion_sistemaForm(ModelForm):
 	class Meta:
 			
 		model=Configuracion_sistema
-		widgets = {'mensaje_bienvenida': Textarea(attrs={'cols': 30, 'rows': 3}),'respuesta': Textarea(attrs={'cols': 30, 'rows': 3}),}
+		widgets = {'mensaje_bienvenida': Textarea(attrs={'cols': 30, 'rows': 2}),'respuesta': Textarea(attrs={'cols': 30, 'rows': 3}),}
 		exclude=[]
 		
 class MensajesForm(ModelForm):
 	class Meta:			
 		model=Mensajes
-		widgets = {'pregunta': Textarea(attrs={'cols': 20, 'rows': 3}),'respuesta': Textarea(attrs={'cols': 20, 'rows': 3}),}
+		widgets = {'pregunta': Textarea(attrs={'cols': 20, 'rows': 2}),'respuesta': Textarea(attrs={'cols': 20, 'rows': 2}),}
 		exclude=["id_usuario","fecha"]
 
 class CcomercialForm(ModelForm):
 	class Meta:			
 		model=Ccomercial
-		widgets = {'descripcion_ccomercial': Textarea(attrs={'cols': 30, 'rows': 3})}
+		widgets = {'descripcion_ccomercial': Textarea(attrs={'cols': 30, 'rows': 2})}
 		exclude=["id_usuario"]
 
 class Carro_de_comprasForm(ModelForm):
 	class Meta:			
 		model=Carro_de_compras
-		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 1})}
+		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2})}
 		exclude=["id_usuario","fecha_ingreso"]
 	
 
