@@ -1105,7 +1105,9 @@ def agregar_producto_al_carrito(request,id_producto):
     categoria=n_categorias()
     n_usuarios, n_tiendas, n_productos=info_pagina()
 
+    
     el_producto=Productos.objects.get(id=id_producto)
+    
 
 
     lafecha=datetime.datetime.now() 
@@ -1169,7 +1171,7 @@ def editar_producto_del_carrito(request):
         else:
             for i in carrito:
               
-              form = Carro_de_comprasForm(instance=i)
+              form = Carro_de_comprasForm(request.user.username,tiendas.nombre_tienda,instance=i)
               vector_de_formularios.append(form)
               #formCateg=CategoriaForm()
 
