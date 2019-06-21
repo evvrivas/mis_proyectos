@@ -1171,7 +1171,7 @@ def editar_producto_del_carrito(request):
         else:
             for i in carrito:
               
-              form = Carro_de_comprasForm(request.user.username,tiendas.nombre_tienda,instance=i)
+              form = Carro_de_comprasForm(instance=i)
               vector_de_formularios.append(form)
               #formCateg=CategoriaForm()
 

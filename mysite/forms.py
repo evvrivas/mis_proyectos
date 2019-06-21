@@ -80,9 +80,9 @@ class Carro_de_comprasForm(ModelForm):
 		model=Carro_de_compras
 		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 1})}
 		exclude=["id_usuario","fecha_ingreso"]
-	def __init__(self, user,nombre_tienda,*args, **kwargs):
+	def __init__(self, *args, **kwargs):
 		super(Carro_de_comprasForm, self).__init__(*args, **kwargs)		
-		self.fields['producto'].queryset=Productos.objects.filter(id_usuario=user,tienda=nombre_tienda)
+		self.fields['producto'].queryset=Productos.objects.all()
 
 
 
