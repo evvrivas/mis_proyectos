@@ -373,7 +373,7 @@ class Carro_de_compras(models.Model):
 	     nombre_tienda=models.CharField(max_length=30,blank=True)	     
 	     cantidad=models.DecimalField(max_digits=4,decimal_places=0,default=0,blank=True,null= True)
 	     nombre=  models.CharField(max_length=30)
-         precio = models.FloatField(default=0,blank=True,null=True)    
+	     precio = models.FloatField(default=0,blank=True,null=True)
 	     especificacion = models.TextField(blank=True,null=True)	     
 	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="EN_EXISTENCIA")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
