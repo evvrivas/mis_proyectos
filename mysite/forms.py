@@ -29,7 +29,8 @@ class BuscarForm(ModelForm):
 
 class CategoriaForm(ModelForm):
 	class Meta:
-		model= Categoria		
+		model= Categoria
+		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}			
 		exclude=["id_usuario","tienda"]
 
     
