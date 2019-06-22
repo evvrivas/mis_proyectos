@@ -18,42 +18,39 @@
                                   
                      
 
-                            <table BORDER="3" CELLSPACING="5">
-                                <tr  align="center">
-                                    <td WIDTH="15">nombre_tienda</td>
-                                    <td WIDTH="5">Cant</td>
-                                    <td WIDTH="20">Nombre</td>                                  
-                                    <td WIDTH="30">Especif</td>
-                                    <td WIDTH="10">P/U</td>
-                                    <td WIDTH="20">Estado</td>
-                                </tr >
 
-                                {% for i in vector_de_formularios %}  
 
-                                 <form action="." method="post" enctype="multipart/form-data"> 
+                          {% for i in vector_de_formularios %}  
+
+                          <form action="." method="post" enctype="multipart/form-data"> 
                                       {% csrf_token%}
 
-
-                                        <tr  align="center">                                  
-                                      
+                             <table BORDER="3" CELLSPACING="5">
+                                <tr  align="center">
                                             <td WIDTH="15">{{ i.nombre_tienda }}</td> 
-                                            <td WIDTH="5">{{ i.cantidad }}</td> 
                                             <td WIDTH="20">{{ i.nombre }}</td>                
-                                            <td WIDTH="30">{{ i.especificacion }} </td>
-                                            <td WIDTH="10">{{ i.precio}}</td> 
-                                            <td WIDTH="20">{{ i.estado_prod }}</td> 
+
                                             
-       
-                                         <br>
-      
+                                </tr >
+                                 
+                                 <tr  align="center">  
+                                            <td WIDTH="5">{{ i.cantidad }}</td> 
+                                            <td WIDTH="30">{{ i.especificacion }} </td>
+                                  </tr >  
+
+                                   <tr  align="center">         
+                                            <td WIDTH="20">{{ i.estado_prod }}</td> 
+                                            <td WIDTH="10">{{ i.precio}}</td> 
+                                   </tr >
+                            </table>
                                                                             
                                   </form> 
-                                  </tr>  
+                                  
 
 
-                                {% endfor %}
-                                 <br>
-                            </table>
+                        {% endfor %}
+                                
+                            
                              <br> 
                              <h2><center>Total a pagar </center></h2>
                               
