@@ -91,4 +91,4 @@ class Carro_de_comprasForm(ModelForm):
 		exclude=["id_usuario","fecha_ingreso"]
 
 		
-forms.TextInput(attrs={'size': 20})
+
