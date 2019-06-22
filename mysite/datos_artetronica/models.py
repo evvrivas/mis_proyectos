@@ -376,7 +376,7 @@ class Carro_de_compras(models.Model):
 	     precio = models.FloatField(default=0,blank=True,null=True,editable = False)
 	     especificacion = models.TextField(blank=True,null=True)
 	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="EN_EXISTENCIA",editable = False)
-	     fecha_ingreso = models.DateField(default=datetime.now,editable = False,editable = False)
+	     fecha_ingreso = models.DateField(default=datetime.now,editable = False,)
 	    
 
 	     def __str__(self):
