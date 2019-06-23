@@ -1104,16 +1104,13 @@ def ver_mis_mensajes(request,idusuario):
 def agregar_producto_al_carrito(request,id_producto):   
     categoria=n_categorias()
     n_usuarios, n_tiendas, n_productos=info_pagina()
-
     
     el_producto=Productos.objects.get(id=id_producto)
-    
-
 
     lafecha=datetime.datetime.now() 
 
     tiendas=Tiendas.objects.filter(id_usuario=request.user.username,nombre_tienda=el_producto.tienda.nombre_tienda).first() 
-
+    
 
     if request.POST:
             cant = request.POST.get("cant")
@@ -1123,11 +1120,9 @@ def agregar_producto_al_carrito(request,id_producto):
             cant=str(cant)
             cant=eval(cant)
 
-            if cant>0:
+            if cant>0:  
 
-                
-
-                 carrito=Carro_de_compras(nombre_tienda=el_producto.tienda.nombre_tienda,id_usuario=request.user.username,cantidad=cant,nombre=el_producto.nombre,especificacion=espe,precio=el_producto.precio_A,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
+                 carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,especificacion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -1154,18 +1149,17 @@ def editar_producto_del_carrito(request):
 
         
         if request.method == 'POST':
-          for i in carrito:                  
+          
+              for i in carrito:                  
                 
                       form = Carro_de_comprasForm(request.POST,request.FILES,instance=i)
                  
                       if form.is_valid():
                                                            
-                              form.save()
-                              vector_de_formularios.append(form)
-                              connection.close() 
-                            
+                              form.save()                              
+                              connection.close()                            
 
-                      return render(request,'catalogo_tienda.html',locals())                                                  
+              return render(request,'confirmar_tienda.html',locals())                                                  
                       
                    
         else:

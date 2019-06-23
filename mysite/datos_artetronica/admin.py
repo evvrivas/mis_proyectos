@@ -120,13 +120,10 @@ admin.site.register(Ccomercial,CcomercialAdmin)
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
     form = Carro_de_comprasForm
-
-
 class Carro_de_comprasAdmin(admin.ModelAdmin):
     model = Carro_de_compras
     list_display = ['id_vendedor','nombre_tienda','id_usuario','cantidad','nombre','especificacion','precio','estado_prod','fecha_ingreso']
    
-    
 admin.site.register(Carro_de_compras,Carro_de_comprasAdmin)
 ####################################################
 

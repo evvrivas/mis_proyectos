@@ -360,10 +360,10 @@ class Item(models.Model):
 				product = property(get_product, set_product)
 
 ESTADO3 = (
-			('PENDIENTE', 'PENDIENTE'),
-			('EN TRAMITE', 'EN TRAMITE'),
-			('CONFIRMADO', 'CONFIRMADO'),
-			('ENTREGADO', 'ENTREGADO'),
+			('QUIERO PEDIR ESTO', 'QUIERO PEDIR ESTO'),
+			('ENPROCESO DE COMPRA', 'ENPROCESO DE COMPRA'),
+			('EL VENDEDOR A CONFIRMADO', 'EL VENDEDOR A CONFIRMADO'),
+			('PRODUCTO ENTREGADO', 'PRODUCTO ENTREGADO'),
 			
 			)
 
@@ -375,12 +375,13 @@ class Carro_de_compras(models.Model):
 	     nombre=  models.CharField(max_length=30,editable = False)
 	     precio = models.FloatField(default=0,blank=True,null=True,editable = False)
 	     especificacion = models.TextField(blank=True,null=True)
-	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="EN_EXISTENCIA",editable = False)
+	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="QUIERO PEDIR ESTO",editable = False)
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False,)
 	    
 
 	     def __str__(self):
-		    		return  self.producto.nombre
+		    		return  self.nombre
 	     class Admin:
 		    		list_display = ('especificacion','id_usuario')
-		    		
+	
+	
