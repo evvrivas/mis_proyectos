@@ -1130,7 +1130,7 @@ def agregar_producto_al_carrito(request,id_producto):
 def ver_el_carrito(request):
       categoria=n_categorias()
       n_usuarios, n_tiendas, n_productos=info_pagina()
-      carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username).order_by("producto.tienda.nombre_tienda")
+      carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username).order_by("nombre_tienda")
       return render(request,'carrito_de_compras.html',locals())   
 
 def quitar_producto_del_carrito(request,id_producto):
