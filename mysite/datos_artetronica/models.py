@@ -368,20 +368,29 @@ ESTADO3 = (
 			)
 
 class Carro_de_compras(models.Model):	     
-	     id_usuario=models.CharField(max_length=30,blank=True,editable = False)
-	     id_vendedor=models.CharField(max_length=30,blank=True,editable = False)
-	     nombre_tienda=models.CharField(max_length=30,blank=True,editable = False)
+	     id_usuario=models.CharField(max_length=30,blank=True)
+	     id_vendedor=models.CharField(max_length=30,blank=True)
+	     nombre_tienda=models.CharField(max_length=30,blank=True)
 	     cantidad=models.DecimalField(max_digits=4,decimal_places=0,default=0,blank=True,null= True)
-	     nombre=  models.CharField(max_length=30,editable = False)
-	     precio = models.FloatField(default=0,blank=True,null=True,editable = False)
+	     nombre=  models.CharField(max_length=30)
+	     precio = models.FloatField(default=0,blank=True,null=True)
 	     especificacion = models.TextField(blank=True,null=True)
-	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="QUIERO PEDIR ESTO",editable = False)
-	     fecha_ingreso = models.DateField(default=datetime.now,editable = False,)
+	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="QUIERO PEDIR ESTO")
+	     fecha_ingreso = models.DateField(default=datetime.now)
 	    
 
 	     def __str__(self):
 		    		return  self.nombre
 	     class Admin:
 		    		list_display = ('especificacion','id_usuario')
+	
+#class Item_carro(models.Model):	     
+#	     cantidad=models.DecimalField(max_digits=4,decimal_places=0,default=0,blank=True,null= True)
+#	     especificacion = models.TextField(blank=True,null=True)
+	     
+#	     def __str__(self):
+#		    		return  self.especificacion
+#	     class Admin:
+#		    		list_display = ('especificacion','cantidad')
 	
 	

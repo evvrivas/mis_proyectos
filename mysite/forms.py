@@ -91,4 +91,16 @@ class Carro_de_comprasForm(ModelForm):
 		exclude=["id_usuario","fecha_ingreso"]
 
 		
+#class Item_carroForm(ModelForm):
+#	class Meta:			
+#		model=Item_carro
+#		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 1}),}
+				   #'nombre_tienda' :  TextInput(attrs={'size': 20}),
+				   #'cantidad' : NumberInput(attrs={'size':'5'}),
+				   #'nombre' :  TextInput(attrs={'size': 20}),
+				   #'precio' :  NumberInput(attrs={'size':'5'}),
+				   #'especificacion' :  TextInput(attrs={'size': 20}),
+				   #'estado_prod' :  TextInput(attrs={'size': 20})
+				    # }
 
+#		exclude=[]

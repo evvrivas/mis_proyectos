@@ -1120,6 +1120,8 @@ def agregar_producto_al_carrito(request,id_producto):
             cant=str(cant)
             cant=eval(cant)
 
+            
+
             if cant>0:  
 
                  carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,especificacion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)

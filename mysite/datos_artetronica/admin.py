@@ -127,4 +127,13 @@ class Carro_de_comprasAdmin(admin.ModelAdmin):
 admin.site.register(Carro_de_compras,Carro_de_comprasAdmin)
 ####################################################
 
-   
+
+####################################################
+#class RulesAdmin(admin.ModelAdmin):
+#    form = Item_carroForm
+#class Item_carroAdmin(admin.ModelAdmin):
+#    model = Item_carro
+#    list_display = ['cantidad','especificacion']
+#   
+#admin.site.register(Item_carro,Item_carroAdmin)
+####################################################
