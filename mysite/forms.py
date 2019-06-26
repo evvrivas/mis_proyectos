@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 from mysite.datos_artetronica.models import *
 
-from django.forms import ModelForm, Textarea
+from django.forms import ModelForm, Textarea, TextInput, NumberInput
+
+
+
 
 class UsuariosForm(ModelForm):
 	class Meta:
@@ -80,12 +83,12 @@ class Carro_de_comprasForm(ModelForm):
 	class Meta:			
 		model=Carro_de_compras
 		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}),}
-				   #'nombre_tienda' :  TextInput(attrs={'size': 20}),
-				   #'cantidad' : NumberInput(attrs={'size':'5'}),
-				   #'nombre' :  TextInput(attrs={'size': 20}),
-				   #'precio' :  NumberInput(attrs={'size':'5'}),
-				   #'especificacion' :  TextInput(attrs={'size': 20}),
-				   #'estado_prod' :  TextInput(attrs={'size': 20})
+				   'nombre_tienda' :  TextInput(attrs={'size': 20}),
+				   'cantidad' : NumberInput(attrs={'size':5}),
+				   'nombre' :  TextInput(attrs={'size': 20}),
+				   'precio' :  NumberInput(attrs={'size':5}),
+				   'especificacion' :  TextInput(attrs={'size': 20}),
+				   'estado_prod' :  TextInput(attrs={'size': 20})
 				    # }
 
 		exclude=["id_usuario","fecha_ingreso"]
