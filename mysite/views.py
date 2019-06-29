@@ -1126,8 +1126,12 @@ def agregar_producto_al_carrito(request,id_del_producto):
 def ver_el_carrito(request,estado_del_producto):
       categoria=n_categorias()
       n_usuarios, n_tiendas, n_productos=info_pagina() 
-
-      carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("nombre_tienda")
+      
+      if estado_del_producto=="TODOS"
+             carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username).order_by("nombre_tienda")
+      else:
+             carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("nombre_tienda")
+ 
       return render(request,'ver_carrito_de_compras.html',locals())   
 
 
