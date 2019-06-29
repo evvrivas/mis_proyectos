@@ -82,7 +82,7 @@ urlpatterns = [
     url(r'^crear_categorias/$',crear_categorias),  
 
     url(r'^agregar_producto_al_carrito/(\d+)/$',agregar_producto_al_carrito),  
-    url(r'^ver_el_carrito/$',ver_el_carrito),  
+    url(r'^ver_el_carrito/([^/]+)/$',ver_el_carrito),  
     url(r'^eliminar_producto_del_carrito/(\d+)/$',eliminar_producto_del_carrito),  
     url(r'^editar_producto_del_carrito/(\d+)/$',editar_producto_del_carrito), 
     url(r'^realizar_compra_individual/(\d+)/$',realizar_compra_individual),
