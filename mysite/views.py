@@ -1149,35 +1149,6 @@ def eliminar_producto_del_carrito(request,id_producto):
        return render(request,'carrito_de_compras.html',locals()) 
 
 
-def editar_producto_del_carrito(request,id_producto):   
-        categoria=n_categorias()
-        n_usuarios, n_tiendas, n_productos=info_pagina()
-        
-        
-        f = Carro_de_compras.objects.get(pk=id_producto)           
-       
-        if request.method == 'POST':
-            
-            form = Carro_de_comprasForm(request.POST,request.FILES,instance=f)
-       
-            if form.is_valid():
-                   
-                   form.save() 
-                   connection.close()
-                   return render(request,'carrito_de_compras.html',locals())             
-                    
-        else:
-            
-            form = Carro_de_comprasForm(instance=f)
-            
-
-        
-        connection.close()
-        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-        return render(request,'formulario_ingreso.html',locals())   
-
-
-
 def realizar_compra(request):
     return render(request,'confirmar_tienda.html',locals())   
 

@@ -24,24 +24,24 @@
                          
                              <table BORDER="3" CELLSPACING="5">
                                 <tr  align="center">
-                                            <td WIDTH="15">{{ i.nombre_tienda }}</td> 
-                                            <td WIDTH="20">{{ i.nombre }}</td>               
+                                            <td WIDTH="25">{{ i.nombre_tienda }}</td> 
+                                            <td WIDTH="10">cant. {{ i.cantidad }}</td> 
+                                            <td WIDTH="25">{{ i.nombre }}</td>               
                                             
                                 </tr >
                                  
-                                 <tr  align="center">  
-                                            <td WIDTH="10">cant. {{ i.cantidad }}</td> 
-                                            <td WIDTH="25">{{ i.especificacion }} </td>
+                                 <tr  align="center">                                              
+                                            <td WIDTH="60">{{ i.especificacion }} </td>
                                   </tr >  
 
                                    <tr  align="center">         
-                                            <td WIDTH="20">{{ i.estado_prod }}</td> 
-                                            <td WIDTH="15">$P/U = {{ i.precio}}</td> 
+                                            <td WIDTH="40">{{ i.estado_prod }}</td> 
+                                            <td WIDTH="20>$P/U = {{ i.precio}}</td> 
                                    </tr >
 
                                     <tr  align="center">         
-                                            <td WIDTH="20"><li><a href="/editar_producto_carrito/{{i.id}}" >Editar  </a></li></td> 
-                                            <td WIDTH="15"><li><a href="/eliminar_producto_carrito/{{i.id}}" >Eliminar  </a></li></td> 
+                                            <td WIDTH="30"><li><a href="/editar_producto_del_carrito/{{i.id}}" >Editar  </a></li></td> 
+                                            <td WIDTH="30"><li><a href="/eliminar_producto_del_carrito/{{i.id}}" >Eliminar  </a></li></td> 
                                    </tr >
                             
 
