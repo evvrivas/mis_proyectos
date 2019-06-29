@@ -1131,8 +1131,7 @@ def agregar_producto_al_carrito(request,id_del_producto):
 
 def ver_el_carrito(request):
       categoria=n_categorias()
-      n_usuarios, n_tiendas, n_productos=info_pagina()
-      
+      n_usuarios, n_tiendas, n_productos=info_pagina()     
 
 
 
@@ -1146,7 +1145,7 @@ def eliminar_producto_del_carrito(request,id_producto):
 
        Carro_de_compras.objects.get(id=id_producto).delete()
        #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-       return render(request,'carrito_de_compras.html',locals()) 
+       return render(request,'ver_carrito_de_compras.html',locals()) 
 
 
 def realizar_compra(request):
@@ -1158,59 +1157,28 @@ def realizar_compra(request):
 
 
 
+def editar_producto_del_carrito(request,id_producto):  
+       categoria=n_categorias()
+       n_usuarios, n_tiendas, n_productos=info_pagina()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def editar_producto_del_carrito(request):  
-        categoria=n_categorias()
-        n_usuarios, n_tiendas, n_productos=info_pagina() 
-   
-        carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username)
-
-        vector_de_formularios=[]
-
-        
-        if request.method == 'POST':
-          
-              for i in carrito:                  
-                
-                      form = Carro_de_comprasForm(request.POST,request.FILES,instance=i)
+       f = Carro_de_compras.objects.get(pk=id_producto)           
+       
+       if request.method == 'POST':
+            
+                form = Carro_de_comprasForm(request.POST,request.FILES,instance=f)
                       
-                      if form.is_valid():
+                if form.is_valid():
                                                            
                             form.save()                              
               
-              connection.close()                            
-              return render(request,'editar_carrito_de_compras.html',locals())                                                  
-                      
-                   
-        else:
-            for i in carrito:
+                connection.close()                            
+                return render(request,'ver_carrito_de_compras.html',locals())                                                  
+                
+        else:           
               
-              form = Carro_de_comprasForm(instance=i)
-              vector_de_formularios.append(form)
-              #formCateg=CategoriaForm()
+              form = Carro_de_comprasForm(instance=f)
+             
 
         
         connection.close()
