@@ -107,14 +107,3 @@ class Carro_de_comprasForm(ModelForm):
 				    # }
 
 #		exclude=[]
-id_usuario=models.CharField(max_length=30,blank=True)
-	     id_vendedor=models.CharField(max_length=30,blank=True)
-	     id_producto=models.CharField(max_length=30,blank=True)
-
-	     nombre_tienda=models.CharField(max_length=30,blank=True)
-	     cantidad=models.DecimalField(max_digits=4,decimal_places=0,default=0,blank=True,null= True)
-	     nombre=  models.CharField(max_length=30)
-	     precio = models.FloatField(default=0,blank=True,null=True)
-	     especificacion = models.TextField(blank=True,null=True)
-	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="QUIERO PEDIR ESTO")
-	     fecha_ingreso = models.DateField(default=datetime.now)
