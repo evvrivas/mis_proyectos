@@ -22,15 +22,23 @@
 
                {% for i in carrito %} 
                          
-                <table BORDER="3" CELLSPACING="5">                                
-                   <p>{{ i.nombre_tienda }}  </p>
-                   <p> {{ i.cantidad }} {{ i.nombre }}  $P/U = {{ i.precio}}  </p>           
-                   <p>{{ i.especificacion }}  </p>
-                   <p>{{ i.estado_prod }} </p>
-                   <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" >Editar  </a></li></h6>
-                   <h6><li><a href="/eliminar_producto_del_carrito/{{i.id}}" >Eliminar  </a></li></h6>
+                <table BORDER="3" CELLSPACING="5">    
+                  
+                  <tr  align="center"> 
+                    <td WIDTH="200">                                  
+                     <p>{{ i.nombre_tienda }}  </p>
+                     <p> {{ i.cantidad }} {{ i.nombre }}  $P/U = {{ i.precio}}  </p>           
+                     <p>{{ i.especificacion }}  </p>
+                     <p>{{ i.estado_prod }} 
+                     <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" >Editar  </a></li></h6>
+                     <h6><li><a href="/eliminar_producto_del_carrito/{{i.id}}" >Eliminar  </a></li></h6>
+                     </p>
+                     </td > 
+                  </tr > 
+
+
                 </table>
-                   <br>        
+                   <br>     
                              
                                   
                 {% endfor %}
@@ -39,7 +47,7 @@
                        
                        <div class="container">
                                   
-                         <a href="/realizar_compra" class="btn btn-info" role="button">REALIZAR COMPRA</a>
+                         <a href="/realizar_compra" class="btn btn-info" role="button">REALIZAR ESTA COMPRA</a>
                         
                               
                                   

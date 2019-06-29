@@ -1154,7 +1154,6 @@ def editar_producto_del_carrito(request,id_producto):
        categoria=n_categorias()
        n_usuarios, n_tiendas, n_productos=info_pagina()
 
-
        f = Carro_de_compras.objects.get(pk=id_producto)           
        
        if request.method == 'POST':
