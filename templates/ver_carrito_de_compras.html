@@ -16,32 +16,62 @@
              <div class="col-md-8">
                 <div class="thumbnail">                                    
                                   
-                            <table BORDER="3" CELLSPACING="5">
+                          
+       
+
+
+               {% for i in carrito %} 
+                         
+                             <table BORDER="3" CELLSPACING="5">
                                 <tr  align="center">
-                                    <td WIDTH="50">Cant</td>
-                                    <td WIDTH="200">Descrip</td>
-                                    <td WIDTH="50">P/U</td>
-                                    <td WIDTH="50">Total</td>
+                                            <td WIDTH="15">{{ i.nombre_tienda }}</td> 
+                                            <td WIDTH="20">{{ i.nombre }}</td>               
+                                            
                                 </tr >
+                                 
+                                 <tr  align="center">  
+                                            <td WIDTH="10">cant. {{ i.cantidad }}</td> 
+                                            <td WIDTH="25">{{ i.especificacion }} </td>
+                                  </tr >  
 
-                                {% for item in cart %}  
+                                   <tr  align="center">         
+                                            <td WIDTH="20">{{ i.estado_prod }}</td> 
+                                            <td WIDTH="15">$P/U = {{ i.precio}}</td> 
+                                   </tr >
 
-                                <tr  align="center">                                  
-                              
-                                    <td WIDTH="50">{{ item.quantity }}</td> 
-                                    <td WIDTH="200">{{ item.product }}</td>  
-                                    <td WIDTH="50">{{ item.unit_price }}</td> 
-                                    <td WIDTH="50">{{ item.total_price }}</td>
-                                </tr>                                  
-                                {% endfor %}
-                                 <br>
+                                    <tr  align="center">         
+                                            <td WIDTH="20"><li><a href="/editar_producto_carrito/{{i.id}}" >Editar  </a></li></td> 
+                                            <td WIDTH="15"><li><a href="/eliminar_producto_carrito/{{i.id}}" >Eliminar  </a></li></td> 
+                                   </tr >
+                            
+
+
                             </table>
+                                                 
+                                
+                                  
+                {% endfor %}
+                        
+
+                       
+                       <div class="container">
+                                  
+                         <a href="/realizar_compra" class="btn btn-info" role="button">REALIZAR COMPRA</a>
+                        
+                              
+                                  
+                        </div>
+                                                                
+        
+
+
+                            
                              <br> 
-                             <h2><center>Total a pagar: {{ total }} </center></h2>
+                             <h2><center>Total a pagar </center></h2>
                               
                              <br>
 
-                              <li><a href="/get_cart/1/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}">Enviar este pedido al vendedor</a></li>
+                             
                               <br>
                               <div class="row"> 
 

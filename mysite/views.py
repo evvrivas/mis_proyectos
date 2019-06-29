@@ -1132,14 +1132,84 @@ def agregar_producto_al_carrito(request,id_del_producto):
 def ver_el_carrito(request):
       categoria=n_categorias()
       n_usuarios, n_tiendas, n_productos=info_pagina()
+      
+
+
+
       carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username).order_by("nombre_tienda")
       return render(request,'carrito_de_compras.html',locals())   
 
-def quitar_producto_del_carrito(request,id_producto):
+
+def eliminar_producto_del_carrito(request,id_producto):
        categoria=n_categorias()
        n_usuarios, n_tiendas, n_productos=info_pagina()
-       Carro_de_compras.objects.filter(id=id_producto)
-       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+       Carro_de_compras.objects.get(id=id_producto).delete()
+       #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+       return render(request,'carrito_de_compras.html',locals()) 
+
+
+def editar_producto_del_carrito(request,id_producto):   
+        categoria=n_categorias()
+        n_usuarios, n_tiendas, n_productos=info_pagina()
+        
+        
+        f = Carro_de_compras.objects.get(pk=id_producto)           
+       
+        if request.method == 'POST':
+            
+            form = Carro_de_comprasForm(request.POST,request.FILES,instance=f)
+       
+            if form.is_valid():
+                   
+                   form.save() 
+                   connection.close()
+                   return render(request,'carrito_de_compras.html',locals())             
+                    
+        else:
+            
+            form = Carro_de_comprasForm(instance=f)
+            
+
+        
+        connection.close()
+        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+        return render(request,'formulario_ingreso.html',locals())   
+
+
+
+def realizar_compra(request):
+    return render(request,'confirmar_tienda.html',locals())   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def editar_producto_del_carrito(request):  
         categoria=n_categorias()
@@ -1156,9 +1226,9 @@ def editar_producto_del_carrito(request):
                 
                       form = Carro_de_comprasForm(request.POST,request.FILES,instance=i)
                       
-                      #if form.is_valid():
+                      if form.is_valid():
                                                            
-                      form.save()                              
+                            form.save()                              
               
               connection.close()                            
               return render(request,'editar_carrito_de_compras.html',locals())                                                  
