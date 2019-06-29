@@ -22,33 +22,16 @@
 
                {% for i in carrito %} 
                          
-                             <table BORDER="3" CELLSPACING="5">
-                                <tr  align="center">
-                                            <td WIDTH="25">{{ i.nombre_tienda }}</td> 
-                                            <td WIDTH="10">cant. {{ i.cantidad }}</td> 
-                                            <td WIDTH="25">{{ i.nombre }}</td>               
-                                            
-                                </tr >
-                                 
-                                 <tr  align="center">                                              
-                                            <td WIDTH="60">{{ i.especificacion }} </td>
-                                  </tr >  
-
-                                   <tr  align="center">         
-                                            <td WIDTH="40">{{ i.estado_prod }}</td> 
-                                            <td WIDTH="20">$P/U = {{ i.precio}}</td> 
-                                   </tr >
-
-                                    <tr  align="center">         
-                                            <td WIDTH="30"><li><a href="/editar_producto_del_carrito/{{i.id}}" >Editar  </a></li></td> 
-                                            <td WIDTH="30"><li><a href="/eliminar_producto_del_carrito/{{i.id}}" >Eliminar  </a></li></td> 
-                                   </tr >
-                            
-
-
-                            </table>
-                                                 
-                                
+                <table BORDER="3" CELLSPACING="5">                                
+                   <p>{{ i.nombre_tienda }}  </p>
+                   <p> {{ i.cantidad }} {{ i.nombre }}  $P/U = {{ i.precio}}  </p>           
+                   <p>{{ i.especificacion }}  </p>
+                   <p>{{ i.estado_prod }} </p>
+                   <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" >Editar  </a></li></h6>
+                   <h6><li><a href="/eliminar_producto_del_carrito/{{i.id}}" >Eliminar  </a></li></h6>
+                </table>
+                   <br>        
+                             
                                   
                 {% endfor %}
                         
