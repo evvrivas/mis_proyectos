@@ -1175,14 +1175,14 @@ def editar_producto_del_carrito(request,id_producto):
                 connection.close()                            
                 return render(request,'ver_carrito_de_compras.html',locals())                                                  
                 
-        else:           
+       else:           
               
               form = Carro_de_comprasForm(instance=f)
              
 
         
-        connection.close()
-        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-        return render(request,'editar_carrito_de_compras.html',locals())   
+       connection.close()
+       #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+       return render(request,'editar_carrito_de_compras.html',locals())   
   
 
