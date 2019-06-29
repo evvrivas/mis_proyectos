@@ -360,10 +360,10 @@ class Item(models.Model):
 				product = property(get_product, set_product)
 
 ESTADO3 = (
-			('QUIERO PEDIR ESTO', 'QUIERO PEDIR ESTO'),
-			('ENPROCESO DE COMPRA', 'ENPROCESO DE COMPRA'),
-			('EL VENDEDOR A CONFIRMADO', 'EL VENDEDOR A CONFIRMADO'),
-			('PRODUCTO ENTREGADO', 'PRODUCTO ENTREGADO'),
+			('QUIERO_PEDIR_ESTO', 'QUIERO_PEDIR_ESTO'),
+			('EL_VENDEDOR_RECIBIO_EL_PEDIDO', 'EL_VENDEDOR_RECIBIO_EL_PEDIDO'),
+			('EL_VENDEDOR_A_CONFIRMADO', 'EL_VENDEDOR_A_CONFIRMADO'),
+			('PRODUCTO_ENTREGADO', 'PRODUCTO_ENTREGADO'),
 			
 			)
 
@@ -377,7 +377,7 @@ class Carro_de_compras(models.Model):
 	     nombre=  models.CharField(max_length=30,null=True)
 	     precio = models.FloatField(default=0,blank=True,null=True)
 	     especificacion = models.TextField(blank=True,null=True)
-	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="QUIERO PEDIR ESTO",null=True)
+	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="QUIERO_PEDIR_ESTO",null=True)
 	     fecha_ingreso = models.DateField(default=datetime.now)
 	    
 
@@ -385,14 +385,4 @@ class Carro_de_compras(models.Model):
 		    		return  self.nombre
 	     class Admin:
 		    		list_display = ('especificacion','id_usuario')
-	
-#class Item_carro(models.Model):	     
-#	     cantidad=models.DecimalField(max_digits=4,decimal_places=0,default=0,blank=True,null= True)
-#	     especificacion = models.TextField(blank=True,null=True)
-	     
-#	     def __str__(self):
-#		    		return  self.especificacion
-#	     class Admin:
-#		    		list_display = ('especificacion','cantidad')
-	
 	

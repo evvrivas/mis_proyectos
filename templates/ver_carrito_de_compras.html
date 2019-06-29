@@ -5,34 +5,47 @@
      
 <div class="panel panel-info">
       <div class="panel-heading">
-        <h2 class="panel-title"><center>Detalle del Pedido </center></h2>                
+        <h2 class="panel-title"><center>Detalle del Pedido </center></h2>    
+
+      
+
+        <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ver pedidos que
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="#">LOS QUE QUIERO</a></li>
+      <li><a href="#">LOS CONFIRMADOS </a></li>
+      <li><a href="#">LOS ENTREGADOS</a></li>
+      <li><a href="#">TODOS</a></li>
+
+    </ul>
+  </div>
+</div>            
       </div>
 
 
     <div class="panel-body">
 
             <div class="row">
-
-             <div class="col-md-8">
-                <div class="thumbnail">                                    
-                                  
                           
        
-
-
-               {% for i in carrito %} 
+        {% for i in carrito %} 
+            <div class="col-md-3">
+                <div class="thumbnail">  
                          
                 <table BORDER="3" CELLSPACING="5">    
                   
                   <tr  align="center"> 
-                    <td WIDTH="400">                                  
-                      <h6><p>{{ i.nombre_tienda }}  </p>  <h6>
+                  <td WIDTH="400">                                  
+                      <h6><p>{{ i.nombre_tienda }}  </p>  </h6>
                       <h6><p> {{ i.cantidad }} {{ i.nombre }}  $P/U = {{ i.precio}}  </p>  </h6>          
                       <h6><p>{{ i.especificacion }}  </p> </h6>
                       <h6><p>{{ i.estado_prod }}  </h6>
-                     <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" >Editar  </a></li></h6>
-                     <h6><li><a href="/eliminar_producto_del_carrito/{{i.id}}" >Eliminar  </a></li></h6>
-                     </p>
+                     <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" > _Editar_ </a>
+                     <a href="/eliminar_producto_del_carrito/{{i.id}}" > _Eliminar_  </a>
+                     <a href="/realizar_compra_individual/{{i.id}}" >_Comprar este_  </a></li></h6>
+
+                   
                      </td > 
                   </tr > 
 
@@ -40,27 +53,25 @@
                 </table>
                    <br>     
                              
-                                  
+                    </div>
+            </div>               
                 {% endfor %}
                         
 
                        
-                       <div class="container">
+                <div class="container">
                                   
-                         <a href="/realizar_compra" class="btn btn-info" role="button">REALIZAR ESTA COMPRA</a>
-                        
-                              
-                                  
-                        </div>
-                                                                
+                <a href="/realizar_compra" class="btn btn-info" role="button">Comprar todo esto</a>
+                                        
+                </div>                                                    
         
 
 
                             
-                             <br> 
+                         <br> 
                              <h2><center>Total a pagar </center></h2>
                               
-                             <br>
+                         <br>
 
                              
                               <br>
@@ -82,8 +93,7 @@
                               
                               
                                                                  
-                </div>
-            </div>
+               
             
           </div>
 

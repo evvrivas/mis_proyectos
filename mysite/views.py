@@ -1118,16 +1118,16 @@ def agregar_producto_al_carrito(request,id_del_producto):
             cant=eval(cant)            
 
             if cant>0:
-                 carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,especificacion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
+                 carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,especificacion=espe,estado_prod="QUIERO PEDIR ESTO" ,fecha_ingreso=lafecha)
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def ver_el_carrito(request):
+def ver_el_carrito(request,estado_del_producto):
       categoria=n_categorias()
       n_usuarios, n_tiendas, n_productos=info_pagina() 
 
-      carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username).order_by("nombre_tienda")
+      carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("nombre_tienda")
       return render(request,'ver_carrito_de_compras.html',locals())   
 
 
@@ -1140,11 +1140,6 @@ def eliminar_producto_del_carrito(request,id_producto):
     
        #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
        return render(request,'ver_carrito_de_compras.html',locals()) 
-
-
-def realizar_compra(request):
-    return render(request,'confirmar_tienda.html',locals())   
-
 
 
 def editar_producto_del_carrito(request,id_producto):  
@@ -1177,3 +1172,24 @@ def editar_producto_del_carrito(request,id_producto):
        return render(request,'editar_carrito_de_compras.html',locals())   
   
 
+def realizar_compra(request):
+     categoria=n_categorias()
+     n_usuarios, n_tiendas, n_productos=info_pagina()
+
+     carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod="QUIERO PEDIR ESTO").order_by("nombre_tienda")
+     
+     for  i in carrito:
+        i.estado_prod="EL VENDEDOR RECIBIO EL PEDIDO"         
+
+     return render(request,'confirmar_la_venta.html',locals())   
+
+
+
+def realizar_compra_individual(request,id_producto):
+     categoria=n_categorias()
+     n_usuarios, n_tiendas, n_productos=info_pagina()
+
+     carrito= Carro_de_compras.objects.get(id=id_producto)
+     carrito.estado_prod="EL VENDEDOR RECIBIO EL PEDIDO"  
+     
+     return render(request,'confirmar_la_venta.html',locals())   

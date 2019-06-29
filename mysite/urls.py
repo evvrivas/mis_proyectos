@@ -85,6 +85,9 @@ urlpatterns = [
     url(r'^ver_el_carrito/$',ver_el_carrito),  
     url(r'^eliminar_producto_del_carrito/(\d+)/$',eliminar_producto_del_carrito),  
     url(r'^editar_producto_del_carrito/(\d+)/$',editar_producto_del_carrito), 
+    url(r'^realizar_compra_individual/(\d+)/$',realizar_compra_individual),
+    url(r'^realizar_compra/$',realizar_compra),
+    
 
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
