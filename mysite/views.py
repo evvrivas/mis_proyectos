@@ -1101,11 +1101,11 @@ def ver_mis_mensajes(request,idusuario):
 
        
 
-def agregar_producto_al_carrito(request,id_producto):   
+def agregar_producto_al_carrito(request,id_del_producto):   
     categoria=n_categorias()
     n_usuarios, n_tiendas, n_productos=info_pagina()
     
-    el_producto=Productos.objects.get(id=id_producto)
+    el_producto=Productos.objects.get(id=id_del_producto)
 
     lafecha=datetime.datetime.now() 
 
@@ -1124,7 +1124,7 @@ def agregar_producto_al_carrito(request,id_producto):
 
             if cant>0:  
 
-                 carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,especificacion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
+                 carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,especificacion=espe,estado_prod="POR ENCARGAR" ,fecha_ingreso=lafecha)
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -1155,13 +1155,13 @@ def editar_producto_del_carrito(request):
               for i in carrito:                  
                 
                       form = Carro_de_comprasForm(request.POST,request.FILES,instance=i)
-                 
-                      if form.is_valid():
+                      
+                      #if form.is_valid():
                                                            
-                              form.save()                              
-                              connection.close()                            
-
-              return render(request,'confirmar_tienda.html',locals())                                                  
+                      form.save()                              
+              
+              connection.close()                            
+              return render(request,'editar_carrito_de_compras.html',locals())                                                  
                       
                    
         else:

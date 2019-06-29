@@ -18,11 +18,11 @@
                                   
                           
        
-
+action='/add_to_cart/{{i.id}}/'
 
                           {% for i in vector_de_formularios %}  
 
-                          <form action="." method="post" enctype="multipart/form-data"> 
+                          <form action="/editar_producto_del_carrito/" method="post" enctype="multipart/form-data"> 
                                       {% csrf_token%}
 
                              <table BORDER="3" CELLSPACING="5">
@@ -33,13 +33,13 @@
                                 </tr >
                                  
                                  <tr  align="center">  
-                                            <td WIDTH="5">{{ i.cantidad }}</td> 
+                                            <td WIDTH="5">Cant.>{{ i.cantidad }}</td> 
                                             <td WIDTH="25">{{ i.especificacion }} </td>
                                   </tr >  
 
                                    <tr  align="center">         
                                             <td WIDTH="20">{{ i.estado_prod }}</td> 
-                                            <td WIDTH="10">{{ i.precio}}</td> 
+                                            <td WIDTH="10">$P/U>{{ i.precio}}</td> 
                                    </tr >
                             </table>
 
@@ -47,8 +47,18 @@
                                   </form> 
                                   
                         {% endfor %}
-                        <p><input type="submit" value="aplicar cambio"></p>       
-                                
+                        
+
+                       
+                       <div class="container">
+                                  
+                         <a href="/editar_producto_del_carrito" class="btn btn-info" role="button">Aplicar cambios</a>
+                         <a href="#" class="btn btn-info" role="button">HACER ESTA COMPRA</a>
+                         <a href="#" class="btn btn-info" role="button">ELIMINAR ESTA COMPRA</a>
+                              
+                                  
+                        </div>
+                                                                
         
 
 
