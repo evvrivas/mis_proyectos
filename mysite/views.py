@@ -1107,10 +1107,7 @@ def agregar_producto_al_carrito(request,id_del_producto):
     
     el_producto=Productos.objects.get(id=id_del_producto)
 
-    lafecha=datetime.datetime.now() 
-
-    tiendas=Tiendas.objects.filter(id_usuario=request.user.username,nombre_tienda=el_producto.tienda.nombre_tienda).first() 
-    
+    lafecha=datetime.datetime.now()     
 
     if request.POST:
             cant = request.POST.get("cant")
