@@ -30,27 +30,7 @@
 </div>
 
 
-
-
-
-
-
-
-
-<div class="container">
-  <div class="dropdown">
-    <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Ver pedidos que
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">LOS QUE QUIERO</a></li>
-      <li><a href="/ver_el_carrito/EL_VENDEDOR_RECIBIO_EL_PEDIDO">ESPERO CONFIRMACION </a></li>
-      <li><a href="/ver_el_carrito/EL_VENDEDOR_A_CONFIRMADO">POR RECIBIRLOS</a></li>
-      <li><a href="/ver_el_carrito/PRODUCTO_ENTREGADO">LOS QUE YA RECIBI</a></li>
-      <li><a href="/ver_el_carrito/TODOS">TODOS</a></li>
-
-    </ul>
-  </div>
-</div>   
+ 
 
 
 <br>
@@ -70,6 +50,7 @@
                       <h6><p> {{ i.cantidad }} {{ i.nombre }}  $P/U = {{ i.precio}}  </p>  </h6>          
                       <h6><p>{{ i.especificacion }}  </p> </h6>
                       <h6><p>{{ i.estado_prod }}  </h6>
+                      <h3><p>{{ i.total }}  </h6>
 
                       {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
                         <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" > Editar </a></li>
@@ -91,15 +72,17 @@
             </div>               
                 {% endfor %}
                         
-
-                       
+    <br>
+    <div class="row">  
+          <div class="col-md-12">           
                 <div class="container">
-                                  
+                <center><h2><p> ${{gran_total}}</p></h2></center>
+                <br>                  
                 <a href="/realizar_compra" class="btn btn-info" role="button">Comprar todo esto</a>
                                         
                 </div>                                                    
-        
-
+          </div>       
+    </div>     
 
                             
                          <br> 

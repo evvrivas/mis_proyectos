@@ -1118,6 +1118,12 @@ def agregar_producto_al_carrito(request,id_del_producto):
             cant=eval(cant)            
 
             if cant>0:
+                 
+                 try:
+                      total=cant*el_producto.precio_A
+                 except:
+                      total=0
+                      
                  carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -1131,7 +1137,12 @@ def ver_el_carrito(request,estado_del_producto):
              carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username).order_by("nombre_tienda")
       else:
              carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("nombre_tienda")
- 
+             if estado_del_producto=="QUIERO_PEDIR_ESTO":
+                  gran_total=0
+                  for i in carrito:
+                        gran_total = gran_total + i.total
+
+
       return render(request,'ver_carrito_de_compras.html',locals())   
 
 
@@ -1157,7 +1168,15 @@ def editar_producto_del_carrito(request,id_producto):
                 form = Carro_de_comprasForm(request.POST,request.FILES,instance=f)
                       
                 if form.is_valid():
-                                                           
+
+                            cantidad_a = form.cleaned_data['cantidad']
+                            precio_a = form.cleaned_data['precio'] 
+                            total_a=   cantidad_a * precio_a
+                            
+                            totalillo = form.save(commit=False)
+                            totalillo.total = total_a # Set the user object here             
+                            totalillo.save() # Now you can send it to DB
+                                                                             
                             form.save()                              
               
                 connection.close()  
