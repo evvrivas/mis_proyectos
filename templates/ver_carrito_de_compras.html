@@ -5,12 +5,12 @@
      
 <div class="panel panel-info">
       <div class="panel-heading">
-        <h2 class="panel-title"><center>Pedidos: {{estado_del_producto}} </center></h2>    
+        
 
       
-
-        <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Ver pedidos que
+<div class="container">
+  <div class="dropdown">
+    <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Ver pedidos que
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">LOS QUE QUIERO</a></li>
@@ -19,15 +19,12 @@
       <li><a href="/ver_el_carrito/PRODUCTO_ENTREGADO">LOS QUE YA RECIBI</a></li>
       <li><a href="/ver_el_carrito/TODOS">TODOS</a></li>
 
-
     </ul>
   </div>
-</div>            
-      </div>
+</div>   
 
 
-    <div class="panel-body">
-    <br>
+<br>
 
             <div class="row">
                           
@@ -45,10 +42,10 @@
                       <h6><p>{{ i.especificacion }}  </p> </h6>
                       <h6><p>{{ i.estado_prod }}  </h6>
 
-                      {% if i.estado_prod != 'QUIERO_PEDIR_ESTO' %}
-                           <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" > _Editar_ </a>
-                           <a href="/eliminar_producto_del_carrito/{{i.id}}" > _Eliminar_  </a>
-                           <a href="/realizar_compra_individual/{{i.id}}" >_Comprar este_  </a></li></h6>
+                      {% if i.estado_prod != "QUIERO_PEDIR_ESTO" %}
+                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" > Editar </a></li>
+                        <li><a href="/eliminar_producto_del_carrito/{{i.id}}" > Eliminar </a></li>
+                        <li><a href="/realizar_compra_individual/{{i.id}}" > Comprar este </a></li></h6>
                       {% else %}
 
                       {% endif %}
@@ -104,6 +101,14 @@
                
             
           </div>
+
+
+
+      </div>
+
+
+    <div class="panel-body">
+    
 
         </div>
   </div>
