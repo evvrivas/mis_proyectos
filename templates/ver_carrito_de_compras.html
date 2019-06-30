@@ -8,6 +8,35 @@
         
 
       
+
+<div class="row">  
+<div class="col-md-12">  
+                                    
+  
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Ver pedidos que
+          <span class="caret"></span></button>
+          
+          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">LOS QUE QUIERO</a></li>
+            <li><a href="/ver_el_carrito/EL_VENDEDOR_RECIBIO_EL_PEDIDO">ESPERO CONFIRMACION </a></li>
+            <li><a href="/ver_el_carrito/EL_VENDEDOR_A_CONFIRMADO">POR RECIBIRLOS</a></li>
+            <li><a href="/ver_el_carrito/PRODUCTO_ENTREGADO">LOS QUE YA RECIBI</a></li>
+            <li><a href="/ver_el_carrito/TODOS">TODOS</a></li>
+           </ul>
+        </div>
+          
+</div>
+</div>
+
+
+
+
+
+
+
+
+
 <div class="container">
   <div class="dropdown">
     <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Ver pedidos que
@@ -42,7 +71,7 @@
                       <h6><p>{{ i.especificacion }}  </p> </h6>
                       <h6><p>{{ i.estado_prod }}  </h6>
 
-                      {% if i.estado_prod != "QUIERO_PEDIR_ESTO" %}
+                      {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
                         <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" > Editar </a></li>
                         <li><a href="/eliminar_producto_del_carrito/{{i.id}}" > Eliminar </a></li>
                         <li><a href="/realizar_compra_individual/{{i.id}}" > Comprar este </a></li></h6>
