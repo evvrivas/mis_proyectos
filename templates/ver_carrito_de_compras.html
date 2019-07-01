@@ -52,13 +52,34 @@
                       <h6><p>{{ i.estado_prod }}  </h6>
                       <h3><p>{{ i.total }}  </h6>
 
-                      {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
+    {% if el_usuario == "EL_COMPRADOR" %}
+              
+              {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
                         <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" > Editar </a></li>
                         <li><a href="/eliminar_producto_del_carrito/{{i.id}}" > Eliminar </a></li>
                         <li><a href="/realizar_compra_individual/{{i.id}}" > Comprar este </a></li></h6>
-                      {% else %}
+              
 
-                      {% endif %}
+              {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" > Cambiar estado </a></li>
+              {% else %}
+                
+              {% endif %}    
+
+      
+    {% elif el_usuario == "EL_VENDEDOR" %}
+
+              {% elif i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" > Cambiar estado </a></li>
+              {% else %}
+                
+              {% endif %} 
+
+    {% else %}
+
+    
+
+    {% endif %}
 
                    
                      </td > 
@@ -83,8 +104,17 @@
                 </div>                                                    
           </div>       
     </div>     
+    <br>
 
-                            
+       <div class="row">  
+          <div class="col-md-12">           
+                <div class="container">
+                <p>Al precionar el boton de comprar El propietario de esta tienda recibira un mensaje con informacion de su pedido,
+                el contactara con usted para ultimar detalles sobre el producto o servicio, forma y lugar de pago y entrga.</p>
+                                        
+                </div>                                                    
+          </div>       
+    </div>                          
                          <br> 
                              <h2><center>Total a pagar </center></h2>
                               

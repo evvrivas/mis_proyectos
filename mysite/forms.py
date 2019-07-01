@@ -91,7 +91,7 @@ class Carro_de_comprasForm(ModelForm):
 				   'estado_prod' :  TextInput(attrs={'size': 20})
 				    }
 
-		exclude=["id_usuario","fecha_ingreso","id_vendedor","id_producto","nombre_tienda","nombre","precio","estado_prod"]
+		exclude=["id_usuario","fecha_ingreso","id_vendedor","id_producto","nombre_tienda","nombre","precio","total","estado_prod"]
 
 		
 #class Item_carroForm(ModelForm):
