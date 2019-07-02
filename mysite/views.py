@@ -1121,7 +1121,7 @@ def agregar_producto_al_carrito(request,id_del_producto):
             if cant>0:
                  
                  try:
-                      total=eval(cant)*eval(el_producto.precio_A)
+                      total=cant*el_producto.precio_A
                  except:
                       total=0
                       
@@ -1215,7 +1215,7 @@ def editar_producto_del_carrito(request,id_producto):
          
                             form.save()
                             try:
-                                 f.total=eval(f.cantidad)*eval(f.precio) 
+                                 f.total=f.cantidad*f.precio 
                             except:
                                  f.total=0
                                                              
