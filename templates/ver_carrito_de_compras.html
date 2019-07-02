@@ -69,7 +69,9 @@
       
     {% elif el_usuario_x == "EL_VENDEDOR" %}
 
-              {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
+              
+
+              {% elif i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
                       <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" > Cambiar estado </a></li>
               {% else %}
                 
