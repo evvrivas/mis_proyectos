@@ -52,7 +52,7 @@
                       <h6><p>{{ i.estado_prod }}  </h6>
                       <h3><p>{{ i.total }}  </h6>
 
-    {% if el_usuario == "EL_COMPRADOR" %}
+    {% if el_usuario_x == "EL_COMPRADOR" %}
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
                         <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" > Editar </a></li>
@@ -67,7 +67,7 @@
               {% endif %}    
 
       
-    {% elif el_usuario == "EL_VENDEDOR" %}
+    {% elif el_usuario_x == "EL_VENDEDOR" %}
 
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
                       <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" > Cambiar estado </a></li>
