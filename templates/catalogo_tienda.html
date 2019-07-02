@@ -147,11 +147,21 @@
                
                <form action='/agregar_producto_al_carrito/{{j.id}}/' method='post'>
                               {% csrf_token %}                                
+                              
+
                               <input type="text" name="cant"  id="cant" size="1" placeholder="cant"> 
-                              <input type="text" name="especificacion"  id="especificacion" placeholder="especificar" size="10">
-                              <input type="submit" value="+" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" />
+                              <input type="text" name="especificacion"  id="especificacion" 
+
+                              placeholder="especificar" size="15">
+
+
+                        <div class="row">   
+                              <center><input type="submit" value="agregar a mi pedido" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" /></center>>
+                         </div>>     
                </form>
-                <H6><p><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">Ver Mi pedido</a> </p> </H6>
+               
+
+                <H6><p><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_comprador">Ver Mi pedido</a> </p> </H6>
 
 <!--
 
@@ -194,12 +204,12 @@
 
 
 
-                       <br>            
+                
                              
                              
                             
 
-                      <p>                    
+                              
                               
                  <div class="row"> 
                  <center>
