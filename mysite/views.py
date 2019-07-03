@@ -150,7 +150,7 @@ def info_pagina():
     cN_pedidos,vN_pedidos=conteo_pedidos()   
     
     connection.close()
-    return cantidad_usuarios, cantidad_tiendas, cantidad_productos,cN_pedido,vN_pedido
+    return cantidad_usuarios, cantidad_tiendas, cantidad_productos,cN_pedidos,vN_pedidos
 
 
 
