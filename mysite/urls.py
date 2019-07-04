@@ -85,7 +85,7 @@ urlpatterns = [
 
     url(r'^enviar_mensaje/(\d+)/$', enviar_mensaje),
     url(r'^ver_mis_mensajes/([^/]+)/$',ver_mis_mensajes),    
-    url(r'^responder_mensaje/(\d+)/$',crear_mensaje),
+    url(r'^responder_mensaje/(\d+)/$',responder_mensaje),
 
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
