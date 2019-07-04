@@ -1257,7 +1257,7 @@ def ver_mis_mensajes(request,estado_mensaje,el_usuario):
                 n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido=info_pagina()
 
                 el_usuario_x=el_usuario  
-                if el_usuario_x=="EL_VENDEDOR"
+                if el_usuario_x=="EL_VENDEDOR":
                             if estado_mensaje=="NUEVO":
                                   mensajes=Mensajes.objects.filter(producto__id_usuario=request.user.username,estado=estado_mensaje).order_by("contacto")                
                             
@@ -1267,7 +1267,7 @@ def ver_mis_mensajes(request,estado_mensaje,el_usuario):
                             else:
                                  mensajes=Mensajes.objects.filter(producto__id_usuario=request.user.username).order_by("contacto")                
 
-                elif el_usuario_x=="EL_COMPRADOR"
+                elif el_usuario_x=="EL_COMPRADOR":
                             if estado_mensaje=="NUEVO":
                                   mensajes=Mensajes.objects.filter(contacto=request.user.username,estado=estado_mensaje).order_by("producto__id_usuario")                
                             
