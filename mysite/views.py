@@ -317,9 +317,6 @@ def editar_producto(request,idusuario,nombretienda,acid):
         return render(request,'entrada_producto.html',locals())   
         
 
-@login_required
-
-
 
 def n_categorias():
          from collections import Counter         
