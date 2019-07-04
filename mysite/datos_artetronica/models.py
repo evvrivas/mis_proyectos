@@ -244,15 +244,15 @@ ESTADO_MENSAJE= (
 			)
 
 class Mensajes(models.Model):
-		producto=models.ForeignKey('Productos',blank=True,null=True)
-	    contacto=models.CharField(max_length=30)
-	    pregunta = models.TextField(blank=True)
-	    respuesta = models.TextField(blank=True)
-	    estado=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NUEVO")
-	    fecha= models.DateField(default=datetime.now,blank=True,editable = False)
-		def __str__(self):
+	producto=models.ForeignKey('Productos',blank=True,null=True)
+	contacto=models.CharField(max_length=30)
+	pregunta = models.TextField(blank=True)
+	respuesta = models.TextField(blank=True)
+	estado=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NUEVO")
+	fecha= models.DateField(default=datetime.now,blank=True,editable = False)
+	def __str__(self):
 				return  self.pregunta
-		class Admin:
+	class Admin:
 				list_display = ('contacto', 'id_usuario','pregunta')
 
 
