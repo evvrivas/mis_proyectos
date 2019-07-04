@@ -51,17 +51,12 @@ urlpatterns = [
     
     url(r'^crear_producto/([^/]+)/([^/]+)/$',crear_producto),
     url(r'^editar_producto/([^/]+)/([^/]+)/(\d+)/$',editar_producto),
-
-    url(r'^crear_mensaje/$',crear_mensaje),
-    #url(r'^editar_mensaje/(\d+)/$',editar_mensaje),
-
- 
+         
     url(r'^get_cart/$', get_cart),
     url(r'^ver_categorias/([^/]+)/$', ver_categorias),
     url(r'^ver_categorias_tienda/([^/]+)/([^/]+)/([^/]+)/$', ver_mis_categorias),
     url(r'^busqueda/$', busqueda),
     url(r'^busqueda_tienda/([^/]+)/([^/]+)/$', busqueda_tienda),
-    
 
     url(r'^editar_pedido/([^/]+)/([^/]+)/(\d+)/$',editar_pedido),
     url(r'^hacer_pedido/([^/]+)/([^/]+)/$',hacer_pedido),
@@ -72,12 +67,11 @@ urlpatterns = [
     url(r'^get_cart/(\d+)/([^/]+)/([^/]+)/$', get_cart),
     url(r'^carrusel/(\d+)/([^/]+)/([^/]+)/$', carrusel),
     url(r'^carrusel_pedidos/(\d+)/([^/]+)/([^/]+)/$', carrusel_pedidos),
-    url(r'^comentario_tienda/([^/]+)/([^/]+)/([^/]+)/$', comentario_tienda),
+    
     url(r'^cambiar_estado_producto/([^/]+)/([^/]+)/(\d+)/([^/]+)/$',cambiar_estado_producto),
     url(r'^cambiar_estado_tienda/([^/]+)/(\d+)/([^/]+)/$',cambiar_estado_tienda),    
     url(r'^descargar/([^/]+)/([^/]+)/(\d+)/$',descargar),
-    url(r'^centro_comercial/([^/]+)/([^/]+)/$',centro_comercial),
-    url(r'^ver_mis_mensajes/([^/]+)/$',ver_mis_mensajes),
+    url(r'^centro_comercial/([^/]+)/([^/]+)/$',centro_comercial),   
     
     url(r'^crear_categorias/$',crear_categorias),  
 
@@ -88,14 +82,13 @@ urlpatterns = [
     url(r'^editar_estado_producto_del_carrito/(\d+)/([^/]+)/$',editar_estado_producto_del_carrito), 
     url(r'^realizar_compra_individual/(\d+)/$',realizar_compra_individual),
     url(r'^realizar_compra/$',realizar_compra),
-    
+
+    url(r'^enviar_mensaje/(\d+)/$', enviar_mensaje),
+    url(r'^ver_mis_mensajes/([^/]+)/$',ver_mis_mensajes),    
+    url(r'^responder_mensaje/(\d+)/$',crear_mensaje),
 
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
-
-
-    
-      
        
 ]
 

@@ -148,33 +148,21 @@
                <form action='/agregar_producto_al_carrito/{{j.id}}/' method='post'>
                               {% csrf_token %}                                
                               
-
-                              <input type="text" name="cant"  id="cant" size="1" placeholder="cant"> 
-                              <input type="text" name="especificacion"  id="especificacion" 
+                              
+                              <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
+                              <input type="submit" value="agregar a mi pedido" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                              
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:250px; height:50px;"></textarea> 
+                <!--              <input type="text" name="especificacion"  id="especificacion" 
 
                               placeholder="especificar" size="15">
-
-
-                             <input type="submit" value="agregar a mi pedido" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                 -->                           
                           
                </form>
                
 
                 <H6><p><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Ver Mi pedido</a> </p> </H6>
 
-<!--
-
-                <form action='/add_to_cart/{{j.id}}/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/' method='post'>
-                              {% csrf_token %}                                
-                              <label for="username">cant</label>
-                              <input type="text" name="cant" value="1" id="cant" size="2">                    
-                              <input type="submit" value="Al Pedido " class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" />                               
-                              <a href="/get_cart/0/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}">Ver</a> 
-                                                  
-
-                       </form>  
-
--->
 
 
 
@@ -197,11 +185,6 @@
                         </div>
 
 </div>
-
-
-                      
-
-
 
                 
                              
@@ -226,22 +209,16 @@
                  </div>
 
 
-      <form action="/comentario_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.nombre}}/" method="post">
+      <form action="/enviar_mensaje/{{j.id}}/" method="post">
                                      {% csrf_token %}
 
-                     {%  if user.is_authenticated %}
-                           <textarea name="comentario" placeholder="Preguntas..?" style="width:200px; height:50px;"></textarea>
+                    
+        <textarea name="comentario" placeholder="tienes preguntas o comentarios?" style="width:250px; height:50px;"></textarea>
 
-          
-                     {% else %}       
-                           <textarea name="comentario"  placeholder="Preguntas..?" style="width:200px; height:50px;"></textarea>
-                           
-                           <input type="text" id="name" name="telefono" size="15" placeholder="Mi numero de contacto es" />                        
-                      {% endif %}         
-
-                               <input type="submit" value="enviar">
+        <input type="submit" value="enviar mensaje" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
         </form>
 
+        <H6><p><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Ver respuestas</a> </p> </H6>
 
 
 
@@ -267,7 +244,6 @@
     <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/VENDIDO/">VENDIDO</a></li>
   </ul>
 </div>
-
 
                   </center>  
 

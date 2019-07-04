@@ -240,16 +240,15 @@ class Tiendas(models.Model):
 
 ESTADO_MENSAJE= (
 	        ('ATENDIDO', 'ATENDIDO'), 
-			('NO_ATENDIDO', 'NO_ATENDIDO'),
+			('NUEVO', 'NUEVO'),
 			)
 
 class Mensajes(models.Model):
-		id_usuario=models.CharField(max_length=30)
+	    producto=models.ForeignKey('Productos',blank=True,null=True)		
 		contacto=models.CharField(max_length=30)
-		pregunta = models.TextField(blank=True)
-		nombre_producto=models.CharField(max_length=30,blank=True)
+		pregunta = models.TextField(blank=True)	
 		respuesta = models.TextField(blank=True)
-		estado=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NO_ATENDIDO")
+		estado=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NUEVO")
 		fecha= models.DateField(default=datetime.now,blank=True,editable = False)
 		def __str__(self):
 				return  self.pregunta

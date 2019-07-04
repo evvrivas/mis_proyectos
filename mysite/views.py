@@ -135,7 +135,7 @@ def conteo_pedidos():
           v_confirmado= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="EL_VENDEDOR_A_CONFIRMADO").count()
           v_entregado= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="PRODUCTO_ENTREGADO").count()
           v_recibi= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="RECIBI_EL_PRODUCTO").count()
-          v_pedido=vnpquiero+vnnprecibidop
+          v_pedido=v_quiero+v_recibido
     except:
           c_pedido=0
           v_pedido=0
@@ -319,40 +319,6 @@ def editar_producto(request,idusuario,nombretienda,acid):
 
 @login_required
 
-def crear_mensaje(request,bandera): 
-        categoria=Categoria.objects.all().order_by("categoria")           
-
-        if request.method == 'POST': # si el usuario est enviando el formulario con datos
-            
-                    form = MensajesForm(request.POST)  
-
-                    if form.is_valid():
-                        mensajero = form.save(commit=False)
-                        # commit=False tells Django that "Don't send this to database yet.
-                        # I have more things I want to do with it."
-                        mensajero.id_usuario = request.user.id # Set the user object here
-                        mensajero.save() # Now you can send it to DB
-                     
-                        connection.close()
-                        #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-                        return render(request,'confirmar.html',locals())   
-        else:            
-                        form = MensajesForm()
-
-
-                        
-        if bandera=="0": 
-                  
-
-                  mensajes_anteriores=Mensajes.objects.filter(id_usuario=request.user.id).order_by("-id")    
-                  
-        else:
-                  
-                  mensajes_anteriores=Mensajes.objects.all().order_by("-id") 
-    
-        connection.close()
-        return render(request,'mensajes.html',locals())   
-        #return render_to_response('mensajes.html', locals() ,context_instance=RequestContext(request))
 
 
 def n_categorias():
@@ -989,59 +955,6 @@ def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
     
 
 
-def comentario_tienda(request,idusuario,nombretienda,producto):
-   
-    categoria=categorizar(idusuario,nombretienda)    
-    
-    tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first() 
-    
-    usuarios=Usuarios.objects.filter(id_usuario=idusuario).first() 
-    
-
-    if request.POST:
-
-        coment = request.POST.get('comentario')
-        
-        
-        if request.user.username:
-               ncontacto=request.user.username
-               lafecha=datetime.datetime.now()
-               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,nombre_producto=producto,estado="NO_ATENDIDO",fecha=lafecha)
-               mensaje.save()
-
-               de="xgangasx@gmail.com"
-               para=["evvrivas@gmail.com","xgangasx@gmail.com",tiendas.email_junior,usuarios.email]               
-               mensajemail= str(lafecha) + "\n" + str(ncontacto)+"\n"+ str(coment) + str(producto)
-               asunto="Xgangas de un cliente"
-               try:
-                     send_mail(asunto, mensajemail,de,para, fail_silently=False)            
-               except:
-                      pass 
-
-
-
-
-           
-        else: 
-            ncontacto = request.POST.get('telefono')
-            if ncontacto=="":
-              pass
-            else:
-               lafecha=datetime.datetime.now()               
-               mensaje=Mensajes(id_usuario=tiendas.id_usuario,contacto=ncontacto,pregunta=coment,nombre_producto=producto,estado="NO_ATENDIDO",fecha=lafecha)
-               mensaje.save()
-
-               de="xgangasx@gmail.com"
-               para=["evvrivas@gmail.com","xgangasx@gmail.com",tiendas.email_junior,usuarios.email]               
-               mensajemail= str(lafecha) + "\n" + str(ncontacto)+"\n"+ str(coment) + str(producto)
-               asunto="Xgangas de un cliente"
-               try:
-                     send_mail(asunto, mensajemail,de,para, fail_silently=False)            
-               except:
-                      pass 
-        
-    connection.close()    
-    return render(request,'confirmar_tienda.html',locals()) 
 
 
 def cambiar_estado_tienda(request,idusuario,id_dela_tienda,estado):
@@ -1115,13 +1028,6 @@ def centro_comercial(request,idusuario,nombre_del_centro_comercial):
     connection.close()
     return render(request,'catalogo.html',locals())   
 
-def ver_mis_mensajes(request,idusuario):                
-                categoria=n_categorias()
-                n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido=info_pagina()
-
-                mensajes=Mensajes.objects.filter(id_usuario=idusuario)
-                connection.close()
-                return render(request,'mensajes.html',locals())   
 
        
 
@@ -1318,3 +1224,96 @@ def realizar_compra_individual(request,id_producto):
      carrito.estado_prod="EL VENDEDOR RECIBIO EL PEDIDO"  
      
      return render(request,'confirmar_la_venta.html',locals())   
+
+
+
+
+
+
+def enviar_mensaje(request,id_del_producto): 
+    categoria=n_categorias()
+    n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido=info_pagina()
+    
+    producto_x=Productos.objects.get(id=id_del_producto)
+   
+    if request.POST:           
+            coment = request.POST.get('comentario')
+
+            #if request.user.username:
+            ncontacto=request.user.username
+            la_respuesta="Gracias, le contactarenmos a la brevedad"
+            lafecha=datetime.datetime.now()
+            mensaje=Mensajes(producto=producto_x,contacto=ncontacto,pregunta=coment,respuesta=la_respuesta,estado="NO_ATENDIDO",fecha=lafecha)
+            
+            mensaje.save()
+            
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
+                  
+
+def ver_mis_mensajes(request,estado_mensaje,el_usuario):                
+               
+                categoria=n_categorias()                
+                n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido=info_pagina()
+
+                el_usuario_x=el_usuario  
+                if el_usuario_x=="EL_VENDEDOR"
+                            if estado_mensaje=="NUEVO":
+                                  mensajes=Mensajes.objects.filter(producto__id_usuario=request.user.username,estado=estado_mensaje).order_by("contacto")                
+                            
+                            elif estado_mensaje=="ATENDIDO": 
+                                  mensajes=Mensajes.objects.filter(producto__id_usuario=request.user.username,estado=estado_mensaje).order_by("contacto")                
+                            
+                            else:
+                                 mensajes=Mensajes.objects.filter(producto__id_usuario=request.user.username).order_by("contacto")                
+
+                elif el_usuario_x=="EL_COMPRADOR"
+                            if estado_mensaje=="NUEVO":
+                                  mensajes=Mensajes.objects.filter(contacto=request.user.username,estado=estado_mensaje).order_by("producto__id_usuario")                
+                            
+                            elif estado_mensaje=="ATENDIDO": 
+                                  mensajes=Mensajes.objects.filter(contacto=request.user.username,estado=estado_mensaje).order_by("producto__id_usuario")                
+                            
+                            else:
+                                 mensajes=Mensajes.objects.filter(contacto=request.user.username).order_by("producto__id_usuario")                
+                else:
+                  pass
+
+
+
+
+
+                connection.close()
+                return render(request,'mensajes.html',locals())   
+
+
+def responder_mensaje(request,id_mensaje):
+     categoria=n_categorias()
+     n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido=info_pagina()
+
+     f = Mensajes.objects.get(pk=id_mensaje)
+
+     if request.POST:
+
+            resp = request.POST.get('respuesta')     
+            f.respuesta=resp
+
+     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

@@ -22,13 +22,44 @@
                     
                        <br>
 
-                         {% for j in mensajes %} 
-                              <p>fecha {{ j.fecha }} contacto {{ j.contacto }} </p>
-                              <p> pregunta:  {{ j.pregunta }} </p>
-                              <p> producto {{ j.nombre_producto }} </p>
-                              <p>------------------------------- </p>                              
-                       {% endfor %} 
+                        {% for j in mensajes %} 
 
+
+               <center>
+               <table BORDER="1" CELLSPACING="1">
+                            
+               <tr  align="center">                                    
+                                   
+                    <td WIDTH="100">
+
+                                   {% thumbnail j.producto.imagen1 "90" crop="center" as im %}
+                                    <td ><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
+                                    {% endthumbnail %}
+                   
+                    </td>                 
+                    <td WIDTH="300">
+
+                              <p>fecha {{ j.fecha }} contacto {{ j.contacto }} </p>                 
+                              <p> producto: {{ j.producto.nombre }} </p>
+                              <p> pregunta:  {{ j.pregunta }} </p>
+                              <p> pregunta:  {{ j.respuesta }} </p>
+                              <p> Este mensaje esta: {{j.estado}} -> </p>
+
+    <form action="/responder_mensaje/{{j.id}}/" method="post">
+            {% csrf_token %}
+            <textarea name="respuesta" placeholder="respuesta..?" style="width:250px; height:50px;"></textarea>
+            <input type="submit" value="cambiar respuesta">
+    </form>
+
+  <p> ----------------------------------- </p>
+                                                      
+                     </td> 
+                                    
+               </tr >                           
+               </table>
+               </center>
+                             
+                        {% endfor %} 
 
 
                        <br>

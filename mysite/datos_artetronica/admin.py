@@ -96,13 +96,29 @@ class Configuracion_sistemaAdmin(admin.ModelAdmin):
 admin.site.register(Configuracion_sistema,Configuracion_sistemaAdmin)
 ####################################################
 
+
+        producto=models.ForeignKey('Productos',blank=True,null=True)        
+        contacto=models.CharField(max_length=30)
+        pregunta = models.TextField(blank=True) 
+        respuesta = models.TextField(blank=True)
+        estado=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NUEVO")
+        fecha= models.DateField(default=datetime.now,blank=True,editable = False)
+
+
+
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
     form = MensajesForm
 class MensajesAdmin(admin.ModelAdmin):
     model = Mensajes
-    list_display = ['id_usuario','nombre_producto','contacto','pregunta','respuesta','estado','fecha']
- 
+    list_display = ['item','nombre_producto','contacto','pregunta','id_usuario','respuesta','estado','fecha']
+    
+    def nombre_producto(self,instance):
+        return instance.producto.nombre
+    def id_usuario(self,instance):
+        return instance.producto.id_usuario
+    def item(self,instance):
+        return instance.producto.id
 admin.site.register(Mensajes,MensajesAdmin)
 ####################################################
    
