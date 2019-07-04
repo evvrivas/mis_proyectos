@@ -97,15 +97,7 @@ admin.site.register(Configuracion_sistema,Configuracion_sistemaAdmin)
 ####################################################
 
 
-        producto=models.ForeignKey('Productos',blank=True,null=True)        
-        contacto=models.CharField(max_length=30)
-        pregunta = models.TextField(blank=True) 
-        respuesta = models.TextField(blank=True)
-        estado=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NUEVO")
-        fecha= models.DateField(default=datetime.now,blank=True,editable = False)
-
-
-
+      
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
     form = MensajesForm
