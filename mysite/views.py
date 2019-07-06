@@ -1306,10 +1306,9 @@ def responder_mensaje(request,id_mensaje):
 
      f = Mensajes.objects.get(pk=id_mensaje)
 
-     if request.POST:
+     resp = request.POST.get('respuesta')     
+     f.respuesta=resp
 
-            resp = request.POST.get('respuesta')     
-            f.respuesta=resp
 
      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
