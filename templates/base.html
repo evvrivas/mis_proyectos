@@ -140,8 +140,10 @@
 
   <div class="panel-body">    
 
-         {%  if user.is_authenticated %}          
-                <li> Hola.!.{{ user.username }}  </li>              
+ <div class="col-md-12">              
+      
+          {%  if user.is_authenticated %}          
+            <center>    <li> Hola.!.{{ user.username }}  </li>       </center>         
                    
                   
 
@@ -152,8 +154,15 @@
         <a href="#">P <span class="badge">{{n_productos}}</span></a>
         <a href="#">Pc <span class="badge">{{cN_pedido}}</span></a>
         <a href="#">Pv <span class="badge">{{vN_pedido}}</span></a>
-        <a href="#">M <span class="badge"></span></a>
+        <a href="#">M <span class="badge">{{n_msg}}</span></a>
+         <a href="#">M <span class="badge">{{v_msg}}</span></a>
+
+        
 </h6>
+
+
+</div>
+
 
 <br>
         <div class="col-md-12">                           
