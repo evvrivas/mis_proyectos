@@ -18,14 +18,14 @@
 
 
     <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Ver pedidos que
+          <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Ver mensajes
           <span class="caret"></span></button>
           
           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                     <li><a href=href="/ver_mis_mensajes/NUEVO/EL_COMPRADOR">MSG NUEVOS</a></li>
-                     <li><a href=href="/ver_mis_mensajes/ATENDIDOS/EL_COMPRADOR">MSG NUEVOS</a></li>
-                     <li><a href=href="/ver_mis_mensajes/TODOS/EL_COMPRADOR">MSG NUEVOS</a></li>
-           </ul>
+                     <li><a href=/ver_mis_mensajes/NUEVO/EL_COMPRADOR>NUEVOS</a></li>
+                     <li><a href=/ver_mis_mensajes/ATENDIDOS/EL_COMPRADOR>ATENDIDOS</a></li>
+                     <li><a href=/ver_mis_mensajes/TODOS/EL_COMPRADOR>TODOS</a></li>
+          </ul>
     </div>
 
              <div class="col-md-12">
@@ -42,40 +42,38 @@
                             
                <tr  align="center">                                    
                                    
-                    <td WIDTH="100">
+                          
+                    <td WIDTH="400">
 
-                                   {% thumbnail j.producto.imagen1 "90" crop="center" as im %}
-                                    <td ><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
+                          <h6> <p> {{ j.fecha }}  </p> </h6>   
+                          <h6> <p> {{ j.producto.nombre }} </p></h6>
+
+                          {% thumbnail j.producto.imagen1 "90" crop="center" as im %}
+                                   <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                    
                                     {% endthumbnail %}
-                   
-                    </td>                 
-                    <td WIDTH="300">
 
-                              <p>fecha {{ j.fecha }} contacto {{ j.contacto }} </p>                 
-                              <p> producto: {{ j.producto.nombre }} </p>
-                              <p> pregunta:  {{ j.pregunta }} </p>
-                              <p> pregunta:  {{ j.respuesta }} </p>
-                              <p> Este mensaje esta: {{j.estado}} -> </p>
+                             
+                          <p> {{ j.contacto }} </p>                              
+                          <p> {{ j.pregunta }} </p>
+                          <h6> <p> {{ j.respuesta }} </p></h6>
+                          <p> {{j.estado}} </p>
 
     <form action="/responder_mensaje/{{j.id}}/" method="post">
             {% csrf_token %}
-            <textarea name="respuesta" placeholder="respuesta..?" style="width:250px; height:50px;"></textarea>
-            <input type="submit" value="cambiar respuesta">
+            <textarea name="respuesta" placeholder="respuesta..?" id="respuesta" style="width:200px; height:50px;"></textarea>
+            <input type="submit" value="reponder/cambiar respuesta">
     </form>
 
-  <p> ----------------------------------- </p>
-                                                      
-                     </td> 
-                                    
-               </tr >                           
+  
+               </td> 
+
+ 
+               </tr>                           
                </table>
                </center>
                              
-                        {% endfor %} 
-
-
-                       <br>
-                       <li><a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}"> regresar a >{{tiendas.nombre_tienda}} </a></li>
+                        {% endfor %}                  
+                     
                          <br>
                         <li><a href="/">Regresar a pagina principal </a></li>
 

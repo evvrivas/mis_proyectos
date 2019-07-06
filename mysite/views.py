@@ -91,7 +91,8 @@ def crear_categorias(request):
   us=Usuarios(id_usuario="50378218224", clave="1111", nombre="Ernesto", email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",pais="El Salvador",facedireccion="",codigoapk="NORMAL",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita)      
   us.save()
 
-
+  us=Usuarios(id_usuario="50378218223", clave="1111", nombre="Ernesto", email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",pais="El Salvador",facedireccion="",codigoapk="NORMAL",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita)      
+  us.save()
 
 
 
@@ -127,7 +128,7 @@ def info_usuario():
 def conteo_mensajes():
       try:
             c_nuevo= Mensajes.objects.filter(contacto=request.user.username,estado_prod="NUEVO").count()
-            v_nuevo= Mensajes.objects.filter(producto_id_usuario=request.user.username,estado_prod="NUEVO").count()
+            v_nuevo= Mensajes.objects.filter(producto__id_usuario=request.user.username,estado_prod="NUEVO").count()
       except:
             c_nuevo=0
             v_nuevo=0
