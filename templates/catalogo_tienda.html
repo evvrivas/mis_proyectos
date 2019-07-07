@@ -5,7 +5,13 @@
 
 
 
- <div class="row">   
+ <div class="row">  
+
+
+
+
+
+
         <div class="alert alert-danger">
                   
          <a href="#" class="alert-link"> {{tiendas.n_visitas}} visitas, {{ productos.0.categoria.descripcion | linebreaks }}</a>
@@ -136,13 +142,17 @@
                
 
 
-                          <div class="row">              
+                       <div class="row">              
+                              <center>   
                               <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
                               <input type="submit" value="agregar a mi pedido" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                              </center>
                             </div>
                           
-                          <div class="row">                              
+                          <div class="row">  
+                          <center>                            
                               <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
+                          </center>
                           </div>
                               
                </form>
@@ -199,10 +209,12 @@
       <form action="/enviar_mensaje/{{j.id}}/" method="post">
                                      {% csrf_token %}
 
-                    
+      <center>          
         <textarea name="comentario" placeholder="tienes preguntas o comentarios?" style="width:200px; height:45px;"></textarea>
 
         <input type="submit" value="enviar mensaje" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+
+        </center>
         </form>
 
         <H6><p><a href="/ver_mis_mensajes/TODOS/EL_COMPRADOR">Ver respuestas</a> </p> </H6>

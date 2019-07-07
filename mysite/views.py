@@ -1313,7 +1313,7 @@ def responder_mensaje(request,id_mensaje):
      f.respuesta=resp
 
 
-     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+     return render(request,'mensajes.html',locals())
 
 
  
