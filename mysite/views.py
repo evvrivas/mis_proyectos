@@ -87,6 +87,9 @@ def crear_categorias(request):
   u1=User.objects.create_user(username="50378218224", password="1111",email="evvrivas@gmail.com",first_name="Ernesto",last_name="Valdez")
   u1.save()
 
+  u1=User.objects.create_user(username="50378218223", password="1111",email="evvrivas@gmail.com",first_name="Ernesto",last_name="Valdez")
+  u1.save()
+
 
   us=Usuarios(id_usuario="50378218224", clave="1111", nombre="Ernesto", email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",pais="El Salvador",facedireccion="",codigoapk="NORMAL",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita)      
   us.save()
