@@ -146,14 +146,19 @@ def conteo_pedidos():
           c_confirmado= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod="EL_VENDEDOR_A_CONFIRMADO").count()
           c_entregado= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod="PRODUCTO_ENTREGADO").count()
           c_recibi= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod="RECIBI_EL_PRODUCTO").count()
-          c_pedido=c_quiero+c_recibido+c_confirmado+c_entregado 
+          c_pedido_1=c_quiero+c_recibido+c_confirmado+c_entregado 
                
           v_quiero= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
           v_recibido= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO").count()
           v_confirmado= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="EL_VENDEDOR_A_CONFIRMADO").count()
           v_entregado= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="PRODUCTO_ENTREGADO").count()
           v_recibi= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="RECIBI_EL_PRODUCTO").count()
-          v_pedido=v_quiero+v_recibido
+          v_pedido_1=v_quiero+v_recibido
+          
+          c_pedido=c_pedido_1+v_pedido_1
+          v_pedido=c_pedido
+
+
     except:
           c_pedido=0
           v_pedido=0
