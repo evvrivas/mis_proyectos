@@ -1206,7 +1206,9 @@ def editar_estado_producto_del_carrito(request,id_producto,el_usuario):
                    f.estado_prod="PRODUCTO_ENTREGADO"
              else:
                  pass 
+             
              estado_del_producto=f.estado_prod
+             f.save()
              carrito= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod=estado_del_producto).order_by("nombre_tienda")
      
        elif el_usuario=="EL_COMPRADOR": 
@@ -1214,6 +1216,7 @@ def editar_estado_producto_del_carrito(request,id_producto,el_usuario):
             if f.estado_prod=="PRODUCTO_ENTREGADO":
                    f.estado_prod=="RECIBI_EL_PRODUCTO"
             estado_del_producto=f.estado_prod
+            f.save()
             carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("nombre_tienda")
 
        else:
@@ -1231,7 +1234,8 @@ def realizar_compra(request):
      carrito= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod="QUIERO PEDIR ESTO").order_by("nombre_tienda")
      
      for  i in carrito:
-        i.estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO"         
+        i.estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO"
+        i.save()         
 
      return render(request,'confirmar_la_venta.html',locals())   
 
@@ -1242,7 +1246,8 @@ def realizar_compra_individual(request,id_producto):
      n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
 
      carrito= Carro_de_compras.objects.get(id=id_producto)
-     carrito.estado_prod="EL VENDEDOR RECIBIO EL PEDIDO"  
+     carrito.estado_prod="EL VENDEDOR RECIBIO EL PEDIDO" 
+     carrito.save() 
      
      return render(request,'confirmar_compra.html',locals())   
 
@@ -1316,6 +1321,7 @@ def responder_mensaje(request,id_mensaje):
 
      resp = request.POST.get('respuesta')     
      f.respuesta=resp
+     f.save()
 
 
      return render(request,'mensajes.html',locals())
