@@ -1120,22 +1120,22 @@ def ver_el_carrito(request,estado_del_producto,el_usuario):
       if estado_del_producto=="TODOS":
           
           if el_usuario_x=="EL_COMPRRADOR":
-             carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).order_by("producto.tienda.nombre_tienda")
+             carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).order_by("producto__tienda__nombre_tienda")
           else:
-             carrito= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username).order_by("producto.tienda.nombre_tienda")
+             carrito= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username).order_by("producto__tienda__nombre_tienda")
 
 
 
       else:
 
           if el_usuario_x=="EL_COMPRRADOR":
-             carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod=estado_del_producto).order_by("producto.tienda.nombre_tienda")
+             carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod=estado_del_producto).order_by("producto__tienda__nombre_tienda")
              if estado_del_producto=="QUIERO_PEDIR_ESTO":
                   gran_total=0
                   for i in carrito:
                         gran_total = gran_total + i.total
           else:
-            carrito= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("producto.tienda.nombre_tienda")
+            carrito= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("producto__tienda__nombre_tienda")
             gran_total=0
             for i in carrito:
                         gran_total = gran_total + i.total
@@ -1148,7 +1148,7 @@ def eliminar_producto_del_carrito(request,id_producto):
        n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
 
        Carro_de_compras.objects.get(id=id_producto).delete()
-       carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).order_by("producto.tienda.nombre_tienda")
+       carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).order_by("producto__tienda__nombre_tienda")
     
        #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
        return render(request,'ver_carrito_de_compras.html',locals()) 
@@ -1174,7 +1174,7 @@ def editar_producto_del_carrito(request,id_producto):
                             f.save()                                 
                   
                 connection.close()  
-                carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).order_by("producto.tienda.nombre_tienda")
+                carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).order_by("producto__tienda__nombre_tienda")
                               
                 return render(request,'ver_carrito_de_compras.html',locals())                                                  
                 
@@ -1210,7 +1210,7 @@ def editar_estado_producto_del_carrito(request,id_producto,el_usuario):
              
              estado_del_producto=f.estado_prod
              f.save()
-             carrito= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("producto.tienda.nombre_tienda")
+             carrito= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("producto__tienda__nombre_tienda")
      
        elif el_usuario=="EL_COMPRADOR": 
 
@@ -1218,7 +1218,7 @@ def editar_estado_producto_del_carrito(request,id_producto,el_usuario):
                    f.estado_prod=="RECIBI_EL_PRODUCTO"
             estado_del_producto=f.estado_prod
             f.save()
-            carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod=estado_del_producto).order_by("producto.tienda.nombre_tienda")
+            carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod=estado_del_producto).order_by("producto__tienda__nombre_tienda")
 
        else:
                  pass
@@ -1232,7 +1232,7 @@ def realizar_compra(request):
      categoria=n_categorias()
      n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
 
-     carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="QUIERO PEDIR ESTO").order_by("producto.tienda.nombre_tienda")
+     carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="QUIERO PEDIR ESTO").order_by("producto__tienda__nombre_tienda")
      
      for  i in carrito:
         i.estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO"
