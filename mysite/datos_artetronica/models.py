@@ -166,6 +166,14 @@ class Configuracion_sistema(models.Model):
 	     class Admin:
 		    		list_display = ('mensaje_bienvenida')
 
+
+BANCO=(
+			('BANCO_AGRICOLA', 'BANCO_AGRICOLA'),
+			('BANCO_AGRICOLA', 'BANCO_AGRICOLA'),
+			('BANCO_AGRICOLA', 'BANCO_AGRICOLA'),
+
+						
+			)
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
 	     clave=models.CharField(max_length=4)
@@ -175,6 +183,8 @@ class Usuarios(models.Model):
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")
 	     pais=models.CharField(max_length=30,blank=True)
 	     facedireccion=models.URLField(blank=True)
+	     nombre_del_banco=models.CharField(max_length=40,blank=True,default="BANCO_AGRICOLA")
+	     numero_cuenta=models.CharField(max_length=40,blank=True)
 	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
 	     fecha_inicio_plan = models.DateField(default=datetime.now)
 	     fecha_final_plan = models.DateField(default=datetime.now)
@@ -184,6 +194,8 @@ class Usuarios(models.Model):
 		    		return  self.id_usuario
 	     class Admin:
 		    		list_display = ('id_usuario')
+
+
 
 CATEGORIA_TIENDA= (
 	        ('GRATIS', 'GRATIS (5 PRODUCTOS MAXIMO, NO PUBLICIDAD)'), 
@@ -245,9 +257,9 @@ ESTADO_MENSAJE= (
 
 class Mensajes(models.Model):
 	producto=models.ForeignKey('Productos',blank=True,null=True)
-	contacto=models.CharField(max_length=30)
-	pregunta = models.TextField(blank=True)
-	respuesta = models.TextField(blank=True)
+	contacto=models.CharField(max_length=30,null=True)
+	pregunta = models.TextField(blank=True,null=True)
+	respuesta = models.TextField(blank=True,null=True)
 	estado=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NUEVO")
 	fecha= models.DateField(default=datetime.now,blank=True,editable = False)
 	def __str__(self):

@@ -1244,7 +1244,7 @@ def realizar_compra_individual(request,id_producto):
      carrito= Carro_de_compras.objects.get(id=id_producto)
      carrito.estado_prod="EL VENDEDOR RECIBIO EL PEDIDO"  
      
-     return render(request,'confirmar_la_venta.html',locals())   
+     return render(request,'confirmar_compra.html',locals())   
 
 
 
@@ -1264,7 +1264,7 @@ def enviar_mensaje(request,id_del_producto):
             ncontacto=request.user.username
             la_respuesta="Gracias, le contactarenmos a la brevedad"
             lafecha=datetime.datetime.now()
-            mensaje=Mensajes(producto=producto_x,contacto=ncontacto,pregunta=coment,respuesta=la_respuesta,estado="NO_ATENDIDO",fecha=lafecha)
+            mensaje=Mensajes(producto=producto_x,contacto=ncontacto,pregunta=coment,respuesta=la_respuesta,estado="NUEVO",fecha=lafecha)
             
             mensaje.save()
             
