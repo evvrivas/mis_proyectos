@@ -16,12 +16,12 @@
                   
          <a href="#" class="alert-link"> {{tiendas.n_visitas}} visitas, {{ productos.0.categoria.descripcion | linebreaks }}</a>
          <br>
-                 <h5><center>  APROVECHA ESTO !!!  </center></h5> 
+                 <h6><center>  APROVECHA ESTO !!!  </center></h6> 
                 <h6><p>{{tiendas.promocion}}</p></h6>
          <br>
     
          
-
+ {% for j in productos %} 
 
       {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' %}
 
