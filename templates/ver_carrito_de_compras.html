@@ -58,9 +58,24 @@
                 <table BORDER="3" CELLSPACING="5">    
                   
                   <tr  align="center"> 
-                  <td WIDTH="400">                                  
-                      <h6><p>{{ i.nombre_tienda }}  </p>  </h6>
-                      <h6><p> {{ i.cantidad }} {{ i.nombre }}  $P/U = {{ i.precio}}  </p>  </h6>          
+                  <td WIDTH="400">          
+
+
+
+                       {% thumbnail i.producto.imagen1 "90" crop="center" as im %}
+                                   <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                    
+                      {% endthumbnail %}
+
+                      {% thumbnail i.producto.imagen2 "90" crop="center" as im %}
+                                   <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                    
+                      {% endthumbnail %}
+
+                      {% thumbnail i.producto.imagen3 "90" crop="center" as im %}
+                                   <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                    
+                      {% endthumbnail %}
+
+                      <h6><p>{{ i.producto.tienda.nombre_tienda }}  </p>  </h6>
+                      <h6><p> {{ i.cantidad }} {{ i.producto.nombre }}  $P/U = {{ i.producto.precio_A}}  </p>  </h6>          
                       <h6><p>{{ i.especificacion }}  </p> </h6>
                       <h6><p>{{ i.estado_prod }}  </h6>
                       <h3><p>{{ i.total }}  </h6>

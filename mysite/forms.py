@@ -82,16 +82,9 @@ class CcomercialForm(ModelForm):
 class Carro_de_comprasForm(ModelForm):
 	class Meta:			
 		model=Carro_de_compras
-		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}),
-				   'nombre_tienda' :  TextInput(attrs={'size': 20}),
-				   'cantidad' : NumberInput(attrs={'size':5}),
-				   'nombre' :  TextInput(attrs={'size': 20}),
-				   'precio' :  NumberInput(attrs={'size':5}),
-				   'especificacion' :  TextInput(attrs={'size': 20}),
-				   'estado_prod' :  TextInput(attrs={'size': 20})
-				    }
+		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}) }
 
-		exclude=["id_usuario","fecha_ingreso","id_vendedor","id_producto","nombre_tienda","nombre","precio","total","estado_prod"]
+		exclude=["fecha_ingreso","id_comprador","total","estado_prod"]
 
 		
 #class Item_carroForm(ModelForm):
