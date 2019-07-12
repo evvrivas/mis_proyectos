@@ -103,7 +103,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = MensajesForm
 class MensajesAdmin(admin.ModelAdmin):
     model = Mensajes
-    list_display = ['item','nombre_producto','contacto','pregunta','id_usuario','respuesta','estado','fecha']
+    list_display = ['item','nombre_producto','contacto','pregunta','id_usuario','respuesta','estado_mensaje','fecha']
     
     def nombre_producto(self,instance):
         return instance.producto.nombre

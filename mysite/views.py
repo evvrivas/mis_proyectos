@@ -1054,6 +1054,7 @@ def centro_comercial(request,idusuario,nombre_del_centro_comercial):
 
 def agregar_producto_al_carrito(request,id_del_producto):   
     categoria=n_categorias()
+    mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
     n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
     
     el_producto=Productos.objects.get(id=id_del_producto)
@@ -1114,6 +1115,7 @@ def contador_de_productos_carrito(el_usuario):
 
 def ver_el_carrito(request,estado_del_producto,el_usuario):
       categoria=n_categorias()
+      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
       n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina() 
       el_usuario_x=el_usuario
       
@@ -1145,6 +1147,7 @@ def ver_el_carrito(request,estado_del_producto,el_usuario):
 
 def eliminar_producto_del_carrito(request,id_producto):
        categoria=n_categorias()
+       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
        n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
 
        Carro_de_compras.objects.get(id=id_producto).delete()
@@ -1156,6 +1159,7 @@ def eliminar_producto_del_carrito(request,id_producto):
 
 def editar_producto_del_carrito(request,id_producto):  
        categoria=n_categorias()
+       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
        n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
 
        f = Carro_de_compras.objects.get(pk=id_producto)           
@@ -1191,6 +1195,7 @@ def editar_producto_del_carrito(request,id_producto):
 
 def editar_estado_producto_del_carrito(request,id_producto,el_usuario):  
        categoria=n_categorias()
+       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
        n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
 
        f = Carro_de_compras.objects.get(pk=id_producto) 
@@ -1230,6 +1235,7 @@ def editar_estado_producto_del_carrito(request,id_producto,el_usuario):
 
 def realizar_compra(request):
      categoria=n_categorias()
+     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
      n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
 
      carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="QUIERO PEDIR ESTO").order_by("producto__tienda__nombre_tienda")
@@ -1244,6 +1250,7 @@ def realizar_compra(request):
 
 def realizar_compra_individual(request,id_producto):
      categoria=n_categorias()
+     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
      n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
 
      carrito= Carro_de_compras.objects.get(id=id_producto)
@@ -1259,6 +1266,7 @@ def realizar_compra_individual(request,id_producto):
 
 def enviar_mensaje(request,id_del_producto): 
     categoria=n_categorias()
+    mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
     n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
     
     producto_x=Productos.objects.get(id=id_del_producto)
@@ -1280,7 +1288,8 @@ def enviar_mensaje(request,id_del_producto):
 
 def ver_mis_mensajes(request,estado_mensaje,el_usuario):                
                
-                categoria=n_categorias()                
+                categoria=n_categorias()
+                mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)                
                 n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
 
                 el_usuario_x=el_usuario  
@@ -1317,11 +1326,13 @@ def ver_mis_mensajes(request,estado_mensaje,el_usuario):
 def responder_mensaje(request,id_mensaje):
      categoria=n_categorias()
      n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
-
+     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+     
      f = Mensajes.objects.get(pk=id_mensaje)
 
      resp = request.POST.get('respuesta')     
      f.respuesta=resp
+     
      f.estado_mensaje="ATENDIDO"
      f.save()
 

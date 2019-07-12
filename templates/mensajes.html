@@ -61,7 +61,7 @@
                           <p> {{ j.contacto }} </p>                              
                           <p> {{ j.pregunta }} </p>
                           <h6> <p> {{ j.respuesta }} </p></h6>
-                          <p> {{j.estado}} </p>
+                          <p> {{j.estado_mensaje}} </p>
 
     <form action="/responder_mensaje/{{j.id}}/" method="post">
             {% csrf_token %}

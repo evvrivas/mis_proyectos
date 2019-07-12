@@ -260,7 +260,7 @@ class Mensajes(models.Model):
 	contacto=models.CharField(max_length=30,null=True)
 	pregunta = models.TextField(blank=True,null=True)
 	respuesta = models.TextField(blank=True,null=True)
-	estado=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NUEVO")
+	estado_mensaje=models.CharField(max_length=30,choices=ESTADO_MENSAJE,default="NUEVO")
 	fecha= models.DateField(default=datetime.now,blank=True,editable = False)
 	def __str__(self):
 				return  self.pregunta
