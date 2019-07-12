@@ -77,7 +77,7 @@ def crear_categorias(request):
       cat.save()
 
 
-  conf=Configuracion_sistema(mensaje_bienvenida="Bienvenido a xgangas", n_visitas=0)
+  conf=Configuracion_sistema(mensaje_bienvenida="Bienvenido a DETODONEGOCIO, Has tu compra, nosotros financiamos el 50% Inicial de la compra", n_visitas=0)
   conf.save()
   
  
@@ -138,21 +138,21 @@ def conteo_mensajes():
 
       return c_nuevo,v_nuevo          
 
-
+ 
 def conteo_pedidos():  
     try:  
-          c_quiero= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
-          c_recibido= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO").count()
-          c_confirmado= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod="EL_VENDEDOR_A_CONFIRMADO").count()
-          c_entregado= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod="PRODUCTO_ENTREGADO").count()
-          c_recibi= Carro_de_compras.objects.filter(id_usuario=request.user.username,estado_prod="RECIBI_EL_PRODUCTO").count()
+          c_quiero= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
+          c_recibido= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO").count()
+          c_confirmado= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="EL_VENDEDOR_A_CONFIRMADO").count()
+          c_entregado= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="PRODUCTO_ENTREGADO").count()
+          c_recibi= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="RECIBI_EL_PRODUCTO").count()
           c_pedido_1=c_quiero+c_recibido+c_confirmado+c_entregado 
                
-          v_quiero= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
-          v_recibido= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO").count()
-          v_confirmado= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="EL_VENDEDOR_A_CONFIRMADO").count()
-          v_entregado= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="PRODUCTO_ENTREGADO").count()
-          v_recibi= Carro_de_compras.objects.filter(id_vendedor=request.user.username,estado_prod="RECIBI_EL_PRODUCTO").count()
+          v_quiero= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
+          v_recibido= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO").count()
+          v_confirmado= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod="EL_VENDEDOR_A_CONFIRMADO").count()
+          v_entregado= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod="PRODUCTO_ENTREGADO").count()
+          v_recibi= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod="RECIBI_EL_PRODUCTO").count()
           v_pedido_1=v_quiero+v_recibido
           
           c_pedido=c_pedido_1+v_pedido_1
@@ -1247,7 +1247,7 @@ def realizar_compra_individual(request,id_producto):
      n_usuarios, n_tiendas, n_productos,cN_pedido,vN_pedido,n_msg,v_msg=info_pagina()
 
      carrito= Carro_de_compras.objects.get(id=id_producto)
-     carrito.estado_prod="EL VENDEDOR RECIBIO EL PEDIDO" 
+     carrito.estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO" 
      carrito.save() 
      
      return render(request,'confirmar_compra.html',locals())   

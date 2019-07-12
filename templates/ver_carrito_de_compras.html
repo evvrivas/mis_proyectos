@@ -19,7 +19,7 @@
           
           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 
-          <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_VENDEDOR">LOS QUE QUIERO</a></li>
+          <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_VENDEDOR">EL CLIENTE QUIERE</a></li>
             <li><a href="/ver_el_carrito/EL_VENDEDOR_RECIBIO_EL_PEDIDO/EL_VENDEDOR">ESPERO CONFIRMACION </a></li>
             <li><a href="/ver_el_carrito/EL_VENDEDOR_A_CONFIRMADO/EL_VENDEDOR">POR RECIBIRLOS</a></li>
             <li><a href="/ver_el_carrito/PRODUCTO_ENTREGADO/EL_VENDEDOR">LOS QUE YA RECIBI</a></li>
@@ -27,7 +27,7 @@
 
             <li><a href="#">---------------</a></li>
 
-            <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">LOS QUE QUIERO</a></li>
+            <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">LOS QUE YO QUIERO</a></li>
             <li><a href="/ver_el_carrito/EL_VENDEDOR_RECIBIO_EL_PEDIDO/EL_COMPRADOR">ESPERO CONFIRMACION </a></li>
             <li><a href="/ver_el_carrito/EL_VENDEDOR_A_CONFIRMADO/EL_COMPRADOR">POR RECIBIRLOS</a></li>
             <li><a href="/ver_el_carrito/PRODUCTO_ENTREGADO/EL_COMPRADOR">LOS QUE YA RECIBI</a></li>
@@ -98,7 +98,7 @@
     {% elif el_usuario_x == "EL_VENDEDOR" %}
 
               
-
+ 
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
                       <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" > Cambiar estado </a></li>
               {% else %}
