@@ -81,11 +81,13 @@
                         <p>{{j.categoria }} </p>   
                         <br>
 
-                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{j.nombre_tienda}}">Informacion</button>
-                              <div id="{{j.nombre_tienda}}" class="collapse">
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{j.id}}">Informacion</button>
+                              <div id="{{j.id}}" class="collapse">
                               <h6> <p>{{j.descripcion | linebreaks}}</p> </h6>
+                              <br>
                                                        
                              <h6>  <p>{{j.slogan}} </p></h6>
+                             <br>
                              <h6>  <p>Miembro desde {{j.fecha_ingreso}}</p> </h6>
                                
                                </div>
