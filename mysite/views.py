@@ -128,28 +128,15 @@ def info_usuario():
     return cantidad_usuarios, cantidad_tiendas, cantidad_productos,cN_pedido,vN_pedido
 
 
-def conteo_mensajes():
-            c_nuevo= Mensajes.objects.filter(contacto=request.user.username,estado_prod="NUEVO").count()
-            v_nuevo= Mensajes.objects.filter(producto__id_usuario=request.user.username,estado_prod="NUEVO").count()
-            total=c_nuevo+v_nuevo
-            connection.close()
-            return total          
-
- 
-def conteo_pedidos():    
-          c_quiero= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
-          v_quiero= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
-          total=c_quiero+ v_quiero   
-          connection.close()      
-          return total
 
 
 def info_pagina():
     cantidad_usuarios=Usuarios.objects.all().count()
     cantidad_tiendas=Tiendas.objects.all().count()
     cantidad_productos=Productos.objects.all().count()
-    cantidad_pedidos=conteo_pedidos()   
-    cantidad_mensajes=conteo_mensajes()
+
+    cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()+Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
+    cantidad_mensajes=Mensajes.objects.filter(contacto=request.user.username,estado_prod="NUEVO").count()+Mensajes.objects.filter(producto__id_usuario=request.user.username,estado_prod="NUEVO").count()
     
     connection.close()
     return cantidad_usuarios, cantidad_tiendas, cantidad_productos,cantidad_pedidos,cantidad_mensajes
