@@ -1033,16 +1033,15 @@ def agregar_producto_al_carrito(request,id_del_producto):
             espe = request.POST.get('especificacion')
 
             #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
-            #cant=str(cant)
-            #cant=eval(cant) 
+            cant=str(cant)
+            cant=eval(cant) 
 
 
             if cant>0:
                  
-                 try:
-                      total_x=cant*el_producto.producto.precio_A
-                 except:
-                      total_x=0
+                 
+                 total_x=cant*el_producto.producto.precio_A
+               
                       
                  #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
                  carrito=Carro_de_compras(producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
