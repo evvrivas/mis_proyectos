@@ -132,14 +132,16 @@ def conteo_mensajes():
             c_nuevo= Mensajes.objects.filter(contacto=request.user.username,estado_prod="NUEVO").count()
             v_nuevo= Mensajes.objects.filter(producto__id_usuario=request.user.username,estado_prod="NUEVO").count()
             total=c_nuevo+v_nuevo
-      return total          
+            connection.close()
+            return total          
 
  
 def conteo_pedidos():    
           c_quiero= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
           v_quiero= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
-          total=c_quiero+ v_quiero         
-    return total
+          total=c_quiero+ v_quiero   
+          connection.close()      
+          return total
 
 
 def info_pagina():
