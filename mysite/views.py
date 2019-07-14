@@ -134,10 +134,12 @@ def info_pagina():
     cantidad_usuarios=Usuarios.objects.all().count()
     cantidad_tiendas=Tiendas.objects.all().count()
     cantidad_productos=Productos.objects.all().count()
-
-    cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()+Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
-    cantidad_mensajes=Mensajes.objects.filter(contacto=request.user.username,estado_prod="NUEVO").count()+Mensajes.objects.filter(producto__id_usuario=request.user.username,estado_prod="NUEVO").count()
-    
+    try:
+          cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()+Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod="QUIERO_PEDIR_ESTO").count()
+          cantidad_mensajes=Mensajes.objects.filter(contacto=request.user.username,estado_prod="NUEVO").count()+Mensajes.objects.filter(producto__id_usuario=request.user.username,estado_prod="NUEVO").count()
+    except:  
+          cantidad_pedidos=0  
+          cantidad_mensajes=0  
     connection.close()
     return cantidad_usuarios, cantidad_tiendas, cantidad_productos,cantidad_pedidos,cantidad_mensajes
 
