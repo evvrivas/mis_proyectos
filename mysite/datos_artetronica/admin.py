@@ -105,7 +105,7 @@ class MensajesAdmin(admin.ModelAdmin):
     model = Mensajes
     list_display = ['item','nombre_producto','contacto','pregunta','id_usuario','respuesta','estado_mensaje','fecha']
     list_filter=(('contacto',admin.RelatedOnlyFieldListFilter),('id_usuario',admin.RelatedOnlyFieldListFilter),('estado_mensaje',admin.RelatedOnlyFieldListFilter))
-    def id_vendedor(self,instance):
+    
     def nombre_producto(self,instance):
         return instance.producto.nombre
     def id_usuario(self,instance):
