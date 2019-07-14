@@ -104,7 +104,8 @@ class RulesAdmin(admin.ModelAdmin):
 class MensajesAdmin(admin.ModelAdmin):
     model = Mensajes
     list_display = ['item','nombre_producto','contacto','pregunta','id_usuario','respuesta','estado_mensaje','fecha']
-    
+    list_filter=(('contacto',admin.RelatedOnlyFieldListFilter),('id_usuario',admin.RelatedOnlyFieldListFilter),('estado_mensaje',admin.RelatedOnlyFieldListFilter))
+    def id_vendedor(self,instance):
     def nombre_producto(self,instance):
         return instance.producto.nombre
     def id_usuario(self,instance):
@@ -131,8 +132,8 @@ class RulesAdmin(admin.ModelAdmin):
 class Carro_de_comprasAdmin(admin.ModelAdmin):
     model = Carro_de_compras
     #list_display = ['id_vendedor','nombre_tienda','id_usuario','cantidad','nombre','especificacion','precio','estado_prod','fecha_ingreso']
-    list_display = ['id_vendedor','nombre_tienda','id_comprador','cantidad','nombre','especificacion','precio','estado_prod','fecha_ingreso']
-
+    list_display = ['id_vendedor','nombre_tienda','id_comprador','cantidad','nombre','especificacion','precio','total','estado_prod','fecha_ingreso']
+    list_filter=(('id_vendedor',admin.RelatedOnlyFieldListFilter),('id_comprador',admin.RelatedOnlyFieldListFilter),('estado_prod',admin.RelatedOnlyFieldListFilter))
     def id_vendedor(self,instance):
         return instance.producto.id_usuario
     def nombre_tienda(self,instance):

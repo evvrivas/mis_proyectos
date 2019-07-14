@@ -54,8 +54,19 @@
         {% for i in carrito %} 
             <div class="col-md-3">
                 <div class="thumbnail">  
-                         
-                <table BORDER="3" CELLSPACING="5">    
+                   
+                      {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Lime ">  
+                      {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="yelow"> 
+                      {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="LightSkyBlue"> 
+                      {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="SkyBlue"> 
+                      {% else %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="blue">    
+                      {% endif %}  
+                 
                   
                   <tr  align="center"> 
                   <td WIDTH="400">          
