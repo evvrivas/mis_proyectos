@@ -1039,8 +1039,10 @@ def agregar_producto_al_carrito(request,id_del_producto):
 
             if cant>0:
                  
-                 
-                 total_x=cant*el_producto.producto.precio_A
+                 try: 
+                    total_x=cant*el_producto.precio_A
+                 except: 
+                    total_x
                
                       
                  #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
