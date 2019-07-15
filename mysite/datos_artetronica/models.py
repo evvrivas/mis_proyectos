@@ -177,7 +177,7 @@ BANCO=(
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
 	     clave=models.CharField(max_length=4)
-	     nombre=models.CharField(max_length=40,blank=True)
+	     nombre=models.CharField(max_length=40)
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")	 
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")
