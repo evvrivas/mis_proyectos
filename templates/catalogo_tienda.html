@@ -108,18 +108,18 @@
                            <div class="row">                         
                            
                                 
-                                    {% thumbnail j.imagen1 "180" crop="center" as im %}
+                                    {% thumbnail j.imagen1 "400" crop="center" as im %}
                                     <td ><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
                                     {% endthumbnail %}
                                 
                                 <center><table>
 
                                 <tr>
-                                    {% thumbnail j.imagen2 "90" crop="center" as im %}
+                                    {% thumbnail j.imagen2 "200" crop="center" as im %}
                                     <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
                                      {% endthumbnail %}
 
-                                     {% thumbnail j.imagen3 "90" crop="center" as im %}
+                                     {% thumbnail j.imagen3 "200" crop="center" as im %}
                                     <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>
                                     {% endthumbnail %}                                       
                                
