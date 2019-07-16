@@ -35,7 +35,7 @@
 <div class="row">
           {% for j in comercio %} 
                <div class="col-md-3">   
-                     <div class="thumbnail">                      
+                   <!--  <div class="thumbnail">  -->                    
                       <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
                                  
                              {% thumbnail j.imagen_ccomercial "400" crop="center" as im %}
@@ -48,7 +48,7 @@
                          <p>{{j.ubicacion}}</p> 
                             
                                
-                    </div>
+                 <!--   </div>   -->
                
                                                                                                   
                 </div>
@@ -70,7 +70,7 @@
   <div class="col-md-3">   
 
                       
-                     <div class="thumbnail">                      
+                 <!--    <div class="thumbnail">       -->               
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
                         
 
@@ -145,7 +145,7 @@
 
 {% endif %}  
 
-                  </div>
+                 <!-- </div>  -->
    </div>  
 
 {% endif %}  
@@ -153,6 +153,16 @@
        {% endfor %} 
          
  </div>         
+
+
+
+
+
+
+
+
+
+
 
  <div class="row">
  {% for j in productos %} 
@@ -170,7 +180,7 @@
 
      <div class="col-md-3">  
             
-                 <div class="thumbnail">
+       <!--         <div class="thumbnail">   -->
 
 
 
@@ -277,7 +287,7 @@
 
                  <h6> <p>Ingreso el {{j.fecha_ingreso}}</p> </h6>
                                           
-                  </div>
+            <!--     </div>  -->
            
           </div>   
 {% endif %}                     
@@ -287,10 +297,17 @@
 
 
 
+
+
+
+
+
+
+
 <div class="row">
           {% for j in nuevo_comercio %} 
                <div class="col-md-3">   
-                     <div class="thumbnail">                      
+                  <!--   <div class="thumbnail">    --    >              
                       <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
                                  
                              {% thumbnail j.imagen_ccomercial "400" crop="center" as im %}
@@ -394,7 +411,7 @@
 {% endif %}  
 
 
-                     </div>
+                   <!--  </div>  -->
    </div>  
 
 
@@ -402,6 +419,19 @@
        {% endfor %} 
          
  </div>         
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  <div class="row">
  {% for j in nuevos_productos %} 
@@ -412,7 +442,7 @@
 {% else %}
      <div class="col-md-3">  
             
-                 <div class="thumbnail">
+               <!--  <div class="thumbnail">  -->
                        <center> <h6> {{j.estado_prod}} </h6> </center>
                        <h4><center>  {{j.nombre}}  </center></h4> 
                        
@@ -503,7 +533,7 @@
 
                     <p>Ingreso el {{j.fecha_ingreso}}</p> 
                                           
-                  </div>
+              <!--    </div>  -->
            
           </div>   
             {% endif %}                     
@@ -511,6 +541,13 @@
        
 </div>
  
+
+
+
+
+
+
+
 
 <div class="row">   
 {% for j in aleatorias_tiendas %} 
@@ -520,7 +557,7 @@
 {% else %}
   <div class="col-md-3">   
                       
-                     <div class="thumbnail">                      
+                   <!--  <div class="thumbnail">     -->                 
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
                         {% thumbnail j.imagen1 "400" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
@@ -586,7 +623,7 @@
 {% endif %}  
 
 
-                     </div>
+                 <!--    </div>  -->
    </div>  
 
 
@@ -594,6 +631,16 @@
        {% endfor %} 
          
  </div>         
+
+ 
+
+
+
+
+
+
+
+
 
  <div class="row">
  {% for j in aleatorias_productos %} 
@@ -604,7 +651,7 @@
 {% else %}
      <div class="col-md-3">  
             
-                 <div class="thumbnail">
+            <!--     <div class="thumbnail">  -->
                        <center> <h6> {{j.estado_prod}} </h6> </center>
                        <h4><center>  {{j.nombre}}  </center></h4> 
 
@@ -704,7 +751,7 @@
 
                     <p>Ingreso el {{j.fecha_ingreso}}</p> 
                                           
-                  </div>
+               <!--   </div>  -->
            
           </div>   
             {% endif %}                     
@@ -713,10 +760,15 @@
 </div>
 
 
+
+
+
+
+
 <div class="row">
           {% for j in aleatorias_comercio %} 
                <div class="col-md-3">   
-                     <div class="thumbnail">                      
+                    <!-- <div class="thumbnail">   -->                     
                       <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
                                  
                              {% thumbnail j.imagen_ccomercial "400" crop="center" as im %}
@@ -732,7 +784,7 @@
                     </div>
                
                                                                                                   
-                </div>
+             <!--   </div> -->
                      
             {% endfor %}   
  </div>
