@@ -7,7 +7,10 @@
       
      
 <div class="row">  
-       <div class="alert alert-info">         
+      <!-- <div class="alert alert-info">        --> 
+
+   <table BORDER="3"   bordercolor="blue">  
+   <tr  align="center">   
          <p>{{configurar.mensaje_bienvenida| linebreaks}}</p>
         
                  
@@ -21,20 +24,26 @@
             <li><a href="/crear_usuario">Quieres una tienda..?   Registrarte Aqui...!</a></li>
          {% endif %}  
 
-     
+   </tr >                        
+
+        </table>
                     
  
 <!--
        </div>
 </div>
 -->
-
+                 
+          
+                      
 
 <br>
 
 <div class="row">
           {% for j in comercio %} 
                <div class="col-md-3">   
+   <table BORDER="3"   bordercolor="yelow ">  
+   <tr  align="center">   
                    <!--  <div class="thumbnail">  -->                    
                       <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
                                  
@@ -49,6 +58,9 @@
                             
                                
                  <!--   </div>   -->
+                   </tr >                        
+
+                        </table>
                
                                                                                                   
                 </div>
@@ -68,7 +80,9 @@
 
 
   <div class="col-md-3">   
-
+ 
+ <table BORDER="3"   bordercolor="red ">  
+   <tr  align="center"> 
                       
                  <!--    <div class="thumbnail">       -->               
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
@@ -146,6 +160,9 @@
 {% endif %}  
 
                  <!-- </div>  -->
+                   </tr >                        
+
+                        </table>
    </div>  
 
 {% endif %}  
@@ -181,7 +198,8 @@
      <div class="col-md-3">  
             
        <!--         <div class="thumbnail">   -->
-
+ <table BORDER="3"   bordercolor="blue ">  
+   <tr  align="center"> 
 
 
  
@@ -288,6 +306,9 @@
                  <h6> <p>Ingreso el {{j.fecha_ingreso}}</p> </h6>
                                           
             <!--     </div>  -->
+              </tr >                        
+
+                        </table>
            
           </div>   
 {% endif %}                     
@@ -307,7 +328,9 @@
 <div class="row">
           {% for j in nuevo_comercio %} 
                <div class="col-md-3">   
-                  <!--   <div class="thumbnail">    --    >              
+                  <!--   <div class="thumbnail">    --    >   
+   <table BORDER="3"   bordercolor="yelow ">  
+   <tr  align="center">            
                       <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
                                  
                              {% thumbnail j.imagen_ccomercial "400" crop="center" as im %}
@@ -320,8 +343,10 @@
                          <p>{{j.ubicacion}}</p> 
                             
                                
-                    </div>
-               
+                   <!-- </div>    --    > 
+               </tr >             
+
+                        </table>
                                                                                                   
                 </div>
                      
@@ -341,7 +366,8 @@
 
 {% else %}
 
-
+<table BORDER="3"   bordercolor="red ">  
+<tr  align="center">    
   <div class="col-md-3">   
                       
                      <div class="thumbnail">                      
@@ -412,6 +438,9 @@
 
 
                    <!--  </div>  -->
+                     </tr >                        
+
+                        </table>
    </div>  
 
 
@@ -443,6 +472,8 @@
      <div class="col-md-3">  
             
                <!--  <div class="thumbnail">  -->
+       <table BORDER="3"   bordercolor="blue ">  
+   <tr  align="center"> 
                        <center> <h6> {{j.estado_prod}} </h6> </center>
                        <h4><center>  {{j.nombre}}  </center></h4> 
                        
@@ -534,6 +565,9 @@
                     <p>Ingreso el {{j.fecha_ingreso}}</p> 
                                           
               <!--    </div>  -->
+                </tr >                        
+
+                        </table>
            
           </div>   
             {% endif %}                     
@@ -557,7 +591,9 @@
 {% else %}
   <div class="col-md-3">   
                       
-                   <!--  <div class="thumbnail">     -->                 
+                   <!--  <div class="thumbnail">     -->    
+           <table BORDER="3"   bordercolor="red">  
+   <tr  align="center">              
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
                         {% thumbnail j.imagen1 "400" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
@@ -624,6 +660,9 @@
 
 
                  <!--    </div>  -->
+                   </tr >                        
+
+                        </table>
    </div>  
 
 
@@ -652,6 +691,9 @@
      <div class="col-md-3">  
             
             <!--     <div class="thumbnail">  -->
+
+             <table BORDER="3"   bordercolor="blue ">  
+   <tr  align="center"> 
                        <center> <h6> {{j.estado_prod}} </h6> </center>
                        <h4><center>  {{j.nombre}}  </center></h4> 
 
@@ -752,6 +794,9 @@
                     <p>Ingreso el {{j.fecha_ingreso}}</p> 
                                           
                <!--   </div>  -->
+                 </tr >                        
+
+                        </table>
            
           </div>   
             {% endif %}                     
@@ -768,7 +813,9 @@
 <div class="row">
           {% for j in aleatorias_comercio %} 
                <div class="col-md-3">   
-                    <!-- <div class="thumbnail">   -->                     
+                    <!-- <div class="thumbnail">   -->   
+       <table BORDER="3"   bordercolor="yelow ">  
+   <tr  align="center">                   
                       <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
                                  
                              {% thumbnail j.imagen_ccomercial "400" crop="center" as im %}
@@ -785,13 +832,16 @@
                
                                                                                                   
              <!--   </div> -->
+               </tr >                        
+
+                        </table>
                      
             {% endfor %}   
  </div>
 
 
 <!--   quita este parar color de fondo -->
-</div>
+ <!--  </div>   -->
 </div>
 
 
