@@ -1213,7 +1213,7 @@ def realizar_compra(request):
         i.estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO"
         i.save()         
 
-     return render(request,'confirmar_la_venta.html',locals())   
+     return render(request,'confirmar_compra.html',locals())   
 
 
 

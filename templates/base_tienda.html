@@ -71,11 +71,13 @@
                 
               
              <div class="col-md-12">  
+                      <a href="/" class="btn btn-warning" role="button">Inicio</a>
+
 
                      <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle"
                                         data-toggle="dropdown">
-                                  Inicio <span class="caret"></span>
+                                  Tienda <span class="caret"></span>
                                 </button>
                                
                                 <ul class="dropdown-menu" role="menu">
@@ -83,11 +85,8 @@
 
                                          <li><a href="/informacion_vendedor/{{tiendas.id_usuario}}">Informacion del vendedor </a></li>
 
-
-
                                          <br>
-                                         <li><a href="/">Ir a Detodonegocio </a></li>
-                                         <br>
+                                         
 
                                          {%  if user.is_authenticated %}          
                                                <li><a href="/accounts/logout/">Cerrar la sesión</a></li>

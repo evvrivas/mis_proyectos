@@ -28,41 +28,42 @@
   <body style="background-color:LightGray;"> 
 
 <div class="panel panel-primary"> 
- <center>
+            <center>
 
-                          {% thumbnail tiendas.imagen1 "200" crop="center" as im %}
+                         {% thumbnail tiendas.imagen1 "200" crop="center" as im %}
                           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                          {% endthumbnail %}
-                 <form action="/busqueda/" method="post">
-                                       {% csrf_token %}                                                  
+                        
+                         <form action="/busqueda/" method="post">
+                                           {% csrf_token %}                                                  
                                                     
                                                     <img src='{% static "logo.png" %}' alt='img' />   
                                                     <input type="text" id="name" name="nombre" size="10" placeholder="Que buscas?"/>
                                                     <input type="submit" value="Buscar">
                                                                                                         
-                                            </form>
+                         </form>
                  
                 
                 
               </center>    
 
-     <div class="panel-heading">
+ <div class="panel-heading">
 
             <div class="col-md-3">              
             </div>
                 
               
              <div class="col-md-6">  
+                     <a href="/" class="btn btn-warning" role="button">Inicio</a>
 
                      <div class="btn-group">
                                 <button type="button" class="btn btn-default dropdown-toggle"
                                         data-toggle="dropdown">
-                                  Inicio <span class="caret"></span>
+                                  Entrar <span class="caret"></span>
                                 </button>
                                
-                                <ul class="dropdown-menu" role="menu">
-                                         <li><a href="/">Inicio </a></li>
-                                         <li><a href="/informacion">Informacion</a></li>
+                                <ul class="dropdown-menu" role="menu">                                      
+                                         
                                          {%  if user.is_authenticated %}          
                                                <li><a href="/accounts/logout/">Cerrar sesión </a></li>
                                          {%  else  %}                                 
@@ -70,6 +71,7 @@
                                            <li><a href="/crear_usuario">Crear cuenta</a></li>
                                            
                                          {% endif %}  
+                                         <li><a href="/informacion">Informacion</a></li>
                                   
                                 </ul>
                        </div>
@@ -116,8 +118,8 @@
                                                    <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_VENDEDOR">Pedidos de los clientes</a></li>
                                                     <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Pedidos que quiero</a></li>
 
-                                                   <li><a href="/ver_mis_mensajes/NUEVO/EL_VENDEDOR">Mensaje del cliente </a></li>
-                                                   <li><a href="/ver_mis_mensajes/NUEVO/EL_COMPRADOR">Ver mis mensajes </a></li>
+                                                  <!-- <li><a href="/ver_mis_mensajes/NUEVO/EL_VENDEDOR">Mensaje del cliente </a></li>
+                                                   <li><a href="/ver_mis_mensajes/NUEVO/EL_COMPRADOR">Ver mis mensajes </a></li> -->
 
 
 
@@ -156,12 +158,12 @@
         {% endif %}  
 <h6>
         <a href="#">Vistas <span class="badge">{{configurar.n_visitas}}</span></a>
-  <!--  <a href="#">T <span class="badge">{{n_tiendas}}</span></a>
-        <a href="#">P <span class="badge">{{n_productos}}</span></a> -->
+        <a href="#">Tiendas <span class="badge">{{n_tiendas}}</span></a>
+        <a href="#">Prod <span class="badge">{{n_productos}}</span></a> 
         <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Pedidos <span class="badge">{{n_pedidos}}</span></a>
     <!--    <a href="#">Pv <span class="badge">{{vN_pedido}}</span></a>
         <a href="#">M <span class="badge">{{n_msg}}</span></a>  -->
-         <a href="/ver_mis_mensajes/NUEVO/EL_COMPRADOR">Mensajes <span class="badge">{{n_mensajes}}</span></a>
+     <!--     <a href="/ver_mis_mensajes/NUEVO/EL_COMPRADOR">Mensajes <span class="badge">{{n_mensajes}}</span></a>  -->
 
         
 </h6>
