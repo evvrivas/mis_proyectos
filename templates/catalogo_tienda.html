@@ -5,32 +5,38 @@
 
 
 
- <div class="row">  
 
+ <div class="col-md-12">
 
-
-
-
-
-        <div class="alert alert-danger">
-                  
-         <a href="#" class="alert-link"> {{tiendas.n_visitas}} visitas, {{ productos.0.categoria.descripcion | linebreaks }}</a>
-         <br>
-                 <h6><center>  APROVECHA ESTO !!!  </center></h6> 
-                <h6><p>{{tiendas.promocion}}</p></h6>
-         <br>
-    
+                  <a href="#" class="alert-link"> {{tiendas.n_visitas}} visitas, {{ productos.0.categoria.descripcion | linebreaks }}</a>
+                  <br>
+                 <h6><center>  APROVECHA ESTO !!! {{tiendas.promocion}}  </center></h6> 
+</div>      
          
+
+
+
+
+
+
+
+
+
  {% for j in productos %} 
 
       {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' %}
 
 {% else %}
+    
+
+<table style="width:100%"  BORDER="5" CELLSPACING="5"  bordercolor="red">    
+ <tr  align="center">   
+
 
            <div class="col-md-3">   
                 <div class="thumbnail">
                        
-                       <center> <h6> {{j.estado_prod}} </h6> </center>
+                  <center> <h6> {{j.estado_prod}} </h6> </center>
                   <h4><center>  {{j.nombre}}  </center></h4> 
                    
                    {% if j.precio_de_antes %}  
@@ -204,20 +210,6 @@
                  </div>
 
 
-      <form action="/enviar_mensaje/{{j.id}}/" method="post">
-                                     {% csrf_token %}
-
-      <center>          
-        <textarea name="comentario" placeholder="tienes preguntas o comentarios?" style="width:200px; height:45px;"></textarea>
-
-        <input type="submit" value="enviar mensaje" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
-
-        </center>
-        </form>
-
-        <H6><p><a href="/ver_mis_mensajes/TODOS/EL_COMPRADOR">Ver respuestas</a> </p> </H6>
-
-
 
  {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior %}     
 
@@ -250,12 +242,36 @@
                  </div>
             </div>            
                 
+ 
+</table>    
+ </tr> 
+
+<br>
+
     {% endif %}             
+ 
+
+
+
  {% endfor %}  
     
 
-</div>
+
      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -25,7 +25,19 @@
   
   </head>
 
+
+
+
+
+
   <body style="background-color:LightGray;"> 
+
+
+
+
+
+
+
 
 <div class="panel panel-primary"> 
  <center>
@@ -36,7 +48,7 @@
                  <form action="/busqueda/" method="post">
                                        {% csrf_token %}                                                  
                                                     
-                                                    <center><img src='{% static "logo.png" %}' alt='img' />   
+                                                    <img src='{% static "logo.png" %}' alt='img' />   
                                                     <input type="text" id="name" name="nombre" size="10" placeholder="Que buscas?"/>
                                                     <input type="submit" value="Buscar">
                                                                                                         
@@ -178,6 +190,9 @@
        
    </div>
 </div>
+        
+
+
         
   <div class="panel panel-primary">
       <div class="panel-heading">
