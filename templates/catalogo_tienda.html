@@ -5,38 +5,32 @@
 
 
 
+ <div class="row">  
 
- <div class="col-md-12">
 
-                  <a href="#" class="alert-link"> {{tiendas.n_visitas}} visitas, {{ productos.0.categoria.descripcion | linebreaks }}</a>
-                  <br>
-                 <h6><center>  APROVECHA ESTO !!! {{tiendas.promocion}}  </center></h6> 
-</div>      
+
+
+
+
+        <div class="alert alert-danger">
+                  
+         <a href="#" class="alert-link"> {{tiendas.n_visitas}} visitas, {{ productos.0.categoria.descripcion | linebreaks }}</a>
+         <br>
+                 <h6><center>  APROVECHA ESTO !!!  </center></h6> 
+                <h6><p>{{tiendas.promocion}}</p></h6>
+         <br>
+    
          
-
-
-
-
-
-
-
-
-
  {% for j in productos %} 
 
       {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' %}
 
 {% else %}
-    
-
-<table style="width:100%"  BORDER="5" CELLSPACING="5"  bordercolor="red">    
- <tr  align="center">   
-
 
            <div class="col-md-3">   
                 <div class="thumbnail">
                        
-                  <center> <h6> {{j.estado_prod}} </h6> </center>
+                       <center> <h6> {{j.estado_prod}} </h6> </center>
                   <h4><center>  {{j.nombre}}  </center></h4> 
                    
                    {% if j.precio_de_antes %}  
@@ -111,25 +105,40 @@
 
 
                          
-                           <div class="row">                         
+                           <div class="row">    
+
+                         <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
                            
-                                
+                           <tr  align="center">  
+                                  <th colspan="2">
+
                                     {% thumbnail j.imagen1 "400" crop="center" as im %}
                                     <td ><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>                        
                                     {% endthumbnail %}
-                                
-                                <center><table>
 
-                                <tr>
+                                     </th>
+                                
+                          </tr >   
+               
+                 
+
+                          <tr>
+                                 <td > 
                                     {% thumbnail j.imagen2 "200" crop="center" as im %}
                                     <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
                                      {% endthumbnail %}
 
+                                  </td > 
+
+                                  <td >    
+
                                      {% thumbnail j.imagen3 "200" crop="center" as im %}
                                     <td><a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>
-                                    {% endthumbnail %}                                       
+                                    {% endthumbnail %}  
+
+                                  </td >                                      
                                
-                                </tr >
+                            </tr >
                           </table></center>                    
                   
                   </div>
@@ -162,7 +171,7 @@
                </form>
                
 
-                <H6><p><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Ver Mi pedido</a> </p> </H6>
+           <!--     <H6><p><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Ver Mi pedido</a> </p> </H6>  -->
 
 
 
@@ -199,16 +208,35 @@
                  <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
+                                 
+                                <td WIDTH="60"><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito.png" %}' alt='img' > </a> 
+
                                     <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=detodonegocio_Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
                                     <td WIDTH="60"><a href="tel://+{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
                                     
-                                    <td WIDTH="60"><a href="https://m.me/j.facedireccion" target="_blank"><img src='{% static "mesenger.png" %}' alt='img'/></a></td>
+                                    
+
+
                                 </tr >
                         </table>
                         </center>
                         <br>
                  </div>
 
+<!--
+      <form action="/enviar_mensaje/{{j.id}}/" method="post">
+                                     {% csrf_token %}
+
+      <center>          
+        <textarea name="comentario" placeholder="tienes preguntas o comentarios?" style="width:200px; height:45px;"></textarea>
+
+        <input type="submit" value="enviar mensaje" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+
+        </center>
+        </form>
+
+        <H6><p><a href="/ver_mis_mensajes/TODOS/EL_COMPRADOR">Ver respuestas</a> </p> </H6>
+-->
 
 
  {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior %}     
@@ -242,36 +270,12 @@
                  </div>
             </div>            
                 
- 
-</table>    
- </tr> 
-
-<br>
-
     {% endif %}             
- 
-
-
-
  {% endfor %}  
     
 
-
+</div>
      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
