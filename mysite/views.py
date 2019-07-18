@@ -615,7 +615,7 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
             tiend.tipo_de_vista="LINEAL"
       elif tiend.tipo_de_vista=="LINEAL":
             tiend.tipo_de_vista="FOTITOS"
-      else
+      else:
          tiend.tipo_de_vista="NORMAL"
 
       tiend.save()      
