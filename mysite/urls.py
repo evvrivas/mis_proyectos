@@ -87,6 +87,9 @@ urlpatterns = [
     url(r'^ver_mis_mensajes/([^/]+)/([^/]+)/$',ver_mis_mensajes),    
     url(r'^responder_mensaje/(\d+)/$',responder_mensaje),
 
+    
+    url(r'^cambiar_tipo_de_vista/(\d+)/$',cambiar_tipo_de_vista),
+
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),
        

@@ -593,7 +593,37 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
    
   connection.close()
   #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
-  return render(request,'catalogo_tienda.html',locals())   
+  if tiendas.tipo_de_vista=='NORMAL':
+    return render(request,'catalogo_tienda.html',locals())   
+  elif tiendas.tipo_de_vista=='LINEAL':
+    return render(request,'catalogo_tienda_lineal.html',locals())   
+  elif tiendas.tipo_de_vista=='FOTITOS':
+    return render(request,'catalogo_tienda_fotitos.html',locals())   
+  else :
+    return render(request,'catalogo_tienda.html',locals())   
+
+
+
+def cambiar_tipo_de_vista(request,id_dela_tienda):
+      
+      categoria=n_categorias()
+      n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina()                           
+                       
+      tiend = Tiendas.objects.get(pk=id_dela_tienda)
+                                                                       
+      if tiend.tipo_de_vista=="NORMAL":
+            tiend.tipo_de_vista="LINEAL"
+      elif tiend.tipo_de_vista=="LINEAL":
+            tiend.tipo_de_vista="FOTITOS"
+      else
+         tiend.tipo_de_vista="NORMAL"
+
+      tiend.save()      
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+  
  
 def busqueda_tienda(request,idusuario,nombretienda):
      
@@ -1310,11 +1340,6 @@ def responder_mensaje(request,id_mensaje):
 
 
  
-
-
-
-
-
 
 
 

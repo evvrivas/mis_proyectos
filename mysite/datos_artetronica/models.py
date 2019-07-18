@@ -234,6 +234,7 @@ class Tiendas(models.Model):
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     descripcion=models.TextField(blank=True)
 	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
+	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")
 	     slogan=models.CharField(max_length=90,blank=True)
 	     promocion=models.CharField(max_length=90,blank=True)
 	     n_visitas=models.IntegerField(blank=True,default=0)

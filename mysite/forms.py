@@ -46,7 +46,7 @@ class TiendasForm(ModelForm):
 	class Meta:
 		model= Tiendas	
 		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}	
-		exclude=["codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario","ultima_fecha_edicion"]
+		exclude=["tipo_de_vista","codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario","ultima_fecha_edicion"]
 	def __init__(self, user,*args, **kwargs):
 		super(TiendasForm, self).__init__(*args, **kwargs)
 		self.fields['ccomercial'].queryset=Ccomercial.objects.all()
