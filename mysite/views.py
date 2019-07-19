@@ -136,11 +136,12 @@ def info_pagina():
     cantidad_productos=Productos.objects.all().count()
     try:
           cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=request.user.username).count()+Carro_de_compras.objects.filter(producto__id_usuario=request.user.username).count()
-          cantidad_mensajes=Mensajes.objects.filter(contacto=request.user.username).count()+Mensajes.objects.filter(producto__id_usuario=request.user.username).count()
+          #cantidad_mensajes=Mensajes.objects.filter(contacto=request.user.username).count()+Mensajes.objects.filter(producto__id_usuario=request.user.username).count()
     except:  
-          cantidad_pedidos=0  
-          cantidad_mensajes=0  
+          cantidad_pedidos=Carro_de_compras.objects.all().count()
+          
     connection.close()
+    cantidad_mensajes=0  
     return cantidad_usuarios, cantidad_tiendas, cantidad_productos,cantidad_pedidos,cantidad_mensajes
 
 
