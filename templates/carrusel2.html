@@ -4,21 +4,7 @@
 {% block content %}
     
 
- <div class="row">   
-
-        <div class="col-md-4"> 
-        </div> 
-
-        <div class="col-md-4">  
-        <h4><center>  {{productos.nombre}}  </center></h4> 
-        <p>{{productos.descripcion | linebreaks}}</p> 
-        </div> 
-
-
-         <div class="col-md-4">  
-         </div> 
-
- </div> 
+ 
 
 
 
@@ -32,10 +18,31 @@
 
 <div class="thumbnail">
 <div class="container"> 
+
+<div class="row">   
+
+        <div class="col-md-4"> 
+        </div> 
+
+        <div class="col-md-4">  
+        <h5><center>  {{productos.nombre}}  </center></h5> 
+       <h6> <p>{{productos.descripcion | linebreaks}}</p> </h6> 
+        </div> 
+
+
+         <div class="col-md-4">  
+         </div> 
+
+ </div> 
+
+
+
+
     <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
      <tr  align="center">  
           {% thumbnail productos.imagen1 "360" crop="center" as im %}   
-        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+        <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+
          {% endthumbnail %}
   <div class="content">
 
@@ -61,8 +68,7 @@
   </table></center>
 
 
-</div>
-</div>
+
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/' method='post'>
                               {% csrf_token %}                                
@@ -104,7 +110,8 @@
 
 
 
-
+</div>
+</div>
 
 {% endif %}
 
@@ -116,14 +123,39 @@
 
 <div class="col-md-4">
 {%  if productos.imagen2 %}
+
 <div class="thumbnail">
 <div class="container"> 
+
+<div class="row">   
+
+        <div class="col-md-4"> 
+        </div> 
+
+        <div class="col-md-4">  
+        <h5><center>  {{productos.nombre}}  </center></h5> 
+       <h6> <p>{{productos.descripcion | linebreaks}}</p> </h6> 
+        </div> 
+
+
+         <div class="col-md-4">  
+         </div> 
+
+ </div> 
+
+
+
 
      <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
      <tr  align="center">  
   
+
+
+
    {% thumbnail productos.imagen2 "360" crop="center" as im %}   
-  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+  <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+  
+                               
    {% endthumbnail %}
   <div class="content">
 
@@ -146,8 +178,7 @@
   </table></center>
 
 
-</div>
-</div>
+
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/' method='post'>
                               {% csrf_token %}                                
@@ -187,6 +218,8 @@
                         <br>
                  </div>
 
+</div>
+</div>
 {% endif %}
 
 </div>
@@ -201,13 +234,33 @@
 
 <div class="col-md-4">
 {%  if productos.imagen3 %}
+
 <div class="thumbnail">  
 <div class="container">  
+
+
+<div class="row">   
+
+        <div class="col-md-4"> 
+        </div> 
+
+        <div class="col-md-4">  
+        <h5><center>  {{productos.nombre}}  </center></h5> 
+       <h6> <p>{{productos.descripcion | linebreaks}}</p> </h6> 
+        </div> 
+
+
+         <div class="col-md-4">  
+         </div> 
+
+ </div> 
+
+
 
    <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
    <tr  align="center">  
    {% thumbnail productos.imagen3 "360" crop="center" as im %}   
-  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+  <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
    {% endthumbnail %}
   <div class="content">
               {%  if productos.precio_de_antes %}  
@@ -231,8 +284,7 @@
   </table></center>
 
 
-</div>
-</div>
+
 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/' method='post'>
@@ -272,6 +324,9 @@
                         </center>
                         <br>
                  </div>
+
+</div>
+</div>
 
 {% endif %}
 
