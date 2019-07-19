@@ -65,8 +65,12 @@ class TiendasAdmin(admin.ModelAdmin):
     model = Tiendas
     list_display = ['id_usuario','centro_comecial', 'nombre_tienda','codigoapk','nombre_categoria','n_visitas','administrador_junior','promocion']
     list_filter=(('ccomercial',admin.RelatedOnlyFieldListFilter),('categoria',admin.RelatedOnlyFieldListFilter),)
-    def centro_comecial(self,instance):
-        return instance.ccomercial.nombre_ccomercial
+    def centro_comecial(self,instance):  
+        try:
+            return instance.ccomercial.nombre_ccomercial
+        except:      
+
+            return "ninguno"
     def nombre_categoria(self,instance):
         return instance.categoria.categoria
 admin.site.register(Tiendas,TiendasAdmin)

@@ -613,15 +613,25 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
                                                                        
       if tiend.tipo_de_vista=="NORMAL":
             tiend.tipo_de_vista="LINEAL"
+
       elif tiend.tipo_de_vista=="LINEAL":
             tiend.tipo_de_vista="FOTITOS"
+
       else:
          tiend.tipo_de_vista="NORMAL"
+               
+      tiend.save()    
 
-      tiend.save()      
-      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
+      
+      if tiend.tipo_de_vista=='NORMAL':
+         return render(request,'catalogo_tienda.html',locals())   
+      elif tiend.tipo_de_vista=='LINEAL':
+         return render(request,'catalogo_tienda_lineal.html',locals())   
+      elif tiend.tipo_de_vista=='FOTITOS':
+         return render(request,'catalogo_tienda_fotitos.html',locals())   
+      else :
+          return render(request,'catalogo_tienda.html',locals())     
+      
 
   
  
