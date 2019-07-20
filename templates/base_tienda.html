@@ -71,7 +71,7 @@
                 
               
              <div class="col-md-12">  
-                      <a href="/" class="btn btn-warning" role="button">Inicio</a>
+                      <a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" class="btn btn-warning" role="button">Inicio</a>
 
 
                      <div class="btn-group">
@@ -81,7 +81,7 @@
                                 </button>
                                
                                 <ul class="dropdown-menu" role="menu">
-                                         <li><a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}">{{tiendas.nombre_tienda}} </a></li>
+                                         
 
                                          <li><a href="/informacion_vendedor/{{tiendas.id_usuario}}">Informacion del vendedor </a></li>
 
@@ -96,7 +96,10 @@
                                            <br>
                                            <li><a href="/crear_usuario">Registrarme</a></li>
                                            <br>
-                                         {% endif %}  
+                                         {% endif %} 
+
+                                         <li><a href="/">Ir a De_todo_negocio </a></li>
+ 
                                                                             
                                   
                                 </ul>

@@ -606,18 +606,17 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
 
 
 def cambiar_tipo_de_vista(request,id_dela_tienda):
-      
-      categoria=categorizar(idusuario,nombretienda)
-
       tiendas = Tiendas.objects.get(pk=id_dela_tienda)
-      var=tiendas.codigoapk   
-
       idusuario=tiendas.id_usuario 
       nombretienda=tiendas.nombre_tienda
+      
+      categoria=categorizar(idusuario,nombretienda)     
+      var=tiendas.codigoapk   
+     
 
       productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("precio_A")[:10]
       
-                           
+                          
       
                                                                        
       if tiendas.tipo_de_vista=="NORMAL":
