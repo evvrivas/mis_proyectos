@@ -437,6 +437,7 @@ def crear_tienda(request):
             form=TiendasForm(request.user.username,request.POST,request.FILES)                   
                   
             if form.is_valid():
+                          nombretienda = form.cleaned_data['nombre_tienda']
                           tiendecilla = form.save(commit=False)
                           # commit=False tells Django that "Don't send this to database yet.
                           # I have more things I want to do with it."
@@ -446,7 +447,8 @@ def crear_tienda(request):
                           form.save()  
                           connection.close()
                           #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-                          
+                          tiendas=Tiendas.objects.filter(id_usuario=request.user.username,nombre_tienda=nombretienda).first() 
+                        
                           return render(request,'confirmar.html',locals())     
             else:
 
@@ -622,7 +624,7 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       if tiendas.tipo_de_vista=="NORMAL":
             tiendas.tipo_de_vista="LINEAL"
 
-      elif tiend.tipo_de_vista=="LINEAL":
+      elif tiendas.tipo_de_vista=="LINEAL":
             tiendas.tipo_de_vista="FOTITOS"
 
       else:
