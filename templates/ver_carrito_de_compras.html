@@ -69,19 +69,35 @@
                  
                   
                   <tr  align="center"> 
-                  <td WIDTH="400">          
-    
+                  <td WIDTH="400">      
+
+                   <center>
+                         <table BORDER="1" CELLSPACING="1">
+                            
+                       <tr  align="center">                      
                        {% thumbnail i.producto.imagen1 "90" crop="center" as im %}
-                                   <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                    
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
                       {% endthumbnail %}
+                       </tr >    
 
-                      {% thumbnail i.producto.imagen2 "90" crop="center" as im %}
-                                   <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                    
-                      {% endthumbnail %}
 
-                      {% thumbnail i.producto.imagen3 "90" crop="center" as im %}
-                                   <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                    
+
+                      <tr  align="center">                      
+                       {% thumbnail i.producto.imagen2 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
                       {% endthumbnail %}
+                       </tr >    
+
+                     <tr  align="center">                      
+                       {% thumbnail i.producto.imagen3 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                       </tr >    
+                        </table>
+                        </center>
 
                       <h6><p>{{ i.producto.tienda.nombre_tienda }}  </p>  </h6>
                       <h6><p> {{ i.cantidad }} {{ i.producto.nombre }}  $P/U = {{ i.producto.precio_A}}  </p>  </h6>          
@@ -103,6 +119,19 @@
                 
               {% endif %}    
 
+              <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.producto.id_usuario}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+
+                                    <td WIDTH="90"><a href="tel://+{{i.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    
+                                   
+                                </tr >
+                        </table>
+                        </center> 
+
       
     {% elif el_usuario_x == "EL_VENDEDOR" %}
 
@@ -113,6 +142,19 @@
               {% else %}
                 
               {% endif %} 
+
+              <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.id_comprador}}&text=Hola%2C%20rs_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+
+                                    <td WIDTH="90"><a href="tel://+{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    {{i.producto.tienda.nombre_tienda}}
+                                   
+                                </tr >
+                        </table>
+                        </center> 
 
     {% else %}
 

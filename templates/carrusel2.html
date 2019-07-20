@@ -25,6 +25,8 @@
         </div> 
 
         <div class="col-md-4">  
+
+
         <h5><center>  {{productos.nombre}}  </center></h5> 
        <h6> <p>{{productos.descripcion | linebreaks}}</p> </h6> 
         </div> 
@@ -37,7 +39,7 @@
 
 
 
-
+<div class="container"> 
     <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
      <tr  align="center">  
           {% thumbnail productos.imagen1 "360" crop="center" as im %}   
@@ -47,16 +49,16 @@
   <div class="content">
 
      {%  if productos.precio_de_antes %}  
-             <center><strike><h4>Antes $ {{productos.precio_de_antes}}</h4></strike></center>
+             <center><strike><h6>Antes $ {{productos.precio_de_antes}}</h6></strike></center>
      {% endif %}
     
     {%  if productos.precio_B %}
 
-                          <h4>Hoy $ {{ productos.precio_B }}</h4>
+                          <h6>Hoy $ {{ productos.precio_B }}</h6>
               {% else %}
                     
                     {%  if productos.precio_A %}
-                          <h4>Hoy $ {{ productos.precio_A }}</h4>
+                          <h6>Hoy $ {{ productos.precio_A }}</h6>
                     {% endif %}
 
     {% endif %}
@@ -66,7 +68,7 @@
 
   </tr >                       
   </table></center>
-
+ </div>
 
 
 
@@ -145,7 +147,7 @@
 
 
 
-
+<div class="container"> 
      <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
      <tr  align="center">  
   
@@ -160,14 +162,14 @@
   <div class="content">
 
      {%  if productos.precio_de_antes %}  
-             <center><strike><h1>Antes $ {{productos.precio_de_antes}}</h1></strike></center>
+             <center><strike><h6>Antes $ {{productos.precio_de_antes}}</h6></strike></center>
      {% endif %}
     {%  if productos.precio_B %}
-                          <h4>Hoy $ {{ productos.precio_B }}</h4>
+                          <h6>Hoy $ {{ productos.precio_B }}</h6>
               {% else %}
                     
                     {%  if productos.precio_A %}
-                          <h4>Hoy $ {{ productos.precio_A }}</h4>
+                          <h6>Hoy $ {{ productos.precio_A }}</h6>
                     {% endif %}
 
               {% endif %}
@@ -176,7 +178,7 @@
 
   </tr >                       
   </table></center>
-
+</div>
 
 
 
@@ -256,7 +258,7 @@
  </div> 
 
 
-
+<div class="container"> 
    <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
    <tr  align="center">  
    {% thumbnail productos.imagen3 "360" crop="center" as im %}   
@@ -264,15 +266,15 @@
    {% endthumbnail %}
   <div class="content">
               {%  if productos.precio_de_antes %}  
-             <center><strike><h1>Antes $ {{productos.precio_de_antes}}</h1></strike></center>
+             <center><strike><h6>Antes $ {{productos.precio_de_antes}}</h6></strike></center>
      {% endif %}
 
               {%  if productos.precio_B %}
-                          <h4>Hoy $ {{ productos.precio_B }}</h4>
+                          <h6>Hoy $ {{ productos.precio_B }}</h6>
               {% else %}
                     
                     {%  if productos.precio_A %}
-                          <h4>Hoy $ {{ productos.precio_A }}</h4>
+                          <h6>Hoy $ {{ productos.precio_A }}</h6>
                     {% endif %}
 
               {% endif %}
@@ -283,7 +285,7 @@
   </tr >                       
   </table></center>
 
-
+</div>
 
 
 
