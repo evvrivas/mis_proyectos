@@ -47,19 +47,7 @@ from django.db.models import Q
 from django.db import connection
 
 from random import sample
-def probando():
-  categorias=["Productos Ventas Varias","Alimentos bebidas","Antiguedades artesanias Adornos","Mascotas acsesorios veterinarios",
-                "Bienes raices alquileres ventas","Tecnologia informatica informacion","Educacion ciencia Academias",
-                "Deportes ocio acsesorios","Herramientas maquinaria equipo","Agro ferreteria maderas","Materias primas varias",
-                "Mateiales de construccion","Muebles electrodomesticos","Productos para el hogar","Productos de consumo diario",
-                "Productos para la industria","Industria acsesorios repuestos","Ropa Moda calzado","Salud belleza",
-                "Usados de todos","Vehiculos acsesorios repuestos","Productos y Sevicios varios","Servicios domesticos",
-                "Servicios personales","Servicios pofesionales","Servicios de Ensenanza","Sevicios financieros",
-                "Servicios publicitarios","Servicio de reparaiones","Servicio de hotel alojamiento","Otros Servicios"]
-  
-  for i in categorias:
-      cat=Categoria_global(categoria=i)
-      cat.save()
+
 
 
 def crear_categorias(request):
@@ -255,7 +243,7 @@ def publicida_inteligencia(request):
     connection.close()       
     return  comercio,tiendas,productos
 
-
+@login_required
 def editar_producto(request,idusuario,nombretienda,acid):   
         categoria=categorizar(idusuario,nombretienda)
   
@@ -373,7 +361,7 @@ def crear_usuario(request):
         return render(request,'formulario_crear_usuario.html',locals()) 
 
         
-
+@login_required
 def editar_usuario(request,acid):   
        categoria=n_categorias()
        n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina()
@@ -994,7 +982,7 @@ def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
 
 
 
-
+@login_required
 def cambiar_estado_tienda(request,idusuario,id_dela_tienda,estado):
                         categoria=n_categorias()
                         n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina()                           
@@ -1011,7 +999,7 @@ def cambiar_estado_tienda(request,idusuario,id_dela_tienda,estado):
                         tiendas.append(tiend)
                         connection.close()
                         return render(request,'catalogo.html',locals())
-
+@login_required
 def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estado_nuevo):  
 
                         categoria=categorizar(idusuario,nombretienda)
@@ -1031,7 +1019,7 @@ def cambiar_estado_producto(request,idusuario,nombretienda,id_del_producto,estad
                         connection.close()
                         return render(request,'catalogo_tienda.html',locals())
 
-
+@login_required
 def descargar(request,idusuario,nombretienda,id_del_producto):  
 
                         categoria=categorizar(idusuario,nombretienda)
@@ -1068,7 +1056,7 @@ def centro_comercial(request,idusuario,nombre_del_centro_comercial):
 
 
        
-
+@login_required
 def agregar_producto_al_carrito(request,id_del_producto):   
     categoria=n_categorias()
     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
@@ -1092,7 +1080,7 @@ def agregar_producto_al_carrito(request,id_del_producto):
                  try: 
                     total_x=cant*el_producto.precio_A
                  except: 
-                    total_x
+                    total_x=0
                
                       
                  #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
@@ -1131,7 +1119,7 @@ def contador_de_productos_carrito(el_usuario):
     return N_pedido
              
 
-
+@login_required
 def ver_el_carrito(request,estado_del_producto,el_usuario):
       categoria=n_categorias()
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
@@ -1163,7 +1151,7 @@ def ver_el_carrito(request,estado_del_producto,el_usuario):
 
       return render(request,'ver_carrito_de_compras.html',locals())   
 
-
+@login_required
 def eliminar_producto_del_carrito(request,id_producto):
        categoria=n_categorias()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
@@ -1175,7 +1163,7 @@ def eliminar_producto_del_carrito(request,id_producto):
        #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
        return render(request,'ver_carrito_de_compras.html',locals()) 
 
-
+@login_required
 def editar_producto_del_carrito(request,id_producto):  
        categoria=n_categorias()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
@@ -1211,7 +1199,7 @@ def editar_producto_del_carrito(request,id_producto):
        #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
        return render(request,'editar_carrito_de_compras.html',locals())   
 
-
+@login_required
 def editar_estado_producto_del_carrito(request,id_producto,el_usuario):  
        categoria=n_categorias()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
@@ -1251,7 +1239,7 @@ def editar_estado_producto_del_carrito(request,id_producto,el_usuario):
        return render(request,'ver_carrito_de_compras.html',locals())
 
 
-
+@login_required
 def realizar_compra(request):
      categoria=n_categorias()
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
@@ -1266,7 +1254,7 @@ def realizar_compra(request):
      return render(request,'confirmar_compra.html',locals())   
 
 
-
+@login_required
 def realizar_compra_individual(request,id_producto):
      categoria=n_categorias()
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
