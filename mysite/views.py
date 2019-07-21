@@ -518,7 +518,16 @@ def mi_tienda(request,idusuario,nombretienda):
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("precio_A")[:10]
     
     connection.close() 
-    return render(request,'catalogo_tienda.html',locals())   
+
+    if tiendas.tipo_de_vista=="NORMAL":
+         return render(request,'catalogo_tienda.html',locals())   
+    elif tiendas.tipo_de_vista=="LINEAL":
+         return render(request,'catalogo_tienda_lineal.html',locals())   
+    elif tiendas.tipo_de_vista=="FOTITOS":
+         return render(request,'catalogo_tienda_fotitos.html',locals())   
+    else :
+          return render(request,'catalogo_tienda.html',locals()) 
+      
  
 def mis_tiendas(request,idusuario):
   
@@ -615,17 +624,20 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       elif tiendas.tipo_de_vista=="LINEAL":
             tiendas.tipo_de_vista="FOTITOS"
 
+      elif tiendas.tipo_de_vista=="FOTITOS":
+            tiendas.tipo_de_vista="NORMAL"
+
       else:
          tiendas.tipo_de_vista="NORMAL"
                
       tiendas.save()    
 
       
-      if tiendas.tipo_de_vista=='NORMAL':
+      if tiendas.tipo_de_vista=="NORMAL":
          return render(request,'catalogo_tienda.html',locals())   
-      elif tiendas.tipo_de_vista=='LINEAL':
+      elif tiendas.tipo_de_vista=="LINEAL":
          return render(request,'catalogo_tienda_lineal.html',locals())   
-      elif tiendas.tipo_de_vista=='FOTITOS':
+      elif tiendas.tipo_de_vista=="FOTITOS":
          return render(request,'catalogo_tienda_fotitos.html',locals())   
       else :
           return render(request,'catalogo_tienda.html',locals())     
