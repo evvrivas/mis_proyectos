@@ -54,7 +54,7 @@
 
                   <td WIDTH="275">   
 
-                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_UNO' method='post'>
+                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_UNO/' method='post'>
                               {% csrf_token %}                                
                
 
@@ -68,7 +68,7 @@
                                 {% else %}
                                        <input type="submit" value="p/u $ X.XX  Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"> 
                                   
-
+                                {% endif %}
 
                             
                                       </center>
@@ -125,7 +125,7 @@
 
                   <td WIDTH="275">   
 
-                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_DOS' method='post'>
+                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_DOS/' method='post'>
                               {% csrf_token %}                                
                
 
@@ -139,7 +139,7 @@
                                 {% else %}
                                        <input type="submit" value="p/u $ X.XX  Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"> 
                                   
-
+                                {% endif %}
 
                             
                                       </center>
@@ -203,7 +203,7 @@
 
                   <td WIDTH="275">   
 
-                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TRES' method='post'>
+                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TRES/' method='post'>
                               {% csrf_token %}                                
                
 
@@ -216,7 +216,7 @@
                                      <input type="submit" value="p/u $ {{ j.precio_A }} Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
                                 {% else %}
                                        <input type="submit" value="p/u $ X.XX  Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"> 
-                                  
+                                {% endif %}   
 
 
                             

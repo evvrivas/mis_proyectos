@@ -1082,9 +1082,9 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
                  except: 
                     total_x=0
                
-                      
+                 n=Usuarios.objects.get(id_usuario=request.user.username)     
                  #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
-                 carrito=Carro_de_compras(mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
+                 carrito=Carro_de_compras(nombre_comprador=n.nombre, mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
                  
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
