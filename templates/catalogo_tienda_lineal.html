@@ -26,13 +26,16 @@
 
       
 
+
+
+{% if j.imagen1 %}
 <div class="thumbnail">
 
    <center><table BORDER="2" CELLSPACING="5"  bordercolor="red"> 
 
                  <tr  align="center">     
 
-                  <td WIDTH="100">
+                  <td WIDTH="125">
                        
                        <div class="row"> 
                           <h6><center> {{j.nombre}}  </center></h6>
@@ -49,19 +52,25 @@
                   </td> 
 
 
-                  <td WIDTH="300">   
+                  <td WIDTH="275">   
 
-                        <form action='/agregar_producto_al_carrito/{{j.id}}/' method='post'>
+                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_UNO' method='post'>
                               {% csrf_token %}                                
                
 
                               <div class="row">              
                                       <center>   
                                     
-                                  <p>    <h6>$ {{ j.precio_A }} </h6>
-                                      <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
-                                      <input type="submit" value="Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
-                                  </p>
+                            
+
+                                {% if j.precio_A %}
+                                     <input type="submit" value="p/u $ {{ j.precio_A }} Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                                {% else %}
+                                       <input type="submit" value="p/u $ X.XX  Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"> 
+                                  
+
+
+                            
                                       </center>
                                 </div>
                           
@@ -80,6 +89,162 @@
                                      
 </div>                                          
                                      
+{% endif %}
+
+
+
+
+
+
+
+
+{% if j.imagen2 %}
+
+<div class="thumbnail">
+
+   <center><table BORDER="2" CELLSPACING="5"  bordercolor="red"> 
+
+                 <tr  align="center">     
+
+                  <td WIDTH="125">
+                       
+                       <div class="row"> 
+                          <h6><center> {{j.nombre}}  </center></h6>
+                       </div>
+
+                      
+                      <div class="row">     
+                          {% thumbnail j.imagen2 "75x75" crop="center" as im %}   
+                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                           {% endthumbnail %}
+                      </div>                                 
+                              
+                                   
+                  </td> 
+
+
+                  <td WIDTH="275">   
+
+                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_DOS' method='post'>
+                              {% csrf_token %}                                
+               
+
+                              <div class="row">              
+                                      <center>   
+                                    
+                            
+
+                                {% if j.precio_A %}
+                                     <input type="submit" value="p/u $ {{ j.precio_A }} Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                                {% else %}
+                                       <input type="submit" value="p/u $ X.XX  Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"> 
+                                  
+
+
+                            
+                                      </center>
+                                </div>
+                          
+                                <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
+                                    </center>
+                                </div>
+                              
+               </form>
+       </td>  
+
+                              
+   </table>
+ </center>          
+                                     
+</div> 
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if j.imagen3 %}
+
+<div class="thumbnail">
+
+   <center><table BORDER="2" CELLSPACING="5"  bordercolor="red"> 
+
+                 <tr  align="center">     
+
+                  <td WIDTH="125">
+                       
+                       <div class="row"> 
+                          <h6><center> {{j.nombre}}  </center></h6>
+                       </div>
+
+                      
+                      <div class="row">     
+                          {% thumbnail j.imagen3 "75x75" crop="center" as im %}   
+                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                           {% endthumbnail %}
+                      </div>                                 
+                              
+                                   
+                  </td> 
+
+
+                  <td WIDTH="275">   
+
+                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TRES' method='post'>
+                              {% csrf_token %}                                
+               
+
+                              <div class="row">              
+                                      <center>   
+                                    
+                            
+
+                                {% if j.precio_A %}
+                                     <input type="submit" value="p/u $ {{ j.precio_A }} Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                                {% else %}
+                                       <input type="submit" value="p/u $ X.XX  Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"> 
+                                  
+
+
+                            
+                                      </center>
+                                </div>
+                          
+                                <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
+                                    </center>
+                                </div>
+                              
+               </form>
+       </td>  
+
+                              
+   </table>
+ </center>          
+                                     
+</div> 
+
+{% endif %}
+
+
+
+
+
+
                                             
                                      
                                
@@ -113,15 +278,13 @@
 
 
 
-    {% endif %}             
+    {% endif %}   
+     <hr>          
  {% endfor %}  
     
 
 </div>
      
-
-
-
 
 
 <div class="row">  

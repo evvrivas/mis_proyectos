@@ -43,7 +43,7 @@
 </div>
 
 
- 
+                             
 
 
 <br>
@@ -69,41 +69,52 @@
                  
                   
                   <tr  align="center"> 
-                  <td WIDTH="400">      
+                          
 
-                   <center>
-                         <table BORDER="1" CELLSPACING="1">
-                            
-                       <tr  align="center">                      
+                 
+                     {% if i.mostrar_foto == 'MOSTRAR_F_UNO' or i.mostrar_foto == 'MOSTRAR_F_TODAS'  %}       
+                     <td WIDTH="400">                          
                        {% thumbnail i.producto.imagen1 "90" crop="center" as im %}
                                    <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
                                                
                       {% endthumbnail %}
-                       </tr >    
+                    <td>    
 
+                    {% elif i.mostrar_foto == 'MOSTRAR_F_DOS' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
 
-
-                      <tr  align="center">                      
+                    <td WIDTH="400">                          
                        {% thumbnail i.producto.imagen2 "90" crop="center" as im %}
                                    <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
                                                
                       {% endthumbnail %}
-                       </tr >    
+                    <td>
 
-                     <tr  align="center">                      
+                    {% elif i.mostrar_foto == 'MOSTRAR_F_TRES' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+     
+                    <td WIDTH="400">                           
                        {% thumbnail i.producto.imagen3 "90" crop="center" as im %}
                                    <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
                                                
                       {% endthumbnail %}
-                       </tr >    
+                    <td>    
+                     {% else %}
+                             
+                     {% endif %}  
+
+
+
+
+
                         </table>
                         </center>
 
-                      <h6><p>{{ i.producto.tienda.nombre_tienda }}  </p>  </h6>
-                      <h6><p> {{ i.cantidad }} {{ i.producto.nombre }}  $P/U = {{ i.producto.precio_A}}  </p>  </h6>          
+                      <h6><p>tienda -> {{ i.producto.tienda.nombre_tienda }} -> {{i.producto.id_usuario}} </p>  </h6>
+                      <h6><p>cliente -> {{nombre_comprador}}  {{}} </p>  </h6>
+                      <h6><p> Cant. {{ i.cantidad }} {{ i.producto.nombre }}  $P/U = {{ i.producto.precio_A}}  </p>  </h6>          
                       <h6><p>{{ i.especificacion }}  </p> </h6>
                       <h6><p>{{ i.estado_prod }}  </h6>
-                      <h3><p>{{ i.total }}  </h6>
+                      <h3><p>Total {{ i.total }}  </h6>
+                      <h6><p>fecha {{ i.fecha_ingreso }}  </h6>
 
     {% if el_usuario_x == "EL_COMPRADOR" %}
               

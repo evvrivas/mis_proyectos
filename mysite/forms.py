@@ -84,7 +84,7 @@ class Carro_de_comprasForm(ModelForm):
 		model=Carro_de_compras
 		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}) }
 
-		exclude=["fecha_ingreso","id_comprador","total","estado_prod"]
+		exclude=["fecha_ingreso","id_comprador","total","estado_prod","mostrar_foto"]
 
 		
 #class Item_carroForm(ModelForm):

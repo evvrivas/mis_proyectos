@@ -26,7 +26,18 @@
 {% else %}
 
 
-            {%  if j.imagen1 %}
+ <center>
+ <table BORDER="3" CELLSPACING="5" bordercolor="red ">
+                        
+      <tr>                                    
+                                    
+                                   
+                            
+
+
+         {%  if j.imagen1 %}
+         <td>
+
              <div class="col-md-2">  
 
                   <div class="thumbnail">
@@ -53,11 +64,13 @@
                         
                   </div>
                </div>
+            </td>     
             {% endif %}
 
 
 
             {%  if j.imagen2 %}
+            <td>
              <div class="col-md-2">  
 
                   <div class="thumbnail">
@@ -84,11 +97,13 @@
                       
                   </div>
                </div>
+            <td?>   
             {% endif %}
 
 
 
             {%  if j.imagen3 %}
+            <td>
              <div class="col-md-2">  
 
                   <div class="thumbnail">
@@ -115,12 +130,14 @@
                         
                   </div>
                </div>
+             </td>  
             {% endif %}
 
 
+</tr>  
 
-
-           
+ 
+ </table>    </center>      
 
     {% endif %}             
  {% endfor %}  
