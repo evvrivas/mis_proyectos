@@ -83,7 +83,9 @@
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}" class="responsive"> </a>
 
                         <br>
-          <a href=#  data-toggle="collapse" data-target="#{{j.id_usuario}}">{{j.categoria }} ver mas...</a>       
+          <center><h6>{{j.categoria }} </h6></center>
+          <center><button type="button" class="btn btn-info btn-xs" data-toggle="collapse" data-target="#{{j.nombre_tienda}}">ver mas..</button></center>
+                              <div id="{{j.nombre_tienda}}" class="collapse">     
          
                               <div id="{{j.id_usuario}}" class="collapse">
                               <center><h6> <p>{{j.descripcion | linebreaks}}</p> </h6>
@@ -342,7 +344,8 @@
 
                         <br>
                           
-                      <a href=#  data-toggle="collapse" data-target="#{{j.nombre_tienda}}">{{j.categoria }} ver mas...</a>
+                      <center><h6>{{j.categoria }} </h6></center>
+          <center><button type="button" class="btn btn-info btn-xs" data-toggle="collapse" data-target="#{{j.nombre_tienda}}">ver mas..</button></center>
                          
                               <div id="{{j.nombre_tienda}}" class="collapse">
                                
@@ -538,7 +541,8 @@
 
                         <br>
                        
-                       <a href=#  data-toggle="collapse" data-target="#{{j.nombre_tienda}}">{{j.categoria }} ver mas...</a>
+                      <center><h6>{{j.categoria }} </h6></center>
+          <center><button type="button" class="btn btn-info btn-xs" data-toggle="collapse" data-target="#{{j.nombre_tienda}}">ver mas..</button></center>
                        
                               <div id="{{j.nombre_tienda}}" class="collapse">
                                

@@ -56,15 +56,15 @@
                 <div class="thumbnail">  
                    
                       {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
-                            <table BORDER="3" CELLSPACING="5"  bordercolor="Lime ">  
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Red ">  
                       {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
-                            <table BORDER="3" CELLSPACING="5"  bordercolor="yelow"> 
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Orange"> 
                       {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
-                            <table BORDER="3" CELLSPACING="5"  bordercolor="LightSkyBlue"> 
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Green"> 
                       {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
-                            <table BORDER="3" CELLSPACING="5"  bordercolor="SkyBlue"> 
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Turquoise"> 
                       {% else %}
-                            <table BORDER="3" CELLSPACING="5"  bordercolor="blue">    
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="MediumBlue">    
                       {% endif %}  
                  
                   
@@ -102,16 +102,15 @@
                                    <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
                                                
                       {% endthumbnail %}
-                    <td>   
+                    </td>   
                      {% endif %}  
                     
 
 
 
+                  <td> 
 
-
-                        </table>
-                        </center>
+                       
 
                       <h6><p>{{ i.producto.tienda.nombre_tienda }} -> {{i.producto.id_usuario}} </p>  </h6>
                       <h6><p>cliente -> {{i.nombre_comprador}} --> {{i.id_comprador}} </p>  </h6>
@@ -126,8 +125,9 @@
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
                         <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" > Editar </a></li>
                         <li><a href="/eliminar_producto_del_carrito/{{i.id}}" > Eliminar </a></li>
-                        <li><a href="/realizar_compra_individual/{{i.id}}" > Comprar este </a></li></h6>
-              
+                        <br>                        
+                        <li><a href="/realizar_compra_individual/{{i.id}}" > Comprar solo este producto </a></li></h6>
+               <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
                       <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" > Cambiar estado </a></li>
@@ -180,6 +180,55 @@
 
                    
                      </td > 
+
+                            {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
+                                <button  class="btn btn-danger">EL CLIENTE QUIERE</button>
+                                <button  class="btn btn-warning btn-xs">xxxxx</button>
+                                <button  class="btn btn-success btn-xs">xxxxx</button>
+                                <button  class="btn btn-info btn-xs">xxxxx</button>
+                                <button  class="btn btn-primary btn-xs">xxxxx</button>                              
+                           
+                            {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
+                               <button  class="btn btn-danger btn-xs">xxxxx</button>
+                                <button  class="btn btn-warning">EL CLIENTE COMPRÓ</button>
+                                <button  class="btn btn-success btn-xs">xxxxx</button>
+                                <button  class="btn btn-info btn-xs">xxxxx</button>
+                                <button  class="btn btn-primary btn-xs">xxxxx</button>
+                            {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
+                                 <button  class="btn btn-danger btn-xs">xxxxx</button>
+                                <button  class="btn btn-warning btn-xs">xxxxx</button>
+                                <button  class="btn btn-success">EL VENDEDOR ACEPTA</button>
+                                <button  class="btn btn-info btn-xs">xxxxx</button>
+                                <button  class="btn btn-primary btn-xs">xxxxx</button>
+                            {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
+                                 <button  class="btn btn-danger btn-xs">xxxxx</button>
+                                <button  class="btn btn-warning btn-xs">xxxxx</button>
+                                <button  class="btn btn-success btn-xs">xxxxx</button>
+                                <button  class="btn btn-info ">EL PRODUCTO ESTA LISTO</button>
+                                <button  class="btn btn-primary btn-xs">xxxxx</button>
+                            {% else %}
+                                <button  class="btn btn-danger">xxxxx</button>
+                                <button  class="btn btn-warning">xxxxx</button>
+                                <button  class="btn btn-success">xxxxx</button>
+                                <button  class="btn btn-info">xxxxx</button>
+                                <button  class="btn btn-primary">PRODUCTO ENTREGADO</button> 
+                            {% endif %} 
+
+
+
+
+
+                            
+
+
+                     <td > 
+
+
+
+
+                     </td > 
+
+
                   </tr > 
 
 
