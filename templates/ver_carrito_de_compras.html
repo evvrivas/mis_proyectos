@@ -52,6 +52,8 @@
                           
        
         {% for i in carrito %} 
+
+        
             <div class="col-md-3">
                 <div class="thumbnail">  
                    
@@ -105,10 +107,13 @@
                     </td>   
                      {% endif %}  
                     
+ </tr >
+                        </table>
+                        </center> 
 
 
 
-                  <td> 
+ 
 
                        
 
@@ -126,7 +131,7 @@
                         <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" > Editar </a></li>
                         <li><a href="/eliminar_producto_del_carrito/{{i.id}}" > Eliminar </a></li>
                         <br>                        
-                        <li><a href="/realizar_compra_individual/{{i.id}}" > Comprar solo este producto </a></li></h6>
+                        <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
                <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
@@ -179,38 +184,38 @@
     {% endif %}
 
                    
-                     </td > 
+                     
 
                             {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
                                 <button  class="btn btn-danger">EL CLIENTE QUIERE</button>
-                                <button  class="btn btn-warning btn-xs">xxxxx</button>
-                                <button  class="btn btn-success btn-xs">xxxxx</button>
-                                <button  class="btn btn-info btn-xs">xxxxx</button>
-                                <button  class="btn btn-primary btn-xs">xxxxx</button>                              
+                                <button  class="btn btn-warning btn-xs">x</button>
+                                <button  class="btn btn-success btn-xs">x</button>
+                                <button  class="btn btn-info btn-xs">x</button>
+                                <button  class="btn btn-primary btn-xs">x</button>                              
                            
                             {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
-                               <button  class="btn btn-danger btn-xs">xxxxx</button>
+                               <button  class="btn btn-danger btn-xs">x</button>
                                 <button  class="btn btn-warning">EL CLIENTE COMPRÓ</button>
-                                <button  class="btn btn-success btn-xs">xxxxx</button>
-                                <button  class="btn btn-info btn-xs">xxxxx</button>
-                                <button  class="btn btn-primary btn-xs">xxxxx</button>
+                                <button  class="btn btn-success btn-xs">x</button>
+                                <button  class="btn btn-info btn-xs">x</button>
+                                <button  class="btn btn-primary btn-xs">x</button>
                             {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
-                                 <button  class="btn btn-danger btn-xs">xxxxx</button>
-                                <button  class="btn btn-warning btn-xs">xxxxx</button>
+                                 <button  class="btn btn-danger btn-xs">x</button>
+                                <button  class="btn btn-warning btn-xs">x</button>
                                 <button  class="btn btn-success">EL VENDEDOR ACEPTA</button>
-                                <button  class="btn btn-info btn-xs">xxxxx</button>
-                                <button  class="btn btn-primary btn-xs">xxxxx</button>
+                                <button  class="btn btn-info btn-xs">x</button>
+                                <button  class="btn btn-primary btn-xs">x</button>
                             {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
-                                 <button  class="btn btn-danger btn-xs">xxxxx</button>
-                                <button  class="btn btn-warning btn-xs">xxxxx</button>
-                                <button  class="btn btn-success btn-xs">xxxxx</button>
+                                 <button  class="btn btn-danger btn-xs">x</button>
+                                <button  class="btn btn-warning btn-xs">x</button>
+                                <button  class="btn btn-success btn-xs">x</button>
                                 <button  class="btn btn-info ">EL PRODUCTO ESTA LISTO</button>
-                                <button  class="btn btn-primary btn-xs">xxxxx</button>
+                                <button  class="btn btn-primary btn-xs">x</button>
                             {% else %}
-                                <button  class="btn btn-danger">xxxxx</button>
-                                <button  class="btn btn-warning">xxxxx</button>
-                                <button  class="btn btn-success">xxxxx</button>
-                                <button  class="btn btn-info">xxxxx</button>
+                                <button  class="btn btn-danger">x</button>
+                                <button  class="btn btn-warning">x</button>
+                                <button  class="btn btn-success">x</button>
+                                <button  class="btn btn-info">x</button>
                                 <button  class="btn btn-primary">PRODUCTO ENTREGADO</button> 
                             {% endif %} 
 
@@ -221,18 +226,13 @@
                             
 
 
-                     <td > 
+                      
 
 
+                    
 
 
-                     </td > 
-
-
-                  </tr > 
-
-
-                </table>
+                 
                    <br>     
                              
                     </div>
