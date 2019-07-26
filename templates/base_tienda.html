@@ -168,16 +168,19 @@
 
     <div class="col-md-12"> 
 
+
+
+
     {% thumbnail tiendas.imagen1 "x30" crop="center" as im %}
-      <td>
-       <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
-         </td> 
+      
+       
+       
+
+
+
+    <li> <a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
+  <a href="/">  <img src ='{% static "logo2.png" %}' alt='img' > </a> <a href="/informacion_vendedor/{{tiendas.id_usuario}}"> Informacion de pago </a> <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito2.png" %}' alt='img' > </a> </li>
     {% endthumbnail %}
-
-
-
-    <li><a href="/">  <img src ='{% static "logo2.png" %}' alt='img' > </a> <a href="/informacion_vendedor/{{tiendas.id_usuario}}"> Informacion de pago del vendedor </a> <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito2.png" %}' alt='img' > </a> </li>
-
     
 
     {% block content %}
