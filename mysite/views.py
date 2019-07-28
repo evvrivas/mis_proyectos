@@ -1150,7 +1150,7 @@ def ver_el_carrito(request,estado_del_producto,el_usuario):
       else:
 
           if el_usuario_x=="EL_COMPRADOR":
-             if estado_prod=="NUEVO": 
+             if estado_del_producto=="NUEVO": 
             
                 carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) and Q(estado_prod='QUIERO_PEDIR_ESTO') | Q(id_comprador=request.user.username) and Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
                 #if estado_del_producto=="QUIERO_PEDIR_ESTO":
@@ -1163,7 +1163,7 @@ def ver_el_carrito(request,estado_del_producto,el_usuario):
           
 
           else:
-            if estado_prod=="NUEVO": 
+            if estado_del_producto=="NUEVO": 
             
                 carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) and Q(estado_prod='QUIERO_PEDIR_ESTO') | Q(producto__id_usuario=request.user.username) and Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
                
