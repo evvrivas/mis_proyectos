@@ -1150,16 +1150,32 @@ def ver_el_carrito(request,estado_del_producto,el_usuario):
       else:
 
           if el_usuario_x=="EL_COMPRADOR":
-             carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod=estado_del_producto).order_by("producto__tienda__nombre_tienda")
-             if estado_del_producto=="QUIERO_PEDIR_ESTO":
-                  gran_total=0
-                  for i in carrito:
-                        gran_total = gran_total + i.total
+             if estado_prod=="NUEVO" 
+            
+                carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) and Q(estado_prod='QUIERO_PEDIR_ESTO') | Q(id_comprador=request.user.username) and Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                #if estado_del_producto=="QUIERO_PEDIR_ESTO":
+                #      gran_total=0
+                #      for i in carrito:
+                #            gran_total = gran_total + i.total
+             else: #estado_prod=="PROCESO"
+                carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) and Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(id_comprador=request.user.username) and Q(estado_prod='PRODUCTO_ENTREGADO') | Q(id_comprador=request.user.username) and Q(estado_prod='PRODUCTO_RECIBIDO_YA')).order_by("producto__tienda__nombre_tienda")
+              
+          
+
           else:
-            carrito= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("producto__tienda__nombre_tienda")
-            gran_total=0
-            for i in carrito:
-                        gran_total = gran_total + i.total
+            if estado_prod=="NUEVO" 
+            
+                carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) and Q(estado_prod='QUIERO_PEDIR_ESTO') | Q(producto__id_usuario=request.user.username) and Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+               
+             else: #estado_prod=="PROCESO"
+                carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) and Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(producto__id_usuario=request.user.username) and Q(estado_prod='PRODUCTO_ENTREGADO')  | Q(producto__id_usuario=request.user.username) and Q(estado_prod='PRODUCTO_RECIBIDO_YA')    ).order_by("producto__tienda__nombre_tienda")
+              
+          
+
+            #carrito= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("producto__tienda__nombre_tienda")
+            #gran_total=0
+            #for i in carrito:
+                        #gran_total = gran_total + i.total
 
       return render(request,'ver_carrito_de_compras.html',locals())   
 
@@ -1239,7 +1255,7 @@ def editar_estado_producto_del_carrito(request,id_producto,el_usuario):
        elif el_usuario=="EL_COMPRADOR": 
 
             if f.estado_prod=="PRODUCTO_ENTREGADO":
-                   f.estado_prod=="PRODUCTO_RECIBIDO_YA!"
+                   f.estado_prod=="PRODUCTO_RECIBIDO_YA"
             estado_del_producto=f.estado_prod
             f.save()
             carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod=estado_del_producto).order_by("producto__tienda__nombre_tienda")

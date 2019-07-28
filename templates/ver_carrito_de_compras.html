@@ -14,26 +14,38 @@
                                     
   
         <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Ver pedidos que
+          <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Ver pedidos 
           <span class="caret"></span></button>
           
           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-
-          <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_VENDEDOR">EL CLIENTE QUIERE</a></li>
-            <li><a href="/ver_el_carrito/EL_VENDEDOR_RECIBIO_EL_PEDIDO/EL_VENDEDOR">EL CLIENTE ESPERA CONFIRMACION</a></li>
-            <li><a href="/ver_el_carrito/EL_VENDEDOR_A_CONFIRMADO/EL_VENDEDOR">EL CLIENTE ESPEAR A RECIBIRLO
-            <li><a href="/ver_el_carrito/PRODUCTO_ENTREGADO/EL_VENDEDOR">EL CLIENTE DEBE ACEPTAR QUE RECIBIO</a></li>
+<!--
+            <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_VENDEDOR">EN EL CARRITO DEL CLIENTE</a></li>
+            <li><a href="/ver_el_carrito/EL_VENDEDOR_RECIBIO_EL_PEDIDO/EL_VENDEDOR">COMPRADO</a></li>
+            <li><a href="/ver_el_carrito/EL_VENDEDOR_A_CONFIRMADO/EL_VENDEDOR">EN PROCESO
+            <li><a href="/ver_el_carrito/PRODUCTO_ENTREGADO/EL_VENDEDOR">RECIBIDO</a></li>
             <li><a href="/ver_el_carrito/TODOS/EL_VENDEDOR">TODOS</a></li>
+--> 
 
+            <li><a href="/ver_el_carrito/NUEVO/EL_VENDEDOR">NUEVOS PEDIDOS</a></li>
+            <li><a href="/ver_el_carrito/EN_PROCESO/EL_VENDEDOR">EN PROCESO
+            <li><a href="/ver_el_carrito/TODOS/EL_VENDEDOR">TODOS</a></li>
+            
             <li><a href="#">---------------</a></li>
+            
+            <li><a href="/ver_el_carrito/NUEVO/EL_COMPRADOR">MIS NUEVOS PEDIDOS</a></li>
+            <li><a href="/ver_el_carrito/EN_PROCESO/EL_COMPRADOR">EN PROCESO
+            <li><a href="/ver_el_carrito/TODOS/EL_COMPRADOR">TODOS</a></li>
+
+
+          <!--  <li><a href="#">---------------</a></li>
 
             <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">LOS QUE YO QUIERO</a></li>
             <li><a href="/ver_el_carrito/EL_VENDEDOR_RECIBIO_EL_PEDIDO/EL_COMPRADOR">ESPERO CONFIRMACION </a></li>
             <li><a href="/ver_el_carrito/EL_VENDEDOR_A_CONFIRMADO/EL_COMPRADOR">ESPERO POR RECIBIRLOS</a></li>
             <li><a href="/ver_el_carrito/PRODUCTO_ENTREGADO/EL_COMPRADOR">LOS QUE YA RECIBI</a></li>
             <li><a href="/ver_el_carrito/TODOS/EL_COMPRADOR">TODOS</a></li>
-
-            
+           
+           --> 
 
             
            </ul>
@@ -222,8 +234,7 @@
 
 
 
-
-                            
+              
 
 
                       
@@ -240,7 +251,8 @@
                 {% endfor %}
                         
     <br>
-    <div class="row">  
+
+  <!--  <div class="row">  
           <div class="col-md-12">           
                 <div class="container">
                 <center><h2><p> ${{gran_total}}</p></h2></center>
@@ -249,8 +261,9 @@
                                         
                 </div>                                                    
           </div>       
-    </div>     
-    <br>
+    </div>  
+
+    <br>   -->
 
        <div class="row">  
           <div class="col-md-12">           
