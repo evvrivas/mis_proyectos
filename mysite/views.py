@@ -1167,7 +1167,7 @@ def ver_el_carrito(request,estado_del_producto,el_usuario):
             
                 carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) and Q(estado_prod='QUIERO_PEDIR_ESTO') | Q(producto__id_usuario=request.user.username) and Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
                
-             else: #estado_prod=="PROCESO"
+            else: #estado_prod=="PROCESO"
                 carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) and Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(producto__id_usuario=request.user.username) and Q(estado_prod='PRODUCTO_ENTREGADO')  | Q(producto__id_usuario=request.user.username) and Q(estado_prod='PRODUCTO_RECIBIDO_YA')    ).order_by("producto__tienda__nombre_tienda")
               
           
