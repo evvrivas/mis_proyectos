@@ -668,6 +668,7 @@ def busqueda(request):
      
      if request.POST:
         palabra = request.POST.get('nombre')
+        ciudad=request.POST.get('ciudad_busqueda') 
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
         if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
             fecha=datetime.datetime.now()
@@ -677,8 +678,8 @@ def busqueda(request):
 
 
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-        tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra))
-        comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(ubicacion__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)) 
+        tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(ubicacion=ciudad)
+        comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).filter(ubicacion=ciudad)
      
 
        

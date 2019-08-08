@@ -206,30 +206,48 @@ CATEGORIA_TIENDA= (
 
 			)
 
-class Ccomercial(models.Model):	     
-	     id_usuario=models.CharField(max_length=30)	     
-	     nombre_ccomercial=models.CharField(max_length=40,blank=True)
-	     imagen_ccomercial = ImageField(upload_to='tmp',blank=True)
-	     ubicacion=models.CharField(max_length=30,blank=True)	     
-	     descripcion_ccomercial=models.TextField(blank=True)	     
-	         
 
-	     def __str__(self):
-		    		return  self.nombre_ccomercial
-	     class Admin:
-		    		list_display = ('nombre_ccomercial')
 
 ESTADO_TIENDA= (
 	        ('DISPONIBLE', 'DISPONIBLE'), 
 			('NO_DISPONIBLE', 'NO_DISPONIBLE'),						
 			)
 
+CIUDADES= (
+	        ("AHUACHAPAN", "AHUACHAPAN"), 
+	        ("SANTA_ANA","SANTA_ANA"), 
+	        ("SONSONATE","SONSONATE"),
+	        ("CHALATENANGO","CHALATENANGO"),
+	        ( "CABANAS", "CABANAS"),
+	        ("LA_LIBERTAD","LA_LIBERTAD"),
+	        ("LA_PAZ","LA_PAZ"),
+	        ("MORAZAN","MORAZAN"),
+	        ("CUSCATLAN","CUSCATLAN"),
+	        ("SAN_MIGUEL","SAN_MIGUEL"),
+	        ("LA_UNION","LA_UNION"),
+	        ("USULUTAN","USULUTAN"),
+	        ("SAN_VICENTE","SAN_VICENTE"),
+	        ("SAN_SALVADOR","SAN_SALVADOR"),							
+		)
 
+class Ccomercial(models.Model):	     
+	     id_usuario=models.CharField(max_length=30)	     
+	     nombre_ccomercial=models.CharField(max_length=40,blank=True)
+	     imagen_ccomercial = ImageField(upload_to='tmp',blank=True)
+	     ubicacion=models.CharField(max_length=30,blank=True,choices=CIUDADES)	     
+	     descripcion_ccomercial=models.TextField(blank=True)	     
+	         
+
+	     def __str__(self):
+		    		return  self.nombre_ccomercial
+	     class Admin:
+		    		list_display = ('nombre_ccomercial')                                                 
+  
 class Tiendas(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	  
 	     ccomercial=models.ForeignKey('Ccomercial',blank=True,null=True)   
 	     nombre_tienda=models.CharField(max_length=30)
-	     ubicacion=models.CharField(max_length=30,blank=True)
+	     ubicacion=models.CharField(max_length=30,blank=True,choices=CIUDADES)
 	     categoria=models.ForeignKey('Categoria_global',blank=True,null=True)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     descripcion=models.TextField(blank=True)
