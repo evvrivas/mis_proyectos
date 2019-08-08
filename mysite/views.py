@@ -671,24 +671,49 @@ def busqueda(request):
         cate_goria= request.POST.get('categoria_busqueda')
         ciudad=request.POST.get('ciudad_busqueda') 
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+        
         if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
             fecha=datetime.datetime.now()
             busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra,fecha_busqueda=fecha)
             busqueda.save()
 
         
+        if palabra=="":
+           
+               if cate_goria=="TODOS" and ciudad=="TODOS":
+                   tiendas= Tiendas.objects.all()
+                   comercio= Ccomercial.objects.all()
+               
+               elif cate_goria=="TODOS" and ciudad!="TODOS":
+                   tiendas= Tiendas.objects.filter(ubicacion=ciudad)
+                   comercio= Ccomercial.objects.filter(ubicacion=ciudad)
 
-        if palabra="":
-           productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-           tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(ubicacion=ciudad)
-           comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).filter(ubicacion=ciudad)
+               elif cate_goria!="TODOS" and ciudad=="TODOS":
+                   tiendas= Tiendas.objects.filter(categoria=cate_goria)
+               else:
+                  pass    
 
-        productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-        tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(ubicacion=ciudad)
-        comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).filter(ubicacion=ciudad)
+        else:
+
+               if cate_goria=="TODOS" and ciudad=="TODOS":
+                      productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+                      tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra))
+                      comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra))
+                 
+               
+               elif cate_goria=="TODOS" and ciudad!="TODOS":
+                    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(tienda__ubicacion=ciudad)
+                    tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(ubicacion=ciudad)
+                    comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).filter(ubicacion=ciudad)
      
 
-       
+               elif cate_goria!="TODOS" and ciudad=="TODOS":
+                    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+                    tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra))
+                    comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra))
+               else:
+                  pass    
+     
      connection.close()
      return render(request,'catalogo.html',locals())   
                   

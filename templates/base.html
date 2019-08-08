@@ -30,14 +30,12 @@
 <div class="panel panel-primary"> 
             <center>
 
-                         {% thumbnail tiendas.imagen1 "200" crop="center" as im %}
-                          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                         {% endthumbnail %}
-                        
+                                                
                    <form action="/busqueda/" method="post">
                        {% csrf_token %}                                                  
                                                     
-                       
+     <div class="col-md-12">              
+          
 
                                                     <select name="ciudad_busqueda">
                                                       <option value="AHUACHAPAN">AHUACHAPAN</option>
@@ -57,7 +55,8 @@
                                                      </select> 
 
 
-                                                      <select name="categoria_busqueda">
+             <select name="categoria_busqueda">
+             <option value="Todo">Todo</option>
              <option value="Productos Ventas Varias">Productos Ventas Varias</option>
              <option value="Alimentos Bebidas">Alimentos Bebidas</option>
              <option value="Antiguedades Artesanias Adornos">Antiguedades Artesanias Adornos</option>
@@ -92,18 +91,20 @@
             
              </select> 
 
+              
+     </div>
 
+<div class="col-md-3">              
+            
 
-
-
-                                                    <input type="text" id="name" name="nombre" size="8" placeholder="Que buscas?"/>
-                                                    <input type="submit" value="Buscar/ver">
+            <input type="text" id="name" name="nombre" size="20" placeholder="Que buscas?"/>
+            <input type="submit" value="Buscar/ver">
                                                                                                         
-              <!--           </form>   -->
-                 
+              <!--           </form>  </center>      -->
+ </div>                
                 
                 
-              </center>    
+             
 
  <div class="panel-heading">
 
@@ -213,7 +214,7 @@
       <div class="col-md-3">              
       </div>
 
-</form>
+</form> </center>    
 
 
       </div>
