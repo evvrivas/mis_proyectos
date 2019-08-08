@@ -25,19 +25,39 @@
   
   </head>
 
-  <body style="background-color:LightGray;"> 
+
+
+
+
+
+
+
+<body style="background-color:LightGray;"> 
+
+
+
+
 
 <div class="panel panel-primary"> 
-            <center>
+            
 
                                                 
-                   <form action="/busqueda/" method="post">
+           
+                
+                
+             
+
+ <div class="panel-heading">
+
+
+
+<center><form action="/busqueda/" method="post">
                        {% csrf_token %}                                                  
                                                     
-     <div class="col-md-12">              
+                    <div class="col-md-12">              
           
 
-                                                    <select name="ciudad_busqueda">
+                                                    <select name="ciudad_busqueda" style="width:100px">
                                                       <option value="AHUACHAPAN">AHUACHAPAN</option>
                                                       <option value="SANTA_ANA">SANTA_ANA</option>
                                                       <option value="SONSONATE">SONSONATE</option>
@@ -55,7 +75,7 @@
                                                      </select> 
 
 
-             <select name="categoria_busqueda">
+             <select name="categoria_busqueda" style="width:200px">
              <option value="Todo">Todo</option>
              <option value="Productos Ventas Varias">Productos Ventas Varias</option>
              <option value="Alimentos Bebidas">Alimentos Bebidas</option>
@@ -92,21 +112,24 @@
              </select> 
 
               
-     </div>
+               </div>
 
-<div class="col-md-3">              
+             <div class="col-md-12">              
             
 
-            <input type="text" id="name" name="nombre" size="20" placeholder="Que buscas?"/>
-            <input type="submit" value="Buscar/ver">
+                    <input type="text" id="name" name="nombre" size="30" placeholder="Que buscas?"/>
+                    <input type="submit" value="Buscar/ver">
                                                                                                         
               <!--           </form>  </center>      -->
- </div>                
-                
-                
-             
+             </div>                
 
- <div class="panel-heading">
+
+
+
+
+
+
+ 
 
             <div class="col-md-3">              
             </div>
@@ -120,58 +143,17 @@
 
 
 
-
-                   <!--  <div class="btn-group">
-                          <button type="button" class="btn btn-default dropdown-toggle"
-                           data-toggle="dropdown">Ver  <span class="caret"></span>
-                           </button>
-                              <ul class="dropdown-menu" role="menu">
-                               <li><a href="/ver_categorias/xtiendax">Todas las tiendas </a></li>
-                               <li><a href="/ver_categorias/xcomerciox">Plazas y centros comerciales </a></li>
-                                    
-                                                               
-                                   {%  for key,val in categoria.items %}
-                                      <li><a href="/ver_categorias/{{key}}">{{val}} : {{key}}</a></li>
-                                   {%  endfor %} 
-
-
-                                </ul>
-                       </div>
-               -->
-                 
+ 
                      {%  if user.is_authenticated %}          
-                        <a href="/accounts/logout/" class="btn btn-danger" role="button">Cerrar</a>
+                        <a href="/accounts/logout/" class="btn btn-danger" role="button">X</a>
                      {%  else  %}   
                         <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
                         <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>                         
                                            
                      {% endif %}
                          <a href="/informacion" class="btn btn-warning" role="button">?</a> 
-
-
-                       
-<!--
-                     <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle"
-                                        data-toggle="dropdown">
-                                  Entrar <span class="caret"></span>
-                                </button>
-                               
-                                <ul class="dropdown-menu" role="menu">                                      
-                                         
-                                         {%  if user.is_authenticated %}          
-                                               <li><a href="/accounts/logout/">Cerrar sesión </a></li>
-                                         {%  else  %}                                 
-                                           <li><a href="/accounts/login">Entrar </a></li>
-                                           <li><a href="/crear_usuario">Crear cuenta</a></li>
-                                           
-                                         {% endif %}  
-                                         <li><a href="/informacion">Informacion</a></li>
-                                  
-                                </ul>
-                       </div>
-
--->                        
+                     
+                      
 
              
                  {%  if user.is_authenticated %}  
@@ -219,39 +201,52 @@
 
       </div>
 
+  
+
+
+
+
+
+
+
+
+
+
+
   <div class="panel-body">    
 
- <div class="col-md-12">              
-      
-          {%  if user.is_authenticated %}          
-            <center>    <li> Hola.!.{{ user.username }}    <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito2.png" %}' alt='img' > </a>    </li>   </center>         
-                   
-                  
+           <div class="col-md-12">              
+                
+                  {%  if user.is_authenticated %}          
+                      <center>    <li> Hola.!.{{ user.username }}    <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito2.png" %}' alt='img' > </a>    </li>   </center>         
+                             
+                            
 
-        {% endif %}  
-<h6>
-        <a href="#">Vistas <span class="badge">{{configurar.n_visitas}}</span></a>
-        <a href="#">Tiendas <span class="badge">{{n_tiendas}}</span></a>
-        <a href="#">Prod <span class="badge">{{n_productos}}</span></a> 
-        <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Pedidos <span class="badge">{{n_pedidos}}</span></a>
-    <!--    <a href="#">Pv <span class="badge">{{vN_pedido}}</span></a>
-        <a href="#">M <span class="badge">{{n_msg}}</span></a>  -->
-     <!--     <a href="/ver_mis_mensajes/NUEVO/EL_COMPRADOR">Mensajes <span class="badge">{{n_mensajes}}</span></a>  -->
+                  {% endif %}  
+                      <h6>
+                          <a href="#">Vistas <span class="badge">{{configurar.n_visitas}}</span></a>
+                          <a href="#">Tiendas <span class="badge">{{n_tiendas}}</span></a>
+                          <a href="#">Prod <span class="badge">{{n_productos}}</span></a> 
+                          <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Pedidos <span class="badge">{{n_pedidos}}</span></a>
+                             
+                       </h6>
+            </div>
 
+
+             <br>
         
-</h6>
 
-
-</div>
-
-
-<br>
-        <div class="col-md-12">                           
-         {% block content %}
-         {% endblock %}
-        </div>
+            <div class="col-md-12">                           
+                  {% block content %}
+                   {% endblock %}
+            </div>
        
    </div>
+
+
+
+
+
 </div>
         
 
