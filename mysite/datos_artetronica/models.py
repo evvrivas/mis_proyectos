@@ -60,12 +60,12 @@ ESTADO2 = (
 			)
 
 
-class Categoria_global(models.Model):
-		 categoria=models.CharField(max_length=60,blank=True,null=True)
-		 def __str__(self):
-		 	return  self.categoria
-		 class Admin:
-		 	list_display = ('categoria')
+#class Categoria_global(models.Model):
+#		 categoria=models.CharField(max_length=60,blank=True,null=True)
+#		 def __str__(self):
+#		 	return  self.categoria
+#		 class Admin:
+#		 	list_display = ('categoria')
 
 class Categoria(models.Model):
          id_usuario=models.CharField(max_length=30,blank=True)
@@ -230,6 +230,43 @@ CIUDADES= (
 	        ("SAN_SALVADOR","SAN_SALVADOR"),							
 		)
 
+
+SUPER_CATEGORIA=(
+("Productos Ventas Varias","Productos Ventas Varias"),
+("Alimentos Bebidas","Alimentos Bebidas"),
+("Antiguedades Artesanias Adornos","Antiguedades Artesanias Adornos"),
+("Mascotas Acsesorios Veterinarios","Mascotas Acsesorios Veterinarios"),
+("Bienes raices Alquileres Ventas","Bienes raices Alquileres Ventas"),
+("Tecnologia Informatica Informacion","Tecnologia Informatica Informacion"),
+("Educacion Ciencia Academias","Educacion Ciencia Academias"),
+("Deportes Ocio Acsesorios","Deportes Ocio Acsesorios"),
+("Herramientas Maquinaria Equipo","Herramientas Maquinaria Equipo"),
+("Agro Ferreteria Maderas","Agro Ferreteria Maderas"),
+("Materias primas varias","Materias primas varias"),
+("Mateiales de construccion","Mateiales de construccion"),
+("Muebles Electrodomesticos","Muebles Electrodomesticos"),
+("Productos para el hogar","Productos para el hogar"),
+("Productos de consumo diario","Productos de consumo diario"),
+("Productos para la industria","Productos para la industria"),
+("Industria Acsesorios Repuestos","Industria Acsesorios Repuestos"),
+("Ropa Moda calzado","Ropa Moda calzado"),
+("Salud Belleza","Salud Belleza"),
+("Usados de todos","Usados de todos"),
+("Vehiculos acsesorios repuestos","Vehiculos acsesorios repuestos"),
+("Productos y Sevicios varios","Productos y Sevicios varios"),
+("Servicios domesticos","Servicios domesticos"),
+("Servicios personales","Servicios personales"),
+("Servicios pofesionales","Servicios pofesionales"),
+("Servicios de Ensenanza","Servicios de Ensenanza"),
+("Sevicios financieros","Sevicios financieros"),
+("Servicios publicitarios","Servicios publicitarios"),
+("Servicio de reparaciones","Servicio de reparaciones"),
+("Servicio de hotel alojamiento","Servicio de hotel alojamiento"),
+("Otros Servicios","Otros Servicios"),
+
+ )
+ 
+
 class Ccomercial(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	     
 	     nombre_ccomercial=models.CharField(max_length=40,blank=True)
@@ -248,7 +285,8 @@ class Tiendas(models.Model):
 	     ccomercial=models.ForeignKey('Ccomercial',blank=True,null=True)   
 	     nombre_tienda=models.CharField(max_length=30)
 	     ubicacion=models.CharField(max_length=30,blank=True,choices=CIUDADES)
-	     categoria=models.ForeignKey('Categoria_global',blank=True,null=True)	     
+	     #categoria=models.ForeignKey('Categoria_global',blank=True,null=True)
+	     categoria=models.CharField(max_length=40,blank=True,choices=SUPER_CATEGORIA)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     descripcion=models.TextField(blank=True)
 	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")

@@ -57,10 +57,47 @@
                                                      </select> 
 
 
+                                                      <select name="categoria_busqueda">
+             <option value="Productos Ventas Varias">Productos Ventas Varias</option>
+             <option value="Alimentos Bebidas">Alimentos Bebidas</option>
+             <option value="Antiguedades Artesanias Adornos">Antiguedades Artesanias Adornos</option>
+             <option value="Mascotas Acsesorios Veterinarios">Mascotas Acsesorios Veterinarios</option>
+             <option value="Bienes raices Alquileres Ventas">Bienes raices Alquileres Ventas</option>
+             <option value="Tecnologia Informatica Informacion">Tecnologia Informatica Informacion</option>
+             <option value="Educacion Ciencia Academias">Educacion Ciencia Academias</option>
+             <option value="Deportes Ocio Acsesorios">Deportes Ocio Acsesorios</option>
+             <option value="Herramientas Maquinaria Equipo">Herramientas Maquinaria Equipo</option>
+             <option value="Agro Ferreteria Maderas">Agro Ferreteria Maderas</option>
+             <option value="Materias primas varias">Materias primas varias</option>
+             <option value="Mateiales de construccion">Mateiales de construccion</option>
+             <option value="Muebles Electrodomesticos">Muebles Electrodomesticos</option>
+             <option value="Productos para el hogar">Productos para el hogar</option>
+             <option value="Productos de consumo diario">Productos de consumo diario</option>
+             <option value="Productos para la industria">Productos para la industria</option>
+             <option value="Industria Acsesorios Repuestos">Industria Acsesorios Repuestos</option>
+             <option value="Ropa Moda calzado">Ropa Moda calzado</option>
+             <option value="Salud Belleza">Salud Belleza</option>             
+             <option value="Usados de todos">Usados de todos</option>
+             <option value="Vehiculos acsesorios repuestos">Vehiculos acsesorios repuestos</option>
+             <option value="Productos y Sevicios varios">Productos y Sevicios varios</option>
+             <option value="Servicios domesticos">Servicios domesticos</option>
+             <option value="Servicios personales">Servicios personales</option>
+             <option value="Servicios pofesionales">Servicios pofesionales</option>
+             <option value="Servicios de Ensenanza">Servicios de Ensenanza</option>
+             <option value="Sevicios financieros">Sevicios financieros</option>
+             <option value="Servicios publicitarios">Servicios publicitarios</option>
+             <option value="Servicio de reparaciones">Servicio de reparaciones</option>
+             <option value="Servicio de hotel alojamiento">AServicio de hotel alojamiento</option>
+             <option value="Otros Servicios">Otros Servicios</option>         
+            
+             </select> 
+
+
+
 
 
                                                     <input type="text" id="name" name="nombre" size="8" placeholder="Que buscas?"/>
-                                                    <input type="submit" value="Buscar">
+                                                    <input type="submit" value="Buscar/ver">
                                                                                                         
               <!--           </form>   -->
                  
@@ -77,7 +114,13 @@
              <div class="col-md-6">  
                      <a href="/">  <img src ='{% static "logo.png" %}' alt='img' > </a>
 
-                     <div class="btn-group">
+
+            
+
+
+
+
+                   <!--  <div class="btn-group">
                           <button type="button" class="btn btn-default dropdown-toggle"
                            data-toggle="dropdown">Ver  <span class="caret"></span>
                            </button>
@@ -85,10 +128,7 @@
                                <li><a href="/ver_categorias/xtiendax">Todas las tiendas </a></li>
                                <li><a href="/ver_categorias/xcomerciox">Plazas y centros comerciales </a></li>
                                     
-                                    <!--
-                                    <li><a href="/ver_categorias/xproductox">Todos los productos</a></li>
-                                     -->
-                                     
+                                                               
                                    {%  for key,val in categoria.items %}
                                       <li><a href="/ver_categorias/{{key}}">{{val}} : {{key}}</a></li>
                                    {%  endfor %} 
@@ -96,7 +136,7 @@
 
                                 </ul>
                        </div>
-
+               -->
                  
                      {%  if user.is_authenticated %}          
                         <a href="/accounts/logout/" class="btn btn-danger" role="button">Cerrar</a>

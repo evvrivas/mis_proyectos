@@ -51,18 +51,18 @@ from random import sample
 
 
 def crear_categorias(request):
-  categorias=["Productos Ventas Varias","Alimentos bebidas","Antiguedades artesanias Adornos","Mascotas acsesorios veterinarios",
-                "Bienes raices alquileres ventas","Tecnologia informatica informacion","Educacion ciencia Academias",
-                "Deportes ocio acsesorios","Herramientas maquinaria equipo","Agro ferreteria maderas","Materias primas varias",
-                "Mateiales de construccion","Muebles electrodomesticos","Productos para el hogar","Productos de consumo diario",
-                "Productos para la industria","Industria acsesorios repuestos","Ropa Moda calzado","Salud belleza",
-                "Usados de todos","Vehiculos acsesorios repuestos","Productos y Sevicios varios","Servicios domesticos",
-                "Servicios personales","Servicios pofesionales","Servicios de Ensenanza","Sevicios financieros",
-                "Servicios publicitarios","Servicio de reparaiones","Servicio de hotel alojamiento","Otros Servicios"]
+  #categorias=["Productos Ventas Varias","Alimentos bebidas","Antiguedades artesanias Adornos","Mascotas acsesorios veterinarios",
+  #              "Bienes raices alquileres ventas","Tecnologia informatica informacion","Educacion ciencia Academias",
+  #              "Deportes ocio acsesorios","Herramientas maquinaria equipo","Agro ferreteria maderas","Materias primas varias",
+  #              "Mateiales de construccion","Muebles electrodomesticos","Productos para el hogar","Productos de consumo diario",
+  #              "Productos para la industria","Industria acsesorios repuestos","Ropa Moda calzado","Salud belleza",
+  #              "Usados de todos","Vehiculos acsesorios repuestos","Productos y Sevicios varios","Servicios domesticos",
+  #              "Servicios personales","Servicios pofesionales","Servicios de Ensenanza","Sevicios financieros",
+  #              "Servicios publicitarios","Servicio de reparaiones","Servicio de hotel alojamiento","Otros Servicios"]
   
-  for i in categorias:
-      cat=Categoria_global(categoria=i)
-      cat.save()
+  #for i in categorias:
+  #    cat=Categoria_global(categoria=i)
+  #    cat.save()
 
 
   conf=Configuracion_sistema(mensaje_bienvenida="Bienvenido a DETODONEGOCIO, Has tu compra, nosotros financiamos el 50% Inicial de la compra", n_visitas=0)
@@ -237,7 +237,7 @@ def publicida_inteligencia(request):
     palabra=items.item_de_busqueda
             
     productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
-    tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
+    tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
     comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(ubicacion__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).order_by("id")[:3] 
              
     connection.close()       
@@ -515,7 +515,7 @@ def mi_tienda(request,idusuario,nombretienda):
     
     var=tiendas.codigoapk    
 
-    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("precio_A")[:10]
+    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)).order_by("precio_A")[:10]
     
     connection.close() 
 
@@ -566,8 +566,8 @@ def ver_categorias(request,item):
     tiendas=Tiendas.objects.all()
    
   else:  
-    tiendas=Tiendas.objects.filter(categoria__categoria__contains=item)  
-    productos=Productos.objects.filter(categoria__categoria__contains=item)    
+    tiendas=Tiendas.objects.filter(categoria__icontains=item)  
+    productos=Productos.objects.filter(categoria__categoria__icontains=item)    
     
   
   connection.close()
@@ -584,11 +584,11 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
 
   if item=="xproductox":    
-    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)) 
+    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)) 
 
     
   else:      
-    productos=Productos.objects.filter(Q(categoria__categoria__contains=item) & Q(tienda__nombre_tienda__contains=nombretienda)) 
+    productos=Productos.objects.filter(Q(categoria__categoria__icontains=item) & Q(tienda__nombre_tienda__icontains=nombretienda)) 
    
    
   connection.close()
@@ -613,7 +613,7 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       var=tiendas.codigoapk   
      
 
-      productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__contains=nombretienda)).order_by("precio_A")[:10]
+      productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)).order_by("precio_A")[:10]
       
                           
       
@@ -657,7 +657,7 @@ def busqueda_tienda(request,idusuario,nombretienda):
             busqueda.save()
         
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-        productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) & Q(tienda__nombre_tienda__contains=nombretienda))
+        productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) & Q(tienda__nombre_tienda__icontains=nombretienda))
         connection.close()
         return render(request,'catalogo_tienda.html',locals()) 
 
@@ -668,6 +668,7 @@ def busqueda(request):
      
      if request.POST:
         palabra = request.POST.get('nombre')
+        cate_goria= request.POST.get('categoria_busqueda')
         ciudad=request.POST.get('ciudad_busqueda') 
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
         if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
@@ -675,10 +676,15 @@ def busqueda(request):
             busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra,fecha_busqueda=fecha)
             busqueda.save()
 
+        
 
+        if palabra="":
+           productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+           tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(ubicacion=ciudad)
+           comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).filter(ubicacion=ciudad)
 
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
-        tiendas= Tiendas.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(ubicacion=ciudad)
+        tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(ubicacion=ciudad)
         comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).filter(ubicacion=ciudad)
      
 

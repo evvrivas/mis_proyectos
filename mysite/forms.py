@@ -37,10 +37,10 @@ class CategoriaForm(ModelForm):
 		exclude=["id_usuario","tienda"]
 
     
-class Categoria_globalForm(ModelForm):
-	class Meta:
-		model= Categoria_global		
-		exclude=[]
+#class Categoria_globalForm(ModelForm):
+#	class Meta:
+#		model= Categoria_global		
+#		exclude=[]
 
 class TiendasForm(ModelForm):
 	class Meta:

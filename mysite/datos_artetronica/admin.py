@@ -53,9 +53,9 @@ admin.site.register(Categoria,CategoriaAdmin)
 ####################################################
 
 ####################################################
-class RulesAdmin(admin.ModelAdmin):
-    form = Categoria_globalForm
-admin.site.register(Categoria_global)
+#class RulesAdmin(admin.ModelAdmin):
+#    form = Categoria_globalForm
+#admin.site.register(Categoria_global)
 ####################################################    
 
 ####################################################
