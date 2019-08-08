@@ -36,20 +36,15 @@
 
 
 
-
-
-<div class="panel panel-primary"> 
-            
-
-                                                
-           
-                
-                
-             
-
  <div class="panel-heading">
 
 
+
+
+
+
+            
+                                
 
 <center><form action="/busqueda/" method="post">
                        {% csrf_token %}                                                  
@@ -57,7 +52,7 @@
                     <div class="col-md-12">              
           
 
-                                                    <select name="ciudad_busqueda" style="width:100px">
+                                                    <select name="ciudad_busqueda" style="width:100px;background-color:white;color:blue;">
                                                       <option value="AHUACHAPAN">AHUACHAPAN</option>
                                                       <option value="SANTA_ANA">SANTA_ANA</option>
                                                       <option value="SONSONATE">SONSONATE</option>
@@ -75,7 +70,7 @@
                                                      </select> 
 
 
-             <select name="categoria_busqueda" style="width:200px">
+             <select name="categoria_busqueda" style="width:200px;background-color:white;color:blue;">
              <option value="Todo">Todo</option>
              <option value="Productos Ventas Varias">Productos Ventas Varias</option>
              <option value="Alimentos Bebidas">Alimentos Bebidas</option>
@@ -120,8 +115,8 @@
                     <input type="text" id="name" name="nombre" size="30" placeholder="Que buscas?"/>
                     <input type="submit" value="Buscar/ver">
                                                                                                         
-              <!--           </form>  </center>      -->
-             </div>                
+             </form> </center>             
+     
 
 
 
@@ -129,7 +124,10 @@
 
 
 
- 
+
+
+<div class="panel panel-primary"> 
+
 
             <div class="col-md-3">              
             </div>
@@ -139,24 +137,8 @@
                      <a href="/">  <img src ='{% static "logo.png" %}' alt='img' > </a>
 
 
-            
 
-
-
- 
-                     {%  if user.is_authenticated %}          
-                        <a href="/accounts/logout/" class="btn btn-danger" role="button">X</a>
-                     {%  else  %}   
-                        <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
-                        <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>                         
-                                           
-                     {% endif %}
-                         <a href="/informacion" class="btn btn-warning" role="button">?</a> 
-                     
-                      
-
-             
-                 {%  if user.is_authenticated %}  
+                     {%  if user.is_authenticated %}  
                              <div class="btn-group">
                                             <button type="button" class="btn btn-success dropdown-toggle"
                                                     data-toggle="dropdown">
@@ -188,7 +170,23 @@
 
                                             </ul>
                                    </div>
-                 {% endif %}  
+                 {% endif %} 
+
+
+
+                     <a href="/informacion" class="btn btn-warning" role="button">?</a>             
+
+ 
+                     {%  if user.is_authenticated %}          
+                        <a href="/accounts/logout/" class="btn btn-danger" role="button">X</a>
+                     {%  else  %}   
+                        <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
+                        <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>                         
+                                           
+                     {% endif %}                      
+                     
+                                  
+                  
 
       </div>
       
@@ -196,17 +194,12 @@
       <div class="col-md-3">              
       </div>
 
-</form> </center>    
+ 
 
 
-      </div>
+ </div>
 
   
-
-
-
-
-
 
 
 
@@ -247,7 +240,7 @@
 
 
 
-</div>
+
         
 
 
