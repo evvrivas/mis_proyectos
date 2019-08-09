@@ -30,22 +30,16 @@
 
 
 
-<div class="panel panel-info">     
+<div class="panel panel-success">   
 
-
-
-
-
-<div class="panel-heading">
-
-           <div class="col-md-12"> 
+    <div class="col-md-12"> 
 
                      <center><table>
 
                             <tr>
                                 <td>
                                     <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                <button type="button" class="btn btn-primary btn-xs dropdown-toggle"
                                         data-toggle="dropdown">
                                   Ver <span class="caret"></span>
                                 </button>
@@ -72,8 +66,80 @@
                                
                                 </tr >
                           </table></center> 
-             </div>  
-    </div>
+             </div>    
+
+
+
+
+
+<div class="panel-heading">
+
+      <div class="col-md-12"> 
+
+              {% thumbnail tiendas.imagen1 "x30" crop="center" as im %}
+                
+                  
+              <a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
+             </a>
+
+             {%  if user.is_authenticated and user.username == tiendas.id_usuario %}          
+                       
+                                   <div class="btn-group">
+                                          <button type="button" class="btn btn-success dropdown-toggle"
+                                                  data-toggle="dropdown">
+                                                Tienda <span class="caret"></span>
+                                          </button>
+
+                                             <ul class="dropdown-menu" role="menu">
+                                                 <li><a href="/crear_producto/{{user.username}}/{{tiendas.nombre_tienda}}">Subir un producto </a></li>      
+                                                 <li><a href="/editar_tienda/{{tiendas.id}}">Editar mi tienda </a></li>
+                                                 <li><a href="/ver_mis_mensajes/TODOS/EL_VENDEDOR">Ver mensajes </a>
+                                                 <li><a href="/ver_el_carrito/ATENDER_PEDIDOS/EL_VENDEDOR">Ver pedidos </a>
+                                                 <br>
+                                                 
+
+                                              {% ifequal var 'PEDIDOS' %}
+                                               
+                                                 <li><a href="/hacer_pedido/{{user.username}}/{{tiendas.nombre_tienda}}">Ingresar pedido</a></li>
+                                                  <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/ENCARGADO">Ver pedidos encargados </a></li>
+                                                  <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/PRODUCCION">ver pedidos en produccion </a></li>
+                                                  <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/EMPACADO">ver los pedidos empacados </a></li>
+                                                  <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/ENTREGADO">Ver los pedidos entregados </a></li>
+                                                  <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/TODOS">ver todos los pedidos</a></li>
+
+                                              {% endifequal %}
+                                             </ul>                   
+                                   </div>
+
+                                    
+                      {% endif %}
+             
+              <a href="/informacion_vendedor/{{tiendas.id_usuario}}" class="btn btn-success" role="button">$ Info</a>
+
+             {%  if user.is_authenticated %}          
+                  <a href="/accounts/logout/" class="btn btn-danger" role="button">X</a>
+             {%  else  %}   
+                  <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
+                  <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>          
+             {% endif %} 
+
+
+             
+
+              <a href="/">  <img src ='{% static "logo2.png" %}' alt='img' >
+              
+
+              {% endthumbnail %}
+
+
+               {%  if user.is_authenticated %}          
+             
+                   <center>    <li> Hola.!.{{ user.username }}    <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito2.png" %}' alt='img' > </a>    </li>   </center>   
+                                     
+               {% endif %}  
+     </div> 
+
+</div>
 
   
 
@@ -86,76 +152,7 @@
 <div class="panel-body">  
     
 
-    <div class="col-md-12"> 
-
-    {% thumbnail tiendas.imagen1 "x30" crop="center" as im %}
-      
-        
-    <a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
-   </a>
-
-   {%  if user.is_authenticated and user.username == tiendas.id_usuario %}          
-             
-                         <div class="btn-group">
-                                <button type="button" class="btn btn-success dropdown-toggle"
-                                        data-toggle="dropdown">
-                                      Tienda <span class="caret"></span>
-                                </button>
-
-                                   <ul class="dropdown-menu" role="menu">
-                                       <li><a href="/crear_producto/{{user.username}}/{{tiendas.nombre_tienda}}">Subir un producto </a></li>      
-                                       <li><a href="/editar_tienda/{{tiendas.id}}">Editar mi tienda </a></li>
-                                       <li><a href="/ver_mis_mensajes/TODOS/EL_VENDEDOR">Ver mensajes </a>
-                                       <li><a href="/ver_el_carrito/ATENDER_PEDIDOS/EL_VENDEDOR">Ver pedidos </a>
-                                       <br>
-                                       
-
-                                    {% ifequal var 'PEDIDOS' %}
-                                     
-                                       <li><a href="/hacer_pedido/{{user.username}}/{{tiendas.nombre_tienda}}">Ingresar pedido</a></li>
-                                        <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/ENCARGADO">Ver pedidos encargados </a></li>
-                                        <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/PRODUCCION">ver pedidos en produccion </a></li>
-                                        <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/EMPACADO">ver los pedidos empacados </a></li>
-                                        <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/ENTREGADO">Ver los pedidos entregados </a></li>
-                                        <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/TODOS">ver todos los pedidos</a></li>
-
-                                    {% endifequal %}
-                                   </ul>                   
-                         </div>
-
-                          
-            {% endif %}
-   
-   <a href="/informacion_vendedor/{{tiendas.id_usuario}}"> $ Info </a>
-
-   {%  if user.is_authenticated %}          
-        <a href="/accounts/logout/" class="btn btn-danger" role="button">X</a>
-   {%  else  %}   
-        <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
-        <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>          
-   {% endif %} 
-
-
-   
-
-    <a href="/">  <img src ='{% static "logo2.png" %}' alt='img' >
-    
-
-    {% endthumbnail %}
-
-
-     {%  if user.is_authenticated %}          
-        <center>  
-           <p> Hola.!.{{ user.username }}</p>
-           <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito2.png" %}' alt='img' > </a> 
-         </center>
-                           
-     {% endif %}  
- </div> 
-
-
-
-
+  
 
 <div class="col-md-12"> 
     {% block content %}
@@ -173,7 +170,7 @@
 
 
         
-  <div class="panel panel-primary">
+  <div class="panel panel-success">
       <div class="panel-heading">
         <h2 class="panel-title"><center>Direccion  {{tiendas.ubicacion}}: #WhatsApp: {{tiendas.id_usuario}}</center></h2>   
 
