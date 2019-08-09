@@ -32,43 +32,7 @@
 
 <div class="panel panel-success">   
 
-    <div class="col-md-12"> 
-
-                     <center><table>
-
-                            <tr>
-                                <td>
-                                    <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle"
-                                        data-toggle="dropdown">
-                                  Ver <span class="caret"></span>
-                                </button>
-                               
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
-                                  {%  for i in categoria %}
-                                      <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i}}">{{i}}</a></li>
-                                   {%  endfor %} 
-                                </ul>
-                       </div>
-
-                                </td>                               
-                                     
-
-                                    
-                                    <td> 
-                                    <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
-                                     {% csrf_token %}
-                                     <input type="text" id="name" name="nombre" placeholder="Que buscas?" size="10"/>
-                                     <input type="submit" value="Buscar">
-                                     </form>
-                                     </td>                                                     
-                               
-                                </tr >
-                          </table></center> 
-             </div>    
-
-
+    
 
 
 
@@ -154,6 +118,45 @@
 
 
 <div class="panel-body">  
+
+
+<div class="col-md-12"> 
+
+                     <center><table>
+
+                            <tr>
+                                <td>
+                                    <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                        data-toggle="dropdown">
+                                  Ver <span class="caret"></span>
+                                </button>
+                               
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
+                                  {%  for i in categoria %}
+                                      <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i}}">{{i}}</a></li>
+                                   {%  endfor %} 
+                                </ul>
+                       </div>
+
+                                </td>                               
+                                     
+
+                                    
+                                    <td> 
+                                    <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
+                                     {% csrf_token %}
+                                     <input type="text" id="name" name="nombre" placeholder="Que buscas?" size="10"/>
+                                     <input type="submit" value="Buscar">
+                                     </form>
+                                     </td>                                                     
+                               
+                                </tr >
+                          </table></center> 
+             </div>    
+
+
     
 
   

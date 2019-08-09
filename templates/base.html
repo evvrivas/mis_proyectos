@@ -41,7 +41,84 @@
             
                                 
 
-<center><form action="/busqueda/" method="post">
+
+ <div class="panel-heading">
+
+                    
+             <div class="col-md-6">  
+
+                <center>   
+                     <a href="/">  <img src ='{% static "logo.png" %}' alt='img' > </a>
+
+
+
+                     {%  if user.is_authenticated %}  
+                             <div class="btn-group">
+                                            <button type="button" class="btn btn-success dropdown-toggle"
+                                                    data-toggle="dropdown">
+                                              Tienda <span class="caret"></span>
+                                            </button>
+                                           
+                                            <ul class="dropdown-menu" role="menu">                                                                                   
+                                                   <li><a href="/editar_usuario/{{user.id}}">Editar Usuario/cambiar Plan </a></li> 
+                                                   
+                                              
+                                                   <li><a href="/crear_tienda/">Crear una tienda</a></li>                                                                                                
+                                                   <li><a href="/{{user.username}}">Ver mis tiendas"</a></li>
+
+                                                   <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_VENDEDOR">Pedidos de los clientes</a></li>
+                                                    <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Pedidos que quiero</a></li>
+
+                                                  <!-- <li><a href="/ver_mis_mensajes/NUEVO/EL_VENDEDOR">Mensaje del cliente </a></li>
+                                                   <li><a href="/ver_mis_mensajes/NUEVO/EL_COMPRADOR">Ver mis mensajes </a></li> -->
+
+
+
+                                       <br>
+
+                                                    {%  for i in mis_tiendas %}
+                                        <li><a href="/{{user.username}}/{{i.nombre_tienda}}">{{i.nombre_tienda}}</a></li>
+                                     {%  endfor %} 
+
+                                                                                       
+
+                                            </ul>
+                                   </div>
+                 {% endif %} 
+
+
+
+                     <a href="/informacion" class="btn btn-warning" role="button">?</a>             
+
+ 
+                     {%  if user.is_authenticated %}          
+                        <a href="/accounts/logout/" class="btn btn-danger" role="button">X</a>
+                     {%  else  %}   
+                        <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
+                        <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>                         
+                                           
+                     {% endif %}                      
+                     
+                                  
+                  
+         </center>   
+      </div>
+      
+
+      
+ </div>
+
+  
+
+
+
+
+
+
+  <div class="panel-body">   
+
+
+  <center><form action="/busqueda/" method="post">
                        {% csrf_token %}                                                  
                                                     
                     <div class="col-md-12">              
@@ -117,80 +194,12 @@
 
 
 
- <div class="panel-heading">
-
-                    
-             <div class="col-md-6">  
-
-                <center>   
-                     <a href="/">  <img src ='{% static "logo.png" %}' alt='img' > </a>
-
-
-
-                     {%  if user.is_authenticated %}  
-                             <div class="btn-group">
-                                            <button type="button" class="btn btn-success dropdown-toggle"
-                                                    data-toggle="dropdown">
-                                              Tienda <span class="caret"></span>
-                                            </button>
-                                           
-                                            <ul class="dropdown-menu" role="menu">                                                                                   
-                                                   <li><a href="/editar_usuario/{{user.id}}">Editar Usuario/cambiar Plan </a></li> 
-                                                   
-                                              
-                                                   <li><a href="/crear_tienda/">Crear una tienda</a></li>                                                                                                
-                                                   <li><a href="/{{user.username}}">Ver mis tiendas"</a></li>
-
-                                                   <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_VENDEDOR">Pedidos de los clientes</a></li>
-                                                    <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Pedidos que quiero</a></li>
-
-                                                  <!-- <li><a href="/ver_mis_mensajes/NUEVO/EL_VENDEDOR">Mensaje del cliente </a></li>
-                                                   <li><a href="/ver_mis_mensajes/NUEVO/EL_COMPRADOR">Ver mis mensajes </a></li> -->
-
-
-
-                                       <br>
-
-                                                    {%  for i in mis_tiendas %}
-                                        <li><a href="/{{user.username}}/{{i.nombre_tienda}}">{{i.nombre_tienda}}</a></li>
-                                     {%  endfor %} 
-
-                                                                                       
-
-                                            </ul>
-                                   </div>
-                 {% endif %} 
-
-
-
-                     <a href="/informacion" class="btn btn-warning" role="button">?</a>             
-
- 
-                     {%  if user.is_authenticated %}          
-                        <a href="/accounts/logout/" class="btn btn-danger" role="button">X</a>
-                     {%  else  %}   
-                        <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
-                        <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>                         
-                                           
-                     {% endif %}                      
-                     
-                                  
-                  
-         </center>   
-      </div>
-      
-
-      
- </div>
-
-  
 
 
 
 
 
 
-  <div class="panel-body">    
 
            <div class="col-md-12">              
                 
