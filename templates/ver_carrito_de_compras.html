@@ -18,34 +18,20 @@
           <span class="caret"></span></button>
           
           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-<!--
-            <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_VENDEDOR">EN EL CARRITO DEL CLIENTE</a></li>
-            <li><a href="/ver_el_carrito/EL_VENDEDOR_RECIBIO_EL_PEDIDO/EL_VENDEDOR">COMPRADO</a></li>
-            <li><a href="/ver_el_carrito/EL_VENDEDOR_A_CONFIRMADO/EL_VENDEDOR">EN PROCESO
-            <li><a href="/ver_el_carrito/PRODUCTO_ENTREGADO/EL_VENDEDOR">RECIBIDO</a></li>
-            <li><a href="/ver_el_carrito/TODOS/EL_VENDEDOR">TODOS</a></li>
---> 
+
 
             <li><a href="/ver_el_carrito/NUEVO/EL_VENDEDOR">NUEVOS PEDIDOS</a></li>
             <li><a href="/ver_el_carrito/EN_PROCESO/EL_VENDEDOR">EN PROCESO
+            <li><a href="/ver_el_carrito/FINALIZADO/EL_VENDEDOR">FINALIZADO
             <li><a href="/ver_el_carrito/TODOS/EL_VENDEDOR">TODOS</a></li>
             
             <li><a href="#">---------------</a></li>
             
             <li><a href="/ver_el_carrito/NUEVO/EL_COMPRADOR">MIS NUEVOS PEDIDOS</a></li>
             <li><a href="/ver_el_carrito/EN_PROCESO/EL_COMPRADOR">EN PROCESO
+            <li><a href="/ver_el_carrito/FINALIZADO/EL_COMPRADOR">FINALIZADO
             <li><a href="/ver_el_carrito/TODOS/EL_COMPRADOR">TODOS</a></li>
-
-
-          <!--  <li><a href="#">---------------</a></li>
-
-            <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">LOS QUE YO QUIERO</a></li>
-            <li><a href="/ver_el_carrito/EL_VENDEDOR_RECIBIO_EL_PEDIDO/EL_COMPRADOR">ESPERO CONFIRMACION </a></li>
-            <li><a href="/ver_el_carrito/EL_VENDEDOR_A_CONFIRMADO/EL_COMPRADOR">ESPERO POR RECIBIRLOS</a></li>
-            <li><a href="/ver_el_carrito/PRODUCTO_ENTREGADO/EL_COMPRADOR">LOS QUE YA RECIBI</a></li>
-            <li><a href="/ver_el_carrito/TODOS/EL_COMPRADOR">TODOS</a></li>
-           
-           --> 
+       
 
             
            </ul>
@@ -78,7 +64,7 @@
                       {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
                             <table BORDER="3" CELLSPACING="5"  bordercolor="Turquoise"> 
                       {% else %}
-                            <table BORDER="3" CELLSPACING="5"  bordercolor="MediumBlue">    
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Blue">    
                       {% endif %}  
                  
                   
@@ -129,13 +115,54 @@
 
                        
 
-                      <h6><p>{{ i.producto.tienda.nombre_tienda }} -> {{i.producto.id_usuario}} </p>  </h6>
-                      <h6><p>cliente -> {{i.nombre_comprador}} --> {{i.id_comprador}} </p>  </h6>
+                      <h6><p>{{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </p>  </h6>
+                      <h6><p>cliente: {{i.nombre_comprador}} : {{i.id_comprador}} </p>  </h6>
                       <h6><p> Cant. {{ i.cantidad }} {{ i.producto.nombre }}  $P/U = {{ i.producto.precio_A}}  </p>  </h6>          
                       <h6><p>{{ i.especificacion }}  </p> </h6>
                       <h6><p>{{ i.estado_prod }}  </h6>
                       <h3><p>Total {{ i.total }}  </h6>
                       <h6><p>fecha {{ i.fecha_ingreso }}  </h6>
+                      <br>
+
+
+                  {% if i.lugar_de_entrega %}
+                      <p> Lugar_de_entrega {{i.lugar_de_entrega}} </p>
+                  {% else %} 
+                  {% endif %}     
+                  
+
+                  {% if i.fecha_de_entrega %}
+                      <p> fecha_de_entrega {{i.fecha_de_entrega}} </p> 
+                  {% else %} 
+                  {% endif %}    
+                  
+
+                  {% if i.servicio_a_domicilio %}
+                      <p> servicio_a_domicilio {{i.servicio_a_domicilio}} </p>
+                     <h3> <p> costo_servicio a domicilio {{i.costo_servicio}} </p></h3>
+                  {% else %} 
+                  {% endif %}  
+                  
+                 
+                                        
+
+                  {% if i.imagen1 %}     
+                       {% thumbnail i.imagen1 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                       
+                        {% endthumbnail %}
+                  {% else %} 
+                  {% endif %}  
+                  
+
+                  {% if i.imagen2 %}
+                       {% thumbnail i.imagen2 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                         
+                        {% endthumbnail %}
+                 {% else %} 
+                 {% endif %}    
+
+
+
 
     {% if el_usuario_x == "EL_COMPRADOR" %}
               
@@ -231,10 +258,7 @@
                                 <button  class="btn btn-primary">PRODUCTO ENTREGADO</button> 
                             {% endif %} 
 
-
-
-
-              
+    
 
 
                       
@@ -252,22 +276,13 @@
                         
     <br>
 
-  <!--  <div class="row">  
-          <div class="col-md-12">           
-                <div class="container">
-                <center><h2><p> ${{gran_total}}</p></h2></center>
-                <br>                  
-                <a href="/realizar_compra" class="btn btn-info" role="button">Comprar todo esto</a>
-                                        
-                </div>                                                    
-          </div>       
-    </div>  
 
-    <br>   -->
 
        <div class="row">  
           <div class="col-md-12">           
                 <div class="container">
+                <p>Puede especificar si quiere servicio a domicilio, lugar y fecha de entrega, ademas puede agregar imagenes a su pedido, Haga click sobre el boton editar y complete el pedido, posteriormente le aparecera el costo del envio.</p>
+
                 <p>Al precionar el boton de comprar El propietario de esta tienda recibira un mensaje con informacion de su pedido,
                 el contactara con usted para ultimar detalles sobre el producto o servicio, forma y lugar de pago y entrga.</p>
                                         

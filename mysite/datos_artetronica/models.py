@@ -267,6 +267,7 @@ SUPER_CATEGORIA=(
  )
  
 
+
 class Ccomercial(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	     
 	     nombre_ccomercial=models.CharField(max_length=40,blank=True)
@@ -437,10 +438,30 @@ ESTADO3 = (
 			
 			)
 
+ENTREGA = (
+			('QUIERO ', 'QUIERO_PEDIR_ESTO'),
+			('EL_VENDEDOR_RECIBIO_EL_PEDIDO', 'EL_VENDEDOR_RECIBIO_EL_PEDIDO'),
+			('EL_VENDEDOR_A_CONFIRMADO', 'EL_VENDEDOR_A_CONFIRMADO'),
+			('PRODUCTO_ENTREGADO', 'PRODUCTO_ENTREGADO'),
+			('PRODUCTO_RECIBIDO_YA', 'PRODUCTO_RECIBIDO_YA'),
+			
+			
+			)
+
+SERVICIO = (
+			('Si, A domicilio $?', 'SI'),
+			('LLegare por el pedido', 'NO'),
+			('Escribame para acordar entrega', 'TALVES'),
+				
+			
+			)
+
 class Carro_de_compras(models.Model):
 	producto=models.ForeignKey('Productos',blank=True,null=True)
 	id_comprador=models.CharField(max_length=30,blank=True,null=True)
-	nombre_comprador=models.CharField(max_length=30,blank=True,null=True)	     
+	nombre_comprador=models.CharField(max_length=30,blank=True,null=True)
+	
+	     
 	#id_vendedor=models.CharField(max_length=30,blank=True,null=True)
 	#id_producto=models.CharField(max_length=30,blank=True,null=True)
 
@@ -453,6 +474,14 @@ class Carro_de_compras(models.Model):
 	total= models.FloatField(default=0,blank=True,null=True)
 	estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="QUIERO_PEDIR_ESTO",null=True)
 	fecha_ingreso = models.DateField(default=datetime.now)
+
+	lugar_de_entrega=models.CharField(max_length=40,blank=True,null=True)	 
+	fecha_de_entrega=models.CharField(max_length=30,blank=True,null=True)	 
+	servicio_a_domicilio=models.CharField(max_length=30,blank=True,null=True,,choices=SERVICIO)
+    costo_servicio=models.FloatField(default=0,blank=True,null=True)	
+	
+	imagen1 = ImageField(upload_to='tmp',blank=True)
+	imagen2 = ImageField(upload_to='tmp',blank=True)	
 	    
 
 	def __str__(self):

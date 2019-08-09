@@ -39,7 +39,7 @@
                             <tr>
                                 <td>
                                     <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-xs dropdown-toggle"
+                                <button type="button" class="btn btn-primary dropdown-toggle"
                                         data-toggle="dropdown">
                                   Ver <span class="caret"></span>
                                 </button>
@@ -75,6 +75,8 @@
 <div class="panel-heading">
 
       <div class="col-md-12"> 
+
+      <center>
 
               {% thumbnail tiendas.imagen1 "x30" crop="center" as im %}
                 
@@ -137,6 +139,8 @@
                    <center>    <li> Hola.!.{{ user.username }}    <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito2.png" %}' alt='img' > </a>    </li>   </center>   
                                      
                {% endif %}  
+
+          </center>      
      </div> 
 
 </div>
