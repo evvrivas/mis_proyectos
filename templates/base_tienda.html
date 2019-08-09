@@ -26,19 +26,39 @@
 
 <body> 
 
+
+
+
+
 <div class="panel panel-info">     
 
-     <div class="panel-heading">
 
-           <div class="col-md-4"> 
+
+
+
+<div class="panel-heading">
+
+           <div class="col-md-12"> 
 
                      <center><table>
 
-                                <tr>
-                                    {% thumbnail tiendas.imagen1 "x30" crop="center" as im %}
-                                    <td> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
-                                    </td> 
-                                    {% endthumbnail %}
+                            <tr>
+                                <td>
+                                    <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                        data-toggle="dropdown">
+                                  Ver <span class="caret"></span>
+                                </button>
+                               
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
+                                  {%  for i in categoria %}
+                                      <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i}}">{{i}}</a></li>
+                                   {%  endfor %} 
+                                </ul>
+                       </div>
+
+                                </td>                               
                                      
 
                                     
@@ -52,81 +72,29 @@
                                
                                 </tr >
                           </table></center> 
-              
+             </div>  
+    </div>
 
-
-                          {%  if user.is_authenticated %}          
-                              <li> Hola.!.{{ user.username }} </span></a> </li>
-                           
-                          {% endif %}  
-                          
-                         
-                       
-
-            </div>
-                                                       
-                 
-
-            
-                
-              
-             <div class="col-md-12">  
-                      <a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" class="btn btn-warning" role="button">Inicio</a>
-
-
-                     <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle"
-                                        data-toggle="dropdown">
-                                  Tienda <span class="caret"></span>
-                                </button>
-                               
-                                <ul class="dropdown-menu" role="menu">
-                                         
-
-                                         <li><a href="/informacion_vendedor/{{tiendas.id_usuario}}">Informacion del vendedor </a></li>
-
-                                         <br>
-                                         
-
-                                         {%  if user.is_authenticated %}          
-                                               <li><a href="/accounts/logout/">Cerrar la sesión</a></li>
-                                               <br>
-                                         {%  else  %}                                 
-                                           <li><a href="/accounts/login">Entrar </a></li>
-                                           <br>
-                                           <li><a href="/crear_usuario">Registrarme</a></li>
-                                           <br>
-                                         {% endif %} 
-
-                                         <li><a href="/">Ir a De_todo_negocio </a></li>
- 
-                                                                            
-                                  
-                                </ul>
-                       </div>
-
-                        <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle"
-                                        data-toggle="dropdown">
-                                  Ver <span class="caret"></span>
-                                </button>
-                               
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
-                                  {%  for i in categoria %}
-                                      <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i}}">{{i}}</a></li>
-                                   {%  endfor %} 
-
- 
-                        
+  
 
 
 
 
-                                </ul>
-                       </div>
 
-          {%  if user.is_authenticated and user.username == tiendas.id_usuario %}          
+
+
+<div class="panel-body">  
+    
+
+    <div class="col-md-12"> 
+
+    {% thumbnail tiendas.imagen1 "x30" crop="center" as im %}
+      
+        
+    <a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
+   </a>
+
+   {%  if user.is_authenticated and user.username == tiendas.id_usuario %}          
              
                          <div class="btn-group">
                                 <button type="button" class="btn btn-success dropdown-toggle"
@@ -157,36 +125,46 @@
 
                           
             {% endif %}
-               
+   
+   <a href="/informacion_vendedor/{{tiendas.id_usuario}}"> $ Info </a>
 
-               </div> 
+   {%  if user.is_authenticated %}          
+        <a href="/accounts/logout/" class="btn btn-danger" role="button">X</a>
+   {%  else  %}   
+        <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
+        <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>          
+   {% endif %} 
 
-      </div>
 
-    <div class="panel-body">  
+   
+
+    <a href="/">  <img src ='{% static "logo2.png" %}' alt='img' >
     
 
-    <div class="col-md-12"> 
-
-
-
-
-    {% thumbnail tiendas.imagen1 "x30" crop="center" as im %}
-      
-        
-       
-
-
-
-    <li> <a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
-  <a href="/">  <img src ='{% static "logo2.png" %}' alt='img' > </a> <a href="/informacion_vendedor/{{tiendas.id_usuario}}"> Informacion de pago </a> <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito2.png" %}' alt='img' > </a> </li>
     {% endthumbnail %}
-    
 
+
+     {%  if user.is_authenticated %}          
+        <center>  
+           <p> Hola.!.{{ user.username }}</p>
+           <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito2.png" %}' alt='img' > </a> 
+         </center>
+                           
+     {% endif %}  
+ </div> 
+
+
+
+
+
+<div class="col-md-12"> 
     {% block content %}
     {% endblock %}
-    </div>
+ </div>
  
+
+
+
 
  </div>
 
