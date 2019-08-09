@@ -478,7 +478,7 @@ class Carro_de_compras(models.Model):
 	lugar_de_entrega=models.CharField(max_length=40,blank=True,null=True)	 
 	fecha_de_entrega=models.CharField(max_length=30,blank=True,null=True)	 
 	servicio_a_domicilio=models.CharField(max_length=30,blank=True,null=True,choices=SERVICIO)
-    costo_servicio=models.FloatField(default=0,blank=True,null=True)	
+	costo_servicio=models.FloatField(default=0,blank=True,null=True)	
 	
 	imagen1 = ImageField(upload_to='tmp',blank=True)
 	imagen2 = ImageField(upload_to='tmp',blank=True)	
