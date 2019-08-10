@@ -73,7 +73,9 @@ urlpatterns = [
     url(r'^descargar/([^/]+)/([^/]+)/(\d+)/$',descargar),
     url(r'^centro_comercial/([^/]+)/([^/]+)/$',centro_comercial),   
     
-    url(r'^crear_categorias/$',crear_categorias),  
+    url(r'^crear_categorias/$',crear_categorias),
+    url(r'^ver_las_preferidas/$',ver_las_preferidas),   
+    
 
     url(r'^agregar_producto_al_carrito/(\d+)/([^/]+)/$',agregar_producto_al_carrito),  
     url(r'^ver_el_carrito/([^/]+)/([^/]+)/$',ver_el_carrito),  
@@ -89,6 +91,8 @@ urlpatterns = [
 
     
     url(r'^cambiar_tipo_de_vista/(\d+)/$',cambiar_tipo_de_vista),
+    url(r'^agregar_a_preferidas/(\d+)/$',agregar_a_preferidas),
+
 
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),

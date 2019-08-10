@@ -10,7 +10,7 @@ from django.forms import ModelForm, Textarea, TextInput, NumberInput
 class UsuariosForm(ModelForm):
 	class Meta:
 		model= Usuarios		
-		exclude=["codigoapk","plan_tienda_activo","fecha_inicio_plan","fecha_final_plan","fecha_ingreso"]
+		exclude=["codigoapk","plan_tienda_activo","fecha_inicio_plan","fecha_final_plan","fecha_ingreso","tipo_de_vista"]
 
 class ProductosForm(ModelForm):
 
@@ -88,17 +88,12 @@ class Carro_de_comprasForm(ModelForm):
 
 		exclude=["fecha_ingreso","id_comprador","total","estado_prod","mostrar_foto"]
 
-		
-#class Item_carroForm(ModelForm):
-#	class Meta:			
-#		model=Item_carro
-#		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 1}),}
-				   #'nombre_tienda' :  TextInput(attrs={'size': 20}),
-				   #'cantidad' : NumberInput(attrs={'size':'5'}),
-				   #'nombre' :  TextInput(attrs={'size': 20}),
-				   #'precio' :  NumberInput(attrs={'size':'5'}),
-				   #'especificacion' :  TextInput(attrs={'size': 20}),
-				   #'estado_prod' :  TextInput(attrs={'size': 20})
-				    # }
 
-#		exclude=[]
+class PreferidasForm(ModelForm):
+	class Meta:			
+		model=Preferidas
+		exclude=[]
+			
+
+
+

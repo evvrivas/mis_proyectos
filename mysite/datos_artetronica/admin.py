@@ -136,8 +136,8 @@ class RulesAdmin(admin.ModelAdmin):
 class Carro_de_comprasAdmin(admin.ModelAdmin):
     model = Carro_de_compras
     #list_display = ['id_vendedor','nombre_tienda','id_usuario','cantidad','nombre','especificacion','precio','estado_prod','fecha_ingreso']
-    list_display = ['id_vendedor','nombre_tienda','id_comprador','cantidad','nombre','especificacion','precio','total','estado_prod','fecha_ingreso']
-    #list_filter=(('id_comprador',admin.RelatedOnlyFieldListFilter),('estado_prod',admin.RelatedOnlyFieldListFilter))
+    list_display = ['id_vendedor','nombre_tienda','id_comprador','cantidad','nombre','especificacion','precio','total','estado_prod','costo_servicio','fecha_ingreso']
+    list_filter=(('id_comprador',admin.RelatedOnlyFieldListFilter),('estado_prod',admin.RelatedOnlyFieldListFilter),('servicio_a_domicilio',admin.RelatedOnlyFieldListFilter))
     def id_vendedor(self,instance):
         return instance.producto.id_usuario
     def nombre_tienda(self,instance):
@@ -153,12 +153,15 @@ admin.site.register(Carro_de_compras,Carro_de_comprasAdmin)
 ####################################################
 
 
+
 ####################################################
-#class RulesAdmin(admin.ModelAdmin):
-#    form = Item_carroForm
-#class Item_carroAdmin(admin.ModelAdmin):
-#    model = Item_carro
-#    list_display = ['cantidad','especificacion']
-#   
-#admin.site.register(Item_carro,Item_carroAdmin)
+class RulesAdmin(admin.ModelAdmin):
+    form = PreferidasForm
+class PreferidasAdmin(admin.ModelAdmin):
+    model = Preferidas
+    list_display = ['id_comprador','id_comercio','fecha_ingreso']
+    list_filter=(('id_comprador',admin.RelatedOnlyFieldListFilter))
 ####################################################
+   
+
+

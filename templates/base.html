@@ -91,8 +91,10 @@
                      <a href="/informacion" class="btn btn-warning" role="button">?</a>             
 
  
-                     {%  if user.is_authenticated %}          
+                     {%  if user.is_authenticated %}    
+                         <a href="/ver_las_preferidas/" class="btn btn-warning" role="button">+1</a>      
                         <a href="/accounts/logout/" class="btn btn-danger" role="button">X</a>
+
                      {%  else  %}   
                         <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
                         <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>                         
@@ -125,6 +127,7 @@
           
 
                                                     <select name="ciudad_busqueda" style="width:90px;background-color:white;color:blue;">
+                                                      <option value="TODOS">Todo</option>
                                                       <option value="AHUACHAPAN">AHUACHAPAN</option>
                                                       <option value="SANTA_ANA">SANTA_ANA</option>
                                                       <option value="SONSONATE">SONSONATE</option>
@@ -143,7 +146,7 @@
 
 
              <select name="categoria_busqueda" style="width:140px;background-color:white;color:blue;">
-             <option value="Todo">Todo</option>
+             <option value="TODOS">Todo</option>
              <option value="Productos Ventas Varias">Productos Ventas Varias</option>
              <option value="Alimentos Bebidas">Alimentos Bebidas</option>
              <option value="Antiguedades Artesanias Adornos">Antiguedades Artesanias Adornos</option>

@@ -610,34 +610,34 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       nombretienda=tiendas.nombre_tienda
       
       categoria=categorizar(idusuario,nombretienda)     
-      var=tiendas.codigoapk   
-     
+      var=tiendas.codigoapk        
+
 
       productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)).order_by("precio_A")[:10]
-      
+      comprador=Usuarios.object.get(id_usuario=request.user.username)
                           
       
                                                                        
-      if tiendas.tipo_de_vista=="NORMAL":
-            tiendas.tipo_de_vista="LINEAL"
+      if comprador.tipo_de_vista=="NORMAL":
+            comprador.tipo_de_vista="LINEAL"
 
-      elif tiendas.tipo_de_vista=="LINEAL":
-            tiendas.tipo_de_vista="FOTITOS"
+      elif comprador.tipo_de_vista=="LINEAL":
+            comprador.tipo_de_vista="FOTITOS"
 
-      elif tiendas.tipo_de_vista=="FOTITOS":
-            tiendas.tipo_de_vista="NORMAL"
+      elif comprador.tipo_de_vista=="FOTITOS":
+            comprador.tipo_de_vista="NORMAL"
 
       else:
-         tiendas.tipo_de_vista="NORMAL"
+         comprador.tipo_de_vista="NORMAL"
                
-      tiendas.save()    
+      comprador.save()    
 
       
-      if tiendas.tipo_de_vista=="NORMAL":
+      if comprador.tipo_de_vista=="NORMAL":
          return render(request,'catalogo_tienda.html',locals())   
-      elif tiendas.tipo_de_vista=="LINEAL":
+      elif comprador.tipo_de_vista=="LINEAL":
          return render(request,'catalogo_tienda_lineal.html',locals())   
-      elif tiendas.tipo_de_vista=="FOTITOS":
+      elif comprador.tipo_de_vista=="FOTITOS":
          return render(request,'catalogo_tienda_fotitos.html',locals())   
       else :
           return render(request,'catalogo_tienda.html',locals())     
@@ -1277,16 +1277,14 @@ def editar_estado_producto_del_carrito(request,id_producto,el_usuario):
              f.save()
              carrito= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username,estado_prod=estado_del_producto).order_by("producto__tienda__nombre_tienda")
      
-       elif el_usuario=="EL_COMPRADOR": 
+       else: #es el comprador 
 
             if f.estado_prod=="PRODUCTO_ENTREGADO":
-                   f.estado_prod=="PRODUCTO_RECIBIDO_YA"
+                   f.estado_prod="PRODUCTO_RECIBIDO_YA"
             estado_del_producto=f.estado_prod
             f.save()
             carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod=estado_del_producto).order_by("producto__tienda__nombre_tienda")
 
-       else:
-                 pass
      
        connection.close()                
        return render(request,'ver_carrito_de_compras.html',locals())
@@ -1398,13 +1396,31 @@ def responder_mensaje(request,id_mensaje):
 
 
  
+def agregar_a_preferidas(request,id_dela_tienda):
+     
 
+     tiendas = Tiendas.objects.get(pk=id_dela_tienda)
+     idusuario=tiendas.id_usuario 
+     nombretienda=tiendas.nombre_tienda
+      
+     categoria=categorizar(idusuario,nombretienda)     
+     var=tiendas.codigoapk  
 
+     lafecha=datetime.datetime.now()
+     a=Preferidas(id_comprador=request.user.username,id_comercio=id_comercio,fecha_ingreso=lafecha)
+     a.save()
 
+     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+def ver_las_preferidas(request)
 
-
-
-
-
+ preferidas=Preferidas.objects.filter(id_comprador=request.user.username)
+ 
+ tiendas=[]
+ for i in preferidas: 
+    x=Tiendas.objects.get(id=i.id_comercio) 
+    tiendas.append(i)
+                        
+ connection.close()                       
+ return render(request,'catalogo.html',locals())   
   

@@ -188,7 +188,8 @@ class Usuarios(models.Model):
 	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
 	     fecha_inicio_plan = models.DateField(default=datetime.now)
 	     fecha_final_plan = models.DateField(default=datetime.now)
-	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)	    
+	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
+	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")	    
 	     
 	     def __str__(self):
 		    		return  self.id_usuario
@@ -475,7 +476,7 @@ class Carro_de_compras(models.Model):
 	estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="QUIERO_PEDIR_ESTO",null=True)
 	fecha_ingreso = models.DateField(default=datetime.now)
 
-	lugar_de_entrega=models.CharField(max_length=40,blank=True,null=True)	 
+	lugar_de_entrega=models.CharField(max_length=60,blank=True,null=True)	 
 	fecha_de_entrega=models.CharField(max_length=30,blank=True,null=True)	 
 	servicio_a_domicilio=models.CharField(max_length=30,blank=True,null=True,choices=SERVICIO)
 	costo_servicio=models.FloatField(default=0,blank=True,null=True)	
@@ -488,4 +489,16 @@ class Carro_de_compras(models.Model):
 		    		return  self.producto.nombre
 	class Admin:
 		    		list_display = ('especificacion','id_usuario')
+	
+
+
+class Preferidas(models.Model):	
+	id_comprador=models.CharField(max_length=30,blank=True,null=True)
+	id_comercio=models.IntegerField(blank=True,default=0)
+	fecha_ingreso = models.DateField(default=datetime.now)  
+
+	def __str__(self):
+		    		return  self.id_comprador
+	class Admin:
+		    		list_display = ('id_comprador')
 	
