@@ -20,7 +20,7 @@
       <h6> {{ productos.0.categoria.descripcion | linebreaks }} </h6>   
  {% for j in productos %} 
 
-      {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' or user.username != j.tienda.administrador_junior and j.estado_prod == 'VENDIDO' %}
+      {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior  %}
 
 {% else %}
 

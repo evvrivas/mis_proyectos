@@ -66,7 +66,7 @@
 <div class="row">   
 {% for j in tiendas %} 
 
-{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' or user.username != j.tienda.administrador_junior and j.estado_prod == 'NO_DISPONIBLE'%}
+{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior %}
 
 {% else %}
 
@@ -166,7 +166,7 @@
 
  
  
- {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' or user.username != j.tienda.administrador_junior and j.estado_prod == 'VENDIDO' %}
+ {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior %}
 
 {% else %}
 
@@ -330,7 +330,7 @@
  <div class="row">   
 {% for j in nuevas_tiendas %} 
 
-{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' or user.username != j.tienda.administrador_junior and j.estado_prod == 'NO_DISPONIBLE' %}
+{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior %}
 
 {% else %}
 
@@ -419,7 +419,7 @@
  <div class="row">
  {% for j in nuevos_productos %} 
 
- {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' or user.username != j.tienda.administrador_junior and j.estado_prod == 'VENDIDO' %}
+ {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior %}
 }
 
 {% else %}
@@ -529,7 +529,7 @@
 <div class="row">   
 {% for j in aleatorias_tiendas %} 
 
-{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' or user.username != j.tienda.administrador_junior and j.estado_prod == 'NO_DISPONIBLE' %}
+{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior %}
 
 {% else %}
   <div class="col-md-3">   
@@ -617,7 +617,7 @@
  <div class="row">
  {% for j in aleatorias_productos %} 
 
- {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' or user.username != j.tienda.administrador_junior and j.estado_prod == 'VENDIDO' %}
+ {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior %}
 }
 
 {% else %}
