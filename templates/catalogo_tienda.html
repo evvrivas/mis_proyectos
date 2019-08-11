@@ -29,24 +29,6 @@
                       
  
       
-                    <table>
-
-                                <tr>
-                                    {% thumbnail tiendas.imagen1 "x40" crop="center" as im %}
-                                    <td> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
-                                    </td> 
-                                    {% endthumbnail %}
-                                     
-
-                                    
-                                    <td>
-                                      <h5><p>{{tiendas.nombre_tienda}}</p></h5> 
-                                    </td>                                                     
-                               
-                                </tr >
-                          </table>
-
-
                        <center> <h6> {{j.estado_prod}} </h6> </center>
                   <h4><center>  {{j.nombre}}  </center></h4> 
                    

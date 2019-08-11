@@ -1396,10 +1396,10 @@ def responder_mensaje(request,id_mensaje):
 
 
  
-def agregar_a_preferidas(request,id_dela_tienda):
+def agregar_a_preferidas(request,id_de_la_tienda):
      
 
-     tiendas = Tiendas.objects.get(pk=id_dela_tienda)
+     tiendas = Tiendas.objects.get(pk=id_de_la_tienda)
      idusuario=tiendas.id_usuario 
      nombretienda=tiendas.nombre_tienda
       
@@ -1407,7 +1407,7 @@ def agregar_a_preferidas(request,id_dela_tienda):
      var=tiendas.codigoapk  
 
      lafecha=datetime.datetime.now()
-     a=Preferidas(id_comprador=request.user.username,id_comercio=id_comercio,fecha_ingreso=lafecha)
+     a=Preferidas(id_comprador=request.user.username,id_comercio=id_de_la_tienda,fecha_ingreso=lafecha)
      a.save()
 
      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
