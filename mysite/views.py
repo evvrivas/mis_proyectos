@@ -1412,15 +1412,15 @@ def agregar_a_preferidas(request,id_dela_tienda):
 
      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-def ver_las_preferidas(request)
+def ver_las_preferidas(request):
 
- preferidas=Preferidas.objects.filter(id_comprador=request.user.username)
- 
- tiendas=[]
- for i in preferidas: 
-    x=Tiendas.objects.get(id=i.id_comercio) 
-    tiendas.append(i)
-                        
- connection.close()                       
- return render(request,'catalogo.html',locals())   
+       preferidas=Preferidas.objects.filter(id_comprador=request.user.username)
+       
+       tiendas=[]
+       for i in preferidas: 
+          x=Tiendas.objects.get(id=i.id_comercio) 
+          tiendas.append(i)
+                              
+       connection.close()                       
+       return render(request,'catalogo.html',locals())   
   
