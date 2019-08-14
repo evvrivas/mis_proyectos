@@ -614,9 +614,9 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
 
 
       productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)).order_by("precio_A")[:10]
-      comprador=Usuarios.object.get(id_usuario=request.user.username)
+      comprador=Usuarios.objects.get(id_usuario=request.user.username)
                           
-      
+     
                                                                        
       if comprador.tipo_de_vista=="NORMAL":
             comprador.tipo_de_vista="LINEAL"
@@ -1412,8 +1412,10 @@ def agregar_a_preferidas(request,id_de_la_tienda):
      var=tiendas.codigoapk  
 
      lafecha=datetime.datetime.now()
-     a=Preferidas(id_comprador=request.user.username,id_comercio=id_de_la_tienda,fecha_ingreso=lafecha)
-     a.save()
+
+     if Preferidas.objects.filter(id_comprador=request.user.username,id_comercio=id_de_la_tienda).count()<=0:
+          a=Preferidas(id_comprador=request.user.username,id_comercio=id_de_la_tienda,fecha_ingreso=lafecha)
+          a.save()          
 
      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
