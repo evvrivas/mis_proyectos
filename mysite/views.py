@@ -1414,7 +1414,7 @@ def responder_mensaje(request,id_mensaje):
      return render(request,'mensajes.html',locals())
 
 
-def eliminar_de_preferidas(request,id_de_la_tienda): 
+def agregar_a_preferidas(request,id_de_la_tienda): 
      tiendas = Tiendas.objects.get(pk=id_de_la_tienda)
      idusuario=tiendas.id_usuario 
      nombretienda=tiendas.nombre_tienda
