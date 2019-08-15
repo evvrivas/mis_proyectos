@@ -19,19 +19,38 @@
           
           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 
-
+         {% if el_usuario_x == "EL_VENDEDOR"  %}
             <li><a href="/ver_el_carrito/NUEVO/EL_VENDEDOR">PEDIDOS</a></li>
-            <li><a href="/ver_el_carrito/EN_PROCESO/EL_VENDEDOR">EN PROCESO
-            <li><a href="/ver_el_carrito/FINALIZADO/EL_VENDEDOR">FINALIZADO
+            <li><a href="/ver_el_carrito/EN_PROCESO/EL_VENDEDOR">EN PROCESO</li>
+            <li><a href="/ver_el_carrito/FINALIZADO/EL_VENDEDOR">FINALIZADO</li></li>
             <li><a href="/ver_el_carrito/TODOS/EL_VENDEDOR">TODOS</a></li>
+         {% else %}
+         {% endif %}
             
             <li><a href="#">---------------</a></li>
-            
+
+
+         {% if el_usuario_x == "EL_COMPRADOR" or  el_usuario_x == "EL_VENDEDOR" %}   
             <li><a href="/ver_el_carrito/NUEVO/EL_COMPRADOR">MIS NUEVOS PEDIDOS</a></li>
-            <li><a href="/ver_el_carrito/EN_PROCESO/EL_COMPRADOR">EN PROCESO
-            <li><a href="/ver_el_carrito/FINALIZADO/EL_COMPRADOR">FINALIZADO
+            <li><a href="/ver_el_carrito/EN_PROCESO/EL_COMPRADOR">EN PROCESO</li>
+            <li><a href="/ver_el_carrito/FINALIZADO/EL_COMPRADOR">FINALIZADO</li>
             <li><a href="/ver_el_carrito/TODOS/EL_COMPRADOR">TODOS</a></li>
-       
+         {% else %}
+         {% endif %}
+            
+
+            <li><a href="#">---------------</a></li>
+
+         {% if el_usuario_x == "EL_DELIBERY" %}
+
+            <li><a href="/ver_el_carrito/NUEVO/EL_DELIBERY">NUEVOS PEDIDOS</a></li>
+            <li><a href="/ver_el_carrito/EN_PROCESO/EL_DELIBERY">PEDIDOS PROCESO</li>
+            <li><a href="/ver_el_carrito/FINALIZADO/EL_DELIBERY">PEDIDO FINALIZADO</li>
+            <li><a href="/ver_el_carrito/TODOS/EL_DELIBERY">TODOS LOS PEDIDOS</a></li>
+
+         {% else %}
+          {% endif %}
+
 
             
            </ul>
@@ -167,14 +186,14 @@
     {% if el_usuario_x == "EL_COMPRADOR" %}
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" > Editar </a></li>
-                        <li><a href="/eliminar_producto_del_carrito/{{i.id}}" > Eliminar </a></li>
+                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar </a></li>
+                        <li><a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
                         <br>                        
                         <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
                <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" > Cambiar estado </a></li>
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
               {% else %}
                 
               {% endif %}    
@@ -198,7 +217,7 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" > Cambiar estado </a></li>
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
               {% else %}
                 
               {% endif %} 

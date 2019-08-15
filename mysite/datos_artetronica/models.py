@@ -174,10 +174,22 @@ BANCO=(
 
 						
 			)
+
+
+TIPO_USUARIO=(
+			('EL_COMPRADOR', 'EL_COMPRADOR'),
+			('EL_VENDEDOR', 'EL_VENDEDOR'),
+			('EL_ADMINISTRADOR', 'EL_ADMINISTRADOR'),
+			('EL_ADMINISTRADOR_JR', 'EL_ADMINISTRADOR_JR'),
+			('EL_DELIBERY', 'EL_DELIBERY'),
+
+						
+			)
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
 	     clave=models.CharField(max_length=4)
 	     nombre=models.CharField(max_length=40)
+	     opcional_comenta=models.CharField(max_length=40)
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")	 
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")
@@ -185,11 +197,13 @@ class Usuarios(models.Model):
 	     facedireccion=models.URLField(blank=True)
 	     nombre_del_banco=models.CharField(max_length=40,blank=True,default="BANCO_AGRICOLA")
 	     numero_cuenta=models.CharField(max_length=40,blank=True)
+	     numero_tigo_money=models.CharField(max_length=40,blank=True)
 	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
 	     fecha_inicio_plan = models.DateField(default=datetime.now)
 	     fecha_final_plan = models.DateField(default=datetime.now)
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
-	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")	    
+	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")
+	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR")	    
 	     
 	     def __str__(self):
 		    		return  self.id_usuario
@@ -298,7 +312,7 @@ class Tiendas(models.Model):
 	     n_visitas=models.IntegerField(blank=True,default=0)
 	     ultimo_comentario=models.CharField(max_length=90,blank=True)
 	     administrador_junior=models.CharField(max_length=30,blank=True)
-	     email_junior = models.EmailField(blank=True)
+	     
 	     estado_tienda=models.CharField(max_length=30,blank=True,choices=ESTADO_TIENDA,default="DISPONIBLE")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)

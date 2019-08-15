@@ -52,22 +52,34 @@
 
 
 
-                     {%  if user.is_authenticated %}  
-                             <div class="btn-group">
+                     {%  if user.is_authenticated %}    
+              
+                                  <div class="btn-group">
                                             <button type="button" class="btn btn-success dropdown-toggle"
                                                     data-toggle="dropdown">
                                               Tienda <span class="caret"></span>
                                             </button>
                                            
-                                            <ul class="dropdown-menu" role="menu">                                                                                   
-                                                   <li><a href="/editar_usuario/{{user.id}}">Editar Usuario/cambiar Plan </a></li> 
-                                                   
+                                            <ul class="dropdown-menu" role="menu">                                                                         {% if t_usuario == 'EL_ADMINISTRADOR' %}
+
+                                                   <li><a href="/editar_usuario/{{user.id}}">Editar Usuario/cambiar Plan </a></li>                                                   
                                               
-                                                   <li><a href="/crear_tienda/">Crear una tienda</a></li>                                                                                                
+                                                   <li><a href="/crear_tienda/">Crear una tienda</a></li> 
+                                                {% else %}    
+
+                                                {% endif %}                                                                                               
                                                    <li><a href="/{{user.username}}">Ver mis tiendas"</a></li>
 
                                                    <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_VENDEDOR">Pedidos de los clientes</a></li>
                                                     <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Pedidos que quiero</a></li>
+
+                                                     {% if t_usuario == 'EL_DELIBERY'  %}
+
+                                                     <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_DELIBERY">Pedidos que quiero</a></li>
+                                                     
+                                                     {% else %}    
+
+                                                     {% endif %}                                                    
 
                                                   <!-- <li><a href="/ver_mis_mensajes/NUEVO/EL_VENDEDOR">Mensaje del cliente </a></li>
                                                    <li><a href="/ver_mis_mensajes/NUEVO/EL_COMPRADOR">Ver mis mensajes </a></li> -->

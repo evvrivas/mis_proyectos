@@ -16,7 +16,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = UsuariosForm
 class UsuariosAdmin(admin.ModelAdmin):
         model = Usuarios
-        list_display = ['nombre', 'plan_tienda_activo','codigoapk','email','fecha_inicio_plan','fecha_final_plan','clave']
+        list_display = ['nombre','tipo_usuario' ,'plan_tienda_activo','codigoapk','email','fecha_inicio_plan','fecha_final_plan','clave']
        
          
 admin.site.register(Usuarios,UsuariosAdmin)
