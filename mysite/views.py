@@ -74,10 +74,8 @@ def crear_categorias(request):
 
 
 
-  us=Usuarios(id_usuario="50378218224", clave="1111", nombre="Ernesto Vladimir Valdez Rivas", email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",pais="El Salvador",facedireccion="",codigoapk="NORMAL",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita,tipo_usuario="EL_ADMINISTRADOR")      
+  us=Usuarios(id_usuario="50378218224", clave="1111", nombre="Ernesto Vladimir Valdez Rivas", comentario_opcional="Soy la Laguna",email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",pais="El Salvador",codigoapk="NORMAL", nombre_del_banco="Banco Agricola Comercial",numero_cuenta="010101010101",numero_tigo_money="78218224",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita,tipo_usuario="EL_ADMINISTRADOR",tipo_de_vista="NORMAL")      
   us.save()
-
-
   
   return render(request,'principal.html',locals())
 
