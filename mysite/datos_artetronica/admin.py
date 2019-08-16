@@ -17,6 +17,7 @@ class RulesAdmin(admin.ModelAdmin):
 class UsuariosAdmin(admin.ModelAdmin):
         model = Usuarios
         list_display = ['nombre','tipo_usuario' ,'plan_tienda_activo','codigoapk','email','fecha_inicio_plan','fecha_final_plan','clave']
+        list_filter=(('plan_tienda_activo',admin.RelatedOnlyFieldListFilter),('tipo_usuario',admin.RelatedOnlyFieldListFilter),)
        
          
 admin.site.register(Usuarios,UsuariosAdmin)

@@ -60,7 +60,7 @@
                                               Tienda <span class="caret"></span>
                                             </button>
                                            
-                                            <ul class="dropdown-menu" role="menu">                                                                         {% if t_usuario == 'EL_ADMINISTRADOR' %}
+                                            <ul class="dropdown-menu" role="menu">                                                                         {% if t_usuario == "EL_ADMINISTRADOR" %}
 
                                                    <li><a href="/editar_usuario/{{user.id}}">Editar Usuario/cambiar Plan </a></li>                                                   
                                               
@@ -68,12 +68,12 @@
                                                 {% else %}    
 
                                                 {% endif %}                                                                                               
-                                                   <li><a href="/{{user.username}}">Ver mis tiendas"</a></li>
+                                                   <li><a href="/{{user.username}}">Ver mis tiendas</a></li>
 
                                                    <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_VENDEDOR">Pedidos de los clientes</a></li>
                                                     <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Pedidos que quiero</a></li>
 
-                                                     {% if t_usuario == 'EL_DELIBERY'  %}
+                                                     {% if t_usuario == "EL_DELIBERY"  %}
 
                                                      <li><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_DELIBERY">Pedidos que quiero</a></li>
                                                      
