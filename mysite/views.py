@@ -110,7 +110,7 @@ def info_usuario():
 
 
 
-def info_pagina():
+def info_pagina(request):
     cantidad_usuarios=Usuarios.objects.all().count()
     cantidad_tiendas=Tiendas.objects.all().count()
     cantidad_productos=Productos.objects.all().count()
@@ -124,6 +124,8 @@ def info_pagina():
           
     try:
           el_usuario=Usuarios.objects.get(id_usuario=request.user.username)
+
+
           t_usuario=el_usuario.tipo_usuario
     except:  
           t_usuario="EL_COMPRADOR"
@@ -1192,7 +1194,7 @@ def ver_el_carrito(request,estado_del_producto):
       categoria=n_categorias()
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
       t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina() 
-      el_usuario_x=el_usuario
+      el_usuario_x=t_usuario
 
 
 
@@ -1470,10 +1472,9 @@ def agregar_a_preferidas(request,id_de_la_tienda):
 
 def ver_las_preferidas(request):
 
-       preferidas=Preferidas.objects.filter(id_comprador=request.user.username)
-       
+       preferidas=Preferidas.objects.filter(id_comprador=request.user.username)       
     
-       tiendas=preferidas.values_list(tienda, flat=True)      
+       tiendas=preferidas.values_list(preferidas.tienda, flat=True)      
       
                               
        connection.close()                       
