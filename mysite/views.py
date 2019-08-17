@@ -364,50 +364,59 @@ def editar_usuario(request,acid):
        categoria=n_categorias()
        t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-       a=eval(acid)-1
 
-       acido=str(a)
-       f = Usuarios.objects.get(pk=acido)           
-       
-       if request.method == 'POST':
-            
-            form = UsuariosForm(request.POST,request.FILES,instance=f)
-       
-            if form.is_valid():
+       if t_usuario=="EL_ADMINISTRADOR" or t_usuario=="EL_VENDEDOR":
+             a=eval(acid)-1
 
-                    contra = form.cleaned_data['clave'] 
+             acido=str(a)
+             f = Usuarios.objects.get(pk=acido)           
+             
+             if request.method == 'POST':
+                  
+                  form = UsuariosForm(request.POST,request.FILES,instance=f)
+             
+                  if form.is_valid():
 
-                    user = User.objects.get(username=request.user.username)
-                    user.set_password(contra)
-                    user.save()
+                          contra = form.cleaned_data['clave'] 
 
-                    usu=form.save(commit=False)
-                    usu.id_usuario = request.user.username
-                    usu.save() # Guardar los datos en la base de datos 
-                    #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
-                    
-                    whatsapp=request.user.username
-                    fecha= datetime.datetime.now()
-                    mensaje= str(fecha)+"  "+str(whatsapp) + "EDITO SU ESTADO "+"\n"
-                    sender =str("xgangasx@gmail.com")
-                    asunto="edita"+" "+ str(whatsapp)
-                    try:
-                        send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
-                    except:
-                         pass        
-                    connection.close()
-                    return render(request,'confirmar.html',locals())             
-            
+                          user = User.objects.get(username=request.user.username)
+                          user.set_password(contra)
+                          user.save()
+
+                          usu=form.save(commit=False)
+                          usu.id_usuario = request.user.username
+                          usu.save() # Guardar los datos en la base de datos 
+                          #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
+                          
+                          whatsapp=request.user.username
+                          fecha= datetime.datetime.now()
+                          mensaje= str(fecha)+"  "+str(whatsapp) + "EDITO SU ESTADO "+"\n"
+                          sender =str("xgangasx@gmail.com")
+                          asunto="edita"+" "+ str(whatsapp)
+                          try:
+                              send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
+                          except:
+                               pass        
+                          connection.close()
+                          return render(request,'confirmar.html',locals())             
+                  
+             else:
+                  
+                  form = UsuariosForm(instance=f)
+                  
+
+              
+
+             connection.close()
+             #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
+             return render(request,'formulario_editar_usuario.html',locals())   
        else:
-            
-            form = UsuariosForm(instance=f)
-            
+             return render(request,'sin_autorizacion.html',locals())
 
-        
 
-       connection.close()
-       #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-       return render(request,'formulario_editar_usuario.html',locals())   
+
+
+
 
 @login_required
 def crear_tienda(request):                
@@ -418,52 +427,63 @@ def crear_tienda(request):
      categoria=n_categorias()
      t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina()
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username) 
+
+     if t_usuario=="EL_ADMINISTRADOR" or t_usuario=="EL_VENDEDOR":
     
-     if request.method == 'POST': # si el usuario est enviando el formulario con datos
-            form=TiendasForm(request.user.username,request.POST,request.FILES)                   
-                  
-            if form.is_valid():
-                          nombretienda = form.cleaned_data['nombre_tienda']
-                          tiendecilla = form.save(commit=False)
-                          # commit=False tells Django that "Don't send this to database yet.
-                          # I have more things I want to do with it."
-                          tiendecilla.id_usuario = request.user.username # Set the user object here             
-                                           
-                          tiendecilla.save() # Now you can send it to DB
-                          form.save()  
-                          connection.close()
-                          #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
-                          tiendas=Tiendas.objects.filter(id_usuario=request.user.username,nombre_tienda=nombretienda).first() 
+           if request.method == 'POST': # si el usuario est enviando el formulario con datos
+                  form=TiendasForm(request.user.username,request.POST,request.FILES)                   
                         
-                          return render(request,'confirmar.html',locals())     
-            else:
+                  if form.is_valid():
+                                nombretienda = form.cleaned_data['nombre_tienda']
+                                tiendecilla = form.save(commit=False)
+                                # commit=False tells Django that "Don't send this to database yet.
+                                # I have more things I want to do with it."
+                                tiendecilla.id_usuario = request.user.username # Set the user object here             
+                                                 
+                                tiendecilla.save() # Now you can send it to DB
+                                form.save()  
+                                connection.close()
+                                #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
+                                tiendas=Tiendas.objects.filter(id_usuario=request.user.username,nombre_tienda=nombretienda).first() 
+                              
+                                return render(request,'confirmar.html',locals())     
+                  else:
 
 
-                                      formCcomercial=CcomercialForm(request.POST,request.FILES) 
-                                      if formCcomercial.is_valid() :                           
+                                            formCcomercial=CcomercialForm(request.POST,request.FILES) 
+                                            if formCcomercial.is_valid() :                           
 
-                                              Ccomer = formCcomercial.save(commit=False)
-                                              # commit=False tells Django that "Don't send this to database yet.
-                                              # I have more things I want to do with it."
-                                              Ccomer.id_usuario = request.user.username # Set the user object here
-                                              
-                                              Ccomer.save() # Now you can send it to DB
-                                              formCcomercial.save() # Guardar los datos en la base de datos  print  
-                                              connection.close() 
-                                              return render(request,'formulario_ingreso.html',locals())                           
-                                                                           
-                                 
-                                          
+                                                    Ccomer = formCcomercial.save(commit=False)
+                                                    # commit=False tells Django that "Don't send this to database yet.
+                                                    # I have more things I want to do with it."
+                                                    Ccomer.id_usuario = request.user.username # Set the user object here
+                                                    
+                                                    Ccomer.save() # Now you can send it to DB
+                                                    formCcomercial.save() # Guardar los datos en la base de datos  print  
+                                                    connection.close() 
+                                                    return render(request,'formulario_ingreso.html',locals())                           
+                                                                                 
+                                       
+                                                
+           else:
+              formCcomercial=CcomercialForm()
+              form=TiendasForm(request.user.username)
+
+
+                                      
+
+           connection.close() 
+           return render(request,'formulario_ingreso.html',locals())
+     
+
      else:
-        formCcomercial=CcomercialForm()
-        form=TiendasForm(request.user.username)
+
+          return render(request,'sin_autorizacion.html',locals())
 
 
-                                
 
-     connection.close() 
-     return render(request,'formulario_ingreso.html',locals())
-        #return render_to_response('formulario.html', locals() ,context_instance=RequestContext(request))
+
+
 
 def editar_tienda(request,acid):   
         categoria=n_categorias()
@@ -533,11 +553,14 @@ def mis_tiendas(request,idusuario):
       t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina()
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
       
-      tiendas=Tiendas.objects.filter(id_usuario=idusuario)
-      connection.close()
+      if t_usuario=="EL_ADMINISTRADOR" or t_usuario=="EL_VENDEDOR":
+
+                tiendas=Tiendas.objects.filter(id_usuario=idusuario)
+                connection.close()
     
       return render(request,'catalogo.html',locals())   
-
+      else:
+                   return render(request,'sin_autorizacion.html',locals())
 
 
 
@@ -1162,7 +1185,7 @@ def contador_de_productos_carrito(el_usuario):
              
 
 @login_required
-def ver_el_carrito(request,estado_del_producto,el_usuario):
+def ver_el_carrito(request,estado_del_producto):
       categoria=n_categorias()
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
       t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina() 
@@ -1184,7 +1207,7 @@ def ver_el_carrito(request,estado_del_producto,el_usuario):
                 pass
 
 
-      elif el_usuario_x=="EL_VENDEDOR": #es el vendedor
+      elif el_usuario_x=="EL_VENDEDOR" or el_usuario_x=="EL_ADMINISTRADOR" or el_usuario_x=="EL_ADMINISTRADOR_JR" : #es el vendedor
 
 
 
@@ -1213,6 +1236,11 @@ def ver_el_carrito(request,estado_del_producto,el_usuario):
                             
                           else:
                             pass
+      
+
+
+
+
       else:
         pass                      
       

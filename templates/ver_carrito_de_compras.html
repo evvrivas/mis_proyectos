@@ -5,9 +5,7 @@
      
 <div class="panel panel-info">
       <div class="panel-heading">
-        
-
-      
+              
 
 <div class="row">  
 <div class="col-md-12">  
@@ -19,38 +17,12 @@
           
           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 
-         {% if el_usuario_x == "EL_VENDEDOR"  %}
-            <li><a href="/ver_el_carrito/NUEVO/EL_VENDEDOR">PEDIDOS</a></li>
-            <li><a href="/ver_el_carrito/EN_PROCESO/EL_VENDEDOR">EN PROCESO</li>
-            <li><a href="/ver_el_carrito/FINALIZADO/EL_VENDEDOR">FINALIZADO</li></li>
-            <li><a href="/ver_el_carrito/TODOS/EL_VENDEDOR">TODOS</a></li>
-         {% else %}
-         {% endif %}
-            
-            <li><a href="#">---------------</a></li>
-
-
-         {% if el_usuario_x == "EL_COMPRADOR" or  el_usuario_x == "EL_VENDEDOR" %}   
-            <li><a href="/ver_el_carrito/NUEVO/EL_COMPRADOR">MIS NUEVOS PEDIDOS</a></li>
-            <li><a href="/ver_el_carrito/EN_PROCESO/EL_COMPRADOR">EN PROCESO</li>
-            <li><a href="/ver_el_carrito/FINALIZADO/EL_COMPRADOR">FINALIZADO</li>
-            <li><a href="/ver_el_carrito/TODOS/EL_COMPRADOR">TODOS</a></li>
-         {% else %}
-         {% endif %}
-            
-
-            <li><a href="#">---------------</a></li>
-
-         {% if el_usuario_x == "EL_DELIBERY" %}
-
-            <li><a href="/ver_el_carrito/NUEVO/EL_DELIBERY">NUEVOS PEDIDOS</a></li>
-            <li><a href="/ver_el_carrito/EN_PROCESO/EL_DELIBERY">PEDIDOS PROCESO</li>
-            <li><a href="/ver_el_carrito/FINALIZADO/EL_DELIBERY">PEDIDO FINALIZADO</li>
-            <li><a href="/ver_el_carrito/TODOS/EL_DELIBERY">TODOS LOS PEDIDOS</a></li>
-
-         {% else %}
-          {% endif %}
-
+        
+            <li><a href="/ver_el_carrito/NUEVO">PEDIDOS</a></li>
+            <li><a href="/ver_el_carrito/EN_PROCESO">EN PROCESO</li>
+            <li><a href="/ver_el_carrito/FINALIZADO">FINALIZADO</li></li>
+            <li><a href="/ver_el_carrito/TODOS">TODOS</a></li>
+         
 
             
            </ul>

@@ -60,7 +60,7 @@
                                                  <li><a href="/crear_producto/{{user.username}}/{{tiendas.nombre_tienda}}">Subir un producto </a></li>      
                                                  <li><a href="/editar_tienda/{{tiendas.id}}">Editar mi tienda </a></li>
                                                  <li><a href="/ver_mis_mensajes/TODOS/EL_VENDEDOR">Ver mensajes </a>
-                                                 <li><a href="/ver_el_carrito/ATENDER_PEDIDOS/EL_VENDEDOR">Ver pedidos </a>
+                                                 <li><a href="/ver_el_carrito/ATENDER_PEDIDOS">Ver pedidos </a>
                                                  <br>
                                                  
 
@@ -102,7 +102,7 @@
 
                {%  if user.is_authenticated %}          
              
-                   <center>    <li> Hola.!.{{ user.username }}    <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">  <img src ='{% static "carrito2.png" %}' alt='img' > </a>    </li>   </center>   
+                   <center>    <li> Hola.!.{{ user.username }}    <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">  <img src ='{% static "carrito2.png" %}' alt='img' > </a>    </li>   </center>   
                                      
                {% endif %}  
 
