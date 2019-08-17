@@ -160,8 +160,10 @@ class RulesAdmin(admin.ModelAdmin):
     form = PreferidasForm
 class PreferidasAdmin(admin.ModelAdmin):
     model = Preferidas
-    list_display = ['id_comprador','id_comercio','fecha_ingreso']
+    list_display = ['id_comprador','nombre_tienda','fecha_ingreso']
     list_filter=(('id_comprador',admin.RelatedOnlyFieldListFilter))
+    def nombre_tienda(self,instance):
+        return instance.tienda.nombre_tienda
 ####################################################
    
 

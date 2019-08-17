@@ -1452,13 +1452,13 @@ def agregar_a_preferidas(request,id_de_la_tienda):
      lafecha=datetime.datetime.now()
 
 
-     conteo=Preferidas.objects.filter(id_comprador=request.user.username,id_comercio=id_de_la_tienda).count()
+     conteo=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=id_de_la_tienda).count()
 
      if conteo<=0:
-          a=Preferidas(id_comprador=request.user.username,id_comercio=id_de_la_tienda,fecha_ingreso=lafecha)
+          a=Preferidas(id_comprador=request.user.username,tienda=tiendas,fecha_ingreso=lafecha)
           a.save()
      else:    
-        Preferidas.objects.get(id_comercio=id_de_la_tienda).delete()     
+        Preferidas.objects.get(tienda__id=id_de_la_tienda).delete()     
 
      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -1469,10 +1469,9 @@ def ver_las_preferidas(request):
 
        preferidas=Preferidas.objects.filter(id_comprador=request.user.username)
        
-       tiendas=[]
-       for i in preferidas: 
-          x=Tiendas.objects.get(id=i.id_comercio) 
-          tiendas.append(i)
+    
+       tiendas=preferidas.values_list(tienda, flat=True)      
+      
                               
        connection.close()                       
        return render(request,'catalogo.html',locals())   

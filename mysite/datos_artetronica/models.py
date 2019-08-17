@@ -508,7 +508,7 @@ class Carro_de_compras(models.Model):
 
 class Preferidas(models.Model):	
 	id_comprador=models.CharField(max_length=30,blank=True,null=True)
-	id_comercio=models.IntegerField(blank=True,default=0)
+	tienda=models.ForeignKey('Tiendas',blank=True,null=True)
 	fecha_ingreso = models.DateField(default=datetime.now)  
 
 	def __str__(self):
