@@ -123,7 +123,7 @@ def info_pagina(requesta):
 
           
     try:
-          el_usuario=Usuarios.objects.get(id_usuario=request.user.username)
+          el_usuario=Usuarios.objects.get(id_usuario=requesta.user.username)
 
 
           t_usuario=el_usuario.tipo_usuario
