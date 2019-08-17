@@ -558,7 +558,7 @@ def mis_tiendas(request,idusuario):
                 tiendas=Tiendas.objects.filter(id_usuario=idusuario)
                 connection.close()
     
-      return render(request,'catalogo.html',locals())   
+                return render(request,'catalogo.html',locals())   
       else:
                    return render(request,'sin_autorizacion.html',locals())
 
