@@ -42,11 +42,11 @@
 
       <center>
 
-              {% thumbnail tiendas.imagen1 "x30" crop="center" as im %}
-                
+              {% thumbnail tiendas.imagen1 "x30" crop="center" as im %}          
                   
               <a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
              </a>
+             {% endthumbnail %}
 
              {%  if user.is_authenticated and user.username == tiendas.id_usuario %}          
                        
@@ -97,7 +97,7 @@
               <a href="/">  <img src ='{% static "logo2.png" %}' alt='img' >
               
 
-              {% endthumbnail %}
+              
 
 
                {%  if user.is_authenticated %}          
