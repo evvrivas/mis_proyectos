@@ -164,7 +164,8 @@ class PreferidasAdmin(admin.ModelAdmin):
     list_filter=(('id_comprador',admin.RelatedOnlyFieldListFilter))
     def nombre_tienda(self,instance):
         return instance.tienda.nombre_tienda
-####################################################
-   
+
+admin.site.register(Preferidas,PreferidasAdmin)
+####################################################   
 
 

@@ -1473,11 +1473,9 @@ def agregar_a_preferidas(request,id_de_la_tienda):
 def ver_las_preferidas(request):
 
        preferidas=Preferidas.objects.filter(id_comprador=request.user.username)     
+       pk_tiendas=preferidas.values_list("tienda", flat=True)     
+       tiendas=Tiendas.objects.filter(pk__in=pk_tiendas)
 
-    
-       tiendas=preferidas.values_list("tienda", flat=True)    
-            
-      
                               
        connection.close()                       
        return render(request,'catalogo.html',locals())   
