@@ -1472,9 +1472,10 @@ def agregar_a_preferidas(request,id_de_la_tienda):
 
 def ver_las_preferidas(request):
 
-       preferidas=Preferidas.objects.filter(id_comprador=request.user.username)       
+       preferidas=Preferidas.objects.filter(id_comprador=request.user.username)     
+
     
-       tiendas=preferidas.values_list(preferidas.tienda, flat=True)      
+       tiendas=preferidas.values_list(tienda, flat=True)      
       
                               
        connection.close()                       
