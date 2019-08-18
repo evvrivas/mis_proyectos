@@ -1475,7 +1475,8 @@ def ver_las_preferidas(request):
        preferidas=Preferidas.objects.filter(id_comprador=request.user.username)     
 
     
-       tiendas=preferidas.values_list(tienda, flat=True)      
+       tiendas=preferidas.values_list("tienda", flat=True)    
+            
       
                               
        connection.close()                       
