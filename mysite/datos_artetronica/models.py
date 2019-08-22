@@ -183,6 +183,23 @@ TIPO_USUARIO=(
 
 						
 			)
+
+CIUDADES= (
+	        ("AHUACHAPAN", "AHUACHAPAN"), 
+	        ("SANTA_ANA","SANTA_ANA"), 
+	        ("SONSONATE","SONSONATE"),
+	        ("CHALATENANGO","CHALATENANGO"),
+	        ( "CABANAS", "CABANAS"),
+	        ("LA_LIBERTAD","LA_LIBERTAD"),
+	        ("LA_PAZ","LA_PAZ"),
+	        ("MORAZAN","MORAZAN"),
+	        ("CUSCATLAN","CUSCATLAN"),
+	        ("SAN_MIGUEL","SAN_MIGUEL"),
+	        ("LA_UNION","LA_UNION"),
+	        ("USULUTAN","USULUTAN"),
+	        ("SAN_VICENTE","SAN_VICENTE"),
+	        ("SAN_SALVADOR","SAN_SALVADOR"),							
+		)
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
 	     clave=models.CharField(max_length=4)
@@ -226,22 +243,7 @@ ESTADO_TIENDA= (
 			('NO_DISPONIBLE', 'NO_DISPONIBLE'),						
 			)
 
-CIUDADES= (
-	        ("AHUACHAPAN", "AHUACHAPAN"), 
-	        ("SANTA_ANA","SANTA_ANA"), 
-	        ("SONSONATE","SONSONATE"),
-	        ("CHALATENANGO","CHALATENANGO"),
-	        ( "CABANAS", "CABANAS"),
-	        ("LA_LIBERTAD","LA_LIBERTAD"),
-	        ("LA_PAZ","LA_PAZ"),
-	        ("MORAZAN","MORAZAN"),
-	        ("CUSCATLAN","CUSCATLAN"),
-	        ("SAN_MIGUEL","SAN_MIGUEL"),
-	        ("LA_UNION","LA_UNION"),
-	        ("USULUTAN","USULUTAN"),
-	        ("SAN_VICENTE","SAN_VICENTE"),
-	        ("SAN_SALVADOR","SAN_SALVADOR"),							
-		)
+
 
 
 SUPER_CATEGORIA=(
