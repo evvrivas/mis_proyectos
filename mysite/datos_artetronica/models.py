@@ -177,10 +177,8 @@ BANCO=(
 
 
 TIPO_USUARIO=(
-			('EL_COMPRADOR', 'EL_COMPRADOR'),
-			('EL_VENDEDOR', 'EL_VENDEDOR'),
-			('EL_ADMINISTRADOR', 'EL_ADMINISTRADOR'),
-			('EL_ADMINISTRADOR_JR', 'EL_ADMINISTRADOR_JR'),
+			('EL_COMPRADOR', 'EL_COMPRADOR'),			
+			('EL_ADMINISTRADOR', 'EL_ADMINISTRADOR'),			
 			('EL_DELIBERY', 'EL_DELIBERY'),
 
 						
@@ -189,11 +187,11 @@ class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
 	     clave=models.CharField(max_length=4)
 	     nombre=models.CharField(max_length=40)
+	     estoy_en=models.CharField(max_length=30,blank=True,choices=CIUDADES)
 	     comentario_opcional=models.CharField(max_length=40,blank=True)
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")	 
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")
-	     pais=models.CharField(max_length=30,blank=True)
 	     facedireccion=models.URLField(blank=True)
 	     nombre_del_banco=models.CharField(max_length=40,blank=True,default="BANCO_AGRICOLA")
 	     numero_cuenta=models.CharField(max_length=40,blank=True)

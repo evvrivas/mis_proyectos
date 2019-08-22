@@ -124,16 +124,16 @@ def info_pagina(requesta):
           
     try:
           el_usuario=Usuarios.objects.get(id_usuario=requesta.user.username)
-
-
           t_usuario=el_usuario.tipo_usuario
+          t_ciudad=el_usuario.estoy_en
     except:  
           t_usuario="EL_COMPRADOR"
+          t_ciudad="TODOS"
 
 
     connection.close()
     cantidad_mensajes=0  
-    return t_usuario,cantidad_usuarios, cantidad_tiendas, cantidad_productos,cantidad_pedidos,cantidad_mensajes
+    return t_ciudad,t_usuario,cantidad_usuarios, cantidad_tiendas, cantidad_productos,cantidad_pedidos,cantidad_mensajes
 
 
 
@@ -234,15 +234,21 @@ def categorizar(idusuario,nombretienda):
         return categoria
 
 
-def publicida_inteligencia(request):
+def publicida_inteligencia(request,ciudad):
     
     items=Buscar.objects.filter(id_usuario=request.user.username).order_by("-fecha_busqueda").first()
     palabra=items.item_de_busqueda
-            
-    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
-    tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
-    comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(ubicacion__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).order_by("id")[:3] 
-             
+
+    if ciudad!="TODOS"            
+          productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
+          tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
+          comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(ubicacion__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).order_by("id")[:3] 
+    else:
+          productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(tienda__ubicacion=ciudad).order_by("id")[:6]
+          tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(ubicacion=ciudad).order_by("id")[:6]
+          comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(ubicacion__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).filter(ubicacion=ciudad).order_by("id")[:3] 
+
+
     connection.close()       
     return  comercio,tiendas,productos
 
@@ -319,7 +325,7 @@ def crear_usuario(request):
         # -*- coding: latin-1 -*-
         categoria=n_categorias()
         
-        t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+        ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
         mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
         import os, sys
@@ -367,10 +373,10 @@ def crear_usuario(request):
 @login_required
 def editar_usuario(request,acid):   
        categoria=n_categorias()
-       t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
-       if t_usuario=="EL_ADMINISTRADOR" or t_usuario=="EL_VENDEDOR":
+       if t_usuario=="EL_ADMINISTRADOR":
              a=eval(acid)-1
 
              acido=str(a)
@@ -430,7 +436,7 @@ def crear_tienda(request):
      # -*- coding: latin-1 -*-
      import os, sys
      categoria=n_categorias()
-     t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+     ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username) 
 
      if t_usuario=="EL_ADMINISTRADOR" or t_usuario=="EL_VENDEDOR":
@@ -492,7 +498,7 @@ def crear_tienda(request):
 
 def editar_tienda(request,acid):   
         categoria=n_categorias()
-        t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+        ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
         mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
         
         f = Tiendas.objects.get(pk=acid)           
@@ -555,7 +561,7 @@ def mi_tienda(request,idusuario,nombretienda):
 def mis_tiendas(request,idusuario):
   
       categoria=n_categorias()
-      t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
       
       if t_usuario=="EL_ADMINISTRADOR" or t_usuario=="EL_VENDEDOR":
@@ -579,7 +585,7 @@ def mis_tiendas(request,idusuario):
 def ver_categorias(request,item):
   
   categoria=n_categorias()
-  t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+  ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   
    
@@ -689,8 +695,10 @@ def busqueda_tienda(request,idusuario,nombretienda):
 
 def busqueda(request):
      categoria=n_categorias()
-     t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+     ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+
+
      
      if request.POST:
         palabra = request.POST.get('nombre')
@@ -740,6 +748,11 @@ def busqueda(request):
                else:
                   pass    
      
+     usuario=Usuarios.objects.get(id_usuario=request.user.username)
+     usuario.estoy_en=ciudad
+     usuario.save()
+
+
      connection.close()
      return render(request,'catalogo.html',locals())   
                   
@@ -750,7 +763,7 @@ import datetime
 def pagina_principal(request):   
 
 
-                         t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+                         ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
                          categoria=n_categorias()
                          
                          mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username) 
@@ -759,32 +772,72 @@ def pagina_principal(request):
                          configurar.n_visitas+=1         
                          configurar.save()
 
+                         usuario=Usuarios.objects.get(id_usuario=request.user.username)
+                         ciudad=usuario.estoy_en
+                         
+
                          
                          try:
-                             comercio,tiendas,productos=publicida_inteligencia(request)
-                         except:
-                             pass
-                         nuevo_comercio=Ccomercial.objects.all().order_by("-id")[:6]
-                         nuevas_tiendas=Tiendas.objects.all().order_by("-id")[:6]
-                         nuevos_productos=Productos.objects.all().order_by("-id")[:6]
-                         
-                         try:
-                            count = Tiendas.objects.all().count()
-                            rand_ids = sample(range(1, count), 3)
-                            aleatorias_tiendas=Tiendas.objects.filter(id__in=rand_ids)
-                         except:
-                             pass
-                         try:                      
-                            count = Productos.objects.all().count()
-                            rand_ids = sample(range(1, count), 3)
-                            aleatorias_productos=Productos.objects.filter(id__in=rand_ids)
+                             comercio,tiendas,productos=publicida_inteligencia(request,ciudad)
                          except:
                              pass
 
-                         try:                      
-                            count = Ccomercial.objects.all().count()
-                            rand_ids = sample(range(1, count), 3)
-                            aleatorias_comercio=Ccomercial.objects.filter(id__in=rand_ids)
+
+                         if ciudad != "TODOS"
+                               nuevo_comercio=Ccomercial.objects.all().order_by("-id")[:6]
+                               nuevas_tiendas=Tiendas.objects.all().order_by("-id")[:6]
+                               nuevos_productos=Productos.objects.all().order_by("-id")[:6]
+                         else:
+                               nuevo_comercio=Ccomercial.objects.filter(ubicacion=ciudad).order_by("-id")[:6]
+                               nuevas_tiendas=Tiendas.objects.filter(ubicacion=ciudad).order_by("-id")[:6]
+                               nuevos_productos=Productos.objects.filter(ubicacion=ciudad).order_by("-id")[:6]
+
+                                                  
+                        
+                         try:
+                            if ciudad != "TODOS"
+                                  count = Tiendas.objects.all().count()
+                                  rand_ids = sample(range(1, count), 3)                                  
+                                  aleatorias_tiendas=Tiendas.objects.filter(id__in=rand_ids)
+                            else:
+                                  count = Tiendas.objects.filter(ubicacion=ciudad).count()
+                                  rand_ids = sample(range(1, count), 3)                                  
+                                  aleatorias_tiendas=Tiendas.objects.filter(id__in=rand_ids)
+
+
+                         except:
+                             pass
+                        
+
+
+                         try:     
+
+                             if ciudad != "TODOS"               
+                                  count = Productos.objects.all().count()
+                                  rand_ids = sample(range(1, count), 3)
+                                  aleatorias_productos=Productos.objects.filter(id__in=rand_ids)
+                             else:
+                                  ount = Productos.objects.filter(ubicacion=ciudad).count()
+                                  rand_ids = sample(range(1, count), 3)
+                                  aleatorias_productos=Productos.objects.filter(id__in=rand_ids)
+
+
+                         except:
+                             pass
+
+
+
+                         try:    
+                            if ciudad != "TODOS"                  
+                                  count = Ccomercial.objects.all().count()
+                                  rand_ids = sample(range(1, count), 3)
+                                  aleatorias_comercio=Ccomercial.objects.filter(id__in=rand_ids)
+                            
+                            else:
+                                  count = Ccomercial.objects.filter(ubicacion=ciudad).count()
+                                  rand_ids = sample(range(1, count), 3)
+                                  aleatorias_comercio=Ccomercial.objects.filter(id__in=rand_ids)
+
                          except:
                              pass
 
@@ -798,7 +851,7 @@ def pagina_principal(request):
 
 def catalogo(request, var):
   categoria=n_categorias()
-  t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+  ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
   #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
@@ -807,7 +860,7 @@ def catalogo(request, var):
 
 def informacion(request):
   categoria=n_categorias()
-  t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+  ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   #return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
   connection.close()
@@ -815,7 +868,7 @@ def informacion(request):
 
 def informacion_vendedor(request,idusuario):
       categoria=n_categorias()
-      t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
      
 
       usuario=Usuarios.objects.filter(id_usuario=idusuario).first()
@@ -834,7 +887,7 @@ from mysite.datos_artetronica.cart import Cart
 def add_to_cart(request,product_id,idusuario,nombretienda):    
     
     categoria=n_categorias()
-    t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
     quantity= request.POST.get("cant")
@@ -855,7 +908,7 @@ def add_to_cart(request,product_id,idusuario,nombretienda):
 @login_required
 def remove_from_cart(request, product_id):
     categoria=n_categorias()
-    t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
     product = Productos.objects.get(id=product_id)
@@ -1055,7 +1108,7 @@ def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
 @login_required
 def cambiar_estado_tienda(request,idusuario,id_dela_tienda,estado):
                         categoria=n_categorias()
-                        t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)                           
+                        ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)                           
                        
                         tiend = Tiendas.objects.get(pk=id_dela_tienda)
                                                                        
@@ -1115,7 +1168,7 @@ def descargar(request,idusuario,nombretienda,id_del_producto):
 
 def centro_comercial(request,idusuario,nombre_del_centro_comercial):
     categoria=n_categorias()
-    t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)        
+    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)        
     
     tiendas= Tiendas.objects.filter(Q(ccomercial__nombre_ccomercial__icontains=nombre_del_centro_comercial))
 
@@ -1130,7 +1183,7 @@ def centro_comercial(request,idusuario,nombre_del_centro_comercial):
 def agregar_producto_al_carrito(request,id_del_producto,foto):   
     categoria=n_categorias()
     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-    t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
     
     el_producto=Productos.objects.get(id=id_del_producto)
 
@@ -1193,7 +1246,7 @@ def contador_de_productos_carrito(el_usuario):
 def ver_el_carrito(request,estado_del_producto):
       categoria=n_categorias()
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-      t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request) 
+      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request) 
       el_usuario_x=t_usuario
 
 
@@ -1212,18 +1265,18 @@ def ver_el_carrito(request,estado_del_producto):
                 pass
 
 
-      elif el_usuario_x=="EL_VENDEDOR" or el_usuario_x=="EL_ADMINISTRADOR" or el_usuario_x=="EL_ADMINISTRADOR_JR" : #es el vendedor
+      elif el_usuario_x=="EL_ADMINISTRADOR" : #es el vendedor
 
 
 
               if estado_del_producto=="TODOS":
-                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(id_comprador=request.user.username)).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="NUEVO":
-                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)| Q(id_comprador=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="EN_PROCESO":
-                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)| Q(id_comprador=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="FINALIZADO":
-                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)| Q(id_comprador=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
                 
               else:
                 pass
@@ -1255,7 +1308,7 @@ def ver_el_carrito(request,estado_del_producto):
 def eliminar_producto_del_carrito(request,id_producto):
        categoria=n_categorias()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-       t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
 
        Carro_de_compras.objects.get(id=id_producto).delete()
        carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).order_by("producto__tienda__nombre_tienda")
@@ -1267,7 +1320,7 @@ def eliminar_producto_del_carrito(request,id_producto):
 def editar_producto_del_carrito(request,id_producto):  
        categoria=n_categorias()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-       t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
 
        f = Carro_de_compras.objects.get(pk=id_producto)           
        
@@ -1303,7 +1356,7 @@ def editar_producto_del_carrito(request,id_producto):
 def editar_estado_producto_del_carrito(request,id_producto,el_usuario):  
        categoria=n_categorias()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-       t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
 
        f = Carro_de_compras.objects.get(pk=id_producto) 
 
@@ -1345,7 +1398,7 @@ def editar_estado_producto_del_carrito(request,id_producto,el_usuario):
 def realizar_compra(request):
      categoria=n_categorias()
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-     t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+     ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
 
      carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username,estado_prod="QUIERO PEDIR ESTO").order_by("producto__tienda__nombre_tienda")
      
@@ -1360,7 +1413,7 @@ def realizar_compra(request):
 def realizar_compra_individual(request,id_producto):
      categoria=n_categorias()
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-     t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+     ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
 
      carrito= Carro_de_compras.objects.get(id=id_producto)
      carrito.estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO" 
@@ -1373,7 +1426,7 @@ def realizar_compra_individual(request,id_producto):
 def enviar_mensaje(request,id_del_producto): 
     categoria=n_categorias()
     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-    t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
     
     producto_x=Productos.objects.get(id=id_del_producto)
    
@@ -1396,7 +1449,7 @@ def ver_mis_mensajes(request,estado_mensaje,el_usuario):
                
                 categoria=n_categorias()
                 mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)                
-                t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+                ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
 
                 el_usuario_x=el_usuario  
                 if el_usuario_x=="EL_VENDEDOR":
@@ -1431,7 +1484,7 @@ def ver_mis_mensajes(request,estado_mensaje,el_usuario):
 
 def responder_mensaje(request,id_mensaje):
      categoria=n_categorias()
-     t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+     ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
      
      f = Mensajes.objects.get(pk=id_mensaje)

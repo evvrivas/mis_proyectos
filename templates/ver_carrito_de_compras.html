@@ -30,9 +30,7 @@
           
 </div>
 </div>
-
-
-                             
+                            
 
 
 <br>
@@ -118,12 +116,16 @@
 
                   {% if i.lugar_de_entrega %}
                       <p> Lugar de entrega {{i.lugar_de_entrega}} </p>
+                       <br>
+
                   {% else %} 
                   {% endif %}     
                   
 
                   {% if i.fecha_de_entrega %}
                       <p> fecha de entrega {{i.fecha_de_entrega}} </p> 
+                       <br>
+
                   {% else %} 
                   {% endif %}    
                   
@@ -131,6 +133,8 @@
                   {% if i.servicio_a_domicilio %}
                       <p> servicio a domicilio {{i.servicio_a_domicilio}} </p>
                      <h4> <p> costo_servicio a domicilio {{i.costo_servicio}} </p></h4>
+                      <br>
+
                   {% else %} 
                   {% endif %}  
                   
@@ -184,7 +188,7 @@
                         </center> 
 
       
-    {% elif el_usuario_x == "EL_VENDEDOR" %}
+    {% elif el_usuario_x == "EL_ADMINISTRADOR" %}
 
               
  
@@ -198,7 +202,7 @@
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.id_comprador}}&text=Hola%2C%20rs_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
 
                                     <td WIDTH="90"><a href="tel://+{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
                                     {{i.producto.tienda.nombre_tienda}}
@@ -206,6 +210,29 @@
                                 </tr >
                         </table>
                         </center> 
+    {% elif el_usuario_x == "EL_DELIBERY" %}
+
+          {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+              {% else %}
+                
+              {% endif %} 
+
+              <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+
+                                    <td WIDTH="90"><a href="tel://+{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    {{i.producto.tienda.nombre_tienda}}
+                                   
+                                </tr >
+                        </table>
+                        </center> 
+
+
+
 
     {% else %}
 
@@ -280,28 +307,8 @@
                 </div>                                                    
           </div>       
     </div>                          
-                         <br> 
-                             <h2><center>Total a pagar </center></h2>
-                              
-                         <br>
-
-                             
-                              <br>
-                              <div class="row"> 
-
-                    <center>
-                 <table BORDER="0" CELLSPACING="1">
-                                <tr  align="center">
-
-                                    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Hola%2C%20deseo%20informacion"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
-                                    <td WIDTH="60"><a href="tel://{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    
-                                    <td WIDTH="60"><a href="https://m.me/j.facedireccion"><img src='{% static "mesenger.png" %}' alt='img'/></a></td>
-                                </tr >
-                        </table>
-                        </center>
-
-                 </div>
+                      
+                           
                               
                               
                                                                  
