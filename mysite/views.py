@@ -239,7 +239,7 @@ def publicida_inteligencia(request,ciudad):
     items=Buscar.objects.filter(id_usuario=request.user.username).order_by("-fecha_busqueda").first()
     palabra=items.item_de_busqueda
 
-    if ciudad!="TODOS"            
+    if ciudad!="TODOS":            
           productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
           tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).order_by("id")[:6]
           comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(ubicacion__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).order_by("id")[:3] 
