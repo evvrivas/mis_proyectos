@@ -105,7 +105,7 @@
                        
 
                       <h6><p>{{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </p>  </h6>
-                      <h6><p>cliente: {{i.nombre_comprador}} : {{i.id_comprador}} </p>  </h6>
+                      <h6><p>cliente: {{i.nombre_comprador}} {{i.apellido_comprador}}: {{i.id_comprador}} </p>  </h6>
                       <h6><p> Cant. {{ i.cantidad }} {{ i.producto.nombre }}  $P/U = {{ i.producto.precio_A}}  </p>  </h6>          
                       <h6><p>{{ i.especificacion }}  </p> </h6>
                       <h6><p>{{ i.estado_prod }}  </h6>
@@ -276,10 +276,7 @@
                                 <button  class="btn btn-primary">PRODUCTO ENTREGADO</button> 
                             {% endif %} 
 
-    
-
-
-                      
+                     
 
 
                     

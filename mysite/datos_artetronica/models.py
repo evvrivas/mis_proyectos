@@ -212,6 +212,7 @@ class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
 	     clave=models.CharField(max_length=4)
 	     nombre=models.CharField(max_length=40)
+	     apellido=models.CharField(max_length=40)
 	     estoy_en=models.CharField(max_length=30,blank=True,choices=CIUDADES)
 	     comentario_opcional=models.CharField(max_length=40,blank=True)
 	     email = models.EmailField(blank=True)
@@ -493,7 +494,8 @@ SERVICIO = (
 class Carro_de_compras(models.Model):
 	producto=models.ForeignKey('Productos',blank=True,null=True)
 	id_comprador=models.CharField(max_length=30,blank=True,null=True)
-	nombre_comprador=models.CharField(max_length=30,blank=True,null=True)
+	nombre_comprador=models.CharField(max_length=40,blank=True,null=True)
+	apellido_comprador=models.CharField(max_length=40,blank=True,null=True)
 	
 	     
 	#id_vendedor=models.CharField(max_length=30,blank=True,null=True)

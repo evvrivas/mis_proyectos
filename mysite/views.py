@@ -72,10 +72,10 @@ def crear_categorias(request):
 
   fechita=datetime.datetime.now()
 
-  u1=User.objects.create_user(username="50378218224", password="1111",email="evvrivas@gmail.com",first_name="Ernesto",last_name="Valdez")
+  u1=User.objects.create_user(username="50378218224", password="1111",email="evvrivas@gmail.com",first_name="Ernesto Vladimir",last_name="Valdez Rivas")
   u1.save()
   
-  us=Usuarios(id_usuario="50378218224", clave="1111", nombre="Ernesto Vladimir Valdez Rivas", comentario_opcional="Soy la Laguna",email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",estoy_en="AHUACHAPAN",codigoapk="NORMAL", nombre_del_banco="Banco Agricola Comercial",numero_cuenta="010101010101",numero_tigo_money="78218224",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita,tipo_usuario="EL_ADMINISTRADOR",tipo_de_vista="NORMAL")      
+  us=Usuarios(id_usuario="50378218224", clave="1111", nombre="Ernesto Vladimir",apellido="Valdez Rivas", comentario_opcional="Soy la Laguna",email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",estoy_en="AHUACHAPAN",codigoapk="NORMAL", nombre_del_banco="Banco Agricola Comercial",numero_cuenta="010101010101",numero_tigo_money="78218224",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita,tipo_usuario="EL_ADMINISTRADOR",tipo_de_vista="NORMAL")      
   us.save()
 
   
@@ -749,9 +749,13 @@ def busqueda(request):
                else:
                   pass    
      
-     usuario=Usuarios.objects.get(id_usuario=request.user.username)
-     usuario.estoy_en=ciudad
-     usuario.save()
+        try:
+            if ciudad!="TODOS":
+               usuario=Usuarios.objects.get(id_usuario=request.user.username)
+               usuario.estoy_en=ciudad
+               usuario.save()
+        except:  
+            pass
 
 
      connection.close()
@@ -1205,7 +1209,7 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
                
                  n=Usuarios.objects.get(id_usuario=request.user.username)     
                  #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
-                 carrito=Carro_de_compras(nombre_comprador=n.nombre, mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
+                 carrito=Carro_de_compras(nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
                  
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

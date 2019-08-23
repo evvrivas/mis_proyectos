@@ -45,7 +45,7 @@
                         <br>
                         <p>{{j.descripcion_ccomercial | linebreaks}} </p>  
                         <br>
-                         <p>{{j.ubicacion}}</p> 
+                         
                             
                                
                     </div>
@@ -76,7 +76,7 @@
 
                       
                      <div class="thumbnail">                      
-                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}}</a></li>
                         
 
                         {% thumbnail j.imagen1 "360" crop="center" as im %}
@@ -308,7 +308,7 @@
                         <br>
                         <p>{{j.descripcion_ccomercial | linebreaks}} </p>  
                         <br>
-                         <p>{{j.ubicacion}}</p> 
+                        
                             
                                
                     </div>
@@ -338,7 +338,7 @@
   <div class="col-md-3">   
                       
                      <div class="thumbnail">                      
-                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}}</a></li>
                         {% thumbnail j.imagen1 "360" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
 
@@ -535,7 +535,7 @@
   <div class="col-md-3">   
                       
                      <div class="thumbnail">                      
-                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}}</a></li>
                         {% thumbnail j.imagen1 "360" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
 
@@ -747,8 +747,7 @@
                         <br>
                         <center><p>{{j.descripcion_ccomercial | linebreaks}} </p>  </center>
                         <br>
-                          <center><p>{{j.ubicacion}}</p>  </center>
-                            
+                         
                                
                     </div>
                
