@@ -89,9 +89,9 @@ ESTADO_PRODUCTO= (
 			)
 
 PLAN_PUBLICIDAD= (
-	        ('SIN_PLAN_PUBLICITARIO $0.0', 'PUBLICIDAD_0'), 
-			('PLAN_SIEMPRE_PRIMERO $15.0/mes', 'PUBLICIDAD_1'),
-			('PLAN_SIEMPRE_PRIMERO_DIRIGIDO $10.0/mes', 'PUBLICIDAD_2'),
+	        ('PUBLICIDAD_0','SIN_PLAN_PUBLICITARIO $0.0'), 
+			('PUBLICIDAD_1','PLAN_SIEMPRE_PRIMERO $15.0/mes'),
+			('PUBLICIDAD_2','PLAN_SIEMPRE_PRIMERO_DIRIGIDO $10.0/mes'),
 			)
 class Productos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
@@ -474,7 +474,7 @@ ESTADO3 = (
 			)
 
 ENTREGA = (
-			('QUIERO ', 'QUIERO_PEDIR_ESTO'),
+			('QUIERO_PEDIR_ESTO ', 'QUIERO_PEDIR_ESTO'),
 			('EL_VENDEDOR_RECIBIO_EL_PEDIDO', 'EL_VENDEDOR_RECIBIO_EL_PEDIDO'),
 			('EL_VENDEDOR_A_CONFIRMADO', 'EL_VENDEDOR_A_CONFIRMADO'),
 			('PRODUCTO_ENTREGADO', 'PRODUCTO_ENTREGADO'),
@@ -484,9 +484,9 @@ ENTREGA = (
 			)
 
 SERVICIO = (
-			('Si, A domicilio $?', 'SI'),
-			('LLegare por el pedido', 'NO'),
-			('Escribame para acordar entrega', 'TALVES'),
+			('SI','Si, A domicilio $?'),
+			('NO','LLegare por el pedido'),
+			('TALVES','Escribame para acordar entrega'),
 				
 			
 			)
