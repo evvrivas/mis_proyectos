@@ -17,7 +17,7 @@ class ProductosForm(ModelForm):
 	class Meta:
 		model= Productos
 		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}
-		exclude=["id_usuario","puntuacion","fecha_ingreso","ultima_fecha_edicion"]
+		exclude=["id_usuario","puntuacion","fecha_ingreso","ultima_fecha_edicion","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan"]
 	
 	def __init__(self, user,nombre_tienda,*args, **kwargs):
 		super(ProductosForm, self).__init__(*args, **kwargs)		
@@ -46,7 +46,7 @@ class TiendasForm(ModelForm):
 	class Meta:
 		model= Tiendas	
 		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}	
-		exclude=["tipo_de_vista","codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario","ultima_fecha_edicion"]
+		exclude=["tipo_de_vista","codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario","ultima_fecha_edicion","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan"]
 	def __init__(self, user,*args, **kwargs):
 		super(TiendasForm, self).__init__(*args, **kwargs)
 		self.fields['ccomercial'].queryset=Ccomercial.objects.all()
@@ -79,7 +79,7 @@ class CcomercialForm(ModelForm):
 	class Meta:			
 		model=Ccomercial
 		widgets = {'descripcion_ccomercial': Textarea(attrs={'cols': 30, 'rows': 2})}
-		exclude=["id_usuario"]
+		exclude=["id_usuario","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan"]
 
 class Carro_de_comprasForm(ModelForm):
 	class Meta:			

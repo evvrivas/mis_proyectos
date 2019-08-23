@@ -28,7 +28,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = ProductosForm
 class ProductosAdmin(admin.ModelAdmin):
         model = Productos
-        list_display = ['id_usuario','tienda_nombre','cantidad', 'nombre','precio_A','precio_B','estado_prod']
+        list_display = ['id_usuario','tienda_nombre','cantidad', 'nombre','precio_A','precio_B','estado_prod','plan_publicidad_activo','fecha_inicio_plan','fecha_final_plan',]
         list_filter=(('tienda',admin.RelatedOnlyFieldListFilter),('categoria',admin.RelatedOnlyFieldListFilter),)
         def tienda_nombre(self,instance):
                 return instance.tienda.nombre_tienda
@@ -64,7 +64,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = TiendasForm
 class TiendasAdmin(admin.ModelAdmin):
     model = Tiendas
-    list_display = ['id_usuario','centro_comecial', 'nombre_tienda','codigoapk','nombre_categoria','n_visitas','administrador_junior','promocion']
+    list_display = ['id_usuario','centro_comecial', 'nombre_tienda','codigoapk','nombre_categoria','n_visitas','administrador_junior','promocion','plan_publicidad_activo','fecha_inicio_plan','fecha_final_plan',]
     list_filter=(('ccomercial',admin.RelatedOnlyFieldListFilter),('categoria',admin.RelatedOnlyFieldListFilter),)
     def centro_comecial(self,instance):  
         try:
@@ -125,7 +125,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = CcomercialForm
 class CcomercialAdmin(admin.ModelAdmin):
     model = Ccomercial
-    list_display = ['nombre_ccomercial','id_usuario']
+    list_display = ['nombre_ccomercial','id_usuario','plan_publicidad_activo','fecha_inicio_plan','fecha_final_plan']
 
 admin.site.register(Ccomercial,CcomercialAdmin)
 ####################################################

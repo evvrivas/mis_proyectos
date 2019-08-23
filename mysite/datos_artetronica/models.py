@@ -88,7 +88,11 @@ ESTADO_PRODUCTO= (
 			
 			)
 
-
+PLAN_PUBLICIDAD= (
+	        ('SIN_PLAN_PUBLICITARIO $0.0', 'PUBLICIDAD_0'), 
+			('PLAN_SIEMPRE_PRIMERO $15.0/mes', 'PUBLICIDAD_1'),
+			('PLAN_SIEMPRE_PRIMERO_DIRIGIDO $10.0/mes', 'PUBLICIDAD_2'),
+			)
 class Productos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
 	     tienda=models.ForeignKey('Tiendas',blank=True,null=True)
@@ -119,6 +123,10 @@ class Productos(models.Model):
 	     estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO_PRODUCTO,default="EN_EXISTENCIA")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
+	     plan_publicidad=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")	 
+	     plan_publicidad_activo=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")
+	     fecha_inicio_plan = models.DateField(default=datetime.now)
+	     fecha_final_plan = models.DateField(default=datetime.now)
 
 	     def __str__(self):
 		    		return  self.nombre
@@ -138,7 +146,7 @@ class Buscar(models.Model):
 
 
 PLAN_TIENDA= (
-	        ('GRATIS', 'GRATIS (5 PRODUCTOS MAXIMO, NO PUBLICIDAD)'), 
+	        ('GRATIS', 'GRATIS (X PRODUCTOS MAXIMO, NO PUBLICIDAD)'), 
 			('BASICO', 'BASICO (20 productos S30 ANUALES)'),
 			('STANDARD', 'STANDARD (45 productos $50 ANUALES)'),
 			('PREMIUM', 'PREMIUN (100 productos $90 ANUALES)'),	
@@ -283,12 +291,18 @@ SUPER_CATEGORIA=(
  
 
 
+
+
 class Ccomercial(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	     
 	     nombre_ccomercial=models.CharField(max_length=40,blank=True)
 	     imagen_ccomercial = ImageField(upload_to='tmp',blank=True)
-	     ubicacion=models.CharField(max_length=30,blank=True,choices=CIUDADES)	     
-	     descripcion_ccomercial=models.TextField(blank=True)	     
+	     ubicacion=models.CharField(max_length=30,blank=True,choices=CIUDADES)
+	     descripcion_ccomercial=models.TextField(blank=True)
+	     plan_publicidad=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")	 
+	     plan_publicidad_activo=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")
+	     fecha_inicio_plan = models.DateField(default=datetime.now)
+	     fecha_final_plan = models.DateField(default=datetime.now)	     
 	         
 
 	     def __str__(self):
@@ -312,7 +326,12 @@ class Tiendas(models.Model):
 	     n_visitas=models.IntegerField(blank=True,default=0)
 	     ultimo_comentario=models.CharField(max_length=90,blank=True)
 	     administrador_junior=models.CharField(max_length=30,blank=True)
-	     
+
+	     plan_publicidad=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")	 
+	     plan_publicidad_activo=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")
+	     plan_publicidad=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")	 
+	     plan_publicidad_activo=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")
+	    
 	     estado_tienda=models.CharField(max_length=30,blank=True,choices=ESTADO_TIENDA,default="DISPONIBLE")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
