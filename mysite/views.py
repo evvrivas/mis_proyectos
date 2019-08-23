@@ -784,7 +784,7 @@ def pagina_principal(request):
                              pass
 
 
-                         if ciudad != "TODOS"
+                         if ciudad != "TODOS":
                                nuevo_comercio=Ccomercial.objects.all().order_by("-id")[:6]
                                nuevas_tiendas=Tiendas.objects.all().order_by("-id")[:6]
                                nuevos_productos=Productos.objects.all().order_by("-id")[:6]
@@ -796,7 +796,7 @@ def pagina_principal(request):
                                                   
                         
                          try:
-                            if ciudad != "TODOS"
+                            if ciudad != "TODOS":
                                   count = Tiendas.objects.all().count()
                                   rand_ids = sample(range(1, count), 3)                                  
                                   aleatorias_tiendas=Tiendas.objects.filter(id__in=rand_ids)
@@ -813,7 +813,7 @@ def pagina_principal(request):
 
                          try:     
 
-                             if ciudad != "TODOS"               
+                             if ciudad != "TODOS":               
                                   count = Productos.objects.all().count()
                                   rand_ids = sample(range(1, count), 3)
                                   aleatorias_productos=Productos.objects.filter(id__in=rand_ids)
@@ -829,7 +829,7 @@ def pagina_principal(request):
 
 
                          try:    
-                            if ciudad != "TODOS"                  
+                            if ciudad != "TODOS":                  
                                   count = Ccomercial.objects.all().count()
                                   rand_ids = sample(range(1, count), 3)
                                   aleatorias_comercio=Ccomercial.objects.filter(id__in=rand_ids)
