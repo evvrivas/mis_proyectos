@@ -788,7 +788,7 @@ def pagina_principal(request):
                          else:
                                nuevo_comercio=Ccomercial.objects.filter(ubicacion=ciudad).order_by("-id")[:6]
                                nuevas_tiendas=Tiendas.objects.filter(ubicacion=ciudad).order_by("-id")[:6]
-                               nuevos_productos=Productos.objects.filter(ubicacion=ciudad).order_by("-id")[:6]
+                               nuevos_productos=Productos.objects.filter(tienda__ubicacion=ciudad).order_by("-id")[:6]
 
                                                   
                         
@@ -815,7 +815,7 @@ def pagina_principal(request):
                                   rand_ids = sample(range(1, count), 3)
                                   aleatorias_productos=Productos.objects.filter(id__in=rand_ids)
                              else:
-                                  ount = Productos.objects.filter(ubicacion=ciudad).count()
+                                  ount = Productos.objects.filter(tienda__ubicacion=ciudad).count()
                                   rand_ids = sample(range(1, count), 3)
                                   aleatorias_productos=Productos.objects.filter(id__in=rand_ids)
 
