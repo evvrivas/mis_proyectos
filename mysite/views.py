@@ -541,6 +541,7 @@ def mi_tienda(request,idusuario,nombretienda):
     tiendas.n_visitas+=1      
     tiendas.save()
 
+    corazon=Preferidas.objects.filter(id_comprador=request.user.username,tiemda__id=tiendas.id).count()
 
     
     var=tiendas.codigoapk    
@@ -564,6 +565,8 @@ def mis_tiendas(request,idusuario):
       categoria=n_categorias()
       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+
+     
       
       if t_usuario=="EL_ADMINISTRADOR" or t_usuario=="EL_VENDEDOR":
 
@@ -615,6 +618,7 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   categoria=categorizar(idusuario,nombretienda)
   
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+  corazon=Preferidas.objects.filter(id_comprador=request.user.username,tiemda__id=tiendas.id).count()
 
   if item=="xproductox":    
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)) 
@@ -649,7 +653,7 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)).order_by("precio_A")[:10]
       comprador=Usuarios.objects.get(id_usuario=request.user.username)
                           
-     
+      corazon=Preferidas.objects.filter(id_comprador=request.user.username,tiemda__id=id_dela_tienda).count()
                                                                        
       if comprador.tipo_de_vista=="NORMAL":
             comprador.tipo_de_vista="LINEAL"
@@ -689,7 +693,11 @@ def busqueda_tienda(request,idusuario,nombretienda):
             busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra)
             busqueda.save()
         
+
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+        corazon=Preferidas.objects.filter(id_comprador=request.user.username,tiemda__id=tiendas.id).count()
+
+
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) & Q(tienda__nombre_tienda__icontains=nombretienda))
         connection.close()
         return render(request,'catalogo_tienda.html',locals()) 
