@@ -85,14 +85,17 @@
              {%  if user.is_authenticated %}          
                   <a href="/accounts/logout/" class="btn btn-danger" role="button">ⓧ</a>
 
-                  
+                 
                   {% ifnotequal corazon 'PREFERIDA' %}
                         <a href="/agregar_a_preferidas/{{tiendas.id}}/" class="btn btn-warning" role="button">+♥</a>
-                  {% else %}
-                       <a href="/agregar_a_preferidas/{{tiendas.id}}/" class="btn btn-warning" role="button">-♡</a>
-
-
                   {% endifnotequal %}
+
+
+                  {% ifequal corazon 'PREFERIDA' %} 
+                       <a href="/agregar_a_preferidas/{{tiendas.id}}/" class="btn btn-warning" role="button">-♡</a>
+                  {% endifequal %}
+
+                  
                   
 
              {%  else  %}   

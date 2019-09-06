@@ -159,11 +159,13 @@
 
 
 
-    {% if el_usuario_x == "EL_COMPRADOR" %}
+    
+    {%  if  user.username == i.id_comprador %} 
+
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar </a></li>
-                        <li><a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
                         <br>                        
                         <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
                <br> 
@@ -188,7 +190,9 @@
                         </center> 
 
       
-    {% elif el_usuario_x == "EL_ADMINISTRADOR" %}
+    
+    {%  elif user.username == i.producto.id_usuario %} 
+
 
               
  
@@ -210,6 +214,7 @@
                                 </tr >
                         </table>
                         </center> 
+    
     {% elif el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}

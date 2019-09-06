@@ -542,7 +542,10 @@ def mi_tienda(request,idusuario,nombretienda):
     tiendas.save()
 
     corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
-
+    if corazon>0:
+        corazon="PREFERIDA"
+    else:
+        corazon="NO_PREFERIDA"
     
     var=tiendas.codigoapk    
 
@@ -619,6 +622,10 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
   corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+  if corazon>0:
+        corazon="PREFERIDA"
+  else:
+        corazon="NO_PREFERIDA"
 
   if item=="xproductox":    
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)) 
@@ -654,6 +661,10 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       comprador=Usuarios.objects.get(id_usuario=request.user.username)
                           
       corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=id_dela_tienda).count()
+      if corazon>0:
+        corazon="PREFERIDA"
+      else:
+        corazon="NO_PREFERIDA"
                                                                        
       if comprador.tipo_de_vista=="NORMAL":
             comprador.tipo_de_vista="LINEAL"
@@ -696,7 +707,10 @@ def busqueda_tienda(request,idusuario,nombretienda):
 
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
         corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
-
+        if corazon>0:
+            corazon="PREFERIDA"
+        else:
+            corazon="NO_PREFERIDA"
 
         productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) & Q(tienda__nombre_tienda__icontains=nombretienda))
         connection.close()
