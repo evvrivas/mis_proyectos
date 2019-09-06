@@ -1286,7 +1286,9 @@ def ver_el_carrito(request,estado_del_producto):
                     carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username, estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
                 
               else:
-                pass
+                  carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+             
+             
 
 
       elif el_usuario_x=="EL_ADMINISTRADOR" : #es el vendedor
@@ -1303,7 +1305,8 @@ def ver_el_carrito(request,estado_del_producto):
                   carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)| Q(id_comprador=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
                 
               else:
-                pass
+                carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)| Q(id_comprador=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+              
              
       elif el_usuario_x=="EL_DELIBERY":
 
@@ -1317,7 +1320,8 @@ def ver_el_carrito(request,estado_del_producto):
                               carrito= Carro_de_compras.objects.filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
                             
                           else:
-                            pass
+                            carrito= Carro_de_compras.objects.filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                          
       
 
 
