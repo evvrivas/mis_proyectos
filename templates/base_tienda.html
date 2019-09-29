@@ -48,12 +48,46 @@
              </a>
              {% endthumbnail %}
 
-             {%  if user.is_authenticated and user.username == tiendas.id_usuario %}          
+             
+             
+            
+             {%  if user.is_authenticated %}          
+                  
+
+                 
+                  {% ifnotequal corazon 'PREFERIDA' %}
+                   <a href="/agregar_a_preferidas/{{tiendas.id}}/">  <img src ='{% static "corazongris45.png" %}' alt='img' > </a>
+                        
+                   
+                  {% endifnotequal %}
+
+
+                  {% ifequal corazon 'PREFERIDA' %} 
+                         <a href="/agregar_a_preferidas/{{tiendas.id}}/">  <img src ='{% static "corazon45.png" %}' alt='img' > </a>
+                       
+                  {% endifequal %}
+
+                  <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">  <img src ='{% static "carrito45.png" %}' alt='img' > </a> 
+
+                                  
+
+             {%  else  %}   
+                  <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
+                  <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>   
+                  <a href="/informacion_vendedor/{{tiendas.id_usuario}}" class="btn btn-success" role="button">$?</a>       
+             {% endif %} 
+
+
+             
+
+              <a href="/">  <img src ='{% static "logo2.png" %}' alt='img' >    
+
+                {%  if user.is_authenticated and user.username == tiendas.id_usuario %}          
                        
                                    <div class="btn-group">
                                           <button type="button" class="btn btn-success dropdown-toggle"
                                                   data-toggle="dropdown">
-                                                Tienda <span class="caret"></span>
+                                                === <span class="caret"></span>
                                           </button>
 
                                              <ul class="dropdown-menu" role="menu">
@@ -74,49 +108,29 @@
                                                   <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/TODOS">ver todos los pedidos</a></li>
 
                                               {% endifequal %}
+
+                                             
+                                              <li><a href="/informacion_vendedor/{{tiendas.id_usuario}}">$?</a></li>   
+                                              <li><a href="/accounts/logout/">Salir</a></li> 
+
+
                                              </ul>                   
                                    </div>
 
                                     
-                      {% endif %}
-             
-              <a href="/informacion_vendedor/{{tiendas.id_usuario}}" class="btn btn-success" role="button">$?</a>
-
-             {%  if user.is_authenticated %}          
-                  <a href="/accounts/logout/" class="btn btn-danger" role="button">ⓧ</a>
-
-                 
-                  {% ifnotequal corazon 'PREFERIDA' %}
-                        <a href="/agregar_a_preferidas/{{tiendas.id}}/" class="btn btn-warning" role="button">+♥</a>
-                  {% endifnotequal %}
-
-
-                  {% ifequal corazon 'PREFERIDA' %} 
-                       <a href="/agregar_a_preferidas/{{tiendas.id}}/" class="btn btn-warning" role="button">-♡</a>
-                  {% endifequal %}
-
-                  
-                  
-
-             {%  else  %}   
-                  <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
-                  <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>          
-             {% endif %} 
-
-
-             
-
-              <a href="/">  <img src ='{% static "logo2.png" %}' alt='img' >
-              
+                      {% endif %}         
 
               
 
 
                {%  if user.is_authenticated %}          
              
-                   <center>    <li> Hola.!.{{ user.username }}    <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">  <img src ='{% static "carrito2.png" %}' alt='img' > </a>    </li>   </center>   
+                   <center>    <li> Hola.!.{{ user.username }}       </li>   </center>   
                                      
                {% endif %}  
+
+
+             
 
           </center>      
      </div> 

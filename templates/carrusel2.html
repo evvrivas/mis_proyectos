@@ -9,6 +9,8 @@
 
  <div class="row">  
 
+
+
 <div class="col-md-4">  
 
 {%  if productos.imagen1 %}
@@ -23,22 +25,7 @@
 
         <div class="col-md-4">  
 
-         <table>
-
-                                <tr>
-                                    {% thumbnail tiendas.imagen1 "x40" crop="center" as im %}
-                                    <td> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
-                                    </td> 
-                                    {% endthumbnail %}
-                                     
-
-                                    
-                                    <td>
-                                      <h5><p>-->{{tiendas.nombre_tienda}}</p></h5> 
-                                    </td>                                                     
-                               
-                                </tr >
-                          </table>
+  
 
 
         <h5><center>  {{productos.nombre}}  </center></h5> 
@@ -137,6 +124,12 @@
 
 
 
+
+
+
+
+
+
 <div class="col-md-4">
 {%  if productos.imagen2 %}
 
@@ -149,23 +142,7 @@
         </div> 
 
         <div class="col-md-4">  
- <table>
-
-                                <tr>
-                                    {% thumbnail tiendas.imagen1 "x40" crop="center" as im %}
-                                    <td> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
-                                    </td> 
-                                    {% endthumbnail %}
-                                     
-
-                                    
-                                    <td>
-                                      <h5><p>-->{{tiendas.nombre_tienda}}</p></h5> 
-                                    </td>                                                     
-                               
-                                </tr >
-                          </table>
-
+ 
         <h5><center>  {{productos.nombre}}  </center></h5> 
        <h6> <p>{{productos.descripcion | linebreaks}}</p> </h6> 
         </div> 
@@ -265,6 +242,10 @@
 
 
 
+
+
+
+
 <div class="col-md-4">
 {%  if productos.imagen3 %}
 
@@ -279,22 +260,7 @@
 
         <div class="col-md-4">  
 
-         <table>
-
-                                <tr>
-                                    {% thumbnail tiendas.imagen1 "x40" crop="center" as im %}
-                                    <td> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
-                                    </td> 
-                                    {% endthumbnail %}
-                                     
-
-                                    
-                                    <td>
-                                      <h5><p>-->{{tiendas.nombre_tienda}} </p></h5> 
-                                    </td>                                                     
-                               
-                                </tr >
-                          </table>
+         
         <h5><center>  {{productos.nombre}}  </center></h5> 
        <h6> <p>{{productos.descripcion | linebreaks}}</p> </h6> 
         </div> 
