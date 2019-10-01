@@ -42,10 +42,12 @@
 
       <center>
 
-              {% thumbnail tiendas.imagen1 "x30" crop="center" as im %}          
+              {% thumbnail tiendas.imagen1 "x45" crop="center" as im %}          
                   
               <a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
              </a>
+
+            
              {% endthumbnail %}
 
              
@@ -80,14 +82,14 @@
 
              
 
-              <a href="/">  <img src ='{% static "logo2.png" %}' alt='img' >    
+              <a href="/">  <img src ='{% static "logo45.png" %}' alt='img' > </a>    
 
                 {%  if user.is_authenticated and user.username == tiendas.id_usuario %}          
                        
                                    <div class="btn-group">
                                           <button type="button" class="btn btn-success dropdown-toggle"
                                                   data-toggle="dropdown">
-                                                === <span class="caret"></span>
+                                                == <span class="caret"></span>
                                           </button>
 
                                              <ul class="dropdown-menu" role="menu">
@@ -155,7 +157,7 @@
                             <tr>
                                 <td>
                                     <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                <button type="button" class="btn btn-primary btn-xs dropdown-toggle"
                                         data-toggle="dropdown">
                                   Ver <span class="caret"></span>
                                 </button>

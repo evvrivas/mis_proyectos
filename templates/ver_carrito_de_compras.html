@@ -58,7 +58,23 @@
                  
                   
                   <tr  align="center"> 
-                          
+
+                      <li><a href="/editar_tienda/{{tiendas.id}}">Editar mi tienda </a></li>
+
+                     <h6><p>cliente: {{i.nombre_comprador}} {{i.apellido_comprador}}: {{i.id_comprador}} </p>  </h6>
+                    
+                     <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.producto.id_usuario}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+
+                                    <td WIDTH="90"><a href="tel://+{{i.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    
+                                   
+                                </tr >
+                        </table>
+                        </center>      
 
                  
                      {% if i.mostrar_foto == 'MOSTRAR_F_UNO' or i.mostrar_foto == 'MOSTRAR_F_TODAS'  %}       
@@ -97,15 +113,27 @@
  </tr >
                         </table>
                         </center> 
-
-
-
- 
-
                        
 
                       <h6><p>{{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </p>  </h6>
-                      <h6><p>cliente: {{i.nombre_comprador}} {{i.apellido_comprador}}: {{i.id_comprador}} </p>  </h6>
+                      <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+
+                                    <td WIDTH="90"><a href="tel://+{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    {{i.producto.tienda.nombre_tienda}}
+                                   
+                                </tr >
+                        </table>
+                        </center> 
+
+
+
+
+
+
                       <h6><p> Cant. {{ i.cantidad }} {{ i.producto.nombre }}  $P/U = {{ i.producto.precio_A}}  </p>  </h6>          
                       <h6><p>{{ i.especificacion }}  </p> </h6>
                       <h6><p>{{ i.estado_prod }}  </h6>
@@ -176,24 +204,16 @@
                 
               {% endif %}    
 
-              <center> 
-                        <table BORDER="0" CELLSPACING="1">
-                                <tr  align="center">
+             
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.producto.id_usuario}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+    {% else %}    
 
-                                    <td WIDTH="90"><a href="tel://+{{i.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    
-                                   
-                                </tr >
-                        </table>
-                        </center> 
+    {% endif %}
 
-      
+
+
     
-    {%  elif user.username == i.producto.id_usuario %} 
-
-
+    {%  if user.username == i.producto.id_usuario %} 
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
@@ -202,20 +222,18 @@
                 
               {% endif %} 
 
-              <center> 
-                        <table BORDER="0" CELLSPACING="1">
-                                <tr  align="center">
-
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
-
-                                    <td WIDTH="90"><a href="tel://+{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    {{i.producto.tienda.nombre_tienda}}
-                                   
-                                </tr >
-                        </table>
-                        </center> 
+              
     
-    {% elif el_usuario_x == "EL_DELIBERY" %}
+  {% else %}    
+
+  {% endif %}
+
+
+
+
+
+
+    {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
                       <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
@@ -234,7 +252,7 @@
                                    
                                 </tr >
                         </table>
-                        </center> 
+              </center> 
 
 
 
@@ -249,7 +267,7 @@
                      
 
                             {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
-                                <button  class="btn btn-danger">EL CLIENTE QUIERE</button>
+                                <button  class="btn btn-danger btn-xs">EL CLIENTE QUIERE</button>
                                 <button  class="btn btn-warning btn-xs">x</button>
                                 <button  class="btn btn-success btn-xs">x</button>
                                 <button  class="btn btn-info btn-xs">x</button>
@@ -257,28 +275,28 @@
                            
                             {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
                                <button  class="btn btn-danger btn-xs">x</button>
-                                <button  class="btn btn-warning">EL CLIENTE COMPRÓ</button>
+                                <button  class="btn btn-warning btn-xs">EL CLIENTE COMPRÓ</button>
                                 <button  class="btn btn-success btn-xs">x</button>
                                 <button  class="btn btn-info btn-xs">x</button>
                                 <button  class="btn btn-primary btn-xs">x</button>
                             {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
                                  <button  class="btn btn-danger btn-xs">x</button>
                                 <button  class="btn btn-warning btn-xs">x</button>
-                                <button  class="btn btn-success">EL VENDEDOR ACEPTA</button>
+                                <button  class="btn btn-success btn-xs">EL VENDEDOR ACEPTA</button>
                                 <button  class="btn btn-info btn-xs">x</button>
                                 <button  class="btn btn-primary btn-xs">x</button>
                             {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
                                  <button  class="btn btn-danger btn-xs">x</button>
                                 <button  class="btn btn-warning btn-xs">x</button>
                                 <button  class="btn btn-success btn-xs">x</button>
-                                <button  class="btn btn-info ">EL PRODUCTO ESTA LISTO</button>
+                                <button  class="btn btn-info btn-xs ">EL PRODUCTO ESTA LISTO</button>
                                 <button  class="btn btn-primary btn-xs">x</button>
                             {% else %}
                                 <button  class="btn btn-danger">x</button>
                                 <button  class="btn btn-warning">x</button>
                                 <button  class="btn btn-success">x</button>
                                 <button  class="btn btn-info">x</button>
-                                <button  class="btn btn-primary">PRODUCTO ENTREGADO</button> 
+                                <button  class="btn btn-primary btn-xs">PRODUCTO ENTREGADO</button> 
                             {% endif %} 
 
                      

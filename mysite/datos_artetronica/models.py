@@ -197,7 +197,7 @@ CIUDADES= (
 	        ("SANTA_ANA","SANTA_ANA"), 
 	        ("SONSONATE","SONSONATE"),
 	        ("CHALATENANGO","CHALATENANGO"),
-	        ( "CABANAS", "CABANAS"),
+	        ( "CABAÑAS", "CABAÑAS"),
 	        ("LA_LIBERTAD","LA_LIBERTAD"),
 	        ("LA_PAZ","LA_PAZ"),
 	        ("MORAZAN","MORAZAN"),

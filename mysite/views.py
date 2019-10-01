@@ -594,7 +594,8 @@ def ver_categorias(request,item):
   categoria=n_categorias()
   ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-  
+
+
    
 
   if item=="xproductox":
@@ -1105,29 +1106,39 @@ def listado_pedido(request,idusuario,nombretienda,bandera):
 def carrusel(request,id_prod,idusuario,nombretienda):
      categoria=categorizar(idusuario,nombretienda)     
      tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+     categoria=categorizar(idusuario,nombretienda)
+     corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+     if corazon>0:
+        corazon="PREFERIDA"
+     else:
+        corazon="NO_PREFERIDA"
+    
+     var=tiendas.codigoapk   
 
      productos=Productos.objects.get(id=id_prod)
      connection.close()
      return render(request,'carrusel2.html',locals())
 
+
 def carrusel_pedidos(request,id_prod,idusuario,nombretienda):
-     
-
-
 
      categoria=categorizar(idusuario,nombretienda)     
      tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+     corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+     if corazon>0:
+        corazon="PREFERIDA"
+     else:
+        corazon="NO_PREFERIDA"
+    
+     var=tiendas.codigoapk
 
      productos=Pedidos.objects.get(id=id_prod)
      connection.close()
      return render(request,'carrusel2.html',locals())
 
-      
-            
+               
             
     
-
-
 
 @login_required
 def cambiar_estado_tienda(request,idusuario,id_dela_tienda,estado):
@@ -1331,6 +1342,10 @@ def ver_el_carrito(request,estado_del_producto):
         pass                      
       
       return render(request,'ver_carrito_de_compras.html',locals())   
+
+
+
+
 
 @login_required
 def eliminar_producto_del_carrito(request,id_producto):
