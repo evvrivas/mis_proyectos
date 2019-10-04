@@ -42,7 +42,7 @@
 
       <center>
 
-              {% thumbnail tiendas.imagen1 "x45" crop="center" as im %}          
+              {% thumbnail tiendas.imagen1 "45x45" crop="center" as im %}          
                   
               <a href="/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle">
              </a>

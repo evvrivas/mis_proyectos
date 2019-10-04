@@ -23,15 +23,12 @@
             <li><a href="/ver_el_carrito/FINALIZADO">FINALIZADO</li></li>
             <li><a href="/ver_el_carrito/TODOS">TODOS</a></li>
          
-
             
            </ul>
         </div>
           
 </div>
-</div>
-                            
-
+</div>                           
 
 <br>
 
@@ -60,7 +57,7 @@
                   <tr  align="center"> 
 
                      
-                     <h6><p>fecha {{ i.fecha_ingreso }}  </h6>
+                     <h6><p>No. {{ i.id }}fecha {{ i.fecha_ingreso }}  </h6>
                      <h6><p>{{i.nombre_comprador}} {{i.apellido_comprador}}: {{i.id_comprador}} </p>  </h6>
                     
                      <center> 
@@ -123,7 +120,7 @@
                                     <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
 
                                     <td WIDTH="90"><a href="tel://+{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    {{i.producto.tienda.nombre_tienda}}
+                                    
                                    
                                 </tr >
                         </table>
@@ -135,9 +132,7 @@
 
 
                       <h6><p> Cant. {{ i.cantidad }} {{ i.producto.nombre }}  $P/U = {{ i.producto.precio_A}}  </p>  </h6>          
-                      <h6><p>{{ i.especificacion }}  </p> </h6>
-                      <h6><p>{{ i.estado_prod }}  </h6>
-                   
+                      <h6><p>{{ i.especificacion }}  </p> </h6>                
 
 
 
@@ -218,7 +213,8 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
+                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
               {% else %}
                 
               {% endif %} 
@@ -238,6 +234,7 @@
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
                       <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
               {% else %}
                 
               {% endif %} 

@@ -1364,13 +1364,18 @@ def editar_producto_del_carrito(request,id_producto):
        categoria=n_categorias()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
        ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+       
 
        f = Carro_de_compras.objects.get(pk=id_producto)           
        
        if request.method == 'POST':
             
-                form = Carro_de_comprasForm(request.POST,request.FILES,instance=f)
-                      
+                if t_usuario=="EL_COMPRADOR"
+                      form = Carro_de_comprasForm(request.POST,request.FILES,instance=f)
+                else:
+                      form = Carro_de_compras2Form(request.POST,request.FILES,instance=f)
+
+
                 if form.is_valid():                         
          
                             form.save()
@@ -1386,8 +1391,10 @@ def editar_producto_del_carrito(request,id_producto):
                 return render(request,'ver_carrito_de_compras.html',locals())                                                  
                 
        else:           
-              
-              form = Carro_de_comprasForm(instance=f)
+              if t_usuario=="EL_COMPRADOR":
+                    form = Carro_de_comprasForm(instance=f)
+              else: 
+                    form = Carro_de_compras2Form(instance=f)
              
 
         

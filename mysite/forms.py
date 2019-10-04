@@ -86,7 +86,23 @@ class Carro_de_comprasForm(ModelForm):
 		model=Carro_de_compras
 		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}) }
 
-		exclude=["fecha_ingreso","id_comprador","total","estado_prod","mostrar_foto"]
+		exclude=["fecha_ingreso","id_comprador","total","estado_prod","mostrar_foto","costo_servicio","lugar_de_entrega","fecha_de_entrega"]
+
+class Carro_de_compras2Form(ModelForm):
+	class Meta:			
+		model=Carro_de_compras
+		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}) }
+
+		exclude=["producto","id_comprador","nombre_comprador","apellido_comprador","cantidad","mostrar_foto","especificacion","total","estado_prod","fecha_ingreso","imagen1","imagen2","servicio_a_domicilio"]
+
+		
+
+	
+
+	
+	
+	
+	
 
 
 class PreferidasForm(ModelForm):
