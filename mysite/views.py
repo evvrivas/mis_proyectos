@@ -1364,13 +1364,13 @@ def editar_producto_del_carrito(request,id_producto):
        categoria=n_categorias()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
        ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
-       
+
 
        f = Carro_de_compras.objects.get(pk=id_producto)           
        
        if request.method == 'POST':
             
-                if t_usuario=="EL_COMPRADOR"
+                if t_usuario=="EL_COMPRADOR":
                       form = Carro_de_comprasForm(request.POST,request.FILES,instance=f)
                 else:
                       form = Carro_de_compras2Form(request.POST,request.FILES,instance=f)
