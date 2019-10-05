@@ -13,6 +13,7 @@ from PIL import Image as Img
 from io import StringIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
+from django.core.validators import MaxValueValidator
 
 
 from sorl.thumbnail import ImageField
@@ -210,7 +211,7 @@ CIUDADES= (
 		)
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
-	     clave=models.IntegerField(max_length=4)
+	     clave=models.PositiveIntegerField(primary_key=True, validators=[MaxValueValidator(9999)])
 	     nombre=models.CharField(max_length=40)
 	     apellido=models.CharField(max_length=40)
 	     estoy_en=models.CharField(max_length=30,blank=True,choices=CIUDADES)
