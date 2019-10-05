@@ -1247,6 +1247,8 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
+
 def contador_de_productos_carrito(el_usuario):
 
     if el_usuario=="EL_COMPRRADOR":
@@ -1275,7 +1277,95 @@ def contador_de_productos_carrito(el_usuario):
              N_pedido=0
     
     return N_pedido
-             
+
+@login_required     
+def ver_el_carrito_personal(request,id_persona_compra):
+      categoria=n_categorias()
+      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request) 
+      el_usuario_x=t_usuario
+
+
+
+      if el_usuario_x=="EL_COMPRADOR":  
+
+            if request.user.username==id_persona_compra:              
+                  carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username ).order_by("estado_prod")
+            else:
+                  carrito= Carro_de_compras.objects.filter(id_comprador=id_persona_compra ).order_by("estado_prod")
+
+     
+      elif el_usuario_x=="EL_ADMINISTRADOR" : #es el vendedor
+              carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username)  & Q(id_comprador=id_persona_compra)).order_by("estado_prod")
+
+      elif el_usuario_x=="EL_DELIBERY":
+              carrito= Carro_de_compras.objects.filter( Q(id_comprador=id_persona_compra)).order_by("estado_prod")
+      else:            
+        pass                      
+      
+      return render(request,'ver_carrito_de_compras.html',locals()) 
+
+    
+@login_required
+def ver_el_carrito_de_tienda(request,id_tienda_de_compra):
+      categoria=n_categorias()
+      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request) 
+      el_usuario_x=t_usuario
+
+
+      if el_usuario_x=="EL_COMPRADOR":  
+
+            if request.user.username==id_persona_compra:              
+                  carrito= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra) .order_by("estado_prod")
+            else:
+                  carrito= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra) .order_by("estado_prod")
+
+     
+      elif el_usuario_x=="EL_ADMINISTRADOR" : #es el vendedor
+              carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) & Q(producto__tienda__id=id_tienda_de_compra) ).order_by("estado_prod")
+
+      elif el_usuario_x=="EL_DELIBERY":
+              carrito= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra).order_by("estado_prod")
+      else:            
+        pass                      
+      
+      return render(request,'ver_carrito_de_compras.html',locals()) 
+
+
+@login_required
+def ver_el_carrito_personal_y_de_tienda(request,id_persona_compra,id_tienda_de_compra):
+    
+      categoria=n_categorias()
+      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request) 
+      el_usuario_x=t_usuario
+
+
+
+      if el_usuario_x=="EL_COMPRADOR":  
+
+            if request.user.username==id_persona_compra:              
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) & Q(producto__tienda__id=id_tienda_de_compra) ).order_by("estado_prod")
+            else:
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=id_persona_compra) & Q(producto__tienda__id=id_tienda_de_compra) ).order_by("estado_prod")
+
+     
+      elif el_usuario_x=="EL_ADMINISTRADOR" : #es el vendedor
+              carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) & Q(producto__tienda__id=id_tienda_de_compra)  & Q(id_comprador=id_persona_compra)).order_by("estado_prod")
+
+      elif el_usuario_x=="EL_DELIBERY":
+              carrito= Carro_de_compras.objects.filter(Q(producto__tienda__id=id_tienda_de_compra)  & Q(id_comprador=id_persona_compra)).order_by("estado_prod")
+      else:            
+        pass                      
+      
+      return render(request,'ver_carrito_de_compras.html',locals()) 
+
+
+
+
+
+
 
 @login_required
 def ver_el_carrito(request,estado_del_producto):
@@ -1285,38 +1375,36 @@ def ver_el_carrito(request,estado_del_producto):
       el_usuario_x=t_usuario
 
 
-
       if el_usuario_x=="EL_COMPRADOR":
               if estado_del_producto=="TODOS":
-                  carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) ).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="NUEVO":
-                  carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="EN_PROCESO":
-                   carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
+                   carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="FINALIZADO":
-                    carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username, estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
+                    carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
                 
               else:
-                  carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
              
-             
+           
 
 
       elif el_usuario_x=="EL_ADMINISTRADOR" : #es el vendedor
 
 
-
               if estado_del_producto=="TODOS":
-                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(id_comprador=request.user.username)).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username)  | Q(id_comprador=request.user.username)).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="NUEVO":
-                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)| Q(id_comprador=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(id_comprador=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="EN_PROCESO":
-                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)| Q(id_comprador=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(id_comprador=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="FINALIZADO":
-                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)| Q(id_comprador=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(id_comprador=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
                 
               else:
-                carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)| Q(id_comprador=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username) | Q(id_comprador=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
               
              
       elif el_usuario_x=="EL_DELIBERY":
@@ -1339,6 +1427,7 @@ def ver_el_carrito(request,estado_del_producto):
 
 
       else:
+            
         pass                      
       
       return render(request,'ver_carrito_de_compras.html',locals())   
@@ -1569,7 +1658,6 @@ def agregar_a_preferidas(request,id_de_la_tienda):
         Preferidas.objects.get(tienda__id=id_de_la_tienda).delete()     
 
      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
 
 
 

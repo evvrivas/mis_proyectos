@@ -57,16 +57,17 @@
                   <tr  align="center"> 
 
                      
-                     <h6><p>No. {{ i.id }}fecha {{ i.fecha_ingreso }}  </h6>
-                     <h6><p>{{i.nombre_comprador}} {{i.apellido_comprador}}: {{i.id_comprador}} </p>  </h6>
-                    
+                     <h6><p>No. {{ i.id }} fecha {{ i.fecha_ingreso }}  </h6>
+                     <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">{{i.nombre_comprador}} {{i.apellido_comprador}}: {{i.id_comprador}} </a></li>
+
+                               
                      <center> 
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.producto.id_usuario}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
 
-                                    <td WIDTH="90"><a href="tel://+{{i.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    <td WIDTH="90"><a href="tel://+503{{i.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
                                     
                                    
                                 </tr >
@@ -112,14 +113,17 @@
                         </center> 
                        
 
-                      <h6><p>{{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </p>  </h6>
+                      
+                       <li><a href="/ver_el_carrito_de_tienda/{{ i.producto.tienda.id }}">{{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </a></li>
+                  
+
                       <center> 
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
 
-                                    <td WIDTH="90"><a href="tel://+{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    <td WIDTH="90"><a href="tel://++503{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
                                     
                                    
                                 </tr >
@@ -239,20 +243,7 @@
                 
               {% endif %} 
 
-              <center> 
-                        <table BORDER="0" CELLSPACING="1">
-                                <tr  align="center">
-
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
-
-                                    <td WIDTH="90"><a href="tel://+{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    {{i.producto.tienda.nombre_tienda}}
-                                   
-                                </tr >
-                        </table>
-              </center> 
-
-
+              
 
 
     {% else %}
@@ -262,10 +253,13 @@
     {% endif %}
 
 
-       <h3><p>Total {{ i.total }}  </h6>
+       <h3><p>Total (No incluye servicio a domisilio) {{ i.total }}  </h6>
        
         <br>           
                      
+
+
+
 
                             {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
                                 <button  class="btn btn-danger btn-xs">EL CLIENTE QUIERE</button>
@@ -299,6 +293,8 @@
                                 <button  class="btn btn-info btn-xs">x</button>
                                 <button  class="btn btn-primary btn-xs">PRODUCTO ENTREGADO</button> 
                             {% endif %} 
+
+                            <li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}">Filtrar pedido</a></li>
 
                      
 
