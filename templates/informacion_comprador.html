@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+{% load staticfiles %} 
+
+    
+
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>INFORMACION DEL USUARIO COMPRADOR </center></h2>             
+      </div>
+
+    <div class="panel-body">
+            
+
+                <div class="thumbnail"> 
+                                 
+        {% thumbnail usuario.foto_perfil "360" crop="center" as im %}
+               <a href="" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+        {% endthumbnail %}   
+      
+       <p>Nombre del comprador:{{usuario.nombre}} {{usuario.apellido}}</p>
+       <p>Telefono/Whatsapp: {{usuario.id_usuario}}</p>
+       <p>email: {{usuario.email}} </p>
+       <p>Ciudad: {{usuario.estoy_en}}</p>
+       
+       <p>es miembro desde: {{usuario.fecha_ingreso}} </p> 
+       <br> 
+       <p>Esta evaluado con esta NOTA: {{usuario.nota_evaluacion}} </p> 
+    
+
+       
+                </div>
+  
+  </div>
+  </div>
+        
+
+{% endblock %}

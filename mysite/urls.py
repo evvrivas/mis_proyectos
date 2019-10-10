@@ -42,6 +42,7 @@ urlpatterns = [
     url(r'^catalogo/(\d+)$', catalogo),
     url(r'^informacion/$', informacion),
     url(r'^informacion_vendedor/([^/]+)/$', informacion_vendedor),
+    url(r'^informacion_comprador/([^/]+)/$', informacion_comprador),
        
     url(r'^crear_usuario/$',crear_usuario),
     url(r'^editar_usuario/(\d+)/$',editar_usuario),
@@ -101,6 +102,13 @@ urlpatterns = [
     
     url(r'^cambiar_tipo_de_vista/(\d+)/$',cambiar_tipo_de_vista),
     url(r'^agregar_a_preferidas/(\d+)/$',agregar_a_preferidas),
+    
+    url(r'^configurar_vista_pagina_principal/$',configurar_vista_pagina_principal),
+    
+    url(r'^evaluar/(\d+)/([^/]+)/$',evaluar), 
+
+    
+    
 
 
     url(r'^([^/]+)/$', mis_tiendas),

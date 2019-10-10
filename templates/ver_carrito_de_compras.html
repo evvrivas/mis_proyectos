@@ -18,10 +18,10 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 
         
-            <li><a href="/ver_el_carrito/NUEVO">PEDIDOS</a></li>
-            <li><a href="/ver_el_carrito/EN_PROCESO">EN PROCESO</li>
-            <li><a href="/ver_el_carrito/FINALIZADO">FINALIZADO</li></li>
-            <li><a href="/ver_el_carrito/TODOS">TODOS</a></li>
+            <li><a href="/ver_el_carrito/NUEVO">PEDIDOS NUEVOS</a></li>
+            <li><a href="/ver_el_carrito/EN_PROCESO">PEDIDOS EN PROCESO</li>
+            <li><a href="/ver_el_carrito/FINALIZADO">PEDIDOS FINALIZADO</li></li>
+            <li><a href="/ver_el_carrito/TODOS">TODOS LOS PEDIDOS</a></li>
          
             
            </ul>
@@ -40,6 +40,47 @@
         
             <div class="col-md-3">
                 <div class="thumbnail">  
+
+
+
+                      <h6><p>No. {{ i.id }} fecha {{ i.fecha_ingreso }} </p> </h6>
+
+     
+      {% if i.nota_comprador < 3 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif i.nota_comprador > 6 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+                   
+
+
+
+                     <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">{{i.nombre_comprador}} {{i.apellido_comprador}}: {{i.id_comprador}} </a></li>
+
+                               
+                     <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+
+                                    <td WIDTH="90"><a href="tel://+503{{i.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    
+                                   
+                                </tr >
+                        </table>
+                        </center>      
+
+
+
+
+
+
+ <center>  
                    
                       {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
                             <table BORDER="3" CELLSPACING="5"  bordercolor="Red ">  
@@ -57,23 +98,7 @@
                   <tr  align="center"> 
 
                      
-                     <h6><p>No. {{ i.id }} fecha {{ i.fecha_ingreso }}  </h6>
-                     <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">{{i.nombre_comprador}} {{i.apellido_comprador}}: {{i.id_comprador}} </a></li>
-
-                               
-                     <center> 
-                        <table BORDER="0" CELLSPACING="1">
-                                <tr  align="center">
-
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
-
-                                    <td WIDTH="90"><a href="tel://+503{{i.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    
-                                   
-                                </tr >
-                        </table>
-                        </center>      
-
+                     
                  
                      {% if i.mostrar_foto == 'MOSTRAR_F_UNO' or i.mostrar_foto == 'MOSTRAR_F_TODAS'  %}       
                      <td>                          
@@ -81,7 +106,7 @@
                                    <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
                                                
                       {% endthumbnail %}
-                    <td>    
+                    </td>    
                      {% endif %} 
 
 
@@ -93,7 +118,7 @@
                                    <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
                                                
                       {% endthumbnail %}
-                    <td>
+                    </td>
                      {% endif %} 
 
                      
@@ -114,6 +139,16 @@
                        
 
                       
+      {% if tiendas.nota_de_evaluacion < 3 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif tiendas.nota_de_evaluacion > 6 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
                        <li><a href="/ver_el_carrito_de_tienda/{{ i.producto.tienda.id }}">{{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </a></li>
                   
 
@@ -253,7 +288,7 @@
     {% endif %}
 
 
-       <h3><p>Total (No incluye servicio a domisilio) {{ i.total }}  </h6>
+       <h4><p>Total (No incluye servicio a domicilio) {{ i.total }}  </h4>
        
         <br>           
                      
@@ -262,7 +297,7 @@
 
 
                             {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
-                                <button  class="btn btn-danger btn-xs">EL CLIENTE QUIERE</button>
+                                <button  class="btn btn-danger btn-xs">PEDIDO ENTRANTE</button>
                                 <button  class="btn btn-warning btn-xs">x</button>
                                 <button  class="btn btn-success btn-xs">x</button>
                                 <button  class="btn btn-info btn-xs">x</button>
@@ -270,47 +305,65 @@
                            
                             {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
                                <button  class="btn btn-danger btn-xs">x</button>
-                                <button  class="btn btn-warning btn-xs">EL CLIENTE COMPRÓ</button>
+                                <button  class="btn btn-warning btn-xs">PEDIDO CONFIRMADO</button>
                                 <button  class="btn btn-success btn-xs">x</button>
                                 <button  class="btn btn-info btn-xs">x</button>
                                 <button  class="btn btn-primary btn-xs">x</button>
                             {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
                                  <button  class="btn btn-danger btn-xs">x</button>
                                 <button  class="btn btn-warning btn-xs">x</button>
-                                <button  class="btn btn-success btn-xs">EL VENDEDOR ACEPTA</button>
+                                <button  class="btn btn-success btn-xs">PEDIDO EN PROCESO</button>
                                 <button  class="btn btn-info btn-xs">x</button>
                                 <button  class="btn btn-primary btn-xs">x</button>
                             {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
                                  <button  class="btn btn-danger btn-xs">x</button>
                                 <button  class="btn btn-warning btn-xs">x</button>
                                 <button  class="btn btn-success btn-xs">x</button>
-                                <button  class="btn btn-info btn-xs ">EL PRODUCTO ESTA LISTO</button>
+                                <button  class="btn btn-info btn-xs ">PEDIDO LISTO</button>
                                 <button  class="btn btn-primary btn-xs">x</button>
                             {% else %}
                                 <button  class="btn btn-danger btn-xs">x</button>
                                 <button  class="btn btn-warning btn-xs">x</button>
                                 <button  class="btn btn-success btn-xs">x</button>
                                 <button  class="btn btn-info btn-xs">x</button>
-                                <button  class="btn btn-primary btn-xs">PRODUCTO ENTREGADO</button> 
+                                <button  class="btn btn-primary btn-xs">PEDIDO FINALIZADO</button> 
                             {% endif %} 
 
                             <li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}">Filtrar pedido</a></li>
 
-                     
+   
 
 
-                    
 
+
+
+
+        
+
+
+
+      <div class="btn-group">
+{% if el_usuario_x == "EL_COMPRADOR" %}
+       <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a esta Tienda<span class="caret"></span> </button>
+{% else %}
+      <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a este Cliente<span class="caret"></span> </button>
+              
+{% endif %} 
+
+
+     
+         <ul class="dropdown-menu" role="menu">                                                  
+
+              <li><a href="/evaluar/{{i.id}}/NO">No lo recomiendo </a></li>
+              <li><a href="/evaluar/{{i.id}}/TALVES">Tal ves lo recomiendo</a></li>       
+              <li><a href="/evaluar/{{i.id}}/SI">Si lo recomiendo</a></li>                                                          
+                                                                                
+         </ul>
+     </div>
+
+<br>
 
                  
-                   <br>     
-                             
-                    </div>
-            </div>               
-                {% endfor %}
-                        
-    <br>
-
 
 
        <div class="row">  

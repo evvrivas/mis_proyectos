@@ -59,7 +59,7 @@
 
                      {%  else  %}   
                         <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
-                        <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>
+                        <a href="/crear_usuario" class="btn btn-info" role="button">Registro</a>
                         <a href="/informacion" class="btn btn-warning" role="button">?</a>                         
                                            
                      {% endif %}   
@@ -95,6 +95,10 @@
                                      {%  for i in mis_tiendas %}
                                         <li><a href="/{{user.username}}/{{i.nombre_tienda}}">{{i.nombre_tienda}}</a></li>
                                      {%  endfor %} 
+                                      <br>
+
+                                     <li><a href="/configurar_vista_pagina_principal">Cambiar vista principal</a></li> 
+                                      <br>
 
                                     <li><a href="/informacion">?</a></li> 
                                     <li><a href="/accounts/logout/">Salir</a></li>                                                                                  
@@ -130,8 +134,8 @@
                     <div class="col-md-12">              
           
 
-                                                    <select name="ciudad_busqueda" value="{{ciudad}}" style="width:90px;background-color:white;color:blue;">
-                                                      <option value="TODOS">TODOS</option>
+                                                    <select name="ciudad_busqueda" value="{{ciudad}}" style="font-size:12pt;width:110px;background-color:white;color:blue;">
+                                                      <option value="TODOS">CIUDAD</option>
                                                       <option value="AHUACHAPAN">AHUACHAPAN</option>
                                                       <option value="SANTA_ANA">SANTA_ANA</option>
                                                       <option value="SONSONATE">SONSONATE</option>
@@ -149,8 +153,8 @@
                                                      </select> 
 
 
-             <select name="categoria_busqueda" style="width:140px;background-color:white;color:blue;">
-             <option value="TODOS">TODOS</option>
+             <select name="categoria_busqueda" style="font-size:12pt;width:160px;background-color:white;color:blue;">
+             <option value="TODOS">CATEGORIAS</option>
              <option value="Productos Ventas Varias">Productos Ventas Varias</option>
              <option value="Alimentos Bebidas">Alimentos Bebidas</option>
              <option value="Antiguedades Artesanias Adornos">Antiguedades Artesanias Adornos</option>
@@ -201,7 +205,7 @@
            <div class="col-md-12">              
                 
                   {%  if user.is_authenticated %}          
-                      <center>    <li> Hola.!.{{ user.username }} </li>   </center>         
+                      <center>    <li>{{ciudad}} Hola.!.{{ user.username }} </li>   </center>         
                              
                             
 

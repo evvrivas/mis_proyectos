@@ -114,9 +114,8 @@ class Productos(models.Model):
 	     recurso=models.URLField(blank=True)
 	     nombre_recurso_de_pago=models.CharField(max_length=400,blank=True)
 	     recurso_de_pago=models.CharField(max_length=400,blank=True)
-	     password_de_recurso=models.CharField(max_length=4,blank=True)
-
-	     puntuacion	 = models.CharField(max_length=30,default=0) 
+	     password_de_recurso=models.CharField(max_length=4,blank=True)	      
+	     nota_de_evaluacion=models.IntegerField(blank=True,default=10)
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_de_antes= models.FloatField(default=0,blank=True,null=True)
 	     precio_A  = models.FloatField(default=0,blank=True,null=True)
@@ -169,7 +168,8 @@ CLAVES=(
 
 class Configuracion_sistema(models.Model):
 	     mensaje_bienvenida=models.TextField(blank=True)	
-	     n_visitas=models.IntegerField(blank=True,default=0)            
+	     n_visitas=models.IntegerField(blank=True,default=0) 
+	               
 	     def __str__(self):
 		    		return  self.mensaje_bienvenida
 	     class Admin:
@@ -214,8 +214,10 @@ class Usuarios(models.Model):
 	     clave=models.PositiveIntegerField(primary_key=True, validators=[MaxValueValidator(9999)])
 	     nombre=models.CharField(max_length=40)
 	     apellido=models.CharField(max_length=40)
+	     foto_perfil = ImageField(upload_to='tmp',blank=True)
 	     estoy_en=models.CharField(max_length=30,blank=True,choices=CIUDADES)
 	     comentario_opcional=models.CharField(max_length=40,blank=True)
+	     nota_de_evaluacion=models.IntegerField(blank=True,default=10)
 	     email = models.EmailField(blank=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")	 
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS")
@@ -228,7 +230,9 @@ class Usuarios(models.Model):
 	     fecha_final_plan = models.DateField(default=datetime.now)
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")
-	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR")	    
+	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR")
+	     tipo_vista=models.IntegerField(blank=True,default=0)   
+
 	     
 	     def __str__(self):
 		    		return  self.id_usuario
@@ -327,7 +331,10 @@ class Tiendas(models.Model):
 	     promocion=models.CharField(max_length=90,blank=True)
 	     n_visitas=models.IntegerField(blank=True,default=0)
 	     ultimo_comentario=models.CharField(max_length=90,blank=True)
+	     nota_de_evaluacion=models.IntegerField(blank=True,default=10)
 	     administrador_junior=models.CharField(max_length=30,blank=True)
+	     administrador_junior_1=models.CharField(max_length=30,blank=True)
+	     administrador_junior_2=models.CharField(max_length=30,blank=True)
 
 	     plan_publicidad=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")	 
 	     plan_publicidad_activo=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")
@@ -360,6 +367,9 @@ class Mensajes(models.Model):
 				return  self.pregunta
 	class Admin:
 				list_display = ('contacto', 'id_usuario','pregunta')
+
+
+
 
 
 class Pedidos(models.Model):
@@ -519,6 +529,9 @@ class Carro_de_compras(models.Model):
 	
 	imagen1 = ImageField(upload_to='tmp',blank=True)
 	imagen2 = ImageField(upload_to='tmp',blank=True)	
+
+	nota_comprador=models.IntegerField(blank=True,default=0)
+	nota_vendedor=models.IntegerField(blank=True,default=0)
 	    
 
 	def __str__(self):
@@ -537,4 +550,14 @@ class Preferidas(models.Model):
 		    		return  self.id_comprador
 	class Admin:
 		    		list_display = ('id_comprador')
+
+
+class Evaluacion(models.Model):
+	id_evaluador=models.ForeignKey('Productos',blank=True,null=True)
+	id_evaluado=models.CharField(max_length=30,null=True)
+	nota = models.TextField(blank=True,null=True)
 	
+	def __str__(self):
+				return  self.id_evaluador
+	class Admin:
+				list_display = ('id_evaluador', 'id_evaluado','nota')

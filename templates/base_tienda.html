@@ -75,8 +75,8 @@
 
              {%  else  %}   
                   <a href="/accounts/login" class="btn btn-success" role="button">Entrar</a>    
-                  <a href="/crear_usuario" class="btn btn-info" role="button">Registrarse</a>   
-                  <a href="/informacion_vendedor/{{tiendas.id_usuario}}" class="btn btn-success" role="button">$?</a>       
+                  <a href="/crear_usuario" class="btn btn-info" role="button">Registro</a>   
+                  <a href="/informacion_vendedor/{{tiendas.id_usuario}}" class="btn btn-success" role="button">?</a>       
              {% endif %} 
 
 
@@ -155,6 +155,28 @@
                      <center><table>
 
                             <tr>
+
+                                <td>
+
+      {% if tiendas.nota_de_evaluacion < 3 %}
+          <a href="/informacion_vendedor/{{tiendas.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif tiendas.nota_de_evaluacion > 6 %}
+          <a href="/informacion_vendedor/{{tiendas.id_usuario}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_vendedor/{{tiendas.id_usuario}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+
+
+
+
+                                </td>
+
+
+
+
                                 <td>
                                     <div class="btn-group">
                                 <button type="button" class="btn btn-primary btn-xs dropdown-toggle"

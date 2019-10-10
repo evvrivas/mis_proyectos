@@ -10,14 +10,14 @@ from django.forms import ModelForm, Textarea, TextInput, NumberInput
 class UsuariosForm(ModelForm):
 	class Meta:
 		model= Usuarios		
-		exclude=["codigoapk","tipo_usuario","plan_tienda_activo","fecha_inicio_plan","fecha_final_plan","fecha_ingreso","tipo_de_vista"]
+		exclude=["codigoapk","tipo_usuario","plan_tienda_activo","fecha_inicio_plan","fecha_final_plan","fecha_ingreso","tipo_de_vista","tipo_vista","nota_de_evaluacion"]
 
 class ProductosForm(ModelForm):
 
 	class Meta:
 		model= Productos
 		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}
-		exclude=["id_usuario","puntuacion","fecha_ingreso","ultima_fecha_edicion","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan"]
+		exclude=["id_usuario","fecha_ingreso","ultima_fecha_edicion","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan","nota_de_evaluacion"]
 	
 	def __init__(self, user,nombre_tienda,*args, **kwargs):
 		super(ProductosForm, self).__init__(*args, **kwargs)		
@@ -46,7 +46,7 @@ class TiendasForm(ModelForm):
 	class Meta:
 		model= Tiendas	
 		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}	
-		exclude=["tipo_de_vista","codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario","ultima_fecha_edicion","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan"]
+		exclude=["tipo_de_vista","codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario","ultima_fecha_edicion","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan","nota_de_evaluacion"]
 	def __init__(self, user,*args, **kwargs):
 		super(TiendasForm, self).__init__(*args, **kwargs)
 		self.fields['ccomercial'].queryset=Ccomercial.objects.all()
@@ -93,7 +93,7 @@ class Carro_de_compras2Form(ModelForm):
 		model=Carro_de_compras
 		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}) }
 
-		exclude=["producto","id_comprador","nombre_comprador","apellido_comprador","cantidad","mostrar_foto","especificacion","total","estado_prod","fecha_ingreso","imagen1","imagen2","servicio_a_domicilio"]
+		exclude=["nota_comprador","nota_vendedor","producto","id_comprador","nombre_comprador","apellido_comprador","cantidad","mostrar_foto","especificacion","total","estado_prod","fecha_ingreso","imagen1","imagen2","servicio_a_domicilio"]
 
 
 class PreferidasForm(ModelForm):
@@ -102,5 +102,10 @@ class PreferidasForm(ModelForm):
 		exclude=[]
 			
 
+class EvaluacionForm(ModelForm):
+	class Meta:			
+		model=Evaluacion
+		exclude=[]
+			
 
 

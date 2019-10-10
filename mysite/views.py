@@ -340,8 +340,11 @@ def crear_usuario(request):
                             
                             whatsapp = form.cleaned_data['id_usuario']
                             contra = form.cleaned_data['clave'] 
+                            nombr=form.cleaned_data['nombre']
+                            apellid=form.cleaned_data['apellido']
                                             
-                            user = User.objects.create_user(username=whatsapp, password=contra)
+                            user = User.objects.create_user(username=whatsapp, password=contra, first_name=nombr ,last_name=apellid)
+                            
                                                        
                             usuario = form.save(commit=False)
                             # commit=False tells Django that "Don't send this to database yet.
@@ -351,14 +354,14 @@ def crear_usuario(request):
                             form.save() # Guardar los datos en la base de datos  print 
                             user.save()  
                             
-                            fecha= datetime.datetime.now()
-                            mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
-                            sender =str("xgangasx@gmail.com")
-                            asunto="nuevo usuario"+" "+ str(whatsapp)
-                            try:
-                                 send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False)            
-                            except:
-                                  pass
+                            #fecha= datetime.datetime.now()
+                            #mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
+                            #sender =str("xgangasx@gmail.com")
+                            #asunto="nuevo usuario"+" "+ str(whatsapp)
+                            #try:
+                            #     send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False)            
+                            #except:
+                            #      pass
                             #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             connection.close()
                             return render(request,'confirmar_usuario.html',locals())                  
@@ -389,10 +392,21 @@ def editar_usuario(request,acid):
              
                   if form.is_valid():
 
-                          contra = form.cleaned_data['clave'] 
+                          contra = form.cleaned_data['clave']
+                          whatsapp = form.cleaned_data['id_usuario']                          
+                          nombr=form.cleaned_data['nombre']
+                          apellid=form.cleaned_data['apellido']
+                          corre=form.cleaned_data['email']
+                        
 
                           user = User.objects.get(username=request.user.username)
                           user.set_password(contra)
+                          user.username=whatsapp
+                          user.first_name=nombr
+                          user.last_name=apellid
+                          user.email=corre
+
+
                           user.save()
 
                           usu=form.save(commit=False)
@@ -400,15 +414,15 @@ def editar_usuario(request,acid):
                           usu.save() # Guardar los datos en la base de datos 
                           #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
                           
-                          whatsapp=request.user.username
-                          fecha= datetime.datetime.now()
-                          mensaje= str(fecha)+"  "+str(whatsapp) + "EDITO SU ESTADO "+"\n"
-                          sender =str("xgangasx@gmail.com")
-                          asunto="edita"+" "+ str(whatsapp)
-                          try:
-                              send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
-                          except:
-                               pass        
+                          #whatsapp=request.user.username
+                          #fecha= datetime.datetime.now()
+                          #mensaje= str(fecha)+"  "+str(whatsapp) + "EDITO SU ESTADO "+"\n"
+                          #sender =str("xgangasx@gmail.com")
+                          #asunto="edita"+" "+ str(whatsapp)
+                          #try:
+                          #    send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
+                          #except:
+                          #     pass        
                           connection.close()
                           return render(request,'confirmar.html',locals())             
                   
@@ -787,6 +801,40 @@ def busqueda(request):
    
 
 import datetime
+
+
+
+def configurar_vista_pagina_principal(request): 
+
+            ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+            categoria=n_categorias()                             
+            mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username) 
+            
+      
+            configuracion=Usuarios.objects.get(id_usuario=request.user.username)     
+            
+            if configuracion.tipo_vista==0:
+                    configuracion.tipo_vista=1
+                    configuracion.save()
+                    return render(request,'principal_cuadricula.html',locals())  
+            
+            else:
+                    configuracion.tipo_vista=0
+                    configuracion.save()
+                    return render(request,'principal.html',locals())  
+
+            
+
+
+
+
+
+
+
+
+            
+
+
 #@login_required
 def pagina_principal(request):   
 
@@ -869,8 +917,17 @@ def pagina_principal(request):
                          
                          
 
-                         connection.close()                    
-                         return render(request,'principal.html',locals())   
+                         connection.close()    
+
+                         configuracion=Usuarios.objects.get(id_usuario=request.user.username)     
+            
+                         if configuracion.tipo_vista==0:                                
+                                  
+                                  return render(request,'principal.html',locals())  
+                          
+                         else:
+                                  return render(request,'principal_cuadricula.html',locals())                  
+                         
 
 
 
@@ -902,6 +959,15 @@ def informacion_vendedor(request,idusuario):
       connection.close()
       
       return render(request,'informacion_vendedor.html',locals())   
+
+def informacion_comprador(request,idusuario):
+      categoria=n_categorias()
+      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+     
+      usuario=Usuarios.objects.filter(id_usuario=idusuario).first()
+      connection.close()
+      
+      return render(request,'informacion_comprador.html',locals()) 
 
 
 
@@ -1242,7 +1308,7 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
                
                  n=Usuarios.objects.get(id_usuario=request.user.username)     
                  #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
-                 carrito=Carro_de_compras(nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
+                 carrito=Carro_de_compras(nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
                  
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -1373,6 +1439,8 @@ def ver_el_carrito(request,estado_del_producto):
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request) 
       el_usuario_x=t_usuario
+
+
 
 
       if el_usuario_x=="EL_COMPRADOR":
@@ -1670,4 +1738,82 @@ def ver_las_preferidas(request):
                               
        connection.close()                       
        return render(request,'catalogo.html',locals())   
+
+
+
+
+
+def evaluar(request,id_pedido_evaluado,nota_evaluacion):
+      categoria=n_categorias()
+      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request) 
+
+      pedido=Carro_de_compras.objects.get(pk=id_pedido_evaluado)
+      
+      comprador=pedido.id_comprador
+      el_evaluador=t_usuario
+
+     
+      if el_evaluador=="EL_COMPRADOR":
+          el_evaluado=pedido.producto.tienda.id_tienda               
+      else:
+          el_evaluado=comprador
+        
+
+
+      if nota_evaluacion=="SI":
+            la_nota=2
+      elif nota_evaluacion=="TALVES":
+             la_nota=-1
+      else:
+             la_nota=-3
+      
+     
+
+      try:     
+            conteo=Evaluacion.objects.filter(id_evaluador=request.user.username,id_evaluado=el_evaluado).count()      
+            if conteo==0:
+                  evaluin=Evaluacion(id_evaluador=request.user.username,id_evaluado=el_evaluado,nota=la_nota)
+                  evaluin.save()
+            else:
+                evaluacion=Evaluacion.objects.filter(id_evaluador=request.user.username,id_evaluado=el_evaluado).first()
+                evaluacion.nota=la_nota
+                evaluacion.save()  
+     
+      except:
+            pass      
+
+
+      nota_evaluado=0
+      evaluacion=Evaluacion.objects.filter(id_evaluado=el_evaluado)
+      for i in evaluacion:
+          nota_evaluado=nota_evaluado+i.nota
+
   
+
+      if nota_evaluado>10:
+              nota_evaluado=10
+      
+      if nota_evaluado<0:
+              nota_evaluado=0
+      
+
+
+      if el_evaluador=="EL_COMPRADOR":
+            pedido.producto.tienda.nota_de_evaluacion= nota_evaluado 
+            pedido.save()
+                        
+      else:
+
+            
+            comprador_evaluado=Usuario.objects.get(id_usuario=el_evaluado)
+            comprador_evaluado.nota_de_evaluacion= nota_evaluado 
+            comprador_evaluado.save() 
+           
+
+      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+
+

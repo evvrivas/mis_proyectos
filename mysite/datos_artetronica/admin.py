@@ -64,16 +64,8 @@ class RulesAdmin(admin.ModelAdmin):
     form = TiendasForm
 class TiendasAdmin(admin.ModelAdmin):
     model = Tiendas
-    list_display = ['id_usuario','centro_comecial', 'nombre_tienda','codigoapk','nombre_categoria','n_visitas','administrador_junior','promocion','plan_publicidad_activo','fecha_inicio_plan','fecha_final_plan']
-    list_filter=(('ccomercial',admin.RelatedOnlyFieldListFilter),('categoria',admin.RelatedOnlyFieldListFilter),)
-    def centro_comecial(self,instance):  
-        try:
-            return instance.ccomercial.nombre_ccomercial
-        except:      
+    list_display = ['id_usuario', 'nombre_tienda','codigoapk','n_visitas','administrador_junior','promocion','plan_publicidad_activo','fecha_inicio_plan','fecha_final_plan']
 
-            return "ninguno"
-    def nombre_categoria(self,instance):
-        return instance.categoria.categoria
 admin.site.register(Tiendas,TiendasAdmin)
 ####################################################
   
@@ -168,4 +160,13 @@ class PreferidasAdmin(admin.ModelAdmin):
 admin.site.register(Preferidas,PreferidasAdmin)
 ####################################################   
 
+####################################################
+class RulesAdmin(admin.ModelAdmin):
+    form = EvaluacionForm
+class EvaluacionAdmin(admin.ModelAdmin):
+    model = Evaluacion
+    list_display = ['id_evaluador','id_evaluado','nota']    
+   
+admin.site.register(Evaluacion,EvaluacionAdmin)
+####################################################   
 
