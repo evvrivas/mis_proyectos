@@ -36,21 +36,23 @@
 
 <br>
 <div class="row">
-          {% for j in comercio %} 
-               
-                     <div class="thumbnail">                      
-                                                      
+ 
+          {% for j in comercio %}  
+
+
+                 <div class="col-md-2">  
+
+                        <div class="thumbnail">                                       
+                                                    
                             {% thumbnail j.imagen_ccomercial "100x100" crop="center" as im %}
                               <a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                             {% endthumbnail %}   
-                                                              
-                               
-                    </div>
-                                                                                                              
-                                
+                        </div>                                              
+                </div>                 
                      
             {% endfor %}   
-
+            
+         
  </div>
 
 <br>
@@ -68,7 +70,7 @@
 {% else %}
 
  
-                      
+                  <div class="col-md-2">    
                      <div class="thumbnail">                     
 
                         {% thumbnail j.imagen1 "100x100" crop="center" as im %}
@@ -77,6 +79,7 @@
                         {% endthumbnail %}                            
 
                   </div>
+                   </div>
 
 {% endif %}  
  
@@ -103,26 +106,27 @@
 
 {% else %}
 
-            
+              
                  <div class="thumbnail">
                                          
                            
-                           
+                           <div class="col-md-2">  
                                
                                     {% thumbnail j.imagen1 "100x100" crop="center" as im %}
                                     <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                   
                                     {% endthumbnail %}
                                 
-                                
-                              
+                              </div>    
+                             <div class="col-md-2">   
                                     {% thumbnail j.imagen2 "100x100" crop="center" as im %}
                                     <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                      {% endthumbnail %}
-
+                               </div> 
+                              <div class="col-md-2">  
                                      {% thumbnail j.imagen3 "100x100" crop="center" as im %}
                                    <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                     {% endthumbnail %}                                       
-                               
+                                </div> 
                          
                   </div>              
                        
@@ -147,13 +151,13 @@
 
 <div class="row">
           {% for j in nuevo_comercio %} 
-                  
+               <div class="col-md-2">     
                 <div class="thumbnail">         
                              {% thumbnail j.imagen_ccomercial "100x100" crop="center" as im %}
                               <a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                {% endthumbnail %}   
                   </div>      
-                                     
+                     </div>                  
             {% endfor %}   
  </div>
 
@@ -173,7 +177,7 @@
 
 {% else %}
 
- 
+ <div class="col-md-2">   
                       
                      <div class="thumbnail">                      
                         
@@ -182,6 +186,7 @@
                                             
                         {% endthumbnail %}
                         
+                     </div>
                      </div>
   
 
@@ -213,21 +218,23 @@
             
                  <div class="thumbnail">               
                            
-                            
+                            <div class="col-md-2">   
                                
                                     {% thumbnail j.imagen1 "100x100" crop="center" as im %}
                                     <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                     
                                     {% endthumbnail %}
+                               </div>      
                              
-                               
+                              <div class="col-md-2">    
                                     {% thumbnail j.imagen2 "100x100" crop="center" as im %}
                                    <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                      {% endthumbnail %}
-
+                               </div>      
+<div class="col-md-2">   
                                      {% thumbnail j.imagen3 "100x100" crop="center" as im %}
                                    <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                     {% endthumbnail %}                                       
-                               
+                                </div>      
                                                
                   
                   </div>                  
@@ -252,7 +259,7 @@
 
 {% else %}
   
-                      
+                     <div class="col-md-2">  
                      <div class="thumbnail">                      
                         
                         {% thumbnail j.imagen1 "100x100" crop="center" as im %}
@@ -262,6 +269,7 @@
                         {% endthumbnail %}
 
                     </div>
+                     </div>
    
  {% endif %}    
    
@@ -287,20 +295,26 @@
             
                  <div class="thumbnail">                  
                            
-                            
+                            <div class="col-md-2">  
                                
                                     {% thumbnail j.imagen1 "100x100" crop="center" as im %}
                                     <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                       
                                     {% endthumbnail %}
-                             
+
+                  </div>   
+                             <div class="col-md-2">  
                               
                                     {% thumbnail j.imagen2 "100x100" crop="center" as im %}
                                     <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                      {% endthumbnail %}
 
+                  </div>   
+<div class="col-md-2">  
                                      {% thumbnail j.imagen3 "100x100" crop="center" as im %}
                                    <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img  class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
-                                    {% endthumbnail %}                                  
+                                    {% endthumbnail %}   
+
+                  </div>                                  
                                
               
                   </div>   
@@ -319,6 +333,8 @@
  <br>
 <div class="row">
           {% for j in aleatorias_comercio %} 
+
+          <div class="col-md-2">
             
                      <div class="thumbnail">                      
                                     
@@ -328,7 +344,7 @@
                                                                                
                     </div>
                
-                                                                                                  
+                   </div>                                                                                
               
        
             {% endfor %}   

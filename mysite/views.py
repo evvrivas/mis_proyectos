@@ -72,10 +72,10 @@ def crear_categorias(request):
 
   fechita=datetime.datetime.now()
 
-  u1=User.objects.create_user(username="50378218224", password="1111",email="evvrivas@gmail.com",first_name="Ernesto Vladimir",last_name="Valdez Rivas")
+  u1=User.objects.create_user(username="78218224", password="1111",email="evvrivas@gmail.com",first_name="Ernesto Vladimir",last_name="Valdez Rivas")
   u1.save()
   
-  us=Usuarios(id_usuario="50378218224", clave="1111", nombre="Ernesto Vladimir",apellido="Valdez Rivas", comentario_opcional="Soy la Laguna",email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",estoy_en="AHUACHAPAN",codigoapk="NORMAL", nombre_del_banco="Banco Agricola Comercial",numero_cuenta="010101010101",numero_tigo_money="78218224",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita,tipo_usuario="EL_ADMINISTRADOR",tipo_de_vista="NORMAL")      
+  us=Usuarios(id_usuario="78218224", clave="1111", nombre="Ernesto Vladimir",apellido="Valdez Rivas", comentario_opcional="Soy la Laguna",email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",estoy_en="AHUACHAPAN",codigoapk="NORMAL", nombre_del_banco="Banco Agricola Comercial",numero_cuenta="010101010101",numero_tigo_money="78218224",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita,tipo_usuario="EL_ADMINISTRADOR",tipo_de_vista="NORMAL")      
   us.save()
 
   
@@ -816,12 +816,13 @@ def configurar_vista_pagina_principal(request):
             if configuracion.tipo_vista==0:
                     configuracion.tipo_vista=1
                     configuracion.save()
-                    return render(request,'principal_cuadricula.html',locals())  
+                    
             
             else:
                     configuracion.tipo_vista=0
                     configuracion.save()
-                    return render(request,'principal.html',locals())  
+            
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))       
 
             
 
@@ -917,9 +918,15 @@ def pagina_principal(request):
                          
                          
 
-                         connection.close()    
+                         connection.close()   
+                         
 
-                         configuracion=Usuarios.objects.get(id_usuario=request.user.username)     
+                         try: 
+                                configuracion=Usuarios.objects.get(id_usuario=request.user.username) 
+                         except:
+                                configuracion.tipo_vista=0:
+
+                             
             
                          if configuracion.tipo_vista==0:                                
                                   
@@ -1755,7 +1762,7 @@ def evaluar(request,id_pedido_evaluado,nota_evaluacion):
 
      
       if el_evaluador=="EL_COMPRADOR":
-          el_evaluado=pedido.producto.tienda.id_tienda               
+          el_evaluado=pedido.producto.tienda.id_usuario              
       else:
           el_evaluado=comprador
         
@@ -1806,7 +1813,7 @@ def evaluar(request,id_pedido_evaluado,nota_evaluacion):
       else:
 
             
-            comprador_evaluado=Usuario.objects.get(id_usuario=el_evaluado)
+            comprador_evaluado=Usuarios.objects.get(id_usuario=el_evaluado)
             comprador_evaluado.nota_de_evaluacion= nota_evaluado 
             comprador_evaluado.save() 
            

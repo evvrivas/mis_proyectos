@@ -110,6 +110,7 @@
                                                   <li><a href="/listado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/TODOS">ver todos los pedidos</a></li>
 
                                               {% endifequal %}
+                                              <li><a href="/admin">Administrar</a></li>
 
                                              
                                               <li><a href="/informacion_vendedor/{{tiendas.id_usuario}}">$?</a></li>   
@@ -158,10 +159,10 @@
 
                                 <td>
 
-      {% if tiendas.nota_de_evaluacion < 3 %}
+      {% if tiendas.nota_de_evaluacion < 4 %}
           <a href="/informacion_vendedor/{{tiendas.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
 
-      {% elif tiendas.nota_de_evaluacion > 6 %}
+      {% elif tiendas.nota_de_evaluacion < 7 %}
           <a href="/informacion_vendedor/{{tiendas.id_usuario}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
       {% else %}
 
