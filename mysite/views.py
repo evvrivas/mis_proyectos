@@ -924,7 +924,7 @@ def pagina_principal(request):
                          try: 
                                 configuracion=Usuarios.objects.get(id_usuario=request.user.username) 
                          except:
-                                configuracion.tipo_vista=0:
+                                configuracion.tipo_vista=0
 
                              
             
