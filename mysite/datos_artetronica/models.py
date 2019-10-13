@@ -17,8 +17,9 @@ from django.core.validators import MaxValueValidator
 
 
 #from sorl.thumbnail import ImageField
-from sorl.thumbnail import ImageField, get_thumbnail
-
+from sorl.thumbnail import ImageField
+from sorl.thumbnail import get_thumbnail
+from django.core.files.base import ContentFile
 
 	
 TIPO_PRENDA = (
@@ -234,15 +235,26 @@ class Usuarios(models.Model):
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR")
 	     tipo_vista=models.IntegerField(blank=True,default=0)
-	     def save(self, *args, **kwargs):
-		        if self.image:
-		            self.image = get_thumbnail(self.image, '200x200', quality=99, format='JPEG')
-		        super(Usuarios, self).save(*args, **kwargs)
+
+
+ 
+
+
+		 def save(self, *args, **kwargs):
+		        if not self.id:  
+		            super(Foo, self).save(*args, **kwargs)  
+		            resized = get_thumbnail(self.image, "100x100" ...)
+		            self.image.save(resized.name, ContentFile(resized.read()), True)
+	         		#self.image = get_thumbnail(self.image, '200x200', quality=99, format='JPEG')
+
+		        super(Foo, self).save(*args, **kwargs)
 		 def __str__(self):
 				    		return  self.id_usuario
 		 class Admin:
 				    		list_display = ('id_usuario')
 
+		       
+		 
 
 
 CATEGORIA_TIENDA= (
