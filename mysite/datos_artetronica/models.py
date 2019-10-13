@@ -16,7 +16,9 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.validators import MaxValueValidator
 
 
-from sorl.thumbnail import ImageField
+#from sorl.thumbnail import ImageField
+from sorl.thumbnail import ImageField, get_thumbnail
+
 
 	
 TIPO_PRENDA = (
@@ -214,7 +216,7 @@ class Usuarios(models.Model):
 	     clave=models.PositiveIntegerField(primary_key=True, validators=[MaxValueValidator(9999)])
 	     nombre=models.CharField(max_length=40)
 	     apellido=models.CharField(max_length=40)
-	     foto_perfil = ImageField(upload_to='tmp',blank=True)
+	     image = ImageField(upload_to='tmp',blank=True)
 	     estoy_en=models.CharField(max_length=30,blank=True,choices=CIUDADES)
 	     comentario_opcional=models.CharField(max_length=40,blank=True)
 	     nota_de_evaluacion=models.IntegerField(blank=True,default=10)
@@ -231,13 +233,18 @@ class Usuarios(models.Model):
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR")
-	     tipo_vista=models.IntegerField(blank=True,default=0)   
+	     tipo_vista=models.IntegerField(blank=True,default=0)
 
-	     
-	     def __str__(self):
-		    		return  self.id_usuario
-	     class Admin:
-		    		list_display = ('id_usuario')
+	    
+		 def save(self, *args, **kwargs):
+		        if self.image:
+		            self.image = get_thumbnail(self.image, '200x200', quality=99, format='JPEG')
+		        super(Usuarios, self).save(*args, **kwargs)
+			     
+		 def __str__(self):
+				    		return  self.id_usuario
+		 class Admin:
+				    		list_display = ('id_usuario')
 
 
 
@@ -532,6 +539,7 @@ class Carro_de_compras(models.Model):
 
 	nota_comprador=models.IntegerField(blank=True,default=0)
 	nota_vendedor=models.IntegerField(blank=True,default=0)
+	usuario_car=models.ForeignKey('Usuarios',blank=True,null=True)
 	    
 
 	def __str__(self):

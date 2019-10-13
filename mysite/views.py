@@ -919,16 +919,17 @@ def pagina_principal(request):
                          
 
                          connection.close()   
-                         
+                         a=0
 
                          try: 
                                 configuracion=Usuarios.objects.get(id_usuario=request.user.username) 
+                                a=configuracion.tipo_vista
                          except:
-                                configuracion.tipo_vista=0
+                                a=0
 
                              
             
-                         if configuracion.tipo_vista==0:                                
+                         if a==0:                                
                                   
                                   return render(request,'principal.html',locals())  
                           
@@ -1315,7 +1316,7 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
                
                  n=Usuarios.objects.get(id_usuario=request.user.username)     
                  #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
-                 carrito=Carro_de_compras(nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
+                 carrito=Carro_de_compras(usuario_car=n,nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
                  
                  carrito.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

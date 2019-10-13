@@ -36,23 +36,25 @@
 
 <br>
 <div class="row">
+      <div class="thumbnail"> 
+      <div class="col-md-2"> 
  
           {% for j in comercio %}  
 
 
-                 <div class="col-md-2">  
+                  
 
-                        <div class="thumbnail">                                       
+                                                              
                                                     
                             {% thumbnail j.imagen_ccomercial "100x100" crop="center" as im %}
                               <a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                             {% endthumbnail %}   
-                        </div>                                              
-                </div>                 
+                                                                    
+                               
                      
             {% endfor %}   
-            
-         
+     </div>         
+   </div>        
  </div>
 
 <br>
@@ -63,6 +65,10 @@
 
 
 <div class="row">   
+
+<div class="thumbnail"> 
+<div class="col-md-2">   
+
 {% for j in tiendas %} 
 
 {% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior %}
@@ -70,21 +76,23 @@
 {% else %}
 
  
-                  <div class="col-md-2">    
-                     <div class="thumbnail">                     
+               
+                                         
 
                         {% thumbnail j.imagen1 "100x100" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}" class="responsive"> </a>
                                   
                         {% endthumbnail %}                            
 
-                  </div>
-                   </div>
+                 
 
 {% endif %}  
  
        
        {% endfor %} 
+
+   </div>
+   </div>
          
  </div>         
 <br>
@@ -99,6 +107,9 @@
 
 
  <div class="row">
+
+  <div class="thumbnail">
+   <div class="col-md-2">  
  {% for j in productos %} 
  
  
@@ -106,29 +117,25 @@
 
 {% else %}
 
-              
-                 <div class="thumbnail">
-                                         
                            
-                           <div class="col-md-2">  
+                                         
+                                                    
                                
                                     {% thumbnail j.imagen1 "100x100" crop="center" as im %}
                                     <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                   
                                     {% endthumbnail %}
                                 
-                              </div>    
-                             <div class="col-md-2">   
+                             
                                     {% thumbnail j.imagen2 "100x100" crop="center" as im %}
                                     <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                      {% endthumbnail %}
-                               </div> 
-                              <div class="col-md-2">  
+                              
                                      {% thumbnail j.imagen3 "100x100" crop="center" as im %}
                                    <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                     {% endthumbnail %}                                       
-                                </div> 
+                            
                          
-                  </div>              
+                             
                        
                         
                      
@@ -139,6 +146,8 @@
                        
          {% endfor %} 
        
+  </div> 
+    </div> 
 </div>
 
 <br>
@@ -150,15 +159,17 @@
 
 
 <div class="row">
+ <div class="col-md-2">     
+                <div class="thumbnail">  
           {% for j in nuevo_comercio %} 
-               <div class="col-md-2">     
-                <div class="thumbnail">         
+                     
                              {% thumbnail j.imagen_ccomercial "100x100" crop="center" as im %}
                               <a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                {% endthumbnail %}   
-                  </div>      
-                     </div>                  
+                                 
             {% endfor %}   
+ </div>      
+                     </div>  
  </div>
 
 
@@ -171,30 +182,32 @@
 
 
  <div class="row">   
+ <div class="thumbnail">   
+  <div class="col-md-2">   
+                      
+                     
 {% for j in nuevas_tiendas %} 
 
 {% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior %}
 
 {% else %}
 
- <div class="col-md-2">   
-                      
-                     <div class="thumbnail">                      
+                   
                         
                         {% thumbnail j.imagen1 "100x100" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>                                 
                                             
                         {% endthumbnail %}
                         
-                     </div>
-                     </div>
+                     
   
 
 
  {% endif %}   
  
        {% endfor %} 
-         
+         </div>
+                     </div>
  </div>    
 
 
@@ -208,6 +221,9 @@
 
 
  <div class="row">
+  <div class="thumbnail">               
+                           
+                            <div class="col-md-2">   
  {% for j in nuevos_productos %} 
 
  {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior %}
@@ -216,34 +232,29 @@
 {% else %}
      
             
-                 <div class="thumbnail">               
-                           
-                            <div class="col-md-2">   
+                
                                
                                     {% thumbnail j.imagen1 "100x100" crop="center" as im %}
                                     <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                     
                                     {% endthumbnail %}
-                               </div>      
-                             
-                              <div class="col-md-2">    
+                                
                                     {% thumbnail j.imagen2 "100x100" crop="center" as im %}
                                    <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                      {% endthumbnail %}
-                               </div>      
-<div class="col-md-2">   
+                              
                                      {% thumbnail j.imagen3 "100x100" crop="center" as im %}
                                    <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                     {% endthumbnail %}                                       
-                                </div>      
-                                               
-                  
-                  </div>                  
+                                         
                        
             {% endif %}     
              
                     
          {% endfor %} 
-       
+          </div>      
+                                               
+                  
+                  </div>      
 </div>
  
 <br>
@@ -252,15 +263,17 @@
 <!--##########################################################################################-->
 <!--##########################################################################################-->
 
-<div class="row">   
+<div class="row"> 
+<div class="thumbnail">  
+<div class="col-md-2">  
+
 {% for j in aleatorias_tiendas %} 
 
 {% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior %}
 
 {% else %}
   
-                     <div class="col-md-2">  
-                     <div class="thumbnail">                      
+                                           
                         
                         {% thumbnail j.imagen1 "100x100" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>          
@@ -268,14 +281,14 @@
                                                                 
                         {% endthumbnail %}
 
-                    </div>
-                     </div>
+                    
    
  {% endif %}    
    
         
        {% endfor %} 
-         
+   </div>
+                     </div>      
  </div>         
  <br>
 
@@ -285,6 +298,9 @@
 
 
  <div class="row">
+  <div class="thumbnail">                  
+                           
+                            <div class="col-md-2">  
  {% for j in aleatorias_productos %} 
 
  {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior %}
@@ -293,35 +309,31 @@
 {% else %}
      
             
-                 <div class="thumbnail">                  
-                           
-                            <div class="col-md-2">  
+                
                                
                                     {% thumbnail j.imagen1 "100x100" crop="center" as im %}
                                     <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                       
                                     {% endthumbnail %}
 
-                  </div>   
-                             <div class="col-md-2">  
+                  
                               
                                     {% thumbnail j.imagen2 "100x100" crop="center" as im %}
                                     <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                      {% endthumbnail %}
 
-                  </div>   
-<div class="col-md-2">  
                                      {% thumbnail j.imagen3 "100x100" crop="center" as im %}
                                    <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img  class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                     {% endthumbnail %}   
 
-                  </div>                                  
-                               
-              
-                  </div>   
+                    
 {% endif %}  
            
                    
          {% endfor %} 
+          </div>                                  
+                               
+              
+                  </div>
        
 </div>
 
@@ -332,24 +344,26 @@
 
  <br>
 <div class="row">
+<div class="thumbnail"> 
+<div class="col-md-2">
+            
+
           {% for j in aleatorias_comercio %} 
 
-          <div class="col-md-2">
-            
-                     <div class="thumbnail">                      
+                               
                                     
                              {% thumbnail j.imagen_ccomercial "100x100" crop="center" as im %}
                               <a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                {% endthumbnail %}   
                                                                                
-                    </div>
-               
-                   </div>                                                                                
+                                                                                                   
               
        
             {% endfor %}   
  </div>
-
+ </div>
+               
+                   </div>
 
 <!--   quita este parar color de fondo -->
 </div>
