@@ -243,7 +243,7 @@ class Usuarios(models.Model):
 		 def save(self, *args, **kwargs):
 		        if not self.id:  
 		            super(Foo, self).save(*args, **kwargs)  
-		            resized = get_thumbnail(self.image, "100x100" ...)
+		            resized = get_thumbnail(self.image, "100x100" ,quality=99, format='JPEG')
 		            self.image.save(resized.name, ContentFile(resized.read()), True)
 	         		#self.image = get_thumbnail(self.image, '200x200', quality=99, format='JPEG')
 
