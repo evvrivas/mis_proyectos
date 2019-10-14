@@ -60,7 +60,7 @@
 
 <td WIDTH="80">
         {% thumbnail i.usuario_car.image "40" crop="center" as im %}
-               <a href="" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+               <a href="/informacion_comprador/{{i.id_comprador}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
         {% endthumbnail %} 
 </td>
 
@@ -168,10 +168,15 @@
 
  
 
+<td WIDTH="80">
+        {% thumbnail i.producto.tienda.imagen1 "40" crop="center" as im %}
+               <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+         <a href="/informacion_vendedor/{{tiendas.id_usuario}}" class="btn btn-success" role="button">?</a> 
+</td>
 
 
-
- <td WIDTH="90">
+ <td WIDTH="80">
                                 {% if tiendas.nota_de_evaluacion < 3 %}
           <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
 
@@ -184,9 +189,9 @@
 
 </td>
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+                                    <td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
 
-                                    <td WIDTH="90"><a href="tel://++503{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    <td WIDTH="80"><a href="tel://++503{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
                                     
                                    
                                 </tr >

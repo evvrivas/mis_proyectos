@@ -235,17 +235,16 @@ class Usuarios(models.Model):
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR")
 	     tipo_vista=models.IntegerField(blank=True,default=0)
-
 	     def save(self, *args, **kwargs):
-		        if not self.id:  
-		            super(Usuarios, self).save(*args, **kwargs)  
-		            resized = get_thumbnail(self.image, "100x100" ,quality=99, format='JPEG')
-		            self.image.save(resized.name, ContentFile(resized.read()), True)
-		        super(Usuarios, self).save(*args, **kwargs)
-		 def __str__(self):
-				    		return  self.id_usuario
-		 class Admin:
-				    		list_display = ('id_usuario')
+	     	if not self.pk:
+	     		super(Usuarios, self).save(*args, **kwargs)
+	     		resized = get_thumbnail(self.image, "100x100" ,quality=99, format='JPEG')
+	     		self.image.save(resized.name, ContentFile(resized.read()), True)
+	     	super(Usuarios, self).save(*args, **kwargs)
+	     def __str__(self):
+	     		return  self.id_usuario
+	     class Admin:
+	     		list_display = ('id_usuario')
 
 		       
 		 

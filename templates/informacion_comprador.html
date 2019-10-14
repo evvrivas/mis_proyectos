@@ -16,7 +16,7 @@
                 <div class="thumbnail"> 
                                  
         {% thumbnail usuario.image "200" crop="center" as im %}
-               <a href="" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+               <a href="" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
         {% endthumbnail %}   
       
        <p>Nombre del comprador:{{usuario.nombre}} {{usuario.apellido}}</p>
