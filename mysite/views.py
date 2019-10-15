@@ -375,16 +375,14 @@ def crear_usuario(request):
 
         
 @login_required
-def editar_usuario(request,acid):   
+def editar_usuario(request):   
        categoria=n_categorias()
        ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
        if t_usuario=="EL_ADMINISTRADOR":
-             a=eval(acid)-1
-
-             acido=str(a)
-             f = Usuarios.objects.get(pk=acido)           
+            
+             f = Usuarios.objects.get(id_usuario=request.user.username)           
              
              if request.method == 'POST':
                   

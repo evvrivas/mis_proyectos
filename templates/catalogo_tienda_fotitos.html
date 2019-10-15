@@ -26,24 +26,20 @@
 {% else %}
 
 
- <center>
- <table BORDER="3" CELLSPACING="5" bordercolor="red ">
-                        
-      <tr>                                    
-                                    
+       
                                    
                             
 
 
          {%  if j.imagen1 %}
-         <td>
+         
 
              
 
                   <div class="thumbnail">
                         
                               {% thumbnail j.imagen1 "100x100" crop="center" as im %}   
-                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
                               {% endthumbnail %}
                             
                               <div class="content">
@@ -64,19 +60,19 @@
                         
                   </div>
                
-            </td>     
+             
             {% endif %}
 
 
 
             {%  if j.imagen2 %}
-            <td>
+            
             
 
                   <div class="thumbnail">
                         
                               {% thumbnail j.imagen2 "100x100" crop="center" as im %}   
-                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
                               {% endthumbnail %}
                             
                               <div class="content">
@@ -97,19 +93,19 @@
                       
                   </div>
                
-            <td>   
+               
             {% endif %}
 
 
 
             {%  if j.imagen3 %}
-            <td>
+            
              
 
                   <div class="thumbnail">
                        
                               {% thumbnail j.imagen3 "100x100" crop="center" as im %}   
-                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
                               {% endthumbnail %}
                             
                               <div class="content">
@@ -130,14 +126,11 @@
                         
                   </div>
               
-             </td>  
+             
             {% endif %}
 
 
-</tr>  
 
- 
- </table>    </center>      
 
     {% endif %}             
  {% endfor %}  

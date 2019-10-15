@@ -45,7 +45,7 @@ urlpatterns = [
     url(r'^informacion_comprador/([^/]+)/$', informacion_comprador),
        
     url(r'^crear_usuario/$',crear_usuario),
-    url(r'^editar_usuario/(\d+)/$',editar_usuario),
+    url(r'^editar_usuario/$',editar_usuario),
 
     url(r'^crear_tienda/$',crear_tienda),
     url(r'^editar_tienda/(\d+)/$',editar_tienda),
