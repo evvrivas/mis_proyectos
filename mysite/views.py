@@ -685,7 +685,7 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       elif comprador.tipo_de_vista=="LINEAL":
             comprador.tipo_de_vista="FOTITOS"
 
-      else comprador.tipo_de_vista=="FOTITOS":
+      else:
             comprador.tipo_de_vista="NORMAL"
 
       
@@ -697,7 +697,7 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
          return render(request,'catalogo_tienda.html',locals())   
       elif comprador.tipo_de_vista=="LINEAL":
          return render(request,'catalogo_tienda_lineal.html',locals())   
-      else comprador.tipo_de_vista=="FOTITOS":
+      else:
          return render(request,'catalogo_tienda_fotitos.html',locals())   
          
       
