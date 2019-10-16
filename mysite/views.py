@@ -688,8 +688,7 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       else comprador.tipo_de_vista=="FOTITOS":
             comprador.tipo_de_vista="NORMAL"
 
-      else:
-         pass
+      
                
       comprador.save()    
 
