@@ -508,7 +508,7 @@ def crear_tienda(request):
 
 
 
-
+@login_required
 def editar_tienda(request,acid):   
         categoria=n_categorias()
         ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
@@ -542,7 +542,7 @@ def editar_tienda(request,acid):
 
 
 
-
+@login_required
 def mi_tienda(request,idusuario,nombretienda):
     
     categoria=categorizar(idusuario,nombretienda)
@@ -563,16 +563,14 @@ def mi_tienda(request,idusuario,nombretienda):
 
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)).order_by("precio_A")[:10]
     
-    connection.close() 
-
-    if tiendas.tipo_de_vista=="NORMAL":
+    comprador=Usuarios.objects.get(id_usuario=request.user.username) 
+    connection.close()
+    if comprador.tipo_de_vista=="NORMAL":
          return render(request,'catalogo_tienda.html',locals())   
-    elif tiendas.tipo_de_vista=="LINEAL":
+    elif comprador.tipo_de_vista=="LINEAL":
          return render(request,'catalogo_tienda_lineal.html',locals())   
-    elif tiendas.tipo_de_vista=="FOTITOS":
-         return render(request,'catalogo_tienda_fotitos.html',locals())   
-    else :
-          return render(request,'catalogo_tienda.html',locals()) 
+    else:
+         return render(request,'catalogo_tienda_fotitos.html',locals()) 
       
  
 def mis_tiendas(request,idusuario):
@@ -647,20 +645,19 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   else:      
     productos=Productos.objects.filter(Q(categoria__categoria__icontains=item) & Q(tienda__nombre_tienda__icontains=nombretienda)) 
    
-   
+  comprador=Usuarios.objects.get(id_usuario=request.user.username) 
   connection.close()
+  if comprador.tipo_de_vista=="NORMAL":
+         return render(request,'catalogo_tienda.html',locals())   
+  elif comprador.tipo_de_vista=="LINEAL":
+         return render(request,'catalogo_tienda_lineal.html',locals())   
+  else:
+         return render(request,'catalogo_tienda_fotitos.html',locals())   
   #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
-  if tiendas.tipo_de_vista=='NORMAL':
-    return render(request,'catalogo_tienda.html',locals())   
-  elif tiendas.tipo_de_vista=='LINEAL':
-    return render(request,'catalogo_tienda_lineal.html',locals())   
-  elif tiendas.tipo_de_vista=='FOTITOS':
-    return render(request,'catalogo_tienda_fotitos.html',locals())   
-  else :
-    return render(request,'catalogo_tienda.html',locals())   
+   
 
 
-
+@login_required
 def cambiar_tipo_de_vista(request,id_dela_tienda):
       tiendas = Tiendas.objects.get(pk=id_dela_tienda)
       idusuario=tiendas.id_usuario 
@@ -799,7 +796,7 @@ def busqueda(request):
 import datetime
 
 
-
+@login_required
 def configurar_vista_pagina_principal(request): 
 
             ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
@@ -1296,8 +1293,8 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
 
     lafecha=datetime.datetime.now()  
     
-    now = datetime.now()       
-    lafecha = now.strftime("%d/%m/%Y, %H:%M:%S")
+      
+    # lafecha = lafecha.strftime("%d/%m/%Y, %H:%M:%S")
     # dd/mm/YY H:M:S format
     
 
@@ -1336,7 +1333,7 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
     else:
         corazon="NO_PREFERIDA"
 
-
+    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)).order_by("precio_A")
     comprador=Usuarios.objects.get(id_usuario=request.user.username)                          
           
     if comprador.tipo_de_vista=="NORMAL":

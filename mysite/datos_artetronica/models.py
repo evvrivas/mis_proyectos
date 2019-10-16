@@ -20,7 +20,7 @@ from django.core.validators import MaxValueValidator
 from sorl.thumbnail import ImageField
 from sorl.thumbnail import get_thumbnail
 from django.core.files.base import ContentFile
-
+from django_resized import ResizedImageField
 	
 TIPO_PRENDA = (
 	        ('confeccion ', 'confeccion'),	        
@@ -217,7 +217,7 @@ class Usuarios(models.Model):
 	     clave=models.PositiveIntegerField(primary_key=True, validators=[MaxValueValidator(9999)])
 	     nombre=models.CharField(max_length=40)
 	     apellido=models.CharField(max_length=40)
-	     image = ImageField(upload_to='tmp',blank=True)
+	     image = ResizedImageField(size=[500, 300], quality=75, upload_to='tmp')
 	     estoy_en=models.CharField(max_length=30,blank=True,choices=CIUDADES)
 	     comentario_opcional=models.CharField(max_length=40,blank=True)
 	     nota_de_evaluacion=models.IntegerField(blank=True,default=10)
@@ -235,9 +235,9 @@ class Usuarios(models.Model):
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR")
 	     tipo_vista=models.IntegerField(blank=True,default=0)
-	     def save(self, *args, **kwargs):
-	     			super(Usuarios, self).save(*args, **kwargs)
-	     			self.medium = get_thumbnail(self.image,'100x100',crop='center',quality=99).url   
+	     #def save(self, *args, **kwargs):
+	     			#super(Usuarios, self).save(*args, **kwargs)
+	     			#self.medium = get_thumbnail(self.image,'100x100',crop='center',quality=99).url   
 	    
 	     def __str__(self):
 	     		return  self.id_usuario
