@@ -40,23 +40,8 @@
                         
                               {% thumbnail j.imagen1 "100x100" crop="center" as im %}   
                                <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
-                              {% endthumbnail %}
-                            
-                              <div class="content">
-
-                               {%  if j.precio_de_antes %}  
-                                       <center><strike><h6>Antes $ {{j.precio_de_antes}}</h6></strike></center>
-                               {% endif %}
-                
-                               {%  if j.precio_B %}
-                                      <h6>Hoy $ {{ j.precio_B }}</h6>
-                               {% else %}
-                                
-                                      {%  if j.precio_A %}
-                                            <h6>Hoy $ {{ j.precio_A }}</h6>
-                                      {% endif %}
-                                {% endif %}
-                                </div>
+                             {% endthumbnail %}
+                                        
                         
                   </div>
                
@@ -74,22 +59,7 @@
                               {% thumbnail j.imagen2 "100x100" crop="center" as im %}   
                                <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
                               {% endthumbnail %}
-                            
-                              <div class="content">
-
-                               {%  if j.precio_de_antes %}  
-                                       <center><strike><h6>Antes $ {{j.precio_de_antes}}</h6></strike></center>
-                               {% endif %}
-                
-                               {%  if j.precio_B %}
-                                      <h6>Hoy $ {{ j.precio_B }}</h6>
-                               {% else %}
-                                
-                                      {%  if j.precio_A %}
-                                            <h6>Hoy $ {{ j.precio_A }}</h6>
-                                      {% endif %}
-                                {% endif %}
-                                </div>
+                                                        
                       
                   </div>
                
@@ -108,22 +78,7 @@
                                <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img  style="float: right; margin: 0px 0px 5px 5px;" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
                               {% endthumbnail %}
                             
-                              <div class="content">
-
-                               {%  if j.precio_de_antes %}  
-                                       <center><strike><h6>Antes $ {{j.precio_de_antes}}</h6></strike></center>
-                               {% endif %}
-                
-                               {%  if j.precio_B %}
-                                      <h6>Hoy $ {{ j.precio_B }}</h6>
-                               {% else %}
-                                
-                                      {%  if j.precio_A %}
-                                            <h6>Hoy $ {{ j.precio_A }}</h6>
-                                      {% endif %}
-                                {% endif %}
-                                </div>
-                        
+                                                     
                   </div>
               
              

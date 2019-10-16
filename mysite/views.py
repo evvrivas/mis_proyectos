@@ -117,7 +117,7 @@ def info_pagina(requesta):
 
     
     try:
-          cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).count()+Carro_de_compras.objects.filter(producto__id_usuario=request.user.username).count()
+          cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(Q(estado_prod="QUIERO_PEDIR_ESTO") | Q(estado_prod="QUIERO_PEDIR_ESTO")).count()+Carro_de_compras.objects.filter(producto__id_usuario=request.user.username).filter(Q(estado_prod="QUIERO_PEDIR_ESTO") | Q(estado_prod="QUIERO_PEDIR_ESTO")).count()
     except:  
           cantidad_pedidos=Carro_de_compras.objects.all().count()
 
@@ -685,11 +685,11 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       elif comprador.tipo_de_vista=="LINEAL":
             comprador.tipo_de_vista="FOTITOS"
 
-      elif comprador.tipo_de_vista=="FOTITOS":
+      else comprador.tipo_de_vista=="FOTITOS":
             comprador.tipo_de_vista="NORMAL"
 
       else:
-         comprador.tipo_de_vista="NORMAL"
+         pass
                
       comprador.save()    
 
@@ -698,10 +698,9 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
          return render(request,'catalogo_tienda.html',locals())   
       elif comprador.tipo_de_vista=="LINEAL":
          return render(request,'catalogo_tienda_lineal.html',locals())   
-      elif comprador.tipo_de_vista=="FOTITOS":
+      else comprador.tipo_de_vista=="FOTITOS":
          return render(request,'catalogo_tienda_fotitos.html',locals())   
-      else :
-          return render(request,'catalogo_tienda.html',locals())     
+         
       
 
   
@@ -1285,16 +1284,23 @@ def centro_comercial(request,idusuario,nombre_del_centro_comercial):
     return render(request,'catalogo.html',locals())   
 
 
+
+          
+
+
        
 @login_required
-def agregar_producto_al_carrito(request,id_del_producto,foto):   
-    categoria=n_categorias()
-    mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+def agregar_producto_al_carrito(request,id_del_producto,foto):     
+
     
     el_producto=Productos.objects.get(id=id_del_producto)
 
-    lafecha=datetime.datetime.now()     
+    lafecha=datetime.datetime.now()  
+    
+    now = datetime.now()       
+    lafecha = now.strftime("%d/%m/%Y, %H:%M:%S")
+    # dd/mm/YY H:M:S format
+    
 
     if request.POST:
             cant = request.POST.get("cant")
@@ -1317,7 +1323,32 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
                  carrito=Carro_de_compras(usuario_car=n,nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
                  
                  carrito.save()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    id_dela_tienda=el_producto.tienda.id
+    tiendas = Tiendas.objects.get(pk=id_dela_tienda)
+    idusuario=tiendas.id_usuario 
+    nombretienda=tiendas.nombre_tienda      
+    categoria=categorizar(idusuario,nombretienda)     
+    var=tiendas.codigoapk    
+    
+    corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=id_dela_tienda).count()
+      if corazon>0:
+        corazon="PREFERIDA"
+      else:
+        corazon="NO_PREFERIDA"
+
+
+    comprador=Usuarios.objects.get(id_usuario=request.user.username)                          
+          
+    if comprador.tipo_de_vista=="NORMAL":
+         return render(request,'catalogo_tienda.html',locals())   
+    elif comprador.tipo_de_vista=="LINEAL":
+         return render(request,'catalogo_tienda_lineal.html',locals())   
+    elif comprador.tipo_de_vista=="FOTITOS":
+         return render(request,'catalogo_tienda_fotitos.html',locals())   
+    else :
+          return render(request,'catalogo_tienda.html',locals())    
+    
 
 
 

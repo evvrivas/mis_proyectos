@@ -236,16 +236,24 @@ class Usuarios(models.Model):
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR")
 	     tipo_vista=models.IntegerField(blank=True,default=0)
 	     def save(self, *args, **kwargs):
-		        if self.image:
-		            	self.image = get_thumbnail(self.image, '100x100', quality=99, format='JPEG')
-		        super(Usuarios, self).save(*args, **kwargs)
-	     
+	     			super(Usuarios, self).save(*args, **kwargs)
+	     			self.medium = get_thumbnail(self.image,'100x100',crop='center',quality=99).url   
+	    
 	     def __str__(self):
 	     		return  self.id_usuario
 	     class Admin:
 	     		list_display = ('id_usuario')
 
-		       
+
+ 
+
+    
+
+	   				  
+	    		 
+
+
+   
 		 
 
 
