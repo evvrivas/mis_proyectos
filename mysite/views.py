@@ -1331,9 +1331,9 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
     var=tiendas.codigoapk    
     
     corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=id_dela_tienda).count()
-      if corazon>0:
+    if corazon>0:
         corazon="PREFERIDA"
-      else:
+    else:
         corazon="NO_PREFERIDA"
 
 
