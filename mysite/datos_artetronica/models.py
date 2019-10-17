@@ -8,7 +8,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 #import Image
 
-from PIL import Image as Img
+#from PIL import Image as Img
 
 from io import StringIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -21,7 +21,13 @@ from sorl.thumbnail import ImageField
 from sorl.thumbnail import get_thumbnail
 from django.core.files.base import ContentFile
 from django_resized import ResizedImageField
-	
+
+
+from PIL import Image
+from io import BytesIO
+
+import sys
+
 TIPO_PRENDA = (
 	        ('confeccion ', 'confeccion'),	        
 	        ('serigrafia', 'serigrafia'),
@@ -217,7 +223,7 @@ class Usuarios(models.Model):
 	     clave=models.PositiveIntegerField(primary_key=True, validators=[MaxValueValidator(9999)])
 	     nombre=models.CharField(max_length=40)
 	     apellido=models.CharField(max_length=40)
-	     image = ResizedImageField(size=[500, 300], quality=75, upload_to='tmp')
+	     image = ResizedImageField(size=[100, 100], quality=75, upload_to='tmp')
 	     estoy_en=models.CharField(max_length=30,blank=True,choices=CIUDADES)
 	     comentario_opcional=models.CharField(max_length=40,blank=True)
 	     nota_de_evaluacion=models.IntegerField(blank=True,default=10)
@@ -237,19 +243,35 @@ class Usuarios(models.Model):
 	     tipo_vista=models.IntegerField(blank=True,default=0)
 	     #def save(self, *args, **kwargs):
 	     			#super(Usuarios, self).save(*args, **kwargs)
-	     			#self.medium = get_thumbnail(self.image,'100x100',crop='center',quality=99).url   
+	     			#self.medium = get_thumbnail(self.image,'100x100',crop='center',quality=99).url
 	    
-	     def __str__(self):
-	     		return  self.id_usuario
-	     class Admin:
-	     		list_display = ('id_usuario')
+
+		 def save(self):
+					#Opening the uploaded image
+					im = Image.open(self.image)
+
+					output = BytesIO()
+
+					#Resize/modify the image
+					im = im.resize( (100,100) )
+
+					#after modifications, save it to the output
+					im.save(output, format='JPEG', quality=100)
+					output.seek(0)
+
+					#change the imagefield value to be the newley modifed image value
+					self.image = InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.image.name.split('.')[0], 'image/jpeg', sys.getsizeof(output), None)
+
+					super(Modify,self).save()   
+				    
+		 def __str__(self):
+				     		return  self.id_usuario
+		 class Admin:
+				     		list_display = ('id_usuario')
 
 
  
-
-    
-
-	   				  
+  
 	    		 
 
 
