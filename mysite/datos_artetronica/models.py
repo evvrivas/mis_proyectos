@@ -223,7 +223,7 @@ class Usuarios(models.Model):
 	     clave=models.PositiveIntegerField(primary_key=True, validators=[MaxValueValidator(9999)])
 	     nombre=models.CharField(max_length=40)
 	     apellido=models.CharField(max_length=40)
-	     image = ImageField(upload_to='tmp',blank=True,null=True)
+	     image = ResizedImageField(size=[100, 100], crop=['top', 'left'], upload_to='tmp')
 	     estoy_en=models.CharField(max_length=30,choices=CIUDADES)
 	     comentario_opcional=models.CharField(max_length=40,blank=True,null=True)
 	     nota_de_evaluacion=models.IntegerField(blank=True,default=10,null=True)
@@ -241,18 +241,18 @@ class Usuarios(models.Model):
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL",null=True)
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR",null=True)
 	     tipo_vista=models.IntegerField(blank=True,default=0,null=True)
-	     def save(self):
-	     #Opening the uploaded image
-	     	im = Image.open(self.image)
-	     	output = BytesIO()
-	     	#Resize/modify the image
-	     	im=im.resize( (100,100) )
-	     	#after modifications, save it to the output
-	     	im.save(output, format='JPEG', quality=100)
-	     	output.seek(0)
-	     	#change the imagefield value to be the newley modifed image value
-	     	self.image = InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.image.name.split('.')[0], 'image/jpeg', sys.getsizeof(output), None)
-	     	super(Usuarios,self).save()
+	     #def save(self):
+	     ##Opening the uploaded image
+	     	#im = Image.open(self.image)
+	     	#output = BytesIO()
+	     	##Resize/modify the image
+	     	#im=im.resize( (100,100) )
+	     	##after modifications, save it to the output
+	     	#im.save(output, format='JPEG', quality=100)
+	     	#output.seek(0)
+	     	##change the imagefield value to be the newley modifed image value
+	     	#self.image = InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.image.name.split('.')[0], 'image/jpeg', sys.getsizeof(output), None)
+	     	#super(Usuarios,self).save()
 	     def __str__(self):
 	     		return  self.id_usuario
 	     class Admin:
