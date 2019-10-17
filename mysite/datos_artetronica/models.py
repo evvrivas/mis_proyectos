@@ -241,12 +241,7 @@ class Usuarios(models.Model):
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR")
 	     tipo_vista=models.IntegerField(blank=True,default=0)
-	     #def save(self, *args, **kwargs):
-	     			#super(Usuarios, self).save(*args, **kwargs)
-	     			#self.medium = get_thumbnail(self.image,'100x100',crop='center',quality=99).url
-	    
-
-		 def save(self):
+	     def save(self):
 					#Opening the uploaded image
 					im = Image.open(self.image)
 
@@ -262,8 +257,7 @@ class Usuarios(models.Model):
 					#change the imagefield value to be the newley modifed image value
 					self.image = InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.image.name.split('.')[0], 'image/jpeg', sys.getsizeof(output), None)
 
-					super(Modify,self).save()   
-				    
+					super(Modify,self).save()
 		 def __str__(self):
 				     		return  self.id_usuario
 		 class Admin:
