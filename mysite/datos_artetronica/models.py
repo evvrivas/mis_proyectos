@@ -24,7 +24,11 @@ from django.core.files.base import ContentFile
 from django_resized import ResizedImageField
 
 from PIL import Image as Img
-import StringIO
+
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 from io import BytesIO
 
