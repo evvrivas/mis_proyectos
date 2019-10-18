@@ -9,7 +9,6 @@ from django import forms
 class UsuariosForm(ModelForm):
 	class Meta:
 		model= Usuarios	
-		widgets = {'clave': forms.PasswordInput(),}	
 		exclude=["codigoapk","tipo_usuario","plan_tienda_activo","fecha_inicio_plan","fecha_final_plan","fecha_ingreso","tipo_de_vista","tipo_vista","nota_de_evaluacion"]
 
 class ProductosForm(ModelForm):

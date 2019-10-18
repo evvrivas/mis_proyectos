@@ -342,27 +342,17 @@ def crear_usuario(request):
                             contra = form.cleaned_data['clave'] 
                             nombr=form.cleaned_data['nombre']
                             apellid=form.cleaned_data['apellido']
-                                            
+                            contra=str(contra)                
                             user = User.objects.create_user(username=whatsapp, password=contra, first_name=nombr ,last_name=apellid)
                             user.save() 
+                            
                                                        
                             usuario = form.save(commit=False)
                             usuario.id_usuario = user.username # Set the user object here
                             usuario.save() # Now you can send it to DB
                             
 
-                            #form.save() # Guardar los datos en la base de datos  print 
-                             
                             
-                            #fecha= datetime.datetime.now()
-                            #mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
-                            #sender =str("xgangasx@gmail.com")
-                            #asunto="nuevo usuario"+" "+ str(whatsapp)
-                            #try:
-                            #     send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False)            
-                            #except:
-                            #      pass
-                            #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                             connection.close()
                             return render(request,'confirmar_usuario.html',locals())                  
                 
