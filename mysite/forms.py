@@ -3,7 +3,7 @@
 from mysite.datos_artetronica.models import *
 
 from django.forms import ModelForm, Textarea, TextInput, NumberInput
-
+from django import forms
 
 
 class UsuariosForm(ModelForm):
