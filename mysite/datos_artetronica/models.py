@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from io import StringIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
+
 from django.core.validators import MaxValueValidator
 
 
@@ -22,8 +23,9 @@ from sorl.thumbnail import get_thumbnail
 from django.core.files.base import ContentFile
 from django_resized import ResizedImageField
 
+from PIL import Image as Img
+import StringIO
 
-from PIL import Image
 from io import BytesIO
 
 import sys
@@ -251,6 +253,9 @@ class Usuarios(models.Model):
 	            output.seek(0)
 	            self.image= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'p_image/jpeg', output.len, None)
 	        super(Usuarios, self).save(*args, **kwargs)
+
+
+
 
 	     #def save(self):
 	     ##Opening the uploaded image
