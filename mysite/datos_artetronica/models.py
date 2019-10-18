@@ -243,16 +243,15 @@ class Usuarios(models.Model):
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL",null=True)
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR",null=True)
 	     tipo_vista=models.IntegerField(blank=True,default=0,null=True)
-
-             def save(self, *args, **kwargs):
-                if self.image:
-	            t_image = Img.open(StringIO.StringIO(self.image.read()))
-	            t_image.thumbnail((600,600), Img.ANTIALIAS)
-	            output = StringIO.StringIO()
-	            t_image.save(output, format='JPEG', quality=75)
-	            output.seek(0)
-	            self.image= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'p_image/jpeg', output.len, None)
-                super(Usuarios, self).save(*args, **kwargs)
+         def save(self, *args, **kwargs):
+             if self.image:
+                t_image = Img.open(StringIO.StringIO(self.image.read()))
+                t_image.thumbnail((600,600), Img.ANTIALIAS)
+                output = StringIO.StringIO()
+                t_image.save(output, format='JPEG', quality=75)
+                output.seek(0)
+                self.image= InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.imagen1.name, 'p_image/jpeg', output.len, None)
+             super(Usuarios, self).save(*args, **kwargs)
 
 
 
