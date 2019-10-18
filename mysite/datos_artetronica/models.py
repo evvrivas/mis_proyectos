@@ -229,7 +229,7 @@ class Usuarios(models.Model):
 	     clave=models.PositiveIntegerField(primary_key=True, validators=[MaxValueValidator(9999)])
 	     nombre=models.CharField(max_length=40)
 	     apellido=models.CharField(max_length=40)
-	     image = ResizedImageField(size=[100, 100], crop=['top', 'left'], upload_to='tmp')
+	     image = ImageField(upload_to='tmp')
 	     estoy_en=models.CharField(max_length=30,choices=CIUDADES)
 	     comentario_opcional=models.CharField(max_length=40,blank=True,null=True)
 	     nota_de_evaluacion=models.IntegerField(blank=True,default=10,null=True)
@@ -255,7 +255,7 @@ class Usuarios(models.Model):
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
 	     		self.image=InmemoryUploadedFile(output,'ImageField',"%s.jpg" %self.imagen1.name,'p_image/jpeg',output.len,None)
-	     	super(usuarios,self).save(*args,**kwargs)
+	     	super(Usuarios,self).save(*args,**kwargs)
 	     #def save(self):
 	     ##Opening the uploaded image
 	     	#im = Image.open(self.image)
