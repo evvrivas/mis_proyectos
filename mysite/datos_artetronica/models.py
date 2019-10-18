@@ -33,6 +33,7 @@ except ImportError:
 from io import BytesIO
 
 import sys
+from sys import getsizeof
 
 TIPO_PRENDA = (
 	        ('confeccion ', 'confeccion'),	        
@@ -236,7 +237,7 @@ class Usuarios(models.Model):
 	     email = models.EmailField(blank=True,null=True)
 	     plan_tienda=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS",null=True)	 
 	     plan_tienda_activo=models.CharField(max_length=30,choices=PLAN_TIENDA,blank=True,default="GRATIS",null=True)
-	     facedireccion=models.URLField(blank=True,null=True)
+	     
 	     nombre_del_banco=models.CharField(max_length=40,blank=True,default="BANCO_AGRICOLA",null=True)
 	     numero_cuenta=models.CharField(max_length=40,blank=True,null=True)
 	     numero_tigo_money=models.CharField(max_length=40,blank=True,null=True)
@@ -249,13 +250,14 @@ class Usuarios(models.Model):
 	     tipo_vista=models.IntegerField(blank=True,default=0,null=True)
 	     def save(self, *args,**kwargs):
 	     	if self.image:
-	     		t_image=Img.open(StringIO.StringIO(self.image.read()))
+	     		t_image=Img.open(BytesIO(self.image.read()))
 	     		t_image.thumbnail((100,100),Img.ANTIALIAS)
-	     		output=StringIO.StringIO()
+	     		output=BytesIO()
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
-	     		self.image=InmemoryUploadedFile(output,'ImageField',"%s.jpg" %self.imagen1.name,'p_image/jpeg',output.len,None)
+	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 	     	super(Usuarios,self).save(*args,**kwargs)
+	     					
 	     #def save(self):
 	     ##Opening the uploaded image
 	     	#im = Image.open(self.image)

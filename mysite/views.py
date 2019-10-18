@@ -344,15 +344,15 @@ def crear_usuario(request):
                             apellid=form.cleaned_data['apellido']
                                             
                             user = User.objects.create_user(username=whatsapp, password=contra, first_name=nombr ,last_name=apellid)
-                            
+                            user.save() 
                                                        
                             usuario = form.save(commit=False)
-                            # commit=False tells Django that "Don't send this to database yet.
-                            # I have more things I want to do with it."
                             usuario.id_usuario = user.username # Set the user object here
                             usuario.save() # Now you can send it to DB
-                            form.save() # Guardar los datos en la base de datos  print 
-                            user.save()  
+                            
+
+                            #form.save() # Guardar los datos en la base de datos  print 
+                             
                             
                             #fecha= datetime.datetime.now()
                             #mensaje= str(fecha)+"  "+str(whatsapp) + "Acaba de registrarse "+"\n"
