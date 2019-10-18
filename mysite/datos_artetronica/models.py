@@ -247,7 +247,7 @@ class Usuarios(models.Model):
          
              if self.image:
                 t_image = Img.open(StringIO.StringIO(self.image.read()))
-                t_image.thumbnail((600,600), Img.ANTIALIAS)
+                t_image.thumbnail((100,100), Img.ANTIALIAS)
                 output = StringIO.StringIO()
                 t_image.save(output, format='JPEG', quality=75)
                 output.seek(0)
