@@ -345,7 +345,7 @@ def crear_usuario(request):
                                           
                             
                             user = User.objects.create_user(username=whatsapp, password="contra", first_name=nombr ,last_name=apellid)
-                            #user.set_password(contra)
+                            user.set_password(contra)
                             user.save() 
                             
                                                        
@@ -535,7 +535,7 @@ def editar_tienda(request,acid):
 
 
 
-@login_required
+
 def mi_tienda(request,idusuario,nombretienda):
     
     categoria=categorizar(idusuario,nombretienda)
@@ -1843,7 +1843,7 @@ def evaluar(request,id_pedido_evaluado,nota_evaluacion):
 @login_required
 def administrar_mis_categorias(request,id_de_la_tienda):            
             
-            tiendas=Tiendas.objects.gets(id=id_de_la_tienda) 
+            tiendas=Tiendas.objects.get(id=id_de_la_tienda) 
             categoria=categorizar(request.user.username,tiendas.nombre_tienda)
 
             visitas=tiendas.n_visitas
@@ -1865,7 +1865,7 @@ def administrar_mis_categorias(request,id_de_la_tienda):
 
 @login_required
 def borrar_categoria_de_mi_tienda(request,acid,id_de_la_tienda):
-        tiendas=Tiendas.objects.gets(id=id_de_la_tienda) 
+        tiendas=Tiendas.objects.get(id=id_de_la_tienda) 
         categoria=categorizar(request.user.username,tiendas.nombre_tienda)
 
         visitas=tiendas.n_visitas
@@ -1892,7 +1892,7 @@ def borrar_categoria_de_mi_tienda(request,acid,id_de_la_tienda):
 @login_required
 def editar_categoria_de_mi_tienda(request,acid,id_de_la_tienda): 
         
-        tiendas=Tiendas.objects.gets(id=id_de_la_tienda) 
+        tiendas=Tiendas.objects.get(id=id_de_la_tienda) 
         categoria=categorizar(request.user.username,tiendas.nombre_tienda)
 
         visitas=tiendas.n_visitas
@@ -1929,7 +1929,7 @@ def editar_categoria_de_mi_tienda(request,acid,id_de_la_tienda):
 
 @login_required        
 def traspasar_tienda(request,id_de_la_tienda):
-            tiendas=Tiendas.objects.gets(id=id_de_la_tienda) 
+            tiendas=Tiendas.objects.get(id=id_de_la_tienda) 
             categoria=categorizar(request.user.username,tiendas.nombre_tienda)
 
             visitas=tiendas.n_visitas
@@ -1951,7 +1951,7 @@ def traspasar_tienda(request,id_de_la_tienda):
             if request.POST:
                 nuevo_id_usuario_tienda = request.POST.get('nombret')
                 #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
-                nuevo_id=Usuarios.object.get(id_usuario=nuevo_id_usuario_tienda)
+                nuevo_id=Usuarios.objects.get(id_usuario=nuevo_id_usuario_tienda)
                 
                 if nuevo_id.count()>0 and nuevo_id.tipo_usuario=="EL_ADMINISTADOR":                  
                       tienda_traspasada=Tiendas.objects.get(id=id_de_la_tienda)

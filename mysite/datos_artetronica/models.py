@@ -288,30 +288,35 @@ class Usuarios(models.Model):
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL",null=True)
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR",null=True)
 	     tipo_vista=models.IntegerField(blank=True,default=0,null=True)
-	     def save(self, *args,**kwargs):
-	     	if self.image:
-	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((200,200),Img.ANTIALIAS)
-	     		output=BytesIO()
-	     		t_image.save(output,format='JPEG',quality=75)
-	     		output.seek(0)
-	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Usuarios,self).save(*args,**kwargs)
-	     	
+	     #def save(self, *args,**kwargs):
+	     	#if self.image:
+	     		#t_image=Img.open(BytesIO(self.image.read()))
+	     		#t_image.thumbnail((200,200),Img.ANTIALIAS)
+	     		#output=BytesIO()
+	     		#t_image.save(output,format='JPEG',quality=75)
+	     		#output.seek(0)
+	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	#super(Usuarios,self).save(*args,**kwargs)
 
+		 def save(self, *args, **kwargs):
+			    # Did we have to resize the image?
+			    # We pop it to remove from kwargs when we pass these along
+			    image_resized = kwargs.pop('image_resized',False)
 
-	     #def save(self):
-	     ##Opening the uploaded image
-	     	#im = Image.open(self.image)
-	     	#output = BytesIO()
-	     	##Resize/modify the image
-	     	#im=im.resize( (100,100) )
-	     	##after modifications, save it to the output
-	     	#im.save(output, format='JPEG', quality=100)
-	     	#output.seek(0)
-	     	##change the imagefield value to be the newley modifed image value
-	     	#self.image = InMemoryUploadedFile(output,'ImageField', "%s.jpg" %self.image.name.split('.')[0], 'image/jpeg', sys.getsizeof(output), None)
-	     	#super(Usuarios,self).save()
+			    if self.image and image_resized:
+			        basewidth = 300
+			        filename = self.get_source_filename()
+			        image = Image.open(filename)
+			        wpercent = (basewidth/float(image.size[0]))
+			        hsize = int((float(image.size[1])*float(wpercent)))
+			        img = image.resize((basewidth,hsize), PIL.Image.ANTIALIAS)
+			        self.image = img
+			        # Save the updated photo, but inform when we do that we
+			        # have resized so we don't try and do it again.
+			        self.save(image_resized = True)
+
+			    super(Usuarios, self).save(*args, **kwargs)
+
 	     def __str__(self):
 	     		return  self.id_usuario
 	     class Admin:
