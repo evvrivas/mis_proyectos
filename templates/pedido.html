@@ -57,6 +57,29 @@
                   <p> tipo de tela{{  form.tipo_tela_3 }} </p>
                   <p> color de tela  {{  form.color_tela_3 }} </p>
                   <br>
+
+
+                  {% if i.archivo1 %}
+
+                                            
+                                        <a href="{{ i.archivo1.url }}">Bajar/ver Archivo 1</a> 
+                                        <br>
+                                    {% endif %}
+
+{% if i.archivo2%}
+
+                                            
+                                        <a href="{{ i.archivo2.url }}">Bajar/ver Archivo 1</a> 
+                                        <br>
+                                    {% endif %}
+
+{% if i.archivo3 %}
+
+                                            
+                                        <a href="{{ i.archivo3.url }}">Bajar/ver Archivo 1</a> 
+                                        <br>
+                                    {% endif %}
+
       
                                                              
                      <br>            

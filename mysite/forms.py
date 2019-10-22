@@ -35,7 +35,7 @@ class CategoriaForm(ModelForm):
 		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}			
 		exclude=["id_usuario","tienda"]
 
-    
+ 
 #class Categoria_globalForm(ModelForm):
 #	class Meta:
 #		model= Categoria_global		

@@ -144,6 +144,46 @@ class Productos(models.Model):
 	     fecha_inicio_plan = models.DateField(default=datetime.now)
 	     fecha_final_plan = models.DateField(default=datetime.now)
 
+	     def save(self, *args,**kwargs):
+	     	self.image=self.imagen1
+	     	if self.image:
+	     		t_image=Img.open(BytesIO(self.image.read()))
+	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		output=BytesIO()
+	     		t_image.save(output,format='JPEG',quality=75)
+	     		output.seek(0)
+	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	super(Usuarios,self).save(*args,**kwargs)
+
+	     	self.image=self.imagen2
+	     	if self.image:
+	     		t_image=Img.open(BytesIO(self.image.read()))
+	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		output=BytesIO()
+	     		t_image.save(output,format='JPEG',quality=75)
+	     		output.seek(0)
+	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	super(Usuarios,self).save(*args,**kwargs)
+
+	     	self.image=self.imagen3
+	     	if self.image:
+	     		t_image=Img.open(BytesIO(self.image.read()))
+	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		output=BytesIO()
+	     		t_image.save(output,format='JPEG',quality=75)
+	     		output.seek(0)
+	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	super(Usuarios,self).save(*args,**kwargs)
+
+
+
+
+
+
+
+
+
+
 	     def __str__(self):
 		    		return  self.nombre
 	     class Admin:
@@ -251,7 +291,7 @@ class Usuarios(models.Model):
 	     def save(self, *args,**kwargs):
 	     	if self.image:
 	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((100,100),Img.ANTIALIAS)
+	     		t_image.thumbnail((200,200),Img.ANTIALIAS)
 	     		output=BytesIO()
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
@@ -352,7 +392,17 @@ class Ccomercial(models.Model):
 	     plan_publicidad=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")	 
 	     plan_publicidad_activo=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")
 	     fecha_inicio_plan = models.DateField(default=datetime.now)
-	     fecha_final_plan = models.DateField(default=datetime.now)	     
+	     fecha_final_plan = models.DateField(default=datetime.now)
+	     def save(self, *args,**kwargs):
+	     	self.image=self.imagen_ccomercial
+	     	if self.image:
+	     		t_image=Img.open(BytesIO(self.image.read()))
+	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		output=BytesIO()
+	     		t_image.save(output,format='JPEG',quality=75)
+	     		output.seek(0)
+	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	super(Usuarios,self).save(*args,**kwargs)	     
 	         
 
 	     def __str__(self):
@@ -388,6 +438,17 @@ class Tiendas(models.Model):
 	     estado_tienda=models.CharField(max_length=30,blank=True,choices=ESTADO_TIENDA,default="DISPONIBLE")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
+	     def save(self, *args,**kwargs):
+	     	self.image=self.imagen1
+	     	if self.image:
+	     		t_image=Img.open(BytesIO(self.image.read()))
+	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		output=BytesIO()
+	     		t_image.save(output,format='JPEG',quality=75)
+	     		output.seek(0)
+	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	super(Usuarios,self).save(*args,**kwargs)
+
 
 	     def __str__(self):
 		    		return  self.nombre_tienda
@@ -451,6 +512,10 @@ class Pedidos(models.Model):
 	     cant_tela_3=models.FloatField(blank=True,null= True)
 	     tipo_tela_3=models.CharField(blank=True,max_length=30,choices=TIPOTELA)
 	     color_tela_3=models.CharField(blank=True,max_length=30)
+
+	     archivo1=models.FileField(upload_to='tmp',blank=True,null=True)
+	     archivo2=models.FileField(upload_to='tmp',blank=True,null=True)
+	     archivo3=models.FileField(upload_to='tmp',blank=True,null=True)
 	    
 
 	     def __str__(self):

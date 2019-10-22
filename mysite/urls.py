@@ -107,8 +107,12 @@ urlpatterns = [
     url(r'^configurar_vista_pagina_principal/$',configurar_vista_pagina_principal),
     
     url(r'^evaluar/(\d+)/([^/]+)/$',evaluar), 
+     
+    url(r'^administrar_mis_categorias/(\d+)/$',administrar_mis_categorias),
+    url(r'^traspasar_tienda/(\d+)/$',traspasar_tienda),
 
-    
+    url(r'^editar_categoria_de_mi_tienda/(\d+)/(\d+)/$',editar_categoria_de_mi_tienda),
+    url(r'^borrar_categoria_de_mi_tienda/(\d+)/(\d+)/$',borrar_categoria_de_mi_tienda),   
     
 
 

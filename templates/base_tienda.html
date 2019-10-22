@@ -95,9 +95,20 @@
                                              <ul class="dropdown-menu" role="menu">
                                                  <li><a href="/crear_producto/{{user.username}}/{{tiendas.nombre_tienda}}">Subir un producto </a></li>      
                                                  <li><a href="/editar_tienda/{{tiendas.id}}">Editar mi tienda </a></li>
-                                                 <li><a href="/ver_mis_mensajes/TODOS/EL_VENDEDOR">Ver mensajes </a>
-                                                 <li><a href="/ver_el_carrito/ATENDER_PEDIDOS">Ver pedidos </a>
+                                                 <li><a href="/ver_mis_mensajes/TODOS/EL_VENDEDOR">Ver mensajes </a></li> 
+                                                 <li><a href="/ver_el_carrito/ATENDER_PEDIDOS">Ver pedidos </a></li> 
                                                  <br>
+                                                 <li><a href="/administrar_mis_categorias/{{tiendas.id}}">Crear/editar Categoria </a></li> 
+                                                 
+                                                <li>   
+
+                                                <form action="/traspasar_tienda/{{tiendas.id}}/" method="post">
+                                                {% csrf_token %}
+                                                <input type="text" id="namet" name="nombret" placeholder="Telefono" size="10"/>
+                                                <input type="submit" value="Traspasar">
+                                                </form>
+                                                
+                                                </a>
                                                  
 
                                               {% ifequal var 'PEDIDOS' %}

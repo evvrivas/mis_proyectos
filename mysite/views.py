@@ -342,8 +342,10 @@ def crear_usuario(request):
                             contra = form.cleaned_data['clave'] 
                             nombr=form.cleaned_data['nombre']
                             apellid=form.cleaned_data['apellido']
-                            contra=str(contra)                
-                            user = User.objects.create_user(username=whatsapp, password=contra, first_name=nombr ,last_name=apellid)
+                                          
+                            
+                            user = User.objects.create_user(username=whatsapp, password="contra", first_name=nombr ,last_name=apellid)
+                            user.set_password(contra)
                             user.save() 
                             
                                                        
@@ -1728,7 +1730,7 @@ def responder_mensaje(request,id_mensaje):
 
      return render(request,'mensajes.html',locals())
 
-
+@login_required
 def agregar_a_preferidas(request,id_de_la_tienda): 
      tiendas = Tiendas.objects.get(pk=id_de_la_tienda)
      idusuario=tiendas.id_usuario 
@@ -1751,7 +1753,7 @@ def agregar_a_preferidas(request,id_de_la_tienda):
      return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-
+@login_required
 def ver_las_preferidas(request):
 
        preferidas=Preferidas.objects.filter(id_comprador=request.user.username)     
@@ -1765,7 +1767,7 @@ def ver_las_preferidas(request):
 
 
 
-
+@login_required
 def evaluar(request,id_pedido_evaluado,nota_evaluacion):
       categoria=n_categorias()
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
@@ -1837,6 +1839,138 @@ def evaluar(request,id_pedido_evaluado,nota_evaluacion):
       return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required
+def administrar_mis_categorias(request,id_de_la_tienda):            
+            
+            tiendas=Tiendas.objects.gets(id=id_de_la_tienda) 
+            categoria=categorizar(request.user.username,tiendas.nombre_tienda)
 
+            visitas=tiendas.n_visitas
+
+            tiendas.n_visitas+=1      
+            tiendas.save()
+
+            corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+            if corazon>0:
+                corazon="PREFERIDA"
+            else:
+                corazon="NO_PREFERIDA"
+            
+            var=tiendas.codigoapk    
+
+           categorias_tienda=Categorias.objects.filter(id_usuario=request.user.username,tienda=tiendas.nombre_tienda)
+           
+           return render(request,'ver_categorias_de_mi_tienda.html',locals()) 
+
+@login_required
+def borrar_categoria_de_mi_tienda(request,acid,id_de_la_tienda):
+        tiendas=Tiendas.objects.gets(id=id_de_la_tienda) 
+        categoria=categorizar(request.user.username,tiendas.nombre_tienda)
+
+        visitas=tiendas.n_visitas
+
+        tiendas.n_visitas+=1      
+        tiendas.save()
+
+        corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+        if corazon>0:
+                corazon="PREFERIDA"
+        else:
+                corazon="NO_PREFERIDA"
+            
+        var=tiendas.codigoapk
+
+        Categorias.objects.get(id=acid).delete()
+        categorias_tienda=Categorias.objects.filter(id_usuario=request.user.username,tienda=tiendas.nombre_tienda)
+           
+        return render(request,'ver_categorias_de_mi_tienda.html',locals()) 
+
+
+
+
+@login_required
+def editar_categoria_de_mi_tienda(request,acid,id_de_la_tienda): 
+        
+        tiendas=Tiendas.objects.gets(id=id_de_la_tienda) 
+        categoria=categorizar(request.user.username,tiendas.nombre_tienda)
+
+        visitas=tiendas.n_visitas
+
+        tiendas.n_visitas+=1      
+        tiendas.save()
+
+        corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+        if corazon>0:
+                corazon="PREFERIDA"
+        else:
+                corazon="NO_PREFERIDA"
+            
+        var=tiendas.codigoapk     
+        
+        
+        f = Categorias.objects.get(pk=acid)           
+       
+        if request.method == 'POST':
+            form = CategoriasForm(request.POST,request.FILES,instance=f)
+       
+            if form.is_valid():
+                    form.save()
+                    connection.close()
+                    return render(request,'confirmar_tienda.html',locals())
+
+        else:
+            
+            form = CategoriasForm(instance=f)   
+        
+        connection.close()
+        return render(request,'editar_categorias_de_mi_tienda.html',locals())
+    
+
+@login_required        
+def traspasar_tienda(request,id_de_la_tienda):
+            tiendas=Tiendas.objects.gets(id=id_de_la_tienda) 
+            categoria=categorizar(request.user.username,tiendas.nombre_tienda)
+
+            visitas=tiendas.n_visitas
+
+            tiendas.n_visitas+=1      
+            tiendas.save()
+
+            corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+            if corazon>0:
+                corazon="PREFERIDA"
+            else:
+                corazon="NO_PREFERIDA"
+            
+            var=tiendas.codigoapk
+
+            categoria=categorizar(idusuario,nombretienda)     
+
+
+            if request.POST:
+                nuevo_id_usuario_tienda = request.POST.get('nombret')
+                #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+                nuevo_id=Usuarios.object.get(id_usuario=nuevo_id_usuario_tienda)
+                
+                if nuevo_id.count()>0 and nuevo_id.tipo_usuario=="EL_ADMINISTADOR":                  
+                      tienda_traspasada=Tiendas.objects.get(id=id_de_la_tienda)
+                      tienda_traspasada.id_usuario=nuevo_id_usuario_tienda
+
+                      producto_traspasado=Productos.objects.filter(tienda=tienda_traspasada)
+                      
+                      if producto_traspasado.count()>0:
+                        
+                            for i in producto_traspasado:
+                                i.id_usuario=nuevo_id_usuario_tienda
+                                i.save()
+
+
+            connection.close()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
+
+
+
+   
 
 
