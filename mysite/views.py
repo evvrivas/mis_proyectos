@@ -345,7 +345,7 @@ def crear_usuario(request):
                                           
                             
                             user = User.objects.create_user(username=whatsapp, password="contra", first_name=nombr ,last_name=apellid)
-                            user.set_password(contra)
+                            #user.set_password(contra)
                             user.save() 
                             
                                                        
