@@ -405,15 +405,7 @@ def editar_usuario(request):
                           usu.save() # Guardar los datos en la base de datos 
                           #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
                           form.save() 
-                          #whatsapp=request.user.username
-                          #fecha= datetime.datetime.now()
-                          #mensaje= str(fecha)+"  "+str(whatsapp) + "EDITO SU ESTADO "+"\n"
-                          #sender =str("xgangasx@gmail.com")
-                          #asunto="edita"+" "+ str(whatsapp)
-                          #try:
-                          #    send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
-                          #except:
-                          #     pass        
+                              
                           connection.close()
                           return render(request,'confirmar.html',locals())             
                   
