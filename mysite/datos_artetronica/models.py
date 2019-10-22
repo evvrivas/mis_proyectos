@@ -288,6 +288,18 @@ class Usuarios(models.Model):
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL",null=True)
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR",null=True)
 	     tipo_vista=models.IntegerField(blank=True,default=0,null=True)
+	     def save(self, *args, **kwargs):
+	     	if not self.id:
+	     		self.image = self.compressImage(self.image)
+	     	super(Usuarios, self).save(*args, **kwargs)
+	     def compressImage(self,image):
+	     	imageTemproary = Image.open(image)
+	     	outputIoStream = BytesIO()
+	     	imageTemproaryResized = imageTemproary.resize( (200,200) )
+	     	imageTemproary.save(outputIoStream , format='JPEG', quality=60)
+	     	outputIoStream.seek(0)
+	     	image = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % image.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
+	     	return image
 	     #def save(self, *args,**kwargs):
 	     	#if self.image:
 	     		#t_image=Img.open(BytesIO(self.image.read()))
@@ -297,19 +309,8 @@ class Usuarios(models.Model):
 	     		#output.seek(0)
 	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 	     	#super(Usuarios,self).save(*args,**kwargs)
-          def save(self, *args, **kwargs):
-		        if not self.id:
-		            self.image = self.compressImage(self.image)
-		        super(Upload, self).save(*args, **kwargs)
-		    
-	     def compressImage(self,image):
-		        imageTemproary = Image.open(image)
-		        outputIoStream = BytesIO()
-		        imageTemproaryResized = imageTemproary.resize( (200,200) ) 
-		        imageTemproary.save(outputIoStream , format='JPEG', quality=60)
-		        outputIoStream.seek(0)
-		        image = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % image.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
-		        return image
+             
+
 			     
 
 
