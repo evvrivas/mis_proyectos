@@ -353,6 +353,7 @@ def crear_usuario(request):
                             usuario.id_usuario = user.username # Set the user object here
                             usuario.save() # Now you can send it to DB
                             
+                            form.save() 
 
                             
                             connection.close()
@@ -403,7 +404,7 @@ def editar_usuario(request):
                           usu.id_usuario = request.user.username
                           usu.save() # Guardar los datos en la base de datos 
                           #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
-                          
+                          form.save() 
                           #whatsapp=request.user.username
                           #fecha= datetime.datetime.now()
                           #mensaje= str(fecha)+"  "+str(whatsapp) + "EDITO SU ESTADO "+"\n"

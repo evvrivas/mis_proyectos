@@ -153,7 +153,8 @@ class Productos(models.Model):
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
 	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Usuarios,self).save(*args,**kwargs)
+	     	#super(Usuarios,self).save(*args,**kwargs)
+	     	super().__init__()
 
 	     	self.image=self.imagen2
 	     	if self.image:
@@ -163,7 +164,8 @@ class Productos(models.Model):
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
 	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Usuarios,self).save(*args,**kwargs)
+	     	#super(Usuarios,self).save(*args,**kwargs)
+	     	super().__init__()
 
 	     	self.image=self.imagen3
 	     	if self.image:
@@ -173,7 +175,8 @@ class Productos(models.Model):
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
 	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Usuarios,self).save(*args,**kwargs)
+	     	#super(Usuarios,self).save(*args,**kwargs)
+	     	super().__init__()
 
 
 
@@ -296,8 +299,10 @@ class Usuarios(models.Model):
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
 	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Usuarios,self).save(*args,**kwargs)
-	     					
+	     	#super(Usuarios,self).save(*args,**kwargs)
+	     	super().__init__() 
+
+
 	     #def save(self):
 	     ##Opening the uploaded image
 	     	#im = Image.open(self.image)
@@ -402,7 +407,8 @@ class Ccomercial(models.Model):
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
 	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Usuarios,self).save(*args,**kwargs)	     
+	     	#super(Usuarios,self).save(*args,**kwargs)
+	     	super().__init__()	     
 	         
 
 	     def __str__(self):
@@ -447,7 +453,8 @@ class Tiendas(models.Model):
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
 	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Usuarios,self).save(*args,**kwargs)
+	     	#super(Usuarios,self).save(*args,**kwargs)
+	     	super().__init__()
 
 
 	     def __str__(self):
