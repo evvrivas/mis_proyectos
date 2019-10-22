@@ -297,8 +297,7 @@ class Usuarios(models.Model):
 	     		#output.seek(0)
 	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 	     	#super(Usuarios,self).save(*args,**kwargs)
-
-		 def save(self, *args, **kwargs):
+	     def save(self, *args, **kwargs):
 			    # Did we have to resize the image?
 			    # We pop it to remove from kwargs when we pass these along
 			    image_resized = kwargs.pop('image_resized',False)
