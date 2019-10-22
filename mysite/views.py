@@ -1858,9 +1858,9 @@ def administrar_mis_categorias(request,id_de_la_tienda):
             
             var=tiendas.codigoapk    
 
-           categorias_tienda=Categorias.objects.filter(id_usuario=request.user.username,tienda=tiendas.nombre_tienda)
+            categorias_tienda=Categorias.objects.filter(id_usuario=request.user.username,tienda=tiendas.nombre_tienda)
            
-           return render(request,'ver_categorias_de_mi_tienda.html',locals()) 
+            return render(request,'ver_categorias_de_mi_tienda.html',locals()) 
 
 @login_required
 def borrar_categoria_de_mi_tienda(request,acid,id_de_la_tienda):
