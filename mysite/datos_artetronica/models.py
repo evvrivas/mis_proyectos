@@ -297,24 +297,28 @@ class Usuarios(models.Model):
 	     		#output.seek(0)
 	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 	     	#super(Usuarios,self).save(*args,**kwargs)
-	     def save(self, *args, **kwargs):
-			    # Did we have to resize the image?
-			    # We pop it to remove from kwargs when we pass these along
-			    image_resized = kwargs.pop('image_resized',False)
 
-			    if self.image and image_resized:
-			        basewidth = 300
-			        filename = self.get_source_filename()
-			        image = Image.open(filename)
-			        wpercent = (basewidth/float(image.size[0]))
-			        hsize = int((float(image.size[1])*float(wpercent)))
-			        img = image.resize((basewidth,hsize), PIL.Image.ANTIALIAS)
-			        self.image = img
-			        # Save the updated photo, but inform when we do that we
-			        # have resized so we don't try and do it again.
-			        self.save(image_resized = True)
+		 def save(self, *args, **kwargs):
+		        if not self.id:
+		            self.image = self.compressImage(self.image)
+		        super(Upload, self).save(*args, **kwargs)
+		    
+		    def compressImage(self,image):
+		        imageTemproary = Image.open(image)
+		        outputIoStream = BytesIO()
+		        imageTemproaryResized = imageTemproary.resize( (200,200) ) 
+		        imageTemproary.save(outputIoStream , format='JPEG', quality=60)
+		        outputIoStream.seek(0)
+		        image = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % image.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
+		        return image
+			     
 
-			    super(Usuarios, self).save(*args, **kwargs)
+
+
+
+
+
+
 
 	     def __str__(self):
 	     		return  self.id_usuario
