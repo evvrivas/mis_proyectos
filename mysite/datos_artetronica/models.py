@@ -297,12 +297,12 @@ class Usuarios(models.Model):
 	     		#output.seek(0)
 	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 	     	#super(Usuarios,self).save(*args,**kwargs)
-             def save(self, *args, **kwargs):
+          def save(self, *args, **kwargs):
 		        if not self.id:
 		            self.image = self.compressImage(self.image)
 		        super(Upload, self).save(*args, **kwargs)
 		    
-		    def compressImage(self,image):
+	     def compressImage(self,image):
 		        imageTemproary = Image.open(image)
 		        outputIoStream = BytesIO()
 		        imageTemproaryResized = imageTemproary.resize( (200,200) ) 
