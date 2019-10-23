@@ -344,8 +344,8 @@ def crear_usuario(request):
                             apellid=form.cleaned_data['apellido']
                                           
                             
-                            user = User.objects.create_user(username=whatsapp, password="contra", first_name=nombr ,last_name=apellid)
-                            user.save()            
+                            user = User.objects.create_user(username=whatsapp, password=contra, first_name=nombr ,last_name=apellid)
+                            user.save() 
                             
                                                        
                             usuario = form.save(commit=False)
@@ -353,10 +353,6 @@ def crear_usuario(request):
                             usuario.save() # Now you can send it to DB
                             
                             form.save() 
-
-                            user = User.objects.get(username=whatsapp)
-                            user.set_password(contra)
-                            user.save() 
 
                             
                             connection.close()
@@ -408,7 +404,15 @@ def editar_usuario(request):
                           usu.save() # Guardar los datos en la base de datos 
                           #return render_to_response('confirmar.html',locals(),context_instance=RequestContext(request))
                           form.save() 
-                              
+                          #whatsapp=request.user.username
+                          #fecha= datetime.datetime.now()
+                          #mensaje= str(fecha)+"  "+str(whatsapp) + "EDITO SU ESTADO "+"\n"
+                          #sender =str("xgangasx@gmail.com")
+                          #asunto="edita"+" "+ str(whatsapp)
+                          #try:
+                          #    send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
+                          #except:
+                          #     pass        
                           connection.close()
                           return render(request,'confirmar.html',locals())             
                   

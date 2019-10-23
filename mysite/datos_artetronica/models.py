@@ -145,36 +145,36 @@ class Productos(models.Model):
 	     fecha_inicio_plan = models.DateField(default=datetime.now)
 	     fecha_final_plan = models.DateField(default=datetime.now)
 
-	     def save(self, *args,**kwargs):
-	     	self.image=self.imagen1
-	     	if self.image:
-	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		output=BytesIO()
-	     		t_image.save(output,format='JPEG',quality=75)
-	     		output.seek(0)
-	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Productos,self).save(*args,**kwargs)
+	     #def save(self, *args,**kwargs):
+	     	#self.image=self.imagen1
+	     	#if self.image:
+	     		#t_image=Img.open(BytesIO(self.image.read()))
+	     		#t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		#output=BytesIO()
+	     		#t_image.save(output,format='JPEG',quality=75)
+	     		#output.seek(0)
+	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	#super(Productos,self).save(*args,**kwargs)
 
-	     	self.image=self.imagen2
-	     	if self.image:
-	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		output=BytesIO()
-	     		t_image.save(output,format='JPEG',quality=75)
-	     		output.seek(0)
-	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Productos,self).save(*args,**kwargs)
+	     	#self.image=self.imagen2
+	     	#if self.image:
+	     		#t_image=Img.open(BytesIO(self.image.read()))
+	     		#t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		#output=BytesIO()
+	     		#t_image.save(output,format='JPEG',quality=75)
+	     		#output.seek(0)
+	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	#super(Productos,self).save(*args,**kwargs)
 
-	     	self.image=self.imagen3
-	     	if self.image:
-	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		output=BytesIO()
-	     		t_image.save(output,format='JPEG',quality=75)
-	     		output.seek(0)
-	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Productos,self).save(*args,**kwargs)
+	     	#self.image=self.imagen3
+	     	#if self.image:
+	     		#t_image=Img.open(BytesIO(self.image.read()))
+	     		#t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		#output=BytesIO()
+	     		#t_image.save(output,format='JPEG',quality=75)
+	     		#output.seek(0)
+	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	#super(Productos,self).save(*args,**kwargs)
 
 
 
@@ -289,18 +289,7 @@ class Usuarios(models.Model):
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL",null=True)
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR",null=True)
 	     tipo_vista=models.IntegerField(blank=True,default=0,null=True)
-	     def save(self, *args, **kwargs):
-	     	if not self.image:
-	     		self.image = self.compressImage(self.image)
-	     	super(Usuarios, self).save(*args, **kwargs)
-	     def compressImage(self,image):
-	     	imageTemproary = Image.open(image)
-	     	outputIoStream = BytesIO()
-	     	imageTemproaryResized = imageTemproary.resize( (200,200) )
-	     	imageTemproary.save(outputIoStream , format='JPEG', quality=60)
-	     	outputIoStream.seek(0)
-	     	image = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % image.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
-	     	return image
+	     
 	     #def save(self, *args,**kwargs):
 	     	#if self.image:
 	     		#t_image=Img.open(BytesIO(self.image.read()))
@@ -311,14 +300,6 @@ class Usuarios(models.Model):
 	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 	     	#super(Usuarios,self).save(*args,**kwargs)
              
-
-			     
-
-
-
-
-
-
 
 
 	     def __str__(self):
@@ -404,16 +385,16 @@ class Ccomercial(models.Model):
 	     plan_publicidad_activo=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")
 	     fecha_inicio_plan = models.DateField(default=datetime.now)
 	     fecha_final_plan = models.DateField(default=datetime.now)
-	     def save(self, *args,**kwargs):
-	     	self.image=self.imagen_ccomercial
-	     	if self.image:
-	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		output=BytesIO()
-	     		t_image.save(output,format='JPEG',quality=75)
-	     		output.seek(0)
-	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Ccomercial,self).save(*args,**kwargs)	     
+	     #def save(self, *args,**kwargs):
+	     	#self.image=self.imagen_ccomercial
+	     	#if self.image:
+	     		#t_image=Img.open(BytesIO(self.image.read()))
+	     		#t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		#output=BytesIO()
+	     		#t_image.save(output,format='JPEG',quality=75)
+	     		#output.seek(0)
+	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	#super(Ccomercial,self).save(*args,**kwargs)	     
 	         
 
 	     def __str__(self):
@@ -449,16 +430,16 @@ class Tiendas(models.Model):
 	     estado_tienda=models.CharField(max_length=30,blank=True,choices=ESTADO_TIENDA,default="DISPONIBLE")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
-	     def save(self, *args,**kwargs):
-	     	self.image=self.imagen1
-	     	if self.image:
-	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		output=BytesIO()
-	     		t_image.save(output,format='JPEG',quality=75)
-	     		output.seek(0)
-	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Tiendas,self).save(*args,**kwargs)
+	     #def save(self, *args,**kwargs):
+	     	#self.image=self.imagen1
+	     	#if self.image:
+	     		#t_image=Img.open(BytesIO(self.image.read()))
+	     		#t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		#output=BytesIO()
+	     		#t_image.save(output,format='JPEG',quality=75)
+	     		#output.seek(0)
+	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	#super(Tiendas,self).save(*args,**kwargs)
 
 
 	     def __str__(self):
