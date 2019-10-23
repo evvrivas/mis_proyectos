@@ -268,7 +268,7 @@ CIUDADES= (
 		)
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
-	     clave=mmodels.CharField(max_length=4)
+	     clave=models.CharField(max_length=4)
 	     nombre=models.CharField(max_length=40)
 	     apellido=models.CharField(max_length=40)
 	     image = ImageField(upload_to='tmp')
