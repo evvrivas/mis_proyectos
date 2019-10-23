@@ -145,37 +145,27 @@ class Productos(models.Model):
 	     fecha_inicio_plan = models.DateField(default=datetime.now)
 	     fecha_final_plan = models.DateField(default=datetime.now)
 
-	     #def save(self, *args,**kwargs):
-	     	#self.image=self.imagen1
-	     	#if self.image:
-	     		#t_image=Img.open(BytesIO(self.image.read()))
-	     		#t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		#output=BytesIO()
-	     		#t_image.save(output,format='JPEG',quality=75)
-	     		#output.seek(0)
-	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	#super(Productos,self).save(*args,**kwargs)
+	     def save(self, *args,**kwargs):
+	     	if self.imagen1:
+	     		self.image=self.imagen1
+	     		
+	     	elif self.imagen2:
+	     		self.image=self.imagen2
+	     	elif self.imagen3:
+	     		self.image=self.imagen3
+	     	else:
+	     		pass
+	     	
+	     	if self.image:
+	     		t_image=Img.open(BytesIO(self.image.read()))
+	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		output=BytesIO()
+	     		t_image.save(output,format='JPEG',quality=75)
+	     		output.seek(0)
+	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	super(Productos,self).save(*args,**kwargs)
 
-	     	#self.image=self.imagen2
-	     	#if self.image:
-	     		#t_image=Img.open(BytesIO(self.image.read()))
-	     		#t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		#output=BytesIO()
-	     		#t_image.save(output,format='JPEG',quality=75)
-	     		#output.seek(0)
-	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	#super(Productos,self).save(*args,**kwargs)
-
-	     	#self.image=self.imagen3
-	     	#if self.image:
-	     		#t_image=Img.open(BytesIO(self.image.read()))
-	     		#t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		#output=BytesIO()
-	     		#t_image.save(output,format='JPEG',quality=75)
-	     		#output.seek(0)
-	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	#super(Productos,self).save(*args,**kwargs)
-
+	     	
 
 
 
