@@ -24,6 +24,7 @@ from django.core.files.base import ContentFile
 from django_resized import ResizedImageField
 
 from PIL import Image as Img
+#from PIL import Image 
 
 try:
     from StringIO import StringIO
@@ -289,7 +290,7 @@ class Usuarios(models.Model):
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR",null=True)
 	     tipo_vista=models.IntegerField(blank=True,default=0,null=True)
 	     def save(self, *args, **kwargs):
-	     	if not self.id:
+	     	if not self.image:
 	     		self.image = self.compressImage(self.image)
 	     	super(Usuarios, self).save(*args, **kwargs)
 	     def compressImage(self,image):
