@@ -268,7 +268,7 @@ CIUDADES= (
 		)
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
-	     clave=models.PositiveIntegerField(primary_key=True, validators=[MaxValueValidator(9999)])
+	     clave=mmodels.CharField(max_length=4)
 	     nombre=models.CharField(max_length=40)
 	     apellido=models.CharField(max_length=40)
 	     image = ImageField(upload_to='tmp')
@@ -290,15 +290,15 @@ class Usuarios(models.Model):
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR",null=True)
 	     tipo_vista=models.IntegerField(blank=True,default=0,null=True)
 	     
-	     #def save(self, *args,**kwargs):
-	     	#if self.image:
-	     		#t_image=Img.open(BytesIO(self.image.read()))
-	     		#t_image.thumbnail((200,200),Img.ANTIALIAS)
-	     		#output=BytesIO()
-	     		#t_image.save(output,format='JPEG',quality=75)
-	     		#output.seek(0)
-	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	#super(Usuarios,self).save(*args,**kwargs)
+	     def save(self, *args,**kwargs):
+	     	if self.image:
+	     		t_image=Img.open(BytesIO(self.image.read()))
+	     		t_image.thumbnail((200,200),Img.ANTIALIAS)
+	     		output=BytesIO()
+	     		t_image.save(output,format='JPEG',quality=75)
+	     		output.seek(0)
+	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	super(Usuarios,self).save(*args,**kwargs)
              
 
 
@@ -385,16 +385,16 @@ class Ccomercial(models.Model):
 	     plan_publicidad_activo=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")
 	     fecha_inicio_plan = models.DateField(default=datetime.now)
 	     fecha_final_plan = models.DateField(default=datetime.now)
-	     #def save(self, *args,**kwargs):
-	     	#self.image=self.imagen_ccomercial
-	     	#if self.image:
-	     		#t_image=Img.open(BytesIO(self.image.read()))
-	     		#t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		#output=BytesIO()
-	     		#t_image.save(output,format='JPEG',quality=75)
-	     		#output.seek(0)
-	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	#super(Ccomercial,self).save(*args,**kwargs)	     
+	     def save(self, *args,**kwargs):
+	     	self.image=self.imagen_ccomercial
+	     	if self.image:
+	     		t_image=Img.open(BytesIO(self.image.read()))
+	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		output=BytesIO()
+	     		t_image.save(output,format='JPEG',quality=75)
+	     		output.seek(0)
+	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	super(Ccomercial,self).save(*args,**kwargs)	     
 	         
 
 	     def __str__(self):
@@ -430,16 +430,16 @@ class Tiendas(models.Model):
 	     estado_tienda=models.CharField(max_length=30,blank=True,choices=ESTADO_TIENDA,default="DISPONIBLE")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
-	     #def save(self, *args,**kwargs):
-	     	#self.image=self.imagen1
-	     	#if self.image:
-	     		#t_image=Img.open(BytesIO(self.image.read()))
-	     		#t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		#output=BytesIO()
-	     		#t_image.save(output,format='JPEG',quality=75)
-	     		#output.seek(0)
-	     		#self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	#super(Tiendas,self).save(*args,**kwargs)
+	     def save(self, *args,**kwargs):
+	     	self.image=self.imagen1
+	     	if self.image:
+	     		t_image=Img.open(BytesIO(self.image.read()))
+	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+	     		output=BytesIO()
+	     		t_image.save(output,format='JPEG',quality=75)
+	     		output.seek(0)
+	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	super(Tiendas,self).save(*args,**kwargs)
 
 
 	     def __str__(self):
