@@ -1858,7 +1858,7 @@ def administrar_mis_categorias(request,id_de_la_tienda):
             
             var=tiendas.codigoapk    
 
-            categorias_tienda=Categorias.objects.filter(id_usuario=request.user.username,tienda=tiendas.nombre_tienda)
+            categorias_tienda=Categoria.objects.filter(id_usuario=request.user.username,tienda=tiendas.nombre_tienda)
            
             return render(request,'ver_categorias_de_mi_tienda.html',locals()) 
 
@@ -1880,8 +1880,8 @@ def borrar_categoria_de_mi_tienda(request,acid,id_de_la_tienda):
             
         var=tiendas.codigoapk
 
-        Categorias.objects.get(id=acid).delete()
-        categorias_tienda=Categorias.objects.filter(id_usuario=request.user.username,tienda=tiendas.nombre_tienda)
+        Categoria.objects.get(id=acid).delete()
+        categorias_tienda=Categoria.objects.filter(id_usuario=request.user.username,tienda=tiendas.nombre_tienda)
            
         return render(request,'ver_categorias_de_mi_tienda.html',locals()) 
 
@@ -1908,10 +1908,10 @@ def editar_categoria_de_mi_tienda(request,acid,id_de_la_tienda):
         var=tiendas.codigoapk     
         
         
-        f = Categorias.objects.get(pk=acid)           
+        f = Categoria.objects.get(pk=acid)           
        
         if request.method == 'POST':
-            form = CategoriasForm(request.POST,request.FILES,instance=f)
+            form = CategoriaForm(request.POST,request.FILES,instance=f)
        
             if form.is_valid():
                     form.save()
@@ -1920,7 +1920,7 @@ def editar_categoria_de_mi_tienda(request,acid,id_de_la_tienda):
 
         else:
             
-            form = CategoriasForm(instance=f)   
+            form = CategoriaForm(instance=f)   
         
         connection.close()
         return render(request,'editar_categorias_de_mi_tienda.html',locals())
