@@ -117,7 +117,7 @@ def info_pagina(requesta):
 
     
     try:
-          cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(Q(estado_prod="QUIERO_PEDIR_ESTO") | Q(estado_prod="QUIERO_PEDIR_ESTO")).count()+Carro_de_compras.objects.filter(producto__id_usuario=request.user.username).filter(Q(estado_prod="QUIERO_PEDIR_ESTO") | Q(estado_prod="QUIERO_PEDIR_ESTO")).count()
+          cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(estado_prod="QUIERO_PEDIR_ESTO").count()+Carro_de_compras.objects.filter(producto__id_usuario=request.user.username).filter(estado_prod="QUIERO_PEDIR_ESTO").count()
     except:  
           cantidad_pedidos=Carro_de_compras.objects.all().count()
 
@@ -168,7 +168,7 @@ def crear_producto(request,idusuario,nombretienda):
             bandera=1 
      elif  usuario.plan_tienda_activo=="DOSMIL" and cantidad_productos<2000:
             bandera=1 
-     elif  usuario.plan_tienda_activo=="CINCOMIL" and cantidad_productos<2000:
+     elif  usuario.plan_tienda_activo=="CINCOMIL" and cantidad_productos<5000:
             bandera=1 
      else:
            bandera=0
@@ -545,26 +545,33 @@ def mi_tienda(request,idusuario,nombretienda):
     tiendas.n_visitas+=1      
     tiendas.save()
 
-    corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
-    if corazon>0:
-        corazon="PREFERIDA"
-    else:
+    try:
+        corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+        if corazon>0:
+            corazon="PREFERIDA"
+        else:
+            corazon="NO_PREFERIDA"
+    except:
         corazon="NO_PREFERIDA"
     
     var=tiendas.codigoapk    
 
     productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)).order_by("precio_A")[:10]
     
-    comprador=Usuarios.objects.get(id_usuario=request.user.username) 
-    connection.close()
-    if comprador.tipo_de_vista=="NORMAL":
-         return render(request,'catalogo_tienda.html',locals())   
-    elif comprador.tipo_de_vista=="LINEAL":
-         return render(request,'catalogo_tienda_lineal.html',locals())   
-    else:
-         return render(request,'catalogo_tienda_fotitos.html',locals()) 
-      
+    try:
+        comprador=Usuarios.objects.get(id_usuario=request.user.username) 
+        connection.close()
+        if comprador.tipo_de_vista=="NORMAL":
+             return render(request,'catalogo_tienda.html',locals())   
+        elif comprador.tipo_de_vista=="LINEAL":
+             return render(request,'catalogo_tienda_lineal.html',locals())   
+        else:
+             return render(request,'catalogo_tienda_fotitos.html',locals()) 
+    except:
+        return render(request,'catalogo_tienda.html',locals())    
  
+
+@login_required
 def mis_tiendas(request,idusuario):
   
       categoria=n_categorias()
@@ -618,7 +625,7 @@ def ver_categorias(request,item):
   #return render_to_response('catalogo.html',locals(),context_instance=RequestContext(request))
   return render(request,'catalogo.html',locals())   
 
-    
+@login_required    
 def ver_mis_categorias(request,idusuario,nombretienda,item):
   
   categoria=categorizar(idusuario,nombretienda)
@@ -692,7 +699,7 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       
 
   
- 
+@login_required 
 def busqueda_tienda(request,idusuario,nombretienda):
      
      categoria=categorizar(idusuario,nombretienda)
@@ -716,6 +723,7 @@ def busqueda_tienda(request,idusuario,nombretienda):
         connection.close()
         return render(request,'catalogo_tienda.html',locals()) 
 
+@login_required
 def busqueda(request):
      categoria=n_categorias()
      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
@@ -941,6 +949,7 @@ def informacion(request):
   connection.close()
   return render(request,'informacion.html',locals())   
 
+
 def informacion_vendedor(request,idusuario):
       categoria=n_categorias()
       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
@@ -966,93 +975,6 @@ def informacion_comprador(request,idusuario):
 
 from mysite.datos_artetronica.cart import Cart
 
-@login_required
-
-def add_to_cart(request,product_id,idusuario,nombretienda):    
-    
-    categoria=n_categorias()
-    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
-    mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-
-    quantity= request.POST.get("cant")
-    productos = Productos.objects.get(id=product_id)
-    
-    precio=productos.precio_A   
-    if precio==None:
-      precio=0
-
-    
-    cart = Cart(request)
-    cart.add(productos, precio, quantity)
-    total=cart.summary()    
-   
-    connection.close()
-    return render(request,'confirmar_tienda.html',locals())   
-    
-@login_required
-def remove_from_cart(request, product_id):
-    categoria=n_categorias()
-    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
-    mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-
-    product = Productos.objects.get(id=product_id)
-    cart = Cart(request)
-    cart.remove(product)
-    connection.close()
-
-@login_required
-def get_cart(request,bandera,idusuario,nombretienda):
-   
-    categoria=categorizar(idusuario,nombretienda)
-    
-    tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-      
-    duenotienda=Usuarios.objects.filter(id_usuario=idusuario).first()
-    
-    cliente=Usuarios.objects.filter(id_usuario=request.user.username).first()
-
-    cart = Cart(request)
-    cart.view()
-    total=cart.summary()   
-  
-    mensaje_pedido=""
-    for item in cart:  
-            mensaje_pedido+=str(item.quantity)+"---" + str(item.product)+"---"+str(item.unit_price)+"---"+ str(item.total_price)+ "\n"
-    
-    mensaje_pedido+= "\n$ "+str(total) 
-
-    
-    if bandera=="1":
-            mensaje="Hola, somos xgangas y registramos que su tienda :\n"
-            mensaje+= str(nombretienda)+ " y No. de contacto" +str(duenotienda.id_usuario)  +"\n"
-            mensaje+="tubo una visita y el cliente se intereso por esto::\n"
-            
-            for item in cart:     
-                 mensaje+= "["+str(item.quantity)+str(item.product )+str(item.total_price)+"]\n"
-            
-            mensaje+="\nEl total es:"+str(total)+"\n\n"
-            
-            whatsapp=cliente.id_usuario
-            fecha= datetime.datetime.now()
-
-            mensaje+="El numero de contacto del cliente es:"+str(cliente.id_usuario)+"\n"
-            mensaje+="El Nombre del cliente es:"+str(cliente.nombre)+"\n"
-            mensaje+="El Email del cliente es:"+str(cliente.mail)+"\n"
-
-            mensaje+= str(fecha)
-            sender =duenotienda.email
-            asunto="de Xgangas: negocios"
-            try:
-               send_mail(asunto, mensaje,"xgangasx@gmail.com",(sender,), fail_silently=False) 
-            except:
-                pass            
-            connection.close()
-            return render(request,'confirmar_tienda.html',locals())               
-    else:
-
-            #return render_to_response('carrito.html', locals(),context_instance=RequestContext(request))
-          connection.close() 
-          return render(request,'carrito.html',locals())   
 
 
 @login_required
@@ -1110,6 +1032,7 @@ def editar_pedido(request,idusuario,nombretienda,acid):
         
         connection.close()
         return render(request,'pedido.html',locals())
+
 
 
 @login_required
@@ -1455,9 +1378,6 @@ def ver_el_carrito_personal_y_de_tienda(request,id_persona_compra,id_tienda_de_c
 
 
 
-
-
-
 @login_required
 def ver_el_carrito(request,estado_del_producto):
       categoria=n_categorias()
@@ -1470,16 +1390,16 @@ def ver_el_carrito(request,estado_del_producto):
 
       if el_usuario_x=="EL_COMPRADOR":
               if estado_del_producto=="TODOS":
-                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) ).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username) ).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="NUEVO":
-                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="EN_PROCESO":
-                   carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
+                   carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="FINALIZADO":
-                    carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
+                    carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
                 
               else:
-                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
              
            
 
@@ -1944,7 +1864,7 @@ def traspasar_tienda(request,id_de_la_tienda):
             
             var=tiendas.codigoapk
 
-            categoria=categorizar(idusuario,nombretienda)     
+             
 
 
             if request.POST:
@@ -1952,11 +1872,12 @@ def traspasar_tienda(request,id_de_la_tienda):
                 #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
                 nuevo_id=Usuarios.objects.get(id_usuario=nuevo_id_usuario_tienda)
                 
-                if nuevo_id.count()>0 and nuevo_id.tipo_usuario=="EL_ADMINISTADOR":                  
+                if nuevo_id.tipo_usuario=="EL_ADMINISTADOR":                  
                       tienda_traspasada=Tiendas.objects.get(id=id_de_la_tienda)
                       tienda_traspasada.id_usuario=nuevo_id_usuario_tienda
+                      tienda_traspasada.save()
 
-                      producto_traspasado=Productos.objects.filter(tienda=tienda_traspasada)
+                      producto_traspasado=Productos.objects.filter(tienda__id=id_de_la_tienda)
                       
                       if producto_traspasado.count()>0:
                         

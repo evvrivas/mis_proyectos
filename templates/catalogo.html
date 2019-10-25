@@ -43,7 +43,7 @@
 <div class="row">
           {% for j in tiendas %} 
 
-{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior %}
+{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior and user.username != j.administrador_junior_1 and user.username != j.administrador_junior_2%}
 
 {% else %}
           
@@ -98,7 +98,7 @@
                         </table>
                         </center> 
 
-                        {%  if user.is_authenticated and user.username == j.id_usuario or user.is_authenticated and user.username == j.administrador_junior %}    
+                        {%  if user.is_authenticated and user.username == j.id_usuario or user.is_authenticated and user.username == j.administrador_junior or user.is_authenticated and user.username == j.administrador_junior_1 or user.is_authenticated and user.username == j.administrador_junior_2 %}    
                                   
                 <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle"
@@ -136,7 +136,7 @@
 
 <div class="row">          
           {% for j in productos %} 
-         {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior %}
+         {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior and user.username != j.tienda.administrador_junior_1 and user.username != j.tienda.administrador_junior_2 %}
 
 {% else %}        
            <div class="col-md-4">   

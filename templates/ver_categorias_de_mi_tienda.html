@@ -20,10 +20,10 @@
                 <div class="thumbnail">                                    
                   <div class="caption">
            
-  
+
 
 {% for i in categorias_tienda %}           
-       <li><a href="/editar_categoria_de_mi_tienda/{{i.id}}/{{tiendas.id}}">  editar  <a href="/borrar_categoria_de_mi_tienda/{{i.id}}/{{tiendas.id}}">  borrar  </a></a></li>
+       <li>{{i}}<a href="/editar_categoria_de_mi_tienda/{{i.id}}/{{tiendas.id}}">  editar  <a href="/borrar_categoria_de_mi_tienda/{{i.id}}/{{tiendas.id}}">  borrar  </a></a></li>
        <br>
 {% endfor %}
 

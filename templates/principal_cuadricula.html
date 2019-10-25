@@ -66,7 +66,7 @@
 
 {% for j in tiendas %} 
 
-{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior %}
+{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior and user.username != j.administrador_junior_1 and user.username != j.administrador_junior_2 %}
 
 {% else %}
 
@@ -106,7 +106,7 @@
  {% for j in productos %} 
  
  
- {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior %}
+ {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior and user.username != j.tienda.administrador_junior_1 and user.username != j.tienda.administrador_junior_2 %}
 
 {% else %}
 
@@ -177,7 +177,7 @@
                      
 {% for j in nuevas_tiendas %} 
 
-{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior %}
+{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior and user.username != j.administrador_junior_1 and user.username != j.administrador_junior_2 %}
 
 {% else %}
 
@@ -212,7 +212,7 @@
   
  {% for j in nuevos_productos %} 
 
- {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior %}
+ {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior and user.username != j.tienda.administrador_junior_1 and user.username != j.tienda.administrador_junior_2 %}
 }
 
 {% else %}
@@ -251,7 +251,7 @@
 
 {% for j in aleatorias_tiendas %} 
 
-{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior %}
+{% if user.username != j.id_usuario and j.estado_tienda == 'NO_DISPONIBLE' and user.username != j.administrador_junior and user.username != j.administrador_junior_1 and user.username != j.administrador_junior_2 %}
 
 {% else %}
   
@@ -282,7 +282,7 @@
   
  {% for j in aleatorias_productos %} 
 
- {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior %}
+ {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior and user.username != j.tienda.administrador_junior_1 and user.username != j.tienda.administrador_junior_2 %}
 }
 
 {% else %}

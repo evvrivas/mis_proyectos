@@ -17,7 +17,7 @@
       <h6> {{ productos.0.categoria.descripcion | linebreaks }} </h6>   
  {% for j in productos %} 
 
-      {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior  %}
+      {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior  and user.username != j.tienda.administrador_junior_1 and user.username != j.tienda.administrador_junior_2 %}
 
 {% else %}
 
@@ -235,10 +235,10 @@
 -->
 
 
- {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior %}     
+ {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior  or user.is_authenticated and user.username == tiendas.administrador_junior_1 or user.is_authenticated and user.username == tiendas.administrador_junior_2 %}     
 
 
-                   {%  if user.is_authenticated and user.username == tiendas.id_usuario  %} 
+                   {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior  %} 
                            <center> 
                              <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li> 
                    {% endif %}  
