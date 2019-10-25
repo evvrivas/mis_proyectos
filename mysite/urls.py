@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^accounts/login/$', login,{'template_name': 'login.html'}),
     url(r'^accounts/logout/$', logout),
     url(r'^accounts/profile/$', pagina_principal),
+
     #url(r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
     #url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':  settings.MEDIA_ROOT}),
     
@@ -54,7 +55,7 @@ urlpatterns = [
     url(r'^crear_producto/([^/]+)/([^/]+)/$',crear_producto),
     url(r'^editar_producto/([^/]+)/([^/]+)/(\d+)/$',editar_producto),
          
-    url(r'^get_cart/$', get_cart),
+ 
     url(r'^ver_categorias/([^/]+)/$', ver_categorias),
     url(r'^ver_categorias_tienda/([^/]+)/([^/]+)/([^/]+)/$', ver_mis_categorias),
     url(r'^busqueda/$', busqueda),
@@ -65,8 +66,7 @@ urlpatterns = [
     url(r'^cambiar_estado_pedido/([^/]+)/([^/]+)/(\d+)/$',cambiar_estado_pedido),
     url(r'^listado_pedido/([^/]+)/([^/]+)/([A-Z]+)/$', listado_pedido),
 
-    url(r'^add_to_cart/(\d+)/([^/]+)/([^/]+)/$',add_to_cart),
-    url(r'^get_cart/(\d+)/([^/]+)/([^/]+)/$', get_cart),
+   
     url(r'^carrusel/(\d+)/([^/]+)/([^/]+)/$', carrusel),
     url(r'^carrusel_pedidos/(\d+)/([^/]+)/([^/]+)/$', carrusel_pedidos),
     
