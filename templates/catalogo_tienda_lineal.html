@@ -37,11 +37,7 @@
 
                   <td WIDTH="125">
                        
-                       <div class="row"> 
-                          <h6><center> {{j.nombre}}  </center></h6>
-                       </div>
-
-                      
+                                            
                       <div class="row">     
                           {% thumbnail j.imagen1 "75x75" crop="center" as im %}   
                                <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
@@ -61,14 +57,32 @@
                               <div class="row">              
                                       <center>   
                                     
-                            
+                             <div class="row"> 
+                          <h3><center> {{j.nombre}}  </center></h3>
+                       </div>
 
-                                {% if j.precio_A %}
+                                {% if j.precio_A  and j.precio_A < 60  %}
                                  <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
                                      <input type="submit" value="p/u $ {{ j.precio_A }} Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+
+                                <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
+                                    </center>
+                                </div>
+                               
+
+
+
                                 {% else %}
-                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
-                                       <input type="submit" value="p/u $ X.XX  Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"> 
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1" style="width:0px; height:0px;">
+                                       <input type="submit" value="ME INTERESA ESTO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+
+                                  <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" value="Comuniquense para hablar sobre el tema"  style="width:0px; height:0px;"></textarea> 
+                                    </center>
+                                </div> 
                                   
                                 {% endif %}
 
@@ -76,11 +90,7 @@
                                       </center>
                                 </div>
                           
-                                <div class="row">  
-                                    <center>                            
-                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
-                                    </center>
-                                </div>
+                              
                               
                </form>
        </td>  
@@ -110,9 +120,7 @@
 
                   <td WIDTH="125">
                        
-                       <div class="row"> 
-                          <h6><center> {{j.nombre}}  </center></h6>
-                       </div>
+
 
                       
                       <div class="row">     
@@ -134,14 +142,33 @@
                               <div class="row">              
                                       <center>   
                                     
-                            
+                             <div class="row"> 
+                          <h3><center> {{j.nombre}}  </center></h3>
+                       </div>
 
-                                {% if j.precio_A %}
+
+                                {% if j.precio_A  and j.precio_A < 60  %}
                                  <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
                                      <input type="submit" value="p/u $ {{ j.precio_A }} Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+
+                                <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
+                                    </center>
+                                </div>
+                               
+
+
+
                                 {% else %}
-                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
-                                       <input type="submit" value="p/u $ X.XX  Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"> 
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1" style="width:0px; height:0px;">
+                                       <input type="submit" value="ME INTERESA ESTO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+
+                                  <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" value="Comuniquense para hablar sobre el tema"  style="width:0px; height:0px;"></textarea> 
+                                    </center>
+                                </div> 
                                   
                                 {% endif %}
 
@@ -189,10 +216,7 @@
                  <tr  align="center">     
 
                   <td WIDTH="125">
-                       
-                       <div class="row"> 
-                          <h6><center> {{j.nombre}}  </center></h6>
-                       </div>
+               
 
                       
                       <div class="row">     
@@ -214,16 +238,35 @@
                               <div class="row">              
                                       <center>   
                                     
-                            
+                             <div class="row"> 
+                          <h3><center> {{j.nombre}}  </center></h3>
+                       </div>
 
-                               {% if j.precio_A %}
+
+                               {% if j.precio_A  and j.precio_A < 60  %}
                                  <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
                                      <input type="submit" value="p/u $ {{ j.precio_A }} Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+
+                                <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
+                                    </center>
+                                </div>
+                               
+
+
+
                                 {% else %}
-                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
-                                       <input type="submit" value="p/u $ X.XX  Agregar" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal"> 
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1" style="width:0px; height:0px;">
+                                       <input type="submit" value="ME INTERESA ESTO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+
+                                  <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" value="Comuniquense para hablar sobre el tema"  style="width:0px; height:0px;"></textarea> 
+                                    </center>
+                                </div> 
                                   
-                                {% endif %}  
+                                {% endif %}
 
 
                             

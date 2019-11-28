@@ -149,7 +149,25 @@
                <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
                               {% csrf_token %}                                
                
+             {% if j.precio_A > 60 %}
+                   <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;>
+                              <input type="submit" value="ME INTERESA HABLAR SOBRE ESTO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                              </center>
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+             
 
+
+              {% else %}
+               
+             
 
                        <div class="row">              
                               <center>   
@@ -163,6 +181,8 @@
                               <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
                           </center>
                           </div>
+
+                  {% endif %}
                               
                </form>
                

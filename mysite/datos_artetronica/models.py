@@ -41,7 +41,7 @@ TIPO_PRENDA = (
 	        ('serigrafia', 'serigrafia'),
 			('Sublimacion', 'Sublimacion'),
 			('uniforme escolar', 'uniforme escolar'),
-			('uniforme deportivo', 'uniforme deportivo'),
+			('uniforme deportivo',  'uniforme deportivo'),
 			('uniforme de trabajo', 'uniforme de trabajo'),
 			('sueter', 'sueter'),
 			('chumpa', 'chumpa'),
@@ -279,17 +279,21 @@ class Usuarios(models.Model):
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL",null=True)
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR",null=True)
 	     tipo_vista=models.IntegerField(blank=True,default=0,null=True)
-	     
+	     codigo=models.CharField(max_length=30,blank=True,null=True)
 	     def save(self, *args,**kwargs):
-	     	if self.image:
-	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((200,200),Img.ANTIALIAS)
-	     		output=BytesIO()
-	     		t_image.save(output,format='JPEG',quality=75)
-	     		output.seek(0)
-	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Usuarios,self).save(*args,**kwargs)
-             
+	     	
+		     	if self.image:
+		     		try:
+			     		t_image=Img.open(BytesIO(self.image.read()))
+			     		t_image.thumbnail((200,200),Img.ANTIALIAS)
+			     		output=BytesIO()
+			     		t_image.save(output,format='JPEG',quality=75)
+			     		output.seek(0)
+			     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+		     		except:
+            			pass 
+		     	super(Usuarios,self).save(*args,**kwargs)
+            
 
 
 	     def __str__(self):
@@ -375,6 +379,7 @@ class Ccomercial(models.Model):
 	     plan_publicidad_activo=models.CharField(max_length=30,choices=PLAN_PUBLICIDAD,blank=True,default="PUBLICIDAD_0")
 	     fecha_inicio_plan = models.DateField(default=datetime.now)
 	     fecha_final_plan = models.DateField(default=datetime.now)
+	     codigo=models.CharField(max_length=30,blank=True,null=True)
 	     def save(self, *args,**kwargs):
 	     	self.image=self.imagen_ccomercial
 	     	if self.image:
@@ -420,6 +425,7 @@ class Tiendas(models.Model):
 	     estado_tienda=models.CharField(max_length=30,blank=True,choices=ESTADO_TIENDA,default="DISPONIBLE")
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
+	     codigo=models.CharField(max_length=30,blank=True,null=True)
 	     def save(self, *args,**kwargs):
 	     	self.image=self.imagen1
 	     	if self.image:
@@ -498,6 +504,7 @@ class Pedidos(models.Model):
 	     archivo1=models.FileField(upload_to='tmp',blank=True,null=True)
 	     archivo2=models.FileField(upload_to='tmp',blank=True,null=True)
 	     archivo3=models.FileField(upload_to='tmp',blank=True,null=True)
+	     codigo=models.CharField(max_length=30,blank=True,null=True)
 	    
 
 	     def __str__(self):
@@ -574,6 +581,7 @@ class Carro_de_compras(models.Model):
 	nota_comprador=models.IntegerField(blank=True,default=0)
 	nota_vendedor=models.IntegerField(blank=True,default=0)
 	usuario_car=models.ForeignKey('Usuarios',blank=True,null=True)
+	codigo=models.CharField(max_length=30,blank=True,null=True)
 	    
 
 	def __str__(self):

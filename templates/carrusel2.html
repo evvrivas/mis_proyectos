@@ -41,34 +41,12 @@
 
 
 <div class="container"> 
-    <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
-     <tr  align="center">  
+    
           {% thumbnail productos.imagen1 "360" crop="center" as im %}   
         <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
 
          {% endthumbnail %}
-  <div class="content">
-
-     {%  if productos.precio_de_antes %}  
-             <center><strike><h6>Antes $ {{productos.precio_de_antes}}</h6></strike></center>
-     {% endif %}
-    
-    {%  if productos.precio_B %}
-
-                          <h6>Hoy $ {{ productos.precio_B }}</h6>
-              {% else %}
-                    
-                    {%  if productos.precio_A %}
-                          <h6>Hoy $ {{ productos.precio_A }}</h6>
-                    {% endif %}
-
-    {% endif %}
-    
-    
-  </div>
-
-  </tr >                       
-  </table></center>
+ 
  </div>
 
 
@@ -76,6 +54,26 @@
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_UNO/' method='post'>
                               {% csrf_token %}                                
                
+                        {% if productos.precio_A > 60 %}
+                   <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;>
+                              <input type="submit" value="ME INTERESA HABLAR SOBRE ESTO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                              </center>
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+             
+
+
+              {% else %}
+               
+             
+
                        <div class="row">              
                               <center>   
                               <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
@@ -88,6 +86,8 @@
                               <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
                           </center>
                           </div>
+
+                  {% endif %}
                               
                </form>
                
@@ -156,9 +156,7 @@
 
 
 <div class="container"> 
-     <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
-     <tr  align="center">  
-  
+    
 
 
 
@@ -168,25 +166,7 @@
                                
    {% endthumbnail %}
   
-  <div class="content">
-
-     {%  if productos.precio_de_antes %}  
-             <center><strike><h6>Antes $ {{productos.precio_de_antes}}</h6></strike></center>
-     {% endif %}
-    {%  if productos.precio_B %}
-                          <h6>Hoy $ {{ productos.precio_B }}</h6>
-              {% else %}
-                    
-                    {%  if productos.precio_A %}
-                          <h6>Hoy $ {{ productos.precio_A }}</h6>
-                    {% endif %}
-
-              {% endif %}
-    
-  </div>
-
-  </tr >                       
-  </table></center>
+  <
 </div>
 
 
@@ -194,6 +174,26 @@
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_DOS/' method='post'>
                               {% csrf_token %}                                
                
+                      {% if productos.precio_A > 60 %}
+                   <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;>
+                              <input type="submit" value="ME INTERESA HABLAR SOBRE ESTO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                              </center>
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+             
+
+
+              {% else %}
+               
+             
+
                        <div class="row">              
                               <center>   
                               <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
@@ -206,6 +206,8 @@
                               <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
                           </center>
                           </div>
+
+                  {% endif %}
                               
                </form>
                
@@ -273,31 +275,11 @@
 
 
 <div class="container"> 
-   <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
-   <tr  align="center">  
+   
    {% thumbnail productos.imagen3 "360" crop="center" as im %}   
   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
    {% endthumbnail %}
-  <div class="content">
-              {%  if productos.precio_de_antes %}  
-             <center><strike><h6>Antes $ {{productos.precio_de_antes}}</h6></strike></center>
-     {% endif %}
-
-              {%  if productos.precio_B %}
-                          <h6>Hoy $ {{ productos.precio_B }}</h6>
-              {% else %}
-                    
-                    {%  if productos.precio_A %}
-                          <h6>Hoy $ {{ productos.precio_A }}</h6>
-                    {% endif %}
-
-              {% endif %}
-   
-   
-  </div>
-
-  </tr >                       
-  </table></center>
+  
 
 </div>
 
@@ -306,6 +288,26 @@
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_TRES/' method='post'>
                               {% csrf_token %}                                
                
+                       {% if productos.precio_A > 60 %}
+                   <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;>
+                              <input type="submit" value="ME INTERESA HABLAR SOBRE ESTO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                              </center>
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+             
+
+
+              {% else %}
+               
+             
+
                        <div class="row">              
                               <center>   
                               <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
@@ -318,6 +320,8 @@
                               <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
                           </center>
                           </div>
+
+                  {% endif %}
                               
                </form>
                

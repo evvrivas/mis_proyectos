@@ -84,16 +84,14 @@
 
 
 
-                                    <td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+                                    <td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.id_comprador}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
 
-                                    <td WIDTH="80"><a href="tel://+503{{i.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    <td WIDTH="80"><a href="tel://+503{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
                                     
                                    
                                 </tr >
                         </table>
                         </center>      
-
-
 
 
 
@@ -177,10 +175,10 @@
 
 
  <td WIDTH="80">
-                                {% if tiendas.nota_de_evaluacion < 3 %}
+                                {% if tiendas.nota_de_evaluacion < 4 %}
           <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
 
-      {% elif tiendas.nota_de_evaluacion > 6 %}
+      {% elif tiendas.nota_de_evaluacion < 7 %}
           <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
       {% else %}
 
@@ -189,16 +187,14 @@
 
 </td>
 
-                                    <td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.id_comprador}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
+                                    <td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>    
 
-                                    <td WIDTH="80"><a href="tel://++503{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    <td WIDTH="80"><a href="tel://+503{{i.producto.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
                                     
                                    
                                 </tr >
                         </table>
                         </center> 
-
-
 
 
 
@@ -212,7 +208,7 @@
 
                   {% if i.lugar_de_entrega %}
                       <p> Lugar de entrega {{i.lugar_de_entrega}} </p>
-                       <br>
+                      <br>
 
                   {% else %} 
                   {% endif %}     
@@ -225,15 +221,12 @@
                   {% else %} 
                   {% endif %}    
                   
-
-                  {% if i.servicio_a_domicilio %}
-                      <p> servicio a domicilio {{i.servicio_a_domicilio}} </p>
-                     <h4> <p> costo_servicio a domicilio {{i.costo_servicio}} </p></h4>
-                      <br>
-
-                  {% else %} 
-                  {% endif %}  
+                          
                   
+                      <p> servicio a domicilio {{i.servicio_a_domicilio}} </p>
+                    
+                      <br>
+                 
                  
                                         
 
@@ -299,14 +292,13 @@
 
 
 
-
-
-
     {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
                       <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+              
+
               {% else %}
                 
               {% endif %} 
@@ -321,7 +313,9 @@
     {% endif %}
 
 
-       <h4><p>Total (No incluye servicio a domicilio) {{ i.total }}  </h4>
+       <h4><p>Total $ {{ i.total }}  </h4>
+       <h4> <p> costo_servicio a domicilio {{i.costo_servicio}} </p></h4>
+       
        
         <br>           
                      
@@ -361,9 +355,9 @@
                                 <button  class="btn btn-info btn-xs">x</button>
                                 <button  class="btn btn-primary btn-xs">PEDIDO FINALIZADO</button> 
                             {% endif %} 
-
+<br>
                             <li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}">Filtrar pedido</a></li>
-
+<br>
    
 
 
