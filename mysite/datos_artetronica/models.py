@@ -291,8 +291,8 @@ class Usuarios(models.Model):
 			     		output.seek(0)
 			     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 		     		except:
-            			pass 
-		     	super(Usuarios,self).save(*args,**kwargs)
+		     			pass
+		     		super(Usuarios,self).save(*args,**kwargs)
             
 
 
