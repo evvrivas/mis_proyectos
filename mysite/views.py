@@ -1434,7 +1434,7 @@ def ver_el_carrito(request,estado_del_producto):
                           if estado_del_producto=="TODOS":
                               carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(financista=request.user.username)).order_by("producto__tienda__nombre_tienda")
                           elif estado_del_producto=="NUEVO":
-                              carrito= Carro_de_compras.objects..filter(Q(id_comprador=request.user.username) | Q(financista=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                              carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(financista=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
                           elif estado_del_producto=="EN_PROCESO":
                               carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(financista=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
                           elif estado_del_producto=="FINALIZADO":
