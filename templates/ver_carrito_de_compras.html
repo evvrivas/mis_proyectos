@@ -221,12 +221,18 @@
                   {% else %} 
                   {% endif %}    
                   
+
+                  {% if i.costo_servicio_a_domicilio %}
+                      <p> $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> 
+                      <p> contacto {{i.delibery_junior}} {{i.delibery}} </p>
+                      <br>
+
+                  {% else %} 
+                  {% endif %}
+                  
                           
                   
-                      <p> servicio a domicilio {{i.servicio_a_domicilio}} </p>
-                    
-                      <br>
-                 
+                                   
                  
                                         
 
@@ -279,16 +285,12 @@
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
                       <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
-                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
               {% else %}
                 
               {% endif %} 
-
-              
-    
-  {% else %}    
-
-  {% endif %}
+ {% else %}    
+ {% endif %}
 
 
 
@@ -302,15 +304,16 @@
               {% else %}
                 
               {% endif %} 
-
-              
-
-
     {% else %}
-
-    
-
     {% endif %}
+
+
+{% if el_usuario_x == "EL_FINANCISTA" %}
+                              
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+{% else %}
+{% endif %}
+
 
 
        <h4><p>Total $ {{ i.total }}  </h4>

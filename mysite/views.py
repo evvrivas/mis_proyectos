@@ -1390,23 +1390,19 @@ def ver_el_carrito(request,estado_del_producto):
 
       if el_usuario_x=="EL_COMPRADOR":
               if estado_del_producto=="TODOS":
-                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username) ).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username) | Q(delibery_junior=request.user.username) | Q(financista_junior=request.user.username)).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="NUEVO":
-                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username) | Q(delibery_junior=request.user.username) | Q(financista_junior=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="EN_PROCESO":
-                   carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
+                   carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username) | Q(delibery_junior=request.user.username) | Q(financista_junior=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="FINALIZADO":
-                    carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
+                    carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username) | Q(delibery_junior=request.user.username) | Q(financista_junior=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
                 
               else:
-                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                  carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(producto__tienda__administrador_junior=request.user.username) | Q(producto__tienda__administrador_junior_1=request.user.username) | Q(producto__tienda__administrador_junior_2=request.user.username) | Q(delibery_junior=request.user.username) | Q(financista_junior=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
              
            
-
-
       elif el_usuario_x=="EL_ADMINISTRADOR" : #es el vendedor
-
-
               if estado_del_producto=="TODOS":
                   carrito= Carro_de_compras.objects.filter(Q(producto__id_usuario=request.user.username)  | Q(id_comprador=request.user.username)).order_by("producto__tienda__nombre_tienda")
               elif estado_del_producto=="NUEVO":
@@ -1421,24 +1417,31 @@ def ver_el_carrito(request,estado_del_producto):
               
              
       elif el_usuario_x=="EL_DELIBERY":
-
                           if estado_del_producto=="TODOS":
-                              carrito= Carro_de_compras.objects.all().order_by("producto__tienda__nombre_tienda")
+                              carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(delibery=request.user.username)).order_by("producto__tienda__nombre_tienda")
                           elif estado_del_producto=="NUEVO":
-                              carrito= Carro_de_compras.objects.filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                              carrito= Carro_de_compras.objects..filter(Q(id_comprador=request.user.username) | Q(delibery=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
                           elif estado_del_producto=="EN_PROCESO":
-                              carrito= Carro_de_compras.objects.filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
+                              carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(delibery=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
                           elif estado_del_producto=="FINALIZADO":
-                              carrito= Carro_de_compras.objects.filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
+                              carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(delibery=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
                             
                           else:
                             carrito= Carro_de_compras.objects.filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
                           
       
-
-
-
-
+      elif el_usuario_x=="EL_FINANCISTA":
+                          if estado_del_producto=="TODOS":
+                              carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(financista=request.user.username)).order_by("producto__tienda__nombre_tienda")
+                          elif estado_del_producto=="NUEVO":
+                              carrito= Carro_de_compras.objects..filter(Q(id_comprador=request.user.username) | Q(financista=request.user.username)).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
+                          elif estado_del_producto=="EN_PROCESO":
+                              carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(financista=request.user.username)).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO')).order_by("producto__tienda__nombre_tienda")
+                          elif estado_del_producto=="FINALIZADO":
+                              carrito= Carro_de_compras.objects.filter(Q(id_comprador=request.user.username) | Q(financista=request.user.username)).filter(estado_prod='PRODUCTO_RECIBIDO_YA').order_by("producto__tienda__nombre_tienda")
+                            
+                          else:
+                            carrito= Carro_de_compras.objects.filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).order_by("producto__tienda__nombre_tienda")
       else:
             
         pass                      
@@ -1474,6 +1477,10 @@ def editar_producto_del_carrito(request,id_producto):
             
                 if t_usuario=="EL_COMPRADOR":
                       form = Carro_de_comprasForm(request.POST,request.FILES,instance=f)
+                elif t_usuario=="EL_DELIBERY":
+                      form = Carro_de_compras_delibery_Form(request.POST,request.FILES,instance=f)
+                elif t_usuario=="EL_FINANCISTA":
+                      form = Carro_de_compras_financista_Form(request.POST,request.FILES,instance=f)
                 else:
                       form = Carro_de_compras2Form(request.POST,request.FILES,instance=f)
 
@@ -1495,6 +1502,10 @@ def editar_producto_del_carrito(request,id_producto):
        else:           
               if t_usuario=="EL_COMPRADOR":
                     form = Carro_de_comprasForm(instance=f)
+              elif t_usuario=="EL_DELIBERY":
+                      form = Carro_de_compras_delibery_Form(instance=f)
+              elif t_usuario=="EL_FINANCISTA":
+                      form = Carro_de_compras_financista_Form(instance=f)
               else: 
                     form = Carro_de_compras2Form(instance=f)
              

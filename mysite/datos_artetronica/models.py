@@ -236,6 +236,7 @@ TIPO_USUARIO=(
 			('EL_COMPRADOR', 'EL_COMPRADOR'),			
 			('EL_ADMINISTRADOR', 'EL_ADMINISTRADOR'),			
 			('EL_DELIBERY', 'EL_DELIBERY'),
+			('EL_FINANCISTA', 'EL_FINANCISTA'),
 
 						
 			)
@@ -364,8 +365,6 @@ SUPER_CATEGORIA=(
 ("Otros Servicios","Otros Servicios"),
 
  )
- 
-
 
 
 
@@ -389,7 +388,7 @@ class Ccomercial(models.Model):
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
 	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-	     	super(Ccomercial,self).save(*args,**kwargs)	     
+	     	super(Ccomercial,self).save(*args,**kwargs)	      
 	         
 
 	     def __str__(self):
@@ -541,11 +540,18 @@ ENTREGA = (
 			
 			
 			)
+SERVICIO_FINANCIERO= (
+			('NO','pagaré un "%" de anticipo'),
+			('SI','Pagaré cuando me entreguen?'),			
+			('TALVES','Escribame para acordar el pago'),
+				
+			
+			)
 
-SERVICIO = (
-			('SI','Si, A domicilio $?'),
+SERVICIO_A_DOMICILIO = (
 			('NO','LLegare por el pedido'),
-			('TALVES','Escribame para acordar entrega'),
+			('SI','Quiero servicio a domicilio'),			
+			('TALVES','Escribame para acordar la entrega'),
 				
 			
 			)
@@ -572,11 +578,17 @@ class Carro_de_compras(models.Model):
 
 	lugar_de_entrega=models.CharField(max_length=60,blank=True,null=True)	 
 	fecha_de_entrega=models.CharField(max_length=30,blank=True,null=True)	 
-	servicio_a_domicilio=models.CharField(max_length=30,blank=True,null=True,choices=SERVICIO)
-	costo_servicio=models.FloatField(default=0,blank=True,null=True)	
+	servicio_a_domicilio=models.CharField(max_length=30,blank=True,null=True,choices=SERVICIO_A_DOMICILIO)
+	costo_servicio_a_domicilio=models.FloatField(default=0,blank=True,null=True)
+	servicio_financiero=models.CharField(max_length=30,blank=True,null=True,choices=SERVICIO_FINANCIERO)	
 	
 	imagen1 = ImageField(upload_to='tmp',blank=True)
 	imagen2 = ImageField(upload_to='tmp',blank=True)	
+
+	financista=models.CharField(max_length=60,blank=True,null=True)	 
+	financista_junior=models.CharField(max_length=60,blank=True,null=True)	
+	delibery=models.CharField(max_length=60,blank=True,null=True)	
+	delibery_junior=models.CharField(max_length=60,blank=True,null=True)	
 
 	nota_comprador=models.IntegerField(blank=True,default=0)
 	nota_vendedor=models.IntegerField(blank=True,default=0)

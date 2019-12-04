@@ -85,14 +85,28 @@ class Carro_de_comprasForm(ModelForm):
 		model=Carro_de_compras
 		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}) }
 		
-		exclude=["codigo","producto","id_comprador","nombre_comprador","apellido_comprador","fecha_ingreso","total","estado_prod","mostrar_foto","costo_servicio","lugar_de_entrega","fecha_de_entrega"]
+		exclude=["codigo","producto","id_comprador","nombre_comprador","apellido_comprador","fecha_ingreso","total","estado_prod","mostrar_foto","costo_servicio","lugar_de_entrega","fecha_de_entrega","financista","financista_junior","delibery","delibery_junior"]
 
 class Carro_de_compras2Form(ModelForm):
 	class Meta:			
 		model=Carro_de_compras
 		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}) }
 
-		exclude=["codigo","usuario_car","nota_comprador","nota_vendedor","producto","id_comprador","nombre_comprador","apellido_comprador","cantidad","mostrar_foto","especificacion","total","estado_prod","fecha_ingreso","imagen1","imagen2","servicio_a_domicilio"]
+		exclude=["codigo","usuario_car","nota_comprador","nota_vendedor","producto","id_comprador","nombre_comprador","apellido_comprador","cantidad","mostrar_foto","especificacion","total","estado_prod","fecha_ingreso","imagen1","imagen2","servicio_a_domicilio","servicio_financiero","financista_junior","delibery_junior"]
+
+class Carro_de_compras_delibery_Form(ModelForm):
+	class Meta:			
+		model=Carro_de_compras
+		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}) }
+
+		exclude=["codigo","usuario_car","nota_comprador","nota_vendedor","producto","id_comprador","nombre_comprador","apellido_comprador","cantidad","mostrar_foto","especificacion","total","estado_prod","fecha_ingreso","imagen1","imagen2","servicio_a_domicilio","servicio_financiero","financista_junior","lugar_de_entrega","fecha_de_entrega","costo_servicio_a_domicilio","financista","delibery"]
+
+class Carro_de_compras_financista_Form(ModelForm):
+	class Meta:			
+		model=Carro_de_compras
+		widgets = {'especificacion': Textarea(attrs={'cols': 20, 'rows': 2}) }
+
+		exclude=["codigo","usuario_car","nota_comprador","nota_vendedor","producto","id_comprador","nombre_comprador","apellido_comprador","cantidad","mostrar_foto","especificacion","total","estado_prod","fecha_ingreso","imagen1","imagen2","servicio_a_domicilio","servicio_financiero","lugar_de_entrega","fecha_de_entrega","costo_servicio_a_domicilio","financista","delibery","delibery_junior"]
 
 
 class PreferidasForm(ModelForm):
