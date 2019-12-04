@@ -129,7 +129,7 @@ class RulesAdmin(admin.ModelAdmin):
 class Carro_de_comprasAdmin(admin.ModelAdmin):
     model = Carro_de_compras
     #list_display = ['id_vendedor','nombre_tienda','id_usuario','cantidad','nombre','especificacion','precio','estado_prod','fecha_ingreso']
-    list_display = ['id_vendedor','nombre_tienda','id_comprador','cantidad','nombre','especificacion','precio','total','estado_prod','costo_servicio','fecha_ingreso']
+    list_display = ['id_vendedor','nombre_tienda','id_comprador','cantidad','nombre','especificacion','precio','total','estado_prod','costo_servicio_a_domicilio','fecha_ingreso']
     list_filter=(('id_comprador',admin.RelatedOnlyFieldListFilter),('estado_prod',admin.RelatedOnlyFieldListFilter),('servicio_a_domicilio',admin.RelatedOnlyFieldListFilter))
     def id_vendedor(self,instance):
         return instance.producto.id_usuario
