@@ -602,6 +602,8 @@ class Carro_de_compras(models.Model):
 		    		list_display = ('especificacion','id_usuario')
 	
 
+   
+    
 
 class Preferidas(models.Model):	
 	id_comprador=models.CharField(max_length=30,blank=True,null=True)

@@ -43,8 +43,7 @@
 
 
 
-                      <h6><p>No. {{ i.id }} fecha {{ i.fecha_ingreso }} </p> </h6>     
-      
+                      <h6><p>No. {{ i.id }} fecha {{ i.fecha_ingreso }} </p> </h6>         
                    
 
 
@@ -198,43 +197,33 @@
 
 
 
-
                       <h6><p> Cant. {{ i.cantidad }} {{ i.producto.nombre }}  $ P/U = {{ i.producto.precio_A}}  </p>  </h6>          
                       <h6><p>{{ i.especificacion }}  </p> </h6>                
 
 
 
-
-
                   {% if i.lugar_de_entrega %}
-                      <p> Lugar de entrega {{i.lugar_de_entrega}} </p>
-                      <br>
+                      <h6><p>Datos de entrega {{i.lugar_de_entrega}} </p></h6>
+                      
 
                   {% else %} 
                   {% endif %}     
                   
 
                   {% if i.fecha_de_entrega %}
-                      <p> fecha de entrega {{i.fecha_de_entrega}} </p> 
-                       <br>
-
+                      <h6><p> fecha de entrega {{i.fecha_de_entrega}} </p> </h6>
+                  
                   {% else %} 
                   {% endif %}    
                   
-
+                  <h4><p>Total $ {{ i.total }}  </h4>   
                   {% if i.costo_servicio_a_domicilio %}
-                      <p> $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> 
-                      <p> contacto {{i.delibery_junior}} {{i.delibery}} </p>
-                      <br>
-
+                     <h6> <p> más  $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> </h6>
+                     <h6> <p> contacto {{i.delibery_junior}} {{i.delibery}} </p></h6>
+                      
                   {% else %} 
                   {% endif %}
-                  
-                          
-                  
-                                   
-                 
-                                        
+                                 
 
                   {% if i.imagen1 %}     
                        {% thumbnail i.imagen1 "360" crop="center" as im %}
@@ -315,9 +304,7 @@
 {% endif %}
 
 
-
-       <h4><p>Total $ {{ i.total }}  </h4>
-       <h4> <p> costo_servicio a domicilio {{i.costo_servicio}} </p></h4>
+    
        
        
         <br>           

@@ -70,13 +70,7 @@ def crear_categorias(request):
   
  
 
-  fechita=datetime.datetime.now()
-
-  u1=User.objects.create_user(username="78218224", password="1111",email="evvrivas@gmail.com",first_name="Ernesto Vladimir",last_name="Valdez Rivas")
-  u1.save()
   
-  us=Usuarios(id_usuario="78218224", clave="1111", nombre="Ernesto Vladimir",apellido="Valdez Rivas", comentario_opcional="Soy la Laguna",email ="evvrivas@gmail.com", plan_tienda="GRATIS",plan_tienda_activo="GRATIS",estoy_en="AHUACHAPAN",codigoapk="NORMAL", nombre_del_banco="Banco Agricola Comercial",numero_cuenta="010101010101",numero_tigo_money="78218224",fecha_inicio_plan = fechita,fecha_final_plan = fechita, fecha_ingreso = fechita,tipo_usuario="EL_ADMINISTRADOR",tipo_de_vista="NORMAL")      
-  us.save()
 
   
   return render(request,'principal.html',locals())
@@ -368,12 +362,10 @@ def crear_usuario(request):
         
 @login_required
 def editar_usuario(request):   
-       categoria=n_categorias()
-       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
-       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-
-       if t_usuario=="EL_ADMINISTRADOR":
-            
+             categoria=n_categorias()
+             ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+             mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+          
              f = Usuarios.objects.get(id_usuario=request.user.username)           
              
              if request.method == 'POST':
@@ -425,9 +417,16 @@ def editar_usuario(request):
 
              connection.close()
              #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-             return render(request,'formulario_editar_usuario.html',locals())   
-       else:
-             return render(request,'sin_autorizacion.html',locals())
+             
+
+             if t_usuario=="EL_COMPRADOR" :
+                  return render(request,'formulario_editar_usuario_comprador.html',locals())
+             else:    
+                  
+                  return render(request,'formulario_editar_usuario.html',locals())
+
+
+       
 
 
 
