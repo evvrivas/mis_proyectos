@@ -8,9 +8,7 @@
 
         <div class="alert alert-danger">
                   
-         <a href="/cambiar_tipo_de_vista/{{tiendas.id}}" class="alert-link"> Cambiar la vista , Tienes  {{tiendas.n_visitas}} visitas, La tienda esta <font color="red">{{estado_de_la_tienda}}</font></a>
-
-         <font color="red">Este texto está en rojo</font>
+         <a href="/cambiar_tipo_de_vista/{{tiendas.id}}" class="alert-link"> Cambiar la vista , Tienes  {{tiendas.n_visitas}} visitas, La tienda esta <font color="red">{{estado_de_la_tienda}} a esta hora</font></a>       
          <br>
                 
                 <center> <h5><p>{{tiendas.promocion}}</p></h5> </center>
@@ -151,6 +149,30 @@
                <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
                               {% csrf_token %}                                
                
+
+    {% if var == 'MIO' %}
+                         <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;">
+                              
+                              <input type="submit" value="ESTE PRODUCTO ES MIO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" style="font-size:12pt;color:white;background-color:green;border:2px solid #336600;padding:3px">
+                              </center>
+                              
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+
+    {% else %}
+
+
+
+
+
+
              {% if j.precio_A > 60 %}
                    <div class="row">              
                           <center>   
@@ -186,7 +208,7 @@
                           </div>
 
                   {% endif %}
-                              
+     {% endif %}                          
                </form>
                
 

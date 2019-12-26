@@ -16,7 +16,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = UsuariosForm
 class UsuariosAdmin(admin.ModelAdmin):
         model = Usuarios
-        list_display = ['nombre','apellido','tipo_usuario','estoy_en','plan_tienda_activo','codigoapk','email','fecha_inicio_plan','fecha_final_plan','clave']
+        list_display = ['id_usuario','nombre','apellido','tipo_usuario','estoy_en','plan_tienda_activo','codigoapk','email','fecha_inicio_plan','fecha_final_plan','clave']
         #list_filter=(('plan_tienda_activo',admin.RelatedOnlyFieldListFilter),('tipo_usuario',admin.RelatedOnlyFieldListFilter),)
    
          

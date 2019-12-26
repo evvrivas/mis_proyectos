@@ -53,7 +53,24 @@
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_UNO/' method='post'>
                               {% csrf_token %}                                
-               
+    
+    {% if var == 'MIO' %}
+                         <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;">
+                              
+                              <input type="submit" value="ESTE PRODUCTO ES MIO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" style="font-size:12pt;color:white;background-color:green;border:2px solid #336600;padding:3px">
+                              </center>
+                              
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+
+{% else %}           
                         {% if productos.precio_A > 60 %}
                    <div class="row">              
                           <center>   
@@ -88,7 +105,7 @@
                           </div>
 
                   {% endif %}
-                              
+{% endif %}                              
                </form>
                
 <div class="row"> 
@@ -173,7 +190,23 @@
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_DOS/' method='post'>
                               {% csrf_token %}                                
-               
+   {% if var == 'MIO' %}
+                         <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;">
+                              
+                              <input type="submit" value="ESTE PRODUCTO ES MIO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" style="font-size:12pt;color:white;background-color:green;border:2px solid #336600;padding:3px">
+                              </center>
+                              
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+
+{% else %}                     
                       {% if productos.precio_A > 60 %}
                    <div class="row">              
                           <center>   
@@ -208,7 +241,7 @@
                           </div>
 
                   {% endif %}
-                              
+{% endif %}                              
                </form>
                
 <div class="row"> 
@@ -287,7 +320,23 @@
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_TRES/' method='post'>
                               {% csrf_token %}                                
-               
+  {% if var == 'MIO' %}
+                         <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;">
+                              
+                              <input type="submit" value="ESTE PRODUCTO ES MIO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" style="font-size:12pt;color:white;background-color:green;border:2px solid #336600;padding:3px">
+                              </center>
+                              
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+
+{% else %}                           
                        {% if productos.precio_A > 60 %}
                    <div class="row">              
                           <center>   
@@ -322,7 +371,7 @@
                           </div>
 
                   {% endif %}
-                              
+ {% endif %}                             
                </form>
                
 <div class="row"> 

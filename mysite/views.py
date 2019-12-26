@@ -17,6 +17,10 @@ from django.template import RequestContext, loader
 
 from django.http import HttpResponse
 import datetime
+#from datetime import date
+#from datetime import datetime
+
+
 
 #from books.models import Publisher
 from django.shortcuts import render_to_response
@@ -102,53 +106,53 @@ def info_usuario():
     return cantidad_usuarios, cantidad_tiendas, cantidad_productos,cN_pedido,vN_pedido
 
 
-def cerrado_abierto(id_tienda):     
+def abierto_cerrado(id_tienda):     
      
      tienda=Tiendas.objects.get(pk=id_tienda) 
 
-     fecha = datetime.now()
+     fecha = datetime.datetime.now()
      hora_actual=fecha.hour
      
-     n_del_dia = datetime.weekday(fecha)    
+     n_del_dia = datetime.datetime.weekday(fecha)    
      
 
      if n_del_dia==0:#Lunes
 
         
-              if hora_actual >= tienda.lunes_abrimos and hora_actual < tienda.lunes_cerramos :
+              if hora_actual >= eval(tienda.lunes_abrimos) and hora_actual < eval(tienda.lunes_cerramos) :
                   estado="ABIERTO"
               else:
                   estado= "CERRADO"
         
 
      elif n_del_dia==1:#Martes
-              if hora_actual >= tienda.martes_abrimos and hora_actual < tienda.martes_cerramos :
+              if hora_actual >= eval(tienda.martes_abrimos) and hora_actual < eval(tienda.martes_cerramos) :
                   estado="ABIERTO"
               else:
                   estado= "CERRADO" 
      elif n_del_dia==2:#Miercoles
-              if hora_actual >= tienda.miercoles_abrimos and hora_actual < tienda.miercoles_cerramos :
+              if hora_actual >= eval(tienda.miercoles_abrimos) and hora_actual < eval(tienda.miercoles_cerramos) :
                   estado="ABIERTO"
               else:
                   estado= "CERRADO"
      elif n_del_dia==3:#Jueves
-              if hora_actual >= tienda.jueves_abrimos and hora_actual < tienda.jueves_cerramos :
+              if hora_actual >= eval(tienda.jueves_abrimos) and hora_actual < eval(tienda.jueves_cerramos) :
                   estado="ABIERTO"
               else:
                   estado= "CERRADO"
      elif n_del_dia==4:#Viernes
-              if hora_actual >= tienda.viernes_abrimos and hora_actual < tienda.viernes_cerramos :
+              if hora_actual >= eval(tienda.viernes_abrimos) and hora_actual < eval(tienda.viernes_cerramos) :
                   estado="ABIERTO"
               else:
                   estado= "CERRADO"    
 
      elif n_del_dia==5:#Sabado
-              if hora_actual >= tienda.sabado_abrimos and hora_actual < tienda.sabado_cerramos :
+              if hora_actual >= eval(tienda.sabado_abrimos) and hora_actual < eval(tienda.sabado_cerramos) :
                   estado="ABIERTO"
               else:
                   estado= "CERRADO"
      elif n_del_dia==6:#Domingo
-              if hora_actual >= tienda.domingo_abrimos and hora_actual < tienda.domingo_cerramos :
+              if hora_actual >= eval(tienda.domingo_abrimos) and hora_actual < eval(tienda.domingo_cerramos) :
                   estado="ABIERTO"
               else:
                   estado= "CERRADO"
@@ -400,8 +404,7 @@ def crear_usuario(request):
                                           
                             
                             user = User.objects.create_user(username=whatsapp, password=contra, first_name=nombr ,last_name=apellid)
-                            user.save() 
-                            
+                            user.save()                             
                                                        
                             usuario = form.save(commit=False)
                             usuario.id_usuario = user.username # Set the user object here
@@ -693,6 +696,7 @@ def ver_mis_categorias(request,idusuario,nombretienda,item):
   categoria=categorizar(idusuario,nombretienda)
   
   tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+  estado_de_la_tienda=abierto_cerrado(tiendas.id)
   corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
   if corazon>0:
         corazon="PREFERIDA"
@@ -775,6 +779,7 @@ def busqueda_tienda(request,idusuario,nombretienda):
         
 
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+
         corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
         if corazon>0:
             corazon="PREFERIDA"
@@ -1808,18 +1813,16 @@ def evaluar(request,id_pedido_evaluado,nota_evaluacion):
       
      
 
-      try:     
-            conteo=Evaluacion.objects.filter(id_evaluador=request.user.username,id_evaluado=el_evaluado).count()      
-            if conteo==0:
+         
+      conteo=Evaluacion.objects.filter(id_evaluador=request.user.username,id_evaluado=el_evaluado).count()      
+      if conteo==0:
                   evaluin=Evaluacion(id_evaluador=request.user.username,id_evaluado=el_evaluado,nota=la_nota)
                   evaluin.save()
-            else:
+      else:
                 evaluacion=Evaluacion.objects.filter(id_evaluador=request.user.username,id_evaluado=el_evaluado).first()
                 evaluacion.nota=la_nota
                 evaluacion.save()  
-     
-      except:
-            pass      
+        
 
 
       nota_evaluado=0

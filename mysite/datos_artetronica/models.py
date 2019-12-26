@@ -209,6 +209,7 @@ CLAVES=(
 			('NORMAL', 'NORMAL'),
 			('PEDIDOS', 'PEDIDOS'),
 			('ENLACES', 'ENLACES'),
+			('MIO', 'MIO'),
 
 						
 			)
@@ -262,8 +263,8 @@ class Usuarios(models.Model):
 	     clave=models.CharField(max_length=4)
 	     nombre=models.CharField(max_length=40,blank=True,null=True)
 	     apellido=models.CharField(max_length=40,blank=True,null=True)
-	     image = ImageField(upload_to='tmp',blank=True,null=True)
-	     estoy_en=models.CharField(max_length=30,choices=CIUDADES)
+	     image = ImageField(upload_to='tmp',blank=True)
+	     estoy_en=models.CharField(max_length=30,choices=CIUDADES,blank=True,null=True)
 	     comentario_opcional=models.CharField(max_length=40,blank=True,null=True)
 	     nota_de_evaluacion=models.IntegerField(blank=True,default=10,null=True)
 	     email = models.EmailField(blank=True,null=True)
@@ -293,7 +294,7 @@ class Usuarios(models.Model):
 			     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 		     		except:
 		     			pass
-		     		super(Usuarios,self).save(*args,**kwargs)
+		     	super(Usuarios,self).save(*args,**kwargs)
             
 
 
@@ -456,26 +457,26 @@ class Tiendas(models.Model):
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
 	     codigo=models.CharField(max_length=30,blank=True,null=True)
 
-	     lunes_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     lunes_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     lunes_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="8")
+	     lunes_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="17")
 
-	     martes_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     martes_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     martes_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="8")
+	     martes_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="17")
 
-	     miercoles_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     miercoles_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     miercoles_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="8")
+	     miercoles_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="17")
 
-	     jueves_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     jueves_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     jueves_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="8")
+	     jueves_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="17")
 
-	     viernes_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     viernes_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     viernes_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="8")
+	     viernes_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="17")
 
-	     sabado_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     sabado_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     sabado_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="8")
+	     sabado_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="12")
 
-	     domingo_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     domingo_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     domingo_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="0")
+	     domingo_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="0")
 
 
 
