@@ -101,6 +101,10 @@ def info_usuario():
     connection.close()
     return cantidad_usuarios, cantidad_tiendas, cantidad_productos,cN_pedido,vN_pedido
 
+def cerrado?abierto():
+
+  
+
 
 
 
@@ -723,7 +727,7 @@ def busqueda_tienda(request,idusuario,nombretienda):
         return render(request,'catalogo_tienda.html',locals()) 
 
 @login_required
-def busqueda(request):
+def busqueda(request,bandera):
      categoria=n_categorias()
      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
@@ -735,6 +739,13 @@ def busqueda(request):
         cate_goria= request.POST.get('categoria_busqueda')
         ciudad=request.POST.get('ciudad_busqueda') 
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
+
+        if bandera="COMIDA":
+            palabra=""
+            cate_goria="Alimentos Bebidas"
+            usuario=Usuarios.objects.get(id_usuario=request.user.username)
+            ciudad=usuario.estoy_en
+
         
         if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
             fecha=datetime.datetime.now()
@@ -754,6 +765,10 @@ def busqueda(request):
 
                elif cate_goria!="TODOS" and ciudad=="TODOS":
                    tiendas= Tiendas.objects.filter(categoria=cate_goria)
+               
+               elif cate_goria!="TODOS" and ciudad!="TODOS":
+                   tiendas= Tiendas.objects.filter(categoria=cate_goria,ubicacion=ciudad) 
+
                else:
                   pass    
 
@@ -775,6 +790,11 @@ def busqueda(request):
                     productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
                     tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra))
                     comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra))
+               
+               elif cate_goria!="TODOS" and ciudad!="TODOS":
+                    productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
+                    tiendas= Tiendas.objects.filter(Q(categoria__icontains=palabra) | Q(nombre_tienda__icontains=palabra) | Q(descripcion__icontains=palabra)).filter(ubicacion=ciudad)
+                    comercio= Ccomercial.objects.filter(Q(nombre_ccomercial__icontains=palabra) | Q(descripcion_ccomercial__icontains=palabra)).ubicacion=ciudad       
                else:
                   pass    
      
@@ -1167,8 +1187,10 @@ def descargar(request,idusuario,nombretienda,id_del_producto):
 
                         prod = Productos.objects.get(pk=id_del_producto)
                         clave= request.POST.get("descargar")                                               
-                        
-                        if prod.password_de_recurso==clave:                            
+                        clave_generada=eval(request.user.username)*2
+
+                        #if prod.password_de_recurso==clave:
+                        if clave_generada==clave:                            
                              bandera="CORRECTO"
                         else:
                              
@@ -1205,8 +1227,7 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
     
     el_producto=Productos.objects.get(id=id_del_producto)
 
-    lafecha=datetime.datetime.now()  
-    
+    lafecha=datetime.datetime.now()      
       
     # lafecha = lafecha.strftime("%d/%m/%Y, %H:%M:%S")
     # dd/mm/YY H:M:S format
@@ -1220,11 +1241,14 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
             cant=str(cant)
             cant=eval(cant) 
 
+            precio=str(el_producto.precio_A)
+            precio=eval(precio)
+
 
             if cant>0:
                  
                  try: 
-                    total_x=cant*el_producto.precio_A
+                    total_x=cant*precio
                  except: 
                     total_x=0
                

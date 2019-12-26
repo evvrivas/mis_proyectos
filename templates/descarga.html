@@ -23,7 +23,8 @@
                    
              
               {% if bandera == 'CORRECTO' %}             
-              <h4> <li><a href="{{prod.recurso_de_pago}}">Descargar {{nombre_recurso_de_pago}} </a></li></h4> 
+              <h4> <li><a href="{{prod.recurso_de_pago.url}}">Descargar {{nombre_recurso_de_pago}} </a></li></h4>
+              
               {% else %}       
                <h4> <li>No coincide el codigo de descarga :( </li></h4> 
               {% endif %}

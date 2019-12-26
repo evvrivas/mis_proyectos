@@ -130,7 +130,7 @@ class Productos(models.Model):
 	     nombre_recurso=models.CharField(max_length=40,blank=True)
 	     recurso=models.URLField(blank=True)
 	     nombre_recurso_de_pago=models.CharField(max_length=400,blank=True)
-	     recurso_de_pago=models.CharField(max_length=400,blank=True)
+	     recurso_de_pago=models.FileField(upload_to='tmp',blank=True,null=True)
 	     password_de_recurso=models.CharField(max_length=4,blank=True)	      
 	     nota_de_evaluacion=models.IntegerField(blank=True,default=10)
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
@@ -260,9 +260,9 @@ CIUDADES= (
 class Usuarios(models.Model):
 	     id_usuario=models.CharField(max_length=30)
 	     clave=models.CharField(max_length=4)
-	     nombre=models.CharField(max_length=40)
-	     apellido=models.CharField(max_length=40)
-	     image = ImageField(upload_to='tmp')
+	     nombre=models.CharField(max_length=40,blank=True,null=True)
+	     apellido=models.CharField(max_length=40,blank=True,null=True)
+	     image = ImageField(upload_to='tmp',blank=True,null=True)
 	     estoy_en=models.CharField(max_length=30,choices=CIUDADES)
 	     comentario_opcional=models.CharField(max_length=40,blank=True,null=True)
 	     nota_de_evaluacion=models.IntegerField(blank=True,default=10,null=True)
@@ -395,6 +395,36 @@ class Ccomercial(models.Model):
 		    		return  self.nombre_ccomercial
 	     class Admin:
 		    		list_display = ('nombre_ccomercial')                                                 
+
+
+HORARIO=(
+("0","00:00 Horas"),
+("1","01:00 am"),
+("2","02:00 am"),
+("3","03:00 am"),
+("4","04:00 am"),
+("5","05:00 am"),
+("6","06:00 am"),
+("7","07:00 am"),
+("8","08:00 am"),
+("9","09:00 am"),
+("10","10:00 am"),
+("11","11:00 am"),
+("12","12:00 am"),
+("13","01:00 pm"),
+("14","02:00 pm"),
+("15","03:00 pm"),
+("16","04:00 pm"),
+("17","05:00 pm"),
+("18","06:00 pm"),
+("19","07:00 pm"),
+("20","08:00 pm"),
+("21","09:00 pm"),
+("22","10:00 pm"),
+("23","11:00 pm"),
+("24","12:00 pm"),
+
+ )
   
 class Tiendas(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	  
@@ -425,6 +455,31 @@ class Tiendas(models.Model):
 	     fecha_ingreso = models.DateField(default=datetime.now,editable = False)
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
 	     codigo=models.CharField(max_length=30,blank=True,null=True)
+
+	     lunes_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     lunes_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+
+	     martes_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     martes_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+
+	     miercoles_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     miercoles_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+
+	     jueves_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     jueves_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+
+	     viernes_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     viernes_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+
+	     sabado_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     sabado_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+
+	     domingo_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     domingo_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+
+
+
+
 	     def save(self, *args,**kwargs):
 	     	self.image=self.imagen1
 	     	if self.image:

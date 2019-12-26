@@ -58,7 +58,7 @@ urlpatterns = [
  
     url(r'^ver_categorias/([^/]+)/$', ver_categorias),
     url(r'^ver_categorias_tienda/([^/]+)/([^/]+)/([^/]+)/$', ver_mis_categorias),
-    url(r'^busqueda/$', busqueda),
+    url(r'^busqueda/([^/]+)/$', busqueda),
     url(r'^busqueda_tienda/([^/]+)/([^/]+)/$', busqueda_tienda),
 
     url(r'^editar_pedido/([^/]+)/([^/]+)/(\d+)/$',editar_pedido),
