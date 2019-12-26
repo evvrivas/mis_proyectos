@@ -113,7 +113,7 @@ def cerrado_abierto(id_tienda):
      
 
      if n_del_dia==0:#Lunes
-              
+
         
               if hora_actual >= tienda.lunes_abrimos and hora_actual < tienda.lunes_cerramos :
                   estado="ABIERTO"
@@ -799,7 +799,7 @@ def busqueda(request,bandera):
         ciudad=request.POST.get('ciudad_busqueda') 
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
 
-        if bandera="COMIDA":
+        if bandera=="COMIDA":
             palabra=""
             cate_goria="Alimentos Bebidas"
             usuario=Usuarios.objects.get(id_usuario=request.user.username)
