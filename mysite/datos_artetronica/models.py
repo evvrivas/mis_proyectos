@@ -456,26 +456,26 @@ class Tiendas(models.Model):
 	     ultima_fecha_edicion = models.DateField(default=datetime.now,editable = False)
 	     codigo=models.CharField(max_length=30,blank=True,null=True)
 
-	     lunes_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     lunes_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     lunes_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     lunes_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
 
-	     martes_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     martes_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     martes_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     martes_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
 
-	     miercoles_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     miercoles_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     miercoles_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     miercoles_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
 
-	     jueves_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     jueves_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     jueves_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     jueves_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
 
-	     viernes_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     viernes_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     viernes_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     viernes_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
 
-	     sabado_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     sabado_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     sabado_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     sabado_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
 
-	     domingo_inicio=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
-	     domingo_final=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     domingo_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
+	     domingo_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO)
 
 
 

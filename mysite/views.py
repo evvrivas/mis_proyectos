@@ -101,7 +101,64 @@ def info_usuario():
     connection.close()
     return cantidad_usuarios, cantidad_tiendas, cantidad_productos,cN_pedido,vN_pedido
 
-def cerrado?abierto():
+
+def cerrado_abierto(id_tienda):     
+     
+     tienda=Tiendas.objects.get(pk=id_tienda) 
+
+     fecha = datetime.now()
+     hora_actual=fecha.hour
+     
+     n_del_dia = datetime.weekday(fecha)    
+     
+
+     if n_del_dia==0:#Lunes
+              
+        
+              if hora_actual >= tienda.lunes_abrimos and hora_actual < tienda.lunes_cerramos :
+                  estado="ABIERTO"
+              else:
+                  estado= "CERRADO"
+        
+
+     elif n_del_dia==1:#Martes
+              if hora_actual >= tienda.martes_abrimos and hora_actual < tienda.martes_cerramos :
+                  estado="ABIERTO"
+              else:
+                  estado= "CERRADO" 
+     elif n_del_dia==2:#Miercoles
+              if hora_actual >= tienda.miercoles_abrimos and hora_actual < tienda.miercoles_cerramos :
+                  estado="ABIERTO"
+              else:
+                  estado= "CERRADO"
+     elif n_del_dia==3:#Jueves
+              if hora_actual >= tienda.jueves_abrimos and hora_actual < tienda.jueves_cerramos :
+                  estado="ABIERTO"
+              else:
+                  estado= "CERRADO"
+     elif n_del_dia==4:#Viernes
+              if hora_actual >= tienda.viernes_abrimos and hora_actual < tienda.viernes_cerramos :
+                  estado="ABIERTO"
+              else:
+                  estado= "CERRADO"    
+
+     elif n_del_dia==5:#Sabado
+              if hora_actual >= tienda.sabado_abrimos and hora_actual < tienda.sabado_cerramos :
+                  estado="ABIERTO"
+              else:
+                  estado= "CERRADO"
+     elif n_del_dia==6:#Domingo
+              if hora_actual >= tienda.domingo_abrimos and hora_actual < tienda.domingo_cerramos :
+                  estado="ABIERTO"
+              else:
+                  estado= "CERRADO"
+     return estado
+
+
+
+
+
+
 
   
 
@@ -547,6 +604,8 @@ def mi_tienda(request,idusuario,nombretienda):
 
     tiendas.n_visitas+=1      
     tiendas.save()
+
+    estado_de_la_tienda=abierto_cerrado(tiendas.id)
 
     try:
         corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
