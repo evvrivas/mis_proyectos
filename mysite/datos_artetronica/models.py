@@ -193,10 +193,12 @@ class Buscar(models.Model):
 
 
 PLAN_TIENDA= (
-	        ('GRATIS', 'GRATIS (X PRODUCTOS MAXIMO, NO PUBLICIDAD)'), 
-			('BASICO', 'BASICO (20 productos S30 ANUALES)'),
-			('STANDARD', 'STANDARD (45 productos $50 ANUALES)'),
-			('PREMIUM', 'PREMIUN (100 productos $90 ANUALES)'),	
+	        ('GRATIS', 'GRATIS (3 PRODUCTOS MAXIMO, '), 
+			('BASICO', 'BASICO (10 productos $5X Mes)'),
+			('STANDARD', 'STANDARD (20 productos $10 x Mes'),
+			('PREMIUM', 'PREMIUN (50 productos $25 x Mes)'),
+			('CIEN', 'CIEN PRODUCTOS PRODUCTOS $?'),	
+			('DOCIENTOS', 'DOCIENTOS PRODUCTOS $?'),		
 			('TRECIENTOS', 'TRECIENTOS PRODUCTOS $?'),	
 			('QUINIENTOS', 'QUINIENTOS PRODUCTOS $?'),	
 			('MIL', 'MIL PRODUCTOS $?'),
@@ -680,4 +682,4 @@ class Evaluacion(models.Model):
 	def __str__(self):
 				return  self.id_evaluador
 	class Admin:
-				list_display = ('id_evaluador', 'id_evaluado','nota')
+				list_display = ('id_ uador', 'id_evaluado','nota')

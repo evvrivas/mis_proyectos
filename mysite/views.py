@@ -211,14 +211,18 @@ def crear_producto(request,idusuario,nombretienda):
      usuario=Usuarios.objects.filter(id_usuario=request.user.username).first()
      
      bandera=0
-     if  usuario.plan_tienda_activo=="GRATIS" and cantidad_productos<5:
+     if  usuario.plan_tienda_activo=="GRATIS" and cantidad_productos<3:
             bandera=1
-     elif  usuario.plan_tienda_activo=="BASICO" and cantidad_productos<20:
+     elif  usuario.plan_tienda_activo=="BASICO" and cantidad_productos<10:
             bandera=1
-     elif  usuario.plan_tienda_activo=="STANDARD" and cantidad_productos<50:
+     elif  usuario.plan_tienda_activo=="STANDARD" and cantidad_productos<20:
             bandera=1
-     elif  usuario.plan_tienda_activo=="PREMIUM" and cantidad_productos<100:
-            bandera=1 
+     elif  usuario.plan_tienda_activo=="PREMIUM" and cantidad_productos<30:
+            bandera=1
+     elif  usuario.plan_tienda_activo=="CIEN" and cantidad_productos<100:
+            bandera=1  
+     elif  usuario.plan_tienda_activo=="DOCIENTOS" and cantidad_productos<100:
+            bandera=1  
      elif  usuario.plan_tienda_activo=="TRECIENTOS" and cantidad_productos<300:
             bandera=1 
      elif  usuario.plan_tienda_activo=="QUINIENTOS" and cantidad_productos<500:
