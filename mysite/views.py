@@ -367,7 +367,7 @@ def editar_producto(request,idusuario,nombretienda,acid):
         
         connection.close()
         #return render_to_response('formulario.html', locals(),context_instance=RequestContext(request))
-        return render(request,'entrada_producto.html',locals())   
+        return render(request,'editar_producto.html',locals())   
         
 
 
@@ -1254,17 +1254,23 @@ def descargar(request,idusuario,nombretienda,id_del_producto):
                         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()                  
 
                         prod = Productos.objects.get(pk=id_del_producto)
-                        clave= request.POST.get("descargar")                                               
-                        clave_generada=eval(request.user.username)*2
+                        clave= request.POST.get("descargar")
 
-                        #if prod.password_de_recurso==clave:
-                        if clave_generada==clave:                            
-                             bandera="CORRECTO"
+
+                        password_de_recurso=prod.password_de_recurso
+                        if password_de_recurso=="PAGADO":
+
+                                clave_generada=eval(request.user.username)*2
+
+                                #if prod.password_de_recurso==clave:
+                                if clave_generada==eval(clave):                            
+                                    bandera="CORRECTO"
+                                else:
+                                 
+                                    bandera="INCORRECTO"                 
+                                # Guardar los datos en la base de datos 
                         else:
-                             
-                             bandera="INCORRECTO"                 
-                         # Guardar los datos en la base de datos 
-                        
+                              bandera="CORRECTO"
                         connection.close()
                         return render(request,'descarga.html',locals())                     
 

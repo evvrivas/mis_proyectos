@@ -111,6 +111,13 @@ PLAN_PUBLICIDAD= (
 			('PUBLICIDAD_1','PLAN_SIEMPRE_PRIMERO $15.0/mes'),
 			('PUBLICIDAD_2','PLAN_SIEMPRE_PRIMERO_DIRIGIDO $10.0/mes'),
 			)
+
+PASSWORD= (
+	        ('GRATIS','GRATIS'), 
+			('PAGADO','PAGADO'),
+			
+			)
+
 class Productos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
 	     tienda=models.ForeignKey('Tiendas',blank=True,null=True)
@@ -131,7 +138,7 @@ class Productos(models.Model):
 	     recurso=models.URLField(blank=True)
 	     nombre_recurso_de_pago=models.CharField(max_length=400,blank=True)
 	     recurso_de_pago=models.FileField(upload_to='tmp',blank=True,null=True)
-	     password_de_recurso=models.CharField(max_length=4,blank=True)	      
+	     password_de_recurso=models.CharField(max_length=12,blank=True,choices=PASSWORD,default="GRATIS")	      
 	     nota_de_evaluacion=models.IntegerField(blank=True,default=10)
 	     #estado=  models.CharField(max_length=30,choices=ESTADO) 
 	     precio_de_antes= models.FloatField(default=0,blank=True,null=True)
@@ -434,6 +441,7 @@ class Tiendas(models.Model):
 	     ccomercial=models.ForeignKey('Ccomercial',blank=True,null=True)   
 	     nombre_tienda=models.CharField(max_length=30)
 	     ubicacion=models.CharField(max_length=30,blank=True,choices=CIUDADES)
+	     direccion_fisica=models.CharField(max_length=150,blank=True,null=True,default="Tienda Virtual")
 	     #categoria=models.ForeignKey('Categoria_global',blank=True,null=True)
 	     categoria=models.CharField(max_length=40,blank=True,choices=SUPER_CATEGORIA)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
