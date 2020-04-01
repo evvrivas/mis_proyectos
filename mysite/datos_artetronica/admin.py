@@ -64,7 +64,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = TiendasForm
 class TiendasAdmin(admin.ModelAdmin):
     model = Tiendas
-    list_display = ['id_usuario', 'nombre_tienda','codigoapk','n_visitas','administrador_junior','promocion','plan_publicidad_activo','fecha_inicio_plan','fecha_final_plan','cant_click_whatsapp_acumulados','cant_click_whatsapp','costo_click_whatsapp','cant_click_telefono_acumulados','cant_click_telefono','costo_click_telefono','cant_click_pedidos_nuevos_acumulados','cant_click_pedidos_nuevos','costo_click__pedidos_nuevos','venta_acumulada','venta_actual','porcentaje_venta']
+    list_display = ['id_usuario', 'nombre_tienda','codigoapk','n_visitas','administrador_junior','promocion','plan_publicidad_activo','fecha_inicio_plan','fecha_final_plan','cant_click_whatsapp_acumulados','cant_click_whatsapp','costo_click_whatsapp','cant_click_telefono_acumulados','cant_click_telefono','costo_click_telefono','cant_click_pedidos_nuevos_acumulados','cant_click_pedidos_nuevos','costo_click_pedidos_nuevos','venta_acumulada','venta_actual','porcentaje_venta']
         
 admin.site.register(Tiendas,TiendasAdmin)
 ####################################################
