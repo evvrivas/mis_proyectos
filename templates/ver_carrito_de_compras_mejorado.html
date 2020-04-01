@@ -1,0 +1,1558 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load staticfiles %} 
+{% block content %}
+     
+
+
+      <center>                
+             <ul class="nav nav-pills">                    
+              <li class="active"><a data-toggle="pill" href="#home">Nuevos </a></li>
+              <li><a data-toggle="pill" href="#menu1">En proceso</a></li>
+              <li><a data-toggle="pill" href="#menu2">Finalizados</a></li>
+              <li><a data-toggle="pill" href="#menu3">Todos</a></li>
+                                        
+                  </ul>
+      </center>
+                                    
+  
+
+
+<div class="tab-content">
+
+
+
+
+
+<div id="home" class="tab-pane fade in active"> 
+
+{% for i in carrito_nuevo %}
+
+<div class="row"> 
+<div class="container">
+
+    <div class="alert alert-info">  
+          <p><h4>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h4></p>
+
+          <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}}}} </a></li>
+
+          <li><a href="/ver_el_carrito_de_tienda/{{ i.producto.tienda.id }}">Vendedor: {{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </a></li>
+         
+          <hr>
+
+          <p><h5>{{ cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} {{ i.total }}</h5></p>
+          <p><h5>{{ i.especificacion }}</h5></p>
+          <hr>
+           {% if i.costo_servicio_a_domicilio %}
+ <h6> <p> más  $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> </h6>
+ <h6> <p> contacto {{i.delibery_junior}} ó {{i.delibery}} </p></h6>
+                      
+                  {% else %} 
+                  {% endif %}
+          
+          {% if i.lugar_de_entrega %}
+            <h6><p>Datos de entrega {{i.lugar_de_entrega}} </p></h6>
+            {% else %} 
+         {% endif %} 
+         
+         <hr>
+
+<div class="btn-group">
+
+    <!--######Botones de opciones y cambios######################## -->
+
+<li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a></li>
+
+   
+    {%  if  user.username == i.id_comprador %} 
+
+              
+              {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
+                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <br>                        
+                        <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
+               <br> 
+
+              {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+              {% else %}
+                
+              {% endif %}    
+            
+
+    {% else %}    
+
+    {% endif %}
+
+    
+    {%  if user.username == i.producto.id_usuario %} 
+              
+ 
+              {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
+                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+              {% else %}
+                
+              {% endif %} 
+ {% else %}    
+ {% endif %}
+
+
+    {% if el_usuario_x == "EL_DELIBERY" %}
+
+          {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+              
+
+              {% else %}
+                
+              {% endif %} 
+    {% else %}
+    {% endif %}
+
+
+     {% if el_usuario_x == "EL_FINANCISTA" %}
+                              
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+      {% else %}
+      {% endif %}
+
+       <!--######Finaliza Botones de opciones y cambios######## -->
+   
+       
+       <!--######FBotones de Evaluacion######################## -->
+    
+
+        {% if el_usuario_x == "EL_COMPRADOR" %}
+               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a esta Tienda<span class="caret"></span> </button>
+        {% else %}
+              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a este Cliente<span class="caret"></span> </button>
+                      
+        {% endif %} 
+             
+                 <ul class="dropdown-menu" role="menu">                               
+
+                      <li><a href="/evaluar/{{i.id}}/NO">No lo recomiendo </a></li>
+                      <li><a href="/evaluar/{{i.id}}/TALVES">Tal ves lo recomiendo</a></li>      
+                      <li><a href="/evaluar/{{i.id}}/SI">Si, lo recomiendo</a></li>                                                       
+                                                                                      
+                 </ul>
+        <!--######Fin de Botones de Evaluacion######################## -->
+ 
+<!-- Boton de collapse del info -->
+        <a href="#demo" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
+<!-- fin de boton de collapse del info -->
+
+
+</div><!--buton group  -->
+
+     
+<div id="demo" class="collapse">
+
+
+<!-- ###########inician caritas##################################### -->   
+<center> 
+<table BORDER="0" CELLSPACING="1">
+
+<tr  align="center">
+
+<td WIDTH="80">
+        {% thumbnail i.usuario_car.image "40" crop="center" as im %}
+               <a href="/informacion_comprador/{{i.id_comprador}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+</td>
+
+<td WIDTH="80">
+                                {% if i.nota_comprador < 4 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif i.nota_comprador < 7 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+</td>
+
+<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.id_comprador}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+
+</td>    
+
+ <td WIDTH="80"><a href="tel://+503{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
+ </td>
+                                                                       
+</tr >
+</table>
+</center>
+<!-- #############Fin de caritas ###################################### -->   
+
+
+<!--######Inicia muestra de fotos del producto######################## -->   
+
+ <center>  
+                   
+                      {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Red ">  
+                      {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Orange"> 
+                      {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Green"> 
+                      {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Turquoise"> 
+                      {% else %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Blue">    
+                      {% endif %}  
+                 
+                  
+                  <tr  align="center">                   
+                     
+                 
+                     {% if i.mostrar_foto == 'MOSTRAR_F_UNO' or i.mostrar_foto == 'MOSTRAR_F_TODAS'  %}       
+                     <td>                          
+                       {% thumbnail i.producto.imagen1 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>    
+                     {% endif %} 
+
+                    {% if i.mostrar_foto == 'MOSTRAR_F_DOS' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+
+                    <td >                          
+                       {% thumbnail i.producto.imagen2 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>
+                     {% endif %} 
+
+                     
+                    {% if i.mostrar_foto == 'MOSTRAR_F_TRES' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+     
+                    <td>                           
+                       {% thumbnail i.producto.imagen3 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>   
+                     {% endif %}  
+                    
+ </tr >
+                        </table>
+</center> 
+
+<!--######Finaliza muestra de fotos del producto######################## -->   
+
+<!--######muestra caritas del la tienda######################## -->   
+
+<center> 
+<table BORDER="0" CELLSPACING="1">
+<tr  align="center">
+
+ 
+
+<td WIDTH="80">
+        {% thumbnail i.producto.tienda.imagen1 "40" crop="center" as im %}
+               <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+          
+</td>
+
+
+ <td WIDTH="80">
+                                {% if tiendas.nota_de_evaluacion < 4 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif tiendas.nota_de_evaluacion < 7 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+</td>
+
+<!-- <td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+</td>    
+
+<td WIDTH="80"><a href="tel://+503{{i.producto.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
+</td> -->
+
+ <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+ <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+
+                                    
+                                   
+</tr >
+</table>
+</center> 
+<!--######finaliza muestra caritas del la tienda######################## --> 
+
+
+<!--######Inicio Agregar imagenes de muestra muestra######################## -->
+{% if i.imagen1 %}     
+                       {% thumbnail i.imagen1 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                       
+                        {% endthumbnail %}
+                  {% else %} 
+                  {% endif %}  
+                  
+
+{% if i.imagen2 %}
+                       {% thumbnail i.imagen2 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                         
+                        {% endthumbnail %}
+                 {% else %} 
+                 {% endif %}  
+<!--######Rinaliza Agregar imagenes de muestra muestra######################## -->
+
+ </div><!--collapse  -->
+ </div> <!--alert info  -->
+ </div><!-- container -->
+ </div><!-- row -->
+{% endfor %}
+
+</div> <!-- Home -->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="menu1" class="tab-pane fade">
+{% for i in carrito_proceso %}
+
+<div class="row"> 
+<div class="container">
+
+    <div class="alert alert-success">  
+          <p><h4>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h4></p>
+
+          <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}}}} </a></li>
+
+          <li><a href="/ver_el_carrito_de_tienda/{{ i.producto.tienda.id }}">Vendedor: {{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </a></li>
+         
+          <hr>
+
+          <p><h5>{{ cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} {{ i.total }}</h5></p>
+          <p><h5>{{ i.especificacion }}</h5></p>
+          <hr>
+           {% if i.costo_servicio_a_domicilio %}
+ <h6> <p> más  $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> </h6>
+ <h6> <p> contacto {{i.delibery_junior}} ó {{i.delibery}} </p></h6>
+                      
+                  {% else %} 
+                  {% endif %}
+          
+          {% if i.lugar_de_entrega %}
+            <h6><p>Datos de entrega {{i.lugar_de_entrega}} </p></h6>
+            {% else %} 
+         {% endif %} 
+         
+         <hr>
+
+<div class="btn-group">
+
+    <!--######Botones de opciones y cambios######################## -->
+
+<li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a></li>
+
+   
+    {%  if  user.username == i.id_comprador %} 
+
+              
+              {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
+                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <br>                        
+                        <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
+               <br> 
+
+              {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+              {% else %}
+                
+              {% endif %}    
+            
+
+    {% else %}    
+
+    {% endif %}
+
+    
+    {%  if user.username == i.producto.id_usuario %} 
+              
+ 
+              {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
+                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+              {% else %}
+                
+              {% endif %} 
+ {% else %}    
+ {% endif %}
+
+
+    {% if el_usuario_x == "EL_DELIBERY" %}
+
+          {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+              
+
+              {% else %}
+                
+              {% endif %} 
+    {% else %}
+    {% endif %}
+
+
+     {% if el_usuario_x == "EL_FINANCISTA" %}
+                              
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+      {% else %}
+      {% endif %}
+
+       <!--######Finaliza Botones de opciones y cambios######## -->
+   
+       
+       <!--######FBotones de Evaluacion######################## -->
+    
+
+        {% if el_usuario_x == "EL_COMPRADOR" %}
+               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a esta Tienda<span class="caret"></span> </button>
+        {% else %}
+              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a este Cliente<span class="caret"></span> </button>
+                      
+        {% endif %} 
+             
+                 <ul class="dropdown-menu" role="menu">                               
+
+                      <li><a href="/evaluar/{{i.id}}/NO">No lo recomiendo </a></li>
+                      <li><a href="/evaluar/{{i.id}}/TALVES">Tal ves lo recomiendo</a></li>      
+                      <li><a href="/evaluar/{{i.id}}/SI">Si, lo recomiendo</a></li>                                                       
+                                                                                      
+                 </ul>
+        <!--######Fin de Botones de Evaluacion######################## -->
+ 
+<!-- Boton de collapse del info -->
+        <a href="#demo" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
+<!-- fin de boton de collapse del info -->
+
+
+</div><!--buton group  -->
+
+     
+<div id="demo" class="collapse">
+
+
+<!-- ###########inician caritas##################################### -->   
+<center> 
+<table BORDER="0" CELLSPACING="1">
+
+<tr  align="center">
+
+<td WIDTH="80">
+        {% thumbnail i.usuario_car.image "40" crop="center" as im %}
+               <a href="/informacion_comprador/{{i.id_comprador}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+</td>
+
+<td WIDTH="80">
+                                {% if i.nota_comprador < 4 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif i.nota_comprador < 7 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+</td>
+
+<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.id_comprador}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+
+</td>    
+
+ <td WIDTH="80"><a href="tel://+503{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
+ </td>
+                                                                       
+</tr >
+</table>
+</center>
+<!-- #############Fin de caritas ###################################### -->   
+
+
+<!--######Inicia muestra de fotos del producto######################## -->   
+
+ <center>  
+                   
+                      {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Red ">  
+                      {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Orange"> 
+                      {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Green"> 
+                      {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Turquoise"> 
+                      {% else %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Blue">    
+                      {% endif %}  
+                 
+                  
+                  <tr  align="center">                   
+                     
+                 
+                     {% if i.mostrar_foto == 'MOSTRAR_F_UNO' or i.mostrar_foto == 'MOSTRAR_F_TODAS'  %}       
+                     <td>                          
+                       {% thumbnail i.producto.imagen1 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>    
+                     {% endif %} 
+
+                    {% if i.mostrar_foto == 'MOSTRAR_F_DOS' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+
+                    <td >                          
+                       {% thumbnail i.producto.imagen2 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>
+                     {% endif %} 
+
+                     
+                    {% if i.mostrar_foto == 'MOSTRAR_F_TRES' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+     
+                    <td>                           
+                       {% thumbnail i.producto.imagen3 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>   
+                     {% endif %}  
+                    
+ </tr >
+                        </table>
+</center> 
+
+<!--######Finaliza muestra de fotos del producto######################## -->   
+
+<!--######muestra caritas del la tienda######################## -->   
+
+<center> 
+<table BORDER="0" CELLSPACING="1">
+<tr  align="center">
+
+ 
+
+<td WIDTH="80">
+        {% thumbnail i.producto.tienda.imagen1 "40" crop="center" as im %}
+               <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+          
+</td>
+
+
+ <td WIDTH="80">
+                                {% if tiendas.nota_de_evaluacion < 4 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif tiendas.nota_de_evaluacion < 7 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+</td>
+
+<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+</td>    
+
+<td WIDTH="80"><a href="tel://+503{{i.producto.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
+</td>
+                                    
+                                   
+</tr >
+</table>
+</center> 
+<!--######finaliza muestra caritas del la tienda######################## --> 
+
+
+<!--######Inicio Agregar imagenes de muestra muestra######################## -->
+{% if i.imagen1 %}     
+                       {% thumbnail i.imagen1 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                       
+                        {% endthumbnail %}
+                  {% else %} 
+                  {% endif %}  
+                  
+
+{% if i.imagen2 %}
+                       {% thumbnail i.imagen2 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                         
+                        {% endthumbnail %}
+                 {% else %} 
+                 {% endif %}  
+<!--######Rinaliza Agregar imagenes de muestra muestra######################## -->
+
+ </div><!--collapse  -->
+ </div> <!--alert info  -->
+ </div><!-- container -->
+ </div><!-- row -->
+{% endfor %}
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="menu2" class="tab-pane fade">
+{% for i in carrito_finalizado %}
+
+<div class="row"> 
+<div class="container">
+
+    <div class="alert alert-danger">  
+          <p><h4>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h4></p>
+
+          <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}}}} </a></li>
+
+          <li><a href="/ver_el_carrito_de_tienda/{{ i.producto.tienda.id }}">Vendedor: {{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </a></li>
+         
+          <hr>
+
+          <p><h5>{{ cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} {{ i.total }}</h5></p>
+          <p><h5>{{ i.especificacion }}</h5></p>
+          <hr>
+           {% if i.costo_servicio_a_domicilio %}
+ <h6> <p> más  $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> </h6>
+ <h6> <p> contacto {{i.delibery_junior}} ó {{i.delibery}} </p></h6>
+                      
+                  {% else %} 
+                  {% endif %}
+          
+          {% if i.lugar_de_entrega %}
+            <h6><p>Datos de entrega {{i.lugar_de_entrega}} </p></h6>
+            {% else %} 
+         {% endif %} 
+         
+         <hr>
+
+<div class="btn-group">
+
+    <!--######Botones de opciones y cambios######################## -->
+
+<li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a></li>
+
+   
+    {%  if  user.username == i.id_comprador %} 
+
+              
+              {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
+                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <br>                        
+                        <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
+               <br> 
+
+              {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+              {% else %}
+                
+              {% endif %}    
+            
+
+    {% else %}    
+
+    {% endif %}
+
+    
+    {%  if user.username == i.producto.id_usuario %} 
+              
+ 
+              {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
+                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+              {% else %}
+                
+              {% endif %} 
+ {% else %}    
+ {% endif %}
+
+
+    {% if el_usuario_x == "EL_DELIBERY" %}
+
+          {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+              
+
+              {% else %}
+                
+              {% endif %} 
+    {% else %}
+    {% endif %}
+
+
+     {% if el_usuario_x == "EL_FINANCISTA" %}
+                              
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+      {% else %}
+      {% endif %}
+
+       <!--######Finaliza Botones de opciones y cambios######## -->
+   
+       
+       <!--######FBotones de Evaluacion######################## -->
+    
+
+        {% if el_usuario_x == "EL_COMPRADOR" %}
+               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a esta Tienda<span class="caret"></span> </button>
+        {% else %}
+              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a este Cliente<span class="caret"></span> </button>
+                      
+        {% endif %} 
+             
+                 <ul class="dropdown-menu" role="menu">                               
+
+                      <li><a href="/evaluar/{{i.id}}/NO">No lo recomiendo </a></li>
+                      <li><a href="/evaluar/{{i.id}}/TALVES">Tal ves lo recomiendo</a></li>      
+                      <li><a href="/evaluar/{{i.id}}/SI">Si, lo recomiendo</a></li>                                                       
+                                                                                      
+                 </ul>
+        <!--######Fin de Botones de Evaluacion######################## -->
+ 
+<!-- Boton de collapse del info -->
+        <a href="#demo" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
+<!-- fin de boton de collapse del info -->
+
+
+</div><!--buton group  -->
+
+     
+<div id="demo" class="collapse">
+
+
+<!-- ###########inician caritas##################################### -->   
+<center> 
+<table BORDER="0" CELLSPACING="1">
+
+<tr  align="center">
+
+<td WIDTH="80">
+        {% thumbnail i.usuario_car.image "40" crop="center" as im %}
+               <a href="/informacion_comprador/{{i.id_comprador}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+</td>
+
+<td WIDTH="80">
+                                {% if i.nota_comprador < 4 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif i.nota_comprador < 7 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+</td>
+
+<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.id_comprador}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+
+</td>    
+
+ <td WIDTH="80"><a href="tel://+503{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
+ </td>
+                                                                       
+</tr >
+</table>
+</center>
+<!-- #############Fin de caritas ###################################### -->   
+
+
+<!--######Inicia muestra de fotos del producto######################## -->   
+
+ <center>  
+                   
+                      {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Red ">  
+                      {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Orange"> 
+                      {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Green"> 
+                      {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Turquoise"> 
+                      {% else %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Blue">    
+                      {% endif %}  
+                 
+                  
+                  <tr  align="center">                   
+                     
+                 
+                     {% if i.mostrar_foto == 'MOSTRAR_F_UNO' or i.mostrar_foto == 'MOSTRAR_F_TODAS'  %}       
+                     <td>                          
+                       {% thumbnail i.producto.imagen1 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>    
+                     {% endif %} 
+
+                    {% if i.mostrar_foto == 'MOSTRAR_F_DOS' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+
+                    <td >                          
+                       {% thumbnail i.producto.imagen2 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>
+                     {% endif %} 
+
+                     
+                    {% if i.mostrar_foto == 'MOSTRAR_F_TRES' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+     
+                    <td>                           
+                       {% thumbnail i.producto.imagen3 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>   
+                     {% endif %}  
+                    
+ </tr >
+                        </table>
+</center> 
+
+<!--######Finaliza muestra de fotos del producto######################## -->   
+
+<!--######muestra caritas del la tienda######################## -->   
+
+<center> 
+<table BORDER="0" CELLSPACING="1">
+<tr  align="center">
+
+ 
+
+<td WIDTH="80">
+        {% thumbnail i.producto.tienda.imagen1 "40" crop="center" as im %}
+               <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+          
+</td>
+
+
+ <td WIDTH="80">
+                                {% if tiendas.nota_de_evaluacion < 4 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif tiendas.nota_de_evaluacion < 7 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+</td>
+
+<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+</td>    
+
+<td WIDTH="80"><a href="tel://+503{{i.producto.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
+</td>
+                                    
+                                   
+</tr >
+</table>
+</center> 
+<!--######finaliza muestra caritas del la tienda######################## --> 
+
+
+<!--######Inicio Agregar imagenes de muestra muestra######################## -->
+{% if i.imagen1 %}     
+                       {% thumbnail i.imagen1 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                       
+                        {% endthumbnail %}
+                  {% else %} 
+                  {% endif %}  
+                  
+
+{% if i.imagen2 %}
+                       {% thumbnail i.imagen2 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                         
+                        {% endthumbnail %}
+                 {% else %} 
+                 {% endif %}  
+<!--######Rinaliza Agregar imagenes de muestra muestra######################## -->
+
+ </div><!--collapse  -->
+ </div> <!--alert info  -->
+ </div><!-- container -->
+ </div><!-- row -->
+{% endfor %}
+
+</div>
+
+
+
+<div id="menu3" class="tab-pane fade">
+
+{% for i in carrito_finalizado %}
+
+<div class="row"> 
+<div class="container">
+
+    <div class="alert alert-success">  
+          <p><h4>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h4></p>
+
+          <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}}}} </a></li>
+
+          <li><a href="/ver_el_carrito_de_tienda/{{ i.producto.tienda.id }}">Vendedor: {{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </a></li>
+         
+          <hr>
+
+          <p><h5>{{ cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} {{ i.total }}</h5></p>
+          <p><h5>{{ i.especificacion }}</h5></p>
+          <hr>
+           {% if i.costo_servicio_a_domicilio %}
+ <h6> <p> más  $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> </h6>
+ <h6> <p> contacto {{i.delibery_junior}} ó {{i.delibery}} </p></h6>
+                      
+                  {% else %} 
+                  {% endif %}
+          
+          {% if i.lugar_de_entrega %}
+            <h6><p>Datos de entrega {{i.lugar_de_entrega}} </p></h6>
+            {% else %} 
+         {% endif %} 
+         
+         <hr>
+
+<div class="btn-group">
+
+    <!--######Botones de opciones y cambios######################## -->
+
+<li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a></li>
+
+   
+    {%  if  user.username == i.id_comprador %} 
+
+              
+              {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
+                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <br>                        
+                        <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
+               <br> 
+
+              {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+              {% else %}
+                
+              {% endif %}    
+            
+
+    {% else %}    
+
+    {% endif %}
+
+    
+    {%  if user.username == i.producto.id_usuario %} 
+              
+ 
+              {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
+                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+              {% else %}
+                
+              {% endif %} 
+ {% else %}    
+ {% endif %}
+
+
+    {% if el_usuario_x == "EL_DELIBERY" %}
+
+          {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+              
+
+              {% else %}
+                
+              {% endif %} 
+    {% else %}
+    {% endif %}
+
+
+     {% if el_usuario_x == "EL_FINANCISTA" %}
+                              
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+      {% else %}
+      {% endif %}
+
+       <!--######Finaliza Botones de opciones y cambios######## -->
+   
+       
+       <!--######FBotones de Evaluacion######################## -->
+    
+
+        {% if el_usuario_x == "EL_COMPRADOR" %}
+               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a esta Tienda<span class="caret"></span> </button>
+        {% else %}
+              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a este Cliente<span class="caret"></span> </button>
+                      
+        {% endif %} 
+             
+                 <ul class="dropdown-menu" role="menu">                               
+
+                      <li><a href="/evaluar/{{i.id}}/NO">No lo recomiendo </a></li>
+                      <li><a href="/evaluar/{{i.id}}/TALVES">Tal ves lo recomiendo</a></li>      
+                      <li><a href="/evaluar/{{i.id}}/SI">Si, lo recomiendo</a></li>                                                       
+                                                                                      
+                 </ul>
+        <!--######Fin de Botones de Evaluacion######################## -->
+ 
+<!-- Boton de collapse del info -->
+        <a href="#demo" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
+<!-- fin de boton de collapse del info -->
+
+
+</div><!--buton group  -->
+
+     
+<div id="demo" class="collapse">
+
+
+<!-- ###########inician caritas##################################### -->   
+<center> 
+<table BORDER="0" CELLSPACING="1">
+
+<tr  align="center">
+
+<td WIDTH="80">
+        {% thumbnail i.usuario_car.image "40" crop="center" as im %}
+               <a href="/informacion_comprador/{{i.id_comprador}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+</td>
+
+<td WIDTH="80">
+                                {% if i.nota_comprador < 4 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif i.nota_comprador < 7 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+</td>
+
+<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.id_comprador}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+
+</td>    
+
+ <td WIDTH="80"><a href="tel://+503{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
+ </td>
+                                                                       
+</tr >
+</table>
+</center>
+<!-- #############Fin de caritas ###################################### -->   
+
+
+<!--######Inicia muestra de fotos del producto######################## -->   
+
+ <center>  
+                   
+                      {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Red ">  
+                      {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Orange"> 
+                      {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Green"> 
+                      {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Turquoise"> 
+                      {% else %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Blue">    
+                      {% endif %}  
+                 
+                  
+                  <tr  align="center">                   
+                     
+                 
+                     {% if i.mostrar_foto == 'MOSTRAR_F_UNO' or i.mostrar_foto == 'MOSTRAR_F_TODAS'  %}       
+                     <td>                          
+                       {% thumbnail i.producto.imagen1 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>    
+                     {% endif %} 
+
+                    {% if i.mostrar_foto == 'MOSTRAR_F_DOS' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+
+                    <td >                          
+                       {% thumbnail i.producto.imagen2 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>
+                     {% endif %} 
+
+                     
+                    {% if i.mostrar_foto == 'MOSTRAR_F_TRES' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+     
+                    <td>                           
+                       {% thumbnail i.producto.imagen3 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>   
+                     {% endif %}  
+                    
+ </tr >
+                        </table>
+</center> 
+
+<!--######Finaliza muestra de fotos del producto######################## -->   
+
+<!--######muestra caritas del la tienda######################## -->   
+
+<center> 
+<table BORDER="0" CELLSPACING="1">
+<tr  align="center">
+
+ 
+
+<td WIDTH="80">
+        {% thumbnail i.producto.tienda.imagen1 "40" crop="center" as im %}
+               <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+          
+</td>
+
+
+ <td WIDTH="80">
+                                {% if tiendas.nota_de_evaluacion < 4 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif tiendas.nota_de_evaluacion < 7 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+</td>
+
+<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+</td>    
+
+<td WIDTH="80"><a href="tel://+503{{i.producto.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
+</td>
+                                    
+                                   
+</tr >
+</table>
+</center> 
+<!--######finaliza muestra caritas del la tienda######################## --> 
+
+
+<!--######Inicio Agregar imagenes de muestra muestra######################## -->
+{% if i.imagen1 %}     
+                       {% thumbnail i.imagen1 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                       
+                        {% endthumbnail %}
+                  {% else %} 
+                  {% endif %}  
+                  
+
+{% if i.imagen2 %}
+                       {% thumbnail i.imagen2 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                         
+                        {% endthumbnail %}
+                 {% else %} 
+                 {% endif %}  
+<!--######Rinaliza Agregar imagenes de muestra muestra######################## -->
+
+ </div><!--collapse  -->
+ </div> <!--alert info  -->
+ </div><!-- container -->
+ </div><!-- row -->
+{% endfor %}
+
+
+
+
+</div>
+
+
+
+
+<div id="menu2" class="tab-pane fade">
+{% for i in carrito_proceso %}
+
+<div class="row"> 
+<div class="container">
+
+    <div class="alert alert-info">  
+          <p><h4>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h4></p>
+
+          <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}}}} </a></li>
+
+          <li><a href="/ver_el_carrito_de_tienda/{{ i.producto.tienda.id }}">Vendedor: {{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </a></li>
+         
+          <hr>
+
+          <p><h5>{{ cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} {{ i.total }}</h5></p>
+          <p><h5>{{ i.especificacion }}</h5></p>
+          <hr>
+           {% if i.costo_servicio_a_domicilio %}
+ <h6> <p> más  $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> </h6>
+ <h6> <p> contacto {{i.delibery_junior}} ó {{i.delibery}} </p></h6>
+                      
+                  {% else %} 
+                  {% endif %}
+          
+          {% if i.lugar_de_entrega %}
+            <h6><p>Datos de entrega {{i.lugar_de_entrega}} </p></h6>
+            {% else %} 
+         {% endif %} 
+         
+         <hr>
+
+<div class="btn-group">
+
+    <!--######Botones de opciones y cambios######################## -->
+
+<li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a></li>
+
+   
+    {%  if  user.username == i.id_comprador %} 
+
+              
+              {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
+                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <br>                        
+                        <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
+               <br> 
+
+              {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+              {% else %}
+                
+              {% endif %}    
+            
+
+    {% else %}    
+
+    {% endif %}
+
+    
+    {%  if user.username == i.producto.id_usuario %} 
+              
+ 
+              {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
+                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+              {% else %}
+                
+              {% endif %} 
+ {% else %}    
+ {% endif %}
+
+
+    {% if el_usuario_x == "EL_DELIBERY" %}
+
+          {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
+                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+              
+
+              {% else %}
+                
+              {% endif %} 
+    {% else %}
+    {% endif %}
+
+
+     {% if el_usuario_x == "EL_FINANCISTA" %}
+                              
+                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+      {% else %}
+      {% endif %}
+
+       <!--######Finaliza Botones de opciones y cambios######## -->
+   
+       
+       <!--######FBotones de Evaluacion######################## -->
+    
+
+        {% if el_usuario_x == "EL_COMPRADOR" %}
+               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a esta Tienda<span class="caret"></span> </button>
+        {% else %}
+              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a este Cliente<span class="caret"></span> </button>
+                      
+        {% endif %} 
+             
+                 <ul class="dropdown-menu" role="menu">                               
+
+                      <li><a href="/evaluar/{{i.id}}/NO">No lo recomiendo </a></li>
+                      <li><a href="/evaluar/{{i.id}}/TALVES">Tal ves lo recomiendo</a></li>      
+                      <li><a href="/evaluar/{{i.id}}/SI">Si, lo recomiendo</a></li>                                                       
+                                                                                      
+                 </ul>
+        <!--######Fin de Botones de Evaluacion######################## -->
+ 
+<!-- Boton de collapse del info -->
+        <a href="#demo" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
+<!-- fin de boton de collapse del info -->
+
+
+</div><!--buton group  -->
+
+     
+<div id="demo" class="collapse">
+
+
+<!-- ###########inician caritas##################################### -->   
+<center> 
+<table BORDER="0" CELLSPACING="1">
+
+<tr  align="center">
+
+<td WIDTH="80">
+        {% thumbnail i.usuario_car.image "40" crop="center" as im %}
+               <a href="/informacion_comprador/{{i.id_comprador}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+</td>
+
+<td WIDTH="80">
+                                {% if i.nota_comprador < 4 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif i.nota_comprador < 7 %}
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_comprador/{{i.id_comprador}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+</td>
+
+<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.id_comprador}}&text=Detodo_negocio_Hola%2C%20deseo%20informacion%20de%20{{i.producto.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+
+</td>    
+
+ <td WIDTH="80"><a href="tel://+503{{i.id_comprador}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
+ </td>
+                                                                       
+</tr >
+</table>
+</center>
+<!-- #############Fin de caritas ###################################### -->   
+
+
+<!--######Inicia muestra de fotos del producto######################## -->   
+
+ <center>  
+                   
+                      {% if i.estado_prod == 'QUIERO_PEDIR_ESTO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Red ">  
+                      {% elif i.estado_prod == 'EL_VENDEDOR_RECIBIO_EL_PEDIDO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Orange"> 
+                      {% elif i.estado_prod == 'EL_VENDEDOR_A_CONFIRMADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Green"> 
+                      {% elif i.estado_prod == 'PRODUCTO_ENTREGADO' %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Turquoise"> 
+                      {% else %}
+                            <table BORDER="3" CELLSPACING="5"  bordercolor="Blue">    
+                      {% endif %}  
+                 
+                  
+                  <tr  align="center">                   
+                     
+                 
+                     {% if i.mostrar_foto == 'MOSTRAR_F_UNO' or i.mostrar_foto == 'MOSTRAR_F_TODAS'  %}       
+                     <td>                          
+                       {% thumbnail i.producto.imagen1 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>    
+                     {% endif %} 
+
+                    {% if i.mostrar_foto == 'MOSTRAR_F_DOS' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+
+                    <td >                          
+                       {% thumbnail i.producto.imagen2 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>
+                     {% endif %} 
+
+                     
+                    {% if i.mostrar_foto == 'MOSTRAR_F_TRES' or i.mostrar_foto == 'MOSTRAR_F_TODAS' %}
+     
+                    <td>                           
+                       {% thumbnail i.producto.imagen3 "90" crop="center" as im %}
+                                   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">     
+                                               
+                      {% endthumbnail %}
+                    </td>   
+                     {% endif %}  
+                    
+ </tr >
+                        </table>
+</center> 
+
+<!--######Finaliza muestra de fotos del producto######################## -->   
+
+<!--######muestra caritas del la tienda######################## -->   
+
+<center> 
+<table BORDER="0" CELLSPACING="1">
+<tr  align="center">
+
+ 
+
+<td WIDTH="80">
+        {% thumbnail i.producto.tienda.imagen1 "40" crop="center" as im %}
+               <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle"></a> 
+        {% endthumbnail %} 
+          
+</td>
+
+
+ <td WIDTH="80">
+                                {% if tiendas.nota_de_evaluacion < 4 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
+
+      {% elif tiendas.nota_de_evaluacion < 7 %}
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
+      {% else %}
+
+          <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
+      {% endif %}
+
+</td>
+
+<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+</td>    
+
+<td WIDTH="80"><a href="tel://+503{{i.producto.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
+</td>
+                                    
+                                   
+</tr >
+</table>
+</center> 
+<!--######finaliza muestra caritas del la tienda######################## --> 
+
+
+<!--######Inicio Agregar imagenes de muestra muestra######################## -->
+{% if i.imagen1 %}     
+                       {% thumbnail i.imagen1 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                       
+                        {% endthumbnail %}
+                  {% else %} 
+                  {% endif %}  
+                  
+
+{% if i.imagen2 %}
+                       {% thumbnail i.imagen2 "360" crop="center" as im %}
+                       <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="responsive"> </a>                         
+                        {% endthumbnail %}
+                 {% else %} 
+                 {% endif %}  
+<!--######Rinaliza Agregar imagenes de muestra muestra######################## -->
+
+ </div><!--collapse  -->
+ </div> <!--alert info  -->
+ </div><!-- container -->
+ </div><!-- row -->
+{% endfor %}
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<div class="row">  
+          <div class="col-md-12">           
+                <div class="container">
+                <p>Puede especificar si quiere servicio a domicilio, lugar y fecha de entrega, ademas puede agregar imagenes a su pedido, Haga click sobre el boton editar y complete el pedido, posteriormente le aparecera el costo del envio.</p>
+
+                <p>Al precionar el boton de comprar El propietario de esta tienda recibira un mensaje con informacion de su pedido,
+                el contactara con usted para ultimar detalles sobre el producto o servicio, forma y lugar de pago y entrga.</p>
+                                        
+                </div>
+          </div> 
+</div>
+
+   
+
+                  
+                                 
+
+                    
+                
+                           
+                              
+ 
+
+{% endblock %}

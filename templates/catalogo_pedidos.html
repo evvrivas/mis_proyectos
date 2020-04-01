@@ -1,0 +1,106 @@
+{% extends "base_tienda.html" %}
+{% load thumbnail %}
+{% load staticfiles %} 
+{% block content %}
+          
+     <div class="row">   
+          {% for j in pedidos %}                
+
+           <div class="col-md-12">   
+                <div class="thumbnail">
+                       
+                  <div class="col-md-6"> 
+                       <br>
+                       <p>{{j.tipo_prenda}}</p>
+                       <br>
+                       <h4><center> cliente: {{j.nombre}} contacto:{{j.contacto}}  ESTADO: {{j.estado}}
+
+                       <form action='/cambiar_estado_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}/' method='post'>
+                        {% csrf_token %}                                             
+                        <input type="submit" value="editar estado"  />                       
+                       </form>
+                       </center></h4> 
+                       <br>
+
+                      <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>     
+                        
+
+                                   {% thumbnail j.imagen1 "200" crop="center" as im %}
+                                    <td ><a href="/carrusel_pedidos/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  </td>                        
+                                    {% endthumbnail %}
+                                
+                                <center><table>
+
+                                <tr>
+                                    {% thumbnail j.imagen2 "100" crop="center" as im %}
+                                    <td><a href="/carrusel_pedidos/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td> 
+                                     {% endthumbnail %}
+
+                                     {% thumbnail j.imagen3 "100" crop="center" as im %}
+                                    <td><a href="/carrusel_pedidos/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> </td>
+                                    {% endthumbnail %}                                       
+                               
+                                </tr >
+                          </table></center> 
+
+
+
+
+
+
+
+
+                  </div>
+                  <div class="col-md-6"> 
+                       <br>
+                       <p>Descripcion {{j.descripcion | linebreaks}}</p> 
+                       <br>
+                       <p>P/Unitarios {{j.precios_unitarios}}</p>
+
+                       <p>P/Total {{j.total}} Anticipo {{j.anticipo}}</p>                       
+                        <br>
+                        <p>FECHA DE ENCARGO {{j.fecha_ingreso}}</p>
+
+                        <p>FECHA DE ENTREGA {{j.fecha_de_entrega}}</p> 
+                        <br>
+
+                        <p>Tela1: cantidad {{j.cant_tela_1}} yds {{j.tipo_tela_1}} color {{j.color_tela_1}} </p>
+                        <p>Tela2: cantidad {{j.cant_tela_2}} yds {{j.tipo_tela_2}} color {{j.color_tela_2}} </p>
+                        <p>Tela3: cantidad {{j.cant_tela_3}} yds {{j.tipo_tela_3}} color {{j.color_tela_3}} </p> 
+                   
+                   
+                                                                  
+                           <li><a href="/editar_pedido/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li>  
+
+                          
+                           <div class="row"> 
+                  <center>
+                 <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="tel://+503{{j.id_usuario}}"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                    
+                                   
+                                </tr >
+                        </table>
+                        </center>
+                 
+
+            </div>
+                                                                                                            
+           </div>
+                       
+            </div>            
+                
+            
+
+
+
+
+           {% endfor %}  
+
+       </div>
+                
+
+{% endblock %}

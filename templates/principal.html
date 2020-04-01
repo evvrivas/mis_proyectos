@@ -114,8 +114,12 @@
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Detodonegocio_Hola%2C%20deseo%20informacion%20de%20{{j.nombre_tienda}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
-                                    <td WIDTH="90"><a href="tel://+{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                   <!--  <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone={{j.id_usuario}}&text=Detodonegocio_Hola%2C%20deseo%20informacion%20de%20{{j.nombre_tienda}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="90"><a href="tel://+{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td> -->
+
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                     
                                     
                                    
                                 </tr >
@@ -190,7 +194,7 @@
 
  
 <center> <h6> {{j.estado_prod}} </h6> </center>
- <h4><center>  {{j.nombre}}  </center></h4> 
+ <h4><center> {{j.precio_A}} {{j.nombre}}  </center></h4> 
              
              {%  if j.precio_de_antes %}  
                    <center><strike>Antes $ {{j.precio_de_antes}}</strike></center>
@@ -279,9 +283,11 @@
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
-                                    <td WIDTH="90"><a href="tel://+503{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    
+                                   <!--  <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="90"><a href="tel://+503{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td> -->
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                     
                                     
                                 </tr >
                         </table>
@@ -381,9 +387,13 @@
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Hola%2C%20deseo%20informacion%20de%20{{j.nombre_tienda}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                  <!--   <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Hola%2C%20deseo%20informacion%20de%20{{j.nombre_tienda}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
                                     <td WIDTH="90"><a href="tel://+503{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    
+                                    --> 
+
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                     
                                    
                                 </tr >
                         </table>
@@ -529,9 +539,13 @@
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Detodonegocio_Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                   <!--  <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Detodonegocio_Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
                                     <td WIDTH="90"><a href="tel://+503{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    
+                                     -->
+
+                                     <td WIDTH="60"><a href="/comunicacion_tienda/{{j.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                     
                                    
                         </table>
                         </center>    
@@ -593,9 +607,13 @@
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Hola%2C%20deseo%20informacion%20de%20{{j.nombre_tienda}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                   <!--  <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Hola%2C%20deseo%20informacion%20de%20{{j.nombre_tienda}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
                                     <td WIDTH="90"><a href="tel://+503{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    
+                                    --> 
+
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                     
                                    
                                 </tr >
                         </table>
@@ -731,9 +749,13 @@
                         <table BORDER="0" CELLSPACING="1">
                                 <tr  align="center">
 
-                                    <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Detodonegocio_Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <!-- <td WIDTH="90"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=Detodonegocio_Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
                                     <td WIDTH="90"><a href="tel://+503{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
-                                    
+                                     -->
+
+                                     <td WIDTH="60"><a href="/comunicacion_tienda/{{j.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                     
                                    
                                 </tr >
                         </table>

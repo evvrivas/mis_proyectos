@@ -1,0 +1,111 @@
+{% extends "base_tienda.html" %}
+
+{% load staticfiles %} 
+{% block content %}
+         
+       
+
+ <div class="col-md-12">
+                <div class="thumbnail"> 
+                                                  
+                      <div class="caption">
+                               <h4><center>DATOS DE PRODUCTO</center></h4>     
+                      </div>   
+
+                      <form action="." method="post" enctype="multipart/form-data" > 
+                            {% csrf_token%}
+                            <p>Crear categoria {{ formCateg.as_p }} </p> 
+                            <input type="submit" value="crear categoria"  />                       
+                      </form>
+                      <br>
+                      <p>--------------------------------- </p>  
+                      <br>
+                      <form action="." method="post" enctype="multipart/form-data" > 
+                       {% csrf_token%}
+
+                     
+                     <p>categoria {{ form.categoria }}  </p>       
+                                         
+                     <p>cantidad {{ form.cantidad }} </p>  
+                     <p>nombre {{ form.nombre }}  </p>   
+
+                     <p>imagen1 {{ form.imagen1 }} </p> 
+                     <p>imagen2 {{ form.imagen2 }} </p> 
+                     <p>imagen3 {{ form.imagen3 }} </p>                
+                     
+                     <p>descripcion {{ form.descripcion }} </p> 
+
+                     {% ifequal var 'ENLACES' %}
+                             
+                               <p>Enlace al video {{ form.video_insercion }} </p>      
+                               <br> 
+                               <p>Nombre del enlace {{ form.nombre_recurso }} </p>
+                               <p>Enlace {{ form.recurso }} </p> 
+
+                                <br>    
+                               <p>Nombre del enlace de pago {{ form.nombre_recurso_de_pago }} </p>
+                               <p>Enlace de pago {{ form.recurso_de_pago }} </p> 
+                               <p>Paswor de descarga{{ form.password_de_recurso }} </p> 
+
+                    
+                     {% endifequal %}
+                      <p>precio anterior {{ form.precio_de_antes }} </p> 
+                      <p>precio venta {{ form.precio_A }} </p>
+                      <p>precio Reventa {{ form.precio_B }} </p>            
+                      <p>Estado de producto {{ form.estado_prod }} </p>                                        
+                     <br> 
+
+                     <p>Publicidad a este producto {{ form.plan_publicidad }} </p> 
+                     <br>          
+
+
+
+                     <input type="submit" value="GUARDAR"  />                       
+                         </form>
+                                
+                </div> 
+
+
+   </div>
+
+        
+ 
+
+       
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+
+         
+          
+
+
+
+
+
+
+
+ 

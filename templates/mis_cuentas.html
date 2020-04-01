@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+{% load staticfiles %} 
+
+    
+
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>CUENTAS DEL USUARIO </center></h2>             
+      </div>
+
+    <div class="panel-body">
+            
+
+
+                <div class="thumbnail"> 
+         {% thumbnail usuario.image "200" crop="center" as im %}
+               <a href="" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"  class="img-circle"></a> 
+        {% endthumbnail %} 
+
+
+       <p>Nombre del vendedor:{{administrador.nombre}} {{administrador.apellido}}</p>
+       <p>Telefono/Whatsapp: {{administrador.id_usuario}}</p>
+       <p>email: {{administrador.email}} </p>
+       <p>Ciudad: {{administrador.estoy_en}}</p>
+       
+       <p>es miembro desde: {{administrador.fecha_ingreso}} </p> 
+       <br> 
+       
+<br>
+<p>El esta evaluado con esta NOTA: {{usuario.nota_de_evaluacion}} </p> 
+
+       <br>      
+ <p> ERES EL ADMINISTRADOR DE ESTAS TIENDAS </p>
+       {%  for j in tiendas_del_administrador %}
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}</a></li>
+<br>                        
+                        <br>
+                        {% thumbnail j.imagen1 "75" crop="center" as im %}
+                        <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>                  
+                        {% endthumbnail %}
+
+                        
+        
+       <p> Click WatsApp :Total:{{ j.cant_click_whatsapp_acumulados }} total P. {{ j.cant_click_whatsapp }} $ {{ j.costo_click_whatsapp }}</p>
+        
+       <br>
+       <p>  Click Telefono: cant: {{j.cant_click_telefono_acumulados}} Total p.{{ j.cant_click_telefono }} $ {{ j.costo_click_telefono }}</p>
+          
+       <br>
+       <p>  Click quiero eso: cant: {{j.cant_click_pedidos_nuevos_acumulados }} {{ j.cant_click_pedidos_nuevos }}  ${{ j.costo_click_pedidos_nuevos }}</p>        
+      <br>
+
+       <p>  Ventas acumuladas: ${{ j.venta_acumulada }}
+       <p>  Venta Actual  : $ {{ j.venta_actual }}
+       <p>  Porcentaje de Cobro X Venta: % {{ j.porcentaje_venta }}
+       <h>
+        <br>
+        {%  endfor %} 
+
+
+                </div>
+  
+  </div>
+  </div>
+
+                
+
+{% endblock %}
+

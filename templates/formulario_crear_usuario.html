@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block content %}
+{% load staticfiles %} 
+         
+       
+   
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>entrada usuario </center></h2>
+
+             
+      </div>
+
+    <div class="panel-body">
+
+            <div class="row">
+          
+
+ <div class="col-md-12">
+                <div class="thumbnail"> 
+                                                  
+                      <div class="caption">
+                               <h4><center>DATOS DE USUARIO</center></h4>     
+                      </div>                         
+                                                                      
+
+                                       <form action="." method="post" enctype="multipart/form-data"> 
+                                      {% csrf_token%}
+                                       <table> 
+
+                                        <center><p>Registrate con tu numero de telefono o WhtasApp mas una contraña de 4 caracteres </p> </center>
+                                        <br>
+
+                                        <center><p>Es muy importante que sean datos reales</p> </center>
+
+                                        <br>
+                                         
+                                          <p>#WhatsApp +(503){{ form.id_usuario }} </p> 
+                                          <p>Contraseña(4 Numeros) {{ form.clave }}  </p>
+                                          <p>Ciudad de interes {{ form.estoy_en }}  </p>
+                                          <br>   
+                                          <center><p>Estos datos no son obligatorios, puedes llenarlos despues, </p> </center>
+                                          
+                                          <p>Nombres   {{ form.nombre }} </p>
+                                          <p>Apellidos   {{ form.apellido }} </p>
+                                          <p>Foto   {{ form.image }} </p>
+                                          
+                                          <br>   
+                                          <center><p>Agrega un comentario*, o simplementa dejalo en blanco</p> </center>
+                                          <br>   
+                                          <p>Un comentario (Opcional) {{ form.comentario_opcional }}  </p>                                       
+                                       
+                                           <p><input type="submit" value="Registrarme para ver y comprar" style="font-size:12pt;color:white;background-color:green;border:2px solid #336600;padding:3px"></p>
+
+
+                                           <center><p>Si quieres Vender, ponte en contacto con DETODONEGOCIO o sus administtradores </p></center>
+<!--
+                                           <br>
+                                        <p>Llena todos los campos si quieres vender tus productos y servicios aqui.</p>
+
+                                        <br>
+                                         
+                                          <p>correo electronico {{ form.email }}  </p>
+                                          <p>cuenta de mesenger {{ form.facedireccion }}  </p>
+                                          <p>Pais y ciudad  {{ form.pais }}  </p>
+
+                                          <br>
+                                          <center><p>Datos Bancarios para tecibir pago  </p></center>
+                                          
+                                          <p>Banco {{ form.nombre_del_banco }}</p>
+                                          <p>Cuenta {{ form.numero_cuenta }} </p>
+                                           <br>
+                                          <p>Todos los datos deben de ser reales, recuerda que de ello depende el exito en los negocios.</p>
+
+
+                                                                                                           
+                                      <br>
+                                       </table>
+                                      <p><input type="submit" value="QUIERO VENDER TAMBIEN"></p>
+                                     -->
+
+                                      </form> 
+                                      
+      
+      
+      
+      
+       
+       
+      
+                                   
+                                                             
+                     <br>               
+
+                                          
+                        
+                </div> 
+
+
+   </div>
+
+            </div>
+
+       </div>
+  </div>
+
+ 
+</form>
+       
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+
+         
+          
+
+
+
+
+
+
+
+  {{ form.as_p }}

@@ -1,0 +1,389 @@
+{% extends "base_tienda.html" %}
+{% load thumbnail %}
+{% load staticfiles %} 
+{% block content %}  
+
+
+ <div class="row">  
+
+        <div class="alert alert-danger">
+                  
+         <a href="/cambiar_tipo_de_vista/{{tiendas.id}}" class="alert-link"> Cambiar la vista , Tienes  {{tiendas.n_visitas}} visitas, La tienda esta <font color="red">{{estado_de_la_tienda}} a esta hora</font></a>       
+         <br>
+                
+                <center> <h5><p>{{tiendas.promocion}}</p></h5> </center>
+        
+    
+      <h6> {{ productos.0.categoria.descripcion | linebreaks }} </h6>   
+ {% for j in productos %} 
+
+      {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior  and user.username != j.tienda.administrador_junior_1 and user.username != j.tienda.administrador_junior_2 %}
+
+{% else %}
+
+           <div class="col-md-3">   
+                <div class="thumbnail">
+                      
+ 
+      
+                       <center> <h6> {{j.estado_prod}} </h6> </center>
+                  <h4><center>  {{j.nombre}}  </center></h4> 
+                   
+                   {% if j.precio_de_antes %}  
+                           <center><strike>Antes $ {{j.precio_de_antes}}</strike></center>
+                   {% endif %}
+
+                       <center> 
+                        <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                <td>
+            
+            {%  if j.precio_B %}
+                          <button type="button" class="btn btn-success">
+                           $ <span class="badge badge-light">{{j.precio_B}}</span>
+                          </button>
+             {% else %}
+                    
+                    {%  if j.precio_A %}
+                          <button type="button" class="btn btn-primary">
+                           $ <span class="badge badge-light">{{j.precio_A}}</span>
+                          </button>
+                    {% endif %}
+
+
+             {% endif %}
+
+                                    </td> 
+                                    <td >
+                                       {%  if j.cantidad %}  
+                            <button type="button" class="btn btn-danger">
+    Cant. <span class="badge badge-light">{{j.cantidad}}</span>
+                                       {% endif %}
+                                   
+                                    </td>                                    
+                                    
+                                </tr >
+                        </table>
+                        </center>  
+                        
+                         <p>{{j.descripcion | linebreaks}}</p>  
+
+                          {% ifequal var 'ENLACES' %}
+                                    
+                               {% if j.video_insercion %}
+                               <center><iframe width="210" height="150" src={{j.video_insercion}} frameborder="0" allowfullscreen></iframe></center>
+                               <br>
+                               {% endif %}
+
+                               {% if j.recurso %}                         
+                                 <center><a href={{j.recurso}}>{{j.nombre_recurso}} </a></center>
+                               {% endif  %} 
+                               
+                                {% if j.recurso_de_pago %}                         
+                                <form action='/descargar/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/' method='post'>
+                              {% csrf_token %}                                
+                              <label for="username">{{j.nombre_recurso_de_pago}}</label>
+                              <input type="text" name="descargar" value="1" id="descargar" size="2">                    
+                              <input type="submit" value="Descargar " class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" />                               
+                             
+                                                  
+
+                       </form>  
+
+                               {% endif  %} 
+
+
+
+                          {% endifequal %}
+
+
+
+
+                         
+                           <div class="row">    
+
+                         <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
+                           
+                           <tr  align="center">  
+                                  <td colspan="2">
+
+                                    {% thumbnail j.imagen1 "360" crop="center" as im %}
+                                    <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>                         
+                                    {% endthumbnail %}
+
+                                     </td>
+                                
+                          </tr >   
+               
+                 
+
+                          <tr>
+                                 <td > 
+                                    {% thumbnail j.imagen2 "180" crop="center" as im %}
+                                    <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a>  
+                                     {% endthumbnail %}
+
+                                  </td > 
+
+                                  <td >    
+
+                                     {% thumbnail j.imagen3 "180" crop="center" as im %}
+                                    <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
+                                    {% endthumbnail %}  
+
+                                  </td >                                      
+                               
+                            </tr >
+                          </table></center>                    
+                  
+                  </div>
+
+
+                          <br>
+                       
+                       
+             
+                              
+                           
+               <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
+                              {% csrf_token %}                                
+               
+
+    {% if var == 'MIO' %}
+                         <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;">
+                              
+                              <input type="submit" value="ESTE PRODUCTO ES MIO + $0.99 Delibery" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" style="font-size:12pt;color:white;background-color:green;border:2px solid #336600;padding:3px">
+                              </center>
+                              
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+
+    {% else %}
+
+
+
+
+
+
+             {% if j.precio_A > 60 %}
+                   <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;">
+                              
+                              <input type="submit" value="ME INTERESA HABLAR SOBRE ESTO" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                              </center>
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+             
+
+
+              {% else %}
+               
+             
+
+                       <div class="row">              
+                              <center>   
+                              <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
+                              <input type="submit" value="QUIERO COMPRAR + $0.99 Delibery" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+                              </center>
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
+                          </center>
+                          </div>
+
+                  {% endif %}
+     {% endif %}                          
+               </form>
+               
+
+           <!--     <H6><p><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO/EL_COMPRADOR">Ver Mi pedido</a> </p> </H6>  -->
+
+
+
+
+
+                      <div class="modal fade" id="myModal" role="dialog">
+                          <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Hola</h4>
+                              </div>
+                              <div class="modal-body">
+                                <p>Producto agregado a la lista</p>
+                              </div>
+                              <div class="modal-footer">
+                             <!--   <button type="button" class="btn btn-default" data-dismiss="modal">Ok.</button>-->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                
+                             
+                             
+                            
+
+                              
+                              
+                 <div class="row"> 
+                 <center>
+                 <table BORDER="0" CELLSPACING="1">
+                                <tr  align="center">
+
+                                 
+                                <td WIDTH="60"><a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">  <img src ='{% static "carrito.png" %}' alt='img' > </a> 
+
+                                 <!--    <td WIDTH="60"><a href="https://api.whatsapp.com/send?phone=+503{{j.id_usuario}}&text=detodonegocio_Hola%2C%20deseo%20informacion%20de%20{{j.nombre}}" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="tel://+503{{j.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                  -->   
+                                  <td WIDTH="60"><a href="/comunicacion_tienda/{{j.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+                                    <td WIDTH="60"><a href="/comunicacion_tienda/{{j.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+                                       
+
+
+                                </tr >
+                        </table>
+                        </center>
+                        <br>
+                 </div>
+
+<!--
+      <form action="/enviar_mensaje/{{j.id}}/" method="post">
+                                     {% csrf_token %}
+
+      <center>          
+        <textarea name="comentario" placeholder="tienes preguntas o comentarios?" style="width:200px; height:45px;"></textarea>
+
+        <input type="submit" value="enviar mensaje" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
+
+        </center>
+        </form>
+
+        <H6><p><a href="/ver_mis_mensajes/TODOS/EL_COMPRADOR">Ver respuestas</a> </p> </H6>
+-->
+
+
+ {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior  or user.is_authenticated and user.username == tiendas.administrador_junior_1 or user.is_authenticated and user.username == tiendas.administrador_junior_2 %}     
+
+
+                   {%  if user.is_authenticated and user.username == tiendas.id_usuario or user.is_authenticated and user.username == tiendas.administrador_junior  %} 
+                           <center> 
+                             <li><a href="/editar_producto/{{user.username}}/{{tiendas.nombre_tienda}}/{{j.id}}">editar</a></li> 
+                   {% endif %}  
+
+                
+                <div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle"
+          data-toggle="dropdown">{{j.estado_prod}}  <span class="caret"></span>
+  </button>
+ 
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/EN_EXISTENCIA/">EN_EXISTENCIA</a></li>
+    <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/EN_PRODUCCION/">EN_PRODUCCION</a></li>
+    <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/SOLO_POR_ENCARGO/">SOLO_POR_ENCARGO</a></li>
+    <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/AGOTADO/">AGOTADO</a></li>
+    <li><a href="/cambiar_estado_producto/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{j.id}}/VENDIDO/">VENDIDO</a></li>
+  </ul>
+</div>
+
+                  </center>  
+
+
+                      {% endif %}     
+                      <p>Ingreso el {{j.fecha_ingreso}}</p>                                                                     
+                 </div>
+            </div>            
+        <hr>
+       
+
+    {% endif %}             
+ {% endfor %}  
+    
+
+</div>
+     
+
+
+
+
+
+<div class="row">  
+<div class="col-md-12">  
+                                      
+  
+        <div class="dropup">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">VER MAS PRODUCTOS
+          <span class="caret"></span></button>
+          
+          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
+        
+        {%  for i in categoria %}
+          <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i}}">{{i}}</a></li>
+        {%  endfor %} 
+          </ul>
+        </div>
+          
+</div>
+</div>
+
+
+
+</div>   <!--   ESTE LO AGREE PARA COLOR DE FONDO -->
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+
+         
+          
+
+
+
+
+
+
+
+ 

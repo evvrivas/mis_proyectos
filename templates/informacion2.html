@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+{% load staticfiles %} 
+
+    
+
+<div class="panel panel-info">
+      <div class="panel-heading">
+        <h2 class="panel-title"><center>INFORMACION DE INTERES </center></h2>             
+      </div>
+
+    <div class="panel-body">
+            <div class="row">
+
+             <div class="col-md-3">
+                <div class="thumbnail"> 
+                  <center> <a href=".">  <img src ='{% static "logo.gif" %}' alt='img' > </a> </center>    
+                                           
+                  <div class="caption">
+
+
+                    <h4><center>DETODO</center></h4>   
+                    
+                  </div>                     
+                  <p>XGANGAS es una plataforma desarrollada para que comerciantes, profesionales vendedores y compradores puedan realizar sus transacciones comerciales, proporcionandole al vendedor un espacio virtual para mostrar sus productos y servicios de manera ordenada y al comprador una herramienta para realizar la mejor compra. Las posibilidades son infinitas. Aprovecha y disfruta de esta plataforma</p>
+                  
+                  <br>
+                  <p>COMO FUNCIONA</p>
+                  <br>
+                  
+                  <p>Hay que registrarse utilizando datos personales reales y tu numero de Whatsapp ademas de una contraseña de 4 digitos, con esto ya puedes crear tiendas y subir productos y/o servicios (Plan Gratuito 5 productos maximo).<p>
+                  <br>
+
+                   <p>Si el plan gratuito (5 productos maximo) no es suficiente para ti, puedes adquirir el plan que mas se adecue a tus nesecidades.</p>
+                  
+                  <p>los planes disponibles son </p>
+                  <br>
+                  <ol>Plan Gratuito 5 productos por $0 Anuales </ol>
+                  <ol>Plan Básico 20 productos por $30 Anuales </ol>
+                  <ol>Plan Profesional 50 productos por $75 Anuales </ol>
+                  <ol>Plan Premium 100 productos por $125 Anuales </ol>           
+                  <br>
+                  <p>Hacemos uso de inteligencia artificial para que  tu tienda y tus productos sean vistos por personas que realmente estan interesados en ellos.</p>                  
+
+                  <br>
+                </div>
+            </div>
+
+<div class="col-md-3">
+                <div class="thumbnail"> 
+                         <h4><center>Contratar un plan de Tienda Virtual</center></h4>               
+                  <div class="caption">
+                   <br>               
+                   <p>Estos son los planes disponibles.</p>
+                   <br>
+                  
+                  <center><a href=""><img src='{% static "planes.gif" %}' alt='img' ></a>    </center>  
+
+                  <p>BENEFICIOS DE CONTRATAR UN PLAN</p>
+                  <br>
+                  <ol>
+                  <li>Tienda/Catalogo online de tus productos/servicios</li>
+                  <li>compartir por medio de redes sociales</li>
+                  <li>Carrito de compras</li>
+                  <li>Publicidad con inteligencia artificial</li>
+                  <li>Publicidad Permanente en medios tradicionales</li>
+                  <li>Adecuar el sistema a tus necesidades</li>
+                  <li>Informate sobre mas posibilidades para tu negocio</li>
+
+                  </ol> 
+
+                  <br>  
+                   {%  if user.is_authenticated %}              
+                  
+                       <li><a href="/editar_usuario/{{user.id}}">Actualizar/cambiar Plan </a></li> 
+                         <br>
+                   {%  else  %}  
+
+                       <li><a href="/accounts/login">Entrar </a></li>
+                        <br>
+                       <li><a href="/crear_usuario">Crear una cuenta</a></li>  
+                        <br>  
+                   {% endif %}                                                             
+                       
+
+                </div>
+            </div>
+</div>
+
+<div class="col-md-3">
+                <div class="thumbnail"> 
+                <a href=""><img src='{% static "garantia.jpg" %}' alt='img'></a>   
+                                             
+                  <div class="caption">
+                    <h4><center>COMO PAGAR</center></h4>     
+                  </div> 
+                  <br>    
+                   <ol>
+                      <li> envia un mensaje de WhatsApp al 503 78218224 o envia u correo a evvrivas@gmail.com, ahi te explicaremos las diferenetes formas de pago. </li>
+                       <li> Deposito Bancario</li>
+                       <li> Tigo Money</li>
+                       <li> Etc</li>
+                                   
+                    </ol>
+                                        
+                                  
+                </div>
+            </div>
+
+
+
+
+
+<div class="col-md-3">
+                <div class="thumbnail"> 
+                <a href=""><img src='{% static "garantia.jpg" %}' alt='img'></a>   
+                                             
+                  <div class="caption">
+                    <h4><center>Responsabilidad y garantía</center></h4>     
+                  </div>     
+                   <br>  
+                   <p>Esta es una aplicacion que esta en constante evolucion, si por algun inconveniente el sistema falla, te solucionaremos..., Bajo ninguna circunstancia devolvemos DINERO</p> 
+                   <br>             
+                   <p>Garantizamos que tus productos estaran siempre listos y disponibles para que los compradores puedan adquirirlos </p>
+                      <br>
+                     <p>Es responsabilidad de los ususarios el tipo de productos/servicios y transacciones que realizan con nuestra plataforma.</p>
+                  <br>
+                   
+                                  
+                </div>
+            </div>
+        
+
+
+
+
+
+
+
+
+
+        </div>
+  </div>
+  </div>
+        
+
+{% endblock %}

@@ -1,0 +1,423 @@
+{% extends "base_tienda.html" %}
+{% load thumbnail %}
+{% load staticfiles %} 
+{% block content %}  
+
+
+
+ <div class="row">  
+
+
+
+     <div class="alert alert-danger">
+                  
+         <a href="/cambiar_tipo_de_vista/{{tiendas.id}}" class="alert-link"> Cambiar vista O>--, Tienes  {{tiendas.n_visitas}} visitas, La tienda esta <font color="red">{{estado_de_la_tienda}} a esta hora</font> </a>
+         <br>
+                
+                <center> <h4><p>{{tiendas.promocion}}</p></h4> </center>
+        
+    
+      <h6> {{ productos.0.categoria.descripcion | linebreaks }} </h6>   
+ {% for j in productos %} 
+
+      {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior and user.username != j.tienda.administrador_junior_1 and user.username != j.tienda.administrador_junior_2 %}
+
+{% else %}
+
+      
+
+
+
+{% if j.imagen1 %}
+<div class="thumbnail">
+
+   <center><table BORDER="0" CELLSPACING="2" > 
+
+            <tr  align="center">     
+
+                  <td WIDTH="400">
+                       
+                                            
+                      <div class="row">     
+                          {% thumbnail j.imagen1 "400x75" crop="center" as im %}   
+                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                           {% endthumbnail %}
+                      </div>                                 
+                              
+                                   
+                  </td> 
+             </tr>      
+             
+             <tr  align="center"> 
+
+                  <td WIDTH="400">   
+
+                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_UNO/' method='post'>
+                              {% csrf_token %}                                
+               
+
+                              <div class="row">              
+                                      <center>   
+                                    
+                             <div class="row"> 
+                          <h3><center> {{j.nombre}}  </center></h3>
+                       </div>
+
+
+{% if var == 'MIO' %}
+                         <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;">
+                              
+                              <input type="submit" value="ESTE PRODUCTO ES MIO + $0.99 Delibery " class="btn btn-info" data-toggle="modal" data-target="#myModal" style="font-size:12pt;color:white;background-color:green;border:2px solid #336600;padding:3px">
+                              </center>
+                              
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+
+{% else %}
+
+                                {% if j.precio_A  and j.precio_A < 60  %}
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
+                                     <input type="submit" value="p/u $ {{ j.precio_A }} QUIERO COMPRAR + $0.99 Delibery" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+
+
+
+                                <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
+                                    </center>
+                                </div>
+                               
+
+
+
+                                {% else %}
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1" style="width:0px; height:0px;">
+                                       <input type="submit" value="ME INTERESA ESTO" class="btn btn-info " data-toggle="modal" data-target="#myModal">
+
+                                  <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" value="Comuniquense para hablar sobre el tema"  style="width:0px; height:0px;"></textarea> 
+                                    </center>
+                                </div> 
+                                  
+                                {% endif %}
+
+     {% endif %}                           
+                                      </center>
+                                </div>
+                          
+                              
+                              
+               </form>
+       </td>  
+
+                              
+   </table>
+ </center>          
+                                     
+</div>                                          
+                                     
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+{% if j.imagen2 %}
+<div class="thumbnail">
+
+   <center><table BORDER="0" CELLSPACING="2" > 
+
+            <tr  align="center">     
+
+                  <td WIDTH="400">
+                       
+                                            
+                      <div class="row">     
+                          {% thumbnail j.imagen1 "400x75" crop="center" as im %}   
+                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                           {% endthumbnail %}
+                      </div>                                 
+                              
+                                   
+                  </td> 
+             </tr>      
+             
+             <tr  align="center"> 
+
+                  <td WIDTH="400">   
+
+                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_UNO/' method='post'>
+                              {% csrf_token %}                                
+               
+
+                              <div class="row">              
+                                      <center>   
+                                    
+                             <div class="row"> 
+                          <h3><center> {{j.nombre}}  </center></h3>
+                       </div>
+
+
+{% if var == 'MIO' %}
+                         <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;">
+                              
+                              <input type="submit" value="ESTE PRODUCTO ES MIO + $0.99 Delibery " class="btn btn-info " data-toggle="modal" data-target="#myModal" style="font-size:12pt;color:white;background-color:green;border:2px solid #336600;padding:3px">
+                              </center>
+                              
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+
+{% else %}
+
+                                {% if j.precio_A  and j.precio_A < 60  %}
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
+                                     <input type="submit" value="p/u $ {{ j.precio_A }} QUIERO COMPRAR + $0.99 Delibery" class="btn btn-info " data-toggle="modal" data-target="#myModal">
+
+
+
+                                <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
+                                    </center>
+                                </div>
+                               
+
+
+
+                                {% else %}
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1" style="width:0px; height:0px;">
+                                       <input type="submit" value="ME INTERESA ESTO" class="btn btn-info " data-toggle="modal" data-target="#myModal">
+
+                                  <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" value="Comuniquense para hablar sobre el tema"  style="width:0px; height:0px;"></textarea> 
+                                    </center>
+                                </div> 
+                                  
+                                {% endif %}
+
+     {% endif %}                           
+                                      </center>
+                                </div>
+                          
+                              
+                              
+               </form>
+       </td>  
+
+                              
+   </table>
+ </center>          
+                                     
+</div>                                          
+                                     
+{% endif %}
+
+
+
+
+
+{% if j.imagen3 %}
+<div class="thumbnail">
+
+   <center><table BORDER="0" CELLSPACING="2" > 
+
+            <tr  align="center">     
+
+                  <td WIDTH="400">
+                       
+                                            
+                      <div class="row">     
+                          {% thumbnail j.imagen1 "400x75" crop="center" as im %}   
+                               <a href="/carrusel/{{j.id}}/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}" target="_self"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+                           {% endthumbnail %}
+                      </div>                                 
+                              
+                                   
+                  </td> 
+             </tr>      
+             
+             <tr  align="center"> 
+
+                  <td WIDTH="400">   
+
+                        <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_UNO/' method='post'>
+                              {% csrf_token %}                                
+               
+
+                              <div class="row">              
+                                      <center>   
+                                    
+                             <div class="row"> 
+                          <h3><center> {{j.nombre}}  </center></h3>
+                       </div>
+
+
+{% if var == 'MIO' %}
+                         <div class="row">              
+                          <center>   
+                             <input type="text" name="cant"  id="cant" size="0" placeholder="cant" value="1" style="width:0px; height:0px;">
+                              
+                              <input type="submit" value="ESTE PRODUCTO ES MIO + $0.99 Delibery " class="btn btn-info " data-toggle="modal" data-target="#myModal" style="font-size:12pt;color:white;background-color:green;border:2px solid #336600;padding:3px">
+                              </center>
+                              
+                            </div>
+                          
+                          <div class="row">  
+                          <center>                            
+                              <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:0px; height:0px;" value="Comuniquense para hablar sobre el tema"></textarea> 
+                          </center>
+                          </div>
+
+{% else %}
+
+                                {% if j.precio_A  and j.precio_A < 60  %}
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
+                                     <input type="submit" value="p/u $ {{ j.precio_A }} QUIERO COMPRAR + $0.99 Delibery" class="btn btn-info " data-toggle="modal" data-target="#myModal">
+
+
+
+                                <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" style="width:200px; height:45px;"></textarea> 
+                                    </center>
+                                </div>
+                               
+
+
+
+                                {% else %}
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1" style="width:0px; height:0px;">
+                                       <input type="submit" value="ME INTERESA ESTO" class="btn btn-info " data-toggle="modal" data-target="#myModal">
+
+                                  <div class="row">  
+                                    <center>                            
+                                        <textarea name="especificacion" placeholder="Especifica como lo quieres?" id="especificacion" value="Comuniquense para hablar sobre el tema"  style="width:0px; height:0px;"></textarea> 
+                                    </center>
+                                </div> 
+                                  
+                                {% endif %}
+
+     {% endif %}                           
+                                      </center>
+                                </div>
+                          
+                              
+                              
+               </form>
+       </td>  
+
+                              
+   </table>
+ </center>          
+                                     
+</div>                                          
+                                     
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            
+                                     
+                               
+          
+
+<div class="modal fade" id="myModal" role="dialog">
+                          <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Hola</h4>
+                              </div>
+                              <div class="modal-body">
+                                <p>Producto agregado a la lista</p>
+                              </div>
+                              <div class="modal-footer">
+                             <!--   <button type="button" class="btn btn-default" data-dismiss="modal">Ok.</button>-->
+                              </div>
+                            </div>
+                          </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    {% endif %}   
+     <hr>          
+ {% endfor %}  
+    
+
+</div>
+     
+
+
+<div class="row">  
+<div class="col-md-12">  
+                                      
+  
+        <div class="dropup">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">VER MAS PRODUCTOS
+          <span class="caret"></span></button>
+          
+          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
+        
+        {%  for i in categoria %}
+          <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i}}">{{i}}</a></li>
+        {%  endfor %} 
+          </ul>
+        </div>
+          
+</div>
+</div>
+
+
+</div>
+
+
+
+{% endblock %}
+

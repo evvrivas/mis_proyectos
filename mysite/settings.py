@@ -244,5 +244,3 @@ EMAIL_USE_TLS = True
 
 
 LOGIN_REDIRECT_URL = '/' #Or whatever you wish
-
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
