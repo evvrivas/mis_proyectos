@@ -296,7 +296,7 @@ class Usuarios(models.Model):
 	     costo_click_pedidos_nuevos=models.FloatField(blank=True,null=True,default=0.35)
 	     venta_acumulada=models.FloatField(blank=True,null=True,default=0.0)
 	     venta_actual=models.FloatField(blank=True,null=True,default=0.0)
-	     porcentaje_venta=models..FloatField(blank=True,null=True,default=0.1)
+	     porcentaje_venta=models.FloatField(blank=True,null=True,default=0.1)
 
 	     
 	     def save(self, *args,**kwargs):
