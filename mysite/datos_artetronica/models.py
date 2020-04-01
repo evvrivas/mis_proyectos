@@ -284,7 +284,6 @@ class Usuarios(models.Model):
 	     tipo_usuario=models.CharField(max_length=30,choices=TIPO_USUARIO,blank=True,default="EL_COMPRADOR",null=True)
 	     tipo_vista=models.IntegerField(blank=True,default=0,null=True)
 	     codigo=models.CharField(max_length=30,blank=True,null=True)
-
 	     cant_click_whatsapp_acumulados=models.IntegerField(blank=True,null=True,default=0)
 	     cant_click_whatsapp=models.IntegerField(blank=True,null=True,default=0)
 	     costo_click_whatsapp=models.FloatField(blank=True,null=True,default=0.1)
@@ -494,8 +493,7 @@ class Tiendas(models.Model):
 
 	     domingo_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="0")
 	     domingo_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="0")
-         
-         cant_click_whatsapp_acumulados=models.IntegerField(blank=True,null=True,default=0)
+	     cant_click_whatsapp_acumulados=models.IntegerField(blank=True,null=True,default=0)
          cant_click_whatsapp=models.IntegerField(blank=True,null=True,default=0)
          costo_click_whatsapp=models.FloatField(blank=True,null=True,default=0.1)
          cant_click_telefono_acumulados=models.IntegerField(blank=True,null=True,default=0)
