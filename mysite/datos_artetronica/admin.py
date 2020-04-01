@@ -33,7 +33,7 @@ class ProductosAdmin(admin.ModelAdmin):
                 return instance.tienda.nombre_tienda
 admin.site.register(Productos,ProductosAdmin)
 ####################################################
-         ,'venta_acumulada','venta_actual','porcentaje_venta'
+       
    
 ####################################################
 class RulesAdmin(admin.ModelAdmin):
