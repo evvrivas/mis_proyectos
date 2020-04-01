@@ -2199,12 +2199,12 @@ def mis_cuentas(request):
      try:
         tiendas_del_administrador=Tiendas.objects.filter(id_usuario=request.user.username)
      except:
-        pass:
+        pass
 
      try:
        tiendas_del_administrador_jr=Tiendas.objects.filter(administrador_jr=request.user.username)
      except:
-        pass:
+        pass
      
 
      return render(request,'mis_cuentas.html',locals())
