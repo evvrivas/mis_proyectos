@@ -27,7 +27,7 @@ class RulesAdmin(admin.ModelAdmin):
     form = ProductosForm
 class ProductosAdmin(admin.ModelAdmin):
         model = Productos
-        list_display = ['id_usuario','tienda_nombre','cantidad', 'nombre','precio_A','precio_B','estado_prod','plan_publicidad_activo','fecha_inicio_plan','fecha_final_plan','venta_acumulada','venta_actual','porcentaje_venta']
+        list_display = ['id_usuario','tienda_nombre','cantidad', 'nombre','precio_A','precio_B','estado_prod','plan_publicidad_activo','fecha_inicio_plan','fecha_final_plan']
         list_filter=(('tienda',admin.RelatedOnlyFieldListFilter),('categoria',admin.RelatedOnlyFieldListFilter),)
         def tienda_nombre(self,instance):
                 return instance.tienda.nombre_tienda
