@@ -1300,7 +1300,8 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
     nombretienda=tiendas.nombre_tienda      
     categoria=categorizar(idusuario,nombretienda)     
     var=tiendas.codigoapk   
-    administrador_tienda=Usuario.objects.get(id_usuario=id_dela_tienda)
+
+    administrador_tienda=Usuarios.objects.get(id_usuario=tiendas.administrador_junior)
       
     
     
@@ -1454,7 +1455,7 @@ def ver_el_carrito_de_tienda(request,id_tienda_de_compra):
 
 
       if el_usuario_x=="EL_COMPRADOR":  
-            if request.user.username==id_persona_compra:              
+            if request.user.username==id_tienda_de_compra:              
                   carrito_nuevo= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO'))
                   carrito_proceso= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO'))
                   carrito_finalizado= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra).filter(estado_prod='PRODUCTO_RECIBIDO_YA')
@@ -1740,23 +1741,19 @@ def realizar_compra(request):
         i.producto.tienda.venta_actual=b
         i.save()
 
-        administrador_tienda=Usuarios.objects.gets(id_usuario=i.producto.tienda.id_usuario)
+        administrador_tienda=Usuarios.objects.get(id_usuario=i.producto.tienda.id_usuario)
         a=administrador_tienda.venta_acumulada
         b=administrador_tienda.venta_actual
         
         a=a+i.total
         b=b+i.total
 
-        i.administrador_tienda.venta_acumulada=a
-        i.administrador_tienda.venta_actual=b
-        i.save()
+        administrador_tienda.venta_acumulada=a
+        administrador_tienda.venta_actual=b
+        administrador_tienda.save()
 
 
-
-        "venta_acumulada","venta_actual","porcentaje_venta"
-
-
-
+      
 
 
      return render(request,'confirmar_compra.html',locals())   
@@ -1782,16 +1779,16 @@ def realizar_compra_individual(request,id_producto):
      carrito.producto.tienda.venta_actual=b
      carrito.save()
 
-     administrador_tienda=Usuarios.objects.gets(id_usuario=carrito.producto.tienda.id_usuario)
+     administrador_tienda=Usuarios.objects.get(id_usuario=carrito.producto.tienda.id_usuario)
      a=administrador_tienda.venta_acumulada
      b=administrador_tienda.venta_actual
         
      a=a+carrito.total
      b=b+carrito.total
 
-     carrito.administrador_tienda.venta_acumulada=a
-     carrito.administrador_tienda.venta_actual=b
-     carrito.save()
+     administrador_tienda.venta_acumulada=a
+     administrador_tienda.venta_actual=b
+     administrador_tienda.save()
      
      return render(request,'confirmar_compra.html',locals())   
 

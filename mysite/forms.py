@@ -9,8 +9,7 @@ from django import forms
 class UsuariosForm(ModelForm):
 	class Meta:
 		model= Usuarios	
-		exclude=["codigo","codigoapk","tipo_usuario","plan_tienda_activo","fecha_inicio_plan","fecha_ingreso","nota_de_evaluacion"]
-		#"cant_click_whatsapp_acumulados","cant_click_whatsapp","costo_click_whatsapp","cant_click_telefono_acumulados","cant_click_telefono","costo_click_telefono","cant_click_pedidos_nuevos_acumulados","cant_click_pedidos_nuevos","costo_click_pedidos_nuevos","venta_acumulada","venta_actual","porcentaje_venta"]
+		exclude=["codigo","codigoapk","tipo_usuario","plan_tienda_activo","fecha_inicio_plan","fecha_ingreso","nota_de_evaluacion","cant_click_whatsapp_acumulados","cant_click_whatsapp","costo_click_whatsapp","cant_click_telefono_acumulados","cant_click_telefono","costo_click_telefono","cant_click_pedidos_nuevos_acumulados","cant_click_pedidos_nuevos","costo_click_pedidos_nuevos","venta_acumulada","venta_actual","porcentaje_venta"]
 
         
 

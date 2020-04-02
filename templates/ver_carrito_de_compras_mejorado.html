@@ -68,14 +68,14 @@
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
-                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
                         <br>                        
                         <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
                <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
               {% else %}
                 
               {% endif %}    
@@ -90,8 +90,8 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
-                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></h6>
+                      <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
               {% else %}
                 
               {% endif %} 
@@ -102,8 +102,8 @@
     {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
-                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
+                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
               
 
               {% else %}
@@ -115,7 +115,7 @@
 
      {% if el_usuario_x == "EL_FINANCISTA" %}
                               
-                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
       {% else %}
       {% endif %}
 
@@ -374,21 +374,21 @@
 
     <!--######Botones de opciones y cambios######################## -->
 
-<li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a></li>
+<a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a>
 
    
     {%  if  user.username == i.id_comprador %} 
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
-                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
                         <br>                        
                         <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
                <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
               {% else %}
                 
               {% endif %}    
@@ -403,8 +403,8 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
-                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></h6>
+                      <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
               {% else %}
                 
               {% endif %} 
@@ -415,8 +415,8 @@
     {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
-                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
+                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
               
 
               {% else %}
@@ -428,7 +428,7 @@
 
      {% if el_usuario_x == "EL_FINANCISTA" %}
                               
-                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
       {% else %}
       {% endif %}
 
@@ -680,21 +680,20 @@
 
     <!--######Botones de opciones y cambios######################## -->
 
-<li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a></li>
-
+<a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a>
    
     {%  if  user.username == i.id_comprador %} 
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
-                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
                         <br>                        
                         <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
                <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
               {% else %}
                 
               {% endif %}    
@@ -709,8 +708,8 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
-                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></h6>
+                      <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
               {% else %}
                 
               {% endif %} 
@@ -721,8 +720,8 @@
     {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
-                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
+                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
               
 
               {% else %}
@@ -734,7 +733,7 @@
 
      {% if el_usuario_x == "EL_FINANCISTA" %}
                               
-                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
       {% else %}
       {% endif %}
 
@@ -971,21 +970,21 @@
 
     <!--######Botones de opciones y cambios######################## -->
 
-<li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a></li>
+<a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a>
 
    
     {%  if  user.username == i.id_comprador %} 
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
-                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
                         <br>                        
                         <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
                <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
               {% else %}
                 
               {% endif %}    
@@ -1000,8 +999,8 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
-                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></h6>
+                      <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
               {% else %}
                 
               {% endif %} 
@@ -1012,8 +1011,8 @@
     {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
-                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
+                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
               
 
               {% else %}
@@ -1025,7 +1024,7 @@
 
      {% if el_usuario_x == "EL_FINANCISTA" %}
                               
-                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
       {% else %}
       {% endif %}
 
@@ -1265,21 +1264,21 @@
 
     <!--######Botones de opciones y cambios######################## -->
 
-<li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a></li>
+<a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a>
 
    
     {%  if  user.username == i.id_comprador %} 
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
-                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a></li>
+                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
                         <br>                        
                         <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
                <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
               {% else %}
                 
               {% endif %}    
@@ -1294,8 +1293,8 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li></h6>
-                      <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></h6>
+                      <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
               {% else %}
                 
               {% endif %} 
@@ -1306,8 +1305,8 @@
     {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
-                      <h6><li><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></li>
-                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
+                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
               
 
               {% else %}
@@ -1319,7 +1318,7 @@
 
      {% if el_usuario_x == "EL_FINANCISTA" %}
                               
-                       <h6><li><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
       {% else %}
       {% endif %}
 
