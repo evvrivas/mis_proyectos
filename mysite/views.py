@@ -115,7 +115,7 @@ def abierto_cerrado(id_tienda):
      
      n_del_dia = datetime.datetime.weekday(fecha)     
 
-     print("H actua",hora_actual,"dia(lunes=0)" n_del_dia,"hora",hora_actual ) 
+     print("H actua",hora_actual,"dia(lunes=0)", n_del_dia ) 
 
      if n_del_dia==0:#Lunes
         
