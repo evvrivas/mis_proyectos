@@ -657,7 +657,7 @@ class Carro_de_compras(models.Model):
 	fecha_ingreso = models.DateField(default=datetime.now)
 
 	lugar_de_entrega=models.CharField(max_length=60,blank=True,null=True)	 
-	fecha_de_entrega=models.CharField(max_length=30,blank=True,null=True)	 
+	fecha_de_entrega=models.CharField(max_length=40,blank=True,null=True)	 
 	servicio_a_domicilio=models.CharField(max_length=30,blank=True,null=True,choices=SERVICIO_A_DOMICILIO)
 	costo_servicio_a_domicilio=models.DecimalField(max_digits=6,decimal_places=2,default=0.99,blank=True,null=True)
 	servicio_financiero=models.CharField(max_length=30,blank=True,null=True,choices=SERVICIO_FINANCIERO)	

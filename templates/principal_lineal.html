@@ -135,7 +135,13 @@
                                    <a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/" target="_self"><img  class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></a> 
                                     {% endthumbnail %}                                       
                             
-                                    <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">{{j.precio_A}} {{j.nombre}}</a></li>
+                                    <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">
+
+                                    {%if j.precio_A %}
+                                       {{j.precio_A}}
+                                    {% endif %} 
+
+                                     {{j.nombre}}</a></li>
                              
                        
                         
@@ -243,7 +249,9 @@
                                     {% endthumbnail %}   
 
 
-                                    <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">{{j.precio_A}} {{j.nombre}}</a></li>
+                                    <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">{%if j.precio_A %}
+                                       {{j.precio_A}}
+                                    {% endif %}  {{j.nombre}}</a></li>
                                                                  
                                          
                        
@@ -319,7 +327,9 @@
                                     {% endthumbnail %}   
 
 
-                                    <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">{{j.precio_A}} {{j.nombre}}</a></li>
+                                    <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">{%if j.precio_A %}
+                                       {{j.precio_A}}
+                                    {% endif %}  {{j.nombre}}</a></li>
                              
 
                     

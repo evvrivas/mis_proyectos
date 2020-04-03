@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% load staticfiles %} 
-{% block content %}
-     
+{% block content %}     
 
 
       <center>                
@@ -14,14 +13,9 @@
                                         
                   </ul>
       </center>
-                                    
+                                 
   
-
-
 <div class="tab-content">
-
-
-
 
 
 <div id="home" class="tab-pane fade in active"> 
@@ -32,7 +26,7 @@
 <div class="container">
 
     <div class="alert alert-info">  
-          <p><h4>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h4></p>
+          <p><h5>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h5></p>
 
           <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}}}} </a></li>
 
@@ -61,21 +55,21 @@
 
     <!--######Botones de opciones y cambios######################## -->
 
-<li><a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a></li>
+<button href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</button>
 
    
     {%  if  user.username == i.id_comprador %} 
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
-                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
+                        <h6><button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </button>
+                        <button href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </button>
                         <br>                        
-                        <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
+                        <center><button href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</button></center>
                <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
+                      <button href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </button>
               {% else %}
                 
               {% endif %}    
@@ -90,8 +84,8 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></h6>
-                      <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+                      <button href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </button>
+                      <button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </button>
               {% else %}
                 
               {% endif %} 
@@ -102,8 +96,8 @@
     {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
-                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
-                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+                      <button href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </button>
+                       <button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </button>
               
 
               {% else %}
@@ -115,7 +109,7 @@
 
      {% if el_usuario_x == "EL_FINANCISTA" %}
                               
-                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+                       <button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </button>
       {% else %}
       {% endif %}
 
@@ -126,9 +120,9 @@
     
 
         {% if el_usuario_x == "EL_COMPRADOR" %}
-               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a esta Tienda<span class="caret"></span> </button>
+               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendar Tienda<span class="caret"></span> </button>
         {% else %}
-              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a este Cliente<span class="caret"></span> </button>
+              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendar Cliente<span class="caret"></span> </button>
                       
         {% endif %} 
              
@@ -142,14 +136,14 @@
         <!--######Fin de Botones de Evaluacion######################## -->
  
 <!-- Boton de collapse del info -->
-        <a href="#demo" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
+        <button href="#{{j.id}}" class="btn btn-info" data-toggle="collapse">Ver +/-</button>
 <!-- fin de boton de collapse del info -->
 
 
 </div><!--buton group  -->
 
      
-<div id="demo" class="collapse">
+<div id="{{j.id}}" class="collapse">
 
 
 <!-- ###########inician caritas##################################### -->   
@@ -339,13 +333,14 @@
 
 
 <div id="menu1" class="tab-pane fade">
+
 {% for i in carrito_proceso %}
 
 <div class="row"> 
 <div class="container">
 
-    <div class="alert alert-success">  
-          <p><h4>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h4></p>
+    <div class="alert alert-info">  
+          <p><h5>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h5></p>
 
           <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}}}} </a></li>
 
@@ -374,21 +369,21 @@
 
     <!--######Botones de opciones y cambios######################## -->
 
-<a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a>
+<button href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</button>
 
    
     {%  if  user.username == i.id_comprador %} 
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
-                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
+                        <h6><button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </button>
+                        <button href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </button>
                         <br>                        
-                        <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
+                        <center><button href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</button></center>
                <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
+                      <button href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </button>
               {% else %}
                 
               {% endif %}    
@@ -403,8 +398,8 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></h6>
-                      <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+                      <button href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </button>
+                      <button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </button>
               {% else %}
                 
               {% endif %} 
@@ -415,8 +410,8 @@
     {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
-                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
-                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+                      <button href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </button>
+                       <button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </button>
               
 
               {% else %}
@@ -428,7 +423,7 @@
 
      {% if el_usuario_x == "EL_FINANCISTA" %}
                               
-                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+                       <button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </button>
       {% else %}
       {% endif %}
 
@@ -439,9 +434,9 @@
     
 
         {% if el_usuario_x == "EL_COMPRADOR" %}
-               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a esta Tienda<span class="caret"></span> </button>
+               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendar Tienda<span class="caret"></span> </button>
         {% else %}
-              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a este Cliente<span class="caret"></span> </button>
+              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendar Cliente<span class="caret"></span> </button>
                       
         {% endif %} 
              
@@ -455,14 +450,14 @@
         <!--######Fin de Botones de Evaluacion######################## -->
  
 <!-- Boton de collapse del info -->
-        <a href="#demo" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
+        <button href="#{{j.id}}" class="btn btn-info" data-toggle="collapse">Ver +/-</button>
 <!-- fin de boton de collapse del info -->
 
 
 </div><!--buton group  -->
 
      
-<div id="demo" class="collapse">
+<div id="{{j.id}}" class="collapse">
 
 
 <!-- ###########inician caritas##################################### -->   
@@ -588,11 +583,15 @@
 
 </td>
 
-<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+<!-- <td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
 </td>    
 
 <td WIDTH="80"><a href="tel://+503{{i.producto.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
-</td>
+</td> -->
+
+ <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+ <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+
                                     
                                    
 </tr >
@@ -623,7 +622,6 @@
  </div><!-- container -->
  </div><!-- row -->
 {% endfor %}
-
 
 
 
@@ -760,14 +758,14 @@
         <!--######Fin de Botones de Evaluacion######################## -->
  
 <!-- Boton de collapse del info -->
-        <a href="#demo" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
+        <a href="#{{j.id}}" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
 <!-- fin de boton de collapse del info -->
 
 
 </div><!--buton group  -->
 
      
-<div id="demo" class="collapse">
+<div id="{{j.id}}" class="collapse">
 
 
 <!-- ###########inician caritas##################################### -->   
@@ -1035,9 +1033,9 @@
     
 
         {% if el_usuario_x == "EL_COMPRADOR" %}
-               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a esta Tienda<span class="caret"></span> </button>
+               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendar Tienda<span class="caret"></span> </button>
         {% else %}
-              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a este Cliente<span class="caret"></span> </button>
+              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendar Cliente<span class="caret"></span> </button>
                       
         {% endif %} 
              
@@ -1051,14 +1049,14 @@
         <!--######Fin de Botones de Evaluacion######################## -->
  
 <!-- Boton de collapse del info -->
-        <a href="#demo" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
+        <a href="#{{j.id}}" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
 <!-- fin de boton de collapse del info -->
 
 
 </div><!--buton group  -->
 
      
-<div id="demo" class="collapse">
+<div id="{{j.id}}" class="collapse">
 
 
 <!-- ###########inician caritas##################################### -->   
@@ -1228,14 +1226,28 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div id="menu2" class="tab-pane fade">
-{% for i in carrito_proceso %}
+{% for i in carrito_finalizado %}
 
 <div class="row"> 
 <div class="container">
 
     <div class="alert alert-info">  
-          <p><h4>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h4></p>
+          <p><h5>No.{{i.id}}: {{i.fecha_ingreso}}-->   {% if i.fecha_de_entrega %}{{i.fecha_de_entrega}} {% else %} {% endif %}   </h5></p>
 
           <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}}}} </a></li>
 
@@ -1264,21 +1276,21 @@
 
     <!--######Botones de opciones y cambios######################## -->
 
-<a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</a>
+<button href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" class="btn btn-warning btn-xs" role="button" >Filtrar</button>
 
    
     {%  if  user.username == i.id_comprador %} 
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
-                        <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
+                        <h6><button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </button>
+                        <button href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </button>
                         <br>                        
-                        <center><a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</a></center>
+                        <center><button href="/realizar_compra_individual/{{i.id}}" class="btn btn-info" role="button">Comprar</button></center>
                <br> 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
+                      <button href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </button>
               {% else %}
                 
               {% endif %}    
@@ -1293,8 +1305,8 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a></h6>
-                      <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a></h6>
+                      <button href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </button>
+                      <button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </button>
               {% else %}
                 
               {% endif %} 
@@ -1305,8 +1317,8 @@
     {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
-                      <h6><a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </a>
-                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a></h6>
+                      <button href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Cambiar estado </button>
+                       <button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </button>
               
 
               {% else %}
@@ -1318,7 +1330,7 @@
 
      {% if el_usuario_x == "EL_FINANCISTA" %}
                               
-                       <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </a></h6>
+                       <button href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agregar Asesor Financiero </button>
       {% else %}
       {% endif %}
 
@@ -1329,9 +1341,9 @@
     
 
         {% if el_usuario_x == "EL_COMPRADOR" %}
-               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a esta Tienda<span class="caret"></span> </button>
+               <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendar Tienda<span class="caret"></span> </button>
         {% else %}
-              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendaria a este Cliente<span class="caret"></span> </button>
+              <button type="button" class="btn btn btn-info dropdown-toggle" data-toggle="dropdown">Recomendar Cliente<span class="caret"></span> </button>
                       
         {% endif %} 
              
@@ -1345,14 +1357,14 @@
         <!--######Fin de Botones de Evaluacion######################## -->
  
 <!-- Boton de collapse del info -->
-        <a href="#demo" class="btn btn-info" data-toggle="collapse">Ver +/-</a>
+        <button href="#{{j.id}}" class="btn btn-info" data-toggle="collapse">Ver +/-</button>
 <!-- fin de boton de collapse del info -->
 
 
 </div><!--buton group  -->
 
      
-<div id="demo" class="collapse">
+<div id="{{j.id}}" class="collapse">
 
 
 <!-- ###########inician caritas##################################### -->   
@@ -1478,11 +1490,15 @@
 
 </td>
 
-<td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
+<!-- <td WIDTH="80"><a href="https://api.whatsapp.com/send?phone=+503{{i.producto.id_usuario}}&text=Hola%2C%20es_un_placer%20hacer_negocio%20con%20usted" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a>
 </td>    
 
 <td WIDTH="80"><a href="tel://+503{{i.producto.id_usuario}}" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a>
-</td>
+</td> -->
+
+ <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img'/></a></td>                                    
+ <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img'/></a></td>
+
                                     
                                    
 </tr >
