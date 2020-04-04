@@ -59,6 +59,65 @@
         <br>
         {%  endfor %} 
 
+        <hr>
+
+        <h4> <p> CUENTAS COMO ADMINISTRADOR JUNIOR  </p></h4>  
+        {% for i in vector_cuentas_administrador_jr %}
+           <h5>  
+               <p> total_watsapp_acumulado ${{i[0]}} </p>
+               <p> total_watsapp_parcial ${{i[1]}} </p>>
+               <p> total_telefono_acumulado ${{i[2]}} </p>
+               <p> total_telefono_parcial ${{i[3]}} </p>
+               <p>  total_pedidos_nuevos_acumulado ${{i[4]}} </p>
+               <p>  total_pedidos_nuevos_parcial ${{i[5]}} </p>  
+               <p> total_venta_acumulada ${{i[6]}} </p>
+               <p>   venta_actual_parcial ${{i[7]}} </p>
+           </h5>               
+        {% endfor %}
+
+
+        <hr>
+
+        <h4> <p> CUENTAS COMO ADMINISTRADOR </p></h4>  
+        {% for i in vector_cuentas_administrador %}
+           <h5>  
+               <p> total_watsapp_acumulado ${{i[0]}} </p>
+               <p> total_watsapp_parcial ${{i[1]}} </p>>
+               <p> total_telefono_acumulado ${{i[2]}} </p>
+               <p> total_telefono_parcial ${{i[3]}} </p>
+               <p> total_pedidos_nuevos_acumulado ${{i[4]}} </p>
+               <p> total_pedidos_nuevos_parcial ${{i[5]}} </p>  
+               <p> total_venta_acumulada ${{i[6]}} </p>
+               <p> venta_actual_parcial ${{i[7]}} </p>
+           </h5>               
+        {% endfor %}
+
+
+ <br>      
+<h4> <p> CUENTAS COMO USUARIO GLOBAL </p></h4> 
+       <hr>
+<h5>    
+        <p> total_watsapp_acumulado ${{administrador_total_watsapp_acumulado}} </p>
+        <p> total_watsapp_parcial ${{administrador_total_watsapp_parcial}} </p>>
+        <p> total_telefono_acumulado ${{administrador_total_telefono_acumulado}} </p>
+        <p> total_telefono_parcial ${{administrador_total_telefono_parcial}} </p>
+
+        <p> total_pedidos_nuevos_acumulado ${{administrador_total_pedidos_nuevos_acumulado }} </p>
+        <p> total_pedidos_nuevos_parcial ${{administrador_total_pedidos_nuevos_parcial}} </p>  
+        <p> total_venta_acumulada ${{administrador_total_venta_acumulada}} </p>
+        <p> venta_actual_parcial ${{administrador_venta_actual_parcial}} </p>
+</h5>    
+
+      
+     
+     
+      
+        
+     
+    
+
+
+
 
                 </div>
   
@@ -69,3 +128,43 @@
 
 {% endblock %}
 
+
+
+     
+    
+     
+
+
+       
+        
+        total_watsapp_acumulado
+        total_watsapp_parcial
+        
+        total_telefono_acumulado        
+        total_telefono_parcial
+     
+        total_pedidos_nuevos_acumulado
+        total_pedidos_nuevos_parcial 
+        
+        total_venta_acumulada
+        venta_actual_parcial
+
+
+     except:
+        pass
+
+     try:
+        tiendas_del_administrador_jr=Tiendas.objects.filter(administrador_junior=request.user.username)
+        ti=tiendas_del_administrador_jr
+        
+        total_watsapp_acumulado=ti.cant_click_whatsapp_acumulados*ti.costo_click_whatsapp
+        total_watsapp_parcial=ti.cant_click_whatsapp*ti.costo_click_whatsapp
+
+        total_telefono_acumulado=ti.cant_click_telefono_acumulados*ti.costo_click_telefono
+        total_telefono_parcial=ti.cant_click_telefono_*ti.costo_click_telefono
+     
+        total_pedidos_nuevos_acumulado = ti.cant_click_pedidos_nuevos_acumulados*ti.costo_click_pedidos_nuevos
+        total_pedidos_nuevos_parcial = ti.cant_click_pedidos_nuevos*ti.costo_click_pedidos_nuevos 
+        
+        total_venta_acumulada= ti.venta_acumulada*ti.porcentaje_venta
+        venta_actual_parcial= ti.venta_actual*ti.porcentaje_venta

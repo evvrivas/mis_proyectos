@@ -1416,6 +1416,8 @@ def ver_el_carrito_personal(request,id_persona_compra):
       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request) 
       el_usuario_x=t_usuario
 
+      tipo_de_carrito="PERSONAL"
+
 
 
       if el_usuario_x=="EL_COMPRADOR":  
@@ -1442,7 +1444,12 @@ def ver_el_carrito_personal(request,id_persona_compra):
               carrito_finalizado= Carro_de_compras.objects.filter( Q(id_comprador=id_persona_compra)).filter(estado_prod='PRODUCTO_RECIBIDO_YA')
 
       else:            
-        pass                      
+        pass
+
+
+      gran_total=0
+      for i in carrito_nuevo:
+         gran_total=gran_total+i.total                        
       
       return render(request,'ver_carrito_de_compras_mejorado.html',locals()) 
 
@@ -1453,6 +1460,8 @@ def ver_el_carrito_de_tienda(request,id_tienda_de_compra):
       mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request) 
       el_usuario_x=t_usuario
+
+      tipo_de_carrito="DE_LA_TENDA"
 
 
       if el_usuario_x=="EL_COMPRADOR":  
@@ -1491,6 +1500,7 @@ def ver_el_carrito_personal_y_de_tienda(request,id_persona_compra,id_tienda_de_c
       ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request) 
       el_usuario_x=t_usuario
 
+      tipo_de_carrito="PERSONAL_Y_DE_LA_TENDA"
 
 
       if el_usuario_x=="EL_COMPRADOR":  
@@ -1517,6 +1527,11 @@ def ver_el_carrito_personal_y_de_tienda(request,id_persona_compra,id_tienda_de_c
               carrito_finalizado= Carro_de_compras.objects.filter(Q(producto__tienda__id=id_tienda_de_compra)  & Q(id_comprador=id_persona_compra)).filter(estado_prod='PRODUCTO_RECIBIDO_YA')
       else:            
         pass                      
+      
+      gran_total=0
+      
+      for i in carrito_nuevo:
+         gran_total=gran_total+i.total
       
       return render(request,'ver_carrito_de_compras_mejorado.html',locals()) 
 
@@ -1751,10 +1766,7 @@ def realizar_compra(request):
 
         administrador_tienda.venta_acumulada=a
         administrador_tienda.venta_actual=b
-        administrador_tienda.save()
-
-
-      
+        administrador_tienda.save()      
 
 
      return render(request,'confirmar_compra.html',locals())   
@@ -2108,7 +2120,6 @@ def traspasar_tienda(request,id_de_la_tienda):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
 
-
    
 def comunicacion_tienda(request,id_de_la_tienda,bandera):
     tiendas=Tiendas.objects.get(id=id_de_la_tienda) 
@@ -2132,8 +2143,8 @@ def comunicacion_tienda(request,id_de_la_tienda,bandera):
     #tienda=Tiendas.objects.get(id=id_tienda)
     administrador_tienda=Usuarios.objects.get(id_usuario=tiendas.id_usuario)
     
-    if tiendas.administrador_jr:
-           n_contacto=tiendas.administrador_jr
+    if tiendas.administrador_junior:
+           n_contacto=tiendas.administrador_junior
     else:
            n_contacto=tiendas.id_usuario
 
@@ -2190,25 +2201,80 @@ def comunicacion_tienda(request,id_de_la_tienda,bandera):
         return render(request,'principal.html',locals())
     
 @login_required   
+
+
 def mis_cuentas(request):
      
      administrador=Usuarios.objects.get(id_usuario=request.user.username)
+     ti=administrador
+        
+     administrador_total_watsapp_acumulado=ti.cant_click_whatsapp_acumulados*ti.costo_click_whatsapp
+     administrador_total_watsapp_parcial=ti.cant_click_whatsapp*ti.costo_click_whatsapp
+
+     administrador_total_telefono_acumulado=ti.cant_click_telefono_acumulados*ti.costo_click_telefono
+     administrador_total_telefono_parcial=ti.cant_click_telefono_*ti.costo_click_telefono
+     
+     administrador_total_pedidos_nuevos_acumulado = ti.cant_click_pedidos_nuevos_acumulados*ti.costo_click_pedidos_nuevos
+     administrador_total_pedidos_nuevos_parcial = ti.cant_click_pedidos_nuevos*ti.costo_click_pedidos_nuevos 
+        
+     administrador_total_venta_acumulada= ti.venta_acumulada*ti.porcentaje_venta
+     administrador_venta_actual_parcial= ti.venta_actual*ti.porcentaje_venta     
     
      try:
+
         tiendas_del_administrador=Tiendas.objects.filter(id_usuario=request.user.username)
+        
+        vector_cuentas_administrador=[]
+        for ti in tiendas_del_administrador:                
+                
+                total_watsapp_acumulado=ti.cant_click_whatsapp_acumulados*ti.costo_click_whatsapp
+                vector_cuentas_administrador.append(total_watsapp_acumulado)
+                total_watsapp_parcial=ti.cant_click_whatsapp*ti.costo_click_whatsapp
+                vector_cuentas_administrador.append(total_watsapp_parcial)
+                total_telefono_acumulado=ti.cant_click_telefono_acumulados*ti.costo_click_telefono
+                vector_cuentas_administrador.append(total_telefono_acumulado)
+                total_telefono_parcial=ti.cant_click_telefono_*ti.costo_click_telefono
+                vector_cuentas_administrador.append(total_telefono_parcial) 
+                total_pedidos_nuevos_acumulado = ti.cant_click_pedidos_nuevos_acumulados*ti.costo_click_pedidos_nuevos
+                vector_cuentas_administrador.append(total_pedidos_nuevos_acumulado)
+                total_pedidos_nuevos_parcial = ti.cant_click_pedidos_nuevos*ti.costo_click_pedidos_nuevos 
+                vector_cuentas_administrador.append(total_pedidos_nuevos_parcial)
+                total_venta_acumulada= ti.venta_acumulada*ti.porcentaje_venta
+                vector_cuentas_administrador.append(total_venta_acumulada)
+                venta_actual_parcial= ti.venta_actual*ti.porcentaje_venta
+                vector_cuentas_administrador.append(venta_actual_parcial)
+
+
      except:
         pass
 
      try:
-       tiendas_del_administrador_jr=Tiendas.objects.filter(administrador_jr=request.user.username)
+        tiendas_del_administrador_jr=Tiendas.objects.filter(administrador_junior=request.user.username)
+        vector_cuentas_administrador_jr=[]
+        for ti in tiendas_del_administrador_jr:                
+                
+                total_watsapp_acumulado=ti.cant_click_whatsapp_acumulados*ti.costo_click_whatsapp
+                vector_cuentas_administrador_jr.append(total_watsapp_acumulado)
+                total_watsapp_parcial=ti.cant_click_whatsapp*ti.costo_click_whatsapp
+                vector_cuentas_administrador_jr.append(total_watsapp_parcial)
+                total_telefono_acumulado=ti.cant_click_telefono_acumulados*ti.costo_click_telefono
+                vector_cuentas_administrador_jr.append(total_telefono_acumulado)
+                total_telefono_parcial=ti.cant_click_telefono_*ti.costo_click_telefono
+                vector_cuentas_administrador_jr.append(total_telefono_parcial) 
+                total_pedidos_nuevos_acumulado = ti.cant_click_pedidos_nuevos_acumulados*ti.costo_click_pedidos_nuevos
+                vector_cuentas_administrador_jr.append(total_pedidos_nuevos_acumulado)
+                total_pedidos_nuevos_parcial = ti.cant_click_pedidos_nuevos*ti.costo_click_pedidos_nuevos 
+                vector_cuentas_administrador_jr.append(total_pedidos_nuevos_parcial)
+                total_venta_acumulada= ti.venta_acumulada*ti.porcentaje_venta
+                vector_cuentas_administrador_jr.append(total_venta_acumulada)
+                venta_actual_parcial= ti.venta_actual*ti.porcentaje_venta
+                vector_cuentas_administrador_jr.append(venta_actual_parcial)
      except:
         pass
      
 
      return render(request,'mis_cuentas.html',locals())
-
-
-
+    
 
 
 
