@@ -46,15 +46,15 @@
 
 
 
-        <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>   
+        <td WIDTH="80"><a href="/comunicacion_tienda/{{i.producto.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>   
 
- <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>
+ <td WIDTH="80"><a href="/comunicacion_tienda/{{i.producto.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>
 
 
 
-          <p><h>No.{{i.id}}: {{i.fecha_ingreso}}</h5>
+          <p><h5>No.{{i.id}}: {{i.fecha_ingreso}}
 <a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" role="button" >Filtrar</a>
-          </p>
+          </h5></p>
 <hr>
           <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}} </a></li>
 
@@ -81,10 +81,10 @@
      </p></h6> 
          <hr>
 
+
 <div class="btn-group">
 
     <!--######Botones de opciones y cambios######################## -->
-
 
 
    
@@ -92,7 +92,7 @@
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
                         <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
                                                 
                         <a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info btn-lg" role="button">Comprar</a>
@@ -150,7 +150,7 @@
     
 
         {% if el_usuario_x == "EL_COMPRADOR" %}
-               <a type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">Recomendar Tienda<span class="caret"></span> </a>
+               <a type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">valuar Tienda<span class="caret"></span> </a>
         {% else %}
               <a type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">Recomendar Cliente<span class="caret"></span> </a>
                       
@@ -301,7 +301,10 @@
                  {% endif %}  
 <!--######Rinaliza Agregar imagenes de muestra muestra######################## -->
 
+
+
  </div><!--collapse  -->
+
  </div> <!--alert info  -->
  </div><!-- container -->
  </div><!-- row -->
@@ -345,7 +348,6 @@
 
 
 <div id="menu1" class="tab-pane fade">
-
 {% for i in carrito_proceso %}
 
 <div class="row"> 
@@ -372,15 +374,15 @@
 
 
 
-        <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>   
+        <td WIDTH="80"><a href="/comunicacion_tienda/{{i.producto.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>   
 
- <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>
+ <td WIDTH="80"><a href="/comunicacion_tienda/{{i.producto.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>
 
 
 
-          <p><h>No.{{i.id}}: {{i.fecha_ingreso}}</h5>
+          <p><h5>No.{{i.id}}: {{i.fecha_ingreso}}
 <a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" role="button" >Filtrar</a>
-          </p>
+          </h5></p>
 <hr>
           <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}} </a></li>
 
@@ -407,10 +409,10 @@
      </p></h6> 
          <hr>
 
+
 <div class="btn-group">
 
     <!--######Botones de opciones y cambios######################## -->
-
 
 
    
@@ -418,7 +420,7 @@
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
                         <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
                                                 
                         <a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info btn-lg" role="button">Comprar</a>
@@ -476,7 +478,7 @@
     
 
         {% if el_usuario_x == "EL_COMPRADOR" %}
-               <a type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">Recomendar Tienda<span class="caret"></span> </a>
+               <a type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">valuar Tienda<span class="caret"></span> </a>
         {% else %}
               <a type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">Recomendar Cliente<span class="caret"></span> </a>
                       
@@ -627,13 +629,14 @@
                  {% endif %}  
 <!--######Rinaliza Agregar imagenes de muestra muestra######################## -->
 
+
+
  </div><!--collapse  -->
+
  </div> <!--alert info  -->
  </div><!-- container -->
  </div><!-- row -->
 {% endfor %}
-
-
 
 </div>
 
@@ -649,11 +652,9 @@
 
 
 
-
-
-
 <div id="menu2" class="tab-pane fade">
-{% for i in carrito_finalizado %}
+
+  {% for i in carrito_finalizado %}
 
 <div class="row"> 
 <div class="container">
@@ -679,15 +680,15 @@
 
 
 
-        <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>   
+        <td WIDTH="80"><a href="/comunicacion_tienda/{{i.producto.tienda.id}}/WHATSAPP" target="_blank"><img src='{% static "whatsapp.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>   
 
- <td WIDTH="80"><a href="/comunicacion_tienda/{{i.productos.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>
+ <td WIDTH="80"><a href="/comunicacion_tienda/{{i.producto.tienda.id}}/TELEFONO" target="_blank"><img src='{% static "llamar.png" %}' alt='img' class="img-circle" style="float: left; margin: 5px 5px 5px 5px;"></a></td>
 
 
 
-          <p><h>No.{{i.id}}: {{i.fecha_ingreso}}</h5>
+          <p><h5>No.{{i.id}}: {{i.fecha_ingreso}}
 <a href="/ver_el_carrito_personal_y_de_tienda/{{i.id_comprador}}/{{ i.producto.tienda.id }}" role="button" >Filtrar</a>
-          </p>
+          </h5></p>
 <hr>
           <li><a href="/ver_el_carrito_personal/{{i.id_comprador}}">cliente {{i.id_comprador}} {{i.nombre_comprador}} {{i.apellido_comprador}} </a></li>
 
@@ -714,10 +715,10 @@
      </p></h6> 
          <hr>
 
+
 <div class="btn-group">
 
     <!--######Botones de opciones y cambios######################## -->
-
 
 
    
@@ -725,7 +726,7 @@
 
               
               {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
-                        <h6><a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
+                        <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Editar/agegar </a>
                         <a href="/eliminar_producto_del_carrito/{{i.id}}" class="btn btn-danger btn-xs" role="button" > Eliminar </a>
                                                 
                         <a href="/realizar_compra_individual/{{i.id}}" class="btn btn-info btn-lg" role="button">Comprar</a>
@@ -783,7 +784,7 @@
     
 
         {% if el_usuario_x == "EL_COMPRADOR" %}
-               <a type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">Recomendar Tienda<span class="caret"></span> </a>
+               <a type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">valuar Tienda<span class="caret"></span> </a>
         {% else %}
               <a type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">Recomendar Cliente<span class="caret"></span> </a>
                       
@@ -934,34 +935,16 @@
                  {% endif %}  
 <!--######Rinaliza Agregar imagenes de muestra muestra######################## -->
 
+
+
  </div><!--collapse  -->
+
  </div> <!--alert info  -->
  </div><!-- container -->
  </div><!-- row -->
 {% endfor %}
 
-
-
 </div>
-
-
-
-<div id="menu2" class="tab-pane fade">
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -979,7 +962,7 @@
 </div>
 
    
-
+</div>
                   
                                  
 

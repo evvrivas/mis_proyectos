@@ -506,15 +506,22 @@ class Tiendas(models.Model):
 	     venta_actual=models.DecimalField(max_digits=6,decimal_places=2,blank=True,null=True,default=0.0)
 	     porcentaje_venta=models.DecimalField(max_digits=6,decimal_places=2,blank=True,null=True,default=0.1)
 	     def save(self, *args,**kwargs):
-	     	self.image=self.imagen1
-	     	if self.image:
-	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		output=BytesIO()
-	     		t_image.save(output,format='JPEG',quality=75)
-	     		output.seek(0)
-	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     	if self.imagen1:
+	     		self.image=self.imagen1
+	     			try:	
+			     		t_image=Img.open(BytesIO(self.image.read()))
+			     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+			     		output=BytesIO()
+			     		t_image.save(output,format='JPEG',quality=75)
+			     		output.seek(0)
+			     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+			     	except:
+				     			pass
 	     	super(Tiendas,self).save(*args,**kwargs)
+
+
+	     	        
+
 
 
 	     def __str__(self):

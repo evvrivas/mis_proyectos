@@ -2212,7 +2212,7 @@ def mis_cuentas(request):
      administrador_total_watsapp_parcial=ti.cant_click_whatsapp*ti.costo_click_whatsapp
 
      administrador_total_telefono_acumulado=ti.cant_click_telefono_acumulados*ti.costo_click_telefono
-     administrador_total_telefono_parcial=ti.cant_click_telefono_*ti.costo_click_telefono
+     administrador_total_telefono_parcial=ti.cant_click_telefono*ti.costo_click_telefono
      
      administrador_total_pedidos_nuevos_acumulado = ti.cant_click_pedidos_nuevos_acumulados*ti.costo_click_pedidos_nuevos
      administrador_total_pedidos_nuevos_parcial = ti.cant_click_pedidos_nuevos*ti.costo_click_pedidos_nuevos 
@@ -2225,25 +2225,27 @@ def mis_cuentas(request):
         tiendas_del_administrador=Tiendas.objects.filter(id_usuario=request.user.username)
         
         vector_cuentas_administrador=[]
-        for ti in tiendas_del_administrador:                
-                
-                total_watsapp_acumulado=ti.cant_click_whatsapp_acumulados*ti.costo_click_whatsapp
-                vector_cuentas_administrador.append(total_watsapp_acumulado)
-                total_watsapp_parcial=ti.cant_click_whatsapp*ti.costo_click_whatsapp
-                vector_cuentas_administrador.append(total_watsapp_parcial)
-                total_telefono_acumulado=ti.cant_click_telefono_acumulados*ti.costo_click_telefono
-                vector_cuentas_administrador.append(total_telefono_acumulado)
-                total_telefono_parcial=ti.cant_click_telefono_*ti.costo_click_telefono
-                vector_cuentas_administrador.append(total_telefono_parcial) 
-                total_pedidos_nuevos_acumulado = ti.cant_click_pedidos_nuevos_acumulados*ti.costo_click_pedidos_nuevos
-                vector_cuentas_administrador.append(total_pedidos_nuevos_acumulado)
-                total_pedidos_nuevos_parcial = ti.cant_click_pedidos_nuevos*ti.costo_click_pedidos_nuevos 
-                vector_cuentas_administrador.append(total_pedidos_nuevos_parcial)
-                total_venta_acumulada= ti.venta_acumulada*ti.porcentaje_venta
-                vector_cuentas_administrador.append(total_venta_acumulada)
-                venta_actual_parcial= ti.venta_actual*ti.porcentaje_venta
-                vector_cuentas_administrador.append(venta_actual_parcial)
+        for ti in tiendas_del_administrador: 
 
+                vector=[]
+                total_watsapp_acumulado=ti.cant_click_whatsapp_acumulados*ti.costo_click_whatsapp
+                vector.append(total_watsapp_acumulado)
+                total_watsapp_parcial=ti.cant_click_whatsapp*ti.costo_click_whatsapp
+                vector.append(total_watsapp_parcial)
+                total_telefono_acumulado=ti.cant_click_telefono_acumulados*ti.costo_click_telefono
+                vector.append(total_telefono_acumulado)
+                total_telefono_parcial=ti.cant_click_telefono_*ti.costo_click_telefono
+                vector.append(total_telefono_parcial) 
+                total_pedidos_nuevos_acumulado = ti.cant_click_pedidos_nuevos_acumulados*ti.costo_click_pedidos_nuevos
+                vector.append(total_pedidos_nuevos_acumulado)
+                total_pedidos_nuevos_parcial = ti.cant_click_pedidos_nuevos*ti.costo_click_pedidos_nuevos 
+                vector.append(total_pedidos_nuevos_parcial)
+                total_venta_acumulada= ti.venta_acumulada*ti.porcentaje_venta
+                vector.append(total_venta_acumulada)
+                venta_actual_parcial= ti.venta_actual*ti.porcentaje_venta
+                vector.append(venta_actual_parcial)
+                
+                vector_cuentas_administrador.append(vector)
 
      except:
         pass
@@ -2252,23 +2254,27 @@ def mis_cuentas(request):
         tiendas_del_administrador_jr=Tiendas.objects.filter(administrador_junior=request.user.username)
         vector_cuentas_administrador_jr=[]
         for ti in tiendas_del_administrador_jr:                
-                
+                vector=[]
                 total_watsapp_acumulado=ti.cant_click_whatsapp_acumulados*ti.costo_click_whatsapp
-                vector_cuentas_administrador_jr.append(total_watsapp_acumulado)
+                vector.append(total_watsapp_acumulado)
                 total_watsapp_parcial=ti.cant_click_whatsapp*ti.costo_click_whatsapp
-                vector_cuentas_administrador_jr.append(total_watsapp_parcial)
+                vector.append(total_watsapp_parcial)
                 total_telefono_acumulado=ti.cant_click_telefono_acumulados*ti.costo_click_telefono
-                vector_cuentas_administrador_jr.append(total_telefono_acumulado)
+                vector.append(total_telefono_acumulado)
                 total_telefono_parcial=ti.cant_click_telefono_*ti.costo_click_telefono
-                vector_cuentas_administrador_jr.append(total_telefono_parcial) 
+                vector.append(total_telefono_parcial) 
                 total_pedidos_nuevos_acumulado = ti.cant_click_pedidos_nuevos_acumulados*ti.costo_click_pedidos_nuevos
-                vector_cuentas_administrador_jr.append(total_pedidos_nuevos_acumulado)
+                vector.append(total_pedidos_nuevos_acumulado)
                 total_pedidos_nuevos_parcial = ti.cant_click_pedidos_nuevos*ti.costo_click_pedidos_nuevos 
-                vector_cuentas_administrador_jr.append(total_pedidos_nuevos_parcial)
+                vector.append(total_pedidos_nuevos_parcial)
                 total_venta_acumulada= ti.venta_acumulada*ti.porcentaje_venta
-                vector_cuentas_administrador_jr.append(total_venta_acumulada)
+                vector.append(total_venta_acumulada)
                 venta_actual_parcial= ti.venta_actual*ti.porcentaje_venta
-                vector_cuentas_administrador_jr.append(venta_actual_parcial)
+                vector.append(venta_actual_parcial)
+                
+                
+                vector_cuentas_administrador_jr.append(vector)
+                
      except:
         pass
      

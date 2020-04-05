@@ -64,14 +64,14 @@
         <h4> <p> CUENTAS COMO ADMINISTRADOR JUNIOR  </p></h4>  
         {% for i in vector_cuentas_administrador_jr %}
            <h5>  
-               <p> total_watsapp_acumulado ${{i[0]}} </p>
-               <p> total_watsapp_parcial ${{i[1]}} </p>>
-               <p> total_telefono_acumulado ${{i[2]}} </p>
-               <p> total_telefono_parcial ${{i[3]}} </p>
-               <p>  total_pedidos_nuevos_acumulado ${{i[4]}} </p>
-               <p>  total_pedidos_nuevos_parcial ${{i[5]}} </p>  
-               <p> total_venta_acumulada ${{i[6]}} </p>
-               <p>   venta_actual_parcial ${{i[7]}} </p>
+               <p> total_watsapp_acumulado ${{i.0}} </p>
+               <p> total_telefono_acumulado ${{i.1}} </p>
+               <p> total_telefono_parcial ${{i.2}} </p>
+               <p> total_watsapp_parcial ${{i.3}} </p>>
+               <p>  total_pedidos_nuevos_acumulado ${{i.4}} </p>
+               <p>  total_pedidos_nuevos_parcial ${{i.4}} </p>  
+               <p> total_venta_acumulada ${{i.6}} </p>
+               <p>   venta_actual_parcial ${{i.7}} </p>
            </h5>               
         {% endfor %}
 
@@ -81,14 +81,14 @@
         <h4> <p> CUENTAS COMO ADMINISTRADOR </p></h4>  
         {% for i in vector_cuentas_administrador %}
            <h5>  
-               <p> total_watsapp_acumulado ${{i[0]}} </p>
-               <p> total_watsapp_parcial ${{i[1]}} </p>>
-               <p> total_telefono_acumulado ${{i[2]}} </p>
-               <p> total_telefono_parcial ${{i[3]}} </p>
-               <p> total_pedidos_nuevos_acumulado ${{i[4]}} </p>
-               <p> total_pedidos_nuevos_parcial ${{i[5]}} </p>  
-               <p> total_venta_acumulada ${{i[6]}} </p>
-               <p> venta_actual_parcial ${{i[7]}} </p>
+               <p> total_watsapp_acumulado ${{i.0}} </p>
+               <p> total_watsapp_parcial ${{i.1}} </p>>
+               <p> total_telefono_acumulado ${{i.2}} </p>
+               <p> total_telefono_parcial ${{i.3}} </p>
+               <p> total_pedidos_nuevos_acumulado ${{i.4}} </p>
+               <p> total_pedidos_nuevos_parcial ${{i.5}} </p>  
+               <p> total_venta_acumulada ${{i.6}} </p>
+               <p> venta_actual_parcial ${{i.7}} </p>
            </h5>               
         {% endfor %}
 
