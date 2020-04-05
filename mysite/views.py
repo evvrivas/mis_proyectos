@@ -106,6 +106,12 @@ def info_usuario():
     return cantidad_usuarios, cantidad_tiendas, cantidad_productos,cN_pedido,vN_pedido
 
 
+def abierto_cerrado_actualizar_todas():
+    tiendas=Tiendas.objects.all() 
+    for i in tiendas:
+        estado=abierto_cerrado(i.id)
+
+
 def abierto_cerrado(id_tienda):     
      
      tienda=Tiendas.objects.get(pk=id_tienda) 
@@ -115,7 +121,7 @@ def abierto_cerrado(id_tienda):
      
      n_del_dia = datetime.datetime.weekday(fecha)     
 
-     print("H actua",hora_actual,"dia(lunes=0)", n_del_dia ) 
+     #print("H actua",hora_actual,"dia(lunes=0)", n_del_dia ) 
 
      if n_del_dia==0:#Lunes
         
@@ -156,6 +162,9 @@ def abierto_cerrado(id_tienda):
                   estado="ABIERTO"
               else:
                   estado= "CERRADO"
+
+     tienda.abierto_cerrado=estado
+     tienda.save()
      return estado
 
 
@@ -175,10 +184,7 @@ def info_pagina(requesta):
     cantidad_productos=Productos.objects.all().count()
 
     
-    try:
-          cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(estado_prod="QUIERO_PEDIR_ESTO").count()+Carro_de_compras.objects.filter(producto__id_usuario=request.user.username).filter(estado_prod="QUIERO_PEDIR_ESTO").count()
-    except:  
-          cantidad_pedidos=Carro_de_compras.objects.all().count()
+    
 
           
     try:
@@ -188,6 +194,21 @@ def info_pagina(requesta):
     except:  
           t_usuario="EL_COMPRADOR"
           t_ciudad="TODOS"
+    
+
+
+    try:
+          #cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(estado_prod="QUIERO_PEDIR_ESTO").count()+
+      if t_usuario=="EL_COMPRADOR":    
+          cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()
+      else:
+          cantidad_pedidos= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()
+    
+
+    except:  
+          cantidad_pedidos=Carro_de_compras.objects.all().count()
+
+
 
 
     connection.close()
@@ -922,6 +943,8 @@ def pagina_principal(request):
                          
                          configurar.n_visitas+=1         
                          configurar.save()
+
+                         abierto_cerrado_actualizar_todas()
                          
 
                          
@@ -1325,7 +1348,7 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
                  except: 
                     total_x=0
 
-                 fe=lafecha.strftime("%A %d/%m/%Y, %H:%M:")   
+                 fe=lafecha.strftime("%d/%m/%Y, %H:%M:")   
                
                  n=Usuarios.objects.get(id_usuario=request.user.username)     
                  #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
@@ -1472,9 +1495,9 @@ def ver_el_carrito_de_tienda(request,id_tienda_de_compra):
             
             
             else:
-                  carrito_nuevo= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra) .order_by("estado_prod")
-                  carrito_proceso= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra) .order_by("estado_prod")
-                  carrito_finalizado= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra) .order_by("estado_prod")
+                  carrito_nuevo= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra,id_comprador=request.user.username).filter( Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO'))
+                  carrito_proceso= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra,id_comprador=request.user.username).filter(Q(estado_prod='EL_VENDEDOR_A_CONFIRMADO') | Q(estado_prod='PRODUCTO_ENTREGADO'))
+                  carrito_finalizado= Carro_de_compras.objects.filter(producto__tienda__id=id_tienda_de_compra,id_comprador=request.user.username).filter(estado_prod='PRODUCTO_RECIBIDO_YA')
 
               
       elif el_usuario_x=="EL_ADMINISTRADOR" : #es el vendedor

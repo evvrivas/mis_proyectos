@@ -20,7 +20,7 @@
         {% endthumbnail %} 
 
 
-       <p>Nombre del vendedor:{{administrador.nombre}} {{administrador.apellido}}</p>
+       <p>Nombre del administrador:{{administrador.nombre}} {{administrador.apellido}}</p>
        <p>Telefono/Whatsapp: {{administrador.id_usuario}}</p>
        <p>email: {{administrador.email}} </p>
        <p>Ciudad: {{administrador.estoy_en}}</p>
@@ -43,18 +43,17 @@
 
                         
         
-       <p> Click WatsApp :Total:{{ j.cant_click_whatsapp_acumulados }} total P. {{ j.cant_click_whatsapp }} $ {{ j.costo_click_whatsapp }}</p>
+       <p> Click WatsApp({{ j.cant_click_whatsapp_acumulados }})---->{{ j.cant_click_whatsapp }}--->$ {{ j.costo_click_whatsapp }}</p>
         
        <br>
-       <p>  Click Telefono: cant: {{j.cant_click_telefono_acumulados}} Total p.{{ j.cant_click_telefono }} $ {{ j.costo_click_telefono }}</p>
+       <p>  Click Telefono({{j.cant_click_telefono_acumulados}})---->{{ j.cant_click_telefono }}--->$ {{ j.costo_click_telefono }}</p>
           
        <br>
-       <p>  Click quiero eso: cant: {{j.cant_click_pedidos_nuevos_acumulados }} {{ j.cant_click_pedidos_nuevos }}  ${{ j.costo_click_pedidos_nuevos }}</p>        
+       <p>  Click en quiero eso:({{j.cant_click_pedidos_nuevos_acumulados }})---> {{ j.cant_click_pedidos_nuevos }}---> ${{ j.costo_click_pedidos_nuevos }}</p>        
       <br>
 
-       <p>  Ventas acumuladas: ${{ j.venta_acumulada }}
-       <p>  Venta Actual  : $ {{ j.venta_actual }}
-       <p>  Porcentaje de Cobro X Venta: % {{ j.porcentaje_venta }}
+       <p>  Ventas acumuladas(${{ j.venta_acumulada }})--->${{ j.venta_actual }}
+       <p>  Porcentaje de Cobro X: % {{ j.porcentaje_venta }}
        <h>
         <br>
         {%  endfor %} 
@@ -64,14 +63,13 @@
         <h4> <p> CUENTAS COMO ADMINISTRADOR JUNIOR  </p></h4>  
         {% for i in vector_cuentas_administrador_jr %}
            <h5>  
-               <p> total_watsapp_acumulado ${{i.0}} </p>
-               <p> total_telefono_acumulado ${{i.1}} </p>
-               <p> total_telefono_parcial ${{i.2}} </p>
-               <p> total_watsapp_parcial ${{i.3}} </p>>
-               <p>  total_pedidos_nuevos_acumulado ${{i.4}} </p>
-               <p>  total_pedidos_nuevos_parcial ${{i.4}} </p>  
-               <p> total_venta_acumulada ${{i.6}} </p>
-               <p>   venta_actual_parcial ${{i.7}} </p>
+              <p> total_watsapp(${{i.0}})---><font color="red"> ${{i.3}}</font> </p>
+              <p> total_telefono(${{i.1}})---><font color="red"> ${{i.2}}</font> </p>
+                            
+              <p> total_pedidos_nuevos(${{i.4}})---><font color="red"> ${{i.4}}</font> </p>
+                             
+              <p> total_venta_acumulada(${{i.6}})---><font color="red">${{i.7}}</font> </p>
+               
            </h5>               
         {% endfor %}
 
@@ -81,14 +79,12 @@
         <h4> <p> CUENTAS COMO ADMINISTRADOR </p></h4>  
         {% for i in vector_cuentas_administrador %}
            <h5>  
-               <p> total_watsapp_acumulado ${{i.0}} </p>
-               <p> total_watsapp_parcial ${{i.1}} </p>>
-               <p> total_telefono_acumulado ${{i.2}} </p>
-               <p> total_telefono_parcial ${{i.3}} </p>
-               <p> total_pedidos_nuevos_acumulado ${{i.4}} </p>
-               <p> total_pedidos_nuevos_parcial ${{i.5}} </p>  
-               <p> total_venta_acumulada ${{i.6}} </p>
-               <p> venta_actual_parcial ${{i.7}} </p>
+               <p> total_watsapp(${{i.0}})---><font color="red"> ${{i.3}}</font> </p>
+              <p> total_telefono(${{i.1}})---><font color="red"> ${{i.2}}</font> </p>
+                            
+              <p> total_pedidos_nuevos(${{i.4}})---><font color="red"> ${{i.4}}</font> </p>
+                             
+              <p> total_venta_acumulada(${{i.6}})---><font color="red">${{i.7}}</font> </p>
            </h5>               
         {% endfor %}
 

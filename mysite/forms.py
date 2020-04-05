@@ -46,7 +46,7 @@ class TiendasForm(ModelForm):
 	class Meta:
 		model= Tiendas	
 		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}	
-		exclude=["codigo","tipo_de_vista","codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario","ultima_fecha_edicion","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan","nota_de_evaluacion","cant_click_whatsapp_acumulados","cant_click_whatsapp","costo_click_whatsapp","cant_click_telefono_acumulados","cant_click_telefono","costo_click_telefono","cant_click_pedidos_nuevos_acumulados","cant_click_pedidos_nuevos","costo_click_pedidos_nuevos","venta_acumulada","venta_actual","porcentaje_venta"]
+		exclude=["abierto_cerrado","codigo","tipo_de_vista","codigoapk","id_usuario","fecha_ingreso","n_visitas","ultimo_comentario","ultima_fecha_edicion","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan","nota_de_evaluacion","cant_click_whatsapp_acumulados","cant_click_whatsapp","costo_click_whatsapp","cant_click_telefono_acumulados","cant_click_telefono","costo_click_telefono","cant_click_pedidos_nuevos_acumulados","cant_click_pedidos_nuevos","costo_click_pedidos_nuevos","venta_acumulada","venta_actual","porcentaje_venta"]
 	
 	def __init__(self, user,*args, **kwargs):
 		super(TiendasForm, self).__init__(*args, **kwargs)

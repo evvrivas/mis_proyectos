@@ -80,8 +80,9 @@
 
                       
                      <div class="thumbnail">                      
-                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}}</a></li>
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}} <font color="red">{{j.abierto_cerrado}}</font></a></li>
                         
+
 
                         {% thumbnail j.imagen1 "360" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}" class="responsive"> </a>
@@ -360,7 +361,7 @@
   <div class="col-md-3">   
                       
                      <div class="thumbnail">                      
-                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}}</a></li>
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}} <font color="red">{{j.abierto_cerrado}}</font></a></li>
                         {% thumbnail j.imagen1 "360" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
 
@@ -578,7 +579,7 @@
   <div class="col-md-3">   
                       
                      <div class="thumbnail">                      
-                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}}</a></li>
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}} <font color="red">{{j.abierto_cerrado}}</font></a></li>
                         {% thumbnail j.imagen1 "360" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
 

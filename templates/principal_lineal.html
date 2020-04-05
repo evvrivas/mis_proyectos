@@ -81,7 +81,7 @@
                                   
                         {% endthumbnail %}   
 
-                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}: {{j.ubicacion}}</a></li>                  
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}: <font color="red">{{j.abierto_cerrado}}</font> {{j.ubicacion}}</a></li>                  
 
 
 
@@ -204,7 +204,7 @@
                                             
                         {% endthumbnail %}
                         
-                      <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}: {{j.ubicacion}}</a></li>
+                      <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}: <font color="red">{{j.abierto_cerrado}}</font> {{j.ubicacion}}</a></li>
   
 
 
@@ -284,7 +284,7 @@
                        
                                                                 
                         {% endthumbnail %}
-                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}: {{j.ubicacion}}</a></li>
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}:<font color="red">{{j.abierto_cerrado}}</font> {{j.ubicacion}}</a></li>
                     
    
  {% endif %}    
@@ -351,10 +351,6 @@
 
  
  <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}}</a></li>  
-
-
-
-
 
 
           {% for j in aleatorias_comercio %} 

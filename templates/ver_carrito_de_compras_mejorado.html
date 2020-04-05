@@ -3,7 +3,6 @@
 {% load staticfiles %} 
 {% block content %}     
 
-
       <center>                
              <ul class="nav nav-pills">                    
               <li class="active"><a data-toggle="pill" href="#home">Nuevos </a></li>
@@ -13,7 +12,7 @@
                                         
                   </ul>
       </center>
-                                 
+                                
   
 <div class="tab-content">
 
@@ -25,7 +24,11 @@
 <div class="row"> 
 <div class="container">
 
-    <div class="alert alert-info">  
+    {% if i.estado_prod == "QUIERO_PEDIR_ESTO" %}
+        <div class="alert alert-warning"> 
+    {% else %}
+        <div class="alert alert-info">
+    {% endif %}  
 
         {% thumbnail i.producto.tienda.imagen1 "40" crop="center" as im %}
                <a href="/informacion_vendedor/{{i.producto.tienda.id_usuario}}" target="_blank"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-circle" style="float: left; margin: 5px 5px 5px 5px;" ></a> 
@@ -99,7 +102,7 @@
                 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Estoy Conforme  </a>
+                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-lg" role="button" > Estoy Conforme  </a>
               {% else %}
                 
               {% endif %}    
@@ -114,7 +117,7 @@
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Acepto Vender </a>
+                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-lg" role="button" > Acepto Vender </a>
                       <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a>
               {% else %}
                 
@@ -126,7 +129,7 @@
     {% if el_usuario_x == "EL_DELIBERY" %}
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
-                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > ACEPTO LLEVARLO </a>
+                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-lg" role="button" > ACEPTO LLEVARLO </a>
                        <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a>
               
 
@@ -275,11 +278,7 @@
 
 <!--######muestra caritas del la tienda######################## -->   
 
-<center> 
-<table BORDER="0" CELLSPACING="1">
-<tr  align="center">
 
- 
 
 <hr>
 
@@ -318,7 +317,7 @@
 <center><a href="/realizar_compra/{{i.id}}" class="btn btn-info btn-lg" role="button">Comprar</a></center>
 
 <br>
-<center><p><h2> Al hacer click sobre el boton Comprar realizara todas las compras mostradas en este pedido. Compras mayoritarias reducen el costo del servicio delibery </center></p></h2>
+<center><p><h4> Al hacer click sobre el boton Comprar realizara todas las compras mostradas en este pedido. Compras mayoritarias reducen el costo del servicio delibery </center></p></h4>
 <br>
 
 {% endif %}
@@ -427,7 +426,7 @@
                 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Estoy Conforme  </a>
+                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-lg" role="button" > Estoy Conforme  </a>
               {% else %}
                 
               {% endif %}    
@@ -603,9 +602,7 @@
 
 <!--######muestra caritas del la tienda######################## -->   
 
-<center> 
-<table BORDER="0" CELLSPACING="1">
-<tr  align="center">
+
 
  
 
@@ -733,7 +730,7 @@
                 
 
               {% elif i.estado_prod == "PRODUCTO_ENTREGADO" %}
-                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-xs" role="button" > Estoy Conforme  </a>
+                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_COMPRADOR" class="btn btn-warning btn-lg" role="button" > Estoy Conforme  </a>
               {% else %}
                 
               {% endif %}    
@@ -749,7 +746,7 @@
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
                       <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Acepto Vender </a>
-                      <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a>
+                      <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-lg" role="button" > Delibery/Financista </a>
               {% else %}
                 
               {% endif %} 
@@ -909,9 +906,6 @@
 
 <!--######muestra caritas del la tienda######################## -->   
 
-<center> 
-<table BORDER="0" CELLSPACING="1">
-<tr  align="center">
 
  
 
