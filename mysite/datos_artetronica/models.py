@@ -507,7 +507,7 @@ class Tiendas(models.Model):
 	     porcentaje_venta=models.DecimalField(max_digits=6,decimal_places=2,blank=True,null=True,default=0.1)
 	     def save(self, *args,**kwargs):
 	     	if self.imagen1:
-	     		self.image=self.imagen1
+	     			self.image=self.imagen1
 	     			try:	
 			     		t_image=Img.open(BytesIO(self.image.read()))
 			     		t_image.thumbnail((360,360),Img.ANTIALIAS)
