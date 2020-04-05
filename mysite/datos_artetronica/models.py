@@ -493,10 +493,7 @@ class Tiendas(models.Model):
 
 	     domingo_abrimos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="0")
 	     domingo_cerramos=models.CharField(max_length=4,blank=True,null=True,choices=HORARIO,default="0")
-	     
-         abierto_cerrado=models.CharField(max_length=12,blank=True,null=True)
-	     
-
+	     abierto_cerrado=models.CharField(max_length=12,blank=True,null=True)
 	     cant_click_whatsapp_acumulados=models.IntegerField(blank=True,null=True,default=0)
 	     cant_click_whatsapp=models.IntegerField(blank=True,null=True,default=0)
 	     costo_click_whatsapp=models.DecimalField(max_digits=6,decimal_places=2,blank=True,null=True,default=0.1)
