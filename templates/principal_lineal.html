@@ -81,7 +81,9 @@
                                   
                         {% endthumbnail %}   
 
-                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}: <font color="red">{{j.abierto_cerrado}}</font> {{j.ubicacion}}</a></li>                  
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}: <font color="red">{{j.abierto_cerrado}}</font> {{j.ubicacion}}</a></li>  
+
+                        <br>                
 
 
 
@@ -142,6 +144,9 @@
                                     {% endif %} 
 
                                      {{j.nombre}}</a></li>
+
+
+                                     <br>
                              
                        
                         
@@ -174,6 +179,7 @@
 
                                <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
                                  
+                                 <br>
             {% endfor %}   
 
  </div>
@@ -205,6 +211,9 @@
                         {% endthumbnail %}
                         
                       <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}: <font color="red">{{j.abierto_cerrado}}</font> {{j.ubicacion}}</a></li>
+
+                      <br>
+
   
 
 
@@ -253,7 +262,7 @@
                                        {{j.precio_A}}
                                     {% endif %}  {{j.nombre}}</a></li>
                                                                  
-                                         
+                                         <br>
                        
             {% endif %}     
              
@@ -286,7 +295,7 @@
                         {% endthumbnail %}
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}:<font color="red">{{j.abierto_cerrado}}</font> {{j.ubicacion}}</a></li>
                     
-   
+                        <br>
  {% endif %}    
    
         
@@ -331,7 +340,7 @@
                                        {{j.precio_A}}
                                     {% endif %}  {{j.nombre}}</a></li>
                              
-
+                                      <br>
                     
 {% endif %}  
            
@@ -362,7 +371,8 @@
                             {% endthumbnail %}   
                                                                                
                   <li><a href="/centro_comercial/{{j.id_usuario}}/{{j.nombre_ccomercial}}">{{j.nombre_ccomercial}}</a></li>
-                                                                               
+                                  
+                                  <br>                                             
               
           {% endfor %}   
 
