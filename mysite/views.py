@@ -53,6 +53,200 @@ from django.db import connection
 from random import sample
 
 
+###########################################
+#cosas de notifficaciones
+from django.views.decorators.http import require_http_methods 
+from django.views.decorators.csrf import csrf_exempt 
+
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.core import serializers
+import json
+
+from fcm_django.models import FCMDevice
+
+
+
+#registration_id (required - is FCM token)
+#name (optional)
+#active (default: true)
+#user (optional)
+#device_id (optional - can be used to uniquely identify devices)
+#type ('android', 'web', 'ios')
+
+def notificacion_para_todos():
+  dispositivos=FCMDevice.objects.filter(active=True)  
+  dispositivos.send_message(
+    title="Detodo negocio",
+    body="Encuentra lo que quieres a un mejor precio",
+    icon="/static/logo45.png"
+  )
+
+def notificacion_nuevo_cliente(lugar):
+     
+    tiendas=Tiendas.objects.filter(ubicacion=lugar)
+    
+    for i in tiendas:
+
+        dispositivos=FCMDevice.objects.filter(active=True,user=i.id_usuario).first()
+        dispositivos.send_message(title="Detodo negocio",body="Se ha incorporado un nuevo Cliente:",icon="/static/logo45.png")
+        
+        dispositivos=FCMDevice.objects.filter(active=True,user=i.administrador_junior).first()
+        dispositivos.send_message(title="Detodo negocio",body="Se ha incorporado un nuevo Cliente:",icon="/static/logo45.png")
+
+        dispositivos=FCMDevice.objects.filter(active=True,user=i.administrador_junior_1).first()
+        dispositivos.send_message(title="Detodo negocio",body="Se ha incorporado un nuevo Cliente:",icon="/static/logo45.png")
+        
+        dispositivos=FCMDevice.objects.filter(active=True,user=i.administrador_junior_2).first()
+        dispositivos.send_message(title="Detodo negocio",body="Se ha incorporado un nuevo Cliente:",icon="/static/logo45.png")
+   
+
+
+
+def notificacion_tienda_nueva(lugar):
+
+    los_usuarios=Usuarios.objects.filter(estoy_en=lugar)
+    
+    for i in los_usuarios:
+        dispositivos=FCMDevice.objects.filter(active=True,user=i.id_usuario).first()
+        dispositivos.send_message(
+        title="Detodo negocio" + tienda.ubicacion,
+        body="Se ha agregado una nueva Tienda:" + tienda.nombre_tienda +": " + tienda.descripcion,
+        icon="/static/logo45.png"
+        )
+
+def notificacion_producto_probable_al_carrito(id_del_pedido):
+    pedido=Carro_de_compras.objects.get(id=id_del_pedido)
+    
+    vector_de_notificacion=[]
+    #vector_de_notificacion.append(pedido.id_comprador)
+    vector_de_notificacion.append(pedido.producto.tienda.id_tienda)
+    vector_de_notificacion.append(pedido.producto.tienda.administrador_junior)
+    
+    cantidad=pedido.cantidad
+    nombre=pedido.producto.nombre
+    especificacion=pedido.especificacion
+    total=pedido.total
+    punitario=pedido.producto.precio_A
+    
+    cuerpo_1 = str(cantidad) + str(nombre) + str(especificacion) + str(punitario) + str(total)
+    cuerpo=cuerpo_1
+    
+    for i in vector_de_notificacion:
+        dispositivos=FCMDevice.objects.filter(active=True,user=i).first()
+        dispositivos.send_message(
+        title="Detodo negocio: Alguien esta interesado en tus productos.!!" ,
+        body=cuerpo,
+        icon="/static/logo45.png"
+        )
+     
+def notificacion_confirmado_producto_al_carrito(id_del_pedido,mensaje):
+    pedido=Carro_de_compras.objects.get(id=id_del_pedido)
+    
+    vector_de_notificacion=[]
+    #vector_de_notificacion.append(pedido.id_comprador)
+    vector_de_notificacion.append(pedido.producto.tienda.id_tienda)
+    vector_de_notificacion.append(pedido.producto.tienda.administrador_junior)
+    vector_de_notificacion.append(pedido.producto.tienda.administrador_junior_1)
+    vector_de_notificacion.append(pedido..producto.tienda.administrador_junior_2)
+    
+    #vector_de_notificacion.append(pedido.delibery)
+    #vector_de_notificacion.append(pedido.delibery_junior)
+    #vector_de_notificacion.append(pedido.financista)
+    #vector_de_notificacion.append(pedido.financista_junior)
+
+    cantidad=pedido.cantidad
+    nombre=pedido.producto.nombre
+    especificacion=pedido.especificacion
+    total=pedido.total
+    punitario=pedido.producto.precio_A
+
+    lugar_de_entrega=pedido.lugar_de_entrega  
+    fecha_de_entrega=pedido.fecha_de_entrega   
+    #servicio_a_domicilio=pedido.servicio_a_domicilio
+    costo_servicio_a_domicilio=pedido.costo_servicio_a_domicilio
+    #servicio_financiero=pedido.servicio_financiero  
+
+    cuerpo_2 =  str(fecha_de_entrega) + str(lugar_de_entrega) + str(costo_servicio_a_domicilio)
+    cuerpo_1 = str(cantidad) + str(nombre) + str(especificacion) + str(punitario) + str(total)
+    cuerpo=cuerpo_1+cuerpo_2
+    
+    for i in vector_de_notificacion:
+        dispositivos=FCMDevice.objects.filter(active=True,user=i).first()
+        dispositivos.send_message(
+        title="Detodo negocio:!! " + mensaje ,
+        body=cuerpo,
+        icon="/static/logo45.png"
+        )
+
+         
+def notificacion_favoritos_tienda(id_de_la_tienda):
+    tienda_preferida=Tiendas.objects.get(id=id_de_la_tienda)
+    preferidas=Preferidas.objects.filter(tienda=tienda_preferida)
+
+    for i in preferidas:
+        dispositivos=FCMDevice.objects.get(active=True,user=i.id_comprador)
+        dispositivos.send_message(
+        title="Detodo negocio" + i.tienda.nombre_tienda,
+        body="Visita nuestra tienda. Nos estamos actualizando:" ,
+        icon="/static/logo45.png"
+        ) 
+      
+
+def notificacion_favoritos_producto(id_del_producto):
+    producto_preferida=Productos.objects.get(id=id_del_producto)
+    tienda_preferida=Tiendas.objects.get(id=producto_preferida.tienda.id)
+
+    preferidas=Preferidas.objects.filter(tienda=tienda_preferida)
+    
+    cuerpo=str(producto_preferida.nombre) + str(producto_preferida.precio_A)
+    nombre_tienda=str(tienda_preferida.nombre_tienda)
+    
+    for i in preferidas:
+        dispositivos=FCMDevice.objects.filter(active=True,user=i.id_comprador).first()
+        dispositivos.send_message(
+        title="Detodo negocio" + nombre_tienda,
+        body=cuerpo ,
+        icon="/static/logo45.png"
+        ) 
+
+
+#def enviar_notificaciones_especificas():
+  #primero obtenemos todos los dispositivos
+#  dispositivos=FCMDevice.objects.filter(active=True)  
+#  dispositivos.send_mensaje(
+#    title="Pelicula agreada!!!",
+#    body="Se ha agregado:" +formulario.cleaned_data['nombre'],
+#    icon="/static/core/img/loop.png"
+#  )
+ 
+
+@csrf_exempt
+@require_http_methods(['POST'])
+def guardar_token(request):
+    body = request.body.decode('utf-8')
+    bodyDict = json.loads(body)
+    token = bodyDict['token']
+
+    existe = FCMDevice.objects.filter(registration_id=token, active=True)
+
+    if len(existe)>0:
+      return HttpResponseBadRequest(json.dumps({'mensaje':'el token ya exsiste'}))
+
+    dispositivo=FCMDevice()
+    dispositivo.registration_id = token
+    dispositivo.active= True
+
+    #solo si el usuario esta autenticado procedemos a enlasarlo
+    if request.user.is_authenticated:
+      dispositivo.user=request.user
+
+    try:
+        dispositivo.save()
+        return HttpResponse(json.dumps({'mensaje':'token guardado'}))
+    except:
+        return HttpResponseBadRequest(json.dumps({'mensaje':'no se ha podido guardar'}))
+
+
 
 def crear_categorias(request):
   #categorias=["Productos Ventas Varias","Alimentos bebidas","Antiguedades artesanias Adornos","Mascotas acsesorios veterinarios",
@@ -71,6 +265,8 @@ def crear_categorias(request):
 
   conf=Configuracion_sistema(mensaje_bienvenida="Bienvenido a DETODONEGOCIO, Has tu compra, nosotros financiamos el 50% Inicial de la compra", n_visitas=0)
   conf.save()
+
+  notificacion_para_todos()
   
  
 
@@ -169,22 +365,10 @@ def abierto_cerrado(id_tienda):
 
 
 
-
-
-
-
-  
-
-
-
-
 def info_pagina(requesta):
     cantidad_usuarios=Usuarios.objects.all().count()
     cantidad_tiendas=Tiendas.objects.all().count()
-    cantidad_productos=Productos.objects.all().count()
-
-    
-    
+    cantidad_productos=Productos.objects.all().count()    
 
           
     try:
@@ -202,7 +386,7 @@ def info_pagina(requesta):
       if t_usuario=="EL_COMPRADOR":    
           cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()
       else:
-          cantidad_pedidos= Carro_de_compras.objects.filter(producto__id_usuario=request.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()
+          cantidad_pedidos= Carro_de_compras.objects.filter(producto__id_usuario=requesta.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()
     
 
     except:  
@@ -276,6 +460,9 @@ def crear_producto(request,idusuario,nombretienda):
                                       
                                       #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                                       connection.close()
+                                      
+                                      notificacion_favoritos_tienda(tiendas.id):
+
                                       return render(request,'confirmar_tienda.html',locals())     
                               else:
 
@@ -363,6 +550,8 @@ def editar_producto(request,idusuario,nombretienda,acid):
                     productos=[]
                     productos.append(f)
 
+                    notificacion_favoritos_tienda(id.tiendas):
+
                     return render(request,'catalogo_tienda.html',locals())      
 
                                           
@@ -435,7 +624,12 @@ def crear_usuario(request):
                             usuario.id_usuario = user.username # Set the user object here
                             usuario.save() # Now you can send it to DB
                             
-                            form.save() 
+                            form.save()
+                            
+                            
+                            nuevo_cliente=Usuarios.objects.get(id_usuario=whatsapp) 
+                            lugar=nuevo_cliente.estoy_en
+                            notificacion_nuevo_cliente(lugar) 
 
                             
                             connection.close()
@@ -549,7 +743,9 @@ def crear_tienda(request):
                                 connection.close()
                                 #return render_to_response('confirmar.html', locals() ,context_instance=RequestContext(request))
                                 tiendas=Tiendas.objects.filter(id_usuario=request.user.username,nombre_tienda=nombretienda).first() 
-                              
+                                lugar=tiendas.ubicacion
+                                notificacion_tienda_nueva(lugar)                   
+                                
                                 return render(request,'confirmar.html',locals())     
                   else:
 
@@ -608,6 +804,8 @@ def editar_tienda(request,acid):
                    tiendecilla.save() # Now you can send it to DB
                    form.save() 
                    connection.close()
+
+                   notificacion_favoritos_tienda(f.id):
                    return render(request,'confirmar.html',locals())             
                     
         else:
@@ -1051,6 +1249,7 @@ def informacion(request):
   ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
   #return render_to_response('informacion.html', locals(),context_instance=RequestContext(request))
+  notificacion_para_todos()
   connection.close()
   return render(request,'informacion.html',locals())   
 
@@ -1378,7 +1577,11 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
                  b=b+1
                  tiendas.cant_click_pedidos_nuevos_acumulados=b
                  tiendas.save()
-
+                 
+                 
+                 carrito=Carro_de_compras.objects.filter(id_comprador=n.id_usuario).first()
+                 notificacion_producto_probable_al_carrito(carrito.id)
+                 
 
       
     
@@ -1661,7 +1864,9 @@ def eliminar_producto_del_carrito(request,id_producto):
 
        Carro_de_compras.objects.get(id=id_producto).delete()
        carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).order_by("producto__tienda__nombre_tienda")
-    
+       
+       mensaje="Se ha eliminado un pedido, revisa:!"
+       notificacion_confirmado_producto_al_carrito(id_producto,mensaje)
        #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
        return render(request,'ver_carrito_de_compras_mejorado.html',locals()) 
 
@@ -1689,6 +1894,8 @@ def editar_producto_del_carrito(request,id_producto):
                 if form.is_valid():                         
          
                             form.save()
+                            mensaje="Se ha editado un pedido, revisa:!"
+                            notificacion_confirmado_producto_al_carrito(id_producto,mensaje)
                             try:
                                  f.total=f.cantidad*f.producto.precio_A 
                             except:
@@ -1727,10 +1934,15 @@ def editar_estado_producto_del_carrito(request,id_producto,el_usuario):
        if el_usuario=="EL_VENDEDOR":                
 
              if f.estado_prod=="QUIERO_PEDIR_ESTO":
-                  f.estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO"     
+                  f.estado_prod="EL_VENDEDOR_RECIBIO_EL_PEDIDO" 
+                  
+
 
              elif f.estado_prod=="EL_VENDEDOR_RECIBIO_EL_PEDIDO":
-                  f.estado_prod="EL_VENDEDOR_A_CONFIRMADO"   
+                  f.estado_prod="EL_VENDEDOR_A_CONFIRMADO"
+
+                  mensaje="Se acepta entregar el pedido! "
+                  notificacion_confirmado_producto_al_carrito(id_producto,mensaje)   
 
              elif f.estado_prod=="EL_VENDEDOR_A_CONFIRMADO":
                    f.estado_prod="PRODUCTO_ENTREGADO"
@@ -1789,7 +2001,10 @@ def realizar_compra(request):
 
         administrador_tienda.venta_acumulada=a
         administrador_tienda.venta_actual=b
-        administrador_tienda.save()      
+        administrador_tienda.save()
+
+        mensaje="El Cliente realizo la compra "
+        notificacion_confirmado_producto_al_carrito(i.id,mensaje)      
 
 
      return render(request,'confirmar_compra.html',locals())   
@@ -1825,6 +2040,9 @@ def realizar_compra_individual(request,id_producto):
      administrador_tienda.venta_acumulada=a
      administrador_tienda.venta_actual=b
      administrador_tienda.save()
+
+     mensaje="El Cliente realizo una compra "
+     notificacion_confirmado_producto_al_carrito(id_producto,mensaje) 
      
      return render(request,'confirmar_compra.html',locals())   
 

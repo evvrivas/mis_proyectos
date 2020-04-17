@@ -20,8 +20,141 @@
   js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+{%  if user.is_authenticated %} 
+
+<!-- ###########################################################################-->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<!--<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script> -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyD4FDKeln63jm4VnY3D6AOUuO-q89QHX48",
+    authDomain: "detodonegocio-dbc1e.firebaseapp.com",
+    databaseURL: "https://detodonegocio-dbc1e.firebaseio.com",
+    projectId: "detodonegocio-dbc1e",
+    storageBucket: "detodonegocio-dbc1e.appspot.com",
+    messagingSenderId: "152761675312",
+    appId: "1:152761675312:web:b91be95a396f1e8d4387f5",
+    
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  let messaging = firebase.messaging();
+
+
+
+/*
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/serviceworker.js', {scope: '/'})
+  .then(function(reg) {
+    // registration worked
+    console.log('Registration succeeded. Scope is ' + reg.scope);
+  }).catch(function(error) {
+    // registration failed
+    console.log('Registration failed with ' + error);
+  });
+}
+
+*/
+
+
+
+  //primero tenemos que enlasar el service worqker
+  navigator.serviceWorker
+  .register('./serviceworker.js')
+  .then(function(register) {
+    
+    messaging.useServiceWorker(register);
+
+    //solicitamos permiso al usuario de recibir notificaciones
+     messaging.requestPermission()
+    .then(function(){
+        console.log("El usuario ha aceptado notificaciones");
+        return messaging.getToken();
+    })
+
+    .then(function(token){
+      console.log(token);
+      //enviaremos el token hacia Django para guardarlo  
+      fetch('guardar_token',{
+        method:'post',
+        headers:{
+          'Content-Type':'application/json',
+          'Accept':'application/json'
+        },
+        body:JSON.stringify({
+          'token':token
+        })
+      })
+
+
+          .then(function(resultado){
+              console.log("se ha guardado el token")
+            })
+          .catch(function(e){
+            console.log("No se ha guardado el token")
+            })
+    
+    }) 
+    
+    .catch(function(e){
+        console.log("El usuario no ha aceptado notificaciones");
+
+
+    })
   
-  
+})
+
+//programamos la recepcion de las notificaciones push
+messaging.onMessage(function(payload){
+  console.log("ha llegado notificacion")
+  let data = payload;
+  console.log(data);
+
+  let title = payload.notification.title;
+  let options = {
+    body: payload.notification.body,
+    icon: payload.notification.icon
+  }
+
+  let mensaje = new Notification(title, options);
+
+});
+
+ 
+</script>
+
+
+
+
+
+
+
+
+<!-- ########################################################################### -->
+
+{% endif %} 
+
+
+
+
+
+
+
+
+
   </head>
 
 
@@ -261,7 +394,8 @@
     <script src='{% static  "bootstrap/js/bootstrap.min.js" %}'></script>
 
   </body>
-</html>
+
+  
 
 
 

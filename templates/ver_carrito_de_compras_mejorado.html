@@ -118,7 +118,7 @@
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
                       <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-lg" role="button" > Acepto Vender </a>
-                      <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a>
+                      <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delivery/Financista </a>
               {% else %}
                 
               {% endif %} 
@@ -130,7 +130,7 @@
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
                       <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-lg" role="button" > ACEPTO LLEVARLO </a>
-                       <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a>
+                       <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delivery </a>
               
 
               {% else %}
@@ -317,7 +317,7 @@
 <center><a href="/realizar_compra/{{i.id}}" class="btn btn-info btn-lg" role="button">Comprar</a></center>
 
 <br>
-<center><p><h4> Al hacer click sobre el boton Comprar realizara todas las compras mostradas en este pedido. Compras mayoritarias reducen el costo del servicio delibery </center></p></h4>
+<center><p><h4> Al hacer click sobre el boton Comprar realizara todas las compras mostradas en este pedido. Compras mayoritarias reducen el costo del servicio delivery </center></p></h4>
 <br>
 
 {% endif %}
@@ -442,7 +442,7 @@
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
                       <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Acepto Vender </a>
-                      <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delibery/Financista </a>
+                      <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delivery/Financista </a>
               {% else %}
                 
               {% endif %} 
@@ -454,7 +454,7 @@
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
                       <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > ACEPTO LLEVARLO </a>
-                       <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a>
+                       <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delivery </a>
               
 
               {% else %}
@@ -746,7 +746,7 @@
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
                       <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Acepto Vender </a>
-                      <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-lg" role="button" > Delibery/Financista </a>
+                      <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-lg" role="button" > Delivery/Financista </a>
               {% else %}
                 
               {% endif %} 
@@ -758,7 +758,7 @@
 
           {% if i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO" %}
                       <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > ACEPTO LLEVARLO </a>
-                       <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delibery </a>
+                       <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Agegar $ delivery </a>
               
 
               {% else %}

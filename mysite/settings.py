@@ -51,6 +51,8 @@ INSTALLED_APPS = (
     'mysite.datos_artetronica',
     'sorl.thumbnail',
     'dbbackup',  # django-dbbackup
+    'fcm_django',
+
 
 )
 
@@ -244,3 +246,20 @@ EMAIL_USE_TLS = True
 
 
 LOGIN_REDIRECT_URL = '/' #Or whatever you wish
+
+
+
+
+
+FCM_DJANGO_SETTINGS = {
+        "APP_VERBOSE_NAME": "detodonegocio",
+         # default: _('FCM Django')
+        "FCM_SERVER_KEY": "AIzaSyD4FDKeln63jm4VnY3D6AOUuO-q89QHX48",
+         # true if you want to have only one active device per registered user at a time
+         # default: False
+        "ONE_DEVICE_PER_USER": False,
+         # devices to which notifications cannot be sent,
+         # are deleted upon receiving error response from FCM
+         # default: False
+        "DELETE_INACTIVE_DEVICES": True,
+}

@@ -114,6 +114,11 @@ urlpatterns = [
     url(r'^borrar_categoria_de_mi_tienda/(\d+)/(\d+)/$',borrar_categoria_de_mi_tienda),   
     
     url(r'^comunicacion_tienda/(\d+)/([^/]+)/$',comunicacion_tienda),
+
+    
+
+    url(r'^guardar_token/$',guardar_token, name='guardar_token'),
+    #url(r'^serviceworker(.*.js)$', TemplateView.as_view(template_name='serviceworker.js',  content_type='application/x-javascript')),
      
     
 
