@@ -13,6 +13,8 @@
     <link href='{% static  "css/style.css" %}' rel="stylesheet"></script>
 
     <div id="fb-root"></div>
+
+
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -22,6 +24,61 @@
 }(document, 'script', 'facebook-jssdk'));</script>
   
   
+  <script>
+
+// generamos el evento para el boton
+document.querySelector("button").addEventListener("click",calcular);
+/**
+ * funcion que realiza los calculos
+ */
+
+function calcular() {
+    /** sumamos las filas **/
+    // obtenemos todas las filas del tbody
+    const filas=document.querySelectorAll("#miTabla tbody tr");
+    // bucle por cada una de las filas
+    filas.forEach((fila) => {
+        // obtenemos los tds de cada fila
+        const tds=fila.querySelectorAll("td");
+        const inp=fila.querySelectorAll("input");
+
+        let total=0;
+        // bucle por cada uno de los tds con excepcion el primero (producto) y ultimo (total)           
+
+        //var x= document.getElementById('name').value
+        //total=parseFloat(tds[5].innerHTML)* x;
+
+        total=parseFloat(tds[3].innerHTML)* parseFloat(tds[4].querySelector('input').value);
+        //tds[0],tds[1],tds[2],tds[3]             
+
+        tds[tds.length-1].innerHTML=total.toFixed(2);
+    });
+    /** sumamos las columnas **/
+    // obtenemos el numero de columnas
+    const columnas=document.querySelectorAll("#miTabla thead tr th");
+    // obtenemos las fila de los totales
+    const totalFila=document.querySelectorAll("#miTabla tfoot tr td");
+    // bucle por cada una de las columnas excepto la primera
+    for(let i=columnas.length-1; i<columnas.length; i++) {
+        let total=0;
+
+        // obtenemos el valor de cada una de las filas
+        filas.forEach((fila) => {
+            total+=parseFloat(fila.querySelectorAll("td")[i].innerHTML);
+        });
+        // mostramos el total en la ultima fila
+        totalFila[i].innerHTML=total.toFixed(2);
+    }
+}
+
+</script> 
+
+
+
+
+
+
+
   </head>
 
 <body> 
@@ -53,18 +110,18 @@
 
                  
                   {% ifnotequal corazon 'PREFERIDA' %}
-                   <a href="/agregar_a_preferidas/{{tiendas.id}}/">  <img src ='{% static "corazongris45.png" %}' alt='img' > </a>
+                   <a href="/agregar_a_preferidas/{{tiendas.id}}/">  <img src ='{% static "corazongris45.png" %}' alt='img' class="img-circle"> </a>
                         
                    
                   {% endifnotequal %}
 
 
                   {% ifequal corazon 'PREFERIDA' %} 
-                         <a href="/agregar_a_preferidas/{{tiendas.id}}/">  <img src ='{% static "corazon45.png" %}' alt='img' > </a>
+                         <a href="/agregar_a_preferidas/{{tiendas.id}}/">  <img src ='{% static "corazon45.png" %}' alt='img' class="img-circle" > </a>
                        
                   {% endifequal %}
 
-                  <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">  <img src ='{% static "carrito45.png" %}' alt='img' > </a> 
+                  <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">  <img src ='{% static "carrito45.png" %}' alt='img' class="img-circle" > </a> 
 
                                   
 
@@ -79,8 +136,9 @@
 
               <a href="/">  <img src ='{% static "logo45.png" %}' alt='img' > </a>    
 
-                {%  if user.is_authenticated and user.username == tiendas.id_usuario %}          
+                {%  if user.is_authenticated %}          
                        
+                                 
                                    <div class="btn-group">
                                           <button type="button" class="btn btn-success dropdown-toggle"
                                                   data-toggle="dropdown">
@@ -88,6 +146,12 @@
                                           </button>
 
                                              <ul class="dropdown-menu" role="menu">
+
+                                                  <li><a href="/informacion_vendedor/{{tiendas.id_usuario}}">$?</a></li>   
+                                                  <li><a href="/accounts/logout/">Salir</a></li> 
+                                            {%  if user.username == tiendas.id_usuario %} 
+
+
                                                  <li><a href="/crear_producto/{{user.username}}/{{tiendas.nombre_tienda}}">Subir un producto </a></li>      
                                                  <li><a href="/editar_tienda/{{tiendas.id}}">Editar mi tienda </a></li>
                                                  <li><a href="/ver_mis_mensajes/TODOS/EL_VENDEDOR">Ver mensajes </a></li> 
@@ -118,10 +182,8 @@
                                               {% endifequal %}
                                               <li><a href="/admin">Administrar</a></li>
 
-                                             
-                                              <li><a href="/informacion_vendedor/{{tiendas.id_usuario}}">$?</a></li>   
-                                              <li><a href="/accounts/logout/">Salir</a></li> 
-
+                                             {% endif %}
+                                              
 
                                              </ul>                   
                                    </div>
@@ -144,17 +206,7 @@
           </center>      
      </div> 
 
-</div>
 
-  
-
-
-
-
-
-
-
-<div class="panel-body">  
 
 
 <div class="col-md-12"> 
@@ -163,26 +215,7 @@
 
                             <tr>
 
-                                <td>
-
-      {% if tiendas.nota_de_evaluacion < 4 %}
-          <a href="/informacion_vendedor/{{tiendas.id_usuario}}">  <img src ='{% static "cararoja30.png" %}' alt='img' class="img-circle"> </a>
-
-      {% elif tiendas.nota_de_evaluacion < 7 %}
-          <a href="/informacion_vendedor/{{tiendas.id_usuario}}">  <img src ='{% static "caraamarilla30.png" %}' alt='img' class="img-circle"> </a>      
-      {% else %}
-
-          <a href="/informacion_vendedor/{{tiendas.id_usuario}}">  <img src ='{% static "caraverde30.png" %}' alt='img' class="img-circle"> </a>
-      {% endif %}
-
-
-
-
-
-                                </td>
-
-
-
+                              
 
                                 <td>
                <div class="btn-group">
@@ -215,14 +248,29 @@
                           </table></center> 
              </div>    
 
+</div>
 
+
+<center> <h6>
+                           <a href="/cambiar_tipo_de_vista/{{tiendas.id}}">Vistas <span class="badge">{{tiendas.n_visitas}}</span></a>
+                          <a href="#">User <span class="badge">{{n_usuarios}}</span></a>
+                   <!-- <a href="#">Tiendas <span class="badge">{{n_tiendas}}</span></  a>      -->   
+                   <!--   <a href="#">Prod <span class="badge">{{n_productos}}</span></a> -->
+                          <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">Pedidos <span class="badge">{{n_pedidos}}</span></a>
+                             
+                       </h6></center>
+
+<center><h5><p>tiendas.descripcion</p></h5></center>
+
+<div class="panel-body">  
     
-
-  
 
 <div class="col-md-12"> 
     {% block content %}
     {% endblock %}
+
+    {% block body_extra %}{% endblock body_extra %}
+    {% block extra_js %}{% endblock extra_js %}
  </div>
  
 
@@ -245,8 +293,7 @@
        
 
 <a href="https://www.facebook.com/sharer/sharer.php?u=www.detodonegocio.com/{{j.id_usuario}}/{{j.nombre_tienda}}"><img src='{% static "facebook.png" %}' alt='img' ></a>
-
-                               
+                             
 
 
 
@@ -259,8 +306,9 @@
     </div>
 
   </div>
-  
 
+    
+  
     <script src='{% static "bootstrap/js/jquery.min.js" %}' ></script>
     <script src='{% static  "bootstrap/js/bootstrap.min.js" %}'></script>
 

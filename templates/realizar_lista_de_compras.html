@@ -1,0 +1,124 @@
+{% extends "base_tienda.html" %}
+{% load staticfiles %} 
+{% load thumbnail %}
+
+
+{% block body_extra %}
+
+<div class="alert alert-danger">
+
+<center><p><button onclick="calcular()">Calcular</button>  </p></center>
+
+<center><form action="/agregar_lista_de_compra_al_carrito/{{producto.id}}/" method="post">
+                       {% csrf_token %}                    
+<table id="miTabla" BORDER="1" CELLSPACING="1" >
+    <thead>
+        <tr align="center">               
+            <th WIDTH="15"><h5>Cant.</h5></th>
+            <th WIDTH="15"><h5>U</h5></th>
+            <th WIDTH="200"><h5>Descripción</h5></th>        
+            <th WIDTH="15"><h5>$ P/U</h5></th>
+            <th WIDTH="15"><h5>Cant</h5></th>
+            <th WIDTH="20"><h5>Total</h5></th>            
+        </tr>
+        
+    </thead>
+
+    <tfoot>
+        <tr align="center">
+            <td WIDTH="15"><h4></h4></td>
+            <td WIDTH="15"></td>
+            <td WIDTH="200">Total</td>
+            <td WIDTH="15"></td>
+            <td WIDTH="15">$</td>           
+            <td WIDTH="20"></td>
+           
+
+        </tr>
+    </tfoot>
+
+    <tbody>
+        
+{% for i in vector %}
+        <tr align="center">
+            <td WIDTH="15">{{i.0}}</td>
+            <td WIDTH="15">{{i.1}}</td>
+            <td WIDTH="200"><h5>{{i.2}}</h5></td>
+            <td WIDTH="15">{{i.3}}</td>            
+            <td WIDTH="15"><input type="text" id="name" name="{{ forloop.counter0 }}" size="2" value="0" ></td>           
+            <td WIDTH="20"></td>
+        </tr>
+{% endfor %}
+   </tbody>
+
+</table>
+  
+
+    
+    <br>  
+   <center>      
+    <input type="submit" value="Realizar la compra" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+                              </center>
+<br>                                                                                                
+</form> </center>
+
+</div>
+
+{% endblock %}
+{% block extra_js %}
+
+<script>
+
+// generamos el evento para el boton
+document.querySelector("button").addEventListener("click",calcular);
+/**
+ * funcion que realiza los calculos
+ */
+
+function calcular() {
+    /** sumamos las filas **/
+    // obtenemos todas las filas del tbody
+    const filas=document.querySelectorAll("#miTabla tbody tr");
+    // bucle por cada una de las filas
+    filas.forEach((fila) => {
+        // obtenemos los tds de cada fila
+        const tds=fila.querySelectorAll("td");
+        const inp=fila.querySelectorAll("input");
+
+        let total=0;
+        // bucle por cada uno de los tds con excepcion el primero (producto) y ultimo (total)           
+
+        //var x= document.getElementById('name').value
+        //total=parseFloat(tds[5].innerHTML)* x;
+
+        total=parseFloat(tds[3].innerHTML)* parseFloat(tds[4].querySelector('input').value);
+        //tds[0],tds[1],tds[2],tds[3]             
+
+        tds[tds.length-1].innerHTML=total.toFixed(2);
+    });
+    /** sumamos las columnas **/
+    // obtenemos el numero de columnas
+    const columnas=document.querySelectorAll("#miTabla thead tr th");
+    // obtenemos las fila de los totales
+    const totalFila=document.querySelectorAll("#miTabla tfoot tr td");
+    // bucle por cada una de las columnas excepto la primera
+    for(let i=columnas.length-1; i<columnas.length; i++) {
+        let total=0;
+
+        // obtenemos el valor de cada una de las filas
+        filas.forEach((fila) => {
+            total+=parseFloat(fila.querySelectorAll("td")[i].innerHTML);
+        });
+        // mostramos el total en la ultima fila
+        totalFila[i].innerHTML=total.toFixed(2);
+    }
+}
+
+</script> 
+
+
+{% endblock %}
+
+
+       
+

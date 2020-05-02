@@ -11,10 +11,7 @@
 
      <div class="alert alert-danger">
                   
-         <a href="/cambiar_tipo_de_vista/{{tiendas.id}}" class="alert-link"> Cambiar vista O>--, Tienes  {{tiendas.n_visitas}} visitas, La tienda esta <font color="red">{{estado_de_la_tienda}} a esta hora</font> </a>
-         <br>
-                
-                <center> <h4><p>{{tiendas.promocion}}</p></h4> </center>
+                  <center> <h4><p>{{tiendas.promocion}}</p></h4> </center>
         
     
       <h6> {{ productos.0.categoria.descripcion | linebreaks }} </h6>   
@@ -64,6 +61,14 @@
                        </div>
 
 
+{% if j.descripcion.0 != "*" %}  
+
+                         
+               <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
+                              {% csrf_token %}     
+
+
+
 {% if var == 'MIO' %}
                          <div class="row">              
                           <center>   
@@ -83,7 +88,7 @@
 {% else %}
 
                                 {% if j.precio_A  and j.precio_A < 60  %}
-                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1">
                                      <input type="submit" value="p/u $ {{ j.precio_A }} QUIERO COMPRAR + $0.99 Delibery" class="btn btn-info" data-toggle="modal" data-target="#myModal">
 
 
@@ -116,6 +121,15 @@
                               
                               
                </form>
+
+    {% else %}
+
+<br>
+    <center> <a href="/realizar_lista_de_compras/{{j.id}}" class="btn btn-info btn-xs" role="button">Hacer lista de compras</a></center>
+    <br>  
+<br>
+
+{% endif %}
        </td>  
 
                               
@@ -170,6 +184,11 @@
                           <h3><center> {{j.nombre}}  </center></h3>
                        </div>
 
+{% if j.descripcion.0 != "*" %}  
+
+                         
+               <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
+                              {% csrf_token %}     
 
 {% if var == 'MIO' %}
                          <div class="row">              
@@ -190,7 +209,7 @@
 {% else %}
 
                                 {% if j.precio_A  and j.precio_A < 60  %}
-                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
+                                 <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1">
                                      <input type="submit" value="p/u $ {{ j.precio_A }} QUIERO COMPRAR + $0.99 Delibery" class="btn btn-info " data-toggle="modal" data-target="#myModal">
 
 
@@ -223,6 +242,17 @@
                               
                               
                </form>
+{% else %}
+
+<br>
+    <center> <a href="/realizar_lista_de_compras/{{j.id}}" class="btn btn-info btn-xs" role="button">Hacer lista de compras</a></center>
+    <br>  
+<br>
+
+{% endif %}
+
+
+
        </td>  
 
                               
@@ -272,6 +302,11 @@
                           <h3><center> {{j.nombre}}  </center></h3>
                        </div>
 
+{% if j.descripcion.0 != "*" %}  
+
+                         
+               <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
+                              {% csrf_token %}     
 
 {% if var == 'MIO' %}
                          <div class="row">              
@@ -325,6 +360,15 @@
                               
                               
                </form>
+
+               {% else %}
+
+<br>
+    <center> <a href="/realizar_lista_de_compras/{{j.id}}" class="btn btn-info btn-xs" role="button">Hacer lista de compras</a></center>
+    <br>  
+<br>
+
+{% endif %}
        </td>  
 
                               

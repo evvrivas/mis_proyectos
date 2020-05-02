@@ -448,6 +448,8 @@ class Tiendas(models.Model):
 	     ccomercial=models.ForeignKey('Ccomercial',blank=True,null=True)   
 	     nombre_tienda=models.CharField(max_length=30)
 	     ubicacion=models.CharField(max_length=30,blank=True,choices=CIUDADES)
+	     latitud=models.CharField(max_length=30,blank=True ,null=True)
+	     longitud=models.CharField(max_length=30,blank=True,null=True)
 	     #categoria=models.ForeignKey('Categoria_global',blank=True,null=True)
 	     categoria=models.CharField(max_length=40,blank=True,choices=SUPER_CATEGORIA)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
@@ -705,9 +707,10 @@ class Preferidas(models.Model):
 
 
 class Evaluacion(models.Model):
-	id_evaluador=models.ForeignKey('Productos',blank=True,null=True)
-	id_evaluado=models.CharField(max_length=30,null=True)
-	nota = models.TextField(blank=True,null=True)
+	id_evaluador=models.CharField(max_length=30,null=True,blank=True)
+	id_evaluado=models.CharField(max_length=30,null=True,blank=True)
+	nota = models.IntegerField(blank=True,null=True,default=0)
+	     
 	
 	def __str__(self):
 				return  self.id_evaluador

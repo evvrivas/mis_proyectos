@@ -60,6 +60,8 @@ urlpatterns = [
     url(r'^ver_categorias_tienda/([^/]+)/([^/]+)/([^/]+)/$', ver_mis_categorias),
     url(r'^busqueda/([^/]+)/$', busqueda),
     url(r'^busqueda_tienda/([^/]+)/([^/]+)/$', busqueda_tienda),
+    url(r'^busqueda_desde_app/([^/]+)/$', busqueda_desde_app),
+    
 
     url(r'^editar_pedido/([^/]+)/([^/]+)/(\d+)/$',editar_pedido),
     url(r'^hacer_pedido/([^/]+)/([^/]+)/$',hacer_pedido),
@@ -114,12 +116,15 @@ urlpatterns = [
     url(r'^borrar_categoria_de_mi_tienda/(\d+)/(\d+)/$',borrar_categoria_de_mi_tienda),   
     
     url(r'^comunicacion_tienda/(\d+)/([^/]+)/$',comunicacion_tienda),
-
+    url(r'^seleccion_compra/(\d+)/(\d+)/$',seleccion_compra),
     
+    url(r'^notificar_a_todos_que/$',notificar_a_todos_que),
 
     url(r'^guardar_token/$',guardar_token, name='guardar_token'),
-    #url(r'^serviceworker(.*.js)$', TemplateView.as_view(template_name='serviceworker.js',  content_type='application/x-javascript')),
+    url(r'^serviceworker(.*.js)$', TemplateView.as_view(template_name='serviceworker.js',  content_type='application/x-javascript')),
      
+    url(r'^realizar_lista_de_compras/(\d+)/$',realizar_lista_de_compras),
+    url(r'^agregar_lista_de_compra_al_carrito/(\d+)/$',agregar_lista_de_compra_al_carrito),
     
 
     url(r'^([^/]+)/$', mis_tiendas),

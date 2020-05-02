@@ -66,7 +66,7 @@
           <hr>
 
           <p><h5>{{ i.cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} TOTAL: {{ i.total }}</h5></p>
-          <p><h5>{{ i.especificacion }}</h5></p>
+          <p><h5>{{ i.especificacion| linebreaks }}</h5></p>
           <hr>
            {% if i.costo_servicio_a_domicilio %}
  <h6> <p> más  $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> </h6>
@@ -390,7 +390,7 @@
           <hr>
 
           <p><h5>{{ i.cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} TOTAL: {{ i.total }}</h5></p>
-          <p><h5>{{ i.especificacion }}</h5></p>
+          <p><h5>{{ i.especificacion| linebreaks }}</h5></p>
           <hr>
            {% if i.costo_servicio_a_domicilio %}
  <h6> <p> más  $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> </h6>
@@ -694,7 +694,7 @@
           <hr>
 
           <p><h5>{{ i.cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} TOTAL: {{ i.total }}</h5></p>
-          <p><h5>{{ i.especificacion }}</h5></p>
+          <p><h5>{{ i.especificacion| linebreaks }}</h5></p>
           <hr>
            {% if i.costo_servicio_a_domicilio %}
  <h6> <p> más  $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> </h6>

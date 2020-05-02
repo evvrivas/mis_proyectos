@@ -29,7 +29,7 @@
        <br> 
        
 <br>
-<p>El esta evaluado con esta NOTA: {{usuario.nota_de_evaluacion}} </p> 
+<p>El esta evaluado con esta NOTA: {{administrador.nota_de_evaluacion}} </p> 
 
        <br>      
  <p> ERES EL ADMINISTRADOR DE ESTAS TIENDAS </p>
@@ -123,44 +123,7 @@
                 
 
 {% endblock %}
-
-
-
-     
+  
     
      
 
-
-       
-        
-        total_watsapp_acumulado
-        total_watsapp_parcial
-        
-        total_telefono_acumulado        
-        total_telefono_parcial
-     
-        total_pedidos_nuevos_acumulado
-        total_pedidos_nuevos_parcial 
-        
-        total_venta_acumulada
-        venta_actual_parcial
-
-
-     except:
-        pass
-
-     try:
-        tiendas_del_administrador_jr=Tiendas.objects.filter(administrador_junior=request.user.username)
-        ti=tiendas_del_administrador_jr
-        
-        total_watsapp_acumulado=ti.cant_click_whatsapp_acumulados*ti.costo_click_whatsapp
-        total_watsapp_parcial=ti.cant_click_whatsapp*ti.costo_click_whatsapp
-
-        total_telefono_acumulado=ti.cant_click_telefono_acumulados*ti.costo_click_telefono
-        total_telefono_parcial=ti.cant_click_telefono_*ti.costo_click_telefono
-     
-        total_pedidos_nuevos_acumulado = ti.cant_click_pedidos_nuevos_acumulados*ti.costo_click_pedidos_nuevos
-        total_pedidos_nuevos_parcial = ti.cant_click_pedidos_nuevos*ti.costo_click_pedidos_nuevos 
-        
-        total_venta_acumulada= ti.venta_acumulada*ti.porcentaje_venta
-        venta_actual_parcial= ti.venta_actual*ti.porcentaje_venta

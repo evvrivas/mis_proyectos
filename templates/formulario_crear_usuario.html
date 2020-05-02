@@ -4,18 +4,10 @@
          
        
    
-<div class="panel panel-info">
-      <div class="panel-heading">
-        <h2 class="panel-title"><center>entrada usuario </center></h2>
-
-             
-      </div>
-
-    <div class="panel-body">
+ <div class="alert alert-info">
 
             <div class="row">
-          
-
+       
  <div class="col-md-12">
                 <div class="thumbnail"> 
                                                   
@@ -28,7 +20,7 @@
                                       {% csrf_token%}
                                   
 
-                                        <center><p>Registrate con tu numero de telefono o WhtasApp mas una contraña de 4 caracteres </p> </center>
+                                        <center><p>Registrate con tu numero de telefono o WhtasApp mas una contraña de 4 digitos </p> </center>
                                         <br>
 
                                         <center><p>Es muy importante que sean datos reales</p> </center>
@@ -39,11 +31,12 @@
                                           <p>Contraseña(4 Numeros) {{ form.clave }}  </p>
                                           <p>Ciudad de interes {{ form.estoy_en }}  </p>
                                           <br>   
+
                                           <center><p>Estos datos no son obligatorios, puedes llenarlos despues, </p> </center>
                                           
                                           <p>Nombres   {{ form.nombre }} </p>
                                           <p>Apellidos   {{ form.apellido }} </p>
-                                          <p>Foto   {{ form.image }} </p>
+                                          <!-- <p>Foto   {{ form.image }} </p> -->
                                           
                                           <br>   
                                           <center><p>Agrega un comentario*, o simplementa dejalo en blanco</p> </center>
@@ -81,7 +74,7 @@
 
             </div>
 
-       </div>
+      
   </div>
 
  

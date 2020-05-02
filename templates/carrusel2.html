@@ -49,7 +49,7 @@
  
  </div>
 
-
+{% if j.descripcion.0 != "*" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_UNO/' method='post'>
                               {% csrf_token %}                                
@@ -93,7 +93,7 @@
 
                        <div class="row">              
                               <center>   
-                              <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
+                              <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1">
                               <input type="submit" value="agregar a mi pedido" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
                               </center>
                             </div>
@@ -107,6 +107,15 @@
                   {% endif %}
 {% endif %}                              
                </form>
+
+               {% else %}
+
+<br>
+    <center> <a href="/realizar_lista_de_compras/{{j.id}}" class="btn btn-info btn-lg" role="button">Hacer lista de compras</a></center>
+    <br>  
+<br>
+
+{% endif %}
                
 <div class="row"> 
                  <center>
@@ -193,6 +202,7 @@
 </div>
 
 
+{% if j.descripcion.0 != "*" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_DOS/' method='post'>
                               {% csrf_token %}                                
@@ -235,7 +245,7 @@
 
                        <div class="row">              
                               <center>   
-                              <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
+                              <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1">
                               <input type="submit" value="agregar a mi pedido" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
                               </center>
                             </div>
@@ -249,6 +259,15 @@
                   {% endif %}
 {% endif %}                              
                </form>
+
+               {% else %}
+
+<br>
+    <center> <a href="/realizar_lista_de_compras/{{j.id}}" class="btn btn-info btn-lg" role="button">Hacer lista de compras</a></center>
+    <br>  
+<br>
+
+{% endif %}
                
 <div class="row"> 
                  <center>
@@ -325,7 +344,7 @@
 
 </div>
 
-
+{% if j.descripcion.0 != "*" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_TRES/' method='post'>
                               {% csrf_token %}                                
@@ -368,7 +387,7 @@
 
                        <div class="row">              
                               <center>   
-                              <input type="text" name="cant"  id="cant" size="1" placeholder="cant">
+                              <input type="text" name="cant"  id="cant" size="1" placeholder="cant" value="1">
                               <input type="submit" value="agregar a mi pedido" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">
                               </center>
                             </div>
@@ -381,7 +400,16 @@
 
                   {% endif %}
  {% endif %}                             
-               </form>
+          </form>
+
+             {% else %}
+
+<br>
+    <center> <a href="/realizar_lista_de_compras/{{j.id}}" class="btn btn-info btn-lg" role="button">Hacer lista de compras</a></center>
+    <br>  
+<br>
+
+{% endif %}
                
 <div class="row"> 
                  <center>
