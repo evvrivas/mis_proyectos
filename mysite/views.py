@@ -1347,6 +1347,9 @@ def pagina_principal(request):
 
 
 
+
+
+
                          
                          configurar.n_visitas+=1         
                          configurar.save()

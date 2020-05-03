@@ -231,7 +231,7 @@ class Configuracion_sistema(models.Model):
 
 	     	if self.imagen1:
 	     		self.image=self.imagen1
-            elif: self.imagen2:
+            elif self.imagen2:
             	self.image=self.imagen2
             else:
             	self.image=self.imagen3
