@@ -243,8 +243,9 @@ class Configuracion_sistema(models.Model):
 			     		output.seek(0)
 			     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 			except:
-			     		pass
-	     	super(Tiendas,self).save(*args,**kwargs) 
+				pass
+
+		 super(Tiendas,self).save(*args,**kwargs) 
 	               
 	     def __str__(self):
 		    		return  self.mensaje_bienvenida
