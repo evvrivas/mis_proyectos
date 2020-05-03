@@ -2789,7 +2789,7 @@ def realizar_lista_de_compras(request,id_del_producto):
 
 
      
- def agregar_lista_de_compra_al_carrito(request,id_del_producto):
+def agregar_lista_de_compra_al_carrito(request,id_del_producto):
 
           ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
        
