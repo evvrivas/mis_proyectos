@@ -25,7 +25,8 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from mysite.views import *
-
+from django.conf.urls import url
+from django.views.generic import TemplateView
 urlpatterns = [
     # Examples:
     # url(r'^$', 'artetronica.views.home', name='home'),
