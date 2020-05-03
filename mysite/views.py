@@ -1343,11 +1343,18 @@ def pagina_principal(request):
                          
                          mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username) 
                          configurar=Configuracion_sistema.objects.all().first()
+
+
+
+
                          
                          configurar.n_visitas+=1         
                          configurar.save()
 
                          abierto_cerrado_actualizar_todas()
+
+
+
                          
 
                          

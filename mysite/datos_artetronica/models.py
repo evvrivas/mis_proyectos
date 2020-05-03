@@ -157,12 +157,15 @@ class Productos(models.Model):
 	     		pass
 	     	
 	     	if self.image:
-	     		t_image=Img.open(BytesIO(self.image.read()))
-	     		t_image.thumbnail((360,360),Img.ANTIALIAS)
-	     		output=BytesIO()
-	     		t_image.save(output,format='JPEG',quality=75)
-	     		output.seek(0)
-	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     		try:
+		     		t_image=Img.open(BytesIO(self.image.read()))
+		     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+		     		output=BytesIO()
+		     		t_image.save(output,format='JPEG',quality=75)
+		     		output.seek(0)
+		     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+	     		except:
+	     			pass
 	     	super(Productos,self).save(*args,**kwargs)
 
 	     	
@@ -218,7 +221,31 @@ CLAVES=(
 
 class Configuracion_sistema(models.Model):
 	     mensaje_bienvenida=models.TextField(blank=True)	
-	     n_visitas=models.IntegerField(blank=True,default=0) 
+	     n_visitas=models.IntegerField(blank=True,default=0)
+	     imagen1 = ImageField(upload_to='tmp',blank=True)
+	     imagen2 = ImageField(upload_to='tmp',blank=True)
+	     imagen3 = ImageField(upload_to='tmp',blank=True)
+
+
+	     def save(self, *args,**kwargs):
+
+	     	if self.imagen1:
+	     		self.image=self.imagen1
+            elif: self.imagen2:
+            	self.image=self.imagen2
+            else:
+            	self.image=self.imagen3
+
+	     	try:	
+			     		t_image=Img.open(BytesIO(self.image.read()))
+			     		t_image.thumbnail((360,360),Img.ANTIALIAS)
+			     		output=BytesIO()
+			     		t_image.save(output,format='JPEG',quality=75)
+			     		output.seek(0)
+			     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
+			except:
+				     			pass
+	     	super(Tiendas,self).save(*args,**kwargs) 
 	               
 	     def __str__(self):
 		    		return  self.mensaje_bienvenida
