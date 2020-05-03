@@ -243,8 +243,8 @@ class Configuracion_sistema(models.Model):
 	     		t_image.save(output,format='JPEG',quality=75)
 	     		output.seek(0)
 	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-			except:
-				pass
+	     	except:
+	     		pass
 
 		 super(Tiendas,self).save(*args,**kwargs) 
 	               
