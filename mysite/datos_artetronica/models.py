@@ -231,11 +231,10 @@ class Configuracion_sistema(models.Model):
 
 	     	if self.imagen1:
 	     		self.image=self.imagen1
-            elif self.imagen2:
-            	self.image=self.imagen2
-            else:
-            	self.image=self.imagen3
-
+	     	elif self.imagen2:
+	     		self.image=self.imagen2
+	     	else:
+	     		self.image=self.imagen3
 	     	try:	
 			     		t_image=Img.open(BytesIO(self.image.read()))
 			     		t_image.thumbnail((360,360),Img.ANTIALIAS)
@@ -243,8 +242,8 @@ class Configuracion_sistema(models.Model):
 			     		t_image.save(output,format='JPEG',quality=75)
 			     		output.seek(0)
 			     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
-			except:
-				     			pass
+			     	except:
+			     		pass
 	     	super(Tiendas,self).save(*args,**kwargs) 
 	               
 	     def __str__(self):
