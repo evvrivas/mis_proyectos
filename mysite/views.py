@@ -1126,7 +1126,7 @@ def busqueda_desde_app(request,palabra):
                       lat2=latitud_usuario
                       lon2=longitud_usuario
                       distancia=distancia_geodesica(lat1,lon1,lat2,lon2)
-                      if distancia<=r
+                      if distancia<=r:
                           productos.append(i)
 
                       else:        
@@ -1140,7 +1140,7 @@ def busqueda_desde_app(request,palabra):
                       lat2=latitud_usuario
                       lon2=longitud_usuario
                       distancia=distancia_geodesica(lat1,lon1,lat2,lon2)
-                      if distancia<=r
+                      if distancia<=r:
                           tiendas.append(i)
 
                       else:        
@@ -1175,7 +1175,7 @@ def busqueda_desde_app(request,palabra):
                       lat2=latitud_usuario
                       lon2=longitud_usuario
                       distancia=distancia_geodesica(lat1,lon1,lat2,lon2)
-                      if distancia<=r
+                      if distancia<=r:
                           tiendas.append(i)
 
                       else:        
@@ -1190,7 +1190,7 @@ def busqueda_desde_app(request,palabra):
                       lon2=longitud_usuario
                       distancia=distancia_geodesica(lat1,lon1,lat2,lon2)
                       
-                      if distancia<=r
+                      if distancia<=r:
                           tiendas.append(i)
 
                       else:        
