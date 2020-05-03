@@ -1046,7 +1046,7 @@ def distancia_geodesica(lat1,lon1,lat2,lon2):
 def seleccion_compra(request,bandera,id_producto,id_tienda):
     arreglo_pruductos=[("Existencia","u", "Descripcion","p/u $")]
     
-    if bandera == "PRODUCTO" 
+    if bandera == "PRODUCTO": 
         pruducto=Productos.objects.get(id=id_producto)
 
         texto=producto.descripcion    
