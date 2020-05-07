@@ -49,7 +49,7 @@
  
  </div>
 
-{% if j.descripcion.0 != "*" %} 
+{% if j.descripcion.0 != "*" or j.descripcion_oculta.0 != "*" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_UNO/' method='post'>
                               {% csrf_token %}                                
@@ -202,7 +202,7 @@
 </div>
 
 
-{% if j.descripcion.0 != "*" %} 
+{% if j.descripcion.0 != "*" or j.descripcion_oculta.0 != "*" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_DOS/' method='post'>
                               {% csrf_token %}                                
@@ -344,7 +344,7 @@
 
 </div>
 
-{% if j.descripcion.0 != "*" %} 
+{% if j.descripcion.0 != "*" or j.descripcion_oculta.0 != "*" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_TRES/' method='post'>
                               {% csrf_token %}                                

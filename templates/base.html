@@ -186,7 +186,7 @@ let title = payload.notification.title;
                                                    {% if user.username == "78218224" %}
                                                    <br>
                                                    <li><a href="/notificar_a_todos_que">informar a todos que:</a></li>
-                                                   {% elif %}
+                                                   {% endif %}
 
 
                                                     
@@ -219,6 +219,7 @@ let title = payload.notification.title;
          </center>   
          </div>
          <!--#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$-->
+
 
 
 
@@ -301,7 +302,7 @@ let title = payload.notification.title;
 
              <input class="form-control input-sm" type="text" id="name" name="nombre" placeholder= "Que buscas?" style="font-size:10pt;width:110px;background-color:white;color:blue;">
 
-             <input type="submit" value="Buscar" class="btn btn-info btn-xs">
+             <input type="submit" value="Buscar" class="btn btn-success">
 
     </div>
              
@@ -354,10 +355,80 @@ let title = payload.notification.title;
                        </h6></center>
             </div>
 
- 
-             <br>
+
+
+
+<div class="row">  
+       <div class="alert alert-info">         
+         <p>{{configurar.mensaje_bienvenida| linebreaks}}</p>
+
+
+
+
+
+
+
+
+         <center>
+<div class="col-md-12">
+          <div id="contenedor">
+        
+        <div id="mycarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            
+
+            <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#mycarousel" data-slide-to="1"></li>
+            <li data-target="#mycarousel" data-slide-to="2"></li>
+            <li data-target="#mycarousel" data-slide-to="3"></li>
+            <li data-target="#mycarousel" data-slide-to="4"></li>
+
+
+             
+          </ol>
+          <div class="carousel-inner">
+
+     {% thumbnail configurar.imagen1 "400" crop="center" as im %}                              
+ <div class="active item"> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" /></div>
+    {% endthumbnail %}
+
+
+ {% thumbnail configurar.imagen2 "400" crop="center" as im %}                              
+ <div class="item"> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" /></div>
+    {% endthumbnail %}
+
+            
+   {% thumbnail configurar.imagen3 "400" crop="center" as im %}                              
+ <div class="item"> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" /></div>
+    {% endthumbnail %}
+
+
+{% thumbnail configurar.imagen4 "400" crop="center" as im %}                              
+ <div class="item"> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" /></div>
+    {% endthumbnail %}
+
+
+{% thumbnail configurar.imagen5 "400" crop="center" as im %}                              
+ <div class="item"> <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" /></div>
+    {% endthumbnail %}
+
+
+    
+            
+          </div>
+          <a class="left carousel-control" href="#mycarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#mycarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </div>
+</div>
+</div>
+</center>
         
 
+      
             <div class="col-md-12">                           
                   {% block content %}
                    {% endblock %}

@@ -137,6 +137,13 @@ def notificacion_producto_probable_al_carrito(id_del_pedido):
       except:
         pass
      
+
+
+
+
+
+
+
 def notificacion_confirmado_producto_al_carrito(id_del_pedido,mensaje):
     pedido=Carro_de_compras.objects.get(id=id_del_pedido)
     
@@ -1764,6 +1771,9 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
                  except: 
                     total_x=0
 
+
+                 el_producto.cantidad = el_producto.cantidad - cant 
+                 el_producto.save()
                  fe=lafecha.strftime("%d/%m/%Y, %H:%M:")   
                
                  n=Usuarios.objects.get(id_usuario=request.user.username)     
@@ -2078,12 +2088,16 @@ def eliminar_producto_del_carrito(request,id_producto):
        categoria=n_categorias()
        mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
        ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+       
 
+       mensaje="Se ha eliminado este pedido, revisá:!"
+       notificacion_confirmado_producto_al_carrito(id_producto,mensaje)
+       
        Carro_de_compras.objects.get(id=id_producto).delete()
+
        carrito= Carro_de_compras.objects.filter(id_comprador=request.user.username).order_by("producto__tienda__nombre_tienda")
        
-       mensaje="Se ha eliminado un pedido, revisá:!"
-       notificacion_confirmado_producto_al_carrito(id_producto,mensaje)
+       
        #return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
        return render(request,'ver_carrito_de_compras_mejorado.html',locals()) 
 
@@ -2742,7 +2756,7 @@ def mis_cuentas(request):
     
 
 
-
+@login_required  
 def realizar_lista_de_compras(request,id_del_producto):
     
     producto=Productos.objects.get(id=id_del_producto)
@@ -2772,9 +2786,12 @@ def realizar_lista_de_compras(request,id_del_producto):
         corazon="NO_PREFERIDA"
     
     var=tiendas.codigoapk  
-   
-    texto1=producto.descripcion
 
+    if el_producto.descripcion_oculta[0] == "*":
+            texto1=el_producto.descripcion_oculta
+    else:
+            texto1=el_producto.descripcion
+       
     vector=[] 
 
     #x=str(id_tienda) + "," + str(id_producto)+","
@@ -2798,7 +2815,7 @@ def realizar_lista_de_compras(request,id_del_producto):
 
 
 
-     
+@login_required       
 def agregar_lista_de_compra_al_carrito(request,id_del_producto):
 
           ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
@@ -2809,7 +2826,11 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
           nombretienda=el_producto.tienda.nombre_tienda
 
           #texto1="*20,u,Salchicha peruana 1,13.25 \n 30,u,Salchicha peruana 2,4.5 \n 60,lb,Salchicha peruana 4,5.25 \n 1,lb,Salchicha peruana 5,2.25 \n 4,Kg,Salchicha peruana 6,1.53 \n 6,LB, Salchicha peruana 7,3.25 \n  9,u,Salchicha peruana 8,1.45 \n 2,lb,Salchicha peruana 9,1.5 "
-          texto1=el_producto.descripcion
+          
+          if el_producto.descripcion_oculta == "*":
+                texto1=el_producto.descripcion_oculta
+          else:
+                texto1=el_producto.descripcion
 
           if texto1[0] == "*" :
             texto=texto1[1:-1]
@@ -2828,14 +2849,17 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
             for i in vector_1:
               p=eval(items[b])
               if p>0:
-                a=i.split(",")
-                pu=eval(a[-1])
-                total=pu*eval(items[b])
-                total_x=total_x+total
+                  a=i.split(",")
+                  pu=eval(a[-1])
+                  total=pu*eval(items[b])
+                  total_x=total_x+total
 
-                a.append(str(items[b]))
-                a.append(str(total))
-                vector.append(a)
+                  stock=eval(a[0])
+                  a[0] = stock - eval(items[b])
+
+                  a.append(str(items[b]))
+                  a.append(str(total))
+                  vector.append(a)
               b=b+1
             
             bux=""
@@ -2915,8 +2939,82 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
             else :
                   return render(request,'catalogo_tienda.html',locals())  
     
+@login_required  
+def crear_super_producto(request,id_de_la_tienda):
 
-    
-    
+          id_del_usuario=request.user.username
+
+          tiendas=Tiendas.objects.get(id=id_de_la_tienda) 
+          categoria=categorizar(request.user.username,tiendas.nombre_tienda)
+
+          visitas=tiendas.n_visitas
+
+          tiendas.n_visitas+=1      
+          tiendas.save()
+
+          corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+          if corazon>0:
+                      corazon="PREFERIDA"
+          else:
+                      corazon="NO_PREFERIDA"
+                  
+          var=tiendas.codigoapk
+          
+
+          los_productos = Productos.objects.filter(tienda__id=id_de_la_tienda)
+      
+
+          bandera="NO EXISTE"
+
+          for i in los_productos:
+               
+               if i.descripcion_oculta[0]=="*":
+                        
+                        bandera="EXSISTE"
+                        id_del_super_producto=i.id        
+                        
+
+               else: 
+                      if i.descripcion[0] == "*":
+                          texto=i.descripcion[1:-1]
+                          items = str(texto) +  "\n"
 
 
+
+                      else:           
+
+                              stock=i.cantidad
+                              
+                              unidad=i.unidad_de_medida
+                              
+                              descrip=i.nombre
+                              
+                              
+                              if i.precio_B >= 0 :
+                                    precio_u = i.precio_B
+                              else:
+                                    precio_u = i.precio_A
+
+
+                              item = str(stock) + "," + str(unidad) + "," + str(descrip) +  "," + str(precio_u) + "\n"
+
+               descripcion_ampliada=descripcion_ampliada+item 
+           
+
+          
+          
+          if bandera == "NO EXSISTE":
+                  descrip= "Mira aqui todos los productos de esta tienda"
+                  fecha = datetime.datetime.now()
+                  la_imagen=tiendas.imagen1
+
+                  pro=Productos(id_usuario=id_del_usuario, tienda=tiendas,nombre="Lista de productos", imagen1=la_imagen , descripcion=descrip,descripcion_oculta=descripcion_ampliada, fecha_ingreso = fecha, ultima_fecha_edicion = fecha , fecha_inicio_plan = fecha , fecha_final_plan = fecha)     
+                  pro.save()
+          
+          else:
+          
+              pro=Productos.objects.get(id=id_del_super_producto)
+              pro.descripcion_oculta=descripcion_ampliada
+              pro.save()
+
+          return render(request,'confirmar_tienda.html',locals())

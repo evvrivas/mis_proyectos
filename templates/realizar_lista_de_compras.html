@@ -14,24 +14,24 @@
 <table id="miTabla" BORDER="1" CELLSPACING="1" >
     <thead>
         <tr align="center">               
-            <th WIDTH="15"><h5>Cant.</h5></th>
-            <th WIDTH="15"><h5>U</h5></th>
-            <th WIDTH="200"><h5>Descripción</h5></th>        
-            <th WIDTH="15"><h5>$ P/U</h5></th>
-            <th WIDTH="15"><h5>Cant</h5></th>
-            <th WIDTH="20"><h5>Total</h5></th>            
+            <center><th WIDTH="15"><h5>Cant.</h5></th></center>
+            <center><th WIDTH="15"><h5>U</h5></th></center>
+            <center><th WIDTH="200"><h5>Descripción</h5></th></center>        
+            <center><th WIDTH="15"><h5>$ P/U</h5></th></center>
+            <center><th WIDTH="15"><h5>Cant</h5></th></center>
+            <center><th WIDTH="20"><h5>Total</h5></th></center>            
         </tr>
         
     </thead>
 
     <tfoot>
         <tr align="center">
-            <td WIDTH="15"><h4></h4></td>
-            <td WIDTH="15"></td>
-            <td WIDTH="200">Total</td>
-            <td WIDTH="15"></td>
-            <td WIDTH="15">$</td>           
-            <td WIDTH="20"></td>
+            <center><td WIDTH="15"><h4></h4></td></center>
+            <center><td WIDTH="15"></td></center>
+            <center><td WIDTH="200">Total</td></center>
+            <center><td WIDTH="15"></td></center>
+            <center><td WIDTH="15">$</td></center>           
+            <center><td WIDTH="20"></td></center>
            
 
         </tr>
@@ -41,18 +41,17 @@
         
 {% for i in vector %}
         <tr align="center">
-            <td WIDTH="15">{{i.0}}</td>
-            <td WIDTH="15">{{i.1}}</td>
-            <td WIDTH="200"><h5>{{i.2}}</h5></td>
-            <td WIDTH="15">{{i.3}}</td>            
-            <td WIDTH="15"><input type="text" id="name" name="{{ forloop.counter0 }}" size="2" value="0" ></td>           
-            <td WIDTH="20"></td>
+            <center><td WIDTH="15">{{i.0}}</td></center>
+            <center><td WIDTH="15">{{i.1}}</td></center>
+            <center><td WIDTH="200"><h5>{{i.2}}</h5></td></center>
+            <center><td WIDTH="15">{{i.3}}</td></center>            
+            <center><td WIDTH="15"><input type="text" id="name" name="{{ forloop.counter0 }}" size="2" value="0" ></td></center>           
+            <center><td WIDTH="20"></td></center>
         </tr>
 {% endfor %}
    </tbody>
 
-</table>
-  
+</table> 
 
     
     <br>  

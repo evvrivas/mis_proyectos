@@ -21,8 +21,8 @@
 
            <div class="col-md-3">   
                 <div class="thumbnail">
-            
-      
+          
+     
                 <center> <h6> {{j.estado_prod}} </h6> </center>
                   <h4><center>  {{j.nombre}}  </center></h4> 
                    
@@ -83,22 +83,18 @@
                               <label for="username">{{j.nombre_recurso_de_pago}}</label>
                               <input type="text" name="descargar" value="1" id="descargar" size="2">                    
                               <input type="submit" value="Descargar " class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" />                               
-                             
-                                                  
+           
+                                           
 
                        </form>  
 
                                {% endif  %} 
 
 
-
                           {% endifequal %}
 
-
-
-
                          
-                           <div class="row">    
+                        <div class="row">    
 
                          <center><table BORDER="3" CELLSPACING="5"  bordercolor="red ">                          
                            
@@ -141,7 +137,7 @@
                        
                        
              
-   {% if j.descripcion.0 != "*" %}  
+   {% if j.descripcion.0 != "*" or j.descripcion_oculta.0 != "*" %}  
 
                          
                <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>

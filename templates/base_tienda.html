@@ -158,13 +158,15 @@ function calcular() {
                                                  <li><a href="/ver_el_carrito/ATENDER_PEDIDOS">Ver pedidos </a></li> 
                                                  <br>
                                                  <li><a href="/administrar_mis_categorias/{{tiendas.id}}">Crear/editar Categoria </a></li> 
+
+                                                 <li><a href="/crear_super_producto/{{tiendas.id}}">Crear listado de productos </a></li> 
                                                  
                                                 <li>   
 
-                                                <form action="/traspasar_tienda/{{tiendas.id}}/" method="post">
+                                        <form action="/traspasar_tienda/{{tiendas.id}}/" method="post">
                                                 {% csrf_token %}
-                                                <input type="text" id="namet" name="nombret" placeholder="Telefono" size="10"/>
-                                                <input type="submit" value="Traspasar">
+                                         <input type="text" id="namet" name="nombret" placeholder="Telefono" size="10"/>
+                                         <input type="submit" value="Traspasar">
                                                 </form>
                                                 
                                                 </a>
@@ -209,7 +211,52 @@ function calcular() {
 
 
 
-<div class="col-md-12"> 
+
+
+
+
+
+
+
+<div class="row">   
+                     
+<div class="form-group">      
+
+       <div class="input-group">    
+
+          <div class="btn-group">
+                   <button type="button" class="btn btn-primary btn-xs dropdown-toggle"
+                                        data-toggle="dropdown">
+                                  Ver <span class="caret"></span>
+                                </button>
+                               
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/xproductox">Todos los productos</a></li> 
+                                  {%  for i in categoria %}
+                                      <li><a href="/ver_categorias_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/{{i}}">{{i}}</a></li>
+                                   {%  endfor %} 
+                                </ul>
+          </div>
+
+          <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
+              {% csrf_token %}
+          <input type="text" id="name" name="nombre" placeholder="Que buscas?" size="10"/>
+          <input type="submit" value="Buscar">
+              </form>
+
+
+       </div>
+
+ </div>
+ </div>
+
+
+
+
+
+
+
+<!-- <div class="col-md-12"> 
 
                      <center><table>
 
@@ -247,8 +294,29 @@ function calcular() {
                                 </tr >
                           </table></center> 
              </div>    
+ -->
+
+
+
+
+
+
+
+
+
+
+
 
 </div>
+
+
+
+
+
+
+
+
+
 
 
 <center> <h6>

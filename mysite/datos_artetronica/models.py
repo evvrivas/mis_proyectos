@@ -111,11 +111,34 @@ PLAN_PUBLICIDAD= (
 			('PUBLICIDAD_1','PLAN_SIEMPRE_PRIMERO $15.0/mes'),
 			('PUBLICIDAD_2','PLAN_SIEMPRE_PRIMERO_DIRIGIDO $10.0/mes'),
 			)
+
+# class Superproductos(models.Model):
+	     
+# 	     tienda=models.ForeignKey('Tiendas',blank=True,null=True)	     
+# 	     cantidad         =  models.DecimalField(max_digits=15,decimal_places=0,default=0,blank=True,null= True)
+# 	     nombre           =  models.CharField(max_length=30)   
+	    
+# 	     descripcion = models.TextField(blank=True)
+# 	     precio = models.DecimalField(max_digits=6,decimal_places=2,default=0,blank=True,null=True)
+
+# 	     def __str__(self):
+# 				return  self.nombre
+		 
+# 		 class Admin:
+# 				list_display = ('nombre', 'cantidad')
+	     
+	    
+
+	     
+
+
+
 class Productos(models.Model):
 	     id_usuario=models.CharField(max_length=30,blank=True)
 	     tienda=models.ForeignKey('Tiendas',blank=True,null=True)
 	     categoria=models.ForeignKey('Categoria',blank=True,null=True)
 	     cantidad         =  models.DecimalField(max_digits=15,decimal_places=0,default=0,blank=True,null= True)
+	     unidad_de_medida = models.CharField(max_length=10,blank=True,default="U")
 	     nombre           =  models.CharField(max_length=30)
 	     codigo=models.CharField(max_length=30,blank=True)
 	     #imagen1      = models.ImageField(upload_to='tmp')	  
@@ -124,6 +147,7 @@ class Productos(models.Model):
 	     imagen3 = ImageField(upload_to='tmp',blank=True)
  
 	     descripcion = models.TextField(blank=True)
+	     descripcion_oculta = models.TextField(blank=True)
 
 	     video_insercion=models.CharField(max_length=400,blank=True)
 	     
@@ -225,6 +249,8 @@ class Configuracion_sistema(models.Model):
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     imagen2 = ImageField(upload_to='tmp',blank=True)
 	     imagen3 = ImageField(upload_to='tmp',blank=True)
+	     imagen4 = ImageField(upload_to='tmp',blank=True)
+	     imagen5 = ImageField(upload_to='tmp',blank=True)
 
 
 	     def save(self, *args,**kwargs):
@@ -233,8 +259,12 @@ class Configuracion_sistema(models.Model):
 	     		self.image=self.imagen1
 	     	elif self.imagen2:
 	     		self.image=self.imagen2
-	     	else:
+	     	elif self.imagen3:
 	     		self.image=self.imagen3
+	     	elif self.imagen4:
+	     		self.image=self.imagen4
+	     	else:
+	     		self.image=self.imagen5
 	     	
 	     	try:
 	     		t_image=Img.open(BytesIO(self.image.read()))
@@ -245,7 +275,7 @@ class Configuracion_sistema(models.Model):
 	     		self.image=InMemoryUploadedFile(output,'ImageField',"%s.jpg" %self.image.name,'p_image/jpeg',getsizeof(output),None)
 	     	except:
 	     		pass
-	     	super(Tiendas,self).save(*args,**kwargs)
+	     	super(Configuracion_sistema,self).save(*args,**kwargs)
 	     def __str__(self):
 		    		return  self.mensaje_bienvenida
 	     class Admin:

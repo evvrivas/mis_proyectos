@@ -7,23 +7,17 @@
 
  <div class="row">  
 
-
-
      <div class="alert alert-danger">
                   
                   <center> <h4><p>{{tiendas.promocion}}</p></h4> </center>
-        
-    
-      <h6> {{ productos.0.categoria.descripcion | linebreaks }} </h6>   
+      
+     <h6> {{ productos.0.categoria.descripcion | linebreaks }} </h6>   
  {% for j in productos %} 
 
       {% if user.username != j.id_usuario and j.estado_prod == 'VENDIDO' and user.username != j.tienda.administrador_junior and user.username != j.tienda.administrador_junior_1 and user.username != j.tienda.administrador_junior_2 %}
 
 {% else %}
-
-      
-
-
+   
 
 {% if j.imagen1 %}
 <div class="thumbnail">
@@ -61,7 +55,7 @@
                        </div>
 
 
-{% if j.descripcion.0 != "*" %}  
+{% if j.descripcion.0 != "*" or j.descripcion_oculta.0 != "*"  %}  
 
                          
                <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
@@ -184,7 +178,7 @@
                           <h3><center> {{j.nombre}}  </center></h3>
                        </div>
 
-{% if j.descripcion.0 != "*" %}  
+{% if j.descripcion.0 != "*" or j.descripcion_oculta.0 != "*" %}  
 
                          
                <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
@@ -302,7 +296,7 @@
                           <h3><center> {{j.nombre}}  </center></h3>
                        </div>
 
-{% if j.descripcion.0 != "*" %}  
+{% if j.descripcion.0 != "*" or j.descripcion_oculta.0 != "*" %}  
 
                          
                <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
