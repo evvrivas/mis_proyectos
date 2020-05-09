@@ -125,7 +125,8 @@ urlpatterns = [
     url(r'^serviceworker(.*.js)$', TemplateView.as_view(template_name='serviceworker.js',  content_type='application/x-javascript')),
      
     url(r'^realizar_lista_de_compras/(\d+)/$',realizar_lista_de_compras),
-    url(r'^agregar_lista_de_compra_al_carrito/(\d+)/$',agregar_lista_de_compra_al_carrito),
+    url(r'^agregar_lista_de_compra_al_carrito/(\d+)/$',agregar_lista_de_compra_al_carrito),    
+    url(r'^crear_super_producto/(\d+)/$',crear_super_producto),
     
 
     url(r'^([^/]+)/$', mis_tiendas),

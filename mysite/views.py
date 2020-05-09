@@ -1982,9 +1982,8 @@ def ver_el_carrito_personal_y_de_tienda(request,id_persona_compra,id_tienda_de_c
         pass                      
       
       gran_total=0
-      
       for i in carrito_nuevo:
-         gran_total=gran_total+i.total
+         gran_total=gran_total+i.total  
       
       return render(request,'ver_carrito_de_compras_mejorado.html',locals()) 
 
@@ -2787,30 +2786,22 @@ def realizar_lista_de_compras(request,id_del_producto):
     
     var=tiendas.codigoapk  
 
-    if el_producto.descripcion_oculta[0] == "*":
-            texto1=el_producto.descripcion_oculta
-    else:
-            texto1=el_producto.descripcion
-       
-    vector=[] 
-
-    #x=str(id_tienda) + "," + str(id_producto)+","
-
-    #texto1="*20,u,Salchicha peruana 1,13.25 \n 30,u,Salchicha peruana 2,4.5 \n 60,lb,Salchicha peruana 4,5.25 \n 1,lb,Salchicha peruana 5,2.25 \n 4,Kg,Salchicha peruana 6,1.53 \n 6,LB, Salchicha peruana 7,3.25 \n  9,u,Salchicha peruana 8,1.45 \n 2,lb,Salchicha peruana 9,1.5 "
-    
-    if texto1[0] == "*" :
-        texto=texto1[1:-1]
-        vector_1=texto.split("\n")
-        vector=[]
-        
-        for i in vector_1:
-          a=i.split(",")
+    if el_producto.descripcion_oculta != ""       
+          texto1=el_producto.descripcion_oculta          
+          vector=[]    
           
-          if len(a)==4:   
-            vector.append(a)
+          texto=texto1[1:-1]
+          vector_1=texto.split("\n")
+          vector=[]
+              
+          for i in vector_1:
+                a=i.split(",")
+                
+                if len(a)==4:   
+                     vector.append(a)
     else:
-      pass 
-
+        pass    
+           
     return render(request,'realizar_lista_de_compras.html',locals())
 
 
@@ -2827,14 +2818,10 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
 
           #texto1="*20,u,Salchicha peruana 1,13.25 \n 30,u,Salchicha peruana 2,4.5 \n 60,lb,Salchicha peruana 4,5.25 \n 1,lb,Salchicha peruana 5,2.25 \n 4,Kg,Salchicha peruana 6,1.53 \n 6,LB, Salchicha peruana 7,3.25 \n  9,u,Salchicha peruana 8,1.45 \n 2,lb,Salchicha peruana 9,1.5 "
           
-          if el_producto.descripcion_oculta == "*":
-                texto1=el_producto.descripcion_oculta
-          else:
-                texto1=el_producto.descripcion
-
-          if texto1[0] == "*" :
-            texto=texto1[1:-1]
-            vector_1=texto.split("\n")
+          if  el_producto.descripcion_oculta != "":
+                texto1=el_producto.descripcion_oculta       
+                texto=texto1
+                vector_1=texto.split("\n")
             
               
           items=[]
@@ -2866,7 +2853,7 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
             for i in vector:
                  aux=""
                  for j in i:
-                    aux=aux+str("**")+str(j) 
+                    aux=aux+str("   ")+str(j) 
                  aux=aux+str("\n")
                   
                  bux=bux+aux      
@@ -2891,8 +2878,6 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
             nombretienda=tiendas.nombre_tienda      
             categoria=categorizar(idusuario,nombretienda)     
             var=tiendas.codigoapk  
-
-
                    
             administrador_tienda=Usuarios.objects.get(id_usuario=tiendas.id_usuario)                
             a=administrador_tienda.cant_click_pedidos_nuevos
@@ -2904,7 +2889,6 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
             administrador_tienda.cant_click_pedidos_nuevos_acumulados=b
 
             administrador_tienda.save()
-
 
             a=tiendas.cant_click_pedidos_nuevos
             a=a+1
@@ -2919,7 +2903,7 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
             notificacion_producto_probable_al_carrito(carrito.id)           
                 
             ###################################################                   
-             
+      
     
             corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=id_dela_tienda).count()
             if corazon>0:
@@ -2968,35 +2952,28 @@ def crear_super_producto(request,id_de_la_tienda):
 
           for i in los_productos:
                
-               if i.descripcion_oculta[0]=="*":
+               if i.codigo=="SUPER_LISTA":
                         
                         bandera="EXSISTE"
                         id_del_super_producto=i.id        
                         
 
                else: 
-                      if i.descripcion[0] == "*":
-                          texto=i.descripcion[1:-1]
-                          items = str(texto) +  "\n"
-
-
-
-                      else:           
-
-                              stock=i.cantidad
+                          
+                          stock=i.cantidad
                               
-                              unidad=i.unidad_de_medida
+                          unidad=i.unidad_de_medida
                               
-                              descrip=i.nombre
+                          descrip=i.nombre
                               
                               
-                              if i.precio_B >= 0 :
+                          if i.precio_B >= 0 :
                                     precio_u = i.precio_B
-                              else:
+                          else:
                                     precio_u = i.precio_A
 
 
-                              item = str(stock) + "," + str(unidad) + "," + str(descrip) +  "," + str(precio_u) + "\n"
+                          item = str(stock) + "," + str(unidad) + "," + str(descrip) +  "," + str(precio_u) + "\n"
 
                descripcion_ampliada=descripcion_ampliada+item 
            
@@ -3004,11 +2981,11 @@ def crear_super_producto(request,id_de_la_tienda):
           
           
           if bandera == "NO EXSISTE":
-                  descrip= "Mira aqui todos los productos de esta tienda"
+                  descrip= "LISTA DE PRODUCTOS DE ESTA TIENDA"
                   fecha = datetime.datetime.now()
                   la_imagen=tiendas.imagen1
 
-                  pro=Productos(id_usuario=id_del_usuario, tienda=tiendas,nombre="Lista de productos", imagen1=la_imagen , descripcion=descrip,descripcion_oculta=descripcion_ampliada, fecha_ingreso = fecha, ultima_fecha_edicion = fecha , fecha_inicio_plan = fecha , fecha_final_plan = fecha)     
+                  pro=Productos(id_usuario=id_del_usuario, tienda=tiendas,nombre="Lista de productos",codigo="SUPER_LISTA", imagen1=la_imagen , descripcion=descrip,descripcion_oculta=descripcion_ampliada, fecha_ingreso = fecha, ultima_fecha_edicion = fecha , fecha_inicio_plan = fecha , fecha_final_plan = fecha)     
                   pro.save()
           
           else:

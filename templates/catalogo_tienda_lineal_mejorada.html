@@ -55,7 +55,7 @@
                        </div>
 
 
-{% if j.descripcion.0 != "*" or j.descripcion_oculta.0 != "*"  %}  
+{% if  j.descripcion_oculta.0 == ""  %}  
 
                          
                <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
@@ -178,7 +178,7 @@
                           <h3><center> {{j.nombre}}  </center></h3>
                        </div>
 
-{% if j.descripcion.0 != "*" or j.descripcion_oculta.0 != "*" %}  
+{% if if  j.descripcion_oculta.0 == "" %}  
 
                          
                <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>
@@ -296,7 +296,7 @@
                           <h3><center> {{j.nombre}}  </center></h3>
                        </div>
 
-{% if j.descripcion.0 != "*" or j.descripcion_oculta.0 != "*" %}  
+{% if  j.descripcion_oculta.0 == "" %}  
 
                          
                <form action='/agregar_producto_al_carrito/{{j.id}}/MOSTRAR_F_TODAS/' method='post'>

@@ -217,14 +217,25 @@ function calcular() {
 
 
 
-
+<center>
 <div class="row">   
                      
 <div class="form-group">      
 
        <div class="input-group">    
 
-          <div class="btn-group">
+          
+
+          <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
+              {% csrf_token %}
+          <input type="text" id="name" name="nombre" placeholder="Que buscas?" size="30"/>
+          <input type="submit" value="Buscar">
+              </form>
+
+
+       </div>
+
+       <div class="btn-group">
                    <button type="button" class="btn btn-primary btn-xs dropdown-toggle"
                                         data-toggle="dropdown">
                                   Ver <span class="caret"></span>
@@ -238,19 +249,10 @@ function calcular() {
                                 </ul>
           </div>
 
-          <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
-              {% csrf_token %}
-          <input type="text" id="name" name="nombre" placeholder="Que buscas?" size="10"/>
-          <input type="submit" value="Buscar">
-              </form>
-
-
-       </div>
-
  </div>
  </div>
 
-
+</center>
 
 
 
@@ -328,7 +330,7 @@ function calcular() {
                              
                        </h6></center>
 
-<center><h5><p>tiendas.descripcion</p></h5></center>
+<center><h5><p>{{tiendas.descripcion}}</p></h5></center>
 
 <div class="panel-body">  
     

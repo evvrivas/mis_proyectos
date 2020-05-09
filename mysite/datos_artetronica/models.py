@@ -140,7 +140,7 @@ class Productos(models.Model):
 	     cantidad         =  models.DecimalField(max_digits=15,decimal_places=0,default=0,blank=True,null= True)
 	     unidad_de_medida = models.CharField(max_length=10,blank=True,default="U")
 	     nombre           =  models.CharField(max_length=30)
-	     codigo=models.CharField(max_length=30,blank=True)
+	     codigo=models.CharField(max_length=30,blank=True,default="NORMAL")
 	     #imagen1      = models.ImageField(upload_to='tmp')	  
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     imagen2 = ImageField(upload_to='tmp',blank=True)
