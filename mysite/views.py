@@ -2786,11 +2786,11 @@ def realizar_lista_de_compras(request,id_del_producto):
     
     var=tiendas.codigoapk  
 
-    if el_producto.descripcion_oculta != ""       
+    if el_producto.descripcion_oculta != "":       
           texto1=el_producto.descripcion_oculta          
           vector=[]    
           
-          texto=texto1[1:-1]
+          texto=texto1
           vector_1=texto.split("\n")
           vector=[]
               
