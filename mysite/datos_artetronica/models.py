@@ -243,7 +243,7 @@ CLAVES=(
 						
 			)
 
-CIUDADES= (  
+CIUDADES1= (  
 	        ("TODOS", "TODOS"),
 	        ("AHUACHAPAN", "AHUACHAPAN"),  
 	        ("SANTA_ANA","SANTA_ANA"), 
@@ -264,7 +264,7 @@ CIUDADES= (
 class Configuracion_sistema(models.Model):
 	     mensaje_bienvenida=models.TextField(blank=True)	
 	     n_visitas=models.IntegerField(blank=True,default=0)
-	     ciudad
+	     ciudad=models.CharField(max_length=30,choices=CIUDADES1,blank=True,null=True)
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     imagen2 = ImageField(upload_to='tmp',blank=True)
 	     imagen3 = ImageField(upload_to='tmp',blank=True)
