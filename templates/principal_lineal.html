@@ -130,6 +130,8 @@
 
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}: <font color="red">{{j.abierto_cerrado}}</font> {{j.ubicacion}}</a></li>  
 
+                        <center><font color="red"><h5> Normalmente preparan su pedido en: {{j.tiempo_espera}}</h5></font></center>
+
                         <br>                
 
 
@@ -191,6 +193,8 @@
                                     {% endif %} 
 
                                      {{j.nombre}}</a></li>
+
+                                     <center><font color="red"><h5> Normalmente está listo en: {{j.tiempo_espera}}</h5></font></center>
 
 
                                      <br>
@@ -259,6 +263,8 @@
                         
                       <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}: <font color="red">{{j.abierto_cerrado}}</font> {{j.ubicacion}}</a></li>
 
+                      <center><font color="red"><h5> Normalmente preparan su pedido en: {{j.tiempo_espera}}</h5></font></center>
+
                       <br>
 
   
@@ -308,6 +314,8 @@
                                     <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">{%if j.precio_A %}
                                        {{j.precio_A}}
                                     {% endif %}  {{j.nombre}}</a></li>
+
+                                    <center><font color="red"><h5> Normalmente está listo en: {{j.tiempo_espera}}</h5></font></center>
                                                                  
                                          <br>
                        
@@ -341,6 +349,8 @@
                                                                 
                         {% endthumbnail %}
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.nombre_tienda}}:<font color="red">{{j.abierto_cerrado}}</font> {{j.ubicacion}}</a></li>
+
+                        <center><font color="red"><h5> Normalmente preparan su pedido en: {{j.tiempo_espera}}</h5></font></center>
                     
                         <br>
  {% endif %}    
@@ -386,6 +396,8 @@
                                     <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">{%if j.precio_A %}
                                        {{j.precio_A}}
                                     {% endif %}  {{j.nombre}}</a></li>
+
+                                    <center><font color="red"><h5> Normalmente preparan su pedido en: {{j.tiempo_espera}}</h5></font></center>
                              
                                       <br>
                     

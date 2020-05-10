@@ -17,7 +17,7 @@ class ProductosForm(ModelForm):
 	class Meta:
 		model= Productos
 		widgets = {'descripcion': Textarea(attrs={'cols': 30, 'rows': 2}),}
-		exclude=["id_usuario","fecha_ingreso","ultima_fecha_edicion","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan","nota_de_evaluacion","descripcion_oculta"]
+		exclude=["id_usuario","fecha_ingreso","ultima_fecha_edicion","plan_publicidad_activo","fecha_inicio_plan","fecha_final_plan","nota_de_evaluacion"]
 	
 	def __init__(self, user,nombre_tienda,*args, **kwargs):
 		super(ProductosForm, self).__init__(*args, **kwargs)		

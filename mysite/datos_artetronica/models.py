@@ -243,9 +243,28 @@ CLAVES=(
 						
 			)
 
+CIUDADES= (  
+	        ("TODOS", "TODOS"),
+	        ("AHUACHAPAN", "AHUACHAPAN"),  
+	        ("SANTA_ANA","SANTA_ANA"), 
+	        ("SONSONATE","SONSONATE"),
+	        ("CHALATENANGO","CHALATENANGO"),
+	        ( "CABAÑAS", "CABAÑAS"),
+	        ("LA_LIBERTAD","LA_LIBERTAD"),
+	        ("LA_PAZ","LA_PAZ"),
+	        ("MORAZAN","MORAZAN"),
+	        ("CUSCATLAN","CUSCATLAN"),
+	        ("SAN_MIGUEL","SAN_MIGUEL"),
+	        ("LA_UNION","LA_UNION"),
+	        ("USULUTAN","USULUTAN"),
+	        ("SAN_VICENTE","SAN_VICENTE"),
+	        ("SAN_SALVADOR","SAN_SALVADOR"),							
+		)
+
 class Configuracion_sistema(models.Model):
 	     mensaje_bienvenida=models.TextField(blank=True)	
 	     n_visitas=models.IntegerField(blank=True,default=0)
+	     ciudad
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     imagen2 = ImageField(upload_to='tmp',blank=True)
 	     imagen3 = ImageField(upload_to='tmp',blank=True)
@@ -498,6 +517,17 @@ HORARIO=(
 ("24","12:00 pm"),
 
  )
+
+TIEMPO=(
+("10 Minutos","10 Minutos"),
+("15 Minutos","15 Minutos"),
+("30 Minutos","30 Minutos"),
+("45 Minutos","45 Minutos"),
+("1 Hora","1 Hora"),
+("2 Horas","2 Horas"),
+
+
+ )
   
 class Tiendas(models.Model):	     
 	     id_usuario=models.CharField(max_length=30)	  
@@ -510,6 +540,8 @@ class Tiendas(models.Model):
 	     categoria=models.CharField(max_length=40,blank=True,choices=SUPER_CATEGORIA)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     descripcion=models.TextField(blank=True)
+	     tiempo_espera=models.TextField(blank=True)
+
 	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")
 	     slogan=models.CharField(max_length=90,blank=True)

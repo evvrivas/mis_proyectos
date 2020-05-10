@@ -1349,25 +1349,22 @@ def pagina_principal(request):
                          categoria=n_categorias()
                          
                          mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username) 
-                         configurar=Configuracion_sistema.objects.all().first()
-
-
-
-
-
-
+                         
 
                          
+                         configurar=Configuracion_sistema.objects.filter(ciudad="TODAS").first()
+
+                         visitas= configurar.n_visitas                        
                          configurar.n_visitas+=1         
                          configurar.save()
 
                          abierto_cerrado_actualizar_todas()
 
+                         city=ciudad
+                         if visitar%2 == 1:
+                                configurar=Configuracion_sistema.objects.filter(ciudad=city).first()
 
-
-                         
-
-                         
+                                                 
                          try:
                              comercio,tiendas,productos=publicida_inteligencia(request,ciudad)
                          except:
@@ -1776,9 +1773,11 @@ def agregar_producto_al_carrito(request,id_del_producto,foto):
                  el_producto.save()
                  fe=lafecha.strftime("%d/%m/%Y, %H:%M:")   
                
-                 n=Usuarios.objects.get(id_usuario=request.user.username)     
+                 n=Usuarios.objects.get(id_usuario=request.user.username) 
+                 servicio_a_domicilio="Enviemelo con Go! delivery por favor"  
+
                  #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
-                 carrito=Carro_de_compras(usuario_car=n,nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha,fecha_de_entrega=fe)
+                 carrito=Carro_de_compras(usuario_car=n,nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha,fecha_de_entrega=fe,servicio_a_domicilio="Enviemelo con Go! delivery por favor" )
                  
                  carrito.save()
                    
@@ -2786,8 +2785,8 @@ def realizar_lista_de_compras(request,id_del_producto):
     
     var=tiendas.codigoapk  
 
-    if el_producto.descripcion_oculta != "":       
-          texto1=el_producto.descripcion_oculta          
+    if producto.descripcion_oculta != "":       
+          texto1=producto.descripcion_oculta          
           vector=[]    
           
           texto=texto1
@@ -2821,7 +2820,13 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
           if  el_producto.descripcion_oculta != "":
                 texto1=el_producto.descripcion_oculta       
                 texto=texto1
-                vector_1=texto.split("\n")
+                vector=texto.split("\n")
+                vector_1=[]
+                for i in vector:
+                  if i != "":
+                      j=i.replace('\r', '')
+                      vector_1.append(j)
+
             
               
           items=[]
@@ -2839,6 +2844,7 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
                   a=i.split(",")
                   pu=eval(a[-1])
                   total=pu*eval(items[b])
+                  total=round(total,2)
                   total_x=total_x+total
 
                   stock=eval(a[0])
@@ -2846,14 +2852,15 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
 
                   a.append(str(items[b]))
                   a.append(str(total))
-                  vector.append(a)
+                  x=a[1:]
+                  vector.append(x)
               b=b+1
             
             bux=""
             for i in vector:
                  aux=""
                  for j in i:
-                    aux=aux+str("   ")+str(j) 
+                    aux=aux+str(" __ ")+str(j) 
                  aux=aux+str("\n")
                   
                  bux=bux+aux      
@@ -2868,7 +2875,7 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
                
             n=Usuarios.objects.get(id_usuario=request.user.username)     
             #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
-            carrito=Carro_de_compras(usuario_car=n,nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha,fecha_de_entrega=fe)
+            carrito=Carro_de_compras(usuario_car=n,nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha,fecha_de_entrega=fe,servicio_a_domicilio="Enviemelo con Go! delivery por favor")
                  
             carrito.save()
 
@@ -2949,6 +2956,7 @@ def crear_super_producto(request,id_de_la_tienda):
       
 
           bandera="NO EXISTE"
+          descripcion_ampliada=""
 
           for i in los_productos:
                
@@ -2960,27 +2968,34 @@ def crear_super_producto(request,id_de_la_tienda):
 
                else: 
                           
+                    if i.descripcion_oculta == "":
                           stock=i.cantidad
                               
                           unidad=i.unidad_de_medida
                               
                           descrip=i.nombre
+                          precio_u = i.precio_A
                               
+                          try:    
+                              if i.precio_B >= 0 :
+                                  precio_u = i.precio_B
                               
-                          if i.precio_B >= 0 :
-                                    precio_u = i.precio_B
-                          else:
-                                    precio_u = i.precio_A
+                          except:
+                              pass
 
 
                           item = str(stock) + "," + str(unidad) + "," + str(descrip) +  "," + str(precio_u) + "\n"
+                    else:
+
+                          item=str(i.descripcion_oculta)+"\n"
+
 
                descripcion_ampliada=descripcion_ampliada+item 
            
 
           
           
-          if bandera == "NO EXSISTE":
+          if bandera == "NO EXISTE":
                   descrip= "LISTA DE PRODUCTOS DE ESTA TIENDA"
                   fecha = datetime.datetime.now()
                   la_imagen=tiendas.imagen1

@@ -144,6 +144,8 @@
                         {% thumbnail j.imagen1 "360" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}" class="responsive"> </a>
 
+                        <center><font color="red"><h5> Normalmente preparan su pedido en: {{j.tiempo_espera}}</h5></font></center>
+
                         <br>
           <center><h6>{{j.categoria }} </h6></center>
           <center><button type="button" class="btn btn-info btn-xs" data-toggle="collapse" data-target="#{{j.nombre_tienda}}">ver mas..</button></center>
@@ -321,7 +323,9 @@
                                     {% endthumbnail %}                                       
                                
                                 </tr>
-                          </table></center>                    
+                          </table></center>  
+
+                          <center><font color="red"><h5> Normalmente está listo en: {{j.tiempo_espera}}</h5></font></center>                  
                   
                   </div>              
                         <br>                   
@@ -418,9 +422,11 @@
   <div class="col-md-3">   
                       
                      <div class="thumbnail">                      
-                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}} <font color="red">{{j.abierto_cerrado}}</font></a></li>
+                        <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}} <font color="red">{{j.abierto_cerrado}} </font></a></li>
                         {% thumbnail j.imagen1 "360" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
+
+                        <center><font color="red"><h5> Normalmente preparan su pedido en: {{j.tiempo_espera}}</h5></font></center>
 
                         <br>
                           
@@ -582,7 +588,9 @@
                                     {% endthumbnail %}                                       
                                
                                 </tr>
-                          </table></center>                    
+                          </table></center>
+
+                          <center><font color="red"><h5> Normalmente está listo en: {{j.tiempo_espera}}</h5></font></center>                    
                   
                   </div>                  
                         <br>                   
@@ -639,6 +647,8 @@
                         <li><a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/">{{j.ubicacion}}- {{j.nombre_tienda}} <font color="red">{{j.abierto_cerrado}}</font></a></li>
                         {% thumbnail j.imagen1 "360" crop="center" as im %}
                         <a href="/{{j.id_usuario}}/{{j.nombre_tienda}}/"><img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" href="/{{j.id_usuario}}/{{j.nombre_tienda}}"> </a>
+
+                        <center><font color="red"><h5> Normalmente preparan su pedido en: {{j.tiempo_espera}}</h5></font></center>
 
                         <br>
                        
@@ -793,7 +803,7 @@
                                
                                 </tr>
                           </table></center>                    
-                  
+                  <center><font color="red"><h5> Normalmente está listo en: {{j.tiempo_espera}}</h5></font></center>
                   </div>                  
                         <br>                   
                         <li><a href="/{{j.id_usuario}}/{{j.tienda.nombre_tienda}}/">Ir a la tienda {{j.tienda}}</a></li>

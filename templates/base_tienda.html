@@ -230,7 +230,7 @@ function calcular() {
               {% csrf_token %}
           <input type="text" id="name" name="nombre" placeholder="Que buscas?" size="30"/>
           <input type="submit" value="Buscar">
-              </form>
+         </form>
 
 
        
@@ -331,7 +331,9 @@ function calcular() {
                              
                        </h6></center>
 
-<center><h5><p>{{tiendas.descripcion}}</p></h5></center>
+<center><h5><p>{{tiendas.descripcion}},<font color="red"> Nos hemos propuesto preparar su pedido en:{{j.tiempo_espera}}</font> </p></h5></center>
+
+
 
 <div class="panel-body">  
     
