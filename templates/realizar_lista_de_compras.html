@@ -14,7 +14,7 @@
 <table id="miTabla" BORDER="1" CELLSPACING="1" >
     <thead>
         <tr align="center">               
-            <center><th WIDTH="15"><h5>Cant.</h5></th></center>
+            
             <center><th WIDTH="15"><h5>U</h5></th></center>
             <center><th WIDTH="200"><h5>Descripción</h5></th></center>        
             <center><th WIDTH="15"><h5>$ P/U</h5></th></center>
@@ -24,9 +24,14 @@
         
     </thead>
 
+
+
+
+
+
     <tfoot>
         <tr align="center">
-            <center><td WIDTH="15"><h4></h4></td></center>
+           
             <center><td WIDTH="15"></td></center>
             <center><td WIDTH="200">Total</td></center>
             <center><td WIDTH="15"></td></center>
@@ -41,11 +46,11 @@
         
 {% for i in vector %}
         <tr align="center">
-            <center><td WIDTH="15">{{i.0}}</td></center>
+            
             <center><td WIDTH="15">{{i.1}}</td></center>
             <center><td WIDTH="200"><h5>{{i.2}}</h5></td></center>
             <center><td WIDTH="15">{{i.3}}</td></center>            
-            <center><td WIDTH="15"><input type="text" id="name" name="{{ forloop.counter0 }}" size="2" value="0" ></td></center>           
+            <center><td WIDTH="15"><input type="number" id="name" name="{{ forloop.counter0 }}" size="2" value="0" min="0"  required style="width: 2em;"></td></center>           
             <center><td WIDTH="20"></td></center>
         </tr>
 {% endfor %}
@@ -53,14 +58,31 @@
 
 </table> 
 
-    
+<br>
+<center>
+
+<textarea name="especificacion_adicional"  placeholder= "Quiere agregar algo?  Quiere servicio a domicilio?, especifique dia, hora, direccion de entrea (se le notificará si hay algun cambio), el servicio delivery tiene un costo de $0.99, varia segun la distancia."  rows="3" cols="30"></textarea>
+
+<select class="form-control input-sm"  name="delivery" value="Envieme el pedido por Go! Delivery" style="font-size:10pt;width:300px;background-color:white;color:blue;">                                                     
+            <option value="Envieme el pedido por Go! Delivery">Envieme el pedido por Go! Delivery</option>
+            <option value="Prepare el pedido, pasaré por el">Prepare el pedido,pasaré por el</option>
+            <option value="Prepare el pedido, lo consumiré alli">Prepare el pedido, lo consumiré alli</option>
+            
+</select> 
+<br>
+<hs>
+<p><h6>Especifique fecha y hora de entrega</h6> </p>
+<br>
+<input type="date" name="fecha_entrega" >
+<br>
+<input type="time" name="hora_entrega" >   
+
     <br>  
-   <center>      
-    <input type="submit" value="Realizar la compra" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
-                              </center>
-
-
-
+  <textarea name="direccion_de_entrega"  placeholder= "A donde le llevamos su pedido?, costo minimo $0.99"  rows="3" cols="30"></textarea>
+<br>
+<hs>
+<input type="submit" value="Realizar la compra" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+</center>
 
 <br>                                                                                                
 </form> </center>
@@ -83,6 +105,11 @@
                           </div>
   </div>
 </div>
+
+
+
+
+
 
 {% endblock %}
 {% block extra_js %}
@@ -111,7 +138,7 @@ function calcular() {
         //var x= document.getElementById('name').value
         //total=parseFloat(tds[5].innerHTML)* x;
 
-        total=parseFloat(tds[3].innerHTML)* parseFloat(tds[4].querySelector('input').value);
+        total=parseFloat(tds[2].innerHTML)* parseFloat(tds[3].querySelector('input').value);
         //tds[0],tds[1],tds[2],tds[3]             
 
         tds[tds.length-1].innerHTML=total.toFixed(2);

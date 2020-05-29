@@ -6,13 +6,13 @@ importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js');
 //5.4.2
 
 var firebaseConfig = {
-    apiKey: "AIzaSyD4FDKeln63jm4VnY3D6AOUuO-q89QHX48",
-    authDomain: "detodonegocio-dbc1e.firebaseapp.com",
-    databaseURL: "https://detodonegocio-dbc1e.firebaseio.com",
-    projectId: "detodonegocio-dbc1e",
-    storageBucket: "detodonegocio-dbc1e.appspot.com",
-    messagingSenderId: "152761675312",
-    appId: "1:152761675312:web:b91be95a396f1e8d4387f5",
+    apiKey: "AIzaSyBIYdkebit4PVB6RV2YRSoSgv_da8j8XW8",
+    authDomain: "godelivery-c5e59.firebaseapp.com",
+    databaseURL: "https://godelivery-c5e59.firebaseio.com",
+    projectId: "godelivery-c5e59",
+    storageBucket: "godelivery-c5e59.appspot.com",
+    messagingSenderId: "873860409720",
+    appId: "1:873860409720:web:866cc2fc7321d6df13808d",
     
   };
   // Initialize Firebase
@@ -20,7 +20,7 @@ var firebaseConfig = {
   let messaging = firebase.messaging();
 
   messaging.setBackgroundMessageHandler(function(payload){
-  	console.log("ha lleado notificacion");
+  	console.log("LLego notificación");
 
   	let title = payload.notification.title;
   let options = {

@@ -49,7 +49,7 @@
  
  </div>
 
-{%  if  j.descripcion_oculta == "" %} 
+{%  if  producto.descripcion_oculta == "" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_UNO/' method='post'>
                               {% csrf_token %}                                
@@ -111,7 +111,7 @@
                {% else %}
 
 <br>
-    <center> <a href="/realizar_lista_de_compras/{{j.id}}" class="btn btn-info btn-lg" role="button">Hacer lista de compras</a></center>
+    <center> <a href="/realizar_lista_de_compras/{{producto.id}}" class="btn btn-info btn-lg" role="button">Hacer lista de compras</a></center>
     <br>  
 <br>
 
@@ -202,7 +202,7 @@
 </div>
 
 
-{% if  j.descripcion_oculta == "" %} 
+{% if  producto.descripcion_oculta == "" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_DOS/' method='post'>
                               {% csrf_token %}                                
@@ -263,7 +263,7 @@
                {% else %}
 
 <br>
-    <center> <a href="/realizar_lista_de_compras/{{j.id}}" class="btn btn-info btn-lg" role="button">Hacer lista de compras</a></center>
+    <center> <a href="/realizar_lista_de_compras/{{producto.id}}" class="btn btn-info btn-lg" role="button">Hacer lista de compras</a></center>
     <br>  
 <br>
 
@@ -344,7 +344,7 @@
 
 </div>
 
-{% if  j.descripcion_oculta == "" %} 
+{% if  producto.descripcion_oculta == "" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_TRES/' method='post'>
                               {% csrf_token %}                                
@@ -405,7 +405,7 @@
              {% else %}
 
 <br>
-    <center> <a href="/realizar_lista_de_compras/{{j.id}}" class="btn btn-info btn-lg" role="button">Hacer lista de compras</a></center>
+    <center> <a href="/realizar_lista_de_compras/{{producto.id}}" class="btn btn-info btn-lg" role="button">Hacer lista de compras</a></center>
     <br>  
 <br>
 

@@ -252,9 +252,9 @@ LOGIN_REDIRECT_URL = '/' #Or whatever you wish
 
 
 FCM_DJANGO_SETTINGS = {
-        "APP_VERBOSE_NAME": "detodonegocio",
+        "APP_VERBOSE_NAME": "godelivery",
          # default: _('FCM Django')
-        "FCM_SERVER_KEY": "AIzaSyD4FDKeln63jm4VnY3D6AOUuO-q89QHX48",
+        "FCM_SERVER_KEY": "AAAAy3YjqXg:APA91bG2CZyjyaYaLo3J18pMb5ttwWexbWjCwKKuHYGPBEU7EpRL0MBwFJTRtWMkXqyZTOWcb-HDJoMRLShbQ7cVXDquZxEhsTtoONWfWzCUfXXwLNSxgtnxspjFbrdaWcteje2t1NjL",
          # true if you want to have only one active device per registered user at a time
          # default: False
         "ONE_DEVICE_PER_USER": False,

@@ -64,12 +64,15 @@
           <li><a href="/ver_el_carrito_de_tienda/{{ i.producto.tienda.id }}">Vendedor: {{ i.producto.tienda.nombre_tienda }} : {{i.producto.id_usuario}} </a></li>
          
           <hr>
+   
 
-          <p><h5>{{ i.cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} TOTAL: {{ i.total }}</h5></p>
+
+
+          <p><h5>{{ i.cantidad }} {{ i.producto.nombre }} {% if i.producto.precio_A <= 0 %} {{ i.producto.precio_A }} {% else  %} {% endif  %}  TOTAL: {{ i.total }}</h5></p>
           <p><h5>{{ i.especificacion| linebreaks }}</h5></p>
           <hr>
            {% if i.costo_servicio_a_domicilio %}
- <h6> <p> más  $servicio a domicilio {{i.costo_servicio_a_domicilio}} </p> </h6>
+ <h6> <p> A su cuenta se agregaran ${{i.costo_servicio_a_domicilio}}  por el  costo del servicio a domicilio.</p> </h6>
   <h5> <p> <font color="red">{{i.servicio_a_domicilio}}</font> </p> </h5>
 
  <h6> <p> contacto {{i.delibery_junior}} ó {{i.delibery}} </p></h6>
@@ -391,7 +394,7 @@
          
           <hr>
 
-          <p><h5>{{ i.cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} TOTAL: {{ i.total }}</h5></p>
+          <p><h5>{{ i.cantidad }} {{ i.producto.nombre }} {% if i.producto.precio_A <= 0 %} {{ i.producto.precio_A }} {% else  %} {% endif  %}  TOTAL: {{ i.total }}</h5></p>
           <p><h5>{{ i.especificacion| linebreaks }}</h5></p>
           <hr>
            {% if i.costo_servicio_a_domicilio %}
@@ -696,7 +699,7 @@
          
           <hr>
 
-          <p><h5>{{ i.cantidad }} {{ i.producto.nombre }} {{ i.producto.precio_A }} TOTAL: {{ i.total }}</h5></p>
+          <p><h5>{{ i.cantidad }} {{ i.producto.nombre }} {% if i.producto.precio_A <= 0 %} {{ i.producto.precio_A }} {% else  %} {% endif  %}  TOTAL: {{ i.total }}</h5></p>
           <p><h5>{{ i.especificacion| linebreaks }}</h5></p>
           <hr>
            {% if i.costo_servicio_a_domicilio %}

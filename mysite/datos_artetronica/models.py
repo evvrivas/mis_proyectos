@@ -96,7 +96,7 @@ class Categoria(models.Model):
          class Admin:
          	list_display = ('categoria')
 
-
+estado_prod
 ESTADO_PRODUCTO= (
 	        ('EN_EXISTENCIA', 'EN_EXISTENCIA'), 
 			('EN_PRODUCCION', 'EN_PRODUCCION'),
@@ -521,6 +521,7 @@ HORARIO=(
 TIEMPO=(
 ("10 Minutos","10 Minutos"),
 ("15 Minutos","15 Minutos"),
+("20 Minutos","20 Minutos"),
 ("30 Minutos","30 Minutos"),
 ("45 Minutos","45 Minutos"),
 ("1 Hora","1 Hora"),
@@ -540,7 +541,7 @@ class Tiendas(models.Model):
 	     categoria=models.CharField(max_length=40,blank=True,choices=SUPER_CATEGORIA)	     
 	     imagen1 = ImageField(upload_to='tmp',blank=True)
 	     descripcion=models.TextField(blank=True)
-	     tiempo_espera=models.TextField(blank=True)
+	     tiempo_espera=models.CharField(max_length=30,blank=True,choices=TIEMPO,default="15 Minutos")
 
 	     codigoapk=models.CharField(max_length=30,blank=True,choices=CLAVES,default="NORMAL")
 	     tipo_de_vista=models.CharField(max_length=30,blank=True,default="NORMAL")
@@ -753,9 +754,9 @@ class Carro_de_compras(models.Model):
 	estado_prod=models.CharField(max_length=30,blank=True,choices=ESTADO3,default="QUIERO_PEDIR_ESTO",null=True)
 	fecha_ingreso = models.DateField(default=datetime.now)
 
-	lugar_de_entrega=models.CharField(max_length=60,blank=True,null=True)	 
+	lugar_de_entrega=models.CharField(max_length=260,blank=True,null=True)	 
 	fecha_de_entrega=models.CharField(max_length=40,blank=True,null=True,default=datetime.now)	 
-	servicio_a_domicilio=models.CharField(max_length=30,blank=True,null=True,choices=SERVICIO_A_DOMICILIO, default="Enviemelo con Go! delivery por favor")
+	servicio_a_domicilio=models.CharField(max_length=60,blank=True,null=True,choices=SERVICIO_A_DOMICILIO, default="Enviemelo con Go! delivery por favor")
 	costo_servicio_a_domicilio=models.DecimalField(max_digits=6,decimal_places=2,default=0.99,blank=True,null=True)
 	servicio_financiero=models.CharField(max_length=30,blank=True,null=True,choices=SERVICIO_FINANCIERO)	
 	

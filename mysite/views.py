@@ -253,7 +253,7 @@ def guardar_token(request):
     #solo si el usuario esta autenticado procedemos a enlasarlo
     if request.user.is_authenticated:
       dispositivo.user=request.user
-      dispositivo.user=request.user.username
+      dispositivo.name=request.user.username
 
     try:
         dispositivo.save()
@@ -608,7 +608,7 @@ def crear_usuario(request):
        
         if request.method == 'POST': # si el usuario est enviando el formulario con datos
                
-              
+              try:  
                     form = UsuariosForm(request.POST,request.FILES)                      
                     
                     if form.is_valid() :                        
@@ -637,7 +637,9 @@ def crear_usuario(request):
                             
                             connection.close()
                             return render(request,'confirmar_usuario.html',locals())                  
-                
+              except:
+                    error_mensaje="Su Numero de Telefono o Wahtsapp al parecer ya esta reistrado, Pruebe en el boton Entrar, introdusca su numero de Whatsapp y su contraseña, si ya no la recuerda escriba un mensaje al 78218224"
+                    return render(request,'confirmar.html',locals())        
 
         else:            
                          
@@ -895,7 +897,8 @@ def ver_categorias(request,item):
   categoria=n_categorias()
   ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
-
+  configurar=Configuracion_sistema.objects.filter(ciudad="TODOS").first()
+  visitas= configurar.n_visitas 
 
    
 
@@ -1002,7 +1005,7 @@ def busqueda_tienda(request,idusuario,nombretienda):
      categoria=categorizar(idusuario,nombretienda)
      
      if request.POST:
-        palabra = request.POST.get('nombre')
+        palabra = request.POST.get('nombre_t')
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
         if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
             busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra)
@@ -1017,7 +1020,7 @@ def busqueda_tienda(request,idusuario,nombretienda):
         else:
             corazon="NO_PREFERIDA"
 
-        productos= Productos.objects.filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra) & Q(tienda__nombre_tienda__icontains=nombretienda))
+        productos= Productos.objects.filter(tienda__nombre_tienda=nombretienda).filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
         connection.close()
         return render(request,'catalogo_tienda.html',locals()) 
 
@@ -1097,6 +1100,8 @@ def busqueda_desde_app(request,palabra):
     categoria=n_categorias()
     ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+    configurar=Configuracion_sistema.objects.filter(ciudad="TODOS").first()
+    visitas= configurar.n_visitas
      
     if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
             fecha=datetime.datetime.now()
@@ -1113,7 +1118,7 @@ def busqueda_desde_app(request,palabra):
         r=keys[3]
         k=keys[4]
    
-        if x != ""  and y != "" :
+        if x != "0"  or y != "0" :
             latidud=eval(x)
             longitud=eval(y)
             radio=1000*eval(r)
@@ -1133,7 +1138,7 @@ def busqueda_desde_app(request,palabra):
                       lat2=latitud_usuario
                       lon2=longitud_usuario
                       distancia=distancia_geodesica(lat1,lon1,lat2,lon2)
-                      if distancia<=r:
+                      if distancia<=radio:
                           productos.append(i)
 
                       else:        
@@ -1147,7 +1152,7 @@ def busqueda_desde_app(request,palabra):
                       lat2=latitud_usuario
                       lon2=longitud_usuario
                       distancia=distancia_geodesica(lat1,lon1,lat2,lon2)
-                      if distancia<=r:
+                      if distancia<=radio:
                           tiendas.append(i)
 
                       else:        
@@ -1161,7 +1166,7 @@ def busqueda_desde_app(request,palabra):
                       lat2=latitud_usuario
                       lon2=longitud_usuario
                       distancia=distancia_geodesica(lat1,lon1,lat2,lon2)
-                      if distancia<=r:
+                      if distancia<=radio:
                           tiendas.append(i)
 
                       else:        
@@ -1182,7 +1187,7 @@ def busqueda_desde_app(request,palabra):
                       lat2=latitud_usuario
                       lon2=longitud_usuario
                       distancia=distancia_geodesica(lat1,lon1,lat2,lon2)
-                      if distancia<=r:
+                      if distancia<=radio:
                           tiendas.append(i)
 
                       else:        
@@ -1197,7 +1202,7 @@ def busqueda_desde_app(request,palabra):
                       lon2=longitud_usuario
                       distancia=distancia_geodesica(lat1,lon1,lat2,lon2)
                       
-                      if distancia<=r:
+                      if distancia<=radio:
                           tiendas.append(i)
 
                       else:        
@@ -1230,6 +1235,9 @@ def busqueda(request,bandera):
      categoria=n_categorias()
      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
      mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+
+     configurar=Configuracion_sistema.objects.filter(ciudad="TODOS").first()
+     visitas= configurar.n_visitas 
 
 
      
@@ -1352,7 +1360,7 @@ def pagina_principal(request):
                          
 
                          
-                         configurar=Configuracion_sistema.objects.filter(ciudad="TODAS").first()
+                         configurar=Configuracion_sistema.objects.filter(ciudad="TODOS").first()
 
                          visitas= configurar.n_visitas                        
                          configurar.n_visitas+=1         
@@ -1361,7 +1369,7 @@ def pagina_principal(request):
                          abierto_cerrado_actualizar_todas()
 
                          city=ciudad
-                         if visitar%2 == 1:
+                         if visitas%2 == 1:
                                 configurar=Configuracion_sistema.objects.filter(ciudad=city).first()
 
                                                  
@@ -1457,7 +1465,11 @@ def pagina_principal(request):
 def catalogo(request, var):
   categoria=n_categorias()
   ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+  configurar=Configuracion_sistema.objects.filter(ciudad="TODOS").first()
+
+  visitas= configurar.n_visitas 
   mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+
 
   #return render_to_response('catalogo.html', locals(),context_instance=RequestContext(request))
   connection.close()
@@ -1711,7 +1723,9 @@ def descargar(request,idusuario,nombretienda,id_del_producto):
 
 def centro_comercial(request,idusuario,nombre_del_centro_comercial):
     categoria=n_categorias()
-    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)        
+    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)  
+    configurar=Configuracion_sistema.objects.filter(ciudad="TODOS").first()
+    visitas= configurar.n_visitas       
     
     tiendas= Tiendas.objects.filter(Q(ccomercial__nombre_ccomercial__icontains=nombre_del_centro_comercial))
 
@@ -2835,6 +2849,13 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
             for i in range(len(vector_1)):
               x= request.POST.get(str(i))
               items.append(x)
+            
+            ea= request.POST.get("especificacion_adicional")
+            a_domicilio= request.POST.get("delivery")
+            fe= request.POST.get("fecha_entrega")
+            he= request.POST.get("hora_entrega")
+            le= request.POST.get("direccion_de_entrega")
+                        
             b=0
             vector=[]
             total_x=0
@@ -2850,8 +2871,14 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
                   stock=eval(a[0])
                   a[0] = stock - eval(items[b])
 
+                  
                   a.append(str(items[b]))
-                  a.append(str(total))
+                  d=a[-2]
+                  a[-2]=str("$")+d
+
+                  d=str("$")+str(total)
+                  a.append(str(d))
+
                   x=a[1:]
                   vector.append(x)
               b=b+1
@@ -2859,23 +2886,34 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
             bux=""
             for i in vector:
                  aux=""
+
+                 p=0
                  for j in i:
-                    aux=aux+str(" __ ")+str(j) 
+                    aux=aux+str(" __ ")+str(j)
+                    p=p+1
+
                  aux=aux+str("\n")
                   
                  bux=bux+aux      
           
                  cant = 1
                  espe = bux                  
+            
+            espe=espe+"\n\n"+str(ea)+"\n\n"+str(le)
+
+
+
             precio=0                
             lafecha=datetime.datetime.now() 
-            fe=lafecha.strftime("%d/%m/%Y, %H:%M:")
-
+            
+            #fe=lafecha.strftime("%d/%m/%Y, %H:%M:")
+            fentrega=str(fe)+str(" a las ")+str(he)
+             
             foto="MOSTRAR_F_TODAS"   
                
             n=Usuarios.objects.get(id_usuario=request.user.username)     
             #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
-            carrito=Carro_de_compras(usuario_car=n,nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha,fecha_de_entrega=fe,servicio_a_domicilio="Enviemelo con Go! delivery por favor")
+            carrito=Carro_de_compras(usuario_car=n,nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha,fecha_de_entrega=fentrega,servicio_a_domicilio=a_domicilio,lugar_de_entrega=le)
                  
             carrito.save()
 
@@ -2944,6 +2982,9 @@ def crear_super_producto(request,id_de_la_tienda):
           tiendas.save()
 
           corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+
+           
+
           if corazon>0:
                       corazon="PREFERIDA"
           else:
@@ -2952,7 +2993,8 @@ def crear_super_producto(request,id_de_la_tienda):
           var=tiendas.codigoapk
           
 
-          los_productos = Productos.objects.filter(tienda__id=id_de_la_tienda)
+          los_productos = Productos.objects.filter(tienda__id=id_de_la_tienda).filter( Q(estado_prod='EN_EXISTENCIA') |  Q(estado_prod='EN_PRODUCCION') |  Q(estado_prod='SOLO_POR_ENCARGO') |  Q(estado_prod='AGOTADO') |  Q(estado_prod='AGOTADO') )
+         
       
 
           bandera="NO EXISTE"

@@ -85,7 +85,7 @@ function calcular() {
 
 
 
-<div class="panel panel-success">   
+<div class="panel panel-primary">   
 
 
 <div class="panel-heading">
@@ -198,7 +198,7 @@ function calcular() {
 
                {%  if user.is_authenticated %}          
              
-                   <center>    <li> Hola.!.{{ user.username }}       </li>   </center>   
+                   <center>    <li> H☺la.!.{{ user.username }}       </li>   </center>   
                                      
                {% endif %}  
 
@@ -228,8 +228,13 @@ function calcular() {
 
           <form action="/busqueda_tienda/{{tiendas.id_usuario}}/{{tiendas.nombre_tienda}}/" method="post">
               {% csrf_token %}
-          <input type="text" id="name" name="nombre" placeholder="Que buscas?" size="30"/>
-          <input type="submit" value="Buscar">
+          
+
+          <input class="form-control input-sm" type="text" id="name_t" name="nombre_t" placeholder= "Que buscas?" style="font-size:10pt;width:280px;background-color:white;color:blue;">
+          <input class="form-control input-sm" type="text" id="name" name="nombre" placeholder= "Que buscas?" style="font-size:10pt;width:110px;background-color:white;color:blue;">
+
+          <input type="submit" value="Buscar" class="btn btn-success"> 
+
          </form>
 
 
@@ -331,7 +336,7 @@ function calcular() {
                              
                        </h6></center>
 
-<center><h5><p>{{tiendas.descripcion}},<font color="red"> Nos hemos propuesto preparar su pedido en:{{j.tiempo_espera}}</font> </p></h5></center>
+<center><h5><p>{{tiendas.descripcion}},<font color="red"> Nos hemos propuesto preparar su pedido en:{{tiendas.tiempo_espera}}</font> </p></h5></center>
 
 
 
