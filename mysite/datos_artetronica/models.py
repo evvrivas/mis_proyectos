@@ -96,7 +96,7 @@ class Categoria(models.Model):
          class Admin:
          	list_display = ('categoria')
 
-estado_prod
+
 ESTADO_PRODUCTO= (
 	        ('EN_EXISTENCIA', 'EN_EXISTENCIA'), 
 			('EN_PRODUCCION', 'EN_PRODUCCION'),

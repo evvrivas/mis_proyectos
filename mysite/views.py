@@ -252,8 +252,9 @@ def guardar_token(request):
 
     #solo si el usuario esta autenticado procedemos a enlasarlo
     if request.user.is_authenticated:
+      dispositivo.name=request.user
+
       dispositivo.user=request.user
-      dispositivo.name=request.user.username
 
     try:
         dispositivo.save()
