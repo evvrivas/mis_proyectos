@@ -122,8 +122,13 @@ def notificacion_producto_probable_al_carrito(id_del_pedido):
     especificacion=pedido.especificacion
     total=pedido.total
     punitario=pedido.producto.precio_A
+
+    usuario=pedido.id_comprador
+    nombre_cliente=pedido.nombre_comprador
+    apellido=pedido.apellido_comprador 
+  
     
-    cuerpo_1 = str(cantidad) + " " + str(nombre) + " " + str(especificacion) + " " + str(punitario) + " " + str(total)
+    cuerpo_1 =str(usuario) + " " + str(nombre_cliente) + " " + str(apellido) + " " + str(cantidad) + " " + str(nombre) + " " + str(especificacion) + " " + str(punitario) + " " + str(total)
     cuerpo=cuerpo_1
     
     for i in vector_de_notificacion:
@@ -169,10 +174,14 @@ def notificacion_confirmado_producto_al_carrito(id_del_pedido,mensaje):
     fecha_de_entrega=pedido.fecha_de_entrega   
     #servicio_a_domicilio=pedido.servicio_a_domicilio
     costo_servicio_a_domicilio=pedido.costo_servicio_a_domicilio
-    #servicio_financiero=pedido.servicio_financiero  
+    #servicio_financiero=pedido.servicio_financiero
+
+    usuario=pedido.id_comprador
+    nombre_cliente=pedido.nombre_comprador
+    apellido=pedido.apellido_comprador      
 
     cuerpo_2 =  str(fecha_de_entrega) + " " + str(lugar_de_entrega) + " " + str(costo_servicio_a_domicilio)
-    cuerpo_1 = str(cantidad) + " " + str(nombre) + " " + str(especificacion) + " " + str(punitario) + " " + str(total)
+    cuerpo_1 = str(usuario) + " " + str(nombre_cliente) + " " + str(apellido) +str(cantidad) + " " + str(nombre) + " " + str(especificacion) + " " + str(punitario) + " " + str(total)
     cuerpo=cuerpo_1+cuerpo_2
     
     for i in vector_de_notificacion:
@@ -385,9 +394,9 @@ def info_pagina(requesta):
     try:
           #cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(estado_prod="QUIERO_PEDIR_ESTO").count()+
       if t_usuario=="EL_COMPRADOR":    
-          cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()
+          cantidad_pedidos=Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()+ Carro_de_compras.objects.filter(producto__tienda__administrador_junior=requesta.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()
       else:
-          cantidad_pedidos= Carro_de_compras.objects.filter(producto__id_usuario=requesta.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()
+          cantidad_pedidos= Carro_de_compras.objects.filter(producto__id_usuario=requesta.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()+Carro_de_compras.objects.filter(id_comprador=requesta.user.username).filter(Q(estado_prod='QUIERO_PEDIR_ESTO') |  Q(estado_prod='EL_VENDEDOR_RECIBIO_EL_PEDIDO')).count()
     
 
     except:  
@@ -617,8 +626,7 @@ def crear_usuario(request):
                             whatsapp = form.cleaned_data['id_usuario']
                             contra = form.cleaned_data['clave'] 
                             nombr=form.cleaned_data['nombre']
-                            apellid=form.cleaned_data['apellido']
-                                          
+                            apellid=form.cleaned_data['apellido']                                          
                             
                             user = User.objects.create_user(username=whatsapp, password=contra, first_name=nombr ,last_name=apellid)
                             user.save()                             
@@ -628,11 +636,10 @@ def crear_usuario(request):
                             usuario.save() # Now you can send it to DB
                             
                             form.save()
-                            
-                            
+                                                        
                             nuevo_cliente=Usuarios.objects.get(id_usuario=whatsapp) 
                             lugar=nuevo_cliente.estoy_en
-                            notificacion_nuevo_cliente(lugar) 
+                            notificacion_nuevo_cliente(lugar)
 
 
                             
@@ -1014,7 +1021,6 @@ def busqueda_tienda(request,idusuario,nombretienda):
         
 
         tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-
         corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
         if corazon>0:
             corazon="PREFERIDA"
@@ -2103,8 +2109,8 @@ def eliminar_producto_del_carrito(request,id_producto):
        ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
        
 
-       mensaje="Se ha eliminado este pedido, revisá:!"
-       notificacion_confirmado_producto_al_carrito(id_producto,mensaje)
+       #mensaje="Se ha eliminado este pedido, revisá:!"
+       #notificacion_confirmado_producto_al_carrito(id_producto,mensaje)
        
        Carro_de_compras.objects.get(id=id_producto).delete()
 
@@ -2138,8 +2144,8 @@ def editar_producto_del_carrito(request,id_producto):
                 if form.is_valid():                         
          
                             form.save()
-                            mensaje="Se ha editado un pedido, revisá:!"
-                            notificacion_confirmado_producto_al_carrito(id_producto,mensaje)
+                            #mensaje="Se ha editado un pedido, revisá:!"
+                            #notificacion_confirmado_producto_al_carrito(id_producto,mensaje)
                             try:
                                  f.total=f.cantidad*f.producto.precio_A 
                             except:
@@ -2247,8 +2253,8 @@ def realizar_compra(request):
         administrador_tienda.venta_actual=b
         administrador_tienda.save()
 
-        mensaje="El Cliente realizó la compra "
-        notificacion_confirmado_producto_al_carrito(i.id,mensaje)      
+        #mensaje="El Cliente realizó la compra "
+        #notificacion_confirmado_producto_al_carrito(i.id,mensaje)      
 
 
      return render(request,'confirmar_compra.html',locals())   
@@ -2285,8 +2291,8 @@ def realizar_compra_individual(request,id_producto):
      administrador_tienda.venta_actual=b
      administrador_tienda.save()
 
-     mensaje="El Cliente realizó una compra "
-     notificacion_confirmado_producto_al_carrito(id_producto,mensaje) 
+     #mensaje="El Cliente realizó una compra "
+     #notificacion_confirmado_producto_al_carrito(id_producto,mensaje) 
      
      return render(request,'confirmar_compra.html',locals())   
 
@@ -2769,16 +2775,17 @@ def mis_cuentas(request):
     
 
 
-@login_required  
+  
 def realizar_lista_de_compras(request,id_del_producto):
     
     producto=Productos.objects.get(id=id_del_producto)
     idusuario=producto.tienda.id_usuario
     nombretienda=producto.tienda.nombre_tienda
 
-
-    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
-       
+    try:
+      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+    except:
+      pass   
     categoria=categorizar(idusuario,nombretienda)
     
     tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first() 
@@ -2818,20 +2825,16 @@ def realizar_lista_de_compras(request,id_del_producto):
            
     return render(request,'realizar_lista_de_compras.html',locals())
 
+     
 
-
-@login_required       
 def agregar_lista_de_compra_al_carrito(request,id_del_producto):
-
-          ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
-       
-
+         
+          
+          #texto1="*20,u,Salchicha peruana 1,13.25 \n 30,u,Salchicha peruana 2,4.5 \n 60,lb,Salchicha peruana 4,5.25 \n 1,lb,Salchicha peruana 5,2.25 \n 4,Kg,Salchicha peruana 6,1.53 \n 6,LB, Salchicha peruana 7,3.25 \n  9,u,Salchicha peruana 8,1.45 \n 2,lb,Salchicha peruana 9,1.5 "
           el_producto=Productos.objects.get(id=id_del_producto)
           idusuario=el_producto.tienda.id_usuario
           nombretienda=el_producto.tienda.nombre_tienda
 
-          #texto1="*20,u,Salchicha peruana 1,13.25 \n 30,u,Salchicha peruana 2,4.5 \n 60,lb,Salchicha peruana 4,5.25 \n 1,lb,Salchicha peruana 5,2.25 \n 4,Kg,Salchicha peruana 6,1.53 \n 6,LB, Salchicha peruana 7,3.25 \n  9,u,Salchicha peruana 8,1.45 \n 2,lb,Salchicha peruana 9,1.5 "
-          
           if  el_producto.descripcion_oculta != "":
                 texto1=el_producto.descripcion_oculta       
                 texto=texto1
@@ -2847,127 +2850,170 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
           items=[]
 
           if request.POST:
-            for i in range(len(vector_1)):
-              x= request.POST.get(str(i))
-              items.append(x)
-            
-            ea= request.POST.get("especificacion_adicional")
-            a_domicilio= request.POST.get("delivery")
-            fe= request.POST.get("fecha_entrega")
-            he= request.POST.get("hora_entrega")
-            le= request.POST.get("direccion_de_entrega")
-                        
-            b=0
-            vector=[]
-            total_x=0
-            for i in vector_1:
-              p=eval(items[b])
-              if p>0:
-                  a=i.split(",")
-                  pu=eval(a[-1])
-                  total=pu*eval(items[b])
-                  total=round(total,2)
-                  total_x=total_x+total
-
-                  stock=eval(a[0])
-                  a[0] = stock - eval(items[b])
-
-                  
-                  a.append(str(items[b]))
-                  d=a[-2]
-                  a[-2]=str("$")+d
-
-                  d=str("$")+str(total)
-                  a.append(str(d))
-
-                  x=a[1:]
-                  vector.append(x)
-              b=b+1
-            
-            bux=""
-            for i in vector:
-                 aux=""
-
-                 p=0
-                 for j in i:
-                    aux=aux+str(" __ ")+str(j)
-                    p=p+1
-
-                 aux=aux+str("\n")
-                  
-                 bux=bux+aux      
-          
-                 cant = 1
-                 espe = bux                  
-            
-            espe=espe+"\n\n"+str(ea)+"\n\n"+str(le)
 
 
+                    for i in range(len(vector_1)):
+                      x= request.POST.get(str(i))
+                      items.append(x)
+                    
+                    ea= request.POST.get("especificacion_adicional")
+                    a_domicilio= request.POST.get("delivery")
+                    fe= request.POST.get("fecha_entrega")
+                    he= request.POST.get("hora_entrega")
+                    le= request.POST.get("direccion_de_entrega")
 
-            precio=0                
-            lafecha=datetime.datetime.now() 
-            
-            #fe=lafecha.strftime("%d/%m/%Y, %H:%M:")
-            fentrega=str(fe)+str(" a las ")+str(he)
-             
-            foto="MOSTRAR_F_TODAS"   
-               
-            n=Usuarios.objects.get(id_usuario=request.user.username)     
-            #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
-            carrito=Carro_de_compras(usuario_car=n,nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha,fecha_de_entrega=fentrega,servicio_a_domicilio=a_domicilio,lugar_de_entrega=le)
-                 
-            carrito.save()
-
-
-            id_dela_tienda=el_producto.tienda.id                
-            tiendas = Tiendas.objects.get(pk=id_dela_tienda)              
-            nombretienda=tiendas.nombre_tienda      
-            categoria=categorizar(idusuario,nombretienda)     
-            var=tiendas.codigoapk  
                    
-            administrador_tienda=Usuarios.objects.get(id_usuario=tiendas.id_usuario)                
-            a=administrador_tienda.cant_click_pedidos_nuevos
-            a=a+1
-            administrador_tienda.cant_click_pedidos_nuevos=a
+                    if request.user.is_authenticated():
+                          pass
+                    
+                    else:
 
-            b=administrador_tienda.cant_click_pedidos_nuevos_acumulados
-            b=b+1
-            administrador_tienda.cant_click_pedidos_nuevos_acumulados=b
+                          username = request.POST['whatsapp']
+                          nombre = request.POST['nombre']
+                          apellido = request.POST['apellido']
+                          contra=username[4:8]
 
-            administrador_tienda.save()
+                          if User.objects.filter(username=username).exists():
 
-            a=tiendas.cant_click_pedidos_nuevos
-            a=a+1
-            tiendas.cant_click_pedidos_nuevos=a
+                                  user = auth.authenticate(username=username, password=contra)
+                                  
+                          else:     
 
-            b=tiendas.cant_click_pedidos_nuevos_acumulados
-            b=b+1
-            tiendas.cant_click_pedidos_nuevos_acumulados=b
-            tiendas.save()
+                                  user = User.objects.create_user(username=username, password=contra, first_name=nombre ,last_name=apellido)
+                                  user.save()
 
-            carrito=Carro_de_compras.objects.filter(id_comprador=n.id_usuario).last()
-            notificacion_producto_probable_al_carrito(carrito.id)           
-                
-            ###################################################                   
-      
-    
-            corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=id_dela_tienda).count()
-            if corazon>0:
-                corazon="PREFERIDA"
-            else:
-                corazon="NO_PREFERIDA"
+                                  lafecha=datetime.datetime.now()
 
-            productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)).order_by("precio_A")
-            comprador=Usuarios.objects.get(id_usuario=request.user.username)                          
+                                  U=Usuarios(id_usuario=username, clave=contra,  nombre=nombre, apellido=apellido,nota_de_evaluacion=10, plan_tienda="GRATIS", plan_tienda_activo="GRATIS", nombre_del_banco="BANCO_AGRICOLA",codigoapk="NORMAL",fecha_inicio_plan =lafecha,fecha_final_plan =lafecha, fecha_ingreso=lafecha,  tipo_de_vista="NORMAL", tipo_usuario="EL_COMPRADOR",cant_click_whatsapp_acumulados=0, cant_click_whatsapp=0,costo_click_whatsapp=0.1, cant_click_telefono_acumulados=0, cant_click_telefono=0, costo_click_telefono=0.1, cant_click_pedidos_nuevos_acumulados=0, cant_click_pedidos_nuevos=0, costo_click_pedidos_nuevos=0.35,venta_acumulada=0.0, venta_actual=0.0, porcentaje_venta=0.1)
+                                  U.save()
+
+                                  user = auth.authenticate(username=username, password=contra)
+
+                                                    
+                          if user is not None and user.is_active:
+                                        # Correct password, and the user is marked "active"
+                                        auth.login(request, user)
+                                        # Redirect to a success page.
+                                       
+                          else:
+                              mensaje="Usted es un usuario registrado, primero hay que entrar!."
+                              return render(request,'sin_autorizacion.html',locals()) 
+
+                                
+                    b=0
+                    vector=[]
+                    total_x=0
+                    for i in vector_1:
+                      p=eval(items[b])
+                      if p>0:
+                          a=i.split(",")
+                          pu=eval(a[-1])
+                          total=pu*eval(items[b])
+                          total=round(total,2)
+                          total_x=total_x+total
+
+                          stock=eval(a[0])
+                          a[0] = stock - eval(items[b])
+
+                          
+                          a.append(str(items[b]))
+                          d=a[-2]
+                          a[-2]=str("$")+d
+
+                          d=str("$")+str(total)
+                          a.append(str(d))
+
+                          x=a[1:]
+                          vector.append(x)
+                      b=b+1
+                    
+                    bux=""
+                    for i in vector:
+                         aux=""
+
+                         p=0
+                         for j in i:
+                            aux=aux+str(" __ ")+str(j)
+                            p=p+1
+
+                         aux=aux+str("\n")
+                          
+                         bux=bux+aux      
                   
-            if comprador.tipo_de_vista=="NORMAL":
-                 return render(request,'catalogo_tienda.html',locals())   
-            elif comprador.tipo_de_vista=="LINEAL":
-                 return render(request,'catalogo_tienda_lineal.html',locals())   
-            elif comprador.tipo_de_vista=="FOTITOS":
-                 return render(request,'catalogo_tienda_fotitos.html',locals())   
-            else :
-                  return render(request,'catalogo_tienda.html',locals())  
+                         cant = 1
+                         espe = bux                  
+                    
+                    espe=espe+"\n\n"+str(ea)+"\n\n"+str(le)
+
+
+                    precio=0                
+                    lafecha=datetime.datetime.now() 
+                    
+                    #fe=lafecha.strftime("%d/%m/%Y, %H:%M:")
+                    fentrega=str(fe)+str(" a las ")+str(he)
+                    
+
+                    ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
+                    
+                     
+                    foto="MOSTRAR_F_TODAS"   
+                       
+                    n=Usuarios.objects.get(id_usuario=request.user.username)     
+                    #carrito=Carro_de_compras(id_usuario=request.user.username,id_vendedor=el_producto.id_usuario,id_producto=id_del_producto,nombre_tienda=el_producto.tienda.nombre_tienda,cantidad=cant,nombre=el_producto.nombre,precio=el_producto.precio_A,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha)
+                    carrito=Carro_de_compras(usuario_car=n,nota_vendedor=el_producto.tienda.nota_de_evaluacion,nota_comprador=n.nota_de_evaluacion,nombre_comprador=n.nombre, apellido_comprador=n.apellido,mostrar_foto=foto, producto=el_producto,id_comprador=request.user.username,cantidad=cant,total=total_x,especificacion=espe,estado_prod="QUIERO_PEDIR_ESTO" ,fecha_ingreso=lafecha,fecha_de_entrega=fentrega,servicio_a_domicilio=a_domicilio,lugar_de_entrega=le)
+                         
+                    carrito.save()
+
+
+                    id_dela_tienda=el_producto.tienda.id                
+                    tiendas = Tiendas.objects.get(pk=id_dela_tienda)              
+                    nombretienda=tiendas.nombre_tienda      
+                    categoria=categorizar(idusuario,nombretienda)     
+                    var=tiendas.codigoapk  
+                           
+                    administrador_tienda=Usuarios.objects.get(id_usuario=tiendas.id_usuario)                
+                    a=administrador_tienda.cant_click_pedidos_nuevos
+                    a=a+1
+                    administrador_tienda.cant_click_pedidos_nuevos=a
+
+                    b=administrador_tienda.cant_click_pedidos_nuevos_acumulados
+                    b=b+1
+                    administrador_tienda.cant_click_pedidos_nuevos_acumulados=b
+
+                    administrador_tienda.save()
+
+                    a=tiendas.cant_click_pedidos_nuevos
+                    a=a+1
+                    tiendas.cant_click_pedidos_nuevos=a
+
+                    b=tiendas.cant_click_pedidos_nuevos_acumulados
+                    b=b+1
+                    tiendas.cant_click_pedidos_nuevos_acumulados=b
+                    tiendas.save()
+
+                    carrito=Carro_de_compras.objects.filter(id_comprador=n.id_usuario).last()
+                    notificacion_producto_probable_al_carrito(carrito.id)           
+                        
+                    ###################################################                  
+              
+            
+                    corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=id_dela_tienda).count()
+                    if corazon>0:
+                        corazon="PREFERIDA"
+                    else:
+                        corazon="NO_PREFERIDA"
+
+                    productos=Productos.objects.filter(Q(id_usuario=idusuario) & Q(tienda__nombre_tienda__icontains=nombretienda)).order_by("precio_A")
+                    comprador=Usuarios.objects.get(id_usuario=request.user.username)                          
+                          
+                    if comprador.tipo_de_vista=="NORMAL":
+                         return render(request,'catalogo_tienda.html',locals())   
+                    elif comprador.tipo_de_vista=="LINEAL":
+                         return render(request,'catalogo_tienda_lineal.html',locals())   
+                    elif comprador.tipo_de_vista=="FOTITOS":
+                         return render(request,'catalogo_tienda_fotitos.html',locals())   
+                    else :
+                          return render(request,'catalogo_tienda.html',locals())  
     
 @login_required  
 def crear_super_producto(request,id_de_la_tienda):
@@ -3053,3 +3099,27 @@ def crear_super_producto(request,id_de_la_tienda):
               pro.save()
 
           return render(request,'confirmar_tienda.html',locals())
+
+
+
+def login_automatico(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    nombre = request.POST['nombre']
+    apellido = request.POST['apellido']
+   
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+        # Correct password, and the user is marked "active"
+        auth.login(request, user)
+        # Redirect to a success page.
+        return HttpResponseRedirect("/account/loggedin/")
+    else:
+        # Show an error page
+        return HttpResponseRedirect("/account/invalid/")
+
+
+
+
+
+       

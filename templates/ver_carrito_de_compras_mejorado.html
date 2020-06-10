@@ -443,11 +443,11 @@
     {% endif %}
 
     
-    {%  if user.username == i.producto.id_usuario %} 
+    {%  if user.username == i.producto.id_usuario or user.username == i.producto.tienda.administrador_junior %} 
               
  
               {% if i.estado_prod == "EL_VENDEDOR_RECIBIO_EL_PEDIDO"  or i.estado_prod == "EL_VENDEDOR_A_CONFIRMADO"   %}
-                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-warning btn-xs" role="button" > Acepto Vender </a>
+                      <a href="/editar_estado_producto_del_carrito/{{i.id}}/EL_VENDEDOR" class="btn btn-info btn-l" role="button" >pedido Listo </a>
                       <a href="/editar_producto_del_carrito/{{i.id}}" class="btn btn-warning btn-xs" role="button" > Delivery/Financista </a>
               {% else %}
                 

@@ -44,12 +44,12 @@
     
           {% thumbnail productos.imagen1 "360" crop="center" as im %}   
         <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
-
+<br>
          {% endthumbnail %}
  
  </div>
 
-{%  if  producto.descripcion_oculta == "" %} 
+{%  if  productos.descripcion_oculta == "" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_UNO/' method='post'>
                               {% csrf_token %}                                
@@ -194,7 +194,7 @@
 
    {% thumbnail productos.imagen2 "360" crop="center" as im %}   
   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
-  
+  <br>
                                
    {% endthumbnail %}
   
@@ -202,7 +202,7 @@
 </div>
 
 
-{% if  producto.descripcion_oculta == "" %} 
+{% if  productos.descripcion_oculta == "" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_DOS/' method='post'>
                               {% csrf_token %}                                
@@ -339,12 +339,13 @@
    
    {% thumbnail productos.imagen3 "360" crop="center" as im %}   
   <img class="img-responsive" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="" >
+  <br>
    {% endthumbnail %}
   
 
 </div>
 
-{% if  producto.descripcion_oculta == "" %} 
+{% if  productos.descripcion_oculta == "" %} 
 
  <form action='/agregar_producto_al_carrito/{{productos.id}}/MOSTRAR_F_TRES/' method='post'>
                               {% csrf_token %}                                
