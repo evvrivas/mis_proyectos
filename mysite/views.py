@@ -891,7 +891,7 @@ def mis_tiendas(request,idusuario):
       else:
                    return render(request,'sin_autorizacion.html',locals())
 
-
+#⌚⌛⏰⏱☕⚽⚾⛏✎⭐⭕🌎🌭💘💒💩💯💳📦🗨😡🚗🚖🚘🚚🚛🚴🛺🧀🧹
 
 #def mis_productos(request,nombre): 
    # productos=Productos.objects.filter(id_usuario=nombre) 
@@ -1005,27 +1005,30 @@ def cambiar_tipo_de_vista(request,id_dela_tienda):
       
 
   
-@login_required 
+ 
 def busqueda_tienda(request,idusuario,nombretienda):
-     ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
-       
+     ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)       
      
      categoria=categorizar(idusuario,nombretienda)
      
      if request.POST:
         palabra = request.POST.get('nombre_t')
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
-        if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
-            busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra)
-            busqueda.save()
         
+        try:  
+            if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
+                busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra)
+                busqueda.save()
+            
 
-        tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
-        corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
-        if corazon>0:
-            corazon="PREFERIDA"
-        else:
-            corazon="NO_PREFERIDA"
+            tiendas=Tiendas.objects.filter(id_usuario=idusuario,nombre_tienda=nombretienda).first()
+            corazon=Preferidas.objects.filter(id_comprador=request.user.username,tienda__id=tiendas.id).count()
+            if corazon>0:
+                corazon="PREFERIDA"
+            else:
+                corazon="NO_PREFERIDA"
+        except:
+              pass
 
         productos= Productos.objects.filter(tienda__nombre_tienda=nombretienda).filter(Q(categoria__categoria__icontains=palabra) | Q(nombre__icontains=palabra) | Q(descripcion__icontains=palabra))
         connection.close()
@@ -1102,19 +1105,20 @@ def seleccion_compra(request,bandera,id_producto,id_tienda):
 
 
 
-@login_required
+
 def busqueda_desde_app(request,palabra):
     categoria=n_categorias()
     ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
-    mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+    #mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
     configurar=Configuracion_sistema.objects.filter(ciudad="TODOS").first()
     visitas= configurar.n_visitas
-     
-    if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
+    try: 
+        if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
             fecha=datetime.datetime.now()
             busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra,fecha_busqueda=fecha)
             busqueda.save()
-
+    except:
+          pass
     
     keys=palabra.split(",")
 
@@ -1236,12 +1240,10 @@ def busqueda_desde_app(request,palabra):
  
 
 
-
-@login_required
 def busqueda(request,bandera):
      categoria=n_categorias()
      ciudad, t_usuario, n_usuarios, n_tiendas, n_productos,n_pedidos,n_mensajes=info_pagina(request)
-     mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
+     #mis_tiendas=Tiendas.objects.filter(id_usuario=request.user.username)
 
      configurar=Configuracion_sistema.objects.filter(ciudad="TODOS").first()
      visitas= configurar.n_visitas 
@@ -1255,20 +1257,93 @@ def busqueda(request,bandera):
         #guarda la palabra buscada siempre y cuando no exista EN EL REGISTRO DE BUSQUEDA
 
         if bandera=="COMIDA":
-            palabra=""
             cate_goria="Alimentos Bebidas"
-            usuario=Usuarios.objects.get(id_usuario=request.user.username)
-            ciudad=usuario.estoy_en
+            palabra=""
+            
+            try:
+                usuario=Usuarios.objects.get(id_usuario=request.user.username)
+                ciudad=usuario.estoy_en
+            except:
+                pass
 
+        if bandera=="SUPERMERCADOS":
+            cate_goria="Productos de consumo diario"
+            palabra=""
+            
+            try:
+                usuario=Usuarios.objects.get(id_usuario=request.user.username)
+                ciudad=usuario.estoy_en
+            except:
+                pass
         
-        if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
-            fecha=datetime.datetime.now()
-            busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra,fecha_busqueda=fecha)
-            busqueda.save()
+             
+        if bandera=="SALUD":
+            cate_goria="Salud Belleza"
+            palabra=""
+            
+            try:
+                usuario=Usuarios.objects.get(id_usuario=request.user.username)
+                ciudad=usuario.estoy_en
+            except:
+                pass
+    
+                
+        if bandera=="TECNOLOGIA":
+            cate_goria="Tecnologia Informatica Informacion"
+            palabra=""
+            
+            try:
+                usuario=Usuarios.objects.get(id_usuario=request.user.username)
+                ciudad=usuario.estoy_en
+            except:
+                pass 
 
+        if bandera=="LIBRERIA":
+            cate_goria="Educacion Ciencia Academias"
+            palabra=""
+            
+            try:
+                usuario=Usuarios.objects.get(id_usuario=request.user.username)
+                ciudad=usuario.estoy_en
+            except:
+                pass 
+        
+        if bandera=="MODA":
+            cate_goria="Ropa Moda calzado"
+            palabra=""
+            
+            try:
+                usuario=Usuarios.objects.get(id_usuario=request.user.username)
+                ciudad=usuario.estoy_en
+            except:
+                pass                                
+
+
+        if bandera=="FERRETERIAS":
+            cate_goria="Agro Ferreteria Maderas"
+            palabra=""
+            
+            try:
+                usuario=Usuarios.objects.get(id_usuario=request.user.username)
+                ciudad=usuario.estoy_en
+            except:
+                pass        
+
+
+        try:
+            if Buscar.objects.filter(id_usuario=request.user.username,item_de_busqueda=palabra).count() <= 0:
+                fecha=datetime.datetime.now()
+                busqueda=Buscar(id_usuario=request.user.username,item_de_busqueda=palabra,fecha_busqueda=fecha)
+                busqueda.save()
+        except:
+              pass
         
         if palabra=="":
            
+
+
+
+
                if cate_goria=="TODOS" and ciudad=="TODOS":
                    tiendas= Tiendas.objects.all()
                    comercio= Ccomercial.objects.all()
@@ -2918,12 +2993,12 @@ def agregar_lista_de_compra_al_carrito(request,id_del_producto):
                           
                           a.append(str(items[b]))
                           d=a[-2]
-                          a[-2]=str("$")+d
+                          a[-2]=str("p/u$")+d
 
-                          d=str("$")+str(total)
+                          d=str("Tot$")+str(total)
                           a.append(str(d))
 
-                          x=a[1:]
+                          x=a[2:]########################################quite la U
                           vector.append(x)
                       b=b+1
                     
@@ -3121,5 +3196,9 @@ def login_automatico(request):
 
 
 
+      
+def go_tipo_uber(request):
+  return render(request,'sin_autorizacion.html',locals())
 
-       
+def go_delivery(request):
+  return render(request,'sin_autorizacion.html',locals())  

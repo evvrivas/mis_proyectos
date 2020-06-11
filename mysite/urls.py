@@ -127,7 +127,10 @@ urlpatterns = [
     url(r'^realizar_lista_de_compras/(\d+)/$',realizar_lista_de_compras),
     url(r'^agregar_lista_de_compra_al_carrito/(\d+)/$',agregar_lista_de_compra_al_carrito),    
     url(r'^crear_super_producto/(\d+)/$',crear_super_producto),
-    
+
+    url(r'^go_tipo_uber/$',go_tipo_uber),
+    url(r'^go_delivery/$',go_delivery),
+      
 
     url(r'^([^/]+)/$', mis_tiendas),
     url(r'^([^/]+)/([^/]+)/$', mi_tienda),

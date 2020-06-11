@@ -306,17 +306,11 @@ let title = payload.notification.title;
              <input type="submit" value="Buscar" class="btn btn-success">
 
     </div>
-             
-    
-
-
-                           
+                                       
               
 
              <!-- <div class="col-md-12">    -->             
-            
-
-                    
+                                
                                                                                                         
              </form> </center>          
 
@@ -340,21 +334,46 @@ let title = payload.notification.title;
 
 
 
-
-
-
 <!--##########################################################################-->
 <div class="panel-body">
 
      <div class="col-md-12">              
                 
                         <center> <h6>
-                           <a href="/configurar_vista_pagina_principal">Vistas <span class="badge">{{configurar.n_visitas}}</span></a>
-                          <a href="#">User <span class="badge">{{n_usuarios}}</span></a>
-                        <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">Pedidos <span class="badge">{{n_pedidos}}</span></a>
+
+                           <a href="/go_tipo_uber"><h2> Go! TipoUber 🚗 </h2> </a>
+                           <a href="/go_delivery"><h2> Go! delivery 📦 </h2> </a>                   
+                      
                              
                        </h6></center>
             </div>
+
+<br>
+
+
+
+     <div class="col-md-12">              
+                
+                        <center> <h6>
+
+                            <a href="/configurar_vista_pagina_principal">Vistas <span class="badge">{{configurar.n_visitas}}</span></a>
+                          <a href="#">User <span class="badge">{{n_usuarios}}</span></a>
+                        <a href="/ver_el_carrito/QUIERO_PEDIR_ESTO">Pedidos <span class="badge">{{n_pedidos}}</span></a>
+                                                                     
+                       </h6></center>
+            </div>
+
+  <div class="col-md-12">             
+           <center>
+           <a href="/busqueda/COMIDA/"> Comidas y bebidas 🍔 </a>
+           <a href="/busqueda/SUPERMERCADOS/"> Supermercados 💅 </a>
+           <a href="/busqueda/FERRETERIAS/"> Ferreterias 🔨 </a>
+           <a href="/busqueda/SALUD/"> Farmacias 💊 </a>
+           <a href="/busqueda/TECNOLOGIA/"> Tecnologia 💻 </a>
+           <a href="/busqueda/MODA/"> Moda y Calzado 👕 </a>
+           <a href="/busqueda/LIBRERIA/"> Librerias 📚 </a>
+          </center>
+ </div>
 
 
 
@@ -427,9 +446,11 @@ let title = payload.notification.title;
 </div>
 </div>
 </center>
-        
 
-      
+
+
+
+     
             <div class="col-md-12">                           
                   {% block content %}
                    {% endblock %}
